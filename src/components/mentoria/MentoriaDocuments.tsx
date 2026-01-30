@@ -1,5 +1,6 @@
 import { MENTORIA_DOCUMENTS, MENTORIA_BONUS_EXPERTS, MENTORIA_IMAGES } from "@/lib/mentoria-constants";
-import { ArrowRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import MentoriaImage from "./MentoriaImage";
 
 const expertImages: Record<string, string> = {
   luciana: MENTORIA_IMAGES.bonusLuciana,
@@ -10,114 +11,79 @@ const expertImages: Record<string, string> = {
 
 export default function MentoriaDocuments() {
   return (
-    <section className="py-16 md:py-20 bg-[#f5f0e8]">
+    <section className="py-20 md:py-28 bg-[#FDFBF7]">
       <div className="container mx-auto px-4">
         {/* Documents Pack */}
-        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-12 animate-fade-up">
-          Pack de documentos que você vai<br />receber:
-        </h2>
+        <div className="text-center mb-14 animate-fade-up">
+          <p className="text-primary font-medium text-lg mb-2">Materiais exclusivos</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Pack de documentos que você vai receber
+          </h2>
+          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+        </div>
 
-        <div className="max-w-4xl mx-auto mb-20">
+        <div className="max-w-4xl mx-auto mb-24">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="animate-fade-up animation-delay-100">
-              <ul className="space-y-3">
-                {MENTORIA_DOCUMENTS.map((doc, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <ArrowRight className="w-3 h-3 text-foreground" />
-                    </div>
-                    <span className="text-foreground text-sm md:text-base">{doc}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-border/30">
+                <ul className="space-y-4">
+                  {MENTORIA_DOCUMENTS.map((doc, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#9ACD32] flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground text-sm md:text-base">{doc}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="animate-fade-up animation-delay-200 flex justify-center">
-              <img 
+              <MentoriaImage 
                 src={MENTORIA_IMAGES.documentsIcon} 
                 alt="Pack de documentos"
-                className="w-48 h-48 object-contain"
+                className="w-56 h-56 object-contain drop-shadow-lg"
               />
             </div>
           </div>
         </div>
 
         {/* Bonus Experts */}
-        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-2 animate-fade-up">
-          Aulas Bônus exclusivas!
-        </h2>
-        <h3 className="text-xl md:text-2xl font-bold text-center text-foreground mb-12 animate-fade-up animation-delay-100">
-          Time de Especialistas
-        </h3>
+        <div className="text-center mb-14 animate-fade-up">
+          <p className="text-[#9ACD32] font-medium text-lg mb-2">Bônus especiais</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Aulas Bônus Exclusivas
+          </h2>
+          <p className="text-lg text-muted-foreground">Time de Especialistas</p>
+          <div className="w-20 h-1 bg-primary mx-auto rounded-full mt-4" />
+        </div>
 
-        {/* Experts Grid - Staggered Layout */}
+        {/* Experts Grid */}
         <div className="max-w-4xl mx-auto mb-12">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-12">
-            {/* Luciana - Top Left */}
-            <div className="flex flex-col items-center md:items-end animate-fade-up">
-              <div className="relative">
-                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-right">LUCIANA GUERRA</p>
-                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-right mb-2">Iluminação aplicada na<br />Arquitetura e na Obra</p>
-                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0">
-                  <img 
-                    src={expertImages.luciana} 
-                    alt="Luciana Guerra"
-                    className="w-full h-full object-cover"
-                  />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {MENTORIA_BONUS_EXPERTS.map((expert, index) => (
+              <div 
+                key={index} 
+                className="flex flex-col items-center animate-fade-up text-center"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="relative mb-4">
+                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-full border-4 border-primary overflow-hidden shadow-lg">
+                    <MentoriaImage 
+                      src={expertImages[expert.image]} 
+                      alt={expert.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
+                <p className="text-primary font-bold text-sm mb-1">{expert.name}</p>
+                <p className="text-muted-foreground text-xs leading-snug">{expert.topic}</p>
               </div>
-            </div>
-
-            {/* Juliana - Top Right */}
-            <div className="flex flex-col items-center md:items-start animate-fade-up animation-delay-100">
-              <div className="relative">
-                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-left">JULIANA CAMPELO</p>
-                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-left mb-2">Gestão de escritório de<br />Arquitetura</p>
-                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0">
-                  <img 
-                    src={expertImages.juliana} 
-                    alt="Juliana Campelo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Imira - Bottom Left */}
-            <div className="flex flex-col items-center md:items-end animate-fade-up animation-delay-200">
-              <div className="relative">
-                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0 mb-2">
-                  <img 
-                    src={expertImages.imira} 
-                    alt="Imira de Holanda"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-right">IMIRA DE HOLANDA</p>
-                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-right">Marketing para Arquitetos</p>
-              </div>
-            </div>
-
-            {/* Renata - Bottom Right */}
-            <div className="flex flex-col items-center md:items-start animate-fade-up animation-delay-300">
-              <div className="relative">
-                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0 mb-2">
-                  <img 
-                    src={expertImages.renata} 
-                    alt="Renata Fuentes"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-left">RENATA FUENTES</p>
-                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-left">Rochas Naturais nos<br />projetos de Arquitetura</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
         <p className="text-center text-primary italic text-base md:text-lg animate-fade-up">
-          + aulas bônus de impermeabilização, divulgação de<br />
-          projeto e aulas surpresas
+          + aulas bônus de impermeabilização, divulgação de projeto e aulas surpresas
         </p>
       </div>
     </section>

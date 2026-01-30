@@ -1,82 +1,56 @@
 import { MENTORIA_MODULES } from "@/lib/mentoria-constants";
-import { ArrowRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import MentoriaImage from "./MentoriaImage";
 
 export default function MentoriaModules() {
   return (
-    <section className="py-16 md:py-20 bg-[#f5f0e8]">
+    <section className="py-20 md:py-28 bg-[#FDFBF7]">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-16 animate-fade-up">
-          Como é a mentoria por dentro?
-        </h2>
+        <div className="text-center mb-16 animate-fade-up">
+          <p className="text-primary font-medium text-lg mb-2">Conteúdo exclusivo</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Como é a mentoria por dentro?
+          </h2>
+          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+        </div>
 
         <div className="max-w-5xl mx-auto space-y-8">
           {MENTORIA_MODULES.map((module, index) => (
             <div
               key={module.number}
-              className={`bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-primary/20 animate-fade-up relative ${
-                index % 2 === 1 ? "md:ml-12" : "md:mr-12"
-              }`}
+              className={`bg-white rounded-2xl overflow-hidden shadow-sm border border-border/30 animate-fade-up hover:shadow-md transition-shadow duration-300`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Module icon */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center">
-                  <span className="text-2xl">📋</span>
+              <div className="grid md:grid-cols-2 gap-0">
+                {/* Image */}
+                <div className={`${index % 2 === 1 ? "md:order-2" : ""}`}>
+                  <MentoriaImage
+                    src={module.image}
+                    alt={`Módulo ${module.number} - ${module.title}`}
+                    className="w-full h-full object-cover min-h-[200px] md:min-h-[300px]"
+                  />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-primary italic">
-                  Módulo 0{module.number} – {module.title}
-                </h3>
-              </div>
 
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                {/* Topics */}
-                <div className={index % 2 === 1 ? "md:order-2" : ""}>
-                  <ul className="space-y-2">
+                {/* Content */}
+                <div className={`p-6 md:p-8 flex flex-col justify-center ${index % 2 === 1 ? "md:order-1" : ""}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-sm font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      MÓDULO {module.number}
+                    </span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground mb-5">
+                    {module.title}
+                  </h3>
+                  <ul className="space-y-3">
                     {module.topics.map((topic, topicIndex) => (
-                      <li key={topicIndex} className="flex items-start gap-2">
-                        <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <ArrowRight className="w-3 h-3 text-foreground" />
-                        </div>
-                        <span className="text-foreground text-sm md:text-base">{topic}</span>
+                      <li key={topicIndex} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-[#9ACD32] flex-shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground text-sm md:text-base">{topic}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-
-                {/* Module Image */}
-                <div className={index % 2 === 1 ? "md:order-1" : ""}>
-                  <div className="relative">
-                    <img
-                      src={module.image}
-                      alt={`Módulo ${module.number} - ${module.title}`}
-                      className="w-full h-auto rounded-lg shadow-md"
-                    />
-                    {/* Laptop frame effect */}
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/3 h-2 bg-gray-400 rounded-b-lg" />
-                  </div>
-                </div>
               </div>
-
-              {/* Connector arrow for flow */}
-              {index < MENTORIA_MODULES.length - 1 && (
-                <div className="hidden md:block absolute -bottom-6 right-8 text-primary">
-                  <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-                    <path
-                      d="M2 2C10 2 20 12 38 22"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M30 16L38 22L32 22"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              )}
             </div>
           ))}
         </div>

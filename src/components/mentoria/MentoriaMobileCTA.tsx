@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowUp } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 interface MentoriaMobileCTAProps {
   onClick: () => void;
@@ -23,15 +22,15 @@ export default function MentoriaMobileCTA({ onClick }: MentoriaMobileCTAProps) {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-      <div className="bg-[#f5f0e8]/95 backdrop-blur-sm border-t border-foreground/10 p-4 shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden animate-fade-up">
+      <div className="bg-white/95 backdrop-blur-md border-t border-border/30 p-4 shadow-2xl">
         <Button
           onClick={onClick}
           size="lg"
-          className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold text-lg py-6 uppercase"
+          className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold text-base h-14 uppercase shadow-lg"
         >
           Quero Entrar na Mentoria
-          <ArrowUp className="ml-2 h-5 w-5" />
+          <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
       </div>
     </div>
