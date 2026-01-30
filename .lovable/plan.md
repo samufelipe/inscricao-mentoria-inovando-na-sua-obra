@@ -1,197 +1,210 @@
 
-# Plano: Recriar LP Mentoria + Validação Completa do Funil RD Station
+# Plano: Redesign Clean e Profissional da LP Mentoria
 
-## Resumo Executivo
+## Resumo do Problema
 
-Criar a Landing Page completa da Mentoria "Inovando na sua Obra" no Lovable, com formulário de captura integrado ao funil de automação já existente.
+A Landing Page atual da Mentoria (`/mentoria`) apresenta problemas de design, layout inconsistente, imagens com carregamento falho (URLs externas do WordPress), e warnings de `forwardRef` no console. A página precisa de um redesign completo para ficar mais clean, profissional e fiel às referências originais.
 
-**Eventos RD Station (já configurados e funcionando):**
-- `checkout-mentoria` → Entra no funil
-- `mentoria-inovando-na-sua-obra-carrinho-abandonado` → 8 e-mails de recuperação
-- `mentoria-inovando-na-sua-obra-compra-aprovada` → Sai da jornada de abandono
+## Problemas Identificados
 
-## Implementação
+1. **Imagens externas com problemas de carregamento**: Todas as URLs apontam para `inovandonasuaobra.com.br` que pode ter problemas de CORS ou disponibilidade
+2. **Warnings de console**: `MentoriaFooter` e `MentoriaMobileCTA` gerando erros de `forwardRef`
+3. **Layout inconsistente**: Espaçamentos irregulares, tipografia sem hierarquia clara
+4. **Seção de Testimonials**: Cards com placeholders em vez de imagens reais
+5. **Design sem respiração**: Seções muito comprimidas, sem espaço em branco adequado
+6. **Paleta de cores pouco harmônica**: Uso excessivo de cores sem contraste adequado
 
-### Fase 1: Criar Página Principal e Constantes
+## Solução: Redesign em 5 Frentes
 
-Criar `src/pages/MentoriaLanding.tsx` como página principal que importa todos os componentes modulares, e `src/lib/mentoria-constants.ts` com todos os dados centralizados (FAQ, módulos, skills, URLs de checkout).
+### 1. Sistema de Imagens Resiliente
 
-### Fase 2: Criar Componentes da Landing Page
+Criar fallback local para todas as imagens críticas e adicionar estados de loading/error para imagens externas.
 
-Criar 12 componentes modulares em `src/components/mentoria/`:
+**Arquivos afetados:**
+- `src/lib/mentoria-constants.ts` - Adicionar mapeamento de fallbacks locais
+- Componentes que usam imagens - Adicionar `onError` handlers
 
-1. **MentoriaHeader.tsx** - Logo + CTA fixo no scroll
-2. **MentoriaHero.tsx** - Título, subtítulo, imagem das mentoras
-3. **MentoriaSkills.tsx** - Habilidades técnicas e comportamentais
-4. **MentoriaAudience.tsx** - Para quem é a mentoria
-5. **MentoriaHowItWorks.tsx** - Como funciona
-6. **MentoriaInside.tsx** - Screenshots da plataforma
-7. **MentoriaModules.tsx** - 4 módulos com accordion
-8. **MentoriaMentors.tsx** - Bio de Ingrid e Fernanda
-9. **MentoriaRevenue.tsx** - Projeção de faturamento
-10. **MentoriaPricing.tsx** - Preço + Formulário de captura integrado
-11. **MentoriaGuarantee.tsx** - Garantia 15 dias
-12. **MentoriaFAQ.tsx** - Perguntas frequentes
+### 2. Correção dos Warnings de Console
 
-### Fase 3: Formulário com Integração RD Station
+Corrigir os componentes que geram warnings de `forwardRef`.
 
-O componente `MentoriaPricing.tsx` terá:
-- Campos: Nome + E-mail
-- Checkbox: "Prefiro pagar com boleto parcelado"
-- Captura automática de UTMs da URL
-- Redirecionamento para `/checkout/mentoria?payment=boleto` (se checkbox) ou `/checkout/mentoria`
+**Arquivos afetados:**
+- `src/components/mentoria/MentoriaFooter.tsx` - Converter para componente correto
+- `src/components/mentoria/MentoriaMobileCTA.tsx` - Adicionar forwardRef se necessário
 
-### Fase 4: Atualizar CheckoutBridge
+### 3. Hero Section Premium
 
-Modificar `src/pages/CheckoutBridge.tsx` para:
-- Detectar parâmetro `?payment=boleto`
-- Redirecionar para URL correta da Hotmart:
-  - Cartão: `https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1759350326376`
-  - Boleto: `https://pay.hotmart.com/Y93975016X?off=et69m72o&bid=1759350383011`
+Redesign completo do Hero com:
+- Formulário mais elegante com sombra suave e bordas arredondadas
+- Melhor hierarquia tipográfica
+- Imagem das mentoras com tratamento visual (sombra, máscara)
+- Badges de prova social
 
-### Fase 5: Registrar Nova Rota
+**Arquivos afetados:**
+- `src/components/mentoria/MentoriaHero.tsx`
 
-Adicionar em `src/App.tsx`:
-```
-/mentoria → MentoriaLanding
-```
+### 4. Seções com Design Limpo
 
-## Design e Animações
+Aplicar design system consistente em todas as seções:
+- Espaçamentos padronizados (py-20 md:py-28)
+- Títulos com decoração sutil (linha dourada abaixo)
+- Cards com sombras suaves e bordas sutis
+- Transições de cores entre seções mais harmônicas
 
-- Paleta de cores da Imersão (dourado/preto)
-- Animações sutis de fade-up ao scroll
-- Sticky CTA mobile (botão fixo no rodapé em celulares)
-- Hover effects nos cards e botões
-- Todas as imagens e textos mantidos exatamente como no WordPress
+**Arquivos afetados:**
+- `src/components/mentoria/MentoriaSkills.tsx`
+- `src/components/mentoria/MentoriaAudience.tsx`
+- `src/components/mentoria/MentoriaHowItWorks.tsx`
+- `src/components/mentoria/MentoriaModules.tsx`
+- `src/components/mentoria/MentoriaDocuments.tsx`
+- `src/components/mentoria/MentoriaRevenue.tsx`
+- `src/components/mentoria/MentoriaPricing.tsx`
+- `src/components/mentoria/MentoriaTestimonials.tsx`
+- `src/components/mentoria/MentoriaGuarantee.tsx`
+- `src/components/mentoria/MentoriaMentors.tsx`
+- `src/components/mentoria/MentoriaFAQ.tsx`
 
-## Fluxo Completo do Lead
+### 5. Detalhes de Polimento
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│ Meta Ads → /mentoria                                         │
-│ (com UTMs: ?utm_source=facebook&utm_campaign=mentoria)       │
-└──────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌──────────────────────────────────────────────────────────────┐
-│ Landing Page /mentoria                                       │
-│ Lead preenche: Nome + Email                                  │
-│ Checkbox: Boleto parcelado                                   │
-└──────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌──────────────────────────────────────────────────────────────┐
-│ /checkout/mentoria?payment=boleto                            │
-│ CheckoutBridge executa:                                      │
-│ 1. Salva no banco (checkout_intents)                         │
-│ 2. Envia checkout-mentoria para RD Station                   │
-│ 3. Redireciona para Hotmart                                  │
-└──────────────────────────────────────────────────────────────┘
-                            │
-              ┌─────────────┴─────────────┐
-              │                           │
-              ▼                           ▼
-┌─────────────────────┐     ┌──────────────────────────────────┐
-│ COMPROU             │     │ NÃO COMPROU (10 min)             │
-│                     │     │                                  │
-│ hotmart-webhook     │     │ abandonment-sweeper              │
-│ status: purchased   │     │ status: abandoned                │
-│                     │     │                                  │
-│ Envia para RD:      │     │ Envia para RD:                   │
-│ mentoria-inovando-  │     │ mentoria-inovando-na-sua-obra-   │
-│ na-sua-obra-compra- │     │ carrinho-abandonado              │
-│ aprovada            │     │                                  │
-│                     │     │ Inicia sequência de 8 e-mails    │
-└─────────────────────┘     └──────────────────────────────────┘
-```
+- Scroll-triggered animations mais suaves
+- Micro-interações em hover
+- Footer redesenhado
+- Mobile CTA com design mais elegante
 
-## URLs para Meta Ads
-
-| Campanha | URL de Destino |
-|----------|----------------|
-| Padrão | `https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria` |
-| Boleto | `https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria?payment=boleto` |
-| Com UTMs | `...lovable.app/mentoria?utm_source=facebook&utm_medium=cpc&utm_campaign=mentoria-jan26` |
-
-## URLs para WordPress (substituir links atuais)
-
-| Botão Atual | Nova URL |
-|-------------|----------|
-| "Quero Entrar na Mentoria" | `https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria` |
-| "Quero meu acesso agora" | `https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria` |
-| "boleto parcelado" | `https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria?payment=boleto` |
+**Arquivos afetados:**
+- `src/components/mentoria/MentoriaFooter.tsx`
+- `src/components/mentoria/MentoriaMobileCTA.tsx`
+- `src/index.css` - Adicionar novas animações
 
 ---
 
-## Seção Técnica
+## Implementação Detalhada
 
-### Arquivos a Criar
+### Fase 1: Sistema de Imagens com Fallback
 
-```
-src/
-├── pages/
-│   └── MentoriaLanding.tsx              # Página principal
-├── components/
-│   └── mentoria/
-│       ├── MentoriaHeader.tsx           # Header com logo
-│       ├── MentoriaHero.tsx             # Hero section
-│       ├── MentoriaSkills.tsx           # O que vai aprender
-│       ├── MentoriaAudience.tsx         # Para quem é
-│       ├── MentoriaHowItWorks.tsx       # Como funciona
-│       ├── MentoriaInside.tsx           # Screenshots
-│       ├── MentoriaModules.tsx          # 4 módulos
-│       ├── MentoriaMentors.tsx          # Bio mentoras
-│       ├── MentoriaRevenue.tsx          # Faturamento
-│       ├── MentoriaPricing.tsx          # Preço + Form
-│       ├── MentoriaTestimonials.tsx     # Depoimentos
-│       ├── MentoriaGuarantee.tsx        # Garantia
-│       ├── MentoriaFAQ.tsx              # FAQ
-│       └── MentoriaFooter.tsx           # Footer
-└── lib/
-    └── mentoria-constants.ts            # Dados centralizados
-```
-
-### Arquivos a Modificar
-
-```
-src/
-├── App.tsx                              # Nova rota /mentoria
-└── pages/CheckoutBridge.tsx             # Suporte a ?payment=boleto
-```
-
-### Eventos RD Station (Validação)
-
-| Momento | Edge Function | Identificador | Status |
-|---------|---------------|---------------|--------|
-| Checkout | log-checkout-intent | `checkout-mentoria` | Já configurado (linha 31-33) |
-| Abandono 10min | abandonment-sweeper | `mentoria-inovando-na-sua-obra-carrinho-abandonado` | Já configurado (linha 19-20) |
-| Compra | hotmart-webhook | `mentoria-inovando-na-sua-obra-compra-aprovada` | Já configurado (linha 17-20) |
-
-### Paleta de Cores (Imersão)
-
-- **Primary**: Dourado `hsl(45, 100%, 50%)`
-- **Foreground**: Preto `hsl(0, 0%, 7%)`
-- **Background**: Branco `hsl(0, 0%, 100%)`
-
-### URLs de Checkout Hotmart
+Atualizar `mentoria-constants.ts` para incluir componente de imagem resiliente:
 
 ```typescript
-const MENTORIA_CHECKOUT_URLS = {
-  default: "https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1759350326376",
-  boleto: "https://pay.hotmart.com/Y93975016X?off=et69m72o&bid=1759350383011"
+// Adicionar helper para imagens com fallback
+export const MENTORIA_FALLBACK_IMAGES = {
+  placeholder: "/placeholder.svg",
+  gradient: "linear-gradient(135deg, #f5f0e8 0%, #e8dfd0 100%)"
 };
 ```
 
-### Imagens (Mantidas do WordPress)
+Criar componente `MentoriaImage.tsx`:
+- Aceita `src`, `fallbackSrc`, `alt`
+- Mostra skeleton durante loading
+- Fallback gracioso em caso de erro
 
-Todas as imagens serão referenciadas das URLs originais do WordPress para manter consistência e não precisar de uploads adicionais.
+### Fase 2: Hero Redesenhado
 
-### Validação do Funil
+**Novo layout:**
+```
+┌────────────────────────────────────────────────────────┐
+│                    FUNDO BEGE #f5f0e8                 │
+│                                                        │
+│   ┌──────────────────────┐  ┌──────────────────────┐  │
+│   │                      │  │                      │  │
+│   │  TÍTULO IMPACTANTE   │  │  IMAGEM MENTORAS     │  │
+│   │  com destaque dourado│  │  com sombra suave    │  │
+│   │                      │  │                      │  │
+│   │  Subtítulo elegante  │  └──────────────────────┘  │
+│   │                      │                            │
+│   │  ┌────────────────┐  │                            │
+│   │  │  FORM CARD     │  │                            │
+│   │  │  Nome          │  │                            │
+│   │  │  Email         │  │                            │
+│   │  │  [CTA VERDE]   │  │                            │
+│   │  └────────────────┘  │                            │
+│   └──────────────────────┘                            │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+```
 
-Após implementação, testar:
-1. Preencher formulário em `/mentoria`
-2. Verificar registro em `checkout_intents` (produto: "mentoria")
-3. Verificar evento `checkout-mentoria` no RD Station
-4. Aguardar 10 minutos ou forçar sweeper
-5. Verificar evento `mentoria-inovando-na-sua-obra-carrinho-abandonado` no RD Station
-6. Simular compra via webhook para verificar `mentoria-inovando-na-sua-obra-compra-aprovada`
+### Fase 3: Design System Consistente
+
+**Paleta refinada:**
+- Background principal: `#FDFBF7` (off-white mais suave)
+- Background alternativo: `#f5f0e8` (bege atual)
+- Texto principal: `#1a1a1a` (preto suavizado)
+- Accent: `#9ACD32` (lime green)
+- Accent secundário: `#5D4037` (marrom)
+- Dourado: `hsl(45, 100%, 50%)` (já existente)
+
+**Tipografia:**
+- Títulos: Font-weight mais leve (600-700)
+- Subtítulos em itálico com cor dourada
+- Corpo de texto com line-height 1.7
+
+**Espaçamentos:**
+- Seções: `py-20 md:py-28` (mais respiro)
+- Container: `max-w-6xl` (mais compacto e elegante)
+
+### Fase 4: Cards e Componentes
+
+**Skills Cards:**
+- Fundo branco com sombra `shadow-sm`
+- Borda sutil `border border-border`
+- Ícones dourados menores e mais elegantes
+
+**Modules:**
+- Cards com imagem ocupando mais espaço
+- Numeração mais discreta
+- Lista de tópicos com tipografia mais clean
+
+**Pricing Card:**
+- Destaque central na página
+- Badge "MAIS POPULAR" ou "RECOMENDADO"
+- Preço com animação sutil de entrada
+
+### Fase 5: Testimonials com Imagens Reais
+
+Atualizar para usar as imagens das alunas que já estão referenciadas em `MENTORIA_IMAGES`:
+- `testimonial1`, `testimonial2`, `testimonial3`, `testimonial4`
+
+Cada card terá:
+- Foto circular da aluna
+- Nome e profissão
+- Quote em itálico
+- Ícone de aspas decorativo
+
+---
+
+## Arquivos a Modificar
+
+| Arquivo | Tipo de Mudança |
+|---------|-----------------|
+| `src/lib/mentoria-constants.ts` | Adicionar sistema de fallback |
+| `src/components/mentoria/MentoriaHero.tsx` | Redesign completo |
+| `src/components/mentoria/MentoriaSkills.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaAudience.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaHowItWorks.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaModules.tsx` | Redesign dos cards |
+| `src/components/mentoria/MentoriaDocuments.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaRevenue.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaPricing.tsx` | Redesign premium |
+| `src/components/mentoria/MentoriaTestimonials.tsx` | Adicionar fotos reais |
+| `src/components/mentoria/MentoriaGuarantee.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaMentors.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaFAQ.tsx` | Polish de design |
+| `src/components/mentoria/MentoriaFooter.tsx` | Corrigir forwardRef + redesign |
+| `src/components/mentoria/MentoriaMobileCTA.tsx` | Corrigir forwardRef + polish |
+| `src/index.css` | Novas animações e utilities |
+
+## Arquivos a Criar
+
+| Arquivo | Propósito |
+|---------|-----------|
+| `src/components/mentoria/MentoriaImage.tsx` | Componente de imagem resiliente |
+
+---
+
+## Resultado Esperado
+
+- Design clean e profissional alinhado com padrões modernos
+- Imagens carregando corretamente com fallbacks
+- Console sem warnings
+- Experiência de usuário fluida com animações suaves
+- Alta conversão com formulários bem posicionados
+- Mobile-first com CTA sticky elegante
