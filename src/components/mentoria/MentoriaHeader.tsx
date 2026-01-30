@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { MENTORIA_IMAGES } from "@/lib/mentoria-constants";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 interface MentoriaHeaderProps {
   onCtaClick: () => void;
@@ -24,29 +24,28 @@ export default function MentoriaHeader({ onCtaClick }: MentoriaHeaderProps) {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-[#f5f0e8]/95 backdrop-blur-sm shadow-md py-2"
+          ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
           : "bg-transparent py-4 pointer-events-none"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <div className={cn(isScrolled ? "opacity-100" : "opacity-0")}>
+        <div className={cn("transition-opacity duration-300", isScrolled ? "opacity-100" : "opacity-0")}>
           <a href="/mentoria" className="flex items-center pointer-events-auto">
-            <img
-              src={MENTORIA_IMAGES.logo}
-              alt="Mentoria Inovando na sua Obra"
-              className="h-10 md:h-12 w-auto"
-            />
+            <span className="text-lg font-bold text-foreground">
+              Mentoria <span className="text-primary">Inovando</span>
+            </span>
           </a>
         </div>
 
         <Button
           onClick={onCtaClick}
           className={cn(
-            "bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold transition-all duration-300 pointer-events-auto uppercase",
+            "bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold transition-all duration-300 pointer-events-auto uppercase shadow-lg group",
             isScrolled ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           )}
         >
-          Quero Entrar na Mentoria
+          Quero Entrar
+          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
     </header>

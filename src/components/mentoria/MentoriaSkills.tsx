@@ -1,28 +1,34 @@
 import { MENTORIA_SKILLS } from "@/lib/mentoria-constants";
-import { ArrowRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 export default function MentoriaSkills() {
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="py-20 md:py-28 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-12 animate-fade-up">
-          O que você vai aprender?
-        </h2>
+        <div className="text-center mb-14 animate-fade-up">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            O que você vai aprender?
+          </h2>
+          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+        </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16">
+        <div className="relative max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* Habilidades Técnicas */}
             <div className="animate-fade-up animation-delay-100">
-              <div className="bg-[#f5f5f5] rounded-xl p-6 border-2 border-foreground/10">
-                <h3 className="text-xl md:text-2xl font-bold text-foreground text-center mb-6 uppercase tracking-wide">
-                  Habilidades Técnicas
-                </h3>
-                <ul className="space-y-3">
+              <div className="bg-[#FDFBF7] rounded-2xl p-8 shadow-sm border border-border/30 h-full hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <span className="text-2xl">🛠️</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                    Habilidades Técnicas
+                  </h3>
+                </div>
+                <ul className="space-y-4">
                   {MENTORIA_SKILLS.technical.map((skill, index) => (
                     <li key={index} className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <ArrowRight className="w-4 h-4 text-foreground" />
-                      </div>
+                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                       <span className="text-foreground text-base md:text-lg">{skill}</span>
                     </li>
                   ))}
@@ -32,21 +38,26 @@ export default function MentoriaSkills() {
 
             {/* Plus sign between cards */}
             <div className="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-              <span className="text-5xl font-bold text-foreground bg-white px-2">+</span>
+              <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                <span className="text-3xl font-bold text-foreground">+</span>
+              </div>
             </div>
 
             {/* Habilidades Comportamentais */}
             <div className="animate-fade-up animation-delay-200">
-              <div className="bg-[#f5f5f5] rounded-xl p-6 border-2 border-foreground/10">
-                <h3 className="text-xl md:text-2xl font-bold text-foreground text-center mb-6 uppercase tracking-wide">
-                  Habilidades Comportamentais
-                </h3>
-                <ul className="space-y-3">
+              <div className="bg-[#FDFBF7] rounded-2xl p-8 shadow-sm border border-border/30 h-full hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <span className="text-2xl">💡</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                    Habilidades Comportamentais
+                  </h3>
+                </div>
+                <ul className="space-y-4">
                   {MENTORIA_SKILLS.behavioral.map((skill, index) => (
                     <li key={index} className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <ArrowRight className="w-4 h-4 text-foreground" />
-                      </div>
+                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                       <span className="text-foreground text-base md:text-lg">{skill}</span>
                     </li>
                   ))}
@@ -57,7 +68,9 @@ export default function MentoriaSkills() {
 
           {/* Plus sign for mobile */}
           <div className="flex md:hidden items-center justify-center -mt-4 -mb-4 relative z-10">
-            <span className="text-3xl font-bold text-foreground bg-white px-4">+</span>
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg">
+              <span className="text-xl font-bold text-foreground">+</span>
+            </div>
           </div>
         </div>
       </div>

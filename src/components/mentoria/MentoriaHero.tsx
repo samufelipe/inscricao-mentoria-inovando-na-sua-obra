@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MENTORIA_IMAGES } from "@/lib/mentoria-constants";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, Users, Clock, FileCheck } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import MentoriaImage from "./MentoriaImage";
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
@@ -72,31 +73,44 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
   };
 
   return (
-    <section className="relative pt-20 pb-16 md:pt-28 md:pb-24 bg-[#f5f0e8]">
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-gradient-to-b from-[#FDFBF7] to-[#f5f0e8]">
       <div className="container mx-auto px-4">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <img
-            src={MENTORIA_IMAGES.logo}
-            alt="Mentoria Inovando na sua Obra"
-            className="h-16 md:h-20 w-auto"
-          />
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Text Content */}
-          <div className="text-center md:text-left animate-fade-up">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-4">
+          <div className="text-center lg:text-left animate-fade-up order-2 lg:order-1">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Users className="w-4 h-4" />
+              <span>+250 arquitetas já transformaram suas obras</span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
               Domine o gerenciamento de obra de interiores de maneira{" "}
-              <span className="text-primary">lucrativa e eficiente</span>
+              <span className="text-primary italic">lucrativa e eficiente</span>
             </h1>
-            <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed">
+            
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
               Transforme cada projeto em uma jornada inesquecível para seus clientes, desde o
               primeiro contato até a entrega final.
             </p>
 
-            {/* Form in Hero */}
-            <div className="bg-white rounded-xl p-6 shadow-lg max-w-md mx-auto md:mx-0">
+            {/* Social Proof Pills */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                <Clock className="w-4 h-4 text-primary" />
+                <span className="text-sm text-foreground">16h de conteúdo</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                <FileCheck className="w-4 h-4 text-primary" />
+                <span className="text-sm text-foreground">Materiais prontos</span>
+              </div>
+            </div>
+
+            {/* Form Card */}
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-border/50 max-w-md mx-auto lg:mx-0">
+              <p className="text-sm text-muted-foreground text-center mb-4">
+                Preencha para acessar o checkout
+              </p>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Label htmlFor="hero-name" className="text-foreground text-sm font-medium">
@@ -108,7 +122,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                     placeholder="Digite seu nome"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`mt-1 ${errors.name ? "border-destructive" : ""}`}
+                    className={`mt-1.5 h-12 bg-muted/30 border-border/50 focus:border-primary focus:ring-primary ${errors.name ? "border-destructive" : ""}`}
                     disabled={isSubmitting}
                   />
                   {errors.name && (
@@ -126,7 +140,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                     placeholder="Digite seu e-mail"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={`mt-1 ${errors.email ? "border-destructive" : ""}`}
+                    className={`mt-1.5 h-12 bg-muted/30 border-border/50 focus:border-primary focus:ring-primary ${errors.email ? "border-destructive" : ""}`}
                     disabled={isSubmitting}
                   />
                   {errors.email && (
@@ -137,7 +151,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold text-base py-6 uppercase tracking-wide"
+                  className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold text-base h-14 uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 group"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -148,21 +162,31 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                   ) : (
                     <>
                       Quero entrar na mentoria
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </Button>
               </form>
+              
+              <p className="text-xs text-muted-foreground text-center mt-4">
+                🔒 Seus dados estão 100% seguros
+              </p>
             </div>
           </div>
 
           {/* Hero Image */}
-          <div className="relative animate-fade-up animation-delay-200 flex justify-center md:justify-end">
-            <img
-              src={MENTORIA_IMAGES.heroMentoras}
-              alt="Ingrid Zarza e Fernanda Bradaschia - Mentoras"
-              className="w-full max-w-md h-auto"
-            />
+          <div className="relative animate-fade-up animation-delay-200 flex justify-center lg:justify-end order-1 lg:order-2">
+            <div className="relative">
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#9ACD32]/20 rounded-full blur-2xl" />
+              
+              <MentoriaImage
+                src={MENTORIA_IMAGES.heroMentoras}
+                alt="Ingrid Zarza e Fernanda Bradaschia - Mentoras"
+                className="w-full max-w-lg h-auto relative z-10 drop-shadow-2xl"
+              />
+            </div>
           </div>
         </div>
       </div>

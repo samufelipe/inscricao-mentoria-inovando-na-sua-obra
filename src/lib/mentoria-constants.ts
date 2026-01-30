@@ -7,6 +7,12 @@ export const MENTORIA_CHECKOUT_URLS = {
 
 export const MENTORIA_WHATSAPP = "https://wa.me/5511557172292";
 
+// Fallback images for when external URLs fail
+export const MENTORIA_FALLBACK = {
+  placeholder: "/placeholder.svg",
+  gradient: "linear-gradient(135deg, hsl(40 30% 94%) 0%, hsl(35 25% 88%) 100%)"
+};
+
 export const MENTORIA_IMAGES = {
   logo: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/Masterclass-Cronograma-1507-e1752603988566.webp",
   heroMentoras: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/06/Post-instagram-contratar-advogado-moderno-azul-e-bege-4-e1752604162881.png",
