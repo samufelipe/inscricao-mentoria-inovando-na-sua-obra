@@ -7,6 +7,14 @@ import { Lock, ArrowRight, Loader2, CheckCircle2, Users, Building2, Award } from
 import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
 import { ScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useParallax } from "@/hooks/use-parallax";
+import { 
+  trackPageView, 
+  trackCTAClick, 
+  trackSectionView,
+  initScrollTracking, 
+  initTimeTracking 
+} from "@/lib/gtm-tracking";
+import { saveUtmParams, getMergedUtmParams } from "@/lib/utm-storage";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
 
@@ -102,15 +110,34 @@ export default function MentoriaLanding() {
       metaDesc.setAttribute("content", "Transforme cada projeto em uma jornada inesquecível para seus clientes, desde o primeiro contato até a entrega final. Mentoria para arquitetas e designers.");
     }
 
-    // Track page view
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: 'page_view',
-        page_title: 'Mentoria Landing Page',
-        page_location: window.location.href,
-      });
+    // Save UTMs from URL to localStorage
+    saveUtmParams(searchParams);
+
+    // Track page view with GTM
+    trackPageView("Mentoria Landing Page");
+    
+    // Init scroll and time tracking
+    initScrollTracking();
+    initTimeTracking();
+
+    // Track pricing section visibility
+    const pricingSection = document.querySelector('.mentoria-pricing-new');
+    if (pricingSection) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              trackSectionView("pricing_section");
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(pricingSection);
+      return () => observer.disconnect();
     }
-  }, []);
+  }, [searchParams]);
 
   // Handler para scroll suave até o formulário do hero
   const scrollToForm = (selectBoleto: boolean = false) => {
@@ -155,7 +182,7 @@ export default function MentoriaLanding() {
       });
     }
 
-    // Montar URL do checkout com UTMs preservados
+    // Montar URL do checkout com UTMs preservados (mesclando URL atual + salvos)
     const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
     checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
     checkoutUrl.searchParams.set("name", result.data.name.trim());
@@ -165,10 +192,10 @@ export default function MentoriaLanding() {
       checkoutUrl.searchParams.set("payment", "boleto");
     }
     
-    // Preservar UTMs da URL atual
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(param => {
-      const value = searchParams.get(param);
-      if (value) checkoutUrl.searchParams.set(param, value);
+    // Usar UTMs mesclados (URL atual + salvos no localStorage)
+    const mergedUtms = getMergedUtmParams(searchParams);
+    Object.entries(mergedUtms).forEach(([key, value]) => {
+      if (value) checkoutUrl.searchParams.set(key, value);
     });
 
     // Redirecionar para CheckoutBridge
@@ -177,7 +204,20 @@ export default function MentoriaLanding() {
 
   // Handler para selecionar boleto e ir para o form
   const handleBoletoClick = () => {
+    trackCTAClick("cta_boleto", "pricing_section", "Prefiro pagar com Boleto Parcelado");
     scrollToForm(true);
+  };
+
+  // Handler para CTA de pricing
+  const handlePricingCTAClick = () => {
+    trackCTAClick("cta_pricing", "pricing_section", "Quero meu acesso agora");
+    scrollToForm(false);
+  };
+
+  // Handler para CTA de testimonials
+  const handleTestimonialsCTAClick = () => {
+    trackCTAClick("cta_testimonials", "testimonials_section", "Quero entrar na mentoria");
+    scrollToForm(false);
   };
 
   return (
@@ -290,6 +330,8 @@ export default function MentoriaLanding() {
                 src={images.heroPhoto} 
                 alt="Ingrid Zarza e Fernanda Bradaschia" 
                 loading="eager"
+                width={600}
+                height={600}
               />
             </div>
           </div>
@@ -500,7 +542,7 @@ export default function MentoriaLanding() {
               <div className="mentoria-pricing-ctas">
                 <button 
                   className="mentoria-cta-button mentoria-cta-pricing"
-                  onClick={() => scrollToForm(false)}
+                  onClick={handlePricingCTAClick}
                 >
                   Quero meu acesso agora
                   <ArrowRight size={20} className="ml-2" />
@@ -575,7 +617,7 @@ export default function MentoriaLanding() {
             <div className="text-center">
               <button 
                 className="mentoria-cta-button"
-                onClick={() => scrollToForm(false)}
+                onClick={handleTestimonialsCTAClick}
               >
                 quero entrar na mentoria
               </button>

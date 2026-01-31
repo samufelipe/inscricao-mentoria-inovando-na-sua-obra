@@ -3,6 +3,7 @@ import { useSearchParams, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { CONFIG } from "@/lib/config";
+import { getStoredUtmParams, clearStoredUtmParams } from "@/lib/utm-storage";
 
 type Product = "imersao" | "mentoria";
 
@@ -56,13 +57,14 @@ export default function CheckoutBridge() {
         return;
       }
 
-      // Capturar UTMs
+      // Capturar UTMs (URL atual tem prioridade sobre salvos no localStorage)
+      const storedUtms = getStoredUtmParams() || {};
       const utmData = {
-        utm_source: searchParams.get("utm_source") || "direct",
-        utm_medium: searchParams.get("utm_medium") || "",
-        utm_campaign: searchParams.get("utm_campaign") || "",
-        utm_content: searchParams.get("utm_content") || "",
-        utm_term: searchParams.get("utm_term") || "",
+        utm_source: searchParams.get("utm_source") || storedUtms.utm_source || "direct",
+        utm_medium: searchParams.get("utm_medium") || storedUtms.utm_medium || "",
+        utm_campaign: searchParams.get("utm_campaign") || storedUtms.utm_campaign || "",
+        utm_content: searchParams.get("utm_content") || storedUtms.utm_content || "",
+        utm_term: searchParams.get("utm_term") || storedUtms.utm_term || "",
       };
 
       try {
