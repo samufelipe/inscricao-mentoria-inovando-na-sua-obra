@@ -144,25 +144,25 @@ export const MENTORIA_VIDEO_TESTIMONIALS = [
     name: "Beatriz Francini",
     role: "Arquiteta do escritório BFLE arquitetos",
     quote: "\"meu sócio falou: Bia parece que você já faz obra há cinco anos\"",
-    videoUrl: "https://www.youtube.com/watch?v=example1"
+    vimeoId: "1160366577"
   },
   {
     name: "Ingrid Cristina",
     role: "Arquiteta do escritório Cúpula Rosa",
     quote: "\"o mapa de compatibilização, não tem como fazer gerenciamento de obra sem ter isso\"",
-    videoUrl: "https://www.youtube.com/watch?v=example2"
+    vimeoId: "1160366561"
   },
   {
     name: "Mônique Figueiredo",
     role: "Arquiteta do escritório Falta Arquitetura",
     quote: "\"é muito importante ter esse processo de obra para minimizar os erros\"",
-    videoUrl: "https://www.youtube.com/watch?v=example3"
+    vimeoId: "1160366548"
   },
   {
     name: "Aline Araujo",
     role: "Recém Formada em Arquitetura e Urbanismo",
     quote: "\"na hora de projetar eu já penso logo na execução\"",
-    videoUrl: "https://www.youtube.com/watch?v=example4"
+    vimeoId: "1160366533"
   }
 ];
 

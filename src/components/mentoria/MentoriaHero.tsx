@@ -73,7 +73,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
   };
 
   return (
-    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-gradient-to-b from-[#FDFBF7] to-[#f5f0e8]">
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-transparent">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Text Content */}
@@ -86,7 +86,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
               Domine o gerenciamento de obra de interiores de maneira{" "}
-              <span className="text-primary italic">lucrativa e eficiente</span>
+              <span className="text-[#D4AF37] italic font-extrabold">lucrativa e eficiente</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -107,7 +107,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
             </div>
 
             {/* Form Card */}
-            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-border/50 max-w-md mx-auto lg:mx-0">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl border border-primary/20 max-w-md mx-auto lg:mx-0">
               <p className="text-sm text-muted-foreground text-center mb-4">
                 Preencha para acessar o checkout
               </p>
@@ -151,7 +151,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold text-base h-14 uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base h-14 uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 group"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
