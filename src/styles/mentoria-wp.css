@@ -367,6 +367,14 @@
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
+  display: block;
+}
+
+.mentoria-guarantee-image-mobile {
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
 }
 
 /* About Section */
@@ -466,27 +474,74 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .mentoria-hero {
+    padding: 16px 16px 30px;
+  }
+  
   .mentoria-hero-content {
     flex-direction: column-reverse;
     text-align: center;
+    gap: 24px;
   }
   
   .mentoria-hero-text {
     max-width: 100%;
   }
   
+  .mentoria-hero-text h2 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  
+  .mentoria-hero-text h5 {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .mentoria-hero-image img {
+    max-width: 280px;
+  }
+  
   .mentoria-hero-form {
     max-width: 100%;
   }
   
-  .mentoria-about-content {
-    flex-direction: column;
-    text-align: center;
+  .mentoria-input {
+    height: 48px;
+    font-size: 15px;
   }
   
-  .mentoria-cta-button {
-    width: 100%;
-    max-width: 300px;
+  .mentoria-logo {
+    max-width: 280px;
+    margin: 0 auto 16px;
+  }
+  
+  .mentoria-section {
+    padding: 40px 16px;
+  }
+  
+  .mentoria-section-title {
+    font-size: 22px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  
+  .mentoria-skills-image {
+    max-width: 100%;
+  }
+  
+  .mentoria-audience-description {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .mentoria-modules-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .mentoria-module-image {
+    max-width: 100%;
   }
   
   .mentoria-revenue-grid {
@@ -495,31 +550,94 @@
   }
   
   .mentoria-revenue-image {
-    max-width: 280px;
+    max-width: 100%;
     margin: 0 auto;
   }
   
-  .mentoria-testimonials-grid {
-    grid-template-columns: 1fr;
+  .mentoria-pricing-card {
+    padding: 0 8px;
   }
   
-  .mentoria-section {
-    padding: 30px 16px;
-  }
-  
-  .mentoria-section-title {
-    font-size: clamp(20px, 5vw, 28px);
-    margin-bottom: 24px;
+  .mentoria-pricing-image {
+    max-width: 100%;
   }
   
   .mentoria-pricing-buttons {
     flex-direction: column;
     gap: 12px;
+    align-items: center;
+  }
+  
+  .mentoria-cta-button {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 24px;
+    font-size: 14px;
   }
   
   .mentoria-cta-secondary {
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
+  }
+  
+  .mentoria-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .mentoria-testimonial-video {
+    border-radius: 8px;
+  }
+  
+  .mentoria-guarantee-text {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .mentoria-about-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+  
+  .mentoria-about-text {
+    min-width: 100%;
+  }
+  
+  .mentoria-about-text h2 {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  
+  .mentoria-about-image {
+    min-width: 100%;
+  }
+  
+  .mentoria-about-image img {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .mentoria-faq {
+    padding: 40px 16px;
+  }
+  
+  .mentoria-faq-item summary {
+    font-size: 14px;
+    padding: 16px;
+  }
+  
+  .mentoria-faq-content {
+    padding: 0 16px 16px;
+  }
+  
+  .mentoria-faq-content p {
+    font-size: 13px;
+  }
+  
+  .mentoria-footer {
+    padding: 20px 16px;
+    font-size: 12px;
   }
 }
 
