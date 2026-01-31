@@ -3,10 +3,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MENTORIA_PRICING } from "@/lib/mentoria-constants";
-import { ArrowRight, Loader2, Shield, Star, CheckCircle2 } from "lucide-react";
+import { MENTORIA_PRICING, MENTORIA_IMAGES } from "@/lib/mentoria-constants";
+import { ArrowRight, Loader2, Shield } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import MentoriaImage from "./MentoriaImage";
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres").max(100),
@@ -72,132 +73,111 @@ export default function MentoriaPricing() {
   };
 
   return (
-    <section id="pricing" className="py-20 md:py-28 bg-gradient-to-b from-[#5D4037] to-[#4A3229] text-white">
+    <section id="pricing" className="py-20 md:py-28 bg-[#5D4037]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-up">
-          <p className="text-primary font-medium text-lg mb-2">Investimento</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <p className="text-[#D4AF37] font-medium text-lg mb-2">Investimento</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             E quanto é o investimento mais importante do seu ano?
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <div className="w-20 h-1 bg-[#D4AF37] mx-auto rounded-full" />
         </div>
 
-        <div className="max-w-lg mx-auto">
-          {/* Price Card */}
-          <div className="bg-white rounded-3xl p-8 md:p-10 text-foreground shadow-2xl animate-fade-up animation-delay-100 relative overflow-hidden">
-            {/* Badge */}
-            <div className="absolute top-0 right-0">
-              <div className="bg-primary text-foreground font-bold text-xs px-4 py-2 rounded-bl-2xl flex items-center gap-1">
-                <Star className="w-3 h-3 fill-current" />
-                RECOMENDADO
-              </div>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Imagem do card de preço original */}
+            <div className="animate-fade-up animation-delay-100">
+              <MentoriaImage
+                src={MENTORIA_IMAGES.pricingCard}
+                alt="Investimento da Mentoria"
+                className="w-full h-auto rounded-2xl shadow-2xl"
+              />
             </div>
 
-            <div className="text-center mb-8">
-              <p className="text-primary font-bold text-lg uppercase mb-4">
-                Oportunidade única e exclusiva!
-              </p>
-              
-              {/* Price display */}
-              <div className="bg-gradient-to-r from-primary to-[hsl(43,96%,45%)] text-foreground inline-block px-8 py-6 rounded-2xl mb-4 shadow-lg">
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-lg font-medium">12x</span>
-                  <span className="text-sm">R$</span>
-                  <span className="text-5xl md:text-6xl font-bold">{MENTORIA_PRICING.installmentValue}</span>
-                  <span className="text-2xl">,{MENTORIA_PRICING.installmentCents}</span>
+            {/* Formulário de captura sobreposto */}
+            <div className="animate-fade-up animation-delay-200">
+              <div className="bg-white rounded-2xl p-8 shadow-2xl">
+                <h3 className="text-xl font-bold text-[#1a1a1a] text-center mb-2">
+                  Garanta sua vaga agora!
+                </h3>
+                <p className="text-sm text-gray-600 text-center mb-6">
+                  Preencha seus dados para acessar o checkout
+                </p>
+
+                <form onSubmit={(e) => handleSubmit(e, false)} className="space-y-4">
+                  <div>
+                    <Label htmlFor="pricing-name" className="text-[#1a1a1a] text-sm font-medium">
+                      Seu nome completo
+                    </Label>
+                    <Input
+                      id="pricing-name"
+                      type="text"
+                      placeholder="Digite seu nome"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className={`mt-1.5 h-12 bg-gray-50 border-gray-200 focus:border-[#D4AF37] focus:ring-[#D4AF37] ${errors.name ? "border-red-500" : ""}`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.name && (
+                      <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <Label htmlFor="pricing-email" className="text-[#1a1a1a] text-sm font-medium">
+                      Seu melhor e-mail
+                    </Label>
+                    <Input
+                      id="pricing-email"
+                      type="email"
+                      placeholder="Digite seu e-mail"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className={`mt-1.5 h-12 bg-gray-50 border-gray-200 focus:border-[#D4AF37] focus:ring-[#D4AF37] ${errors.email ? "border-red-500" : ""}`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.email && (
+                      <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                    )}
+                  </div>
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base h-14 uppercase shadow-lg hover:shadow-xl transition-all duration-300 group border-2 border-[#1a1a1a]"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Processando...
+                      </>
+                    ) : (
+                      <>
+                        Quero meu acesso agora
+                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="lg"
+                    className="w-full border-2 border-[#1a1a1a] text-[#1a1a1a] hover:bg-gray-50 font-bold text-base h-14 uppercase"
+                    disabled={isSubmitting}
+                    onClick={(e) => handleSubmit(e as unknown as React.FormEvent, true)}
+                  >
+                    Boleto parcelado
+                  </Button>
+                </form>
+
+                {/* Trust badges */}
+                <div className="flex items-center justify-center gap-2 mt-6 text-gray-500">
+                  <Shield className="w-4 h-4" />
+                  <span className="text-xs">Compra 100% segura • Garantia de 15 dias</span>
                 </div>
               </div>
-              
-              <p className="text-muted-foreground">
-                ou <span className="font-semibold text-foreground">{MENTORIA_PRICING.fullPrice}</span> à vista
-              </p>
-            </div>
-
-            {/* Features List */}
-            <div className="mb-8">
-              <ul className="grid grid-cols-2 gap-3">
-                {MENTORIA_PRICING.features.map((feature, index) => (
-                  <li key={index} className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="w-4 h-4 text-[#9ACD32] flex-shrink-0" />
-                    <span className="text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Form */}
-            <form onSubmit={(e) => handleSubmit(e, false)} className="space-y-4">
-              <div>
-                <Label htmlFor="pricing-name" className="text-foreground text-sm font-medium">
-                  Seu nome completo
-                </Label>
-                <Input
-                  id="pricing-name"
-                  type="text"
-                  placeholder="Digite seu nome"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className={`mt-1.5 h-12 bg-muted/30 border-border/50 ${errors.name ? "border-destructive" : ""}`}
-                  disabled={isSubmitting}
-                />
-                {errors.name && (
-                  <p className="text-xs text-destructive mt-1">{errors.name}</p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor="pricing-email" className="text-foreground text-sm font-medium">
-                  Seu melhor e-mail
-                </Label>
-                <Input
-                  id="pricing-email"
-                  type="email"
-                  placeholder="Digite seu e-mail"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={`mt-1.5 h-12 bg-muted/30 border-border/50 ${errors.email ? "border-destructive" : ""}`}
-                  disabled={isSubmitting}
-                />
-                {errors.email && (
-                  <p className="text-xs text-destructive mt-1">{errors.email}</p>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold text-base h-14 uppercase shadow-lg hover:shadow-xl transition-all duration-300 group"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Processando...
-                  </>
-                ) : (
-                  <>
-                    Quero meu acesso agora
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
-              </Button>
-
-              <Button
-                type="button"
-                variant="outline"
-                size="lg"
-                className="w-full border-2 border-foreground/20 text-foreground hover:bg-foreground/5 font-bold text-base h-14 uppercase"
-                disabled={isSubmitting}
-                onClick={(e) => handleSubmit(e as unknown as React.FormEvent, true)}
-              >
-                Boleto parcelado
-              </Button>
-            </form>
-
-            {/* Trust badges */}
-            <div className="flex items-center justify-center gap-2 mt-6 text-muted-foreground">
-              <Shield className="w-4 h-4" />
-              <span className="text-xs">Compra 100% segura • Garantia de 15 dias</span>
             </div>
           </div>
         </div>

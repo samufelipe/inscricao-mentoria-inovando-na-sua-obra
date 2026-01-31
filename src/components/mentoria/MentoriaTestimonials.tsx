@@ -13,11 +13,11 @@ export default function MentoriaTestimonials({ onCtaClick }: MentoriaTestimonial
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-14 animate-fade-up">
-          <p className="text-primary font-medium text-lg mb-2">Depoimentos</p>
+          <p className="text-[#D4AF37] font-medium text-lg mb-2">Depoimentos</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Veja o que dizem nossas alunas
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <div className="w-20 h-1 bg-[#D4AF37] mx-auto rounded-full" />
         </div>
 
         {/* Testimonial Cards Grid */}
@@ -37,13 +37,13 @@ export default function MentoriaTestimonials({ onCtaClick }: MentoriaTestimonial
                 />
                 {/* Quote icon */}
                 <div className="absolute top-4 right-4">
-                  <Quote className="w-6 h-6 text-primary" fill="currentColor" />
+                  <Quote className="w-6 h-6 text-[#D4AF37]" fill="currentColor" />
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-5 pt-0">
-                <p className="text-lg font-bold text-primary mb-1">{testimonial.name}</p>
+                <p className="text-lg font-bold text-[#D4AF37] mb-1">{testimonial.name}</p>
                 <p className="text-xs text-white/70 mb-3">{testimonial.role}</p>
                 <p className="text-white/90 text-sm italic leading-relaxed">{testimonial.quote}</p>
               </div>
@@ -56,7 +56,7 @@ export default function MentoriaTestimonials({ onCtaClick }: MentoriaTestimonial
           <Button
             onClick={onCtaClick}
             size="lg"
-            className="bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base px-12 h-14 uppercase shadow-lg hover:shadow-xl transition-all duration-300 group"
+            className="bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base px-12 h-14 uppercase shadow-lg hover:shadow-xl transition-all duration-300 group border-2 border-[#1a1a1a]"
           >
             Quero entrar na mentoria
           </Button>

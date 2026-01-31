@@ -13,26 +13,68 @@ export const MENTORIA_FALLBACK = {
   gradient: "linear-gradient(135deg, hsl(40 30% 94%) 0%, hsl(35 25% 88%) 100%)"
 };
 
+// URLs das imagens originais do WordPress - Image-First approach
 export const MENTORIA_IMAGES = {
+  // Hero
   logo: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/Masterclass-Cronograma-1507-e1752603988566.webp",
   heroMentoras: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/06/Post-instagram-contratar-advogado-moderno-azul-e-bege-4-e1752604162881.png",
+  
+  // Skills Section - Imagem única com todo o design
+  skillsImage: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/1-2-e1752679552648.webp",
+  
+  // Audience Section
   audienceSteps: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/2-1.webp",
+  
+  // How It Works - Imagens do funcionamento
+  howItWorks1: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/3-1-e1752674351215.png",
+  howItWorks2: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/3-e1752678867880.webp",
+  
+  // Modules - Imagens verticais dos módulos (cards prontos)
+  module1Vertical: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/5modulo-01-768x1365.png",
+  module2Vertical: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/6modulo-2-576x1024.webp",
+  module3Vertical: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/7modulo-3-576x1024.png",
+  module4Vertical: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/8modulo-4-e1752587594978.webp",
+  
+  // Mantendo as originais para compatibilidade
   module1: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/6-1024x576.png",
   module2: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/7-1024x576.png",
   module3: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/5-1.png",
   module4: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/8-e1752606854888.png",
+  
+  // Documents Pack
+  documentsPack: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/4.webp",
   documentsIcon: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/3-e1752678867880.webp",
+  
+  // Bonus Experts
   bonusLuciana: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/luciana-guerra.png",
   bonusImira: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/imira-holanda.png",
   bonusJuliana: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/juliana-campelo.png",
   bonusRenata: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/renata-fuentes.png",
+  bonus1: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/15.png",
+  bonus2: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/16-1.png",
+  bonus3: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/16.webp",
+  
+  // Revenue Section - Imagens verticais dos depoimentos de faturamento
   revenue1: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/9-e1738201829974.png",
   revenue2: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/10-e1738201869212.png",
+  revenue1Vertical: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/12-e1752605232522-651x1024.webp",
+  revenue2Vertical: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/13-576x1024.png",
+  
+  // Pricing Card - Imagem pronta do card de preço
+  pricingCard: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/10/Pagina-de-VendaSite-1-e1759350501979-768x658.png",
+  
+  // Testimonials (fotos)
   testimonial1: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/beatriz-francini.jpg",
   testimonial2: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/ingrid-cristina.jpg",
   testimonial3: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/monique-figueiredo.jpg",
   testimonial4: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/aline-araujo.jpg",
+  
+  // Guarantee Section
   guarantee: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/garantia-15-dias.png",
+  guaranteeBanner: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/14-e1752677582621-1024x172.png",
+  guaranteeSeal: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/GARANTIA-REVISADO-e1752678628759-1024x619.webp",
+  
+  // Mentors
   mentors: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/inso4-1-e1738203060570.png",
 };
 
@@ -78,7 +120,8 @@ export const MENTORIA_MODULES = [
       "Apresentação de Propostas Comerciais",
       "Responsabilidade e contratos claros de projeto e gerenciamento de obra"
     ],
-    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/6-1024x576.png"
+    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/6-1024x576.png",
+    verticalImage: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/5modulo-01-768x1365.png"
   },
   {
     number: 2,
@@ -91,7 +134,8 @@ export const MENTORIA_MODULES = [
       "Custo Estimado da Obra",
       "Como compatibilizar projetos (Mapa de Compatibilização)"
     ],
-    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/7-1024x576.png"
+    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/7-1024x576.png",
+    verticalImage: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/6modulo-2-576x1024.webp"
   },
   {
     number: 3,
@@ -106,7 +150,8 @@ export const MENTORIA_MODULES = [
       "Histórias de erros de obra e soluções",
       "Checklist de todas as etapas (Checagem)"
     ],
-    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/5-1.png"
+    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/5-1.png",
+    verticalImage: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/7modulo-3-576x1024.png"
   },
   {
     number: 4,
@@ -117,7 +162,8 @@ export const MENTORIA_MODULES = [
       "Dicas para produzir ambientes para FOTOS",
       "E como divulgar seus projetos"
     ],
-    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/8-e1752606854888.png"
+    image: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/01/8-e1752606854888.png",
+    verticalImage: "https://inovandonasuaobra.com.br/wp-content/uploads/2025/07/8modulo-4-e1752587594978.webp"
   }
 ];
 

@@ -24,15 +24,15 @@ export default function MentoriaHeader({ onCtaClick }: MentoriaHeaderProps) {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
+          ? "bg-[#EDE8DC]/95 backdrop-blur-md shadow-sm py-3"
           : "bg-transparent py-4 pointer-events-none"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className={cn("transition-opacity duration-300", isScrolled ? "opacity-100" : "opacity-0")}>
           <a href="/mentoria" className="flex items-center pointer-events-auto">
-            <span className="text-lg font-bold text-foreground">
-              Mentoria <span className="text-primary">Inovando</span>
+            <span className="text-lg font-bold text-[#1a1a1a]">
+              Mentoria <span className="text-[#D4AF37]">Inovando</span>
             </span>
           </a>
         </div>
@@ -40,7 +40,7 @@ export default function MentoriaHeader({ onCtaClick }: MentoriaHeaderProps) {
         <Button
           onClick={onCtaClick}
           className={cn(
-            "bg-[#9ACD32] hover:bg-[#8BC52A] text-foreground font-bold transition-all duration-300 pointer-events-auto uppercase shadow-lg group",
+            "bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold transition-all duration-300 pointer-events-auto uppercase shadow-lg group border-2 border-[#1a1a1a]",
             isScrolled ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           )}
         >
