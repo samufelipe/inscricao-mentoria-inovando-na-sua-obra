@@ -1,5 +1,19 @@
 /* Mentoria Landing Page - WordPress Elementor Clone Styles */
 
+/* Pulse subtle animation for CTA buttons */
+@keyframes pulse-subtle {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(27, 138, 63, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(27, 138, 63, 0.5);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
 /* Base reset for WordPress content */
 .mentoria-wp-page {
   font-family: 'Poppins', 'Montserrat', system-ui, -apple-system, sans-serif;
