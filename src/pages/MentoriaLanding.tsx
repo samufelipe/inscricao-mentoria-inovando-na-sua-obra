@@ -16,21 +16,44 @@ import {
 } from "@/lib/gtm-tracking";
 import { saveUtmParams, getMergedUtmParams } from "@/lib/utm-storage";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
-import mentorasImg from "@/assets/mentoras.png";
-import logoImg from "@/assets/logo-white-gold.png";
 import "../styles/mentoria-wp.css";
 
-// Vimeo IDs dos depoimentos (funcionam independente do WordPress)
-const vimeoTestimonials = {
-  testimonial1: "1160366577",
-  testimonial2: "1160366561",
-  testimonial3: "1160366548",
-  testimonial4: "1160366533",
+// URLs das imagens do WordPress CDN
+const WP_CDN = "https://inovandonasuaobra.com.br/wp-content/uploads";
+
+const images = {
+  logo: `${WP_CDN}/2025/07/Masterclass-Cronograma-1507-e1752603988566.webp`,
+  heroPhoto: `${WP_CDN}/2025/06/Post-instagram-contratar-advogado-moderno-azul-e-bege-4-e1752604162881.png`,
+  skills: `${WP_CDN}/2025/07/1-2-e1752679552648.webp`,
+  audience: `${WP_CDN}/2025/07/2-1.webp`,
+  audienceMobile: `${WP_CDN}/2025/07/2.webp`,
+  howWorks: `${WP_CDN}/2025/07/3-1-e1752674351215.png`,
+  howWorksMobile: `${WP_CDN}/2025/07/3-e1752678867880.webp`,
+  modules1: `${WP_CDN}/2025/07/5-1.png`,
+  modules2: `${WP_CDN}/2025/07/6-1024x576.png`,
+  modules3: `${WP_CDN}/2025/07/7-1024x576.png`,
+  modules4: `${WP_CDN}/2025/07/8-e1752606854888.png`,
+  modulesMobile: `${WP_CDN}/2025/07/5-e1752604964742.webp`,
+  bonus1: `${WP_CDN}/2025/07/15.png`,
+  bonus2: `${WP_CDN}/2025/07/16-1.png`,
+  revenue1: `${WP_CDN}/2025/07/12-e1752605232522-651x1024.webp`,
+  revenue2: `${WP_CDN}/2025/07/13-576x1024.png`,
+  pricing: `${WP_CDN}/2025/10/Pagina-de-VendaSite-1-e1759350501979-768x658.png`,
+  guarantee: `${WP_CDN}/2025/07/14-e1752677582621-1024x172.png`,
+  guaranteeMobile: `${WP_CDN}/2025/07/14mobile.webp`,
+  about: `${WP_CDN}/2025/01/inso4-1-e1738203060570.png`,
+  testimonial1Poster: `${WP_CDN}/2025/05/beatriz-com-frase-1.jpg`,
+  testimonial2Poster: `${WP_CDN}/2025/05/ingrid-com-frase.jpg`,
+  testimonial3Poster: `${WP_CDN}/2025/05/monique-com-frase.jpg`,
+  testimonial4Poster: `${WP_CDN}/2025/05/aline-com-frase.jpg`,
 };
 
-// Placeholder SVG para imagens temporariamente indisponíveis
-const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%23EDE8DC' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3ECarregando...%3C/text%3E%3C/svg%3E`;
-const placeholderSvgVertical = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='600' viewBox='0 0 400 600'%3E%3Crect fill='%23EDE8DC' width='400' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3ECarregando...%3C/text%3E%3C/svg%3E`;
+const videos = {
+  testimonial1: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-192020-bc2c9e42_b5SbHjIn.mp4`,
+  testimonial2: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-192014-d8f07a40_94n43JX7.mp4`,
+  testimonial3: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-191958-e3b1a838_OJuygEE2.mp4`,
+  testimonial4: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-192005-91a62508_ZRfhS0aI.mp4`,
+};
 
 const faqItems = [
   {
@@ -211,7 +234,7 @@ export default function MentoriaLanding() {
               style={{ transform: heroTextParallax.transform }}
             >
               <img 
-                src={logoImg} 
+                src={images.logo} 
                 alt="Mentoria Inovando na sua Obra" 
                 className="mentoria-logo"
                 loading="eager"
@@ -304,7 +327,7 @@ export default function MentoriaLanding() {
               style={{ transform: heroImageParallax.transform }}
             >
               <img 
-                src={mentorasImg} 
+                src={images.heroPhoto} 
                 alt="Ingrid Zarza e Fernanda Bradaschia" 
                 loading="eager"
                 width={600}
@@ -323,7 +346,7 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <ScrollAnimation delay={150}>
             <img 
-              src={placeholderSvg} 
+              src={images.skills} 
               alt="Habilidades técnicas e comportamentais"
               className="mentoria-skills-image"
               loading="lazy"
@@ -343,13 +366,13 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <ScrollAnimation delay={150}>
             <img 
-              src={placeholderSvg} 
+              src={images.audience} 
               alt="Para quem é a mentoria"
               className="mentoria-skills-image hidden-mobile"
               loading="lazy"
             />
             <img 
-              src={placeholderSvg} 
+              src={images.audienceMobile} 
               alt="Para quem é a mentoria"
               className="mentoria-skills-image hidden-desktop"
               loading="lazy"
@@ -368,13 +391,13 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <ScrollAnimation delay={150}>
             <img 
-              src={placeholderSvg} 
+              src={images.howWorks} 
               alt="Como funciona a mentoria"
               className="mentoria-skills-image hidden-mobile"
               loading="lazy"
             />
             <img 
-              src={placeholderSvg} 
+              src={images.howWorksMobile} 
               alt="Como funciona a mentoria"
               className="mentoria-skills-image hidden-desktop"
               loading="lazy"
@@ -390,10 +413,10 @@ export default function MentoriaLanding() {
             <h2 className="mentoria-section-title">Como é a mentoria por dentro?</h2>
           </ScrollAnimation>
           <div className="mentoria-modules-grid">
-            <ScrollAnimation delay={100}><img src={placeholderSvg} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
-            <ScrollAnimation delay={200}><img src={placeholderSvg} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
-            <ScrollAnimation delay={300}><img src={placeholderSvg} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
-            <ScrollAnimation delay={400}><img src={placeholderSvg} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={100}><img src={images.modules1} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={200}><img src={images.modules2} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={300}><img src={images.modules3} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={400}><img src={images.modules4} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
           </div>
         </div>
       </section>
@@ -402,7 +425,7 @@ export default function MentoriaLanding() {
       <section className="mentoria-section mentoria-modules hidden-desktop">
         <div className="mentoria-section-inner text-center">
           <ScrollAnimation>
-            <img src={placeholderSvg} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
+            <img src={images.modulesMobile} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
           </ScrollAnimation>
         </div>
       </section>
@@ -414,10 +437,10 @@ export default function MentoriaLanding() {
             <h2 className="mentoria-section-title hidden-desktop">Bônus Exclusivos</h2>
           </ScrollAnimation>
           <ScrollAnimation delay={100}>
-            <img src={placeholderSvg} alt="Bônus da mentoria" className="mentoria-skills-image mb-8" loading="lazy" />
+            <img src={images.bonus1} alt="Bônus da mentoria" className="mentoria-skills-image mb-8" loading="lazy" />
           </ScrollAnimation>
           <ScrollAnimation delay={200}>
-            <img src={placeholderSvg} alt="Bônus da mentoria" className="mentoria-skills-image" loading="lazy" />
+            <img src={images.bonus2} alt="Bônus da mentoria" className="mentoria-skills-image" loading="lazy" />
           </ScrollAnimation>
         </div>
       </section>
@@ -430,10 +453,10 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <div className="mentoria-revenue-grid">
             <ScrollAnimation delay={100} animation="fade-left">
-              <img src={placeholderSvgVertical} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
+              <img src={images.revenue1} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
             </ScrollAnimation>
             <ScrollAnimation delay={200} animation="fade-right">
-              <img src={placeholderSvgVertical} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
+              <img src={images.revenue2} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
             </ScrollAnimation>
           </div>
         </div>
@@ -550,48 +573,44 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <div className="mentoria-testimonials-grid">
             <ScrollAnimation delay={100}>
-              <div className="mentoria-testimonial-video">
-                <iframe
-                  src={`https://player.vimeo.com/video/${vimeoTestimonials.testimonial1}?title=0&byline=0&portrait=0`}
-                  title="Depoimento Beatriz"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial1}
+                poster={images.testimonial1Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
             </ScrollAnimation>
             <ScrollAnimation delay={200}>
-              <div className="mentoria-testimonial-video">
-                <iframe
-                  src={`https://player.vimeo.com/video/${vimeoTestimonials.testimonial2}?title=0&byline=0&portrait=0`}
-                  title="Depoimento Ingrid"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial2}
+                poster={images.testimonial2Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
             </ScrollAnimation>
             <ScrollAnimation delay={300}>
-              <div className="mentoria-testimonial-video">
-                <iframe
-                  src={`https://player.vimeo.com/video/${vimeoTestimonials.testimonial3}?title=0&byline=0&portrait=0`}
-                  title="Depoimento Mônique"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial3}
+                poster={images.testimonial3Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
             </ScrollAnimation>
             <ScrollAnimation delay={400}>
-              <div className="mentoria-testimonial-video">
-                <iframe
-                  src={`https://player.vimeo.com/video/${vimeoTestimonials.testimonial4}?title=0&byline=0&portrait=0`}
-                  title="Depoimento Aline"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial4}
+                poster={images.testimonial4Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
             </ScrollAnimation>
           </div>
           <ScrollAnimation delay={300}>
@@ -619,7 +638,7 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <ScrollAnimation delay={150} animation="scale">
             <img 
-              src={placeholderSvg} 
+              src={images.guarantee} 
               alt="Garantia de 15 dias"
               className="mentoria-guarantee-image hidden-mobile"
               loading="lazy"
@@ -654,7 +673,7 @@ export default function MentoriaLanding() {
             <ScrollAnimation delay={200} animation="fade-right">
               <div className="mentoria-about-image">
                 <img 
-                  src={mentorasImg} 
+                  src={images.about} 
                   alt="Ingrid Zarza e Fernanda Bradaschia"
                   loading="lazy"
                 />
