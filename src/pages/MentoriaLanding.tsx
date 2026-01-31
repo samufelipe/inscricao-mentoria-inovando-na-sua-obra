@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
+import { z } from "zod";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Lock, ArrowRight, Loader2 } from "lucide-react";
+import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
 import "../styles/mentoria-wp.css";
-
-// Link do Hotmart para a Mentoria
-const HOTMART_LINK = "https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1759350326376";
-const HOTMART_BOLETO_LINK = "https://pay.hotmart.com/Y93975016X?off=et69m72o&bid=1759350383011";
 
 // URLs das imagens do WordPress CDN
 const WP_CDN = "https://inovandonasuaobra.com.br/wp-content/uploads";
@@ -65,7 +67,24 @@ const faqItems = [
   }
 ];
 
+// Schema de validação do formulário
+const formSchema = z.object({
+  name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
+  email: z.string().trim().email("E-mail inválido").max(255, "E-mail muito longo"),
+});
+
+type FormData = z.infer<typeof formSchema>;
+type FormErrors = Partial<Record<keyof FormData, string>>;
+
 export default function MentoriaLanding() {
+  const [searchParams] = useSearchParams();
+  const heroFormRef = useRef<HTMLFormElement>(null);
+  
+  // Form state
+  const [formData, setFormData] = useState<FormData>({ name: "", email: "" });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     // Update page metadata
     document.title = "Mentoria Inovando na sua Obra – Domine o gerenciamento de obra de interiores";
@@ -86,37 +105,102 @@ export default function MentoriaLanding() {
     }
   }, []);
 
-  // Handler para disparar evento ao clicar no CTA
-  const handleCtaClick = () => {
+  // Handler para scroll suave até o formulário do hero
+  const scrollToForm = () => {
+    heroFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Focus no primeiro campo após scroll
+    setTimeout(() => {
+      const nameInput = heroFormRef.current?.querySelector('input[name="name"]') as HTMLInputElement;
+      nameInput?.focus();
+    }, 500);
+  };
+
+  // Handler para validar e submeter o formulário
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrors({});
+    
+    // Validar com Zod
+    const result = formSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: FormErrors = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as keyof FormData] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+
     // DataLayer event para GTM
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
       (window as any).dataLayer.push({
         event: 'checkout_intent',
         product: 'mentoria',
-        conversion_identifier: 'mentoria-inovando-na-sua-obra-carrinho-abandonado',
+        conversion_identifier: 'checkout-mentoria',
       });
     }
+
+    // Montar URL do checkout com UTMs preservados
+    const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
+    checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
+    checkoutUrl.searchParams.set("name", result.data.name.trim());
     
-    // Redireciona para Hotmart
-    window.location.href = HOTMART_LINK;
+    // Preservar UTMs da URL atual
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(param => {
+      const value = searchParams.get(param);
+      if (value) checkoutUrl.searchParams.set(param, value);
+    });
+
+    // Redirecionar para CheckoutBridge
+    window.location.href = checkoutUrl.toString();
   };
 
+  // Handler para boleto (scroll até o form também)
   const handleBoletoClick = () => {
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: 'checkout_intent',
-        product: 'mentoria',
-        payment_method: 'boleto',
-        conversion_identifier: 'mentoria-inovando-na-sua-obra-carrinho-abandonado',
-      });
+    // Adiciona payment=boleto ao form submission
+    const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
+    
+    if (formData.email && formData.name) {
+      const result = formSchema.safeParse(formData);
+      if (result.success) {
+        checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
+        checkoutUrl.searchParams.set("name", result.data.name.trim());
+        checkoutUrl.searchParams.set("payment", "boleto");
+        
+        ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(param => {
+          const value = searchParams.get(param);
+          if (value) checkoutUrl.searchParams.set(param, value);
+        });
+
+        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+          (window as any).dataLayer.push({
+            event: 'checkout_intent',
+            product: 'mentoria',
+            payment_method: 'boleto',
+            conversion_identifier: 'checkout-mentoria',
+          });
+        }
+
+        window.location.href = checkoutUrl.toString();
+        return;
+      }
     }
-    window.location.href = HOTMART_BOLETO_LINK;
+    
+    // Se não tem dados preenchidos, scroll para o form
+    scrollToForm();
   };
 
   return (
     <div className="mentoria-wp-page">
+      {/* Mobile CTA fixo */}
+      <MentoriaMobileCTA onClick={scrollToForm} />
+      
       {/* Hero Section */}
-      <section className="mentoria-section mentoria-hero">
+      <section className="mentoria-section mentoria-hero" id="hero-form">
         <div className="mentoria-section-inner">
           <div className="mentoria-hero-content">
             <div className="mentoria-hero-text">
@@ -132,12 +216,68 @@ export default function MentoriaLanding() {
               <h5>
                 Transforme cada projeto em uma jornada inesquecível para seus clientes, desde o primeiro contato até a entrega final.
               </h5>
-              <button 
-                className="mentoria-cta-button"
-                onClick={handleCtaClick}
+              
+              {/* Formulário inline */}
+              <form 
+                ref={heroFormRef}
+                onSubmit={handleFormSubmit}
+                className="mentoria-hero-form"
               >
-                Quero ENTRAR NA MENTORIA
-              </button>
+                <div className="mentoria-form-field">
+                  <Label htmlFor="name" className="sr-only">Seu nome completo</Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Seu nome completo"
+                    value={formData.name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    className={`mentoria-input ${errors.name ? 'mentoria-input-error' : ''}`}
+                    disabled={isSubmitting}
+                    autoComplete="name"
+                  />
+                  {errors.name && <span className="mentoria-error-text">{errors.name}</span>}
+                </div>
+                
+                <div className="mentoria-form-field">
+                  <Label htmlFor="email" className="sr-only">Seu melhor e-mail</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Seu melhor e-mail"
+                    value={formData.email}
+                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                    className={`mentoria-input ${errors.email ? 'mentoria-input-error' : ''}`}
+                    disabled={isSubmitting}
+                    autoComplete="email"
+                  />
+                  {errors.email && <span className="mentoria-error-text">{errors.email}</span>}
+                </div>
+                
+                <button 
+                  type="submit"
+                  className="mentoria-cta-button mentoria-cta-form"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2" size={20} />
+                      Processando...
+                    </>
+                  ) : (
+                    <>
+                      Quero ENTRAR NA MENTORIA
+                      <ArrowRight className="ml-2" size={20} />
+                    </>
+                  )}
+                </button>
+                
+                <p className="mentoria-form-security">
+                  <Lock size={14} className="inline mr-1" />
+                  Seus dados estão 100% seguros
+                </p>
+              </form>
             </div>
             <div className="mentoria-hero-image">
               <img 
@@ -261,7 +401,7 @@ export default function MentoriaLanding() {
             <div className="mentoria-pricing-buttons">
               <button 
                 className="mentoria-cta-button"
-                onClick={handleCtaClick}
+                onClick={scrollToForm}
               >
                 Quero meu acesso agora
               </button>
@@ -319,7 +459,7 @@ export default function MentoriaLanding() {
           <div className="text-center">
             <button 
               className="mentoria-cta-button"
-              onClick={handleCtaClick}
+              onClick={scrollToForm}
             >
               quero entrar na mentoria
             </button>
