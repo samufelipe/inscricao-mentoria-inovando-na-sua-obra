@@ -1,173 +1,204 @@
 
+# Plano de Otimização da LP para Meta Ads
 
-# Formulário no Hero + Otimização para Leads da Imersão
+## Resumo
 
-## Contexto
+Implementação de otimizações técnicas e de UX na landing page `/mentoria` para melhorar performance (Core Web Vitals), tracking de eventos e taxa de conversão em campanhas Meta Ads. O Meta Pixel será configurado manualmente por você.
 
-A campanha de Meta Ads será direcionada para pessoas que **já participaram da Imersão** e já estão cadastradas no RD Station. Precisamos:
+---
 
-1. Coletar nome e e-mail para pré-preencher o checkout da Hotmart
-2. **Manter os eventos no RD** para que as jornadas de e-mail funcionem
-3. Evitar atrito desnecessário na experiência do usuário
+## Mudanças Propostas
 
-## Esclarecimento Importante
+### 1. Performance - Otimizações de Carregamento
 
-O RD Station **não duplica contatos** - quando você envia uma conversão com um e-mail que já existe, ele apenas:
-- Adiciona a nova conversão ao histórico do contato
-- Atualiza campos se necessário
-- Adiciona novas tags
+**Arquivo: `index.html`**
 
-Então **podemos e devemos continuar enviando os eventos** para que o RD identifique:
-- Quem iniciou o checkout da mentoria
-- Quem abandonou o carrinho
-- Quem comprou
+Adicionar preconnect e preload para recursos críticos:
+- `preconnect` para o CDN do WordPress (imagens)
+- `preload` para a imagem do hero (LCP - Largest Contentful Paint)
+- Meta tags Open Graph para melhor preview em redes sociais
 
-## Fluxo de Eventos no RD Station
+### 2. Tracking de Eventos para GTM
 
-```text
-┌─────────────────────────────────────────────────────────────────┐
-│  LEAD JÁ EXISTE NO RD (veio da Imersão)                        │
-│  Tags atuais: [checkout-imersao], [comprou-imersao]            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  1. Preenche formulário na /mentoria                           │
-│     → Evento: "checkout-mentoria"                               │
-│     → RD adiciona tag [checkout-mentoria] ao contato existente  │
-│                                                                 │
-│  2. Se não comprar em 10 minutos:                               │
-│     → Sweeper dispara: "mentoria-...-carrinho-abandonado"       │
-│     → RD adiciona tag [carrinho-abandonado-mentoria]            │
-│     → Jornada de recuperação inicia                             │
-│                                                                 │
-│  3. Se comprar:                                                 │
-│     → Webhook Hotmart: "mentoria-...-compra-aprovada"           │
-│     → RD adiciona tag [comprou-mentoria]                        │
-│     → Jornada de onboarding inicia                              │
-│     → Jornada de recuperação para (regra de saída)              │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+**Arquivo: `src/pages/MentoriaLanding.tsx`**
 
-## Alterações Propostas
+Integrar o sistema de tracking existente (`gtm-tracking.ts`):
+- Evento de page_view específico para mentoria
+- Tracking de scroll depth (25%, 50%, 75%, 100%)
+- Tracking de tempo na página
+- Tracking de visualização da seção de pricing
+- Tracking de cliques nos CTAs com localização
+- Tracking de interação com FAQ
+- Tracking de play em vídeos de depoimento
 
-### 1. Formulário no Hero (`src/pages/MentoriaLanding.tsx`)
+### 3. Persistência de UTMs no localStorage
 
-Substituir o botão "QUERO ENTRAR NA MENTORIA" por um formulário inline:
+**Novo arquivo: `src/lib/utm-storage.ts`**
 
-```text
-┌─────────────────────────────────────────────┐
-│                                             │
-│  [  Seu nome completo               ]       │
-│                                             │
-│  [  Seu melhor e-mail               ]       │
-│                                             │
-│  ┌─────────────────────────────────────┐    │
-│  │  QUERO ENTRAR NA MENTORIA ──→      │    │
-│  └─────────────────────────────────────┘    │
-│                                             │
-│  🔒 Seus dados estão seguros               │
-│                                             │
-└─────────────────────────────────────────────┘
-```
+Salvar UTMs da primeira visita para atribuição cross-session:
+- Captura e salva UTMs na primeira visita
+- Recupera UTMs salvos em visitas subsequentes
+- Útil quando o usuário sai e volta depois pelo Google
 
-**Campos:**
-- Nome completo (obrigatório)
-- E-mail (obrigatório, validação)
+**Arquivo: `src/pages/MentoriaLanding.tsx`** e `CheckoutBridge.tsx`
+- Usar UTMs salvos como fallback
 
-**Ao submeter:**
-1. Redireciona para `/checkout/mentoria?email=...&name=...&utm_source=...`
-2. O CheckoutBridge registra o intent e envia para RD
-3. Usuário vai para Hotmart com dados pré-preenchidos
+### 4. CTA Fixo Mobile Otimizado
 
-### 2. Atualizar `src/pages/CheckoutBridge.tsx`
+**Arquivo: `src/components/mentoria/MentoriaMobileCTA.tsx`**
 
-O CheckoutBridge já está configurado corretamente! Ele:
-- Chama `log-checkout-intent` que envia evento `checkout-mentoria` para RD
-- Redireciona para Hotmart com dados pré-preenchidos
+Melhorias para aumentar conversão:
+- Adicionar animação de pulse sutil no botão
+- Mostrar o valor "12x R$196" para reforçar oferta
+- Melhorar visibilidade com sombra mais pronunciada
 
-**Ajuste necessário:** Garantir que os parâmetros de telefone não são obrigatórios (campanha só coleta nome + email).
+### 5. Dimensões de Imagens para CLS
 
-### 3. Confirmar Edge Functions (já corretas)
+**Arquivo: `src/pages/MentoriaLanding.tsx`**
 
-| Edge Function | Evento RD | Quando dispara |
-|---------------|-----------|----------------|
-| `log-checkout-intent` | `checkout-mentoria` | Ao submeter formulário |
-| `abandonment-sweeper` | `mentoria-inovando-na-sua-obra-carrinho-abandonado` | 10 min sem compra |
-| `hotmart-webhook` | `mentoria-inovando-na-sua-obra-compra-aprovada` | Compra aprovada |
+Adicionar `width` e `height` nas imagens principais:
+- Hero image: evitar layout shift
+- Logo: definir dimensões
 
-### 4. Demais CTAs da Página
-
-Os outros botões "Quero entrar na mentoria" (após pricing e testimonials) podem:
-
-**Opção A:** Scroll suave até o formulário do hero
-**Opção B:** Abrir modal com o mesmo formulário
-**Opção C:** Redirecionar direto para Hotmart (sem coleta)
-
-Recomendo **Opção A** para manter uma única entrada de dados.
-
-## Arquivos a Modificar
-
-| Arquivo | Alteração |
-|---------|-----------|
-| `src/pages/MentoriaLanding.tsx` | Adicionar formulário no hero + scroll nos outros CTAs |
-| `src/pages/CheckoutBridge.tsx` | Tornar `phone` opcional na chamada |
-
-## Benefícios
-
-| Aspecto | Resultado |
-|---------|-----------|
-| Experiência do usuário | Formulário simples (só 2 campos) |
-| Tracking no RD | Todos os eventos continuam funcionando |
-| Jornada de abandono | Sweeper identifica quem abandonou |
-| Jornada de compra | Webhook identifica quem comprou |
-| Hotmart pre-fill | Dados já vão preenchidos |
-| Duplicidade | Não existe - RD atualiza contato |
+---
 
 ## Detalhes Técnicos
 
-### Validação do Formulário
+### 1. Preconnect e Open Graph (index.html)
 
-```tsx
-const formSchema = z.object({
-  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("E-mail inválido"),
-});
+```html
+<!-- Preconnect para CDN -->
+<link rel="preconnect" href="https://inovandonasuaobra.com.br" crossorigin />
+
+<!-- Preload hero image -->
+<link rel="preload" as="image" href="https://inovandonasuaobra.com.br/wp-content/uploads/2025/06/Post-instagram-contratar-advogado-moderno-azul-e-bege-4-e1752604162881.png" />
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="Mentoria Inovando na sua Obra" />
+<meta property="og:description" content="Domine o gerenciamento de obra de interiores de maneira lucrativa e eficiente" />
+<meta property="og:image" content="[URL da imagem das mentoras]" />
+<meta property="og:url" content="https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria" />
+<meta property="og:type" content="website" />
 ```
 
-### Submit Handler
+### 2. Tracking Integrado (MentoriaLanding.tsx)
 
-```tsx
-const handleFormSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  // Validar
-  const result = formSchema.safeParse(formData);
-  if (!result.success) { /* mostrar erros */ }
-  
-  // Montar URL do checkout com UTMs preservados
-  const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
-  checkoutUrl.searchParams.set("email", formData.email);
-  checkoutUrl.searchParams.set("name", formData.name);
-  
-  // Preservar UTMs da URL atual
-  const currentParams = new URLSearchParams(window.location.search);
-  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
-    .forEach(param => {
-      const value = currentParams.get(param);
-      if (value) checkoutUrl.searchParams.set(param, value);
-    });
-  
-  // Redirecionar
-  window.location.href = checkoutUrl.toString();
-};
+```typescript
+// Importar funções de tracking
+import { 
+  initScrollTracking, 
+  initTimeTracking, 
+  trackPageView,
+  trackCTAClick,
+  trackSectionView,
+  trackVideoInteraction,
+  trackFAQClick
+} from "@/lib/gtm-tracking";
+
+// No useEffect inicial
+useEffect(() => {
+  trackPageView("Mentoria Landing Page");
+  initScrollTracking();
+  initTimeTracking();
+}, []);
+
+// Nos CTAs
+onClick={() => {
+  trackCTAClick("cta_pricing", "pricing_section", "Quero meu acesso agora");
+  scrollToForm(false);
+}}
 ```
 
-### Pré-preenchimento no Hotmart
+### 3. UTM Storage (novo arquivo)
 
-O CheckoutBridge já faz isso quando `CONFIG.hotmart.preFillCheckout` está ativo:
+```typescript
+// src/lib/utm-storage.ts
+const UTM_STORAGE_KEY = "mentoria_utm_params";
+const UTM_EXPIRY_DAYS = 30;
 
-```tsx
-if (email) checkoutUrl.searchParams.set("email", email);
-if (name) checkoutUrl.searchParams.set("name", name);
+export function saveUtmParams(params: URLSearchParams) {
+  const utmParams = {
+    utm_source: params.get("utm_source"),
+    utm_medium: params.get("utm_medium"),
+    utm_campaign: params.get("utm_campaign"),
+    utm_content: params.get("utm_content"),
+    utm_term: params.get("utm_term"),
+    saved_at: Date.now(),
+  };
+  
+  // Só salva se tiver pelo menos utm_source
+  if (utmParams.utm_source) {
+    localStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(utmParams));
+  }
+}
+
+export function getStoredUtmParams(): Record<string, string> | null {
+  const stored = localStorage.getItem(UTM_STORAGE_KEY);
+  if (!stored) return null;
+  
+  const parsed = JSON.parse(stored);
+  const expiryMs = UTM_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+  
+  if (Date.now() - parsed.saved_at > expiryMs) {
+    localStorage.removeItem(UTM_STORAGE_KEY);
+    return null;
+  }
+  
+  return parsed;
+}
 ```
 
+### 4. CTA Mobile Otimizado
+
+```tsx
+// Adicionar preço e animação
+<Button className="w-full animate-pulse-subtle ...">
+  Quero Entrar • 12x R$196
+  <ArrowRight className="ml-2 h-5 w-5" />
+</Button>
+```
+
+### 5. Dimensões de Imagens
+
+```tsx
+// Hero image com dimensões explícitas
+<img 
+  src={images.heroPhoto} 
+  alt="Ingrid Zarza e Fernanda Bradaschia" 
+  loading="eager"
+  width={600}
+  height={600}
+/>
+```
+
+---
+
+## Arquivos Modificados
+
+| Arquivo | Tipo | Mudança |
+|---------|------|---------|
+| `index.html` | Editar | Preconnect, preload, OG tags |
+| `src/lib/utm-storage.ts` | Criar | Funções de persistência UTM |
+| `src/pages/MentoriaLanding.tsx` | Editar | Integrar tracking, dimensões de imagens |
+| `src/pages/CheckoutBridge.tsx` | Editar | Usar UTMs do storage como fallback |
+| `src/components/mentoria/MentoriaMobileCTA.tsx` | Editar | Melhorias visuais e preço |
+| `src/styles/mentoria-wp.css` | Editar | Animação pulse-subtle |
+
+---
+
+## Impacto Esperado
+
+| Otimização | Benefício |
+|------------|-----------|
+| Preconnect/Preload | Reduz LCP em ~200-500ms |
+| Dimensões de imagens | Reduz CLS (evita layout shift) |
+| Tracking de eventos | Dados para otimização de campanhas |
+| UTM persistence | Melhor atribuição de conversões |
+| CTA mobile com preço | Maior clareza = maior conversão |
+| Open Graph tags | Melhor CTR em compartilhamentos |
+
+---
+
+## Observação
+
+O Meta Pixel será configurado por você manualmente via GTM. Os eventos de dataLayer que estou adicionando (`page_view`, `scroll_depth`, `cta_click`, etc.) são compatíveis com o GTM e podem ser usados para disparar eventos do Pixel.
