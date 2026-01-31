@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, ArrowRight, Loader2, CheckCircle2, Users, Building2, Award } from "lucide-react";
 import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
+import { ScrollAnimation } from "@/hooks/use-scroll-animation";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
 
@@ -288,68 +289,82 @@ export default function MentoriaLanding() {
       {/* What You Will Learn - Skills Section */}
       <section className="mentoria-section mentoria-skills">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">O que você vai aprender?</h2>
-          <img 
-            src={images.skills} 
-            alt="Habilidades técnicas e comportamentais"
-            className="mentoria-skills-image"
-            loading="lazy"
-          />
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">O que você vai aprender?</h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={150}>
+            <img 
+              src={images.skills} 
+              alt="Habilidades técnicas e comportamentais"
+              className="mentoria-skills-image"
+              loading="lazy"
+            />
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Audience Section */}
       <section className="mentoria-section mentoria-audience">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">Para quem é?</h2>
-          <p className="mentoria-audience-description">
-            Para arquitetas, designers de interiores e engenheiras que queiram aprender a organizar obras de forma eficiente e previsível.
-          </p>
-          <img 
-            src={images.audience} 
-            alt="Para quem é a mentoria"
-            className="mentoria-skills-image hidden-mobile"
-            loading="lazy"
-          />
-          <img 
-            src={images.audienceMobile} 
-            alt="Para quem é a mentoria"
-            className="mentoria-skills-image hidden-desktop"
-            loading="lazy"
-          />
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">Para quem é?</h2>
+            <p className="mentoria-audience-description">
+              Para arquitetas, designers de interiores e engenheiras que queiram aprender a organizar obras de forma eficiente e previsível.
+            </p>
+          </ScrollAnimation>
+          <ScrollAnimation delay={150}>
+            <img 
+              src={images.audience} 
+              alt="Para quem é a mentoria"
+              className="mentoria-skills-image hidden-mobile"
+              loading="lazy"
+            />
+            <img 
+              src={images.audienceMobile} 
+              alt="Para quem é a mentoria"
+              className="mentoria-skills-image hidden-desktop"
+              loading="lazy"
+            />
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* How It Works Section */}
       <section className="mentoria-section mentoria-how-works">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">
-            Como funciona a <br /><b>Mentoria Inovando na sua Obra</b>?
-          </h2>
-          <img 
-            src={images.howWorks} 
-            alt="Como funciona a mentoria"
-            className="mentoria-skills-image hidden-mobile"
-            loading="lazy"
-          />
-          <img 
-            src={images.howWorksMobile} 
-            alt="Como funciona a mentoria"
-            className="mentoria-skills-image hidden-desktop"
-            loading="lazy"
-          />
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">
+              Como funciona a <br /><b>Mentoria Inovando na sua Obra</b>?
+            </h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={150}>
+            <img 
+              src={images.howWorks} 
+              alt="Como funciona a mentoria"
+              className="mentoria-skills-image hidden-mobile"
+              loading="lazy"
+            />
+            <img 
+              src={images.howWorksMobile} 
+              alt="Como funciona a mentoria"
+              className="mentoria-skills-image hidden-desktop"
+              loading="lazy"
+            />
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Modules Section - Desktop */}
       <section className="mentoria-section mentoria-modules hidden-mobile">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">Como é a mentoria por dentro?</h2>
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">Como é a mentoria por dentro?</h2>
+          </ScrollAnimation>
           <div className="mentoria-modules-grid">
-            <img src={images.modules1} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
-            <img src={images.modules2} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
-            <img src={images.modules3} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
-            <img src={images.modules4} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
+            <ScrollAnimation delay={100}><img src={images.modules1} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={200}><img src={images.modules2} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={300}><img src={images.modules3} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+            <ScrollAnimation delay={400}><img src={images.modules4} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
           </div>
         </div>
       </section>
@@ -357,26 +372,40 @@ export default function MentoriaLanding() {
       {/* Modules Section - Mobile */}
       <section className="mentoria-section mentoria-modules hidden-desktop">
         <div className="mentoria-section-inner text-center">
-          <img src={images.modulesMobile} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
+          <ScrollAnimation>
+            <img src={images.modulesMobile} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Bonus Section */}
       <section className="mentoria-section mentoria-bonus" style={{ backgroundColor: '#F5EFE6' }}>
         <div className="mentoria-section-inner text-center">
-          <h2 className="mentoria-section-title hidden-desktop">Bônus Exclusivos</h2>
-          <img src={images.bonus1} alt="Bônus da mentoria" className="mentoria-skills-image mb-8" loading="lazy" />
-          <img src={images.bonus2} alt="Bônus da mentoria" className="mentoria-skills-image" loading="lazy" />
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title hidden-desktop">Bônus Exclusivos</h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={100}>
+            <img src={images.bonus1} alt="Bônus da mentoria" className="mentoria-skills-image mb-8" loading="lazy" />
+          </ScrollAnimation>
+          <ScrollAnimation delay={200}>
+            <img src={images.bonus2} alt="Bônus da mentoria" className="mentoria-skills-image" loading="lazy" />
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Revenue Section */}
       <section className="mentoria-section mentoria-revenue">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">Como você pode faturar mais?</h2>
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">Como você pode faturar mais?</h2>
+          </ScrollAnimation>
           <div className="mentoria-revenue-grid">
-            <img src={images.revenue1} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
-            <img src={images.revenue2} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
+            <ScrollAnimation delay={100} animation="fade-left">
+              <img src={images.revenue1} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
+            </ScrollAnimation>
+            <ScrollAnimation delay={200} animation="fade-right">
+              <img src={images.revenue2} alt="Como faturar mais" className="mentoria-revenue-image" loading="lazy" />
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -384,192 +413,220 @@ export default function MentoriaLanding() {
       {/* Pricing Section */}
       <section className="mentoria-section mentoria-pricing-new">
         <div className="mentoria-section-inner">
-          <p className="mentoria-pricing-label">Investimento</p>
-          <h2 className="mentoria-section-title" style={{ color: '#fff' }}>
-            E quanto é o investimento mais importante do seu ano?
-          </h2>
+          <ScrollAnimation>
+            <p className="mentoria-pricing-label">Investimento</p>
+            <h2 className="mentoria-section-title" style={{ color: '#fff' }}>
+              E quanto é o investimento mais importante do seu ano?
+            </h2>
+          </ScrollAnimation>
           
           {/* Stats Row */}
-          <div className="mentoria-pricing-stats">
-            <div className="mentoria-pricing-stat">
-              <div className="mentoria-pricing-stat-icon">
-                <Building2 size={24} />
+          <ScrollAnimation delay={100}>
+            <div className="mentoria-pricing-stats">
+              <div className="mentoria-pricing-stat">
+                <div className="mentoria-pricing-stat-icon">
+                  <Building2 size={24} />
+                </div>
+                <div>
+                  <p className="mentoria-pricing-stat-value">+250</p>
+                  <p className="mentoria-pricing-stat-label">Obras gerenciadas</p>
+                </div>
               </div>
-              <div>
-                <p className="mentoria-pricing-stat-value">+250</p>
-                <p className="mentoria-pricing-stat-label">Obras gerenciadas</p>
+              <div className="mentoria-pricing-stat">
+                <div className="mentoria-pricing-stat-icon">
+                  <Users size={24} />
+                </div>
+                <div>
+                  <p className="mentoria-pricing-stat-value">+100</p>
+                  <p className="mentoria-pricing-stat-label">Alunas transformadas</p>
+                </div>
+              </div>
+              <div className="mentoria-pricing-stat">
+                <div className="mentoria-pricing-stat-icon">
+                  <Award size={24} />
+                </div>
+                <div>
+                  <p className="mentoria-pricing-stat-value">12</p>
+                  <p className="mentoria-pricing-stat-label">Anos de experiência</p>
+                </div>
               </div>
             </div>
-            <div className="mentoria-pricing-stat">
-              <div className="mentoria-pricing-stat-icon">
-                <Users size={24} />
-              </div>
-              <div>
-                <p className="mentoria-pricing-stat-value">+100</p>
-                <p className="mentoria-pricing-stat-label">Alunas transformadas</p>
-              </div>
-            </div>
-            <div className="mentoria-pricing-stat">
-              <div className="mentoria-pricing-stat-icon">
-                <Award size={24} />
-              </div>
-              <div>
-                <p className="mentoria-pricing-stat-value">12</p>
-                <p className="mentoria-pricing-stat-label">Anos de experiência</p>
-              </div>
-            </div>
-          </div>
+          </ScrollAnimation>
 
           {/* Main Card */}
-          <div className="mentoria-pricing-main-card">
-            {/* Price Header */}
-            <div className="mentoria-pricing-header">
-              <p className="mentoria-pricing-access">Acesso completo por</p>
-              <div className="mentoria-pricing-value">
-                <span className="mentoria-pricing-installment">12x</span>
-                <span className="mentoria-pricing-amount">R$ 196</span>
-                <span className="mentoria-pricing-cents">,50</span>
+          <ScrollAnimation delay={200} animation="scale">
+            <div className="mentoria-pricing-main-card">
+              {/* Price Header */}
+              <div className="mentoria-pricing-header">
+                <p className="mentoria-pricing-access">Acesso completo por</p>
+                <div className="mentoria-pricing-value">
+                  <span className="mentoria-pricing-installment">12x</span>
+                  <span className="mentoria-pricing-amount">R$ 196</span>
+                  <span className="mentoria-pricing-cents">,50</span>
+                </div>
+                <p className="mentoria-pricing-full">ou R$ 1.900,00 à vista</p>
               </div>
-              <p className="mentoria-pricing-full">ou R$ 1.900,00 à vista</p>
-            </div>
 
-            {/* Benefits List */}
-            <div className="mentoria-pricing-benefits">
-              <div className="mentoria-pricing-benefits-grid">
-                {[
-                  "16h de conteúdo gravado em 4 módulos",
-                  "12 meses de acesso à plataforma",
-                  "1h de mentoria individual",
-                  "Encontro presencial em São Paulo",
-                  "Materiais, checklists e ferramentas",
-                  "Suporte e grupo de networking",
-                ].map((benefit, index) => (
-                  <div key={index} className="mentoria-pricing-benefit">
-                    <CheckCircle2 size={20} className="mentoria-pricing-benefit-icon" />
-                    <span>{benefit}</span>
-                  </div>
-                ))}
+              {/* Benefits List */}
+              <div className="mentoria-pricing-benefits">
+                <div className="mentoria-pricing-benefits-grid">
+                  {[
+                    "16h de conteúdo gravado em 4 módulos",
+                    "12 meses de acesso à plataforma",
+                    "1h de mentoria individual",
+                    "Encontro presencial em São Paulo",
+                    "Materiais, checklists e ferramentas",
+                    "Suporte e grupo de networking",
+                  ].map((benefit, index) => (
+                    <div key={index} className="mentoria-pricing-benefit">
+                      <CheckCircle2 size={20} className="mentoria-pricing-benefit-icon" />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="mentoria-pricing-ctas">
+                <button 
+                  className="mentoria-cta-button mentoria-cta-pricing"
+                  onClick={() => scrollToForm(false)}
+                >
+                  Quero meu acesso agora
+                  <ArrowRight size={20} className="ml-2" />
+                </button>
+                <button 
+                  className="mentoria-cta-secondary mentoria-cta-boleto"
+                  onClick={handleBoletoClick}
+                >
+                  Prefiro pagar com Boleto Parcelado
+                </button>
+                <p className="mentoria-pricing-security">
+                  <Lock size={14} className="inline mr-1" />
+                  Compra 100% segura • Garantia de 15 dias
+                </p>
               </div>
             </div>
-
-            {/* CTA Buttons */}
-            <div className="mentoria-pricing-ctas">
-              <button 
-                className="mentoria-cta-button mentoria-cta-pricing"
-                onClick={() => scrollToForm(false)}
-              >
-                Quero meu acesso agora
-                <ArrowRight size={20} className="ml-2" />
-              </button>
-              <button 
-                className="mentoria-cta-secondary mentoria-cta-boleto"
-                onClick={handleBoletoClick}
-              >
-                Prefiro pagar com Boleto Parcelado
-              </button>
-              <p className="mentoria-pricing-security">
-                <Lock size={14} className="inline mr-1" />
-                Compra 100% segura • Garantia de 15 dias
-              </p>
-            </div>
-          </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Testimonials Section */}
       <section className="mentoria-section mentoria-testimonials">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">
-            Veja o que dizem <b>nossas alunas:</b>
-          </h2>
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">
+              Veja o que dizem <b>nossas alunas:</b>
+            </h2>
+          </ScrollAnimation>
           <div className="mentoria-testimonials-grid">
-            <video 
-              className="mentoria-testimonial-video"
-              src={videos.testimonial1}
-              poster={images.testimonial1Poster}
-              controls
-              preload="metadata"
-              controlsList="nodownload"
-            />
-            <video 
-              className="mentoria-testimonial-video"
-              src={videos.testimonial2}
-              poster={images.testimonial2Poster}
-              controls
-              preload="metadata"
-              controlsList="nodownload"
-            />
-            <video 
-              className="mentoria-testimonial-video"
-              src={videos.testimonial3}
-              poster={images.testimonial3Poster}
-              controls
-              preload="metadata"
-              controlsList="nodownload"
-            />
-            <video 
-              className="mentoria-testimonial-video"
-              src={videos.testimonial4}
-              poster={images.testimonial4Poster}
-              controls
-              preload="metadata"
-              controlsList="nodownload"
-            />
+            <ScrollAnimation delay={100}>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial1}
+                poster={images.testimonial1Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
+            </ScrollAnimation>
+            <ScrollAnimation delay={200}>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial2}
+                poster={images.testimonial2Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
+            </ScrollAnimation>
+            <ScrollAnimation delay={300}>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial3}
+                poster={images.testimonial3Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
+            </ScrollAnimation>
+            <ScrollAnimation delay={400}>
+              <video 
+                className="mentoria-testimonial-video"
+                src={videos.testimonial4}
+                poster={images.testimonial4Poster}
+                controls
+                preload="metadata"
+                controlsList="nodownload"
+              />
+            </ScrollAnimation>
           </div>
-          <div className="text-center">
-            <button 
-              className="mentoria-cta-button"
-              onClick={() => scrollToForm(false)}
-            >
-              quero entrar na mentoria
-            </button>
-          </div>
+          <ScrollAnimation delay={300}>
+            <div className="text-center">
+              <button 
+                className="mentoria-cta-button"
+                onClick={() => scrollToForm(false)}
+              >
+                quero entrar na mentoria
+              </button>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Guarantee Section */}
       <section className="mentoria-section mentoria-guarantee">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">Risco Zero para você</h2>
-          <p className="mentoria-guarantee-text">
-            Confiamos tanto no nosso conteúdo que damos uma <br className="hidden-mobile" />
-            <b>garantia incondicional de 15 dias</b> pra você.
-          </p>
-          <img 
-            src={images.guarantee} 
-            alt="Garantia de 15 dias"
-            className="mentoria-guarantee-image hidden-mobile"
-            loading="lazy"
-          />
-          <img 
-            src={garantiaMobileImg} 
-            alt="Garantia incondicional de 15 dias"
-            className="mentoria-guarantee-image-mobile hidden-desktop"
-            loading="lazy"
-          />
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">Risco Zero para você</h2>
+            <p className="mentoria-guarantee-text">
+              Confiamos tanto no nosso conteúdo que damos uma <br className="hidden-mobile" />
+              <b>garantia incondicional de 15 dias</b> pra você.
+            </p>
+          </ScrollAnimation>
+          <ScrollAnimation delay={150} animation="scale">
+            <img 
+              src={images.guarantee} 
+              alt="Garantia de 15 dias"
+              className="mentoria-guarantee-image hidden-mobile"
+              loading="lazy"
+            />
+            <img 
+              src={garantiaMobileImg} 
+              alt="Garantia incondicional de 15 dias"
+              className="mentoria-guarantee-image-mobile hidden-desktop"
+              loading="lazy"
+            />
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* About Section */}
       <section className="mentoria-section mentoria-about">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">Quem Somos</h2>
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title">Quem Somos</h2>
+          </ScrollAnimation>
           <div className="mentoria-about-content">
-            <div className="mentoria-about-text">
-              <h2>
-                Somos <b>Ingrid Zarza e Fernanda Bradaschia</b>, arquitetas <b>apaixonadas</b> por compartilhar conhecimento e <b>transformar a gestão de obras de interiores</b>.<br /><br />
-                Unimos nossas experiências para fundar a <b>INOVANDO ARQUITETURA</b>, um escritório dedicado ao desenvolvimento e gerenciamento de projetos residenciais e comerciais de interiores. Ao longo da nossa trajetória, <b>já concluímos mais de 250 obras</b>, ajudando clientes a realizarem o seu sonho.<br /><br />
-                Criamos a <b>@inovandonasuaobra</b>, um instagram para arquitetas, designers de interiores e engenheiras que querem aprender a gerenciar obras de interiores com mais segurança e qualidade. Lá, <b>compartilhamos experiências reais de obra, dicas valiosas e estratégias práticas</b> baseadas na nossa vivência em campo.<br /><br />
-                Em <b>2024</b>, criamos a <b>Mentoria Inovando na Sua Obra</b> para <b>compartilhar todo esse conhecimento de forma organizada e acessível</b>. Já são dezenas de alunas impactadas diretamente pela nossa metodologia, conquistando mais confiança e resultados.
-              </h2>
-            </div>
-            <div className="mentoria-about-image">
-              <img 
-                src={images.about} 
-                alt="Ingrid Zarza e Fernanda Bradaschia"
-                loading="lazy"
-              />
-            </div>
+            <ScrollAnimation delay={100} animation="fade-left">
+              <div className="mentoria-about-text">
+                <h2>
+                  Somos <b>Ingrid Zarza e Fernanda Bradaschia</b>, arquitetas <b>apaixonadas</b> por compartilhar conhecimento e <b>transformar a gestão de obras de interiores</b>.<br /><br />
+                  Unimos nossas experiências para fundar a <b>INOVANDO ARQUITETURA</b>, um escritório dedicado ao desenvolvimento e gerenciamento de projetos residenciais e comerciais de interiores. Ao longo da nossa trajetória, <b>já concluímos mais de 250 obras</b>, ajudando clientes a realizarem o seu sonho.<br /><br />
+                  Criamos a <b>@inovandonasuaobra</b>, um instagram para arquitetas, designers de interiores e engenheiras que querem aprender a gerenciar obras de interiores com mais segurança e qualidade. Lá, <b>compartilhamos experiências reais de obra, dicas valiosas e estratégias práticas</b> baseadas na nossa vivência em campo.<br /><br />
+                  Em <b>2024</b>, criamos a <b>Mentoria Inovando na Sua Obra</b> para <b>compartilhar todo esse conhecimento de forma organizada e acessível</b>. Já são dezenas de alunas impactadas diretamente pela nossa metodologia, conquistando mais confiança e resultados.
+                </h2>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={200} animation="fade-right">
+              <div className="mentoria-about-image">
+                <img 
+                  src={images.about} 
+                  alt="Ingrid Zarza e Fernanda Bradaschia"
+                  loading="lazy"
+                />
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -577,15 +634,19 @@ export default function MentoriaLanding() {
       {/* FAQ Section */}
       <section className="mentoria-section mentoria-faq">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title"><b>Perguntas Frequentes</b></h2>
+          <ScrollAnimation>
+            <h2 className="mentoria-section-title"><b>Perguntas Frequentes</b></h2>
+          </ScrollAnimation>
           <div className="mentoria-faq-list">
             {faqItems.map((item, index) => (
-              <details key={index} className="mentoria-faq-item" open={index === 0}>
-                <summary>{item.question}</summary>
-                <div className="mentoria-faq-content">
-                  <p>{item.answer}</p>
-                </div>
-              </details>
+              <ScrollAnimation key={index} delay={index * 100}>
+                <details className="mentoria-faq-item" open={index === 0}>
+                  <summary>{item.question}</summary>
+                  <div className="mentoria-faq-content">
+                    <p>{item.answer}</p>
+                  </div>
+                </details>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
