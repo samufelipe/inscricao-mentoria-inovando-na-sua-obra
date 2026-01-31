@@ -313,7 +313,210 @@
   background-color: #333;
 }
 
-/* Pricing Section */
+/* Pricing Section - New Design */
+.mentoria-pricing-new {
+  background-color: #5D4037;
+  padding: 80px 20px;
+}
+
+.mentoria-pricing-label {
+  text-align: center;
+  color: #D4AF37;
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.mentoria-pricing-new .mentoria-section-title {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.mentoria-pricing-new .mentoria-section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #D4AF37;
+  border-radius: 2px;
+  margin: 16px auto 0;
+}
+
+/* Stats Row */
+.mentoria-pricing-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .mentoria-pricing-stats {
+    gap: 48px;
+  }
+}
+
+.mentoria-pricing-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+
+.mentoria-pricing-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D4AF37;
+}
+
+.mentoria-pricing-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.mentoria-pricing-stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Main Card */
+.mentoria-pricing-main-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Price Header */
+.mentoria-pricing-header {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8962E 100%);
+  padding: 32px;
+  text-align: center;
+}
+
+.mentoria-pricing-access {
+  color: #5D4037;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.mentoria-pricing-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mentoria-pricing-installment {
+  color: #5D4037;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mentoria-pricing-amount {
+  color: #5D4037;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.mentoria-pricing-cents {
+  color: #5D4037;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mentoria-pricing-full {
+  color: rgba(93, 64, 55, 0.8);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Benefits */
+.mentoria-pricing-benefits {
+  padding: 32px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mentoria-pricing-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .mentoria-pricing-benefits-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mentoria-pricing-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.mentoria-pricing-benefit-icon {
+  flex-shrink: 0;
+  color: #1B8A3F;
+  margin-top: 2px;
+}
+
+/* CTA Section */
+.mentoria-pricing-ctas {
+  padding: 32px;
+  text-align: center;
+}
+
+.mentoria-cta-pricing {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 18px 32px;
+  margin-bottom: 16px;
+}
+
+.mentoria-cta-boleto {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 14px 24px;
+  border-color: #5D4037;
+  color: #5D4037;
+}
+
+.mentoria-cta-boleto:hover {
+  background: rgba(93, 64, 55, 0.05);
+  color: #5D4037;
+}
+
+.mentoria-pricing-security {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Legacy Pricing Styles (keeping for compatibility) */
 .mentoria-pricing {
   background-color: #FDF9F3;
   padding: 80px 20px;
