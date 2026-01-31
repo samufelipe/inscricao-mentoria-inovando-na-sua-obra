@@ -11,10 +11,13 @@ import {
   trackPageView, 
   trackCTAClick, 
   trackSectionView,
+  trackFormSubmit,
+  trackFormError,
   initScrollTracking, 
   initTimeTracking 
 } from "@/lib/gtm-tracking";
 import { saveUtmParams, getMergedUtmParams } from "@/lib/utm-storage";
+import { toast } from "@/hooks/use-toast";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
 
@@ -180,49 +183,70 @@ export default function MentoriaLanding() {
     e.preventDefault();
     setErrors({});
     
-    // Validar com Zod
-    const result = formSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: FormErrors = {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) {
-          fieldErrors[err.path[0] as keyof FormData] = err.message;
-        }
+    try {
+      // Validar com Zod
+      const result = formSchema.safeParse(formData);
+      if (!result.success) {
+        const fieldErrors: FormErrors = {};
+        result.error.errors.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0] as keyof FormData] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        
+        // Track form validation error
+        trackFormError(fieldErrors);
+        return;
+      }
+
+      setIsSubmitting(true);
+
+      // Track form submission no GTM
+      trackFormSubmit({
+        name: result.data.name,
+        email: result.data.email,
+        formName: "mentoria_hero_form",
       });
-      setErrors(fieldErrors);
-      return;
-    }
 
-    setIsSubmitting(true);
+      // DataLayer event para GTM
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: 'checkout_intent',
+          product: 'mentoria',
+          payment_method: paymentMethod,
+          conversion_identifier: 'checkout-mentoria',
+        });
+      }
 
-    // DataLayer event para GTM
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: 'checkout_intent',
-        product: 'mentoria',
-        payment_method: paymentMethod,
-        conversion_identifier: 'checkout-mentoria',
+      // Montar URL do checkout com UTMs preservados (mesclando URL atual + salvos)
+      const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
+      checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
+      checkoutUrl.searchParams.set("name", result.data.name.trim());
+      
+      // Adicionar método de pagamento se for boleto
+      if (paymentMethod === "boleto") {
+        checkoutUrl.searchParams.set("payment", "boleto");
+      }
+      
+      // Usar UTMs mesclados (URL atual + salvos no localStorage)
+      const mergedUtms = getMergedUtmParams(searchParams);
+      Object.entries(mergedUtms).forEach(([key, value]) => {
+        if (value) checkoutUrl.searchParams.set(key, value);
+      });
+
+      // Redirecionar para CheckoutBridge
+      window.location.href = checkoutUrl.toString();
+    } catch (error) {
+      console.error("❌ Erro ao processar formulário:", error);
+      setIsSubmitting(false);
+      
+      toast({
+        title: "Erro ao processar",
+        description: "Ocorreu um erro inesperado. Por favor, tente novamente.",
+        variant: "destructive",
       });
     }
-
-    // Montar URL do checkout com UTMs preservados (mesclando URL atual + salvos)
-    const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
-    checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
-    checkoutUrl.searchParams.set("name", result.data.name.trim());
-    
-    // Adicionar método de pagamento se for boleto
-    if (paymentMethod === "boleto") {
-      checkoutUrl.searchParams.set("payment", "boleto");
-    }
-    
-    // Usar UTMs mesclados (URL atual + salvos no localStorage)
-    const mergedUtms = getMergedUtmParams(searchParams);
-    Object.entries(mergedUtms).forEach(([key, value]) => {
-      if (value) checkoutUrl.searchParams.set(key, value);
-    });
-
-    // Redirecionar para CheckoutBridge
-    window.location.href = checkoutUrl.toString();
   };
 
   // Handler para selecionar boleto e ir para o form

@@ -65,13 +65,14 @@ export const trackFormStart = (): void => {
  * Evento quando o formulário é submetido com sucesso
  */
 export const trackFormSubmit = (data: {
-  name: string;
-  email: string;
-  phone: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  formName?: string;
 }): void => {
   pushToDataLayer({
     event: "form_submit",
-    form_name: "lead_form",
+    form_name: data.formName || "lead_form",
     form_status: "success",
     // Não enviar dados sensíveis completos - apenas indicadores
     has_name: !!data.name,

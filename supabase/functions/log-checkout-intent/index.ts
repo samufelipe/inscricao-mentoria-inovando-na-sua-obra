@@ -3,8 +3,11 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
+
+// Validação de email
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface CheckoutIntentRequest {
   product: "imersao" | "mentoria";
@@ -112,6 +115,16 @@ serve(async (req: Request) => {
       );
     }
 
+    // Validar formato de email
+    const normalizedEmail = body.email.toLowerCase().trim();
+    if (!EMAIL_REGEX.test(normalizedEmail)) {
+      console.warn("⚠️ Formato de email inválido:", normalizedEmail);
+      return new Response(
+        JSON.stringify({ error: "Formato de email inválido" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     if (!["imersao", "mentoria"].includes(body.product)) {
       return new Response(
         JSON.stringify({ error: "Produto inválido" }),
@@ -128,7 +141,7 @@ serve(async (req: Request) => {
         .from("checkout_intents")
         .upsert(
           {
-            email: body.email.toLowerCase().trim(),
+            email: normalizedEmail,
             product: body.product,
             name: body.name || null,
             phone: body.phone || null,
