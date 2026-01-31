@@ -42,6 +42,8 @@
   flex: 1;
   min-width: 300px;
   max-width: 600px;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
 }
 
 .mentoria-hero-image {
@@ -49,11 +51,19 @@
   min-width: 300px;
   display: flex;
   justify-content: center;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
 }
 
 .mentoria-hero-image img {
   max-width: 100%;
   height: auto;
+}
+
+/* Parallax container */
+.mentoria-hero-parallax {
+  overflow: hidden;
+  position: relative;
 }
 
 .mentoria-logo {

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Lock, ArrowRight, Loader2, CheckCircle2, Users, Building2, Award } from "lucide-react";
 import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
 import { ScrollAnimation } from "@/hooks/use-scroll-animation";
+import { useParallax } from "@/hooks/use-parallax";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
 
@@ -88,6 +89,9 @@ export default function MentoriaLanding() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"card" | "boleto">("card");
 
+  // Parallax effects
+  const heroImageParallax = useParallax({ speed: 0.15, direction: "down", maxOffset: 80 });
+  const heroTextParallax = useParallax({ speed: 0.08, direction: "up", maxOffset: 40 });
   useEffect(() => {
     // Update page metadata
     document.title = "Mentoria Inovando na sua Obra – Domine o gerenciamento de obra de interiores";
@@ -182,10 +186,13 @@ export default function MentoriaLanding() {
       <MentoriaMobileCTA onClick={() => scrollToForm(false)} />
       
       {/* Hero Section */}
-      <section className="mentoria-section mentoria-hero" id="hero-form">
+      <section className="mentoria-section mentoria-hero mentoria-hero-parallax" id="hero-form">
         <div className="mentoria-section-inner">
           <div className="mentoria-hero-content">
-            <div className="mentoria-hero-text">
+            <div 
+              className="mentoria-hero-text"
+              style={{ transform: heroTextParallax.transform }}
+            >
               <img 
                 src={images.logo} 
                 alt="Mentoria Inovando na sua Obra" 
@@ -275,7 +282,10 @@ export default function MentoriaLanding() {
                 </p>
               </form>
             </div>
-            <div className="mentoria-hero-image">
+            <div 
+              className="mentoria-hero-image"
+              style={{ transform: heroImageParallax.transform }}
+            >
               <img 
                 src={images.heroPhoto} 
                 alt="Ingrid Zarza e Fernanda Bradaschia" 
