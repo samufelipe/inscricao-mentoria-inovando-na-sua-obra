@@ -13,10 +13,16 @@ const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 // 🔧 MODO DEBUG: Quando ativo, aceita requisições sem validar token
 const DEBUG_MODE = Deno.env.get("HOTMART_DEBUG_MODE") === "true";
 
-// Identificadores de conversão para compra no RD Station
+// Identificadores de conversão para RD Station
 const PURCHASE_CONVERSION_IDENTIFIERS: Record<string, string> = {
   imersao: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
   mentoria: "mentoria-inovando-na-sua-obra-compra-aprovada",
+};
+
+// Identificador para carrinho abandonado (PURCHASE_OUT_OF_SHOPPING_CART)
+const ABANDONED_CART_IDENTIFIERS: Record<string, string> = {
+  imersao: "checkout-imersao", // Já existente
+  mentoria: "mentoria-inovando-na-sua-obra-carrinho-abandonado",
 };
 
 // Interface para o payload da Hotmart (múltiplos formatos)
@@ -192,12 +198,94 @@ serve(async (req: Request) => {
     const approvedEvents = ["PURCHASE_APPROVED", "PURCHASE_COMPLETE", "PURCHASE_BILLET_PRINTED"];
     const approvedStatuses = ["approved", "complete", "completed", "paid"];
     
+    // Verificar se é um evento de carrinho abandonado
+    const abandonedCartEvents = ["PURCHASE_OUT_OF_SHOPPING_CART", "PURCHASE_CANCELED", "PURCHASE_EXPIRED"];
+    
     const isApproved = 
       approvedEvents.includes(event.toUpperCase()) || 
       approvedStatuses.includes(status.toLowerCase());
+    
+    const isAbandonedCart = abandonedCartEvents.includes(event.toUpperCase());
+
+    // Se for carrinho abandonado, enviar evento específico para RD Station
+    if (isAbandonedCart) {
+      console.log(`[${requestId}] 🛒 Evento de carrinho abandonado identificado:`, event);
+      
+      // Determinar produto
+      let product: "imersao" | "mentoria" = "imersao";
+      if (productName) {
+        const nameLower = productName.toLowerCase();
+        if (nameLower.includes("mentoria") || nameLower.includes("inovando")) {
+          product = "mentoria";
+        }
+      }
+      
+      const normalizedEmail = email.toLowerCase().trim();
+      
+      // Enviar evento de carrinho abandonado para RD Station
+      if (RD_STATION_API_KEY) {
+        const abandonedIdentifier = ABANDONED_CART_IDENTIFIERS[product];
+        
+        const rdPayload = {
+          event_type: "CONVERSION",
+          event_family: "CDP",
+          payload: {
+            conversion_identifier: abandonedIdentifier,
+            email: normalizedEmail,
+            name: buyerName || "",
+            cf_produto: product,
+            cf_status_carrinho: "abandonado",
+            cf_evento_hotmart: event,
+            tags: [`carrinho-abandonado-${product}`, "hotmart-webhook"],
+          },
+        };
+
+        console.log(`[${requestId}] 📤 Enviando evento de carrinho abandonado para RD Station:`, {
+          email: normalizedEmail,
+          conversion: abandonedIdentifier,
+          product,
+        });
+
+        try {
+          const rdResponse = await fetch(
+            `https://api.rd.services/platform/conversions?api_key=${RD_STATION_API_KEY}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+              },
+              body: JSON.stringify(rdPayload),
+            }
+          );
+
+          const rdResponseData = await rdResponse.json().catch(() => ({}));
+          
+          if (rdResponse.ok) {
+            console.log(`[${requestId}] ✅ Evento de carrinho abandonado enviado para RD Station:`, rdResponseData);
+          } else {
+            console.error(`[${requestId}] ❌ Erro RD Station (carrinho abandonado):`, rdResponse.status, rdResponseData);
+          }
+        } catch (rdError) {
+          console.error(`[${requestId}] ❌ Erro na requisição ao RD Station (carrinho abandonado):`, rdError);
+        }
+      }
+      
+      return new Response(
+        JSON.stringify({ 
+          success: true, 
+          request_id: requestId,
+          message: "Evento de carrinho abandonado processado",
+          event,
+          email: normalizedEmail,
+          product,
+        }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     if (!isApproved) {
-      console.log(`[${requestId}] ℹ️ Evento não é compra aprovada, ignorando:`, { event, status });
+      console.log(`[${requestId}] ℹ️ Evento não é compra aprovada nem carrinho abandonado, ignorando:`, { event, status });
       return new Response(
         JSON.stringify({ success: true, message: "Evento ignorado", event, status }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }

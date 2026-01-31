@@ -1,0 +1,433 @@
+/* Mentoria Landing Page - WordPress Elementor Clone Styles */
+
+/* Base reset for WordPress content */
+.mentoria-wp-page {
+  font-family: 'Poppins', 'Montserrat', system-ui, -apple-system, sans-serif;
+  background-color: #FDF9F3;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.mentoria-wp-page * {
+  box-sizing: border-box;
+}
+
+/* Section containers */
+.mentoria-section {
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.mentoria-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.mentoria-hero {
+  background-color: #FDF9F3;
+  padding: 20px 20px 40px;
+}
+
+.mentoria-hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.mentoria-hero-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.mentoria-hero-image {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.mentoria-hero-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.mentoria-logo {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.mentoria-hero h2 {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.mentoria-hero h5 {
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+/* CTA Button - Green Lime */
+.mentoria-cta-button {
+  display: inline-block;
+  background-color: #ADFF2F;
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.mentoria-cta-button:hover {
+  background-color: #9ACD32;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(173, 255, 47, 0.4);
+}
+
+/* Section Headings */
+.mentoria-section-title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #D4AF37;
+}
+
+.mentoria-section-title b {
+  color: #333;
+}
+
+/* Skills Section */
+.mentoria-skills {
+  background-color: #FDF9F3;
+  padding: 60px 20px;
+}
+
+.mentoria-skills-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Audience Section */
+.mentoria-audience {
+  background-color: #F5EFE6;
+  padding: 60px 20px;
+}
+
+.mentoria-audience h2 {
+  font-size: clamp(20px, 3vw, 32px);
+  color: #D4AF37;
+  margin-bottom: 20px;
+}
+
+.mentoria-audience-description {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+/* How It Works Section */
+.mentoria-how-works {
+  background-color: #FDF9F3;
+  padding: 60px 20px;
+}
+
+/* Modules Section */
+.mentoria-modules {
+  background-color: #F5EFE6;
+  padding: 60px 20px;
+}
+
+.mentoria-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mentoria-module-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Revenue Section */
+.mentoria-revenue {
+  background-color: #333;
+  color: #fff;
+  padding: 60px 20px;
+}
+
+.mentoria-revenue h2 {
+  color: #D4AF37;
+}
+
+.mentoria-revenue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mentoria-revenue-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Pricing Section */
+.mentoria-pricing {
+  background-color: #FDF9F3;
+  padding: 80px 20px;
+}
+
+.mentoria-pricing-card {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mentoria-pricing-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.mentoria-pricing-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.mentoria-cta-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid #333;
+  cursor: pointer;
+  text-align: center;
+}
+
+.mentoria-cta-secondary:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Testimonials Section */
+.mentoria-testimonials {
+  background-color: #F5EFE6;
+  padding: 80px 20px;
+}
+
+.mentoria-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.mentoria-testimonial-video {
+  width: 100%;
+  border-radius: 12px;
+  aspect-ratio: 9/16;
+  object-fit: cover;
+}
+
+/* Guarantee Section */
+.mentoria-guarantee {
+  background-color: #FDF9F3;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.mentoria-guarantee h2 {
+  color: #D4AF37;
+  margin-bottom: 16px;
+}
+
+.mentoria-guarantee-text {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+.mentoria-guarantee-image {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* About Section */
+.mentoria-about {
+  background-color: #F5EFE6;
+  padding: 80px 20px;
+}
+
+.mentoria-about-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.mentoria-about-text {
+  flex: 1.5;
+  min-width: 300px;
+}
+
+.mentoria-about-text h2 {
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.8;
+  color: #333;
+}
+
+.mentoria-about-text b {
+  color: #D4AF37;
+}
+
+.mentoria-about-image {
+  flex: 1;
+  min-width: 280px;
+}
+
+.mentoria-about-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* FAQ Section */
+.mentoria-faq {
+  background-color: #FDF9F3;
+  padding: 80px 20px;
+}
+
+.mentoria-faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mentoria-faq-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mentoria-faq-item summary {
+  padding: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.mentoria-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.mentoria-faq-item[open] summary {
+  border-bottom: 1px solid #eee;
+}
+
+.mentoria-faq-content {
+  padding: 20px;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* Footer */
+.mentoria-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mentoria-hero-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  
+  .mentoria-hero-text {
+    max-width: 100%;
+  }
+  
+  .mentoria-about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .mentoria-cta-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-8 {
+  margin-bottom: 32px;
+}
+
+.hidden-mobile {
+  display: block;
+}
+
+.hidden-desktop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+  
+  .hidden-desktop {
+    display: block;
+  }
+}
