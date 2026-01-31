@@ -85,11 +85,11 @@
 
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden selection:bg-primary selection:text-foreground;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     @apply uppercase tracking-tight leading-tight;
   }

@@ -84,9 +84,9 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
               <span>+250 arquitetas já transformaram suas obras</span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-none mb-6 uppercase tracking-tight">
               Domine o gerenciamento de obra de interiores de maneira{" "}
-              <span className="text-[#D4AF37] italic font-extrabold">lucrativa e eficiente</span>
+              <span className="text-[#D4AF37] font-extrabold not-italic">lucrativa e eficiente</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
