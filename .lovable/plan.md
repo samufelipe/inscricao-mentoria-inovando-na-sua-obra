@@ -1,204 +1,178 @@
 
-# Plano de Otimização da LP para Meta Ads
+# Guia Completo: Migrar LP para inovandonasuaobra.com.br (Raiz)
 
-## Resumo
+## Resumo da Situação
 
-Implementação de otimizações técnicas e de UX na landing page `/mentoria` para melhorar performance (Core Web Vitals), tracking de eventos e taxa de conversão em campanhas Meta Ads. O Meta Pixel será configurado manualmente por você.
-
----
-
-## Mudanças Propostas
-
-### 1. Performance - Otimizações de Carregamento
-
-**Arquivo: `index.html`**
-
-Adicionar preconnect e preload para recursos críticos:
-- `preconnect` para o CDN do WordPress (imagens)
-- `preload` para a imagem do hero (LCP - Largest Contentful Paint)
-- Meta tags Open Graph para melhor preview em redes sociais
-
-### 2. Tracking de Eventos para GTM
-
-**Arquivo: `src/pages/MentoriaLanding.tsx`**
-
-Integrar o sistema de tracking existente (`gtm-tracking.ts`):
-- Evento de page_view específico para mentoria
-- Tracking de scroll depth (25%, 50%, 75%, 100%)
-- Tracking de tempo na página
-- Tracking de visualização da seção de pricing
-- Tracking de cliques nos CTAs com localização
-- Tracking de interação com FAQ
-- Tracking de play em vídeos de depoimento
-
-### 3. Persistência de UTMs no localStorage
-
-**Novo arquivo: `src/lib/utm-storage.ts`**
-
-Salvar UTMs da primeira visita para atribuição cross-session:
-- Captura e salva UTMs na primeira visita
-- Recupera UTMs salvos em visitas subsequentes
-- Útil quando o usuário sai e volta depois pelo Google
-
-**Arquivo: `src/pages/MentoriaLanding.tsx`** e `CheckoutBridge.tsx`
-- Usar UTMs salvos como fallback
-
-### 4. CTA Fixo Mobile Otimizado
-
-**Arquivo: `src/components/mentoria/MentoriaMobileCTA.tsx`**
-
-Melhorias para aumentar conversão:
-- Adicionar animação de pulse sutil no botão
-- Mostrar o valor "12x R$196" para reforçar oferta
-- Melhorar visibilidade com sombra mais pronunciada
-
-### 5. Dimensões de Imagens para CLS
-
-**Arquivo: `src/pages/MentoriaLanding.tsx`**
-
-Adicionar `width` e `height` nas imagens principais:
-- Hero image: evitar layout shift
-- Logo: definir dimensões
+Você quer que a página `/mentoria` do Lovable substitua completamente o site atual em `inovandonasuaobra.com.br`, ficando acessível na **raiz** do domínio.
 
 ---
 
-## Detalhes Técnicos
+## Opção Recomendada: Domínio Customizado no Lovable
 
-### 1. Preconnect e Open Graph (index.html)
+Esta é a forma mais simples e mantém tudo funcionando automaticamente (Edge Functions, SSL, deploys).
 
-```html
-<!-- Preconnect para CDN -->
-<link rel="preconnect" href="https://inovandonasuaobra.com.br" crossorigin />
+### Passo 1: Ajustar a Rota no Código
 
-<!-- Preload hero image -->
-<link rel="preload" as="image" href="https://inovandonasuaobra.com.br/wp-content/uploads/2025/06/Post-instagram-contratar-advogado-moderno-azul-e-bege-4-e1752604162881.png" />
+Antes de conectar o domínio, preciso ajustar o código para que a página de mentoria seja a rota principal (`/`).
 
-<!-- Open Graph Meta Tags -->
-<meta property="og:title" content="Mentoria Inovando na sua Obra" />
-<meta property="og:description" content="Domine o gerenciamento de obra de interiores de maneira lucrativa e eficiente" />
-<meta property="og:image" content="[URL da imagem das mentoras]" />
-<meta property="og:url" content="https://inscricao-cronogramainovandonasuaobracombr.lovable.app/mentoria" />
-<meta property="og:type" content="website" />
-```
+**Mudanças necessárias:**
+- No `App.tsx`: Trocar a rota da mentoria de `/mentoria` para `/`
+- Mover ou remover a página Index atual
+- Atualizar links internos e referências
 
-### 2. Tracking Integrado (MentoriaLanding.tsx)
+### Passo 2: Conectar Domínio no Lovable
 
-```typescript
-// Importar funções de tracking
-import { 
-  initScrollTracking, 
-  initTimeTracking, 
-  trackPageView,
-  trackCTAClick,
-  trackSectionView,
-  trackVideoInteraction,
-  trackFAQClick
-} from "@/lib/gtm-tracking";
+1. No Lovable, clique no nome do projeto (canto superior esquerdo)
+2. Vá em **Settings** → **Domains**
+3. Clique em **Connect Domain**
+4. Digite: `inovandonasuaobra.com.br`
 
-// No useEffect inicial
-useEffect(() => {
-  trackPageView("Mentoria Landing Page");
-  initScrollTracking();
-  initTimeTracking();
-}, []);
+### Passo 3: Configurar DNS no cPanel
 
-// Nos CTAs
-onClick={() => {
-  trackCTAClick("cta_pricing", "pricing_section", "Quero meu acesso agora");
-  scrollToForm(false);
-}}
-```
+O Lovable vai mostrar os registros DNS necessários. No cPanel:
 
-### 3. UTM Storage (novo arquivo)
+1. Acesse **Zone Editor** ou **DNS Zone Editor**
+2. **Delete** todos os registros A existentes para `@` (raiz)
+3. **Delete** todos os registros A existentes para `www`
+4. **Adicione** os seguintes registros:
 
-```typescript
-// src/lib/utm-storage.ts
-const UTM_STORAGE_KEY = "mentoria_utm_params";
-const UTM_EXPIRY_DAYS = 30;
+| Tipo | Nome | Valor | TTL |
+|------|------|-------|-----|
+| A | @ | 185.158.133.1 | 3600 |
+| A | www | 185.158.133.1 | 3600 |
+| TXT | _lovable | (valor fornecido pelo Lovable) | 3600 |
 
-export function saveUtmParams(params: URLSearchParams) {
-  const utmParams = {
-    utm_source: params.get("utm_source"),
-    utm_medium: params.get("utm_medium"),
-    utm_campaign: params.get("utm_campaign"),
-    utm_content: params.get("utm_content"),
-    utm_term: params.get("utm_term"),
-    saved_at: Date.now(),
-  };
-  
-  // Só salva se tiver pelo menos utm_source
-  if (utmParams.utm_source) {
-    localStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(utmParams));
-  }
-}
+### Passo 4: Aguardar Propagação
 
-export function getStoredUtmParams(): Record<string, string> | null {
-  const stored = localStorage.getItem(UTM_STORAGE_KEY);
-  if (!stored) return null;
-  
-  const parsed = JSON.parse(stored);
-  const expiryMs = UTM_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
-  
-  if (Date.now() - parsed.saved_at > expiryMs) {
-    localStorage.removeItem(UTM_STORAGE_KEY);
-    return null;
-  }
-  
-  return parsed;
-}
-```
+- Pode levar de **10 minutos a 72 horas**
+- Verifique em: https://dnschecker.org
 
-### 4. CTA Mobile Otimizado
+### Passo 5: Publicar o Projeto
 
-```tsx
-// Adicionar preço e animação
-<Button className="w-full animate-pulse-subtle ...">
-  Quero Entrar • 12x R$196
-  <ArrowRight className="ml-2 h-5 w-5" />
-</Button>
-```
-
-### 5. Dimensões de Imagens
-
-```tsx
-// Hero image com dimensões explícitas
-<img 
-  src={images.heroPhoto} 
-  alt="Ingrid Zarza e Fernanda Bradaschia" 
-  loading="eager"
-  width={600}
-  height={600}
-/>
-```
+Após o DNS propagar e o Lovable verificar:
+1. Clique em **Publish** no Lovable
+2. O site estará disponível em `inovandonasuaobra.com.br`
 
 ---
 
-## Arquivos Modificados
+## O Que Acontece com as Integrações
 
-| Arquivo | Tipo | Mudança |
-|---------|------|---------|
-| `index.html` | Editar | Preconnect, preload, OG tags |
-| `src/lib/utm-storage.ts` | Criar | Funções de persistência UTM |
-| `src/pages/MentoriaLanding.tsx` | Editar | Integrar tracking, dimensões de imagens |
-| `src/pages/CheckoutBridge.tsx` | Editar | Usar UTMs do storage como fallback |
-| `src/components/mentoria/MentoriaMobileCTA.tsx` | Editar | Melhorias visuais e preço |
-| `src/styles/mentoria-wp.css` | Editar | Animação pulse-subtle |
+### Edge Functions (Supabase)
+- **Continuam funcionando automaticamente**
+- URL permanece: `https://npthhlpmffjqwivarvpw.supabase.co/functions/v1/`
+- Não precisa alterar nada
+
+### RD Station
+- **Continua funcionando automaticamente**
+- A API key está salva no Supabase (secrets)
+- Os eventos de conversão (`checkout-mentoria`) funcionam normalmente
+
+### Hotmart Webhook
+- **Precisa atualizar** a URL do webhook no painel da Hotmart
+- De: URL atual do Lovable
+- Para: `https://npthhlpmffjqwivarvpw.supabase.co/functions/v1/hotmart-webhook`
+- (A URL do Supabase NÃO muda, então provavelmente já está correto)
+
+### Google Tag Manager (GTM-KSNCJ6GL)
+- **Funciona automaticamente**
+- O GTM carrega via JavaScript, independente do domínio
+- Os eventos do dataLayer continuam funcionando
+
+### Imagens do WordPress CDN
+- **Continuam funcionando**
+- As imagens já estão hospedadas em `inovandonasuaobra.com.br/wp-content/uploads/`
+- Como você vai substituir o site, precisa manter a pasta `wp-content/uploads` no servidor OU migrar as imagens para outro lugar
 
 ---
 
-## Impacto Esperado
+## Considerações Importantes sobre as Imagens
 
-| Otimização | Benefício |
-|------------|-----------|
-| Preconnect/Preload | Reduz LCP em ~200-500ms |
-| Dimensões de imagens | Reduz CLS (evita layout shift) |
-| Tracking de eventos | Dados para otimização de campanhas |
-| UTM persistence | Melhor atribuição de conversões |
-| CTA mobile com preço | Maior clareza = maior conversão |
-| Open Graph tags | Melhor CTR em compartilhamentos |
+### Problema Potencial
+A página usa imagens do WordPress em URLs como:
+```
+https://inovandonasuaobra.com.br/wp-content/uploads/2025/...
+```
+
+Se você **deletar completamente** o WordPress do servidor, essas imagens vão parar de funcionar.
+
+### Soluções Possíveis
+
+1. **Manter os arquivos de upload** (Recomendado)
+   - Antes de deletar o WordPress, faça backup da pasta `wp-content/uploads`
+   - Configure o cPanel para servir esses arquivos estáticos junto com o domínio apontando para o Lovable
+   - Isso pode ser complexo de configurar
+
+2. **Migrar imagens para CDN externo**
+   - Subir as imagens para Cloudinary, imgix, ou Supabase Storage
+   - Atualizar as URLs no código
+
+3. **Usar proxy no cPanel**
+   - Configurar `.htaccess` para que `/wp-content/uploads/` sirva arquivos locais
+   - Resto redireciona para o Lovable
 
 ---
 
-## Observação
+## Roteiro Passo a Passo Simplificado
 
-O Meta Pixel será configurado por você manualmente via GTM. Os eventos de dataLayer que estou adicionando (`page_view`, `scroll_depth`, `cta_click`, etc.) são compatíveis com o GTM e podem ser usados para disparar eventos do Pixel.
+### Etapa 1: Backup
+- Fazer backup completo do site WordPress atual
+- Baixar toda a pasta `wp-content/uploads` via FTP
+
+### Etapa 2: Ajustar Código (eu faço isso)
+- Trocar rota `/mentoria` para `/`
+- Atualizar referências internas
+
+### Etapa 3: Conectar Domínio
+- Seguir o fluxo no Lovable Settings → Domains
+
+### Etapa 4: Configurar DNS no cPanel
+- Adicionar registros A e TXT conforme instruções do Lovable
+- Remover registros conflitantes
+
+### Etapa 5: Configurar Arquivos Estáticos (se necessário)
+- Se as imagens quebrarem, configurar fallback ou migrar imagens
+
+### Etapa 6: Testar Tudo
+- Verificar se a página carrega
+- Testar formulário de lead (RD Station)
+- Testar clique no CTA de checkout (Hotmart)
+- Verificar se as imagens aparecem
+- Testar no mobile
+
+### Etapa 7: Atualizar Webhook Hotmart (se necessário)
+- Verificar se a URL do webhook está usando o Supabase (não muda)
+
+---
+
+## Resumo das Mudanças de Código Necessárias
+
+| Arquivo | Mudança |
+|---------|---------|
+| `src/App.tsx` | Trocar rota de `/mentoria` para `/` |
+| `index.html` | Atualizar meta tags OG com nova URL |
+
+---
+
+## Checklist Final de Validação
+
+Após a migração, testar:
+- [ ] Página carrega em `inovandonasuaobra.com.br`
+- [ ] SSL/HTTPS funcionando
+- [ ] Imagens carregando corretamente
+- [ ] Formulário de lead funciona (enviar teste)
+- [ ] Botão de checkout redireciona para Hotmart
+- [ ] UTMs sendo capturados corretamente
+- [ ] GTM/DataLayer funcionando (verificar console)
+- [ ] Mobile responsivo
+- [ ] CTA fixo aparece no mobile
+
+---
+
+## Próximo Passo
+
+Deseja que eu faça as alterações de código necessárias (trocar a rota para `/` e atualizar as meta tags)?
+
+Após isso, você pode:
+1. Conectar o domínio no Lovable
+2. Configurar o DNS no cPanel
+3. Publicar
