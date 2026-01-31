@@ -69,10 +69,10 @@ const images = {
 };
 
 const videos = {
-  testimonial1: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-192020-bc2c9e42_b5SbHjIn.mp4`,
-  testimonial2: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-192014-d8f07a40_94n43JX7.mp4`,
-  testimonial3: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-191958-e3b1a838_OJuygEE2.mp4`,
-  testimonial4: `${WP_CDN}/2025/02/video-do-whatsapp-de-2025-02-12-a-s-192005-91a62508_ZRfhS0aI.mp4`,
+  testimonial1: "/videos/testimonial1.mp4",
+  testimonial2: "/videos/testimonial2.mp4",
+  testimonial3: "/videos/testimonial3.mp4",
+  testimonial4: "/videos/testimonial4.mp4",
 };
 
 const faqItems = [
