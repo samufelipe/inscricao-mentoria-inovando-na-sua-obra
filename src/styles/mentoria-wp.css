@@ -77,11 +77,11 @@
   margin-bottom: 24px;
 }
 
-/* CTA Button - Green Lime */
+/* CTA Button - Green */
 .mentoria-cta-button {
   display: inline-block;
-  background-color: #ADFF2F;
-  color: #000;
+  background-color: #1B8A3F;
+  color: #fff;
   font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
@@ -95,9 +95,9 @@
 }
 
 .mentoria-cta-button:hover {
-  background-color: #9ACD32;
+  background-color: #157A35;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(173, 255, 47, 0.4);
+  box-shadow: 0 4px 12px rgba(27, 138, 63, 0.4);
 }
 
 /* Hero Form Styles */
@@ -237,6 +237,7 @@
   height: auto;
   display: block;
   margin: 0 auto;
+  mix-blend-mode: multiply;
 }
 
 /* Audience Section */
@@ -283,6 +284,7 @@
   width: 100%;
   height: auto;
   border-radius: 8px;
+  mix-blend-mode: multiply;
 }
 
 /* Revenue Section */
@@ -308,6 +310,7 @@
   width: 100%;
   height: auto;
   border-radius: 8px;
+  background-color: #333;
 }
 
 /* Pricing Section */
@@ -326,6 +329,7 @@
   max-width: 100%;
   height: auto;
   margin-bottom: 30px;
+  mix-blend-mode: multiply;
 }
 
 .mentoria-pricing-buttons {
@@ -400,6 +404,7 @@
   width: 100%;
   margin: 0 auto;
   display: block;
+  mix-blend-mode: multiply;
 }
 
 .mentoria-guarantee-image-mobile {

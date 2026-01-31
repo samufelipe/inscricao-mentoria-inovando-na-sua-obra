@@ -27,7 +27,7 @@ export default function MentoriaMobileCTA({ onClick }: MentoriaMobileCTAProps) {
         <Button
           onClick={onClick}
           size="lg"
-          className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base h-14 uppercase shadow-lg border-2 border-[#1a1a1a]"
+          className="w-full bg-[#1B8A3F] hover:bg-[#157A35] text-white font-bold text-base h-14 uppercase shadow-lg"
         >
           Quero Entrar na Mentoria
           <ArrowRight className="ml-2 h-5 w-5" />
