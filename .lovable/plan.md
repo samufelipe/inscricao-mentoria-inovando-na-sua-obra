@@ -1,178 +1,182 @@
 
-# Guia Completo: Migrar LP para inovandonasuaobra.com.br (Raiz)
+# Auditoria Completa: Integrações RD Station e Estrutura de Tracking
 
-## Resumo da Situação
+## Resumo Executivo
 
-Você quer que a página `/mentoria` do Lovable substitua completamente o site atual em `inovandonasuaobra.com.br`, ficando acessível na **raiz** do domínio.
-
----
-
-## Opção Recomendada: Domínio Customizado no Lovable
-
-Esta é a forma mais simples e mantém tudo funcionando automaticamente (Edge Functions, SSL, deploys).
-
-### Passo 1: Ajustar a Rota no Código
-
-Antes de conectar o domínio, preciso ajustar o código para que a página de mentoria seja a rota principal (`/`).
-
-**Mudanças necessárias:**
-- No `App.tsx`: Trocar a rota da mentoria de `/mentoria` para `/`
-- Mover ou remover a página Index atual
-- Atualizar links internos e referências
-
-### Passo 2: Conectar Domínio no Lovable
-
-1. No Lovable, clique no nome do projeto (canto superior esquerdo)
-2. Vá em **Settings** → **Domains**
-3. Clique em **Connect Domain**
-4. Digite: `inovandonasuaobra.com.br`
-
-### Passo 3: Configurar DNS no cPanel
-
-O Lovable vai mostrar os registros DNS necessários. No cPanel:
-
-1. Acesse **Zone Editor** ou **DNS Zone Editor**
-2. **Delete** todos os registros A existentes para `@` (raiz)
-3. **Delete** todos os registros A existentes para `www`
-4. **Adicione** os seguintes registros:
-
-| Tipo | Nome | Valor | TTL |
-|------|------|-------|-----|
-| A | @ | 185.158.133.1 | 3600 |
-| A | www | 185.158.133.1 | 3600 |
-| TXT | _lovable | (valor fornecido pelo Lovable) | 3600 |
-
-### Passo 4: Aguardar Propagação
-
-- Pode levar de **10 minutos a 72 horas**
-- Verifique em: https://dnschecker.org
-
-### Passo 5: Publicar o Projeto
-
-Após o DNS propagar e o Lovable verificar:
-1. Clique em **Publish** no Lovable
-2. O site estará disponível em `inovandonasuaobra.com.br`
+Analisei toda a arquitetura de integrações e a estrutura está **bem organizada e funcional**. Encontrei alguns pontos de melhoria para garantir robustez e consistência de alto nível.
 
 ---
 
-## O Que Acontece com as Integrações
+## Arquitetura Atual (Status: Funcional)
 
-### Edge Functions (Supabase)
-- **Continuam funcionando automaticamente**
-- URL permanece: `https://npthhlpmffjqwivarvpw.supabase.co/functions/v1/`
-- Não precisa alterar nada
-
-### RD Station
-- **Continua funcionando automaticamente**
-- A API key está salva no Supabase (secrets)
-- Os eventos de conversão (`checkout-mentoria`) funcionam normalmente
-
-### Hotmart Webhook
-- **Precisa atualizar** a URL do webhook no painel da Hotmart
-- De: URL atual do Lovable
-- Para: `https://npthhlpmffjqwivarvpw.supabase.co/functions/v1/hotmart-webhook`
-- (A URL do Supabase NÃO muda, então provavelmente já está correto)
-
-### Google Tag Manager (GTM-KSNCJ6GL)
-- **Funciona automaticamente**
-- O GTM carrega via JavaScript, independente do domínio
-- Os eventos do dataLayer continuam funcionando
-
-### Imagens do WordPress CDN
-- **Continuam funcionando**
-- As imagens já estão hospedadas em `inovandonasuaobra.com.br/wp-content/uploads/`
-- Como você vai substituir o site, precisa manter a pasta `wp-content/uploads` no servidor OU migrar as imagens para outro lugar
-
----
-
-## Considerações Importantes sobre as Imagens
-
-### Problema Potencial
-A página usa imagens do WordPress em URLs como:
-```
-https://inovandonasuaobra.com.br/wp-content/uploads/2025/...
+```text
++------------------+      +------------------+      +------------------+
+|    Landing Page  |      |  CheckoutBridge  |      |  Edge Functions  |
+|    (/)           |----->|  /checkout/:prod |----->|  log-checkout-   |
+|                  |      |                  |      |  intent          |
++------------------+      +------------------+      +------------------+
+        |                         |                         |
+        |                         |                         v
+        v                         |              +------------------+
++------------------+              |              |   RD Station     |
+|   GTM/DataLayer  |              |              |   (checkout-     |
+|   - page_view    |              |              |   mentoria)      |
+|   - scroll_depth |              |              +------------------+
+|   - cta_click    |              |
+|   - time_on_page |              v
++------------------+      +------------------+
+                          |   Hotmart        |
+                          |   Checkout       |
+                          +------------------+
+                                  |
+                                  v
+                          +------------------+
+                          |   hotmart-       |
+                          |   webhook        |---> RD Station
+                          +------------------+     (compra/abandono)
+                                  |
+                                  v
+                          +------------------+
+                          |   checkout_      |
+                          |   intents (DB)   |
+                          +------------------+
+                                  ^
+                                  |
+                          +------------------+
+                          |   abandonment-   |
+                          |   sweeper (CRON) |---> RD Station
+                          +------------------+     (carrinho abandonado)
 ```
 
-Se você **deletar completamente** o WordPress do servidor, essas imagens vão parar de funcionar.
+---
 
-### Soluções Possíveis
+## Fluxo de Eventos Detalhado
 
-1. **Manter os arquivos de upload** (Recomendado)
-   - Antes de deletar o WordPress, faça backup da pasta `wp-content/uploads`
-   - Configure o cPanel para servir esses arquivos estáticos junto com o domínio apontando para o Lovable
-   - Isso pode ser complexo de configurar
+### 1. Captura de Lead (Formulário Hero)
+| Passo | Componente | Evento |
+|-------|-----------|--------|
+| 1 | MentoriaLanding.tsx | Formulário submissão |
+| 2 | GTM DataLayer | `checkout_intent` |
+| 3 | Redirect | `/checkout/mentoria?email=...&name=...` |
 
-2. **Migrar imagens para CDN externo**
-   - Subir as imagens para Cloudinary, imgix, ou Supabase Storage
-   - Atualizar as URLs no código
+### 2. Registro no Backend (CheckoutBridge)
+| Passo | Componente | Evento |
+|-------|-----------|--------|
+| 4 | CheckoutBridge.tsx | Chama `log-checkout-intent` |
+| 5 | log-checkout-intent | Salva em `checkout_intents` (status: started) |
+| 6 | log-checkout-intent | Envia para RD Station (`checkout-mentoria`) |
+| 7 | CheckoutBridge.tsx | Redireciona para Hotmart |
 
-3. **Usar proxy no cPanel**
-   - Configurar `.htaccess` para que `/wp-content/uploads/` sirva arquivos locais
-   - Resto redireciona para o Lovable
+### 3. Detecção de Abandono (CRON)
+| Passo | Componente | Evento |
+|-------|-----------|--------|
+| 8 | abandonment-sweeper | Busca intents com `status: started` + `created_at < 3min` |
+| 9 | abandonment-sweeper | Envia para RD Station (`mentoria-inovando-na-sua-obra-carrinho-abandonado`) |
+| 10 | abandonment-sweeper | Atualiza status para `abandoned` |
+
+### 4. Compra Aprovada (Webhook Hotmart)
+| Passo | Componente | Evento |
+|-------|-----------|--------|
+| 11 | hotmart-webhook | Recebe evento `PURCHASE_APPROVED` |
+| 12 | hotmart-webhook | Atualiza intent para `status: purchased` |
+| 13 | hotmart-webhook | Envia para RD Station (`mentoria-inovando-na-sua-obra-compra-aprovada`) |
 
 ---
 
-## Roteiro Passo a Passo Simplificado
+## Identificadores de Conversão (RD Station)
 
-### Etapa 1: Backup
-- Fazer backup completo do site WordPress atual
-- Baixar toda a pasta `wp-content/uploads` via FTP
-
-### Etapa 2: Ajustar Código (eu faço isso)
-- Trocar rota `/mentoria` para `/`
-- Atualizar referências internas
-
-### Etapa 3: Conectar Domínio
-- Seguir o fluxo no Lovable Settings → Domains
-
-### Etapa 4: Configurar DNS no cPanel
-- Adicionar registros A e TXT conforme instruções do Lovable
-- Remover registros conflitantes
-
-### Etapa 5: Configurar Arquivos Estáticos (se necessário)
-- Se as imagens quebrarem, configurar fallback ou migrar imagens
-
-### Etapa 6: Testar Tudo
-- Verificar se a página carrega
-- Testar formulário de lead (RD Station)
-- Testar clique no CTA de checkout (Hotmart)
-- Verificar se as imagens aparecem
-- Testar no mobile
-
-### Etapa 7: Atualizar Webhook Hotmart (se necessário)
-- Verificar se a URL do webhook está usando o Supabase (não muda)
+| Momento | Produto | Identificador |
+|---------|---------|---------------|
+| Checkout iniciado | mentoria | `checkout-mentoria` |
+| Carrinho abandonado | mentoria | `mentoria-inovando-na-sua-obra-carrinho-abandonado` |
+| Compra aprovada | mentoria | `mentoria-inovando-na-sua-obra-compra-aprovada` |
+| Checkout iniciado | imersao | `checkout-imersao` |
+| Carrinho abandonado | imersao | `imersao-cronograma-2.0-o-mapa-da-obra-carrinho-abandonado` |
+| Compra aprovada | imersao | `imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada` |
 
 ---
 
-## Resumo das Mudanças de Código Necessárias
+## Pontos Fortes Identificados
 
-| Arquivo | Mudança |
-|---------|---------|
-| `src/App.tsx` | Trocar rota de `/mentoria` para `/` |
-| `index.html` | Atualizar meta tags OG com nova URL |
-
----
-
-## Checklist Final de Validação
-
-Após a migração, testar:
-- [ ] Página carrega em `inovandonasuaobra.com.br`
-- [ ] SSL/HTTPS funcionando
-- [ ] Imagens carregando corretamente
-- [ ] Formulário de lead funciona (enviar teste)
-- [ ] Botão de checkout redireciona para Hotmart
-- [ ] UTMs sendo capturados corretamente
-- [ ] GTM/DataLayer funcionando (verificar console)
-- [ ] Mobile responsivo
-- [ ] CTA fixo aparece no mobile
+1. **Persistência de UTMs**: Sistema robusto com localStorage (30 dias de validade) + mesclagem de parâmetros URL/salvos
+2. **Fallback de Hotmart**: Webhook cria registro mesmo sem intent prévio (captura direto do checkout)
+3. **Auditoria completa**: Tabela `checkout_intents` registra todo o ciclo de vida do lead
+4. **Paralelismo**: `log-checkout-intent` executa RD Station e DB em paralelo para velocidade
+5. **Timeout de segurança**: CheckoutBridge usa timeout de 3s para não bloquear o usuário
 
 ---
 
-## Próximo Passo
+## Oportunidades de Melhoria
 
-Deseja que eu faça as alterações de código necessárias (trocar a rota para `/` e atualizar as meta tags)?
+### 1. CORS Headers Incompletos (Crítico)
+O `Access-Control-Allow-Headers` nas edge functions não inclui todos os headers que o Supabase client envia. Isso pode causar falhas em alguns navegadores.
 
-Após isso, você pode:
-1. Conectar o domínio no Lovable
-2. Configurar o DNS no cPanel
-3. Publicar
+**Atualmente:**
+```javascript
+"Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type"
+```
+
+**Recomendado:**
+```javascript
+"Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version"
+```
+
+### 2. Evento de Formulário Faltando no GTM
+O formulário do Hero dispara `checkout_intent` no DataLayer, mas não dispara `form_submit` do `gtm-tracking.ts`. Isso pode afetar rastreamento de funil.
+
+**Ação:** Adicionar chamada `trackFormSubmit()` antes do redirect.
+
+### 3. RD Station - Envio Duplicado Potencial
+O `log-checkout-intent` envia para RD Station imediatamente com `checkout-mentoria`. Depois o `abandonment-sweeper` pode enviar novamente com `mentoria-inovando-na-sua-obra-carrinho-abandonado` para o mesmo lead.
+
+**Impacto:** O lead pode receber 2 segmentações diferentes no RD. Isso é intencional ou deveria ser uma única jornada?
+
+**Sugestão:** Avaliar se o primeiro evento (`checkout-mentoria`) deveria ser removido ou renomeado para evitar conflito com automações.
+
+### 4. Validação de Email no Backend
+O `log-checkout-intent` não valida formato de email no servidor. Um email inválido passaria para o RD Station e seria rejeitado lá.
+
+**Sugestão:** Adicionar validação regex simples antes de processar.
+
+### 5. Tratamento de Erros no Frontend
+O `handleFormSubmit` em `MentoriaLanding.tsx` não tem `try/catch`. Se algo falhar antes do redirect, o usuário fica travado.
+
+**Sugestão:** Adicionar tratamento de erro com toast de feedback.
+
+---
+
+## Estrutura da Tabela checkout_intents
+
+| Coluna | Tipo | Descrição |
+|--------|------|-----------|
+| id | uuid | ID único |
+| product | text | "imersao" ou "mentoria" |
+| email | text | Email do lead |
+| name | text | Nome do lead |
+| phone | text | Telefone (opcional) |
+| utm_* | text | Parâmetros de atribuição |
+| status | text | started, abandoned, purchased |
+| created_at | timestamptz | Momento do intent |
+| sent_to_rd_at | timestamptz | Quando foi enviado abandono |
+| purchased_at | timestamptz | Quando comprou |
+| hotmart_transaction_id | text | ID da transação Hotmart |
+| rd_attempts | integer | Tentativas de envio ao RD |
+| rd_response | jsonb | Resposta do RD Station |
+
+---
+
+## Próximas Ações Recomendadas
+
+1. **Atualizar CORS** em todas as edge functions (prioridade alta)
+2. **Adicionar trackFormSubmit()** no formulário do Hero
+3. **Revisar fluxo de eventos** RD para evitar duplicação
+4. **Adicionar validação de email** no log-checkout-intent
+5. **Adicionar try/catch** no handleFormSubmit do landing
+
+---
+
+## Conclusão
+
+A arquitetura está **bem estruturada e funcional**. Os dados fluem corretamente do formulário até o RD Station, com mecanismos de fallback e auditoria robustos. As melhorias sugeridas são refinamentos para aumentar a confiabilidade e consistência do tracking.
+
+Deseja que eu implemente as melhorias identificadas?
