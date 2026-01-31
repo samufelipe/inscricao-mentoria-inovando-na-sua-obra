@@ -24,10 +24,14 @@ import heroPhotoImg from "@/assets/images/hero-photo.png";
 import skillsImg from "@/assets/images/skills.png";
 import audienceImg from "@/assets/images/audience.png";
 import howWorksImg from "@/assets/images/how-works.png";
-import modulesImg from "@/assets/images/modules.png";
+import module1Img from "@/assets/images/module1.png";
+import module2Img from "@/assets/images/module2.png";
+import module3Img from "@/assets/images/module3.png";
+import module4Img from "@/assets/images/module4.png";
 import bonus1Img from "@/assets/images/bonus1.png";
 import bonus2Img from "@/assets/images/bonus2.png";
-import revenueImg from "@/assets/images/revenue.png";
+import revenue1Img from "@/assets/images/revenue1.png";
+import revenue2Img from "@/assets/images/revenue2.png";
 import guaranteeImg from "@/assets/images/guarantee.png";
 import aboutImg from "@/assets/images/about.png";
 
@@ -42,15 +46,15 @@ const images = {
   audienceMobile: audienceImg,
   howWorks: howWorksImg,
   howWorksMobile: howWorksImg,
-  modules1: modulesImg,
-  modules2: modulesImg,
-  modules3: modulesImg,
-  modules4: modulesImg,
-  modulesMobile: modulesImg,
+  modules1: module1Img,
+  modules2: module2Img,
+  modules3: module3Img,
+  modules4: module4Img,
+  modulesMobile: module1Img,
   bonus1: bonus1Img,
   bonus2: bonus2Img,
-  revenue1: revenueImg,
-  revenue2: revenueImg,
+  revenue1: revenue1Img,
+  revenue2: revenue2Img,
   guarantee: guaranteeImg,
   guaranteeMobile: guaranteeImg,
   about: aboutImg,
@@ -418,27 +422,26 @@ export default function MentoriaLanding() {
         </div>
       </section>
 
-      {/* Modules Section - Desktop */}
-      <section className="mentoria-section mentoria-modules hidden-mobile">
+      {/* Modules Section */}
+      <section className="mentoria-section mentoria-modules">
         <div className="mentoria-section-inner">
           <ScrollAnimation>
             <h2 className="mentoria-section-title">Como é a mentoria por dentro?</h2>
           </ScrollAnimation>
-          <div className="mentoria-modules-grid">
-            <ScrollAnimation delay={100}><img src={images.modules1} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
-            <ScrollAnimation delay={200}><img src={images.modules2} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
-            <ScrollAnimation delay={300}><img src={images.modules3} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
-            <ScrollAnimation delay={400}><img src={images.modules4} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" /></ScrollAnimation>
+          <div className="mentoria-modules-vertical">
+            <ScrollAnimation delay={100}>
+              <img src={images.modules1} alt="Módulo 01 - Primeiros Passos" className="mentoria-module-image-full" loading="lazy" />
+            </ScrollAnimation>
+            <ScrollAnimation delay={150}>
+              <img src={images.modules2} alt="Módulo 02 - Projeto Executável" className="mentoria-module-image-full" loading="lazy" />
+            </ScrollAnimation>
+            <ScrollAnimation delay={200}>
+              <img src={images.modules3} alt="Módulo 03 - Gerenciamento de Obra" className="mentoria-module-image-full" loading="lazy" />
+            </ScrollAnimation>
+            <ScrollAnimation delay={250}>
+              <img src={images.modules4} alt="Módulo 04 - Finalização e Fidelização" className="mentoria-module-image-full" loading="lazy" />
+            </ScrollAnimation>
           </div>
-        </div>
-      </section>
-
-      {/* Modules Section - Mobile */}
-      <section className="mentoria-section mentoria-modules hidden-desktop">
-        <div className="mentoria-section-inner text-center">
-          <ScrollAnimation>
-            <img src={images.modulesMobile} alt="Módulos da mentoria" className="mentoria-module-image" loading="lazy" />
-          </ScrollAnimation>
         </div>
       </section>
 

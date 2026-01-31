@@ -311,30 +311,59 @@
   mix-blend-mode: multiply;
 }
 
+/* Modules Vertical Layout */
+.mentoria-modules-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 40px auto 0;
+}
+
+.mentoria-module-image-full {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mentoria-module-image-full:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
 /* Revenue Section */
 .mentoria-revenue {
-  background-color: #333;
-  color: #fff;
+  background-color: #FDF9F3;
+  color: #333;
   padding: 60px 20px;
 }
 
 .mentoria-revenue h2 {
-  color: #D4AF37;
+  color: #333;
 }
 
 .mentoria-revenue-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 800px;
+  margin: 40px auto 0;
+  justify-items: center;
 }
 
 .mentoria-revenue-image {
   width: 100%;
+  max-width: 350px;
   height: auto;
-  border-radius: 8px;
-  background-color: #333;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.mentoria-revenue-image:hover {
+  transform: scale(1.02);
 }
 
 /* Pricing Section - New Design */
@@ -808,14 +837,34 @@
     max-width: 100%;
   }
   
+  .mentoria-modules-vertical {
+    gap: 16px;
+    margin: 24px auto 0;
+  }
+  
+  .mentoria-module-image-full {
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+  
+  .mentoria-module-image-full:hover {
+    transform: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+  
   .mentoria-revenue-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+    margin: 24px auto 0;
   }
   
   .mentoria-revenue-image {
-    max-width: 100%;
+    max-width: 320px;
     margin: 0 auto;
+  }
+  
+  .mentoria-revenue-image:hover {
+    transform: none;
   }
   
   .mentoria-pricing-card {
