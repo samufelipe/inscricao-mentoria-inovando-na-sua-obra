@@ -1,210 +1,117 @@
 
-# Plano: Redesign Clean e Profissional da LP Mentoria
+# Plano: Correção de Erros de Build e Validação do Deploy
 
-## Resumo do Problema
+## Problema Identificado
 
-A Landing Page atual da Mentoria (`/mentoria`) apresenta problemas de design, layout inconsistente, imagens com carregamento falho (URLs externas do WordPress), e warnings de `forwardRef` no console. A página precisa de um redesign completo para ficar mais clean, profissional e fiel às referências originais.
+O arquivo `src/components/mentoria/MentoriaTestimonials.tsx` contém **caracteres `\n` literais** (strings escapadas) em vez de quebras de linha reais, causando erros de sintaxe:
 
-## Problemas Identificados
+**Linha 3:**
+```typescript
+import { Quote } from "lucide-react";\nimport VimeoPlayer from "./VimeoPlayer";
+```
 
-1. **Imagens externas com problemas de carregamento**: Todas as URLs apontam para `inovandonasuaobra.com.br` que pode ter problemas de CORS ou disponibilidade
-2. **Warnings de console**: `MentoriaFooter` e `MentoriaMobileCTA` gerando erros de `forwardRef`
-3. **Layout inconsistente**: Espaçamentos irregulares, tipografia sem hierarquia clara
-4. **Seção de Testimonials**: Cards com placeholders em vez de imagens reais
-5. **Design sem respiração**: Seções muito comprimidas, sem espaço em branco adequado
-6. **Paleta de cores pouco harmônica**: Uso excessivo de cores sem contraste adequado
+**Linha 30:**
+```typescript
+<div className="relative">\n                <VimeoPlayer\n...
+```
 
-## Solução: Redesign em 5 Frentes
+Esses `\n` literais quebram o parser do TypeScript e impedem a compilação.
 
-### 1. Sistema de Imagens Resiliente
+## Correção Necessária
 
-Criar fallback local para todas as imagens críticas e adicionar estados de loading/error para imagens externas.
+### 1. Corrigir `MentoriaTestimonials.tsx`
 
-**Arquivos afetados:**
-- `src/lib/mentoria-constants.ts` - Adicionar mapeamento de fallbacks locais
-- Componentes que usam imagens - Adicionar `onError` handlers
-
-### 2. Correção dos Warnings de Console
-
-Corrigir os componentes que geram warnings de `forwardRef`.
-
-**Arquivos afetados:**
-- `src/components/mentoria/MentoriaFooter.tsx` - Converter para componente correto
-- `src/components/mentoria/MentoriaMobileCTA.tsx` - Adicionar forwardRef se necessário
-
-### 3. Hero Section Premium
-
-Redesign completo do Hero com:
-- Formulário mais elegante com sombra suave e bordas arredondadas
-- Melhor hierarquia tipográfica
-- Imagem das mentoras com tratamento visual (sombra, máscara)
-- Badges de prova social
-
-**Arquivos afetados:**
-- `src/components/mentoria/MentoriaHero.tsx`
-
-### 4. Seções com Design Limpo
-
-Aplicar design system consistente em todas as seções:
-- Espaçamentos padronizados (py-20 md:py-28)
-- Títulos com decoração sutil (linha dourada abaixo)
-- Cards com sombras suaves e bordas sutis
-- Transições de cores entre seções mais harmônicas
-
-**Arquivos afetados:**
-- `src/components/mentoria/MentoriaSkills.tsx`
-- `src/components/mentoria/MentoriaAudience.tsx`
-- `src/components/mentoria/MentoriaHowItWorks.tsx`
-- `src/components/mentoria/MentoriaModules.tsx`
-- `src/components/mentoria/MentoriaDocuments.tsx`
-- `src/components/mentoria/MentoriaRevenue.tsx`
-- `src/components/mentoria/MentoriaPricing.tsx`
-- `src/components/mentoria/MentoriaTestimonials.tsx`
-- `src/components/mentoria/MentoriaGuarantee.tsx`
-- `src/components/mentoria/MentoriaMentors.tsx`
-- `src/components/mentoria/MentoriaFAQ.tsx`
-
-### 5. Detalhes de Polimento
-
-- Scroll-triggered animations mais suaves
-- Micro-interações em hover
-- Footer redesenhado
-- Mobile CTA com design mais elegante
-
-**Arquivos afetados:**
-- `src/components/mentoria/MentoriaFooter.tsx`
-- `src/components/mentoria/MentoriaMobileCTA.tsx`
-- `src/index.css` - Adicionar novas animações
-
----
-
-## Implementação Detalhada
-
-### Fase 1: Sistema de Imagens com Fallback
-
-Atualizar `mentoria-constants.ts` para incluir componente de imagem resiliente:
+Reescrever o arquivo com quebras de linha corretas:
 
 ```typescript
-// Adicionar helper para imagens com fallback
-export const MENTORIA_FALLBACK_IMAGES = {
-  placeholder: "/placeholder.svg",
-  gradient: "linear-gradient(135deg, #f5f0e8 0%, #e8dfd0 100%)"
-};
+import { Button } from "@/components/ui/button";
+import { MENTORIA_VIDEO_TESTIMONIALS, MENTORIA_IMAGES } from "@/lib/mentoria-constants";
+import { Quote } from "lucide-react";
+import VimeoPlayer from "./VimeoPlayer";
+import MentoriaImage from "./MentoriaImage";
+
+interface MentoriaTestimonialsProps {
+  onCtaClick: () => void;
+}
+
+export default function MentoriaTestimonials({ onCtaClick }: MentoriaTestimonialsProps) {
+  return (
+    <section className="py-20 md:py-28 bg-[#282828]">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-14 animate-fade-up">
+          <p className="text-primary font-medium text-lg mb-2">Depoimentos</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Veja o que dizem nossas alunas
+          </h2>
+          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+        </div>
+
+        {/* Testimonial Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-14">
+          {MENTORIA_VIDEO_TESTIMONIALS.map((testimonial, index) => (
+            <div
+              key={index}
+              className="bg-white/5 rounded-2xl overflow-hidden animate-fade-up group transition-all duration-300 border border-white/10 shadow-2xl"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              {/* Vimeo Video Player */}
+              <div className="relative">
+                <VimeoPlayer
+                  vimeoId={testimonial.vimeoId}
+                  title={`Depoimento de ${testimonial.name}`}
+                  className="mb-4"
+                />
+                {/* Quote icon */}
+                <div className="absolute top-4 right-4">
+                  <Quote className="w-6 h-6 text-primary" fill="currentColor" />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-5 pt-0">
+                <p className="text-lg font-bold text-primary mb-1">{testimonial.name}</p>
+                <p className="text-xs text-white/70 mb-3">{testimonial.role}</p>
+                <p className="text-white/90 text-sm italic leading-relaxed">{testimonial.quote}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center animate-fade-up">
+          <Button
+            onClick={onCtaClick}
+            size="lg"
+            className="bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base px-12 h-14 uppercase shadow-lg hover:shadow-xl transition-all duration-300 group"
+          >
+            Quero entrar na mentoria
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
 ```
 
-Criar componente `MentoriaImage.tsx`:
-- Aceita `src`, `fallbackSrc`, `alt`
-- Mostra skeleton durante loading
-- Fallback gracioso em caso de erro
+## Validação Pós-Correção
 
-### Fase 2: Hero Redesenhado
+Após a correção, validarei:
 
-**Novo layout:**
-```
-┌────────────────────────────────────────────────────────┐
-│                    FUNDO BEGE #f5f0e8                 │
-│                                                        │
-│   ┌──────────────────────┐  ┌──────────────────────┐  │
-│   │                      │  │                      │  │
-│   │  TÍTULO IMPACTANTE   │  │  IMAGEM MENTORAS     │  │
-│   │  com destaque dourado│  │  com sombra suave    │  │
-│   │                      │  │                      │  │
-│   │  Subtítulo elegante  │  └──────────────────────┘  │
-│   │                      │                            │
-│   │  ┌────────────────┐  │                            │
-│   │  │  FORM CARD     │  │                            │
-│   │  │  Nome          │  │                            │
-│   │  │  Email         │  │                            │
-│   │  │  [CTA VERDE]   │  │                            │
-│   │  └────────────────┘  │                            │
-│   └──────────────────────┘                            │
-│                                                        │
-└────────────────────────────────────────────────────────┘
-```
-
-### Fase 3: Design System Consistente
-
-**Paleta refinada:**
-- Background principal: `#FDFBF7` (off-white mais suave)
-- Background alternativo: `#f5f0e8` (bege atual)
-- Texto principal: `#1a1a1a` (preto suavizado)
-- Accent: `#9ACD32` (lime green)
-- Accent secundário: `#5D4037` (marrom)
-- Dourado: `hsl(45, 100%, 50%)` (já existente)
-
-**Tipografia:**
-- Títulos: Font-weight mais leve (600-700)
-- Subtítulos em itálico com cor dourada
-- Corpo de texto com line-height 1.7
-
-**Espaçamentos:**
-- Seções: `py-20 md:py-28` (mais respiro)
-- Container: `max-w-6xl` (mais compacto e elegante)
-
-### Fase 4: Cards e Componentes
-
-**Skills Cards:**
-- Fundo branco com sombra `shadow-sm`
-- Borda sutil `border border-border`
-- Ícones dourados menores e mais elegantes
-
-**Modules:**
-- Cards com imagem ocupando mais espaço
-- Numeração mais discreta
-- Lista de tópicos com tipografia mais clean
-
-**Pricing Card:**
-- Destaque central na página
-- Badge "MAIS POPULAR" ou "RECOMENDADO"
-- Preço com animação sutil de entrada
-
-### Fase 5: Testimonials com Imagens Reais
-
-Atualizar para usar as imagens das alunas que já estão referenciadas em `MENTORIA_IMAGES`:
-- `testimonial1`, `testimonial2`, `testimonial3`, `testimonial4`
-
-Cada card terá:
-- Foto circular da aluna
-- Nome e profissão
-- Quote em itálico
-- Ícone de aspas decorativo
-
----
+1. **Build sem erros** - Verificar compilação TypeScript
+2. **Design e Tipografia** - Montserrat em títulos, fundo bege, destaques dourados
+3. **Mídia** - Imagens e vídeos Vimeo carregando corretamente
+4. **Formulários de Lead** - Testar captura no Hero e redirecionamento para checkout
 
 ## Arquivos a Modificar
 
-| Arquivo | Tipo de Mudança |
-|---------|-----------------|
-| `src/lib/mentoria-constants.ts` | Adicionar sistema de fallback |
-| `src/components/mentoria/MentoriaHero.tsx` | Redesign completo |
-| `src/components/mentoria/MentoriaSkills.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaAudience.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaHowItWorks.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaModules.tsx` | Redesign dos cards |
-| `src/components/mentoria/MentoriaDocuments.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaRevenue.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaPricing.tsx` | Redesign premium |
-| `src/components/mentoria/MentoriaTestimonials.tsx` | Adicionar fotos reais |
-| `src/components/mentoria/MentoriaGuarantee.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaMentors.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaFAQ.tsx` | Polish de design |
-| `src/components/mentoria/MentoriaFooter.tsx` | Corrigir forwardRef + redesign |
-| `src/components/mentoria/MentoriaMobileCTA.tsx` | Corrigir forwardRef + polish |
-| `src/index.css` | Novas animações e utilities |
-
-## Arquivos a Criar
-
-| Arquivo | Propósito |
-|---------|-----------|
-| `src/components/mentoria/MentoriaImage.tsx` | Componente de imagem resiliente |
-
----
+| Arquivo | Mudança |
+|---------|---------|
+| `src/components/mentoria/MentoriaTestimonials.tsx` | Corrigir caracteres `\n` literais |
 
 ## Resultado Esperado
 
-- Design clean e profissional alinhado com padrões modernos
-- Imagens carregando corretamente com fallbacks
-- Console sem warnings
-- Experiência de usuário fluida com animações suaves
-- Alta conversão com formulários bem posicionados
-- Mobile-first com CTA sticky elegante
+- Build compilando sem erros
+- Página `/mentoria` renderizando corretamente
+- Vídeos Vimeo carregando nos depoimentos
+- Formulários funcionais com integração RD Station → Hotmart
