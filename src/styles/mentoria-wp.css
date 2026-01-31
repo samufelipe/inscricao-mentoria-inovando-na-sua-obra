@@ -820,6 +820,104 @@
     max-width: 100%;
   }
   
+  /* New Pricing Section - Mobile */
+  .mentoria-pricing-new {
+    padding: 48px 16px;
+  }
+  
+  .mentoria-pricing-label {
+    font-size: 14px;
+  }
+  
+  .mentoria-pricing-new .mentoria-section-title {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  
+  .mentoria-pricing-stats {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+    align-items: center;
+  }
+  
+  .mentoria-pricing-stat {
+    width: 100%;
+    max-width: 280px;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+  
+  .mentoria-pricing-stat-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .mentoria-pricing-stat-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .mentoria-pricing-stat-value {
+    font-size: 22px;
+  }
+  
+  .mentoria-pricing-stat-label {
+    font-size: 12px;
+  }
+  
+  .mentoria-pricing-main-card {
+    border-radius: 16px;
+    margin: 0 -8px;
+  }
+  
+  .mentoria-pricing-header {
+    padding: 24px 16px;
+  }
+  
+  .mentoria-pricing-amount {
+    font-size: 44px;
+  }
+  
+  .mentoria-pricing-installment,
+  .mentoria-pricing-cents {
+    font-size: 20px;
+  }
+  
+  .mentoria-pricing-benefits {
+    padding: 24px 16px;
+  }
+  
+  .mentoria-pricing-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .mentoria-pricing-benefit {
+    font-size: 13px;
+  }
+  
+  .mentoria-pricing-ctas {
+    padding: 24px 16px;
+  }
+  
+  .mentoria-cta-pricing {
+    padding: 16px 24px;
+    font-size: 14px;
+  }
+  
+  .mentoria-cta-boleto {
+    font-size: 12px;
+    padding: 12px 20px;
+  }
+  
+  .mentoria-pricing-security {
+    font-size: 11px;
+    margin-top: 16px;
+  }
+  
   .mentoria-testimonials-grid {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
