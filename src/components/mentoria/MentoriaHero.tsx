@@ -73,47 +73,47 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
   };
 
   return (
-    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-transparent">
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-[#EDE8DC]">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Text Content */}
           <div className="text-center lg:text-left animate-fade-up order-2 lg:order-1">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#D4AF37]/10 text-[#D4AF37] px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Users className="w-4 h-4" />
               <span>+250 arquitetas já transformaram suas obras</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-none mb-6 uppercase tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1a1a1a] leading-tight mb-6 uppercase tracking-tight">
               Domine o gerenciamento de obra de interiores de maneira{" "}
-              <span className="text-[#D4AF37] font-extrabold not-italic">lucrativa e eficiente</span>
+              <span className="text-[#D4AF37] font-extrabold">lucrativa e eficiente</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
               Transforme cada projeto em uma jornada inesquecível para seus clientes, desde o
               primeiro contato até a entrega final.
             </p>
 
             {/* Social Proof Pills */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
-              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
-                <Clock className="w-4 h-4 text-primary" />
-                <span className="text-sm text-foreground">16h de conteúdo</span>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-[#D4AF37]/20">
+                <Clock className="w-4 h-4 text-[#D4AF37]" />
+                <span className="text-sm text-[#1a1a1a]">16h de conteúdo</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
-                <FileCheck className="w-4 h-4 text-primary" />
-                <span className="text-sm text-foreground">Materiais prontos</span>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-[#D4AF37]/20">
+                <FileCheck className="w-4 h-4 text-[#D4AF37]" />
+                <span className="text-sm text-[#1a1a1a]">Materiais prontos</span>
               </div>
             </div>
 
             {/* Form Card */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl border border-primary/20 max-w-md mx-auto lg:mx-0">
-              <p className="text-sm text-muted-foreground text-center mb-4">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl border border-[#D4AF37]/20 max-w-md mx-auto lg:mx-0">
+              <p className="text-sm text-gray-600 text-center mb-4">
                 Preencha para acessar o checkout
               </p>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="hero-name" className="text-foreground text-sm font-medium">
+                  <Label htmlFor="hero-name" className="text-[#1a1a1a] text-sm font-medium">
                     Seu nome completo
                   </Label>
                   <Input
@@ -122,16 +122,16 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                     placeholder="Digite seu nome"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`mt-1.5 h-12 bg-muted/30 border-border/50 focus:border-primary focus:ring-primary ${errors.name ? "border-destructive" : ""}`}
+                    className={`mt-1.5 h-12 bg-gray-50 border-gray-200 focus:border-[#D4AF37] focus:ring-[#D4AF37] ${errors.name ? "border-red-500" : ""}`}
                     disabled={isSubmitting}
                   />
                   {errors.name && (
-                    <p className="text-xs text-destructive mt-1">{errors.name}</p>
+                    <p className="text-xs text-red-500 mt-1">{errors.name}</p>
                   )}
                 </div>
 
                 <div>
-                  <Label htmlFor="hero-email" className="text-foreground text-sm font-medium">
+                  <Label htmlFor="hero-email" className="text-[#1a1a1a] text-sm font-medium">
                     Seu melhor e-mail
                   </Label>
                   <Input
@@ -140,18 +140,18 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                     placeholder="Digite seu e-mail"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={`mt-1.5 h-12 bg-muted/30 border-border/50 focus:border-primary focus:ring-primary ${errors.email ? "border-destructive" : ""}`}
+                    className={`mt-1.5 h-12 bg-gray-50 border-gray-200 focus:border-[#D4AF37] focus:ring-[#D4AF37] ${errors.email ? "border-red-500" : ""}`}
                     disabled={isSubmitting}
                   />
                   {errors.email && (
-                    <p className="text-xs text-destructive mt-1">{errors.email}</p>
+                    <p className="text-xs text-red-500 mt-1">{errors.email}</p>
                   )}
                 </div>
 
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base h-14 uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="w-full bg-[#9ACD32] hover:bg-[#8BC52A] text-white font-bold text-base h-14 uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 group border-2 border-[#1a1a1a]"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -168,7 +168,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
                 </Button>
               </form>
               
-              <p className="text-xs text-muted-foreground text-center mt-4">
+              <p className="text-xs text-gray-500 text-center mt-4">
                 🔒 Seus dados estão 100% seguros
               </p>
             </div>
@@ -178,7 +178,7 @@ export default function MentoriaHero({ onCtaClick }: MentoriaHeroProps) {
           <div className="relative animate-fade-up animation-delay-200 flex justify-center lg:justify-end order-1 lg:order-2">
             <div className="relative">
               {/* Decorative elements */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#D4AF37]/20 rounded-full blur-2xl" />
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#9ACD32]/20 rounded-full blur-2xl" />
               
               <MentoriaImage

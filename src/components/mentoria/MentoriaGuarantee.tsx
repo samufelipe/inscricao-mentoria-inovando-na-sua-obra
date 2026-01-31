@@ -1,52 +1,41 @@
 import { Button } from "@/components/ui/button";
-import { MENTORIA_WHATSAPP } from "@/lib/mentoria-constants";
-import { MessageCircle, Shield } from "lucide-react";
+import { MENTORIA_WHATSAPP, MENTORIA_IMAGES } from "@/lib/mentoria-constants";
+import { MessageCircle } from "lucide-react";
+import MentoriaImage from "./MentoriaImage";
 
 export default function MentoriaGuarantee() {
   return (
-    <section className="py-20 md:py-28 bg-[#FDFBF7]">
+    <section className="py-20 md:py-28 bg-white">
       <div className="container mx-auto px-4">
-        {/* Guarantee */}
-        <div className="max-w-3xl mx-auto text-center mb-20 animate-fade-up">
-          <div className="inline-flex items-center gap-2 bg-[#9ACD32]/10 text-[#9ACD32] px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Shield className="w-4 h-4" />
-            <span>Garantia incondicional</span>
+        {/* Guarantee - Usando imagens originais */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          {/* Banner de garantia */}
+          <div className="animate-fade-up mb-8">
+            <MentoriaImage
+              src={MENTORIA_IMAGES.guaranteeBanner}
+              alt="Garantia incondicional"
+              className="w-full h-auto"
+            />
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Risco Zero para você
-          </h2>
-
-          <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
-            Confiamos tanto no nosso conteúdo que damos uma{" "}
-            <span className="font-semibold text-foreground">garantia incondicional de 15 dias</span> pra você.
-          </p>
-
-          <div className="inline-flex items-center gap-6 bg-white rounded-2xl p-6 shadow-sm border border-border/30">
-            <div className="text-left">
-              <span className="text-primary font-bold text-xl md:text-2xl uppercase leading-tight block">
-                Garantia
-              </span>
-              <span className="text-primary font-bold text-xl md:text-2xl uppercase leading-tight block">
-                Incondicional
-              </span>
-            </div>
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-primary to-[hsl(43,96%,45%)] flex items-center justify-center shadow-lg">
-              <span className="text-xl md:text-2xl font-bold text-foreground text-center leading-tight">
-                15<br/>DIAS
-              </span>
-            </div>
+          {/* Selo de garantia */}
+          <div className="animate-fade-up animation-delay-100">
+            <MentoriaImage
+              src={MENTORIA_IMAGES.guaranteeSeal}
+              alt="Garantia de 15 dias - Risco Zero"
+              className="w-full max-w-lg mx-auto h-auto"
+            />
           </div>
 
-          <p className="text-sm text-muted-foreground max-w-md mx-auto mt-6">
+          <p className="text-sm text-gray-600 max-w-md mx-auto mt-6 animate-fade-up animation-delay-200">
             Compra 100% segura pela plataforma HOTMART.<br />
             Se em 15 dias não gostar, você pode pedir seu reembolso e tem 100% do seu dinheiro de volta.
           </p>
         </div>
 
         {/* Support CTA */}
-        <div className="text-center animate-fade-up animation-delay-200">
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+        <div className="text-center animate-fade-up animation-delay-300">
+          <h3 className="text-2xl md:text-3xl font-bold text-[#D4AF37] mb-6">
             Ficou com alguma dúvida?
           </h3>
           <Button

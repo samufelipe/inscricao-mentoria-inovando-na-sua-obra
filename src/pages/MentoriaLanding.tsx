@@ -32,7 +32,7 @@ export default function MentoriaLanding() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F0]">
+    <div className="min-h-screen bg-[#EDE8DC]">
       <MentoriaHeader onCtaClick={scrollToPricing} />
       <main>
         <MentoriaHero onCtaClick={scrollToPricing} />
