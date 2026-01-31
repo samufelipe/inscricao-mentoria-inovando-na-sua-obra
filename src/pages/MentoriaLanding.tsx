@@ -34,8 +34,12 @@ import revenue1Img from "@/assets/images/revenue1.png";
 import revenue2Img from "@/assets/images/revenue2.png";
 import guaranteeImg from "@/assets/images/guarantee.png";
 import aboutImg from "@/assets/images/about.png";
+import testimonial1Img from "@/assets/images/testimonial1.png";
+import testimonial2Img from "@/assets/images/testimonial2.png";
+import testimonial3Img from "@/assets/images/testimonial3.png";
+import testimonial4Img from "@/assets/images/testimonial4.png";
 
-// URLs das imagens do WordPress CDN (para thumbnails de vídeos que ainda não foram enviadas)
+// URLs das imagens do WordPress CDN (para vídeos)
 const WP_CDN = "https://inovandonasuaobra.com.br/wp-content/uploads";
 
 const images = {
@@ -58,10 +62,10 @@ const images = {
   guarantee: guaranteeImg,
   guaranteeMobile: guaranteeImg,
   about: aboutImg,
-  testimonial1Poster: `${WP_CDN}/2025/05/beatriz-com-frase-1.jpg`,
-  testimonial2Poster: `${WP_CDN}/2025/05/ingrid-com-frase.jpg`,
-  testimonial3Poster: `${WP_CDN}/2025/05/monique-com-frase.jpg`,
-  testimonial4Poster: `${WP_CDN}/2025/05/aline-com-frase.jpg`,
+  testimonial1Poster: testimonial1Img,
+  testimonial2Poster: testimonial2Img,
+  testimonial3Poster: testimonial3Img,
+  testimonial4Poster: testimonial4Img,
 };
 
 const videos = {
@@ -112,6 +116,9 @@ export default function MentoriaLanding() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"card" | "boleto">("card");
+  
+  // Video testimonial state
+  const [activeVideo, setActiveVideo] = useState<number | null>(null);
 
   // Parallax effects
   const heroImageParallax = useParallax({ speed: 0.15, direction: "down", maxOffset: 80 });
@@ -588,44 +595,72 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
           <div className="mentoria-testimonials-grid">
             <ScrollAnimation delay={100}>
-              <video 
-                className="mentoria-testimonial-video"
-                src={videos.testimonial1}
-                poster={images.testimonial1Poster}
-                controls
-                preload="metadata"
-                controlsList="nodownload"
-              />
+              <div 
+                className="mentoria-testimonial-card"
+                onClick={() => setActiveVideo(1)}
+              >
+                <img 
+                  src={images.testimonial1Poster} 
+                  alt="Depoimento Beatriz Francini" 
+                  className="mentoria-testimonial-thumbnail"
+                />
+                <div className="mentoria-testimonial-play">
+                  <svg viewBox="0 0 24 24" fill="white" width="48" height="48">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
             </ScrollAnimation>
             <ScrollAnimation delay={200}>
-              <video 
-                className="mentoria-testimonial-video"
-                src={videos.testimonial2}
-                poster={images.testimonial2Poster}
-                controls
-                preload="metadata"
-                controlsList="nodownload"
-              />
+              <div 
+                className="mentoria-testimonial-card"
+                onClick={() => setActiveVideo(2)}
+              >
+                <img 
+                  src={images.testimonial2Poster} 
+                  alt="Depoimento Ingrid Cristina" 
+                  className="mentoria-testimonial-thumbnail"
+                />
+                <div className="mentoria-testimonial-play">
+                  <svg viewBox="0 0 24 24" fill="white" width="48" height="48">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
             </ScrollAnimation>
             <ScrollAnimation delay={300}>
-              <video 
-                className="mentoria-testimonial-video"
-                src={videos.testimonial3}
-                poster={images.testimonial3Poster}
-                controls
-                preload="metadata"
-                controlsList="nodownload"
-              />
+              <div 
+                className="mentoria-testimonial-card"
+                onClick={() => setActiveVideo(3)}
+              >
+                <img 
+                  src={images.testimonial3Poster} 
+                  alt="Depoimento Monique Figueiredo" 
+                  className="mentoria-testimonial-thumbnail"
+                />
+                <div className="mentoria-testimonial-play">
+                  <svg viewBox="0 0 24 24" fill="white" width="48" height="48">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
             </ScrollAnimation>
             <ScrollAnimation delay={400}>
-              <video 
-                className="mentoria-testimonial-video"
-                src={videos.testimonial4}
-                poster={images.testimonial4Poster}
-                controls
-                preload="metadata"
-                controlsList="nodownload"
-              />
+              <div 
+                className="mentoria-testimonial-card"
+                onClick={() => setActiveVideo(4)}
+              >
+                <img 
+                  src={images.testimonial4Poster} 
+                  alt="Depoimento Aline Araujo" 
+                  className="mentoria-testimonial-thumbnail"
+                />
+                <div className="mentoria-testimonial-play">
+                  <svg viewBox="0 0 24 24" fill="white" width="48" height="48">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
             </ScrollAnimation>
           </div>
           <ScrollAnimation delay={300}>
@@ -640,6 +675,36 @@ export default function MentoriaLanding() {
           </ScrollAnimation>
         </div>
       </section>
+
+      {/* Video Modal */}
+      {activeVideo && (
+        <div 
+          className="mentoria-video-modal"
+          onClick={() => setActiveVideo(null)}
+        >
+          <div 
+            className="mentoria-video-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="mentoria-video-modal-close"
+              onClick={() => setActiveVideo(null)}
+            >
+              ×
+            </button>
+            <video 
+              className="mentoria-video-modal-player"
+              src={activeVideo === 1 ? videos.testimonial1 : 
+                   activeVideo === 2 ? videos.testimonial2 : 
+                   activeVideo === 3 ? videos.testimonial3 : 
+                   videos.testimonial4}
+              controls
+              autoPlay
+              controlsList="nodownload"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Guarantee Section */}
       <section className="mentoria-section mentoria-guarantee">
