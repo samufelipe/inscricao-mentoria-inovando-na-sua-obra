@@ -19,8 +19,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/mentoria" element={<MentoriaLanding />} />
+          <Route path="/" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
           <Route path="/tools/background-remover" element={<BackgroundRemover />} />
