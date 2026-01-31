@@ -18,30 +18,42 @@ import { saveUtmParams, getMergedUtmParams } from "@/lib/utm-storage";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
 
-// URLs das imagens do WordPress CDN
+// Importações das imagens locais
+import logoImg from "@/assets/images/logo.png";
+import heroPhotoImg from "@/assets/images/hero-photo.png";
+import skillsImg from "@/assets/images/skills.png";
+import audienceImg from "@/assets/images/audience.png";
+import howWorksImg from "@/assets/images/how-works.png";
+import modulesImg from "@/assets/images/modules.png";
+import bonus1Img from "@/assets/images/bonus1.png";
+import bonus2Img from "@/assets/images/bonus2.png";
+import revenueImg from "@/assets/images/revenue.png";
+import guaranteeImg from "@/assets/images/guarantee.png";
+import aboutImg from "@/assets/images/about.png";
+
+// URLs das imagens do WordPress CDN (para thumbnails de vídeos que ainda não foram enviadas)
 const WP_CDN = "https://inovandonasuaobra.com.br/wp-content/uploads";
 
 const images = {
-  logo: `${WP_CDN}/2025/07/Masterclass-Cronograma-1507-e1752603988566.webp`,
-  heroPhoto: `${WP_CDN}/2025/06/Post-instagram-contratar-advogado-moderno-azul-e-bege-4-e1752604162881.png`,
-  skills: `${WP_CDN}/2025/07/1-2-e1752679552648.webp`,
-  audience: `${WP_CDN}/2025/07/2-1.webp`,
-  audienceMobile: `${WP_CDN}/2025/07/2.webp`,
-  howWorks: `${WP_CDN}/2025/07/3-1-e1752674351215.png`,
-  howWorksMobile: `${WP_CDN}/2025/07/3-e1752678867880.webp`,
-  modules1: `${WP_CDN}/2025/07/5-1.png`,
-  modules2: `${WP_CDN}/2025/07/6-1024x576.png`,
-  modules3: `${WP_CDN}/2025/07/7-1024x576.png`,
-  modules4: `${WP_CDN}/2025/07/8-e1752606854888.png`,
-  modulesMobile: `${WP_CDN}/2025/07/5-e1752604964742.webp`,
-  bonus1: `${WP_CDN}/2025/07/15.png`,
-  bonus2: `${WP_CDN}/2025/07/16-1.png`,
-  revenue1: `${WP_CDN}/2025/07/12-e1752605232522-651x1024.webp`,
-  revenue2: `${WP_CDN}/2025/07/13-576x1024.png`,
-  pricing: `${WP_CDN}/2025/10/Pagina-de-VendaSite-1-e1759350501979-768x658.png`,
-  guarantee: `${WP_CDN}/2025/07/14-e1752677582621-1024x172.png`,
-  guaranteeMobile: `${WP_CDN}/2025/07/14mobile.webp`,
-  about: `${WP_CDN}/2025/01/inso4-1-e1738203060570.png`,
+  logo: logoImg,
+  heroPhoto: heroPhotoImg,
+  skills: skillsImg,
+  audience: audienceImg,
+  audienceMobile: audienceImg,
+  howWorks: howWorksImg,
+  howWorksMobile: howWorksImg,
+  modules1: modulesImg,
+  modules2: modulesImg,
+  modules3: modulesImg,
+  modules4: modulesImg,
+  modulesMobile: modulesImg,
+  bonus1: bonus1Img,
+  bonus2: bonus2Img,
+  revenue1: revenueImg,
+  revenue2: revenueImg,
+  guarantee: guaranteeImg,
+  guaranteeMobile: guaranteeImg,
+  about: aboutImg,
   testimonial1Poster: `${WP_CDN}/2025/05/beatriz-com-frase-1.jpg`,
   testimonial2Poster: `${WP_CDN}/2025/05/ingrid-com-frase.jpg`,
   testimonial3Poster: `${WP_CDN}/2025/05/monique-com-frase.jpg`,
