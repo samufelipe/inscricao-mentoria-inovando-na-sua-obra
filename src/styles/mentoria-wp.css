@@ -913,6 +913,7 @@
   
   .mentoria-skills-image {
     max-width: 100%;
+    width: 100%;
   }
   
   .mentoria-audience-description {
@@ -927,6 +928,7 @@
   
   .mentoria-module-image {
     max-width: 100%;
+    width: 100%;
   }
   
   .mentoria-modules-vertical {
@@ -951,7 +953,8 @@
   }
   
   .mentoria-revenue-image {
-    max-width: 320px;
+    max-width: 380px;
+    width: 95%;
     margin: 0 auto;
   }
   
