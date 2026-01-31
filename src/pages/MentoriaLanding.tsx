@@ -297,7 +297,7 @@ export default function MentoriaLanding() {
           <img 
             src={images.skills} 
             alt="Habilidades técnicas e comportamentais"
-            className="mentoria-skills-image hidden-mobile"
+            className="mentoria-skills-image"
             loading="lazy"
           />
         </div>
@@ -367,15 +367,16 @@ export default function MentoriaLanding() {
       </section>
 
       {/* Bonus Section */}
-      <section className="mentoria-section hidden-mobile" style={{ backgroundColor: '#F5EFE6' }}>
+      <section className="mentoria-section mentoria-bonus" style={{ backgroundColor: '#F5EFE6' }}>
         <div className="mentoria-section-inner text-center">
+          <h2 className="mentoria-section-title hidden-desktop">Bônus Exclusivos</h2>
           <img src={images.bonus1} alt="Bônus da mentoria" className="mentoria-skills-image mb-8" loading="lazy" />
           <img src={images.bonus2} alt="Bônus da mentoria" className="mentoria-skills-image" loading="lazy" />
         </div>
       </section>
 
-      {/* Revenue Section - Desktop */}
-      <section className="mentoria-section mentoria-revenue hidden-mobile">
+      {/* Revenue Section */}
+      <section className="mentoria-section mentoria-revenue">
         <div className="mentoria-section-inner">
           <h2 className="mentoria-section-title">Como você pode faturar mais?</h2>
           <div className="mentoria-revenue-grid">
@@ -472,13 +473,19 @@ export default function MentoriaLanding() {
         <div className="mentoria-section-inner">
           <h2 className="mentoria-section-title">Risco Zero para você</h2>
           <p className="mentoria-guarantee-text">
-            Confiamos tanto no nosso conteúdo que damos uma <br />
+            Confiamos tanto no nosso conteúdo que damos uma <br className="hidden-mobile" />
             <b>garantia incondicional de 15 dias</b> pra você.
           </p>
           <img 
             src={images.guarantee} 
             alt="Garantia de 15 dias"
             className="mentoria-guarantee-image hidden-mobile"
+            loading="lazy"
+          />
+          <img 
+            src={images.guaranteeMobile} 
+            alt="Garantia de 15 dias"
+            className="mentoria-guarantee-image hidden-desktop"
             loading="lazy"
           />
         </div>
