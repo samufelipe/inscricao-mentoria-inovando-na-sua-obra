@@ -1,115 +1,173 @@
 
 
-# E-mail da Imersão: Link da Live (1h antes)
+# Formulário no Hero + Otimização para Leads da Imersão
 
 ## Contexto
 
-O e-mail será enviado **às 08h00** avisando que a live começa **às 09h00**. Já existe o arquivo `public/emails/boas-vindas-3.html` com essa finalidade, mas vou propor melhorias para maximizar a taxa de abertura e cliques.
+A campanha de Meta Ads será direcionada para pessoas que **já participaram da Imersão** e já estão cadastradas no RD Station. Precisamos:
 
-## E-mail Proposto
+1. Coletar nome e e-mail para pré-preencher o checkout da Hotmart
+2. **Manter os eventos no RD** para que as jornadas de e-mail funcionem
+3. Evitar atrito desnecessário na experiência do usuário
 
-### Configurações de Envio
+## Esclarecimento Importante
 
-| Campo | Valor |
-|-------|-------|
-| **Assunto** | 🔴 *\|PRIMEIRO_NOME\|*, falta 1 HORA! Entre na sala do Zoom |
-| **Preheader** | Clique aqui para entrar na sala do Zoom agora |
-| **Horário de envio** | 08h00 (1 hora antes da live às 09h00) |
-| **Identificador RD** | imersao-1h-antes |
+O RD Station **não duplica contatos** - quando você envia uma conversão com um e-mail que já existe, ele apenas:
+- Adiciona a nova conversão ao histórico do contato
+- Atualiza campos se necessário
+- Adiciona novas tags
 
-### Estrutura do E-mail
+Então **podemos e devemos continuar enviando os eventos** para que o RD identifique:
+- Quem iniciou o checkout da mentoria
+- Quem abandonou o carrinho
+- Quem comprou
+
+## Fluxo de Eventos no RD Station
 
 ```text
-┌─────────────────────────────────────────────────────────┐
-│  Background: #18181B (dark mode forçado)                │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│  *|PRIMEIRO_NOME|*, chegou a hora! 🔥                   │
-│  (dourado #D4AF37, 20px, bold)                          │
-│                                                         │
-│  A Imersão Cronograma 2.0: O Mapa da Obra começa        │
-│  em 1 hora.                                             │
-│                                                         │
-│  ┌───────────────────────────────────────────────────┐  │
-│  │     🔴 ACESSE O ZOOM                              │  │
-│  │                                                   │  │
-│  │  ┌─────────────────────────────────────────────┐  │  │
-│  │  │      ENTRAR NA SALA AGORA                   │  │  │
-│  │  └─────────────────────────────────────────────┘  │  │
-│  │  (botão dourado #D4AF37)                         │  │
-│  │                                                   │  │
-│  │  Recomendamos entrar 10 minutos antes            │  │
-│  └───────────────────────────────────────────────────┘  │
-│  (box #27272A com borda dourada)                        │
-│                                                         │
-│  📋 LEMBRETE RÁPIDO:                                    │
-│                                                         │
-│  ✓ Apostila em mãos                                     │
-│  ✓ Caneta e papel                                       │
-│  ✓ Ambiente tranquilo                                   │
-│  ✓ Celular no silencioso                                │
-│                                                         │
-│  Hoje vamos abordar: A mentalidade de quem gerencia     │
-│  obras com sucesso + Os pilares de um cronograma        │
-│  eficiente                                              │
-│                                                         │
-│  Nos vemos em instantes! 🚀                             │
-│                                                         │
-├─────────────────────────────────────────────────────────┤
-│  Um abraço,                                             │
-│  Ingrid Zarza e Fernanda Bradaschia                     │
-│  Mentoras da Imersão Cronograma 2.0                     │
-│  @inovandonasuaobra                                     │
-├─────────────────────────────────────────────────────────┤
-│  © 2026 Cronograma 2.0: O Mapa da Obra.                 │
-│  São Paulo, SP                                          │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│  LEAD JÁ EXISTE NO RD (veio da Imersão)                        │
+│  Tags atuais: [checkout-imersao], [comprou-imersao]            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  1. Preenche formulário na /mentoria                           │
+│     → Evento: "checkout-mentoria"                               │
+│     → RD adiciona tag [checkout-mentoria] ao contato existente  │
+│                                                                 │
+│  2. Se não comprar em 10 minutos:                               │
+│     → Sweeper dispara: "mentoria-...-carrinho-abandonado"       │
+│     → RD adiciona tag [carrinho-abandonado-mentoria]            │
+│     → Jornada de recuperação inicia                             │
+│                                                                 │
+│  3. Se comprar:                                                 │
+│     → Webhook Hotmart: "mentoria-...-compra-aprovada"           │
+│     → RD adiciona tag [comprou-mentoria]                        │
+│     → Jornada de onboarding inicia                              │
+│     → Jornada de recuperação para (regra de saída)              │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### Código HTML Completo
+## Alterações Propostas
 
-O arquivo `public/emails/boas-vindas-3.html` já contém essa estrutura. Pontos de atenção:
+### 1. Formulário no Hero (`src/pages/MentoriaLanding.tsx`)
 
-**1. Link do Zoom (CRÍTICO)**
-O e-mail já possui um link hardcoded:
-```html
-href="https://us06web.zoom.us/j/82080980831?pwd=R8Ynpm1cS7bl4AbEPWrksSABexP7en.1"
+Substituir o botão "QUERO ENTRAR NA MENTORIA" por um formulário inline:
+
+```text
+┌─────────────────────────────────────────────┐
+│                                             │
+│  [  Seu nome completo               ]       │
+│                                             │
+│  [  Seu melhor e-mail               ]       │
+│                                             │
+│  ┌─────────────────────────────────────┐    │
+│  │  QUERO ENTRAR NA MENTORIA ──→      │    │
+│  └─────────────────────────────────────┘    │
+│                                             │
+│  🔒 Seus dados estão seguros               │
+│                                             │
+└─────────────────────────────────────────────┘
 ```
 
-**2. Variável de Personalização**
-Usa `*|PRIMEIRO_NOME|*` para personalização (padrão RD Station)
+**Campos:**
+- Nome completo (obrigatório)
+- E-mail (obrigatório, validação)
 
-**3. Conteúdo do Módulo Manhã**
-Baseado em `src/lib/constants.ts`:
-- A mentalidade de quem gerencia obras com sucesso
-- Os pilares de um cronograma eficiente
+**Ao submeter:**
+1. Redireciona para `/checkout/mentoria?email=...&name=...&utm_source=...`
+2. O CheckoutBridge registra o intent e envia para RD
+3. Usuário vai para Hotmart com dados pré-preenchidos
 
-## Alteração Necessária
+### 2. Atualizar `src/pages/CheckoutBridge.tsx`
 
-O e-mail atual já está bem estruturado. A única atualização seria substituir o link do Zoom pelo placeholder configurável `ZOOM_LINK` para uso no painel de admin:
+O CheckoutBridge já está configurado corretamente! Ele:
+- Chama `log-checkout-intent` que envia evento `checkout-mentoria` para RD
+- Redireciona para Hotmart com dados pré-preenchidos
 
-**Linha 51 atual:**
-```html
-<a href="https://us06web.zoom.us/j/82080980831?pwd=..." ...>
-```
+**Ajuste necessário:** Garantir que os parâmetros de telefone não são obrigatórios (campanha só coleta nome + email).
 
-**Linha 51 proposta:**
-```html
-<a href="ZOOM_LINK" ...>
-```
+### 3. Confirmar Edge Functions (já corretas)
 
-Isso permite que o link seja configurado dinamicamente pelo painel `/admin/emails`.
+| Edge Function | Evento RD | Quando dispara |
+|---------------|-----------|----------------|
+| `log-checkout-intent` | `checkout-mentoria` | Ao submeter formulário |
+| `abandonment-sweeper` | `mentoria-inovando-na-sua-obra-carrinho-abandonado` | 10 min sem compra |
+| `hotmart-webhook` | `mentoria-inovando-na-sua-obra-compra-aprovada` | Compra aprovada |
 
-## Resumo de Ações
+### 4. Demais CTAs da Página
+
+Os outros botões "Quero entrar na mentoria" (após pricing e testimonials) podem:
+
+**Opção A:** Scroll suave até o formulário do hero
+**Opção B:** Abrir modal com o mesmo formulário
+**Opção C:** Redirecionar direto para Hotmart (sem coleta)
+
+Recomendo **Opção A** para manter uma única entrada de dados.
+
+## Arquivos a Modificar
 
 | Arquivo | Alteração |
 |---------|-----------|
-| `public/emails/boas-vindas-3.html` | Substituir link hardcoded por `ZOOM_LINK` |
+| `src/pages/MentoriaLanding.tsx` | Adicionar formulário no hero + scroll nos outros CTAs |
+| `src/pages/CheckoutBridge.tsx` | Tornar `phone` opcional na chamada |
 
-## Preview do E-mail
+## Benefícios
 
-O e-mail pode ser visualizado e testado em:
-- **Rota**: `/admin/emails`
-- **Seção**: Boas-Vindas
-- **Arquivo**: boas-vindas-3.html
+| Aspecto | Resultado |
+|---------|-----------|
+| Experiência do usuário | Formulário simples (só 2 campos) |
+| Tracking no RD | Todos os eventos continuam funcionando |
+| Jornada de abandono | Sweeper identifica quem abandonou |
+| Jornada de compra | Webhook identifica quem comprou |
+| Hotmart pre-fill | Dados já vão preenchidos |
+| Duplicidade | Não existe - RD atualiza contato |
+
+## Detalhes Técnicos
+
+### Validação do Formulário
+
+```tsx
+const formSchema = z.object({
+  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
+  email: z.string().email("E-mail inválido"),
+});
+```
+
+### Submit Handler
+
+```tsx
+const handleFormSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  // Validar
+  const result = formSchema.safeParse(formData);
+  if (!result.success) { /* mostrar erros */ }
+  
+  // Montar URL do checkout com UTMs preservados
+  const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
+  checkoutUrl.searchParams.set("email", formData.email);
+  checkoutUrl.searchParams.set("name", formData.name);
+  
+  // Preservar UTMs da URL atual
+  const currentParams = new URLSearchParams(window.location.search);
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
+    .forEach(param => {
+      const value = currentParams.get(param);
+      if (value) checkoutUrl.searchParams.set(param, value);
+    });
+  
+  // Redirecionar
+  window.location.href = checkoutUrl.toString();
+};
+```
+
+### Pré-preenchimento no Hotmart
+
+O CheckoutBridge já faz isso quando `CONFIG.hotmart.preFillCheckout` está ativo:
+
+```tsx
+if (email) checkoutUrl.searchParams.set("email", email);
+if (name) checkoutUrl.searchParams.set("name", name);
+```
 
