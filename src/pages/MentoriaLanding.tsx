@@ -85,6 +85,7 @@ export default function MentoriaLanding() {
   const [formData, setFormData] = useState<FormData>({ name: "", email: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "boleto">("card");
 
   useEffect(() => {
     // Update page metadata
@@ -107,7 +108,10 @@ export default function MentoriaLanding() {
   }, []);
 
   // Handler para scroll suave até o formulário do hero
-  const scrollToForm = () => {
+  const scrollToForm = (selectBoleto: boolean = false) => {
+    if (selectBoleto) {
+      setPaymentMethod("boleto");
+    }
     heroFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     // Focus no primeiro campo após scroll
     setTimeout(() => {
@@ -141,6 +145,7 @@ export default function MentoriaLanding() {
       (window as any).dataLayer.push({
         event: 'checkout_intent',
         product: 'mentoria',
+        payment_method: paymentMethod,
         conversion_identifier: 'checkout-mentoria',
       });
     }
@@ -149,6 +154,11 @@ export default function MentoriaLanding() {
     const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
     checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
     checkoutUrl.searchParams.set("name", result.data.name.trim());
+    
+    // Adicionar método de pagamento se for boleto
+    if (paymentMethod === "boleto") {
+      checkoutUrl.searchParams.set("payment", "boleto");
+    }
     
     // Preservar UTMs da URL atual
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(param => {
@@ -160,45 +170,15 @@ export default function MentoriaLanding() {
     window.location.href = checkoutUrl.toString();
   };
 
-  // Handler para boleto (scroll até o form também)
+  // Handler para selecionar boleto e ir para o form
   const handleBoletoClick = () => {
-    // Adiciona payment=boleto ao form submission
-    const checkoutUrl = new URL("/checkout/mentoria", window.location.origin);
-    
-    if (formData.email && formData.name) {
-      const result = formSchema.safeParse(formData);
-      if (result.success) {
-        checkoutUrl.searchParams.set("email", result.data.email.toLowerCase().trim());
-        checkoutUrl.searchParams.set("name", result.data.name.trim());
-        checkoutUrl.searchParams.set("payment", "boleto");
-        
-        ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(param => {
-          const value = searchParams.get(param);
-          if (value) checkoutUrl.searchParams.set(param, value);
-        });
-
-        if (typeof window !== 'undefined' && (window as any).dataLayer) {
-          (window as any).dataLayer.push({
-            event: 'checkout_intent',
-            product: 'mentoria',
-            payment_method: 'boleto',
-            conversion_identifier: 'checkout-mentoria',
-          });
-        }
-
-        window.location.href = checkoutUrl.toString();
-        return;
-      }
-    }
-    
-    // Se não tem dados preenchidos, scroll para o form
-    scrollToForm();
+    scrollToForm(true);
   };
 
   return (
     <div className="mentoria-wp-page">
       {/* Mobile CTA fixo */}
-      <MentoriaMobileCTA onClick={scrollToForm} />
+      <MentoriaMobileCTA onClick={() => scrollToForm(false)} />
       
       {/* Hero Section */}
       <section className="mentoria-section mentoria-hero" id="hero-form">
@@ -256,6 +236,20 @@ export default function MentoriaLanding() {
                   {errors.email && <span className="mentoria-error-text">{errors.email}</span>}
                 </div>
                 
+                {/* Indicador de boleto selecionado */}
+                {paymentMethod === "boleto" && (
+                  <div className="mentoria-boleto-badge">
+                    <span>💳 Pagamento via Boleto Parcelado</span>
+                    <button 
+                      type="button" 
+                      onClick={() => setPaymentMethod("card")}
+                      className="mentoria-boleto-change"
+                    >
+                      Alterar
+                    </button>
+                  </div>
+                )}
+                
                 <button 
                   type="submit"
                   className="mentoria-cta-button mentoria-cta-form"
@@ -268,7 +262,7 @@ export default function MentoriaLanding() {
                     </>
                   ) : (
                     <>
-                      Quero ENTRAR NA MENTORIA
+                      {paymentMethod === "boleto" ? "CONTINUAR COM BOLETO" : "Quero ENTRAR NA MENTORIA"}
                       <ArrowRight className="ml-2" size={20} />
                     </>
                   )}
@@ -403,7 +397,7 @@ export default function MentoriaLanding() {
             <div className="mentoria-pricing-buttons">
               <button 
                 className="mentoria-cta-button"
-                onClick={scrollToForm}
+                onClick={() => scrollToForm(false)}
               >
                 Quero meu acesso agora
               </button>
@@ -461,7 +455,7 @@ export default function MentoriaLanding() {
           <div className="text-center">
             <button 
               className="mentoria-cta-button"
-              onClick={scrollToForm}
+              onClick={() => scrollToForm(false)}
             >
               quero entrar na mentoria
             </button>
