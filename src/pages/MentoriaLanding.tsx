@@ -364,13 +364,10 @@ export default function MentoriaLanding() {
       {/* What You Will Learn - Skills Section */}
       <section className="mentoria-section mentoria-skills">
         <div className="mentoria-section-inner">
-          <ScrollAnimation>
-            <h2 className="mentoria-section-title">O que você vai aprender?</h2>
-          </ScrollAnimation>
           <ScrollAnimation delay={150}>
             <img 
               src={images.skills} 
-              alt="Habilidades técnicas e comportamentais"
+              alt="O que você vai aprender - Habilidades técnicas e comportamentais"
               className="mentoria-skills-image"
               loading="lazy"
             />
@@ -407,21 +404,16 @@ export default function MentoriaLanding() {
       {/* How It Works Section */}
       <section className="mentoria-section mentoria-how-works">
         <div className="mentoria-section-inner">
-          <ScrollAnimation>
-            <h2 className="mentoria-section-title">
-              Como funciona a <br /><b>Mentoria Inovando na sua Obra</b>?
-            </h2>
-          </ScrollAnimation>
           <ScrollAnimation delay={150}>
             <img 
               src={images.howWorks} 
-              alt="Como funciona a mentoria"
+              alt="Como funciona a Mentoria Inovando na sua Obra"
               className="mentoria-skills-image hidden-mobile"
               loading="lazy"
             />
             <img 
               src={images.howWorksMobile} 
-              alt="Como funciona a mentoria"
+              alt="Como funciona a Mentoria Inovando na sua Obra"
               className="mentoria-skills-image hidden-desktop"
               loading="lazy"
             />
