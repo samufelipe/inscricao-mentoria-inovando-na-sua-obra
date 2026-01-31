@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, ArrowRight, Loader2 } from "lucide-react";
 import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
+import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
 
 // URLs das imagens do WordPress CDN
@@ -483,9 +484,9 @@ export default function MentoriaLanding() {
             loading="lazy"
           />
           <img 
-            src={images.guaranteeMobile} 
-            alt="Garantia de 15 dias"
-            className="mentoria-guarantee-image hidden-desktop"
+            src={garantiaMobileImg} 
+            alt="Garantia incondicional de 15 dias"
+            className="mentoria-guarantee-image-mobile hidden-desktop"
             loading="lazy"
           />
         </div>
