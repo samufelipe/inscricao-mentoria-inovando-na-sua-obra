@@ -475,12 +475,49 @@
     max-width: 100%;
   }
   
+  .mentoria-hero-form {
+    max-width: 100%;
+  }
+  
   .mentoria-about-content {
     flex-direction: column;
     text-align: center;
   }
   
   .mentoria-cta-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .mentoria-revenue-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .mentoria-revenue-image {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .mentoria-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mentoria-section {
+    padding: 30px 16px;
+  }
+  
+  .mentoria-section-title {
+    font-size: clamp(20px, 5vw, 28px);
+    margin-bottom: 24px;
+  }
+  
+  .mentoria-pricing-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .mentoria-cta-secondary {
     width: 100%;
     max-width: 300px;
   }
