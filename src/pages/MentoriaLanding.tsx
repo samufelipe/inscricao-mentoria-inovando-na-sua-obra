@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Lock, ArrowRight, Loader2 } from "lucide-react";
+import { Lock, ArrowRight, Loader2, CheckCircle2, Users, Building2, Award } from "lucide-react";
 import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
 import garantiaMobileImg from "@/assets/garantia-15-dias-mobile.png";
 import "../styles/mentoria-wp.css";
@@ -382,31 +382,95 @@ export default function MentoriaLanding() {
       </section>
 
       {/* Pricing Section */}
-      <section className="mentoria-section mentoria-pricing">
+      <section className="mentoria-section mentoria-pricing-new">
         <div className="mentoria-section-inner">
-          <h2 className="mentoria-section-title">
+          <p className="mentoria-pricing-label">Investimento</p>
+          <h2 className="mentoria-section-title" style={{ color: '#fff' }}>
             E quanto é o investimento mais importante do seu ano?
           </h2>
-          <div className="mentoria-pricing-card">
-            <img 
-              src={images.pricing} 
-              alt="Investimento" 
-              className="mentoria-pricing-image"
-              loading="lazy"
-            />
-            <div className="mentoria-pricing-buttons">
+          
+          {/* Stats Row */}
+          <div className="mentoria-pricing-stats">
+            <div className="mentoria-pricing-stat">
+              <div className="mentoria-pricing-stat-icon">
+                <Building2 size={24} />
+              </div>
+              <div>
+                <p className="mentoria-pricing-stat-value">+250</p>
+                <p className="mentoria-pricing-stat-label">Obras gerenciadas</p>
+              </div>
+            </div>
+            <div className="mentoria-pricing-stat">
+              <div className="mentoria-pricing-stat-icon">
+                <Users size={24} />
+              </div>
+              <div>
+                <p className="mentoria-pricing-stat-value">+100</p>
+                <p className="mentoria-pricing-stat-label">Alunas transformadas</p>
+              </div>
+            </div>
+            <div className="mentoria-pricing-stat">
+              <div className="mentoria-pricing-stat-icon">
+                <Award size={24} />
+              </div>
+              <div>
+                <p className="mentoria-pricing-stat-value">12</p>
+                <p className="mentoria-pricing-stat-label">Anos de experiência</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Card */}
+          <div className="mentoria-pricing-main-card">
+            {/* Price Header */}
+            <div className="mentoria-pricing-header">
+              <p className="mentoria-pricing-access">Acesso completo por</p>
+              <div className="mentoria-pricing-value">
+                <span className="mentoria-pricing-installment">12x</span>
+                <span className="mentoria-pricing-amount">R$ 196</span>
+                <span className="mentoria-pricing-cents">,50</span>
+              </div>
+              <p className="mentoria-pricing-full">ou R$ 1.900,00 à vista</p>
+            </div>
+
+            {/* Benefits List */}
+            <div className="mentoria-pricing-benefits">
+              <div className="mentoria-pricing-benefits-grid">
+                {[
+                  "16h de conteúdo gravado em 4 módulos",
+                  "12 meses de acesso à plataforma",
+                  "1h de mentoria individual",
+                  "Encontro presencial em São Paulo",
+                  "Materiais, checklists e ferramentas",
+                  "Suporte e grupo de networking",
+                ].map((benefit, index) => (
+                  <div key={index} className="mentoria-pricing-benefit">
+                    <CheckCircle2 size={20} className="mentoria-pricing-benefit-icon" />
+                    <span>{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="mentoria-pricing-ctas">
               <button 
-                className="mentoria-cta-button"
+                className="mentoria-cta-button mentoria-cta-pricing"
                 onClick={() => scrollToForm(false)}
               >
                 Quero meu acesso agora
+                <ArrowRight size={20} className="ml-2" />
               </button>
               <button 
-                className="mentoria-cta-secondary"
+                className="mentoria-cta-secondary mentoria-cta-boleto"
                 onClick={handleBoletoClick}
               >
-                boleto parcelado
+                Prefiro pagar com Boleto Parcelado
               </button>
+              <p className="mentoria-pricing-security">
+                <Lock size={14} className="inline mr-1" />
+                Compra 100% segura • Garantia de 15 dias
+              </p>
             </div>
           </div>
         </div>
