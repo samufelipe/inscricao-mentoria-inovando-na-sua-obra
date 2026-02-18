@@ -14,10 +14,10 @@ export function ArchitecturalTitle({
   color = "purple",
 }: ArchitecturalTitleProps) {
   const variants = {
-    h1: "font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none",
-    h2: "font-serif text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight",
-    h3: "font-sans text-2xl md:text-3xl font-bold tracking-wide uppercase",
-    h4: "font-sans text-xl font-semibold tracking-wider uppercase",
+    h1: "font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none uppercase",
+    h2: "font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight uppercase",
+    h3: "font-display text-2xl md:text-3xl font-bold tracking-wide uppercase",
+    h4: "font-display text-xl font-semibold tracking-wider uppercase",
   };
 
   const colors = {
