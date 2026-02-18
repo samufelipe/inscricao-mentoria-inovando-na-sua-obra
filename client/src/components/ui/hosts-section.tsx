@@ -1,0 +1,70 @@
+import { ArchitecturalTitle } from "./architectural-title";
+import { cn } from "@/lib/utils";
+
+export function HostsSection() {
+  return (
+    <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[oklch(0.97_0.01_95)] -skew-x-12 translate-x-1/4 z-0" />
+      
+      <div className="container relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Image Column */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-[oklch(0.35_0.12_320)] translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
+            <div className="relative aspect-[4/5] overflow-hidden border-4 border-white shadow-2xl">
+              <img 
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg" 
+                alt="Anfitriãs: Ingrid Zarza, Fernanda Bradaschia e Juliana Campelo" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              
+              {/* Names Overlay */}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                <div className="flex justify-between text-white text-xs font-bold tracking-widest uppercase">
+                  <span>Ingrid Zarza</span>
+                  <span>Fernanda Bradaschia</span>
+                  <span>Juliana Campelo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Column */}
+          <div className="space-y-8">
+            <div className="space-y-2">
+              <p className="text-[oklch(0.75_0.18_65)] font-bold tracking-widest uppercase text-sm">
+                Suas Anfitriãs
+              </p>
+              <ArchitecturalTitle variant="h2" color="purple">
+                Unidas Pelo Propósito
+              </ArchitecturalTitle>
+            </div>
+
+            <div className="space-y-6 text-gray-600 text-lg leading-relaxed font-light">
+              <p>
+                <span className="text-[oklch(0.35_0.12_320)] font-medium">Nós três representamos o bastidor que sustenta uma carreira sólida.</span>
+              </p>
+              
+              <p>
+                Enquanto o mercado se encanta com tendências, lançamentos e vitrines como a Expo Revestir e a Casa Cor, nós defendemos aquilo que realmente transforma a trajetória de uma arquiteta: <strong>gestão de escritório e gestão de obra.</strong>
+              </p>
+              
+              <p className="border-l-4 border-[oklch(0.75_0.18_65)] pl-6 italic text-gray-800">
+                "Porque antes do projeto fotografado, existe organização, método, responsabilidade e estrutura."
+              </p>
+              
+              <p>
+                Acreditamos que essas são as duas prioridades que deveriam ser aprendidas desde o início — não como complemento, mas como fundamento.
+              </p>
+              
+              <p className="font-serif text-xl text-[oklch(0.35_0.12_320)] font-bold pt-4">
+                Juntas, mostramos que autoridade não nasce da estética, nasce da base.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
