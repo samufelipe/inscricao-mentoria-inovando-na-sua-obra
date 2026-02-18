@@ -10,9 +10,14 @@
 - [x] Adicionar animações de entrada (framer-motion ou CSS)
 - [x] Implementar formulário de pré-cadastro funcional (Nome, Email, Telefone)
 - [x] Configurar envio de dados via WhatsApp (mensagem pré-preenchida)
-- [ ] Analisar tipografia da LP de referência (https://inscricao.imersao.inovandonasuaobra.com.br/)
-- [ ] Atualizar fontes no index.html e index.css para corresponder à referência
-- [ ] Ajustar componentes de título e texto para usar as novas fontes
+- [x] Analisar tipografia da LP de referência
+- [x] Atualizar fontes no index.html e index.css para corresponder à referência
+- [x] Ajustar componentes de título e texto para usar as novas fontes
+- [ ] Fazer upload da logo oficial para o S3
+- [ ] Substituir título em texto pela logo na Hero Section
+- [ ] Implementar Sticky Header (Menu Fixo) com botão de inscrição
+- [ ] Adicionar seção de "Garantia/Segurança" (Escassez)
+- [ ] Refinar espaçamento e layout para maior elegância
 - [ ] Otimizar performance (lazy loading, compressão)
 - [ ] Revisar responsividade mobile
 - [ ] Configurar deploy na Vercel
