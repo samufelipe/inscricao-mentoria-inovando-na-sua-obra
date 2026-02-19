@@ -12,8 +12,21 @@ import { StickyHeader } from "@/components/ui/sticky-header";
 import { ScarcityBanner } from "@/components/ui/scarcity-banner";
 import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default function AlemDaTendencia() {
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = "Além da Tendência - Evento Presencial";
+
+    const link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
+    const prevFavicon = link?.href || "";
+
+    return () => {
+      document.title = prevTitle;
+      if (link) link.href = prevFavicon;
+    };
+  }, []);
   const whatsappLink = "https://wa.me/551155717229?text=Ol%C3%A1!%20Gostaria%20de%20me%20inscrever%20no%20evento%20Al%C3%A9m%20da%20Tend%C3%AAncia.";
 
   const fadeInUp = {
