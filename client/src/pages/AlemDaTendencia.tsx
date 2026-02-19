@@ -53,71 +53,86 @@ export default function AlemDaTendencia() {
     <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-[oklch(0.97_0.01_95)] overflow-x-hidden">
       <StickyHeader />
       
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-[oklch(0.97_0.01_95)]">
+      {/* HERO SECTION - Full Dark Cinematic */}
+      <section className="relative overflow-hidden bg-[#1a1a1a]">
         {/* Hero Image Composition - 4 Photos with Dark Cinematic Fade Blending */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] bg-black overflow-hidden"
+          className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px] bg-black overflow-hidden"
         >
           {/* Camada 1: Far image (profundidade) */}
           <img
             src={heroFar}
             alt=""
-            className="absolute left-0 top-0 w-[28%] md:w-[25%] h-full object-cover object-[center_20%] opacity-70"
+            className="absolute left-0 top-0 w-[30%] md:w-[28%] h-full object-cover object-[center_25%] opacity-70"
             style={{
-              WebkitMaskImage: 'linear-gradient(to right, black 0%, black 30%, transparent 90%)',
-              maskImage: 'linear-gradient(to right, black 0%, black 30%, transparent 90%)',
+              WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
+              maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
             }}
           />
           {/* Camada 2: Left image */}
           <img
             src={heroLeft}
             alt=""
-            className="absolute left-[5%] md:left-[8%] top-0 w-[40%] md:w-[38%] h-full object-cover object-[center_20%] z-[2]"
+            className="absolute left-[5%] md:left-[8%] top-0 w-[42%] md:w-[40%] h-full object-cover object-[center_25%] z-[2]"
             style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 50%, transparent 90%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 50%, transparent 90%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
             }}
           />
           {/* Camada 3: CENTRAL principal (três mulheres em pé) */}
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[60%] md:w-[55%] h-full object-cover object-top z-10"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] md:w-[58%] h-full object-cover object-[center_15%] z-10"
             style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
             }}
           />
           {/* Camada 4: Right image */}
           <img
             src={heroRight}
             alt=""
-            className="absolute right-0 top-0 w-[35%] md:w-[32%] h-full object-cover object-[center_20%] z-[2]"
+            className="absolute right-0 top-0 w-[38%] md:w-[35%] h-full object-cover object-[center_25%] z-[2]"
             style={{
-              WebkitMaskImage: 'linear-gradient(to left, black 0%, black 30%, transparent 90%)',
-              maskImage: 'linear-gradient(to left, black 0%, black 30%, transparent 90%)',
+              WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
+              maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
             }}
           />
           {/* Dark cinematic overlay */}
-          <div className="absolute inset-0 bg-black/25 z-[15] pointer-events-none" />
+          <div className="absolute inset-0 bg-black/20 z-[15] pointer-events-none" />
           {/* Radial vignette */}
           <div
             className="absolute inset-0 z-[16] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.7) 100%)' }}
+            style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%)' }}
           />
-          {/* Bottom gradient transition to page background */}
+          {/* Bottom gradient - seamless to dark section */}
           <div
-            className="absolute bottom-0 left-0 right-0 h-1/3 z-20 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 40%, oklch(0.97 0.01 95) 100%)' }}
+            className="absolute bottom-0 left-0 right-0 h-[40%] z-20 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(26,26,26,0.6) 50%, #1a1a1a 100%)' }}
           />
+
+          {/* Logo overlaid on the composition - centered top */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="absolute top-4 sm:top-6 md:top-8 left-1/2 -translate-x-1/2 z-[25]"
+          >
+            <img 
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
+              alt="Além da Tendência - Logo Oficial" 
+              className="w-[140px] sm:w-[160px] md:w-[200px] h-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+              style={{ filter: 'brightness(1.1) contrast(1.05)' }}
+            />
+          </motion.div>
         </motion.div>
 
-        {/* Content Below Image */}
-        <div className="container relative z-10 -mt-16 sm:-mt-20 md:-mt-28 pb-12 md:pb-20">
+        {/* Content Below Image - Dark themed */}
+        <div className="container relative z-10 -mt-8 sm:-mt-12 md:-mt-16 pb-12 md:pb-20">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left: Text Content */}
             <motion.div 
@@ -126,33 +141,24 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start pt-4 md:pt-8"
             >
-              <div className="mb-5 max-w-[180px] md:max-w-[220px] w-full">
-                <img 
-                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
-                  alt="Além da Tendência - Logo Oficial" 
-                  className="w-full h-auto object-contain"
-                  style={{ mixBlendMode: 'multiply' }}
-                />
-              </div>
-              
-              <p className="text-base md:text-lg text-[oklch(0.35_0.05_320)] max-w-lg mb-6 font-light leading-relaxed border-l-4 border-[oklch(0.75_0.18_65)] pl-5">
+              <p className="text-base md:text-lg text-gray-300 max-w-lg mb-6 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
                 Como transformar inspiração em realidade através da gestão de escritório e obra.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white p-4 rounded-xl shadow-md border border-gray-100 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
                 <div className="flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-[oklch(0.75_0.18_65)]" />
+                  <Calendar className="w-5 h-5 text-[#C9A84C]" />
                   <div>
-                    <span className="block text-xs text-gray-400 mb-0.5">Data</span>
-                    <span className="text-base font-bold text-[oklch(0.2_0.02_320)]">10 de Março</span>
+                    <span className="block text-xs text-gray-500 mb-0.5">Data</span>
+                    <span className="text-base font-bold text-white">10 de Março</span>
                   </div>
                 </div>
-                <div className="w-px h-10 bg-gray-200 hidden sm:block" />
+                <div className="w-px h-10 bg-white/10 hidden sm:block" />
                 <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-[oklch(0.75_0.18_65)]" />
+                  <MapPin className="w-5 h-5 text-[#C9A84C]" />
                   <div>
-                    <span className="block text-xs text-gray-400 mb-0.5">Local</span>
-                    <span className="text-base font-bold text-[oklch(0.2_0.02_320)]">Auditório AFRESP - SP</span>
+                    <span className="block text-xs text-gray-500 mb-0.5">Local</span>
+                    <span className="text-base font-bold text-white">Auditório AFRESP - SP</span>
                   </div>
                 </div>
               </div>
@@ -169,6 +175,12 @@ export default function AlemDaTendencia() {
             </motion.div>
           </div>
         </div>
+
+        {/* Transition gradient from dark hero to light page */}
+        <div 
+          className="w-full h-20 md:h-32"
+          style={{ background: 'linear-gradient(to bottom, #1a1a1a 0%, oklch(0.97 0.01 95) 100%)' }}
+        />
       </section>
 
       <ScarcityBanner />
