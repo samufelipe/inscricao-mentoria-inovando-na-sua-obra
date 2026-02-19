@@ -14,7 +14,10 @@ import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
 import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import heroEventImg from "@/assets/alem-da-tendencia/hero-event.png";
+import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
+import heroLeft from "@/assets/alem-da-tendencia/hero-left.png";
+import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
+import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -52,22 +55,52 @@ export default function AlemDaTendencia() {
       
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[oklch(0.97_0.01_95)]">
-        {/* Hero Image - Full Width */}
-        <div className="relative w-full">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="w-full"
-          >
-            <img 
-              src={heroEventImg}
-              alt="Evento Além da Tendência - Momentos do evento" 
-              className="w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px] object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[oklch(0.97_0.01_95)]" />
-          </motion.div>
-        </div>
+        {/* Hero Image Composition - 4 Photos with Fade Blending */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="relative w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px] overflow-hidden"
+        >
+          {/* Far left image (DSC03250) */}
+          <img
+            src={heroFar}
+            alt=""
+            className="absolute left-0 top-0 w-[30%] h-full object-cover object-center"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, black 20%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, black 20%, transparent 100%)',
+            }}
+          />
+          {/* Left image (DSC03085) */}
+          <img
+            src={heroLeft}
+            alt=""
+            className="absolute left-[10%] top-0 w-[35%] h-full object-cover object-center z-[2]"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
+            }}
+          />
+          {/* Central MAIN image (DSC03181_1 - três mulheres) */}
+          <img
+            src={heroMain}
+            alt="Evento Além da Tendência - Mentoras"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[50%] h-full object-cover object-top z-10"
+          />
+          {/* Right image (DSC03192) */}
+          <img
+            src={heroRight}
+            alt=""
+            className="absolute right-0 top-0 w-[35%] h-full object-cover object-center z-[2]"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to left, black 30%, transparent 100%)',
+              maskImage: 'linear-gradient(to left, black 30%, transparent 100%)',
+            }}
+          />
+          {/* Bottom gradient fade to background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[oklch(0.97_0.01_95)] z-20 pointer-events-none" />
+        </motion.div>
 
         {/* Content Below Image */}
         <div className="container relative z-10 -mt-16 sm:-mt-20 md:-mt-28 pb-12 md:pb-20">
