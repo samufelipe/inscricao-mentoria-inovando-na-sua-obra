@@ -13,10 +13,12 @@
 - [x] Analisar tipografia da LP de referência
 - [x] Atualizar fontes no index.html e index.css para corresponder à referência
 - [x] Ajustar componentes de título e texto para usar as novas fontes
-- [ ] Fazer upload da logo oficial para o S3
-- [ ] Substituir título em texto pela logo na Hero Section
-- [ ] Implementar Sticky Header (Menu Fixo) com botão de inscrição
-- [ ] Adicionar seção de "Garantia/Segurança" (Escassez)
+- [x] Fazer upload da logo oficial para o S3
+- [x] Substituir título em texto pela logo na Hero Section
+- [x] Implementar Sticky Header (Menu Fixo) com botão de inscrição
+- [x] Adicionar seção de "Garantia/Segurança" (Escassez)
+- [ ] **URGENTE:** Corrigir Hero Section (fundo preto/tela branca)
+- [ ] **URGENTE:** Restaurar Rodapé completo e detalhado
 - [ ] Refinar espaçamento e layout para maior elegância
 - [ ] Otimizar performance (lazy loading, compressão)
 - [ ] Revisar responsividade mobile
