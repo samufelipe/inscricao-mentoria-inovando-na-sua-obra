@@ -17,8 +17,9 @@
 - [x] Substituir título em texto pela logo na Hero Section
 - [x] Implementar Sticky Header (Menu Fixo) com botão de inscrição
 - [x] Adicionar seção de "Garantia/Segurança" (Escassez)
-- [ ] **URGENTE:** Corrigir Hero Section (fundo preto/tela branca)
-- [ ] **URGENTE:** Restaurar Rodapé completo e detalhado
+- [x] Corrigir Hero Section (fundo preto/tela branca)
+- [x] Restaurar Rodapé completo e detalhado
+- [ ] **URGENTE:** Enviar código para o repositório GitHub `inscricao-mentoria-inovando-na-sua-obra`
 - [ ] Refinar espaçamento e layout para maior elegância
 - [ ] Otimizar performance (lazy loading, compressão)
 - [ ] Revisar responsividade mobile
