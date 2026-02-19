@@ -167,7 +167,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#F5F0E8] font-sans">
 
       {/* ── 1. HERO ── */}
-      <section className="relative bg-[#F5F0E8] overflow-hidden">
+      <section className="relative bg-[#F5F0E8] overflow-hidden" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col lg:flex-row items-center gap-10">
             <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
@@ -197,7 +197,7 @@ export default function Home() {
       </section>
 
       {/* ── 2. SKILLS ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
             <img
@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* ── 3. AUDIENCE ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="text-center space-y-8">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37] italic">
@@ -231,7 +231,7 @@ export default function Home() {
       </section>
 
       {/* ── 4. HOW IT WORKS ── */}
-      <section className="bg-white py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
             <img
@@ -245,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* ── 5. MODULES (vertical stacked) ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-4xl uppercase text-[#2D2D2D] italic">
@@ -268,7 +268,7 @@ export default function Home() {
       </section>
 
       {/* ── 6. BONUS (vertical stacked) ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
             <FadeIn className="w-full">
@@ -282,7 +282,7 @@ export default function Home() {
       </section>
 
       {/* ── 7. REVENUE ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] italic">
@@ -382,7 +382,7 @@ export default function Home() {
       </section>
 
       {/* ── 9. TESTIMONIALS ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
@@ -413,7 +413,7 @@ export default function Home() {
       </section>
 
       {/* ── 10. GUARANTEE ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
             <div className="flex-1 space-y-6 text-center md:text-left">
@@ -444,7 +444,7 @@ export default function Home() {
       </section>
 
       {/* ── 11. ABOUT ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
             <div className="flex-1 space-y-6">
@@ -479,7 +479,7 @@ export default function Home() {
       </section>
 
       {/* ── 12. FAQ ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
         <div className="container mx-auto px-4">
           <FadeIn className="max-w-3xl mx-auto">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] text-center mb-10">
@@ -531,7 +531,7 @@ export default function Home() {
               <img
                 src={imgLogo}
                 alt="Inovando na sua Obra"
-                className="h-16 mx-auto md:mx-0 brightness-0 invert opacity-80"
+                className="h-16 mx-auto md:mx-0"
                 loading="lazy"
               />
               <p className="text-sm text-gray-500 leading-relaxed">
@@ -542,7 +542,7 @@ export default function Home() {
             {/* Links */}
             <div className="space-y-3 text-center md:text-left">
               <h4 className="font-display font-bold text-white uppercase text-sm tracking-wider mb-4">Links Úteis</h4>
-              <a href="#pricing" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Investimento</a>
+              <button onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })} className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm mx-auto md:mx-0">Investimento</button>
               <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Quero me inscrever</a>
               <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Instagram</a>
             </div>
@@ -567,7 +567,7 @@ export default function Home() {
 
           <div className="border-t border-gray-800 mt-10 pt-6 text-center">
             <p className="text-xs text-gray-600">
-              © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados. | CNPJ: XX.XXX.XXX/0001-XX
+              © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
             </p>
           </div>
         </div>
