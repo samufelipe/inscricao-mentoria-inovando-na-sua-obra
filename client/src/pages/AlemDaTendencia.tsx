@@ -10,9 +10,11 @@ import { SpeakerCard } from "@/components/ui/speaker-card";
 import { TestimonialCard } from "@/components/ui/testimonial-card";
 import { StickyHeader } from "@/components/ui/sticky-header";
 import { ScarcityBanner } from "@/components/ui/scarcity-banner";
+import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
 import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import heroEventImg from "@/assets/alem-da-tendencia/hero-event.png";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -49,95 +51,86 @@ export default function AlemDaTendencia() {
       <StickyHeader />
       
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[oklch(0.2_0.02_320)] text-white">
-        <div className="absolute inset-0 z-0">
-          <motion.div 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: "easeOut" }}
-            className="w-full h-full"
+      <section className="relative overflow-hidden bg-[oklch(0.97_0.01_95)]">
+        {/* Hero Image - Full Width */}
+        <div className="relative w-full">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="w-full"
           >
             <img 
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/hero-bg.jpg" 
-              alt="Escritório de arquitetura minimalista" 
-              className="w-full h-full object-cover opacity-40"
+              src={heroEventImg}
+              alt="Evento Além da Tendência - Momentos do evento" 
+              className="w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px] object-cover object-center"
             />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[oklch(0.97_0.01_95)]" />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.2_0.02_320)]/80 via-[oklch(0.2_0.02_320)]/60 to-[oklch(0.2_0.02_320)]" />
         </div>
 
-        <div className="container relative z-10 pt-24 pb-32">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto flex flex-col items-start"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-8">
-              <div className="w-2 h-2 rounded-full bg-[oklch(0.75_0.18_65)] animate-pulse" />
-              <span className="text-sm font-medium tracking-wide uppercase">Evento Presencial em São Paulo</span>
-            </div>
-            
-            <div className="mb-8 max-w-[400px] w-full">
-              <img 
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
-                alt="Além da Tendência - Logo Oficial" 
-                className="w-full h-auto object-contain drop-shadow-2xl filter brightness-0 invert"
-              />
-            </div>
-            
-            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-[oklch(0.75_0.18_65)] pl-6">
-              Como transformar inspiração em realidade através da gestão de escritório e obra.
-            </p>
-
-            <div className="flex flex-col md:flex-row gap-6 mb-12 text-sm font-medium tracking-wide uppercase bg-white/5 p-6 rounded-lg border border-white/10 backdrop-blur-sm w-full md:w-auto">
-              <div className="flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-[oklch(0.75_0.18_65)]" />
-                <div>
-                  <span className="block text-xs text-white/60 mb-1">Data</span>
-                  <span className="text-lg font-bold">10 de Março</span>
-                </div>
+        {/* Content Below Image */}
+        <div className="container relative z-10 -mt-16 sm:-mt-20 md:-mt-28 pb-12 md:pb-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            {/* Left: Text Content */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col items-start pt-4 md:pt-8"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[oklch(0.35_0.12_320)]/20 bg-[oklch(0.35_0.12_320)]/5 mb-6">
+                <div className="w-2 h-2 rounded-full bg-[oklch(0.75_0.18_65)] animate-pulse" />
+                <span className="text-sm font-medium tracking-wide uppercase text-[oklch(0.35_0.12_320)]">Evento Presencial em São Paulo</span>
               </div>
-              <div className="w-px h-12 bg-white/20 hidden md:block mx-4" />
-              <div className="flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-[oklch(0.75_0.18_65)]" />
-                <div>
-                  <span className="block text-xs text-white/60 mb-1">Local</span>
-                  <span className="text-lg font-bold">Auditório AFRESP - SP</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-              <ArchitecturalButton 
-                variant="primary"
-                className="w-full sm:w-auto text-center justify-center py-8 text-lg shadow-[0_0_30px_rgba(243,156,18,0.3)] hover:shadow-[0_0_50px_rgba(243,156,18,0.5)] transition-all duration-300"
-                onClick={() => {
-                  const formSection = document.getElementById("inscricao");
-                  if (formSection) {
-                    formSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Garanta Sua Vaga - R$ 147,00
-              </ArchitecturalButton>
               
-              <p className="text-sm text-white/60 flex items-center gap-2">
+              <div className="mb-6 max-w-[320px] md:max-w-[400px] w-full">
+                <img 
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
+                  alt="Além da Tendência - Logo Oficial" 
+                  className="w-full h-auto object-contain drop-shadow-lg"
+                />
+              </div>
+              
+              <p className="text-lg md:text-xl text-[oklch(0.35_0.05_320)] max-w-lg mb-8 font-light leading-relaxed border-l-4 border-[oklch(0.75_0.18_65)] pl-5">
+                Como transformar inspiração em realidade através da gestão de escritório e obra.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 text-sm font-medium tracking-wide uppercase bg-white p-5 rounded-xl shadow-md border border-gray-100 w-full sm:w-auto">
+                <div className="flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-[oklch(0.75_0.18_65)]" />
+                  <div>
+                    <span className="block text-xs text-gray-400 mb-0.5">Data</span>
+                    <span className="text-base font-bold text-[oklch(0.2_0.02_320)]">10 de Março</span>
+                  </div>
+                </div>
+                <div className="w-px h-10 bg-gray-200 hidden sm:block" />
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-[oklch(0.75_0.18_65)]" />
+                  <div>
+                    <span className="block text-xs text-gray-400 mb-0.5">Local</span>
+                    <span className="text-base font-bold text-[oklch(0.2_0.02_320)]">Auditório AFRESP - SP</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-500 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[oklch(0.75_0.18_65)]" /> 
                 Vagas limitadas a 200 participantes
               </p>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/50"
-        >
-          <ArrowDown className="w-8 h-8" />
-        </motion.div>
+            {/* Right: Registration Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="w-full"
+            >
+              <HeroRegistrationForm />
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       <ScarcityBanner />

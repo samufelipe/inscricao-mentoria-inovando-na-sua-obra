@@ -10,10 +10,9 @@ export function RegistrationForm() {
     name: "",
     email: "",
     phone: "",
-    profession: ""
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -30,8 +29,7 @@ export function RegistrationForm() {
     }
 
     // Format WhatsApp message
-    const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}%0AProfissão: ${formData.profession || "Não informado"}`;
-    
+    const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}`;
     const whatsappUrl = `https://wa.me/551155717229?text=${message}`;
 
     // Simulate processing delay for better UX
@@ -83,8 +81,7 @@ export function RegistrationForm() {
           </div>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
+        <div className="space-y-2">
             <label htmlFor="phone" className="text-sm font-bold uppercase tracking-wider text-gray-500">WhatsApp *</label>
             <input 
               type="tel" 
@@ -97,24 +94,6 @@ export function RegistrationForm() {
               placeholder="(00) 00000-0000"
             />
           </div>
-          
-          <div className="space-y-2">
-            <label htmlFor="profession" className="text-sm font-bold uppercase tracking-wider text-gray-500">Profissão</label>
-            <select 
-              id="profession" 
-              name="profession"
-              value={formData.profession}
-              onChange={handleChange}
-              className="w-full p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors appearance-none bg-white"
-            >
-              <option value="">Selecione...</option>
-              <option value="Arquiteta">Arquiteta</option>
-              <option value="Designer de Interiores">Designer de Interiores</option>
-              <option value="Estudante">Estudante</option>
-              <option value="Outro">Outro</option>
-            </select>
-          </div>
-        </div>
         
         <div className="pt-4">
           <ArchitecturalButton 
