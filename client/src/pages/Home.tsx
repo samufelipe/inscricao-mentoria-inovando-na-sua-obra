@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ShieldCheck, CreditCard, Barcode } from "lucide-react";
+import { Check, ShieldCheck, Lock, ArrowRight } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -31,6 +31,12 @@ import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
 import imgAbout from "@/assets/mentoria/about.png";
 
 const modules = [imgModule1, imgModule2, imgModule3, imgModule4];
+const moduleLabels = [
+  "Módulo 01 - Primeiros Passos",
+  "Módulo 02 - Projeto Executável",
+  "Módulo 03 - Gerenciamento de Obra",
+  "Módulo 04 - Finalização e Fidelização",
+];
 const testimonials = [
   { src: imgTestimonial1, name: "Beatriz Francini" },
   { src: imgTestimonial2, name: "Ingrid Cristina" },
@@ -102,7 +108,7 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu nome completo"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1B8A3F]"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
@@ -112,26 +118,31 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu melhor e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1B8A3F]"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
         <input
           type="tel"
-          placeholder="(99) 99999-9999"
+          placeholder="Seu WhatsApp (99) 99999-9999"
           value={phone}
           onChange={(e) => setPhone(phoneMask(e.target.value))}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1B8A3F]"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
       <button
         type="submit"
-        className="w-full py-4 bg-[#1B8A3F] hover:bg-[#156e32] text-white font-bold text-lg rounded-lg transition-colors uppercase tracking-wide"
+        className="w-full py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-lg rounded-lg transition-colors uppercase tracking-wide flex items-center justify-center gap-2"
       >
         {ctaLabel}
+        <ArrowRight className="w-5 h-5" />
       </button>
+      <p className="flex items-center justify-center gap-2 text-sm text-gray-500">
+        <Lock className="w-4 h-4" />
+        Seus dados estão 100% seguros
+      </p>
     </form>
   );
 }
@@ -153,31 +164,30 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F0] font-sans">
+    <div className="min-h-screen bg-[#F5F0E8] font-sans">
 
       {/* ── 1. HERO ── */}
-      <section className="relative bg-[#EDE8DC] overflow-hidden">
+      <section className="relative bg-[#F5F0E8] overflow-hidden">
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col lg:flex-row items-center gap-10">
             <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
               <img
                 src={imgLogo}
                 alt="Mentoria Inovando na sua Obra"
-                className="h-16 md:h-20 object-contain mix-blend-multiply"
+                className="h-20 md:h-28 object-contain mix-blend-multiply"
               />
-              <h1 className="font-display font-bold text-2xl md:text-4xl lg:text-5xl uppercase leading-tight text-[#2D2D2D]">
-                Domine o Gerenciamento de Obra de Interiores de Maneira{" "}
-                <span className="text-[#D4AF37]">Lucrativa e Eficiente</span>
+              <h1 className="font-display font-bold text-2xl md:text-4xl lg:text-[2.75rem] uppercase leading-tight text-[#2D2D2D]">
+                Domine o gerenciamento de obra de interiores de maneira lucrativa e eficiente
               </h1>
-              <p className="text-gray-600 text-base md:text-lg max-w-xl">
-                A mentoria completa para arquitetas e designers de interiores que querem transformar o gerenciamento de obras em uma fonte de lucro e reconhecimento profissional.
+              <p className="text-[#555] text-sm md:text-base uppercase tracking-wide font-medium max-w-xl">
+                Transforme cada projeto em uma jornada inesquecível para seus clientes, desde o primeiro contato até a entrega final.
               </p>
               <LeadForm id="hero-form" />
             </div>
             <div className="flex-1 flex justify-center">
               <img
                 src={imgHeroPhoto}
-                alt="Ingrid e Fernanda"
+                alt="Ingrid Zarza e Fernanda Bradaschia"
                 className="max-w-full h-auto mix-blend-multiply"
                 loading="eager"
               />
@@ -187,15 +197,12 @@ export default function Home() {
       </section>
 
       {/* ── 2. SKILLS ── */}
-      <section className="bg-[#F5F5F0] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37] mb-10">
-              O Que Você Vai Aprender?
-            </h2>
             <img
               src={imgSkills}
-              alt="Habilidades Técnicas e Comportamentais"
+              alt="O que você vai aprender - Habilidades técnicas e comportamentais"
               className="mx-auto max-w-4xl w-full mix-blend-multiply"
               loading="lazy"
             />
@@ -204,14 +211,14 @@ export default function Home() {
       </section>
 
       {/* ── 3. AUDIENCE ── */}
-      <section className="bg-[#EDE8DC] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center space-y-8">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-              Para Quem É?
+              Para quem é?
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
-              Se você é arquiteta, designer de interiores ou engenheira e quer aprender a gerenciar obras de interiores com eficiência, organização e lucratividade, essa mentoria é para você.
+            <p className="text-[#555] max-w-2xl mx-auto text-base md:text-lg">
+              Para arquitetas, designers de interiores e engenheiras que queiram aprender a organizar obras de forma eficiente e previsível.
             </p>
             <img
               src={imgAudience}
@@ -224,12 +231,12 @@ export default function Home() {
       </section>
 
       {/* ── 4. HOW IT WORKS ── */}
-      <section className="bg-[#F5F5F0] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
             <img
               src={imgHowWorks}
-              alt="Como funciona a Mentoria"
+              alt="Como funciona a Mentoria Inovando na sua Obra"
               className="mx-auto max-w-5xl w-full mix-blend-multiply"
               loading="lazy"
             />
@@ -238,11 +245,11 @@ export default function Home() {
       </section>
 
       {/* ── 5. MODULES ── */}
-      <section className="bg-[#EDE8DC] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-              Como é a Mentoria Por Dentro?
+              Como é a mentoria por dentro?
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -250,7 +257,7 @@ export default function Home() {
               <FadeIn key={i}>
                 <img
                   src={src}
-                  alt={`Módulo ${i + 1}`}
+                  alt={moduleLabels[i]}
                   className="w-full rounded-lg shadow-lg mix-blend-multiply"
                   loading="lazy"
                 />
@@ -261,7 +268,7 @@ export default function Home() {
       </section>
 
       {/* ── 6. BONUS ── */}
-      <section className="bg-[#F5F5F0] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37]">
@@ -270,29 +277,29 @@ export default function Home() {
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <FadeIn>
-              <img src={imgBonus1} alt="Bônus 1" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
+              <img src={imgBonus1} alt="Bônus da mentoria" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
             </FadeIn>
             <FadeIn>
-              <img src={imgBonus2} alt="Bônus 2" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
+              <img src={imgBonus2} alt="Bônus da mentoria" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
             </FadeIn>
           </div>
         </div>
       </section>
 
       {/* ── 7. REVENUE ── */}
-      <section className="bg-[#EDE8DC] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-              Como Você Pode Faturar Mais?
+              Como você pode faturar mais?
             </h2>
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <FadeIn>
-              <img src={imgRevenue1} alt="Depoimento 1" className="w-full rounded-lg shadow-lg" loading="lazy" />
+              <img src={imgRevenue1} alt="Como faturar mais" className="w-full rounded-lg shadow-lg" loading="lazy" />
             </FadeIn>
             <FadeIn>
-              <img src={imgRevenue2} alt="Depoimento 2" className="w-full rounded-lg shadow-lg" loading="lazy" />
+              <img src={imgRevenue2} alt="Como faturar mais" className="w-full rounded-lg shadow-lg" loading="lazy" />
             </FadeIn>
           </div>
         </div>
@@ -304,14 +311,14 @@ export default function Home() {
           <FadeIn className="text-center space-y-8">
             <p className="text-[#D4AF37] font-bold uppercase tracking-widest text-sm">Investimento</p>
             <h2 className="font-display font-bold text-2xl md:text-4xl uppercase">
-              É Quanto é o Investimento Mais Importante do Seu Ano?
+              E quanto é o investimento mais importante do seu ano?
             </h2>
 
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 py-6">
               {[
-                { value: "+250", label: "Obras Gerenciadas" },
-                { value: "+100", label: "Alunas Formadas" },
-                { value: "12", label: "Anos de Experiência" },
+                { value: "+250", label: "Obras gerenciadas" },
+                { value: "+100", label: "Alunas transformadas" },
+                { value: "12", label: "Anos de experiência" },
               ].map((s) => (
                 <div key={s.label} className="text-center">
                   <p className="text-4xl md:text-5xl font-bold text-[#D4AF37]">{s.value}</p>
@@ -322,8 +329,10 @@ export default function Home() {
 
             <div className="bg-white text-gray-800 rounded-2xl shadow-2xl max-w-lg mx-auto p-8 md:p-12 space-y-6">
               <div className="text-center">
-                <p className="text-gray-500 text-sm">12x de</p>
-                <p className="text-5xl md:text-6xl font-bold text-[#1B8A3F]">R$ 196<span className="text-2xl">,50</span></p>
+                <p className="text-gray-500 text-sm">Acesso completo por</p>
+                <p className="text-5xl md:text-6xl font-bold text-[#2E7D32]">
+                  12x<span className="text-3xl">R$</span> 196<span className="text-2xl">,50</span>
+                </p>
                 <p className="text-gray-500 text-sm mt-1">ou R$ 1.900,00 à vista</p>
               </div>
 
@@ -337,7 +346,7 @@ export default function Home() {
                   "Suporte e grupo de networking",
                 ].map((b) => (
                   <li key={b} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-[#1B8A3F] mt-0.5 shrink-0" />
+                    <Check className="w-5 h-5 text-[#2E7D32] mt-0.5 shrink-0" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -348,24 +357,22 @@ export default function Home() {
                   href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-[#1B8A3F] hover:bg-[#156e32] text-white font-bold text-lg rounded-lg transition-colors uppercase"
+                  className="flex items-center justify-center gap-2 w-full py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-lg rounded-lg transition-colors uppercase"
                 >
-                  <CreditCard className="w-5 h-5" />
-                  COMPRAR COM CARTÃO
+                  Quero meu acesso agora
                 </a>
                 <a
                   href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-[#1B8A3F] text-[#1B8A3F] hover:bg-[#1B8A3F] hover:text-white font-bold rounded-lg transition-colors uppercase text-sm"
+                  className="block text-center text-[#2E7D32] hover:underline font-semibold text-sm py-2"
                 >
-                  <Barcode className="w-5 h-5" />
-                  PAGAR COM BOLETO PARCELADO
+                  Prefiro pagar com Boleto Parcelado
                 </a>
               </div>
 
               <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
-                <ShieldCheck className="w-4 h-4 text-[#1B8A3F]" />
+                <ShieldCheck className="w-4 h-4 text-[#2E7D32]" />
                 Compra 100% segura - Garantia de 15 dias
               </div>
             </div>
@@ -374,11 +381,11 @@ export default function Home() {
       </section>
 
       {/* ── 9. TESTIMONIALS ── */}
-      <section className="bg-[#F5F5F0] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-              Veja o Que Dizem Nossas Alunas:
+              Veja o que dizem <strong>nossas alunas:</strong>
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
@@ -386,7 +393,7 @@ export default function Home() {
               <FadeIn key={t.name}>
                 <img
                   src={t.src}
-                  alt={`Depoimento de ${t.name}`}
+                  alt={`Depoimento ${t.name}`}
                   className="w-full rounded-lg shadow-lg"
                   loading="lazy"
                 />
@@ -396,42 +403,37 @@ export default function Home() {
           <FadeIn className="text-center mt-10">
             <button
               onClick={scrollToForm}
-              className="px-10 py-4 bg-[#1B8A3F] hover:bg-[#156e32] text-white font-bold text-lg rounded-lg transition-colors uppercase"
+              className="px-10 py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-lg rounded-lg transition-colors uppercase"
             >
-              QUERO ENTRAR NA MENTORIA
+              quero entrar na mentoria
             </button>
           </FadeIn>
         </div>
       </section>
 
       {/* ── 10. GUARANTEE ── */}
-      <section className="bg-[#EDE8DC] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
             <div className="flex-1 space-y-6 text-center md:text-left">
               <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-                Risco Zero Para Você
+                Risco Zero para você
               </h2>
-              <p className="text-gray-600 leading-relaxed">
-                Você tem 15 dias de garantia incondicional. Se dentro desse período você sentir que a mentoria não é para você, basta solicitar o reembolso e devolvemos 100% do seu investimento, sem perguntas. Queremos que você entre com total segurança e confiança.
+              <p className="text-[#555] leading-relaxed text-lg">
+                Confiamos tanto no nosso conteúdo que damos uma{" "}
+                <strong>garantia incondicional de 15 dias</strong> pra você.
               </p>
-              <button
-                onClick={scrollToForm}
-                className="px-8 py-4 bg-[#1B8A3F] hover:bg-[#156e32] text-white font-bold rounded-lg transition-colors uppercase"
-              >
-                GARANTIR MINHA VAGA
-              </button>
             </div>
             <div className="flex-1 flex justify-center">
               <img
                 src={imgGuarantee}
-                alt="Garantia 15 dias"
+                alt="Garantia de 15 dias"
                 className="hidden md:block max-w-xs w-full mix-blend-multiply"
                 loading="lazy"
               />
               <img
                 src={imgGarantiaMobile}
-                alt="Garantia 15 dias"
+                alt="Garantia incondicional de 15 dias"
                 className="block md:hidden max-w-[200px] w-full mix-blend-multiply"
                 loading="lazy"
               />
@@ -441,22 +443,25 @@ export default function Home() {
       </section>
 
       {/* ── 11. ABOUT ── */}
-      <section className="bg-white py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
             <div className="flex-1 space-y-6">
               <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
                 Quem Somos
               </h2>
-              <div className="text-gray-600 leading-relaxed space-y-4">
+              <div className="text-[#555] leading-relaxed space-y-4 text-base">
                 <p>
-                  Somos <strong>Ingrid Zarza</strong> e <strong>Fernanda Bradaschia</strong>, arquitetas apaixonadas por compartilhar conhecimento e transformar a gestão de obras de interiores.
+                  Somos <strong>Ingrid Zarza e Fernanda Bradaschia</strong>, arquitetas <strong>apaixonadas</strong> por compartilhar conhecimento e <strong>transformar a gestão de obras de interiores</strong>.
                 </p>
                 <p>
-                  Unimos nossas experiências para fundar a <strong>INOVANDO ARQUITETURA</strong>, com mais de <strong>250 obras gerenciadas</strong> e <strong>12 anos de experiência</strong> no mercado de arquitetura e design de interiores.
+                  Unimos nossas experiências para fundar a <strong>INOVANDO ARQUITETURA</strong>, um escritório dedicado ao desenvolvimento e gerenciamento de projetos residenciais e comerciais de interiores. Ao longo da nossa trajetória, <strong>já concluímos mais de 250 obras</strong>, ajudando clientes a realizarem o seu sonho.
                 </p>
                 <p>
-                  Criamos o perfil <strong>@inovandonasuaobra</strong> para ajudar profissionais a enfrentarem os desafios reais do canteiro de obras. Em 2024, lançamos a <strong>Mentoria Inovando na Sua Obra</strong> para formar uma nova geração de profissionais que gerenciam obras com excelência, lucratividade e reconhecimento.
+                  Criamos a <strong>@inovandonasuaobra</strong>, um instagram para arquitetas, designers de interiores e engenheiras que querem aprender a gerenciar obras de interiores com mais segurança e qualidade. Lá, <strong>compartilhamos experiências reais de obra, dicas valiosas e estratégias práticas</strong> baseadas na nossa vivência em campo.
+                </p>
+                <p>
+                  Em <strong>2024</strong>, criamos a <strong>Mentoria Inovando na Sua Obra</strong> para <strong>compartilhar todo esse conhecimento de forma organizada e acessível</strong>. Já são dezenas de alunas impactadas diretamente pela nossa metodologia, conquistando mais confiança e resultados.
                 </p>
               </div>
             </div>
@@ -473,40 +478,40 @@ export default function Home() {
       </section>
 
       {/* ── 12. FAQ ── */}
-      <section className="bg-[#F5F5F0] py-16 md:py-24">
+      <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="max-w-3xl mx-auto">
             <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] text-center mb-10">
-              Perguntas Frequentes
+              <strong>Perguntas Frequentes</strong>
             </h2>
             <Accordion type="single" collapsible className="space-y-4">
               {[
                 {
                   q: "As aulas são gravadas ou ao vivo?",
-                  a: "Todo o conteúdo já está gravado e organizado por temas na plataforma. Você pode assistir no seu ritmo, quando e onde quiser, quantas vezes precisar durante o período de acesso.",
+                  a: "Todo o conteúdo já está gravado e organizado por temas na plataforma. Assim que você comprar, terá acesso imediato aos 4 primeiros módulos. Além disso, as aulas bônus e os plantões de dúvidas serão ao vivo pelo Zoom, com as gravações disponíveis na plataforma Hotmart.",
                 },
                 {
                   q: "Em quanto tempo eu termino a mentoria?",
-                  a: "Aproximadamente 3 meses. Todo conteúdo gravado são 16h de aulas distribuídas em 4 módulos. Mas você tem 12 meses de acesso para assistir no seu ritmo.",
+                  a: "Aproximadamente 3 meses. Todo conteúdo gravado são 16h e isso dá 1h33 por semana (12 semanas)",
                 },
                 {
                   q: "Por quanto tempo eu tenho acesso ao conteúdo?",
-                  a: "Você terá 1 ano de acesso completo a todo o conteúdo da plataforma, incluindo atualizações e materiais complementares.",
+                  a: "1 ano de acesso.",
                 },
                 {
                   q: "Será que consigo conciliar a mentoria com meus outros compromissos?",
-                  a: "Sabemos que o dia a dia nas obras são corridos. Por isso, o conteúdo é gravado e você pode assistir no seu tempo. As mentorias individuais são agendadas conforme sua disponibilidade.",
+                  a: "Sabemos que o dia a dia nas obras são corridos, e é por isso que nossas aulas foram planejadas para se ajustarem à sua rotina. Conteúdo prático e direto ao ponto, em módulos concisos, para você aprender no seu ritmo e aplicar no dia seguinte.",
                 },
                 {
                   q: "Não encontrei a resposta para a minha dúvida, como faço?",
-                  a: "Entre em contato com nosso time pelo WhatsApp (11) 5571-7229. Estamos prontos para te ajudar!",
+                  a: "Entre em contato com nosso time pelo WhatsApp ou e-mail. Estamos prontos para te ajudar!",
                 },
               ].map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-lg px-6 border border-gray-200">
-                  <AccordionTrigger className="text-left font-bold text-base md:text-lg py-5 hover:no-underline">
+                  <AccordionTrigger className="text-left font-bold text-base md:text-lg py-5 hover:no-underline text-[#2D2D2D]">
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed pb-5">
+                  <AccordionContent className="text-[#555] leading-relaxed pb-5">
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -528,15 +533,12 @@ export default function Home() {
           <p className="text-sm">
             © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
           </p>
-          <p className="text-xs">
-            Contato: (11) 5571-7229 - contato@inovandonasuaobra.com.br
-          </p>
         </div>
       </footer>
 
       {/* ── STICKY MOBILE CTA ── */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 bg-[#1B8A3F] text-white p-3 flex items-center justify-between md:hidden transition-transform duration-300 shadow-[0_-4px_12px_rgba(0,0,0,0.2)] ${
+        className={`fixed bottom-0 left-0 right-0 z-50 bg-[#2E7D32] text-white p-3 flex items-center justify-between md:hidden transition-transform duration-300 shadow-[0_-4px_12px_rgba(0,0,0,0.2)] ${
           showSticky ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -546,7 +548,7 @@ export default function Home() {
         </div>
         <button
           onClick={scrollToForm}
-          className="px-6 py-2 bg-white text-[#1B8A3F] font-bold rounded-lg text-sm uppercase animate-pulse"
+          className="px-6 py-2 bg-white text-[#2E7D32] font-bold rounded-lg text-sm uppercase animate-pulse"
         >
           Garantir Vaga
         </button>
