@@ -79,24 +79,20 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start pt-4 md:pt-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[oklch(0.35_0.12_320)]/20 bg-[oklch(0.35_0.12_320)]/5 mb-6">
-                <div className="w-2 h-2 rounded-full bg-[oklch(0.75_0.18_65)] animate-pulse" />
-                <span className="text-sm font-medium tracking-wide uppercase text-[oklch(0.35_0.12_320)]">Evento Presencial em São Paulo</span>
-              </div>
-              
-              <div className="mb-6 max-w-[320px] md:max-w-[400px] w-full">
+              <div className="mb-5 max-w-[180px] md:max-w-[220px] w-full">
                 <img 
                   src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
                   alt="Além da Tendência - Logo Oficial" 
-                  className="w-full h-auto object-contain drop-shadow-lg"
+                  className="w-full h-auto object-contain"
+                  style={{ mixBlendMode: 'multiply' }}
                 />
               </div>
               
-              <p className="text-lg md:text-xl text-[oklch(0.35_0.05_320)] max-w-lg mb-8 font-light leading-relaxed border-l-4 border-[oklch(0.75_0.18_65)] pl-5">
+              <p className="text-base md:text-lg text-[oklch(0.35_0.05_320)] max-w-lg mb-6 font-light leading-relaxed border-l-4 border-[oklch(0.75_0.18_65)] pl-5">
                 Como transformar inspiração em realidade através da gestão de escritório e obra.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 text-sm font-medium tracking-wide uppercase bg-white p-5 rounded-xl shadow-md border border-gray-100 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white p-4 rounded-xl shadow-md border border-gray-100 w-full sm:w-auto">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-[oklch(0.75_0.18_65)]" />
                   <div>
@@ -113,11 +109,6 @@ export default function AlemDaTendencia() {
                   </div>
                 </div>
               </div>
-
-              <p className="text-sm text-gray-500 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[oklch(0.75_0.18_65)]" /> 
-                Vagas limitadas a 200 participantes
-              </p>
             </motion.div>
 
             {/* Right: Registration Form */}
