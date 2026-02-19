@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ShieldCheck, ChevronDown, MessageCircle, CreditCard, Barcode } from "lucide-react";
+import { Check, ShieldCheck, CreditCard, Barcode } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +8,35 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const IMG = "/images/mentoria";
+/* ─── Image imports (ES6 — Vite bundles these into build output) ─── */
+import imgLogo from "@/assets/mentoria/logo.png";
+import imgHeroPhoto from "@/assets/mentoria/hero-photo.png";
+import imgSkills from "@/assets/mentoria/skills.png";
+import imgAudience from "@/assets/mentoria/audience.png";
+import imgHowWorks from "@/assets/mentoria/how-works.png";
+import imgModule1 from "@/assets/mentoria/module1.png";
+import imgModule2 from "@/assets/mentoria/module2.png";
+import imgModule3 from "@/assets/mentoria/module3.png";
+import imgModule4 from "@/assets/mentoria/module4.png";
+import imgBonus1 from "@/assets/mentoria/bonus1.png";
+import imgBonus2 from "@/assets/mentoria/bonus2.png";
+import imgRevenue1 from "@/assets/mentoria/revenue1.png";
+import imgRevenue2 from "@/assets/mentoria/revenue2.png";
+import imgTestimonial1 from "@/assets/mentoria/testimonial1.png";
+import imgTestimonial2 from "@/assets/mentoria/testimonial2.png";
+import imgTestimonial3 from "@/assets/mentoria/testimonial3.png";
+import imgTestimonial4 from "@/assets/mentoria/testimonial4.png";
+import imgGuarantee from "@/assets/mentoria/guarantee.png";
+import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
+import imgAbout from "@/assets/mentoria/about.png";
+
+const modules = [imgModule1, imgModule2, imgModule3, imgModule4];
+const testimonials = [
+  { src: imgTestimonial1, name: "Beatriz Francini" },
+  { src: imgTestimonial2, name: "Ingrid Cristina" },
+  { src: imgTestimonial3, name: "Monique Figueiredo" },
+  { src: imgTestimonial4, name: "Aline Araujo" },
+];
 
 /* ─── Fade-in wrapper ─── */
 function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -131,10 +159,9 @@ export default function Home() {
       <section className="relative bg-[#EDE8DC] overflow-hidden">
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col lg:flex-row items-center gap-10">
-            {/* Left */}
             <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
               <img
-                src={`${IMG}/logo.png`}
+                src={imgLogo}
                 alt="Mentoria Inovando na sua Obra"
                 className="h-16 md:h-20 object-contain mix-blend-multiply"
               />
@@ -147,10 +174,9 @@ export default function Home() {
               </p>
               <LeadForm id="hero-form" />
             </div>
-            {/* Right — photo */}
             <div className="flex-1 flex justify-center">
               <img
-                src={`${IMG}/hero-photo.png`}
+                src={imgHeroPhoto}
                 alt="Ingrid e Fernanda"
                 className="max-w-full h-auto mix-blend-multiply"
                 loading="eager"
@@ -168,7 +194,7 @@ export default function Home() {
               O Que Você Vai Aprender?
             </h2>
             <img
-              src={`${IMG}/skills.png`}
+              src={imgSkills}
               alt="Habilidades Técnicas e Comportamentais"
               className="mx-auto max-w-4xl w-full mix-blend-multiply"
               loading="lazy"
@@ -188,7 +214,7 @@ export default function Home() {
               Se você é arquiteta, designer de interiores ou engenheira e quer aprender a gerenciar obras de interiores com eficiência, organização e lucratividade, essa mentoria é para você.
             </p>
             <img
-              src={`${IMG}/audience.png`}
+              src={imgAudience}
               alt="Para quem é a mentoria"
               className="mx-auto max-w-4xl w-full mix-blend-multiply"
               loading="lazy"
@@ -202,7 +228,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
             <img
-              src={`${IMG}/how-works.png`}
+              src={imgHowWorks}
               alt="Como funciona a Mentoria"
               className="mx-auto max-w-5xl w-full mix-blend-multiply"
               loading="lazy"
@@ -220,11 +246,11 @@ export default function Home() {
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((n) => (
-              <FadeIn key={n}>
+            {modules.map((src, i) => (
+              <FadeIn key={i}>
                 <img
-                  src={`${IMG}/module${n}.png`}
-                  alt={`Módulo ${n}`}
+                  src={src}
+                  alt={`Módulo ${i + 1}`}
                   className="w-full rounded-lg shadow-lg mix-blend-multiply"
                   loading="lazy"
                 />
@@ -244,10 +270,10 @@ export default function Home() {
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <FadeIn>
-              <img src={`${IMG}/bonus1.png`} alt="Bônus 1" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
+              <img src={imgBonus1} alt="Bônus 1" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
             </FadeIn>
             <FadeIn>
-              <img src={`${IMG}/bonus2.png`} alt="Bônus 2" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
+              <img src={imgBonus2} alt="Bônus 2" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
             </FadeIn>
           </div>
         </div>
@@ -263,10 +289,10 @@ export default function Home() {
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <FadeIn>
-              <img src={`${IMG}/revenue1.png`} alt="Depoimento 1" className="w-full rounded-lg shadow-lg" loading="lazy" />
+              <img src={imgRevenue1} alt="Depoimento 1" className="w-full rounded-lg shadow-lg" loading="lazy" />
             </FadeIn>
             <FadeIn>
-              <img src={`${IMG}/revenue2.png`} alt="Depoimento 2" className="w-full rounded-lg shadow-lg" loading="lazy" />
+              <img src={imgRevenue2} alt="Depoimento 2" className="w-full rounded-lg shadow-lg" loading="lazy" />
             </FadeIn>
           </div>
         </div>
@@ -281,7 +307,6 @@ export default function Home() {
               É Quanto é o Investimento Mais Importante do Seu Ano?
             </h2>
 
-            {/* Stats */}
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 py-6">
               {[
                 { value: "+250", label: "Obras Gerenciadas" },
@@ -295,7 +320,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Card */}
             <div className="bg-white text-gray-800 rounded-2xl shadow-2xl max-w-lg mx-auto p-8 md:p-12 space-y-6">
               <div className="text-center">
                 <p className="text-gray-500 text-sm">12x de</p>
@@ -342,7 +366,7 @@ export default function Home() {
 
               <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
                 <ShieldCheck className="w-4 h-4 text-[#1B8A3F]" />
-                Compra 100% segura • Garantia de 15 dias
+                Compra 100% segura - Garantia de 15 dias
               </div>
             </div>
           </FadeIn>
@@ -358,15 +382,10 @@ export default function Home() {
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {[
-              { src: "testimonial1.png", name: "Beatriz Francini" },
-              { src: "testimonial2.png", name: "Ingrid Cristina" },
-              { src: "testimonial3.png", name: "Monique Figueiredo" },
-              { src: "testimonial4.png", name: "Aline Araujo" },
-            ].map((t) => (
+            {testimonials.map((t) => (
               <FadeIn key={t.name}>
                 <img
-                  src={`${IMG}/${t.src}`}
+                  src={t.src}
                   alt={`Depoimento de ${t.name}`}
                   className="w-full rounded-lg shadow-lg"
                   loading="lazy"
@@ -404,16 +423,14 @@ export default function Home() {
               </button>
             </div>
             <div className="flex-1 flex justify-center">
-              {/* Desktop guarantee */}
               <img
-                src={`${IMG}/guarantee.png`}
+                src={imgGuarantee}
                 alt="Garantia 15 dias"
                 className="hidden md:block max-w-xs w-full mix-blend-multiply"
                 loading="lazy"
               />
-              {/* Mobile guarantee */}
               <img
-                src={`${IMG}/garantia-mobile.png`}
+                src={imgGarantiaMobile}
                 alt="Garantia 15 dias"
                 className="block md:hidden max-w-[200px] w-full mix-blend-multiply"
                 loading="lazy"
@@ -445,7 +462,7 @@ export default function Home() {
             </div>
             <div className="flex-1 flex justify-center">
               <img
-                src={`${IMG}/about.png`}
+                src={imgAbout}
                 alt="Ingrid Zarza e Fernanda Bradaschia"
                 className="max-w-md w-full rounded-lg shadow-lg"
                 loading="lazy"
@@ -503,7 +520,7 @@ export default function Home() {
       <footer className="bg-[#1a1a1a] text-gray-400 py-10">
         <div className="container mx-auto px-4 text-center space-y-3">
           <img
-            src={`${IMG}/logo.png`}
+            src={imgLogo}
             alt="Inovando na sua Obra"
             className="h-10 mx-auto opacity-70 invert"
             loading="lazy"
@@ -512,7 +529,7 @@ export default function Home() {
             © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
           </p>
           <p className="text-xs">
-            Contato: (11) 5571-7229 • contato@inovandonasuaobra.com.br
+            Contato: (11) 5571-7229 - contato@inovandonasuaobra.com.br
           </p>
         </div>
       </footer>
