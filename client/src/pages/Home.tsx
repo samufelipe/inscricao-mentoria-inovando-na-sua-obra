@@ -138,7 +138,7 @@ export default function Home() {
                 alt="Mentoria Inovando na sua Obra"
                 className="h-16 md:h-20 object-contain mix-blend-multiply"
               />
-              <h1 className="font-montserrat font-bold text-2xl md:text-4xl lg:text-5xl uppercase leading-tight text-[#2D2D2D]">
+              <h1 className="font-display font-bold text-2xl md:text-4xl lg:text-5xl uppercase leading-tight text-[#2D2D2D]">
                 Domine o Gerenciamento de Obra de Interiores de Maneira{" "}
                 <span className="text-[#D4AF37]">Lucrativa e Eficiente</span>
               </h1>
@@ -164,7 +164,7 @@ export default function Home() {
       <section className="bg-[#F5F5F0] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#D4AF37] mb-10">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37] mb-10">
               O Que Você Vai Aprender?
             </h2>
             <img
@@ -181,7 +181,7 @@ export default function Home() {
       <section className="bg-[#EDE8DC] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center space-y-8">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
               Para Quem É?
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
@@ -215,7 +215,7 @@ export default function Home() {
       <section className="bg-[#EDE8DC] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
               Como é a Mentoria Por Dentro?
             </h2>
           </FadeIn>
@@ -238,7 +238,7 @@ export default function Home() {
       <section className="bg-[#F5F5F0] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#D4AF37]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37]">
               Bônus Exclusivos
             </h2>
           </FadeIn>
@@ -257,7 +257,7 @@ export default function Home() {
       <section className="bg-[#EDE8DC] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
               Como Você Pode Faturar Mais?
             </h2>
           </FadeIn>
@@ -277,7 +277,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <FadeIn className="text-center space-y-8">
             <p className="text-[#D4AF37] font-bold uppercase tracking-widest text-sm">Investimento</p>
-            <h2 className="font-montserrat font-bold text-2xl md:text-4xl uppercase">
+            <h2 className="font-display font-bold text-2xl md:text-4xl uppercase">
               É Quanto é o Investimento Mais Importante do Seu Ano?
             </h2>
 
@@ -353,7 +353,7 @@ export default function Home() {
       <section className="bg-[#F5F5F0] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
               Veja o Que Dizem Nossas Alunas:
             </h2>
           </FadeIn>
@@ -390,7 +390,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
             <div className="flex-1 space-y-6 text-center md:text-left">
-              <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+              <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
                 Risco Zero Para Você
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -428,7 +428,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
             <div className="flex-1 space-y-6">
-              <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+              <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
                 Quem Somos
               </h2>
               <div className="text-gray-600 leading-relaxed space-y-4">
@@ -459,7 +459,7 @@ export default function Home() {
       <section className="bg-[#F5F5F0] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="max-w-3xl mx-auto">
-            <h2 className="font-montserrat font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] text-center mb-10">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] text-center mb-10">
               Perguntas Frequentes
             </h2>
             <Accordion type="single" collapsible className="space-y-4">
