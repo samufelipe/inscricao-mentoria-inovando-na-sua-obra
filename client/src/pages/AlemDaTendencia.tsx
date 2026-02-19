@@ -55,51 +55,65 @@ export default function AlemDaTendencia() {
       
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[oklch(0.97_0.01_95)]">
-        {/* Hero Image Composition - 4 Photos with Fade Blending */}
+        {/* Hero Image Composition - 4 Photos with Dark Cinematic Fade Blending */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="relative w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px] overflow-hidden"
+          className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] bg-black overflow-hidden"
         >
-          {/* Far left image (DSC03250) */}
+          {/* Camada 1: Far image (profundidade) */}
           <img
             src={heroFar}
             alt=""
-            className="absolute left-0 top-0 w-[30%] h-full object-cover object-center"
+            className="absolute left-0 top-0 w-[28%] md:w-[25%] h-full object-cover object-[center_20%] opacity-70"
             style={{
-              WebkitMaskImage: 'linear-gradient(to right, black 20%, transparent 100%)',
-              maskImage: 'linear-gradient(to right, black 20%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, black 0%, black 30%, transparent 90%)',
+              maskImage: 'linear-gradient(to right, black 0%, black 30%, transparent 90%)',
             }}
           />
-          {/* Left image (DSC03085) */}
+          {/* Camada 2: Left image */}
           <img
             src={heroLeft}
             alt=""
-            className="absolute left-[10%] top-0 w-[35%] h-full object-cover object-center z-[2]"
+            className="absolute left-[5%] md:left-[8%] top-0 w-[40%] md:w-[38%] h-full object-cover object-[center_20%] z-[2]"
             style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 50%, transparent 90%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 50%, transparent 90%)',
             }}
           />
-          {/* Central MAIN image (DSC03181_1 - três mulheres) */}
+          {/* Camada 3: CENTRAL principal (três mulheres em pé) */}
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[50%] h-full object-cover object-top z-10"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[60%] md:w-[55%] h-full object-cover object-top z-10"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+            }}
           />
-          {/* Right image (DSC03192) */}
+          {/* Camada 4: Right image */}
           <img
             src={heroRight}
             alt=""
-            className="absolute right-0 top-0 w-[35%] h-full object-cover object-center z-[2]"
+            className="absolute right-0 top-0 w-[35%] md:w-[32%] h-full object-cover object-[center_20%] z-[2]"
             style={{
-              WebkitMaskImage: 'linear-gradient(to left, black 30%, transparent 100%)',
-              maskImage: 'linear-gradient(to left, black 30%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to left, black 0%, black 30%, transparent 90%)',
+              maskImage: 'linear-gradient(to left, black 0%, black 30%, transparent 90%)',
             }}
           />
-          {/* Bottom gradient fade to background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[oklch(0.97_0.01_95)] z-20 pointer-events-none" />
+          {/* Dark cinematic overlay */}
+          <div className="absolute inset-0 bg-black/25 z-[15] pointer-events-none" />
+          {/* Radial vignette */}
+          <div
+            className="absolute inset-0 z-[16] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.7) 100%)' }}
+          />
+          {/* Bottom gradient transition to page background */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-1/3 z-20 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 40%, oklch(0.97 0.01 95) 100%)' }}
+          />
         </motion.div>
 
         {/* Content Below Image */}
