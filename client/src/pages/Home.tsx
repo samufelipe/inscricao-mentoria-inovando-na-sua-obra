@@ -328,10 +328,10 @@ export default function Home() {
                 <p className="text-white/90 text-sm font-medium">Acesso completo por</p>
                 <p className="text-white mt-2">
                   <span className="text-lg">12x</span>{" "}
-                  <span className="text-5xl md:text-6xl font-bold">R$ 196</span>
-                  <span className="text-2xl font-bold">,50</span>
+                  <span className="text-5xl md:text-6xl font-bold">R$ 237</span>
+                  <span className="text-2xl font-bold">,87</span>
                 </p>
-                <p className="text-white/80 text-sm mt-2">ou R$ 1.900,00 à vista</p>
+                <p className="text-white/80 text-sm mt-2">ou R$ 2.300,00 à vista</p>
               </div>
               {/* White body */}
               <div className="p-8 space-y-6">
@@ -581,7 +581,7 @@ export default function Home() {
       >
         <div>
           <p className="text-xs font-medium">A partir de</p>
-          <p className="text-lg font-bold">12x R$ 196</p>
+          <p className="text-lg font-bold">12x R$ 237</p>
         </div>
         <button
           onClick={scrollToForm}
