@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ShieldCheck, Lock, ArrowRight } from "lucide-react";
+import { Check, ShieldCheck, Lock, ArrowRight, Phone, Mail, Instagram } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -108,7 +108,7 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu nome completo"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
+          className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
@@ -118,7 +118,7 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu melhor e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
+          className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
@@ -128,7 +128,7 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu WhatsApp (99) 99999-9999"
           value={phone}
           onChange={(e) => setPhone(phoneMask(e.target.value))}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
+          className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
         />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
@@ -214,7 +214,7 @@ export default function Home() {
       <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center space-y-8">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37] italic">
               Para quem é?
             </h2>
             <p className="text-[#555] max-w-2xl mx-auto text-base md:text-lg">
@@ -231,34 +231,34 @@ export default function Home() {
       </section>
 
       {/* ── 4. HOW IT WORKS ── */}
-      <section className="bg-[#F5F0E8] py-16 md:py-24">
+      <section className="bg-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center">
             <img
               src={imgHowWorks}
               alt="Como funciona a Mentoria Inovando na sua Obra"
-              className="mx-auto max-w-5xl w-full mix-blend-multiply"
+              className="mx-auto max-w-5xl w-full"
               loading="lazy"
             />
           </FadeIn>
         </div>
       </section>
 
-      {/* ── 5. MODULES ── */}
+      {/* ── 5. MODULES (vertical stacked) ── */}
       <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-4xl uppercase text-[#2D2D2D] italic">
               Como é a mentoria por dentro?
             </h2>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
             {modules.map((src, i) => (
-              <FadeIn key={i}>
+              <FadeIn key={i} className="w-full">
                 <img
                   src={src}
                   alt={moduleLabels[i]}
-                  className="w-full rounded-lg shadow-lg mix-blend-multiply"
+                  className="w-full mix-blend-multiply"
                   loading="lazy"
                 />
               </FadeIn>
@@ -267,20 +267,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. BONUS ── */}
+      {/* ── 6. BONUS (vertical stacked) ── */}
       <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <FadeIn className="text-center mb-12">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37]">
-              Bônus Exclusivos
-            </h2>
-          </FadeIn>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <FadeIn>
-              <img src={imgBonus1} alt="Bônus da mentoria" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
+          <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
+            <FadeIn className="w-full">
+              <img src={imgBonus1} alt="Pack de documentos" className="w-full mix-blend-multiply" loading="lazy" />
             </FadeIn>
-            <FadeIn>
-              <img src={imgBonus2} alt="Bônus da mentoria" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
+            <FadeIn className="w-full">
+              <img src={imgBonus2} alt="Aulas bônus exclusivas" className="w-full mix-blend-multiply" loading="lazy" />
             </FadeIn>
           </div>
         </div>
@@ -290,7 +285,7 @@ export default function Home() {
       <section className="bg-[#F5F0E8] py-16 md:py-24">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center mb-12">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
+            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] italic">
               Como você pode faturar mais?
             </h2>
           </FadeIn>
@@ -306,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* ── 8. PRICING ── */}
-      <section id="pricing" className="bg-[#1a1a1a] py-16 md:py-24 text-white">
+      <section id="pricing" className="bg-[#2D2018] py-16 md:py-24 text-white">
         <div className="container mx-auto px-4">
           <FadeIn className="text-center space-y-8">
             <p className="text-[#D4AF37] font-bold uppercase tracking-widest text-sm">Investimento</p>
@@ -321,59 +316,65 @@ export default function Home() {
                 { value: "12", label: "Anos de experiência" },
               ].map((s) => (
                 <div key={s.label} className="text-center">
-                  <p className="text-4xl md:text-5xl font-bold text-[#D4AF37]">{s.value}</p>
+                  <p className="text-4xl md:text-5xl font-bold text-white">{s.value}</p>
                   <p className="text-gray-400 text-sm mt-1">{s.label}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-white text-gray-800 rounded-2xl shadow-2xl max-w-lg mx-auto p-8 md:p-12 space-y-6">
-              <div className="text-center">
-                <p className="text-gray-500 text-sm">Acesso completo por</p>
-                <p className="text-5xl md:text-6xl font-bold text-[#2E7D32]">
-                  12x<span className="text-3xl">R$</span> 196<span className="text-2xl">,50</span>
+            <div className="bg-white text-gray-800 rounded-2xl shadow-2xl max-w-lg mx-auto overflow-hidden">
+              {/* Gold header */}
+              <div className="bg-gradient-to-br from-[#D4AF37] to-[#C49B30] text-center py-8 px-6">
+                <p className="text-white/90 text-sm font-medium">Acesso completo por</p>
+                <p className="text-white mt-2">
+                  <span className="text-lg">12x</span>{" "}
+                  <span className="text-5xl md:text-6xl font-bold">R$ 196</span>
+                  <span className="text-2xl font-bold">,50</span>
                 </p>
-                <p className="text-gray-500 text-sm mt-1">ou R$ 1.900,00 à vista</p>
+                <p className="text-white/80 text-sm mt-2">ou R$ 1.900,00 à vista</p>
               </div>
+              {/* White body */}
+              <div className="p-8 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+                  {[
+                    "16h de conteúdo gravado em 4 módulos",
+                    "12 meses de acesso à plataforma",
+                    "1h de mentoria individual",
+                    "Encontro presencial em São Paulo",
+                    "Materiais, checklists e ferramentas",
+                    "Suporte e grupo de networking",
+                  ].map((b) => (
+                    <div key={b} className="flex items-start gap-2">
+                      <Check className="w-5 h-5 text-[#2E7D32] mt-0.5 shrink-0" />
+                      <span className="text-sm">{b}</span>
+                    </div>
+                  ))}
+                </div>
 
-              <ul className="space-y-3 text-left">
-                {[
-                  "16h de conteúdo gravado em 4 módulos",
-                  "12 meses de acesso à plataforma",
-                  "1h de mentoria individual",
-                  "Encontro presencial em São Paulo",
-                  "Materiais, checklists e ferramentas",
-                  "Suporte e grupo de networking",
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-[#2E7D32] mt-0.5 shrink-0" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+                <div className="space-y-3 pt-2">
+                  <a
+                    href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-base rounded-lg transition-colors uppercase"
+                  >
+                    Quero meu acesso agora
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center w-full py-3 border border-gray-300 rounded-lg font-bold text-sm uppercase text-gray-600 hover:bg-gray-50 transition-colors"
+                  >
+                    Prefiro pagar com Boleto Parcelado
+                  </a>
+                </div>
 
-              <div className="space-y-3 pt-4">
-                <a
-                  href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-lg rounded-lg transition-colors uppercase"
-                >
-                  Quero meu acesso agora
-                </a>
-                <a
-                  href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center text-[#2E7D32] hover:underline font-semibold text-sm py-2"
-                >
-                  Prefiro pagar com Boleto Parcelado
-                </a>
-              </div>
-
-              <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
-                <ShieldCheck className="w-4 h-4 text-[#2E7D32]" />
-                Compra 100% segura - Garantia de 15 dias
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
+                  <ShieldCheck className="w-4 h-4 text-[#2E7D32]" />
+                  Compra 100% segura - Garantia de 15 dias
+                </div>
               </div>
             </div>
           </FadeIn>
@@ -522,17 +523,53 @@ export default function Home() {
       </section>
 
       {/* ── 13. FOOTER ── */}
-      <footer className="bg-[#1a1a1a] text-gray-400 py-10">
-        <div className="container mx-auto px-4 text-center space-y-3">
-          <img
-            src={imgLogo}
-            alt="Inovando na sua Obra"
-            className="h-10 mx-auto opacity-70 invert"
-            loading="lazy"
-          />
-          <p className="text-sm">
-            © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
-          </p>
+      <footer className="bg-[#1a1a1a] text-gray-300 py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+            {/* Logo & brand */}
+            <div className="space-y-4 text-center md:text-left">
+              <img
+                src={imgLogo}
+                alt="Inovando na sua Obra"
+                className="h-16 mx-auto md:mx-0 brightness-0 invert opacity-80"
+                loading="lazy"
+              />
+              <p className="text-sm text-gray-500 leading-relaxed">
+                Transformando a gestão de obras de interiores com método, segurança e resultados reais.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div className="space-y-3 text-center md:text-left">
+              <h4 className="font-display font-bold text-white uppercase text-sm tracking-wider mb-4">Links Úteis</h4>
+              <a href="#pricing" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Investimento</a>
+              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Quero me inscrever</a>
+              <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Instagram</a>
+            </div>
+
+            {/* Contact */}
+            <div className="space-y-3 text-center md:text-left">
+              <h4 className="font-display font-bold text-white uppercase text-sm tracking-wider mb-4">Contato</h4>
+              <a href="https://wa.me/5511955717229" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] transition-colors text-sm justify-center md:justify-start">
+                <Phone className="w-4 h-4" />
+                (11) 5571-7229
+              </a>
+              <a href="mailto:contato@inovandonasuaobra.com.br" className="flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] transition-colors text-sm justify-center md:justify-start">
+                <Mail className="w-4 h-4" />
+                contato@inovandonasuaobra.com.br
+              </a>
+              <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] transition-colors text-sm justify-center md:justify-start">
+                <Instagram className="w-4 h-4" />
+                @inovandonasuaobra
+              </a>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-10 pt-6 text-center">
+            <p className="text-xs text-gray-600">
+              © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados. | CNPJ: XX.XXX.XXX/0001-XX
+            </p>
+          </div>
         </div>
       </footer>
 
