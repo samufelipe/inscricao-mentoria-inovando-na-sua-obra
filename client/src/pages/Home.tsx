@@ -237,7 +237,7 @@ export default function Home() {
             <img
               src={imgHowWorks}
               alt="Como funciona a Mentoria Inovando na sua Obra"
-              className="mx-auto max-w-5xl w-full"
+              className="mx-auto max-w-5xl w-full mix-blend-multiply"
               loading="lazy"
             />
           </FadeIn>
@@ -291,10 +291,10 @@ export default function Home() {
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <FadeIn>
-              <img src={imgRevenue1} alt="Como faturar mais" className="w-full rounded-lg shadow-lg" loading="lazy" />
+              <img src={imgRevenue1} alt="Como faturar mais" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
             </FadeIn>
             <FadeIn>
-              <img src={imgRevenue2} alt="Como faturar mais" className="w-full rounded-lg shadow-lg" loading="lazy" />
+              <img src={imgRevenue2} alt="Como faturar mais" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
             </FadeIn>
           </div>
         </div>
@@ -395,7 +395,7 @@ export default function Home() {
                 <img
                   src={t.src}
                   alt={`Depoimento ${t.name}`}
-                  className="w-full rounded-lg shadow-lg"
+                  className="w-full rounded-lg shadow-lg mix-blend-multiply"
                   loading="lazy"
                 />
               </FadeIn>
@@ -470,7 +470,7 @@ export default function Home() {
               <img
                 src={imgAbout}
                 alt="Ingrid Zarza e Fernanda Bradaschia"
-                className="max-w-md w-full rounded-lg shadow-lg"
+                className="max-w-md w-full rounded-lg shadow-lg mix-blend-multiply"
                 loading="lazy"
               />
             </div>
