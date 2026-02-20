@@ -19,7 +19,7 @@ export function ArchitecturalButton({
   const baseStyles = "relative overflow-hidden transition-all duration-300 group font-sans font-bold tracking-wider uppercase text-sm py-6 px-8 rounded-none border-0";
   
   const variants = {
-    primary: "bg-[oklch(0.75_0.18_65)] text-white hover:bg-[oklch(0.7_0.18_65)] shadow-lg hover:shadow-xl hover:-translate-y-1",
+    primary: "bg-[#2E7D32] text-white hover:bg-[#256829] shadow-lg hover:shadow-xl hover:-translate-y-1",
     secondary: "bg-[oklch(0.35_0.12_320)] text-white hover:bg-[oklch(0.3_0.12_320)] shadow-lg hover:shadow-xl hover:-translate-y-1",
     outline: "bg-transparent border-2 border-[oklch(0.35_0.12_320)] text-[oklch(0.35_0.12_320)] hover:bg-[oklch(0.35_0.12_320)] hover:text-white"
   };
