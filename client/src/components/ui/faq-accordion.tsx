@@ -9,15 +9,15 @@ export function FAQAccordion() {
   const faqs = [
     {
       question: "Já tenho experiência. O evento é só para iniciantes?",
-      answer: "De forma alguma. O conteúdo foi desenhado para profissionais que já atuam no mercado e querem escalar — com processos mais sólidos, contratos mais seguros e gestão de obra mais lucrativa. Quanto mais experiência você tem, mais vai aproveitar."
+      answer: "De forma alguma. O conteúdo foi desenhado para profissionais que já atuam no mercado e querem escalar, com processos mais sólidos, contratos mais seguros e gestão de obra mais lucrativa. Quanto mais experiência você tem, mais vai aproveitar."
     },
     {
       question: "O que torna este evento diferente de outros do mercado?",
-      answer: "Reunimos 4 especialistas de áreas complementares (gestão de obra, gestão de escritório, iluminação e contratos) em um único dia. Não é palestra motivacional — é conteúdo prático que você aplica na segunda-feira. Além disso, o formato presencial com apenas 297 lugares garante networking de altíssimo nível."
+      answer: "Reunimos 4 especialistas de áreas complementares (gestão de obra, gestão de escritório, iluminação e contratos) em um único dia. Não é palestra motivacional, é conteúdo prático que você aplica na segunda-feira. Além disso, o formato presencial com apenas 297 lugares garante networking de altíssimo nível."
     },
     {
       question: "Vou conseguir aplicar o conteúdo imediatamente?",
-      answer: "Sim. Cada módulo é focado em ações práticas. Você sai com um plano claro para gestão de obra, precificação, contratos e iluminação — tudo aplicável na semana seguinte, sem depender de cursos longos."
+      answer: "Sim. Cada módulo é focado em ações práticas. Você sai com um plano claro para gestão de obra, precificação, contratos e iluminação, tudo aplicável na semana seguinte, sem depender de cursos longos."
     },
     {
       question: "O investimento de R$147 realmente vale a pena?",
@@ -37,7 +37,7 @@ export function FAQAccordion() {
     },
     {
       question: "Haverá coffee break?",
-      answer: "Sim. Haverá um momento dedicado ao networking com coffee break incluso no valor da inscrição — um dos momentos mais valiosos do evento."
+      answer: "Sim. Haverá um momento dedicado ao networking com coffee break incluso no valor da inscrição, um dos momentos mais valiosos do evento."
     },
     {
       question: "Qual a política de cancelamento?",
