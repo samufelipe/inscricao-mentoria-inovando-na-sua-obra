@@ -14,6 +14,7 @@ import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
 import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { AudienceMontage } from "@/components/ui/audience-montage";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroLeft from "@/assets/alem-da-tendencia/hero-left.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
@@ -21,10 +22,6 @@ import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra.jpg";
 import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira.jpg";
-import audience1 from "@/assets/alem-da-tendencia/audience-1.jpg";
-import audience2 from "@/assets/alem-da-tendencia/audience-2.jpg";
-import audience3 from "@/assets/alem-da-tendencia/audience-3.jpg";
-import audience4 from "@/assets/alem-da-tendencia/audience-4.jpg";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -281,64 +278,8 @@ export default function AlemDaTendencia() {
             </p>
           </motion.div>
 
-          {/* Montagem cinematográfica de fotos reais */}
-          <motion.div 
-            variants={fadeInUp}
-            className="relative h-[200px] md:h-[300px] lg:h-[350px] my-4 overflow-hidden rounded-2xl"
-          >
-            {/* Overlay de tint para coerência com fundo escuro */}
-            <div className="absolute inset-0 z-[5] pointer-events-none bg-[oklch(0.20_0.05_300)]/20" />
-
-            {/* Img 1 - Esquerda */}
-            <img
-              src={audience1}
-              alt="Plateia atenta no evento"
-              className="absolute left-0 top-0 w-[55%] md:w-[30%] h-full object-cover object-center opacity-70"
-              style={{
-                WebkitMaskImage: 'linear-gradient(to right, black 0%, black 50%, transparent 100%)',
-                maskImage: 'linear-gradient(to right, black 0%, black 50%, transparent 100%)',
-              }}
-            />
-
-            {/* Img 2 - Centro (destaque) */}
-            <img
-              src={audience2}
-              alt="Networking entre participantes"
-              className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] md:w-[45%] h-full object-cover object-center z-[3] opacity-90"
-              style={{
-                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-                maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-              }}
-            />
-
-            {/* Img 3 - Direita (hidden mobile) */}
-            <img
-              src={audience3}
-              alt="Plateia focada"
-              className="hidden md:block absolute right-[15%] top-0 w-[30%] h-full object-cover object-center z-[2] opacity-70"
-              style={{
-                WebkitMaskImage: 'linear-gradient(to left, black 0%, black 50%, transparent 100%)',
-                maskImage: 'linear-gradient(to left, black 0%, black 50%, transparent 100%)',
-              }}
-            />
-
-            {/* Img 4 - Extrema direita (hidden mobile) */}
-            <img
-              src={audience4}
-              alt="Palestrante no palco"
-              className="hidden md:block absolute right-0 top-0 w-[25%] h-full object-cover object-center z-[1] opacity-60"
-              style={{
-                WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 90%)',
-                maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 90%)',
-              }}
-            />
-
-            {/* Vignette radial */}
-            <div
-              className="absolute inset-0 z-[6] pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.4) 100%)' }}
-            />
-          </motion.div>
+          {/* Montagem cinematográfica de fotos reais com parallax */}
+          <AudienceMontage />
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
