@@ -553,9 +553,9 @@ export default function AlemDaTendencia() {
         <div className="container grid md:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <img 
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
+              src={logoTransparent}
               alt="Além da Tendência" 
-              className="h-12 w-auto object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+              className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
             />
             <p className="text-white/60 text-sm leading-relaxed">
               O evento definitivo para arquitetas que buscam transformar inspiração em realidade através da gestão de escritório e obra.
