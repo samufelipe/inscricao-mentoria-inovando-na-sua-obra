@@ -555,7 +555,7 @@ export default function AlemDaTendencia() {
             <img 
               src={logoTransparent}
               alt="Além da Tendência" 
-              className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+              className="h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
             />
             <p className="text-white/60 text-sm leading-relaxed">
               O evento definitivo para arquitetas que buscam transformar inspiração em realidade através da gestão de escritório e obra.
