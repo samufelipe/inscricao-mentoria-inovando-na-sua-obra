@@ -1,0 +1,2 @@
+ALTER TABLE public.checkout_intents DROP CONSTRAINT checkout_intents_product_check;
+ALTER TABLE public.checkout_intents ADD CONSTRAINT checkout_intents_product_check CHECK (product = ANY (ARRAY['imersao'::text, 'mentoria'::text, 'alem-da-tendencia'::text]));
