@@ -292,17 +292,17 @@ export default function AlemDaTendencia() {
             {
               icon: <Users className="w-8 h-8 text-[#C9A84C]" />,
               title: "Arquitetas e Designers de Interiores",
-              desc: "Até 200 profissionais que atuam ou desejam ter o próprio escritório. Você que quer sair da inspiração e entrar na gestão real do seu negócio."
+              desc: "Você que projeta, especifica e executa - mas sente que falta método para escalar. Aqui você vai estruturar seu escritório como uma empresa real, com processos que sustentam o crescimento."
             },
             {
               icon: <CheckCircle2 className="w-8 h-8 text-[#C9A84C]" />,
               title: "Quem Busca Estrutura e Processos",
-              desc: "Profissionais que entendem que talento sem gestão não escala. Você quer precificar melhor, organizar sua operação e proteger seu lucro."
+              desc: "Talento sem gestão não escala. Se você precisa precificar com segurança, organizar sua operação e proteger seu lucro, este evento foi desenhado para você sair com um plano concreto."
             },
             {
               icon: <Calendar className="w-8 h-8 text-[#C9A84C]" />,
-              title: "Quem Quer Sair da ExpoRevestir com um Plano",
-              desc: "90% mulheres e 10% homens que buscam transformar tendências em projetos executados com segurança, contratos e gestão financeira."
+              title: "Quem Quer Transformar Tendência em Execução",
+              desc: "Você acompanha feiras, se inspira e consome conteúdo - mas na hora de executar, falta segurança jurídica, controle financeiro e método de obra. Aqui a tendência vira projeto entregue."
             }
           ].map((card, i) => (
             <motion.div 
