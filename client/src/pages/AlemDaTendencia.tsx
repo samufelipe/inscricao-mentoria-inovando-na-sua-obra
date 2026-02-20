@@ -28,7 +28,7 @@ import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
 export default function AlemDaTendencia() {
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = "Além da Tendência - Evento Presencial";
+    document.title = "Além da Tendência - A Arquitetura Acontece nos Bastidores";
 
     const link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
     const prevFavicon = link?.href || "";
