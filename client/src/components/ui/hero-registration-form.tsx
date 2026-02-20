@@ -56,7 +56,8 @@ export function HeroRegistrationForm() {
           <span className="text-sm text-gray-400 line-through">R$ 297,00</span>
           <span className="text-3xl md:text-4xl font-bold text-[oklch(0.35_0.12_320)]">R$ 147,00</span>
         </div>
-        <p className="text-xs text-[oklch(0.75_0.18_65)] font-medium">Lote Promocional por Tempo Limitado</p>
+        <p className="text-sm text-[oklch(0.75_0.18_65)] font-semibold">ou 5x de R$ 29,40</p>
+        <p className="text-xs text-gray-400 mt-0.5">Lote Promocional por Tempo Limitado</p>
       </div>
       
       <form onSubmit={handleSubmit} className="space-y-4">

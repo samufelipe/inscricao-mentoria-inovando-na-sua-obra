@@ -32,14 +32,6 @@ export function FAQAccordion() {
       answer: "10 de Março de 2026, das 13h30 às 19h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP). Fácil acesso por transporte público e com estacionamento conveniado nas proximidades."
     },
     {
-      question: "Receberei certificado de participação?",
-      answer: "Sim, todas as participantes recebem certificado digital após o evento."
-    },
-    {
-      question: "Haverá coffee break?",
-      answer: "Sim. Haverá um momento dedicado ao networking com coffee break incluso no valor da inscrição, um dos momentos mais valiosos do evento."
-    },
-    {
       question: "Qual a política de cancelamento?",
       answer: "Cancelamentos podem ser solicitados até 7 dias após a compra, desde que a solicitação seja realizada 48h antes do início do evento, conforme política do Sympla."
     }
