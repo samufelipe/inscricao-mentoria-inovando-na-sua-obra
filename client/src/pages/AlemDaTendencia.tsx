@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
-import heroLeft from "@/assets/alem-da-tendencia/hero-left.png";
+// heroLeft removed per plan
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
@@ -69,27 +69,18 @@ export default function AlemDaTendencia() {
           <img
             src={heroFar}
             alt=""
-            className="hidden md:block absolute left-0 top-0 w-[28%] h-full object-cover object-[center_20%] opacity-70"
+            className="hidden md:block absolute left-0 top-0 w-[35%] h-full object-cover object-[center_20%] opacity-70"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
               maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
             }}
           />
-          {/* Camada 2: Left image - hidden on mobile */}
-          <img
-            src={heroLeft}
-            alt=""
-            className="hidden md:block absolute left-[8%] top-0 w-[40%] h-full object-cover object-[center_20%] z-[2]"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
-            }}
-          />
+          {/* Camada 2 removida (heroLeft) - agora só 3 imagens */}
           {/* Camada 3: CENTRAL principal - larger on mobile */}
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[95%] md:w-[58%] h-full object-cover object-[center_15%] z-[3]"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[95%] md:w-[60%] h-full object-cover object-[center_15%] z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
@@ -255,17 +246,18 @@ export default function AlemDaTendencia() {
             </motion.div>
           </div>
 
-          {/* Imagem Ilustrativa Conceitual (Substituindo a montagem que estava errada aqui) */}
-          <motion.div variants={fadeInUp} className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-             <img 
-               src={heroMain} 
-               alt="Conceito do Evento" 
-               className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-             />
-             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-             <div className="absolute bottom-8 left-8 right-8 text-white">
-               <p className="text-lg font-light italic">"Não existe arquitetura sem gestão. Não existe obra sem processo."</p>
-             </div>
+          {/* Citação estilizada */}
+          <motion.div variants={fadeInUp} className="relative flex items-center justify-center">
+            <div className="relative bg-[oklch(0.35_0.12_320)]/5 border-l-4 border-[oklch(0.75_0.18_65)] p-8 md:p-12 rounded-r-2xl">
+              <span className="absolute -top-6 -left-2 text-[oklch(0.75_0.18_65)] text-8xl font-serif leading-none opacity-30">"</span>
+              <p className="text-xl md:text-2xl font-serif italic text-[oklch(0.35_0.12_320)] leading-relaxed mb-4">
+                Não existe arquitetura sem gestão. Não existe obra sem processo.
+              </p>
+              <p className="text-sm uppercase tracking-widest text-[oklch(0.75_0.18_65)] font-bold">
+                — Filosofia do Evento
+              </p>
+              <span className="absolute -bottom-6 right-4 text-[oklch(0.75_0.18_65)] text-8xl font-serif leading-none opacity-30 rotate-180">"</span>
+            </div>
           </motion.div>
         </motion.div>
       </ArchitecturalSection>
@@ -276,7 +268,7 @@ export default function AlemDaTendencia() {
           <ArchitecturalTitle variant="h3" color="orange">
             Público-Alvo
           </ArchitecturalTitle>
-          <ArchitecturalTitle variant="h2" color="white">
+          <ArchitecturalTitle variant="h2" color="light">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
           <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
@@ -293,6 +285,39 @@ export default function AlemDaTendencia() {
         >
           <AudienceMontageV2 />
         </motion.div>
+
+        {/* Cards de perfil do público-alvo */}
+        <motion.div 
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+          className="grid md:grid-cols-3 gap-8 mt-12 relative z-10"
+        >
+          {[
+            {
+              icon: "🏛️",
+              title: "Arquitetas e Designers de Interiores",
+              desc: "Que querem sair do operacional e construir um escritório com processos, precificação e gestão financeira de verdade."
+            },
+            {
+              icon: "🏗️",
+              title: "Engenheiras e Gestoras de Obra",
+              desc: "Que precisam dominar cronograma, orçamento e execução sem depender da sorte ou de terceiros descompromissados."
+            },
+            {
+              icon: "💼",
+              title: "Empreendedoras do Design",
+              desc: "Que entendem que talento sem estrutura não escala — e buscam transformar seu nome em uma marca sólida e lucrativa."
+            }
+          ].map((card, i) => (
+            <motion.div 
+              key={i} variants={fadeInUp}
+              className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-xl p-8 hover:bg-white/10 transition-all duration-500 group"
+            >
+              <span className="text-4xl mb-4 block">{card.icon}</span>
+              <h3 className="text-white font-bold text-lg mb-3 group-hover:text-[#C9A84C] transition-colors">{card.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{card.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </ArchitecturalSection>
 
       {/* ANFITRIÃS */}
@@ -304,7 +329,7 @@ export default function AlemDaTendencia() {
           <ArchitecturalTitle variant="h3" color="orange">
             Line-up Oficial
           </ArchitecturalTitle>
-          <ArchitecturalTitle variant="h2" color="white">
+          <ArchitecturalTitle variant="h2" color="light">
             Quem Vai Guiar Sua Jornada
           </ArchitecturalTitle>
         </div>
@@ -313,16 +338,16 @@ export default function AlemDaTendencia() {
           <SpeakerCard 
             name="Luciana Guerra"
             role="Especialista em Iluminação"
-            topic="Iluminação que Vende e Valoriza"
+            description="Referência nacional em Lighting Design, Luciana ensina como a luz pode transformar ambientes e aumentar o valor percebido dos seus projetos."
             image={lucianaGuerraImg}
-            bio="Referência nacional em Lighting Design, Luciana ensina como a luz pode transformar ambientes e aumentar o valor percebido dos seus projetos."
+            socialProof="Iluminação que Vende e Valoriza"
           />
           <SpeakerCard 
             name="Marcia Pereira"
             role="Advogada Especialista em Arquitetura"
-            topic="Blindagem Jurídica para Arquitetos"
+            description="Especialista em contratos e responsabilidade civil para arquitetos e engenheiros. Aprenda a se proteger de riscos e garantir seus honorários."
             image={marciaPereira}
-            bio="Especialista em contratos e responsabilidade civil para arquitetos e engenheiros. Aprenda a se proteger de riscos e garantir seus honorários."
+            socialProof="Blindagem Jurídica para Arquitetos"
           />
         </div>
       </ArchitecturalSection>
@@ -373,7 +398,7 @@ export default function AlemDaTendencia() {
             <ArchitecturalTitle variant="h3" color="orange">
               O Palco
             </ArchitecturalTitle>
-            <ArchitecturalTitle variant="h2" color="white">
+            <ArchitecturalTitle variant="h2" color="light">
               Auditório AFRESP
             </ArchitecturalTitle>
             
