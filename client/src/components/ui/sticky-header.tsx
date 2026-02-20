@@ -49,7 +49,7 @@ export function StickyHeader() {
           </span>
           <Button 
             onClick={scrollToForm}
-            className="bg-[oklch(0.75_0.18_65)] hover:bg-[oklch(0.70_0.18_65)] text-white font-bold uppercase tracking-wider text-xs md:text-sm px-6"
+            className="bg-[#2E7D32] hover:bg-[#256829] text-white font-bold uppercase tracking-wider text-xs md:text-sm px-6"
           >
             Garantir Vaga
           </Button>
