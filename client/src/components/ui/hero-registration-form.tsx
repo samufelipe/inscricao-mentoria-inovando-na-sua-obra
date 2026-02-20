@@ -38,12 +38,9 @@ export function HeroRegistrationForm() {
       // Non-blocking: don't prevent redirect on capture failure
     }
 
-    const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}`;
-    const whatsappUrl = `https://wa.me/551155717229?text=${message}`;
-
-    window.open(whatsappUrl, "_blank");
+    window.open("https://www.sympla.com.br/evento/alem-da-tendencia/3315090", "_blank");
     setIsLoading(false);
-    toast.success("Redirecionando para o WhatsApp...");
+    toast.success("Redirecionando para o Sympla...");
   };
 
   return (
