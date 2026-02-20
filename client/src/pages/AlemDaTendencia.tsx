@@ -18,6 +18,7 @@ import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroLeft from "@/assets/alem-da-tendencia/hero-left.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
+import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -53,20 +54,15 @@ export default function AlemDaTendencia() {
     <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-[oklch(0.97_0.01_95)] overflow-x-hidden">
       <StickyHeader />
       
-      {/* HERO SECTION - Full Dark Cinematic */}
-      <section className="relative overflow-hidden bg-[#1a1a1a]">
-        {/* Hero Image Composition - 4 Photos with Dark Cinematic Fade Blending */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px] bg-black overflow-hidden"
-        >
+      {/* HERO SECTION - Full Dark Cinematic Integrated */}
+      <section className="relative overflow-hidden bg-[#1a1a1a] min-h-[80vh] md:min-h-[90vh] flex flex-col">
+        {/* Background: 4-image composition covering entire hero */}
+        <div className="absolute inset-0 overflow-hidden">
           {/* Camada 1: Far image (profundidade) */}
           <img
             src={heroFar}
             alt=""
-            className="absolute left-0 top-0 w-[30%] md:w-[28%] h-full object-cover object-[center_25%] opacity-70"
+            className="absolute left-0 top-0 w-[30%] md:w-[28%] h-full object-cover object-[center_20%] opacity-70"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
               maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
@@ -76,7 +72,7 @@ export default function AlemDaTendencia() {
           <img
             src={heroLeft}
             alt=""
-            className="absolute left-[5%] md:left-[8%] top-0 w-[42%] md:w-[40%] h-full object-cover object-[center_25%] z-[2]"
+            className="absolute left-[5%] md:left-[8%] top-0 w-[42%] md:w-[40%] h-full object-cover object-[center_20%] z-[2]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
@@ -86,7 +82,7 @@ export default function AlemDaTendencia() {
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] md:w-[58%] h-full object-cover object-[center_15%] z-10"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] md:w-[58%] h-full object-cover object-[center_15%] z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
@@ -96,60 +92,62 @@ export default function AlemDaTendencia() {
           <img
             src={heroRight}
             alt=""
-            className="absolute right-0 top-0 w-[38%] md:w-[35%] h-full object-cover object-[center_25%] z-[2]"
+            className="absolute right-0 top-0 w-[38%] md:w-[35%] h-full object-cover object-[center_20%] z-[2]"
             style={{
               WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
               maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
             }}
           />
-          {/* Dark cinematic overlay */}
-          <div className="absolute inset-0 bg-black/20 z-[15] pointer-events-none" />
+
+          {/* Overlay: gradient for legibility - transparent top, dark bottom */}
+          <div 
+            className="absolute inset-0 z-[10] pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(26,26,26,0.5) 45%, rgba(26,26,26,0.85) 65%, #1a1a1a 85%)' }}
+          />
           {/* Radial vignette */}
           <div
-            className="absolute inset-0 z-[16] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%)' }}
+            className="absolute inset-0 z-[11] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%)' }}
           />
-          {/* Bottom gradient - seamless to dark section */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-[40%] z-20 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(26,26,26,0.6) 50%, #1a1a1a 100%)' }}
-          />
+        </div>
 
-          {/* Logo overlaid on the composition - centered top */}
+        {/* Content overlaid on images */}
+        <div className="relative z-20 flex-1 flex flex-col container mx-auto px-4">
+          {/* Logo - top center */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute top-4 sm:top-6 md:top-8 left-1/2 -translate-x-1/2 z-[25]"
+            className="flex justify-center pt-8 md:pt-12"
           >
             <img 
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
+              src={logoTransparent}
               alt="Além da Tendência - Logo Oficial" 
-              className="w-[140px] sm:w-[160px] md:w-[200px] h-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
-              style={{ filter: 'brightness(1.1) contrast(1.05)' }}
+              className="w-[160px] md:w-[220px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
             />
           </motion.div>
-        </motion.div>
 
-        {/* Content Below Image - Dark themed */}
-        <div className="container relative z-10 -mt-8 sm:-mt-12 md:-mt-16 pb-12 md:pb-20">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Spacer to push content to bottom half */}
+          <div className="flex-1 min-h-[120px] md:min-h-[180px]" />
+
+          {/* Bottom content: text + form */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end pb-8 md:pb-16">
             {/* Left: Text Content */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex flex-col items-start pt-4 md:pt-8"
+              className="flex flex-col items-start"
             >
-              <p className="text-base md:text-lg text-gray-300 max-w-lg mb-6 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
+              <p className="text-base md:text-lg text-gray-200 max-w-lg mb-6 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
                 Como transformar inspiração em realidade através da gestão de escritório e obra.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-[#C9A84C]" />
                   <div>
-                    <span className="block text-xs text-gray-500 mb-0.5">Data</span>
+                    <span className="block text-xs text-gray-400 mb-0.5">Data</span>
                     <span className="text-base font-bold text-white">10 de Março</span>
                   </div>
                 </div>
@@ -157,28 +155,30 @@ export default function AlemDaTendencia() {
                 <div className="flex items-center gap-3">
                   <MapPin className="w-5 h-5 text-[#C9A84C]" />
                   <div>
-                    <span className="block text-xs text-gray-500 mb-0.5">Local</span>
+                    <span className="block text-xs text-gray-400 mb-0.5">Local</span>
                     <span className="text-base font-bold text-white">Auditório AFRESP - SP</span>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Right: Registration Form */}
+            {/* Right: Registration Form - Glassmorphism */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-full"
             >
-              <HeroRegistrationForm />
+              <div className="backdrop-blur-md bg-white/10 border border-white/15 rounded-2xl p-1">
+                <HeroRegistrationForm />
+              </div>
             </motion.div>
           </div>
         </div>
 
         {/* Transition gradient from dark hero to light page */}
         <div 
-          className="w-full h-20 md:h-32"
+          className="relative z-20 w-full h-20 md:h-32"
           style={{ background: 'linear-gradient(to bottom, #1a1a1a 0%, oklch(0.97 0.01 95) 100%)' }}
         />
       </section>

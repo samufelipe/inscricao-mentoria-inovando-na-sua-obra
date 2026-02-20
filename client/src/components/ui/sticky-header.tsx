@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 
 export function StickyHeader() {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,7 +37,7 @@ export function StickyHeader() {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img 
-            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/AiIwiEKCNtnzEfRb.png" 
+            src={logoTransparent}
             alt="Além da Tendência" 
             className="h-8 w-auto object-contain"
           />

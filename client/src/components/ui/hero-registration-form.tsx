@@ -37,7 +37,7 @@ export function HeroRegistrationForm() {
   };
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-2xl shadow-2xl border border-gray-100">
+    <div className="bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl">
       <div className="text-center mb-6">
         <h3 className="font-display text-xl md:text-2xl font-bold text-[oklch(0.35_0.12_320)] uppercase mb-2">
           Garanta Sua Vaga
