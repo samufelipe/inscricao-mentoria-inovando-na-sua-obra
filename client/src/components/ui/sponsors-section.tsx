@@ -29,7 +29,7 @@ export function SponsorsSection() {
               <img
                 src={sponsor.logo}
                 alt={sponsor.name}
-                className="h-16 md:h-20 w-auto object-contain"
+                className="h-24 md:h-32 w-auto object-contain"
               />
             </div>
           ))}
