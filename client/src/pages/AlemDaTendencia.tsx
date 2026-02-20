@@ -91,7 +91,7 @@ export default function AlemDaTendencia() {
           <img
             src={heroRight}
             alt=""
-            className="hidden md:block absolute right-0 top-0 w-[35%] h-full object-cover object-[center_20%] z-[2]"
+            className="hidden md:block absolute right-0 top-0 w-[35%] h-full object-cover object-[center_45%] z-[2]"
             style={{
               WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
               maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
@@ -293,26 +293,26 @@ export default function AlemDaTendencia() {
         >
           {[
             {
-              icon: "🏛️",
+              icon: <Users className="w-8 h-8 text-[#C9A84C]" />,
               title: "Arquitetas e Designers de Interiores",
-              desc: "Que querem sair do operacional e construir um escritório com processos, precificação e gestão financeira de verdade."
+              desc: "Até 200 profissionais que atuam ou desejam ter o próprio escritório. Você que quer sair da inspiração e entrar na gestão real do seu negócio."
             },
             {
-              icon: "🏗️",
-              title: "Engenheiras e Gestoras de Obra",
-              desc: "Que precisam dominar cronograma, orçamento e execução sem depender da sorte ou de terceiros descompromissados."
+              icon: <CheckCircle2 className="w-8 h-8 text-[#C9A84C]" />,
+              title: "Quem Busca Estrutura e Processos",
+              desc: "Profissionais que entendem que talento sem gestão não escala. Você quer precificar melhor, organizar sua operação e proteger seu lucro."
             },
             {
-              icon: "💼",
-              title: "Empreendedoras do Design",
-              desc: "Que entendem que talento sem estrutura não escala — e buscam transformar seu nome em uma marca sólida e lucrativa."
+              icon: <Calendar className="w-8 h-8 text-[#C9A84C]" />,
+              title: "Quem Quer Sair da ExpoRevestir com um Plano",
+              desc: "90% mulheres e 10% homens que buscam transformar tendências em projetos executados com segurança, contratos e gestão financeira."
             }
           ].map((card, i) => (
             <motion.div 
               key={i} variants={fadeInUp}
               className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-xl p-8 hover:bg-white/10 transition-all duration-500 group"
             >
-              <span className="text-4xl mb-4 block">{card.icon}</span>
+              <div className="mb-4">{card.icon}</div>
               <h3 className="text-white font-bold text-lg mb-3 group-hover:text-[#C9A84C] transition-colors">{card.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">{card.desc}</p>
             </motion.div>
