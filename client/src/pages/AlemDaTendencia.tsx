@@ -20,8 +20,10 @@ import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
-import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra.jpg";
-import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira.jpg";
+import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra.png";
+import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo.jpg";
+import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra-new.jpg";
+import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -331,22 +333,78 @@ export default function AlemDaTendencia() {
           </ArchitecturalTitle>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <SpeakerCard 
-            name="Luciana Guerra"
-            role="Especialista em Iluminação"
-            description="Referência nacional em Lighting Design, Luciana ensina como a luz pode transformar ambientes e aumentar o valor percebido dos seus projetos."
-            image={lucianaGuerraImg}
-            socialProof="Iluminação que Vende e Valoriza"
-          />
-          <SpeakerCard 
-            name="Marcia Pereira"
-            role="Advogada Especialista em Arquitetura"
-            description="Especialista em contratos e responsabilidade civil para arquitetos e engenheiros. Aprenda a se proteger de riscos e garantir seus honorários."
-            image={marciaPereira}
-            socialProof="Blindagem Jurídica para Arquitetos"
-          />
-        </div>
+        <motion.div 
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+        >
+          {/* Card 1: Inovando na Sua Obra */}
+          <motion.div variants={fadeInUp} className="group">
+            <div className="overflow-hidden relative aspect-[4/5]">
+              <img src={inovandoObraImg} alt="Ingrid Zarza e Fernanda Bradaschia" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
+                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Gestão de Obras de Interiores</p>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Ingrid Zarza & Fernanda Bradaschia</h3>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">Especialistas em gestão de obras com método, segurança e resultados reais. Criaram uma metodologia para arquitetas e designers que querem gerenciar obras com mais qualidade e controle.</p>
+                <div className="flex flex-wrap gap-3 text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">200+ Alunas</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">250+ Obras Concluídas</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Juliana Capelo */}
+          <motion.div variants={fadeInUp} className="group">
+            <div className="overflow-hidden relative aspect-[4/5]">
+              <img src={julianaCapelo} alt="Juliana Capelo" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
+                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Gestão Estratégica de Escritórios</p>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Juliana Capelo</h3>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">Especialista em gestão estratégica para escritórios de arquitetura. Ao lado de Larissa Kock e Guilherme Lessa, é sócia da MONU Arquitetura, com projetos no Brasil, Emirados Árabes, EUA e Inglaterra.</p>
+                <div className="flex flex-wrap gap-3 text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">500+ Escritórios</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">2000+ Alunos</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Luciana Guerra */}
+          <motion.div variants={fadeInUp} className="group">
+            <div className="overflow-hidden relative aspect-[4/5]">
+              <img src={lucianaGuerraImg} alt="Luciana Guerra" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
+                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Especialista em Iluminação</p>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Luciana Guerra</h3>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">Arquiteta e Urbanista com foco em iluminação e metodologia própria. Referência para marcas globais e projetos de luxo, defende que a luz é o elemento mais importante de qualquer espaço.</p>
+                <div className="flex flex-wrap gap-3 text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">2.500+ Alunos Formados</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">Metodologia Exclusiva</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 4: Márcia Pereira */}
+          <motion.div variants={fadeInUp} className="group">
+            <div className="overflow-hidden relative aspect-[4/5]">
+              <img src={marciaPereira} alt="Márcia Pereira" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
+                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Contratos para Arquitetos</p>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Márcia Pereira</h3>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">Advogada que traduz o juridiquês para a linguagem do projeto. Ajuda escritórios a criarem contratos que comunicam com clareza, valorizam a marca e fortalecem a relação com clientes.</p>
+                <div className="flex flex-wrap gap-3 text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">Segurança Jurídica</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">Contratos Estratégicos</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </ArchitecturalSection>
 
       {/* CONTEÚDO / MÓDULOS */}
