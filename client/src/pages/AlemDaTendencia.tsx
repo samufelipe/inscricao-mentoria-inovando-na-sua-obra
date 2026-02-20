@@ -67,124 +67,171 @@ export default function AlemDaTendencia() {
       <StickyHeader />
       
       {/* HERO SECTION - Full Dark Cinematic Integrated */}
-      <section className="relative overflow-hidden bg-[#1a1a1a] min-h-[75vh] md:min-h-[90vh] flex flex-col">
-        {/* Background: 4-image composition covering entire hero */}
+      {/* HERO - MOBILE: stacked layout (image then content) */}
+      <section className="md:hidden bg-[#1a1a1a] flex flex-col">
+        {/* Mobile: Image block with logo overlay */}
+        <div className="relative w-full aspect-[3/4] max-h-[65vh] overflow-hidden">
+          <img
+            src={heroMain}
+            alt="Evento Além da Tendência - Anfitriãs"
+            className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+          />
+          {/* Subtle bottom gradient for transition */}
+          <div 
+            className="absolute inset-0 z-[10] pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, transparent 20%, transparent 60%, rgba(26,26,26,0.7) 85%, #1a1a1a 100%)' }}
+          />
+          {/* Logo centered on image */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="absolute top-6 left-0 right-0 z-20 flex justify-center"
+          >
+            <img 
+              src={logoTransparent}
+              alt="Além da Tendência - Logo Oficial" 
+              className="w-[150px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
+            />
+          </motion.div>
+        </div>
+
+        {/* Mobile: Content below image */}
+        <div className="relative z-20 px-4 py-6 flex flex-col gap-5">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-start"
+          >
+            <div className="flex items-center gap-2 mb-3 text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
+              <MapPin className="w-3 h-3" />
+              <span>Evento Presencial</span>
+              <span className="text-white/30">|</span>
+              <span>São Paulo - SP</span>
+            </div>
+
+            <h1 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight mb-3 uppercase">
+              A Arquitetura Acontece{" "}
+              <span className="text-[#C9A84C]">nos Bastidores</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-200 max-w-lg mb-3 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4">
+              Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos — o bastidor que define quem cresce de verdade.
+            </p>
+            <p className="text-[10px] sm:text-xs text-[#C9A84C] font-semibold uppercase tracking-wider mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+              Vagas Limitadas • Lote Promocional com 50% OFF
+            </p>
+
+            <div className="flex items-center gap-3 text-xs text-white/80 bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15 w-full">
+              <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0" />
+              <span className="font-semibold text-white">10 de Março</span>
+              <span className="text-white/30">|</span>
+              <MapPin className="w-4 h-4 text-[#C9A84C] shrink-0" />
+              <span className="font-semibold text-white">AFRESP - SP</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            id="inscricao-mobile"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full"
+          >
+            <div className="backdrop-blur-md bg-white/10 border border-white/15 rounded-2xl p-1 shadow-2xl">
+              <HeroRegistrationForm />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* HERO - DESKTOP: original overlay composition */}
+      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] min-h-[90vh] flex-col">
+        {/* Background: multi-image composition */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Camada 1: Far image (profundidade) - hidden on mobile */}
           <img
             src={heroFar}
             alt=""
-            className="hidden md:block absolute left-0 top-0 w-[35%] h-full object-cover object-[center_20%] opacity-70"
+            className="absolute left-0 top-0 w-[35%] h-full object-cover object-[center_20%] opacity-70"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
               maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
             }}
           />
-          {/* Camada 2 removida (heroLeft) - agora só 3 imagens */}
-          {/* Camada 3: CENTRAL principal - heroMain on desktop, heroEvent on mobile */}
-          <img
-            src={heroMain}
-            alt="Evento Além da Tendência - Anfitriãs"
-            className="md:hidden absolute inset-0 w-full h-full object-cover object-[center_38%] z-[3]"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-            }}
-          />
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 w-[65%] h-full object-cover z-[3]"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] h-full object-cover z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               objectPosition: 'center 38%'
             }}
           />
-          {/* Camada 4: Right image - hidden on mobile */}
           <img
             src={heroRight}
             alt=""
-            className="hidden md:block absolute right-0 top-0 w-[35%] h-full object-cover object-[center_45%] z-[2]"
+            className="absolute right-0 top-0 w-[35%] h-full object-cover object-[center_45%] z-[2]"
             style={{
               WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
               maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
             }}
           />
-
-          {/* Overlay: gradient for legibility - transparent top, dark bottom */}
           <div 
             className="absolute inset-0 z-[10] pointer-events-none"
             style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(26,26,26,0.4) 65%, rgba(26,26,26,0.85) 80%, #1a1a1a 92%)' }}
           />
-          {/* Radial vignette - Stronger on mobile for text readability */}
           <div
             className="absolute inset-0 z-[11] pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.6) 100%)' }}
           />
-          {/* Mobile specific overlay for text contrast */}
-          <div className="md:hidden absolute inset-0 z-[12] bg-black/10 pointer-events-none" />
         </div>
 
-        {/* Content overlaid on images */}
-        <div className="relative z-20 flex-1 flex flex-col container mx-auto px-3 sm:px-4">
-          {/* Logo - top center */}
+        {/* Desktop content */}
+        <div className="relative z-20 flex-1 flex flex-col container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-center pt-8 md:pt-12"
+            className="flex justify-center pt-12"
           >
             <img 
               src={logoTransparent}
               alt="Além da Tendência - Logo Oficial" 
-              className="w-[160px] md:w-[220px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
+              className="w-[220px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
             />
           </motion.div>
 
-          {/* Spacer to push content to bottom half */}
-          <div className="flex-1 min-h-[40px] md:min-h-[100px]" />
+          <div className="flex-1 min-h-[100px]" />
 
-          {/* Bottom content: text + form */}
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-end pb-6 md:pb-16">
-            {/* Left: Text Content */}
+          <div className="grid lg:grid-cols-2 gap-12 items-end pb-16">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
             >
-              {/* Badge Evento Presencial */}
-              <div className="flex items-center gap-2 mb-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.6)' }}>
-                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]" />
+              <div className="flex items-center gap-2 mb-3 text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.6)' }}>
+                <MapPin className="w-4 h-4 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]" />
                 <span>Evento Presencial</span>
                 <span className="text-white/30">|</span>
                 <span>São Paulo - SP</span>
               </div>
 
-              <h1 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3 sm:mb-4 uppercase" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)' }}>
+              <h1 className="font-display text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 uppercase" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)' }}>
                 A Arquitetura Acontece{" "}
                 <span className="text-[#C9A84C]">nos Bastidores</span>
               </h1>
-              <p className="text-xs sm:text-sm md:text-base text-gray-200 max-w-lg mb-3 sm:mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4 sm:pl-5" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+              <p className="text-base text-gray-200 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
                 Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos — o bastidor que define quem cresce de verdade.
               </p>
-              <p className="text-[10px] sm:text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-4 sm:mb-6 flex items-center gap-2" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.6)' }}>
+              <p className="text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.6)' }}>
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                 Vagas Limitadas • Lote Promocional com 50% OFF
               </p>
 
-              {/* Mobile: data/local compacto */}
-              <div className="flex md:hidden items-center gap-3 text-xs text-white/80 bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15">
-                <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]" />
-                <span className="font-semibold text-white">10 de Março</span>
-                <span className="text-white/30">|</span>
-                <MapPin className="w-4 h-4 text-[#C9A84C] shrink-0 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]" />
-                <span className="font-semibold text-white">AFRESP - SP</span>
-              </div>
-
-              {/* Desktop: cards detalhados */}
-              <div className="hidden md:flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto shadow-lg">
+              <div className="flex flex-row gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-auto shadow-lg">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-[#C9A84C]" />
                   <div>
@@ -192,7 +239,7 @@ export default function AlemDaTendencia() {
                     <span className="text-base font-bold text-white">10 de Março</span>
                   </div>
                 </div>
-                <div className="w-px h-10 bg-white/10 hidden sm:block" />
+                <div className="w-px h-10 bg-white/10" />
                 <div className="flex items-center gap-3">
                   <MapPin className="w-5 h-5 text-[#C9A84C]" />
                   <div>
@@ -203,7 +250,6 @@ export default function AlemDaTendencia() {
               </div>
             </motion.div>
 
-            {/* Right: Registration Form - Glassmorphism */}
             <motion.div
               id="inscricao"
               initial={{ opacity: 0, y: 30 }}
