@@ -317,6 +317,17 @@ export default function AlemDaTendencia() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* CTA after Para Quem É */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-center mt-14 relative z-10"
+        >
+          <p className="text-gray-400 text-sm mb-4 uppercase tracking-wider">Se você se identificou, o próximo passo é simples:</p>
+          <button onClick={scrollToInscricao} className="bg-[#C9A84C] text-[#1a1a1a] font-bold px-12 py-4 uppercase tracking-wider text-sm hover:bg-[#d4b85a] transition-all shadow-lg hover:-translate-y-1">
+            Garantir Minha Vaga — R$ 147 →
+          </button>
+        </motion.div>
       </ArchitecturalSection>
 
       {/* ANFITRIÃS */}
@@ -409,6 +420,17 @@ export default function AlemDaTendencia() {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* CTA after Palestrantes */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <p className="text-gray-400 text-sm mb-4 uppercase tracking-wider">4 especialistas. 1 dia. Conteúdo que transforma carreiras.</p>
+          <button onClick={scrollToInscricao} className="bg-[#C9A84C] text-[#1a1a1a] font-bold px-12 py-4 uppercase tracking-wider text-sm hover:bg-[#d4b85a] transition-all shadow-lg hover:-translate-y-1">
+            Quero Aprender Com Elas — R$ 147 →
+          </button>
+        </motion.div>
       </ArchitecturalSection>
 
       {/* CONTEÚDO / MÓDULOS */}
@@ -448,6 +470,20 @@ export default function AlemDaTendencia() {
             speaker="Márcia Pereira"
           />
         </div>
+
+        {/* CTA after Conteúdo */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-center mt-14"
+        >
+          <div className="bg-[oklch(0.35_0.12_320)]/10 border border-[oklch(0.35_0.12_320)]/20 p-8 rounded-xl max-w-2xl mx-auto">
+            <p className="text-[oklch(0.35_0.12_320)] font-bold text-lg mb-2">Lote Promocional com 50% OFF</p>
+            <p className="text-gray-500 text-sm mb-6">De <span className="line-through">R$ 294</span> por apenas <span className="text-[oklch(0.35_0.12_320)] font-bold text-xl">R$ 147</span></p>
+            <button onClick={scrollToInscricao} className="bg-[oklch(0.35_0.12_320)] text-white font-bold px-12 py-4 uppercase tracking-wider text-sm hover:bg-[oklch(0.3_0.12_320)] transition-all shadow-lg hover:-translate-y-1">
+              Inscrever-se Agora →
+            </button>
+          </div>
+        </motion.div>
       </ArchitecturalSection>
 
       {/* LOCAL */}
@@ -486,7 +522,7 @@ export default function AlemDaTendencia() {
                 </li>
               </ul>
               
-              <div className="pt-6">
+              <div className="pt-6 flex flex-col sm:flex-row gap-4">
                 <a 
                   href="https://maps.app.goo.gl/xyz" 
                   target="_blank" 
@@ -495,6 +531,9 @@ export default function AlemDaTendencia() {
                 >
                   Ver no Google Maps <ArrowDown className="-rotate-90 w-4 h-4" />
                 </a>
+                <button onClick={scrollToInscricao} className="bg-[#C9A84C] text-[#1a1a1a] font-bold px-8 py-3 uppercase tracking-wider text-sm hover:bg-[#d4b85a] transition-all shadow-lg hover:-translate-y-1">
+                  Reservar Meu Lugar →
+                </button>
               </div>
             </div>
           </div>
