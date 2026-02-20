@@ -19,6 +19,8 @@ import heroLeft from "@/assets/alem-da-tendencia/hero-left.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
+import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra.jpg";
+import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira.jpg";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -139,8 +141,12 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
             >
-              <p className="text-base md:text-lg text-gray-200 max-w-lg mb-6 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
-                Como transformar inspiração em realidade através da gestão de escritório e obra.
+              <p className="text-base md:text-lg text-gray-200 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
+                O evento presencial que une as especialistas que você acompanha online — ao vivo, em São Paulo.
+              </p>
+              <p className="text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                Auditório para apenas 297 pessoas — Vagas Limitadas
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto">
@@ -263,7 +269,7 @@ export default function AlemDaTendencia() {
               Para Quem é Este Evento?
             </ArchitecturalTitle>
             <p className="text-xl text-white/80 max-w-2xl mx-auto">
-              Um encontro desenhado para profissionais que buscam o próximo nível.
+              Você sai da ExpoRevestir cheia de ideias... mas na segunda-feira, a realidade do escritório e da obra continua a mesma?
             </p>
           </motion.div>
 
@@ -272,17 +278,17 @@ export default function AlemDaTendencia() {
               {
                 icon: Users,
                 title: "Arquitetas e Designers",
-                desc: "Que já atuam no mercado e sentem a necessidade de profissionalizar a gestão."
+                desc: "Que atuam no mercado mas sentem que a gestão do escritório e da obra ainda é o calcanhar de Aquiles."
               },
               {
                 icon: Check,
-                title: "Estudantes",
-                desc: "Que desejam começar a carreira com o pé direito, entendendo a realidade do mercado."
+                title: "Quem Quer Ter Escritório Próprio",
+                desc: "Que desejam começar com base sólida — não apenas com portfólio bonito, mas com processos, contratos e método."
               },
               {
                 icon: MapPin,
-                title: "Profissionais da Área",
-                desc: "Engenheiras e gestoras que buscam aprimorar processos e networking."
+                title: "Profissionais que Gerenciam Obras",
+                desc: "Engenheiras e arquitetas que precisam dominar a execução para entregar o que foi prometido no projeto."
               }
             ].map((item, index) => (
               <motion.div 
@@ -322,34 +328,20 @@ export default function AlemDaTendencia() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <SpeakerCard 
               name="Luciana Guerra"
-              role="Engenheira Civil"
-              description="Especialista em patologias construtivas e gestão de obras de alto padrão."
-              socialProof="Mais de 15 anos de experiência em obras complexas."
-              image="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/luciana-guerra.jpg"
+              role="Especialista em Iluminação"
+              description="Arquiteta e Urbanista especialista em iluminação. Defende que a luz é o elemento mais importante de qualquer espaço. Mentora de profissionais de elite com metodologia exclusiva de cálculo e sensibilidade."
+              socialProof="64,1 mil seguidores • 2.500+ alunos formados"
+              image={lucianaGuerraImg}
             />
             <SpeakerCard 
               name="Marcia Pereira"
-              role="Arquiteta e Urbanista"
-              description="Mentora de arquitetos e especialista em gestão de escritórios lucrativos."
-              socialProof="Autora do método 'Escritório Lucrativo'."
-              image="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/marcia-pereira.jpg"
-            />
-            <SpeakerCard 
-              name="Renata Fuentes"
-              role="Especialista em Iluminação"
-              description="Lighting Designer premiada, transformando ambientes através da luz."
-              socialProof="Projetos publicados em revistas internacionais."
-              image="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/renata-fuentes.jpg"
-            />
-            <SpeakerCard 
-              name="Convidada Especial"
-              role="Surpresa"
-              description="Uma das maiores autoridades em posicionamento de marca para arquitetos."
-              socialProof="Revelação exclusiva no evento."
-              image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop"
+              role="Advogada — Contratos para Arquitetos"
+              description="Especialista em unir segurança jurídica e identidade profissional. Traduz o 'juridiquês' para a linguagem do projeto, ajudando escritórios a criarem contratos que valorizam a marca e protegem o profissional."
+              socialProof="Referência em contratos de arquitetura"
+              image={marciaPereira}
             />
           </div>
         </motion.div>
@@ -375,27 +367,27 @@ export default function AlemDaTendencia() {
           <div className="grid md:grid-cols-2 gap-8">
             <LearningModule 
               number="01"
-              title="Gestão de Processos"
-              speaker="Marcia Pereira"
-              description="Como organizar o fluxo de trabalho do escritório, desde o primeiro contato até a entrega final, garantindo eficiência e lucro."
+              title="Gestão de Obra"
+              speaker="Ingrid Zarza & Fernanda Bradaschia"
+              description="Como gerenciar obras de interiores com segurança e lucro — do planejamento à entrega final, antecipando problemas e fidelizando clientes."
             />
             <LearningModule 
               number="02"
-              title="Gestão de Obras"
-              speaker="Luciana Guerra"
-              description="O passo a passo para gerenciar obras sem dor de cabeça, antecipando problemas e fidelizando clientes através da excelência técnica."
+              title="Gestão de Escritório"
+              speaker="Juliana Campelo"
+              description="Estratégias práticas para estruturar seu escritório de arquitetura com processos, precificação e posicionamento que geram lucro e consistência."
             />
             <LearningModule 
               number="03"
-              title="Patologias Construtivas"
+              title="Iluminação que Transforma"
               speaker="Luciana Guerra"
-              description="Aprenda a identificar e evitar os erros mais comuns em obras de interiores que podem destruir sua reputação."
+              description="Iluminar é mais do que escolher luminária. Unindo ciência, saúde e estética para criar atmosferas que elevam qualquer projeto."
             />
             <LearningModule 
               number="04"
-              title="Posicionamento e Vendas"
-              speaker="Convidada Especial"
-              description="Como se posicionar como autoridade no mercado e atrair clientes que valorizam o seu trabalho (e pagam bem por ele)."
+              title="Contratos que Protegem"
+              speaker="Marcia Pereira"
+              description="Como criar contratos que comunicam com clareza, valorizam sua marca e fortalecem a relação com os clientes — sem juridiquês."
             />
           </div>
         </motion.div>
@@ -436,7 +428,7 @@ export default function AlemDaTendencia() {
                 <div>
                   <h4 className="font-bold text-[oklch(0.35_0.12_320)]">Data e Horário</h4>
                   <p>10 de Março de 2026</p>
-                  <p>Das 09h às 18h</p>
+                  <p>Das 14h às 18h</p>
                 </div>
               </div>
             </div>
@@ -512,18 +504,22 @@ export default function AlemDaTendencia() {
               
               <div className="space-y-4 text-lg text-white/80">
                 <p className="flex items-center gap-3">
-                  <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> Acesso completo ao dia de palestras
+                  <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> 4 palestras com especialistas referência
                 </p>
                 <p className="flex items-center gap-3">
-                  <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> Kit de boas-vindas exclusivo
+                  <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> Gestão de obra + escritório + iluminação + contratos
+                </p>
+                <p className="flex items-center gap-3">
+                  <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> Coffee break e networking presencial
                 </p>
                 <p className="flex items-center gap-3">
                   <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> Certificado de participação
                 </p>
-                <p className="flex items-center gap-3">
-                  <CheckCircle2 className="text-[oklch(0.75_0.18_65)]" /> Coffee break e networking
-                </p>
               </div>
+
+              <p className="text-sm text-white/50 flex items-center gap-2 pt-2">
+                <Users className="w-4 h-4" /> Auditório AFRESP — Capacidade máxima: 297 lugares
+              </p>
 
               <div className="pt-8">
                 <p className="text-sm uppercase tracking-widest text-white/60 mb-2">Investimento Único</p>
@@ -547,6 +543,31 @@ export default function AlemDaTendencia() {
           </div>
         </div>
       </section>
+
+      {/* PARCEIROS E PATROCINADORES */}
+      <ArchitecturalSection variant="light" className="py-16">
+        <div className="text-center mb-12">
+          <ArchitecturalTitle variant="h3" color="orange">
+            Quem Apoia
+          </ArchitecturalTitle>
+          <ArchitecturalTitle variant="h2" color="purple">
+            Parceiros e Patrocinadores
+          </ArchitecturalTitle>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-4xl mx-auto items-center">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div 
+              key={i}
+              className="h-24 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-200 hover:border-[oklch(0.75_0.18_65)] transition-colors duration-300"
+            >
+              <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">Logo em breve</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-sm text-gray-400 mt-8">
+          Interessado em patrocinar? Entre em contato pelo nosso WhatsApp.
+        </p>
+      </ArchitecturalSection>
 
       {/* FOOTER */}
       <footer className="bg-[oklch(0.2_0.02_320)] text-white pt-20 pb-10 border-t border-white/10">
