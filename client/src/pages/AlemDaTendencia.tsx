@@ -155,7 +155,7 @@ export default function AlemDaTendencia() {
                 Vagas Limitadas • Lote Promocional com 50% OFF
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto shadow-lg">
+              <div className="hidden md:flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto shadow-lg">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-[#C9A84C]" />
                   <div>
