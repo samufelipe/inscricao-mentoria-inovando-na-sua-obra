@@ -93,7 +93,7 @@ export function HostsSection() {
               </div>
               
               <p className="font-display text-xl text-[oklch(0.35_0.12_320)] font-bold pt-4">
-                Juntas, mostramos que autoridade não nasce da estética, nasce da base.
+                Juntas, mostramos que a arquitetura de verdade acontece nos bastidores.
               </p>
             </div>
           </div>

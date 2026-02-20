@@ -144,11 +144,11 @@ export default function AlemDaTendencia() {
               className="flex flex-col items-start"
             >
               <h1 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3 sm:mb-4 uppercase drop-shadow-lg">
-                Inspiração Sem Gestão É Só Tendência Que{" "}
-                <span className="text-[#C9A84C]">Não Sai do Papel</span>
+                A Arquitetura Acontece{" "}
+                <span className="text-[#C9A84C]">nos Bastidores</span>
               </h1>
               <p className="text-xs sm:text-sm md:text-base text-gray-200 max-w-lg mb-3 sm:mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4 sm:pl-5 drop-shadow-md">
-                Tudo o que você precisa para sair da ExpoRevestir com um plano real de gestão de obra, escritório, iluminação e contratos.
+                Gestão de obra, escritório, iluminação e contratos: o que ninguém mostra nas feiras, mas que define quem cresce de verdade.
               </p>
               <p className="text-[10px] sm:text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-4 sm:mb-6 flex items-center gap-2 drop-shadow-md">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
@@ -219,12 +219,11 @@ export default function AlemDaTendencia() {
             
             <motion.div variants={fadeInUp} className="text-gray-600 space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg leading-relaxed">
               <p>
-                A ExpoRevestir apresenta lançamentos. Mostra possibilidades. Desperta ideias.
-                Mas para que uma tendência saia do stand e vire obra executada e cliente satisfeito, é preciso estrutura.
+                O mercado celebra tendências, lançamentos e vitrines. Mas para que uma ideia vire obra executada e cliente satisfeito, é preciso estrutura.
               </p>
               <p>
-                O evento <strong className="text-[oklch(0.35_0.12_320)]">Além da Tendência</strong> nasceu para preencher essa lacuna.
-                Enquanto o mercado fala de estética, nós vamos falar de <strong className="text-[oklch(0.35_0.12_320)]">negócio</strong>.
+                O evento <strong className="text-[oklch(0.35_0.12_320)]">Além da Tendência</strong> nasceu para revelar o que acontece nos bastidores.
+                Enquanto o mercado fala de estética, nós falamos do que sustenta tudo: o <strong className="text-[oklch(0.35_0.12_320)]">negócio</strong>.
               </p>
               <ul className="space-y-3 pt-4">
                 {[
@@ -270,7 +269,7 @@ export default function AlemDaTendencia() {
             Para Quem É Este Evento?
           </ArchitecturalTitle>
           <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-2">
-            Reunimos profissionais que buscam ir além do óbvio e transformar seus escritórios em empresas sólidas e lucrativas.
+            Se você sente que o bastidor do seu negócio precisa de mais estrutura, este evento é para você.
           </p>
         </div>
 
@@ -425,7 +424,7 @@ export default function AlemDaTendencia() {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <p className="text-gray-400 text-sm mb-4 uppercase tracking-wider">4 especialistas. 1 dia. Conteúdo que transforma carreiras.</p>
+          <p className="text-gray-400 text-sm mb-4 uppercase tracking-wider">4 especialistas. 1 dia. O bastidor que transforma carreiras.</p>
           <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-8 sm:px-12 py-4 uppercase tracking-wider text-xs sm:text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
             Quero Aprender Com Elas →
           </button>
@@ -625,7 +624,7 @@ export default function AlemDaTendencia() {
                 className="w-48 mb-6 opacity-90"
               />
               <p className="text-gray-400 text-sm leading-relaxed max-w-md">
-                O evento presencial definitivo para arquitetas e designers que buscam gestão, lucratividade e segurança jurídica.
+                O evento que revela os bastidores de uma carreira sólida em arquitetura: gestão, lucratividade e segurança jurídica.
               </p>
             </div>
             
@@ -662,7 +661,7 @@ export default function AlemDaTendencia() {
           </div>
           
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <p>© 2025 Inovando na Sua Obra. Todos os direitos reservados.</p>
+            <p>© 2026 Inovando na Sua Obra. Todos os direitos reservados.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
               <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
