@@ -66,7 +66,7 @@ export default function AlemDaTendencia() {
       <StickyHeader />
       
       {/* HERO SECTION - Full Dark Cinematic Integrated */}
-      <section className="relative overflow-hidden bg-[#1a1a1a] min-h-[60vh] md:min-h-[90vh] flex flex-col">
+      <section className="relative overflow-hidden bg-[#1a1a1a] min-h-[75vh] md:min-h-[90vh] flex flex-col">
         {/* Background: 4-image composition covering entire hero */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Camada 1: Far image (profundidade) - hidden on mobile */}
@@ -84,11 +84,11 @@ export default function AlemDaTendencia() {
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[95%] md:w-[60%] h-full object-cover object-[center_15%] z-[3]"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[95%] md:w-[60%] h-full object-cover object-[center_35%] z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-              objectPosition: 'center 15%' // Foco nos rostos
+              objectPosition: 'center 35%'
             }}
           />
           {/* Camada 4: Right image - hidden on mobile */}
@@ -105,7 +105,7 @@ export default function AlemDaTendencia() {
           {/* Overlay: gradient for legibility - transparent top, dark bottom */}
           <div 
             className="absolute inset-0 z-[10] pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(26,26,26,0.5) 45%, rgba(26,26,26,0.85) 65%, #1a1a1a 85%)' }}
+            style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(26,26,26,0.4) 55%, rgba(26,26,26,0.85) 75%, #1a1a1a 90%)' }}
           />
           {/* Radial vignette - Stronger on mobile for text readability */}
           <div
@@ -113,7 +113,7 @@ export default function AlemDaTendencia() {
             style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)' }}
           />
           {/* Mobile specific overlay for text contrast */}
-          <div className="md:hidden absolute inset-0 z-[12] bg-black/40 pointer-events-none" />
+          <div className="md:hidden absolute inset-0 z-[12] bg-black/25 pointer-events-none" />
         </div>
 
         {/* Content overlaid on images */}
@@ -133,7 +133,7 @@ export default function AlemDaTendencia() {
           </motion.div>
 
           {/* Spacer to push content to bottom half */}
-          <div className="flex-1 min-h-[20px] md:min-h-[180px]" />
+          <div className="flex-1 min-h-[80px] md:min-h-[180px]" />
 
           {/* Bottom content: text + form */}
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-end pb-6 md:pb-16">
