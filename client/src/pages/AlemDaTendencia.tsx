@@ -32,6 +32,7 @@ export default function AlemDaTendencia() {
 
     const link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
     const prevFavicon = link?.href || "";
+    if (link) link.href = "/favicon-alem-da-tendencia.png";
 
     return () => {
       document.title = prevTitle;
