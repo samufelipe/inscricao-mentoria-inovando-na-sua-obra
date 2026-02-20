@@ -1,118 +1,67 @@
 
 
-# Correcao e Otimizacao Completa da LP "Alem da Tendencia"
+# Melhorias na Hero, FAQ e Fix Mobile
 
-## Problemas Criticos Encontrados (PDF vs Pagina Atual)
+## 1. Hero - Copy Mais Estrategica e Persuasiva
 
-### 1. Palestrantes ERRADAS
-A pagina mostra 4 palestrantes, mas o documento lista apenas **2 palestrantes reais**:
-- **Luciana Guerra** (Lu Guerra) - Especialista em ILUMINACAO (nao engenharia civil/patologias como esta na pagina). 64.1k seguidores, mais de 2.500 alunos formados
-- **Marcia Pereira** - ADVOGADA especializada em contratos para arquitetos (nao arquiteta/gestao de escritorios como esta na pagina)
-- "Renata Fuentes" e "Convidada Especial" NAO existem no documento - sao ficticias
+**Problema atual:** O hero nao tem titulo principal visivel — apenas o subtitulo com borda lateral. Falta comunicar o VALOR do evento de forma imediata.
 
-### 2. Descricoes das Anfitrias e Palestrantes Incorretas
-- **Juliana Campelo** esta descrita no documento como fundadora da AjudaMONU, especialista em gestao estrategica para escritorios de arquitetura, 850+ escritorios atendidos, 3000+ alunos, 47.3k seguidores
-- As descricoes de Luciana e Marcia estao completamente erradas
+**Mudancas propostas em `client/src/pages/AlemDaTendencia.tsx` (linhas 138-168):**
 
-### 3. Horario Errado
-- Pagina mostra: **09h as 18h**
-- Documento real: **14h as 18h**
+- Adicionar titulo principal em destaque antes do subtitulo:
+  - **"Inspiracao Sem Gestao e So Tendencia Que Nao Sai do Papel"** (headline principal, grande, branco)
+- Reescrever subtitulo para ser mais direto e orientado a transformacao:
+  - **"4 especialistas. 4 horas. Tudo o que voce precisa para sair da ExpoRevestir com um plano real de gestao de obra, escritorio, iluminacao e contratos."**
+- Manter badge de urgencia mas tornar mais incisivo:
+  - **"Apenas 297 lugares — Lote Promocional com 50% OFF"**
 
-### 4. Modulos de Conteudo Incorretos
-- Os 4 modulos atuais nao correspondem as palestrantes reais
-- Precisam ser reescritos para refletir: Iluminacao (Luciana) e Contratos (Marcia)
+## 2. FAQ - Duvidas Estrategicas para Quebrar Objecoes
 
----
+**Problema atual:** As 7 perguntas sao muito genericas e logisticas. Nao quebram objecoes reais de quem esta indeciso antes do checkout.
 
-## Plano de Implementacao
+**Mudancas propostas em `client/src/components/ui/faq-accordion.tsx`:**
 
-### Tarefa 1: Corrigir Palestrantes (de 4 para 2)
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx` (linhas 304-356)
+Reescrever o array de FAQs para incluir perguntas estrategicas misturadas com as logisticas:
 
-Reduzir de 4 para 2 SpeakerCards com dados corretos:
+- **"Ja tenho experiencia. O evento e so para iniciantes?"** — Resposta posiciona o evento para quem ja atua mas quer escalar.
+- **"Nao moro em Sao Paulo. Vale a pena ir?"** — Resposta reforcar o networking presencial e o ROI.
+- **"O que torna este evento diferente de outros?"** — Resposta destaca as 4 especialistas reunidas + foco pratico (nao e palestra motivacional).
+- **"Vou conseguir aplicar o conteudo na segunda-feira?"** — Resposta sobre conteudo pratico e acionavel.
+- **"O investimento de R$147 se paga?"** — Resposta com comparacao de valor (menos que um almoco de negocios).
+- Manter as logisticas essenciais: data/local, certificado, coffee break, cancelamento.
+- Total: ~9 perguntas (5 estrategicas + 4 logisticas).
 
-**Luciana Guerra:**
-- Role: "Especialista em Iluminacao"
-- Description: "Arquiteta e Urbanista especialista em iluminacao, com foco na metodologia propria. Defende que a luz e o elemento mais importante de qualquer espaco. Mentora de profissionais de elite."
-- SocialProof: "64.1 mil seguidores | 2.500+ alunos formados"
-- Imagem: extrair foto do PDF (pagina 13)
+## 3. Hero Mobile - Imagens Muito Grandes
 
-**Marcia Pereira:**
-- Role: "Advogada - Contratos para Arquitetos"
-- Description: "Especialista em unir seguranca juridica e identidade profissional. Traduz o juridiques para a linguagem do projeto, ajudando escritorios a criarem contratos que valorizam a marca e protegem o profissional."
-- SocialProof: "Referencia em contratos de arquitetura"
-- Imagem: extrair foto do PDF (pagina 14)
+**Problema atual:** As 4 imagens sobrepostas (heroFar, heroLeft, heroMain, heroRight) ocupam toda a tela no mobile, empurrando o conteudo para muito baixo. O layout de composicao de 4 imagens nao funciona em telas pequenas.
 
-Grid passa de `lg:grid-cols-4` para `md:grid-cols-2` centralizado com `max-w-3xl mx-auto`.
+**Mudancas propostas em `client/src/pages/AlemDaTendencia.tsx` (linhas 60-114):**
 
-### Tarefa 2: Corrigir Horario
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx` (linha 439)
-
-Alterar "Das 09h as 18h" para "Das 14h as 18h".
-
-### Tarefa 3: Reescrever Modulos de Conteudo
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx` (linhas 375-400)
-
-Reduzir de 4 para 4 modulos alinhados com as anfitrias + palestrantes reais:
-- Modulo 01: "Gestao de Obra" - Ingrid Zarza e Fernanda Bradaschia
-- Modulo 02: "Gestao de Escritorio" - Juliana Campelo
-- Modulo 03: "Iluminacao que Transforma" - Luciana Guerra
-- Modulo 04: "Contratos que Protegem" - Marcia Pereira
-
-### Tarefa 4: Adicionar Secao de Patrocinadores
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
-
-Nova secao entre o FAQ e o CTA final. Estrutura:
-- Titulo: "Parceiros e Patrocinadores"
-- Grid responsivo para logos (placeholder com texto "Em breve" ate o usuario enviar as logos reais)
-- Fundo claro com borda sutil, estilo minimalista
-- Preparado para receber de 4 a 8 logos via imagens
-
-### Tarefa 5: Extrair e Salvar Fotos Reais das Palestrantes
-**Arquivos novos:**
-- `client/src/assets/alem-da-tendencia/luciana-guerra.jpg` (extraida do PDF pagina 13)
-- `client/src/assets/alem-da-tendencia/marcia-pereira.jpg` (extraida do PDF pagina 14)
-
-Estas fotos reais substituirao as URLs do Manus CDN que podem expirar.
-
-### Tarefa 6: Melhorias de Copy para Conversao (Meta Ads)
-
-**Hero:**
-- Subtitulo mais orientado a acao: "O evento presencial que une as especialistas que voce acompanha online -- ao vivo, em Sao Paulo"
-- Adicionar badge de urgencia no formulario: "Ultimas vagas - Auditorio para apenas 297 pessoas"
-
-**Secao "Para Quem E":**
-- Reescrever com dor/desejo mais agressivo para ads
-- "Voce sai da ExpoRevestir cheia de ideias... mas na segunda-feira, a realidade do escritorio e da obra continua a mesma?"
-
-**CTA Final:**
-- Reforcar escassez: "Auditorio AFRESP - Capacidade Maxima: 297 lugares"
-- Adicionar contagem de beneficios mais tangivel
-
-**Secao Anfitrias (HostsSection):**
-- Atualizar dados da Juliana Campelo com metricas reais: "850+ escritorios impactados, 47.3k seguidores, 3000+ alunos"
+- Reduzir a altura minima do hero no mobile de `min-h-[80vh]` para `min-h-[60vh]`
+- Esconder as imagens laterais (heroFar e heroRight) no mobile com classes `hidden md:block`
+- Ajustar heroMain para ocupar mais largura no mobile: `w-[90%] md:w-[58%]`
+- Ajustar heroLeft para: `hidden md:block` (ou reduzir drasticamente)
+- Tornar o gradient overlay mais forte no mobile para garantir legibilidade
+- Reduzir o spacer (min-h) entre logo e conteudo no mobile
 
 ---
 
 ## Detalhes Tecnicos
 
 ### Arquivos editados:
-1. `client/src/pages/AlemDaTendencia.tsx` - Correcoes de palestrantes, horario, modulos, nova secao patrocinadores, melhorias de copy
-2. `client/src/components/ui/hosts-section.tsx` - Atualizar dados e metricas das anfitrias
-3. `client/src/assets/alem-da-tendencia/luciana-guerra.jpg` - Foto real (do PDF)
-4. `client/src/assets/alem-da-tendencia/marcia-pereira.jpg` - Foto real (do PDF)
+1. **`client/src/pages/AlemDaTendencia.tsx`** — Hero copy (titulo + subtitulo), hero mobile (imagens responsivas, altura)
+2. **`client/src/components/ui/faq-accordion.tsx`** — Reescrita completa do array de FAQs com perguntas estrategicas
 
-### Secao de Patrocinadores (estrutura):
+### Resumo das alteracoes por area:
+
 ```text
-+----------------------------------------------------------+
-|           PARCEIROS E PATROCINADORES                      |
-|                                                           |
-|   [Logo 1]   [Logo 2]   [Logo 3]   [Logo 4]             |
-|   [Logo 5]   [Logo 6]   [Logo 7]   [Logo 8]             |
-|                                                           |
-|   (placeholders ate o usuario enviar as logos)            |
-+----------------------------------------------------------+
-```
+HERO (AlemDaTendencia.tsx):
+  - Linha 60: min-h-[80vh] -> min-h-[60vh] md:min-h-[90vh]
+  - Linhas 64-102: Adicionar hidden md:block em heroFar e heroRight; ajustar heroMain mobile
+  - Linha 133: Reduzir spacer mobile
+  - Linhas 144-150: Novo titulo h1 + subtitulo reescrito + badge atualizado
 
-Grid responsivo: `grid-cols-2 sm:grid-cols-3 md:grid-cols-4` com items centralizados, grayscale por padrao e cor no hover.
+FAQ (faq-accordion.tsx):
+  - Linhas 9-37: Substituir array de 7 FAQs por 9 FAQs estrategicas
+```
 
