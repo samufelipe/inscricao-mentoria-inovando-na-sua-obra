@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function HostsSection() {
   return (
-    <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+    <section className="relative py-12 md:py-32 bg-white overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[oklch(0.97_0.01_95)] -skew-x-12 translate-x-1/4 z-0" />
       
@@ -21,7 +21,7 @@ export function HostsSection() {
               
               {/* Names Overlay */}
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                <div className="flex justify-between text-white text-xs font-bold tracking-widest uppercase">
+                <div className="flex flex-col sm:flex-row justify-between text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase gap-1 sm:gap-0">
                   <span>Ingrid Zarza</span>
                   <span>Fernanda Bradaschia</span>
                   <span>Juliana Campelo</span>
@@ -41,7 +41,7 @@ export function HostsSection() {
               </ArchitecturalTitle>
             </div>
 
-            <div className="space-y-6 text-gray-600 text-lg leading-relaxed font-light">
+            <div className="space-y-4 sm:space-y-6 text-gray-600 text-base sm:text-lg leading-relaxed font-light">
               <p>
                 <span className="text-[oklch(0.35_0.12_320)] font-medium">Nós três representamos o bastidor que sustenta uma carreira sólida.</span>
               </p>
