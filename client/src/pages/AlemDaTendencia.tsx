@@ -551,11 +551,11 @@ export default function AlemDaTendencia() {
       {/* FOOTER */}
       <footer className="bg-[oklch(0.2_0.02_320)] text-white pt-20 pb-10 border-t border-white/10">
         <div className="container grid md:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-6">
+          <div className="space-y-6 text-left">
             <img 
               src={logoTransparent}
               alt="Além da Tendência" 
-              className="h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+              className="h-16 w-auto object-contain object-left opacity-90 hover:opacity-100 transition-opacity duration-300"
             />
             <p className="text-white/60 text-sm leading-relaxed">
               O evento definitivo para arquitetas que buscam transformar inspiração em realidade através da gestão de escritório e obra.
