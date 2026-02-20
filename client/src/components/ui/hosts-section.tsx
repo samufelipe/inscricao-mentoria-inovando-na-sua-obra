@@ -47,7 +47,7 @@ export function HostsSection() {
               </p>
               
               <p>
-                Enquanto o mercado se encanta com tendências, lançamentos e vitrines como a Expo Revestir e a Casa Cor, nós defendemos aquilo que realmente transforma a trajetória de uma arquiteta: <strong>gestão de escritório e gestão de obra.</strong>
+                Enquanto o mercado se encanta com tendências, lançamentos e vitrines, nós defendemos aquilo que realmente transforma a trajetória de uma arquiteta: <strong>gestão de escritório e gestão de obra.</strong>
               </p>
               
               <p className="border-l-4 border-[oklch(0.75_0.18_65)] pl-6 italic text-gray-800">
