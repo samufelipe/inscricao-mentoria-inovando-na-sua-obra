@@ -53,10 +53,22 @@ export function HostsSection() {
               <p className="border-l-4 border-[oklch(0.75_0.18_65)] pl-6 italic text-gray-800">
                 "Porque antes do projeto fotografado, existe organização, método, responsabilidade e estrutura."
               </p>
-              
-              <p>
-                Acreditamos que essas são as duas prioridades que deveriam ser aprendidas desde o início — não como complemento, mas como fundamento.
-              </p>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                  <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">55mil+</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores Inovando</p>
+                </div>
+                <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                  <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">850+</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">Escritórios Atendidos</p>
+                </div>
+                <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                  <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">47,3mil</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores AjudaMONU</p>
+                </div>
+              </div>
               
               <p className="font-serif text-xl text-[oklch(0.35_0.12_320)] font-bold pt-4">
                 Juntas, mostramos que autoridade não nasce da estética, nasce da base.
