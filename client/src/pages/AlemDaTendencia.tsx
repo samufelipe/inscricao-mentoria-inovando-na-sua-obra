@@ -144,18 +144,36 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
             >
+              {/* Badge Evento Presencial */}
+              <div className="flex items-center gap-2 mb-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span>Evento Presencial</span>
+                <span className="text-white/30">|</span>
+                <span>São Paulo - SP</span>
+              </div>
+
               <h1 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3 sm:mb-4 uppercase drop-shadow-lg">
                 A Arquitetura Acontece{" "}
                 <span className="text-[#C9A84C]">nos Bastidores</span>
               </h1>
               <p className="text-xs sm:text-sm md:text-base text-gray-200 max-w-lg mb-3 sm:mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4 sm:pl-5 drop-shadow-md">
-                Gestão de obra, escritório, iluminação e contratos: o que ninguém mostra nas feiras, mas que define quem cresce de verdade.
+                Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos — o bastidor que define quem cresce de verdade.
               </p>
               <p className="text-[10px] sm:text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-4 sm:mb-6 flex items-center gap-2 drop-shadow-md">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                 Vagas Limitadas • Lote Promocional com 50% OFF
               </p>
 
+              {/* Mobile: data/local compacto */}
+              <div className="flex md:hidden items-center gap-3 text-xs text-white/80 bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15">
+                <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                <span className="font-semibold text-white">10 de Março</span>
+                <span className="text-white/30">|</span>
+                <MapPin className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                <span className="font-semibold text-white">AFRESP - SP</span>
+              </div>
+
+              {/* Desktop: cards detalhados */}
               <div className="hidden md:flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto shadow-lg">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-[#C9A84C]" />
