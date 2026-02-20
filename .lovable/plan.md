@@ -1,95 +1,97 @@
 
 
-# Atualização de Horário e Alinhamento da Copy com a Promessa "A Arquitetura Acontece nos Bastidores"
+# Otimizacao da Hero para Clareza de "Evento Presencial"
 
-## Resumo
+## Problema
 
-Duas frentes de trabalho: (1) corrigir o horário do evento para 13:30 - 19h em todos os pontos da LP e (2) alinhar a copy inteira com a promessa central "A Arquitetura acontece nos bastidores", reforçando a ideia de que o que sustenta uma carreira sólida em arquitetura é o que acontece por trás dos projetos -- gestão, método, contratos, processos.
+Um lead que acessa a pagina nao entende imediatamente que se trata de um evento presencial com data e local definidos. Especificamente:
 
----
-
-## 1. Atualização do Horário (13:30 - 19h)
-
-Todos os locais onde o horário ou duração do evento aparecem:
-
-| Arquivo | Texto Atual | Texto Novo |
-|---------|------------|------------|
-| `faq-accordion.tsx` (FAQ "Quando e onde") | "das 14h as 18h" | "das 13h30 as 19h" |
-| `faq-accordion.tsx` (FAQ "vale a pena?") | "4 horas com especialistas" | "mais de 5 horas com especialistas" |
-| `scarcity-banner.tsx` | "10 de Marco de 2026" (sem horario) | "10 de Marco de 2026 - 13h30 as 19h" |
-| `sticky-header.tsx` | "Evento Presencial - 10 de Marco" | "10 de Marco - 13h30 as 19h" |
+- No **mobile**, os cards de Data e Local estao ocultos (classe `hidden md:flex`), entao nao ha nenhuma referencia a evento presencial na primeira dobra.
+- No **desktop**, a informacao de data/local existe mas esta posicionada de forma discreta no canto inferior.
+- A palavra "evento" ou "presencial" nao aparece em nenhum ponto da hero.
 
 ---
 
-## 2. Alinhamento da Copy com "A Arquitetura Acontece nos Bastidores"
+## Solucao Proposta
 
-### Hero (AlemDaTendencia.tsx)
+### 1. Adicionar badge "EVENTO PRESENCIAL" acima do H1
 
-- **H1 atual**: "Inspiracao Sem Gestao E So Tendencia Que Nao Sai do Papel"
-- **H1 novo**: "A Arquitetura Acontece nos Bastidores" -- a promessa vira o titulo principal, direto e memoravel.
-- **Subtitulo atual**: "Tudo o que voce precisa para sair da ExpoRevestir com um plano real..."
-- **Subtitulo novo**: "Gestao de obra, escritorio, iluminacao e contratos: o que ninguem mostra nas feiras, mas que define quem cresce de verdade." -- reforco dos bastidores sem mencionar ExpoRevestir.
+Inserir um micro-badge logo antes do titulo principal, visivel em todos os dispositivos:
 
-### Secao "O Conceito" (Tendencia Encanta. Estrutura Constroi.)
+```
+EVENTO PRESENCIAL  |  SAO PAULO - SP
+```
 
-- **Titulo**: manter "Tendencia Encanta. Estrutura Constroi." -- complementa perfeitamente a promessa.
-- **Paragrafo 1 ajustado**: Remover referencia a ExpoRevestir. Novo: "O mercado celebra tendencias, lancamentos e vitrines. Mas para que uma ideia vire obra executada e cliente satisfeito, e preciso estrutura."
-- **Paragrafo 2 ajustado**: "O evento Alem da Tendencia nasceu para revelar o que acontece nos bastidores. Enquanto o mercado fala de estetica, nos falamos do que sustenta tudo: o negocio."
-- **Citacao**: manter como esta -- ja combina perfeitamente.
+Estilizado como um badge discreto em uppercase, com icone de MapPin, usando as cores gold (#C9A84C) sobre fundo semi-transparente. Funciona como ancora visual que comunica instantaneamente o formato.
 
-### Secao "Para Quem E"
+### 2. Mostrar data e local no mobile
 
-- **Subtitulo ajustado**: "Se voce sente que o bastidor do seu negocio precisa de mais estrutura, este evento e para voce."
+Remover o `hidden md:flex` dos cards de Data e Local, adaptando-os para mobile com um layout mais compacto:
 
-### Secao Anfitrias (hosts-section.tsx)
+- Versao mobile: uma unica linha horizontal com "10 de Marco | Auditorio AFRESP - SP" 
+- Versao desktop: manter o layout atual com os cards separados
 
-- **Frase de abertura atual**: "Nos tres representamos o bastidor que sustenta uma carreira solida." -- ja esta perfeita, manter.
-- **Frase final atual**: "Juntas, mostramos que autoridade nao nasce da estetica, nasce da base."
-- **Frase final nova**: "Juntas, mostramos que a arquitetura de verdade acontece nos bastidores."
+### 3. Ajustar o subtitulo para mencionar o formato
 
-### CTA dos Palestrantes
+Subtitulo atual:
+> "Gestao de obra, escritorio, iluminacao e contratos: o que ninguem mostra nas feiras, mas que define quem cresce de verdade."
 
-- **Texto atual**: "4 especialistas. 1 dia. Conteudo que transforma carreiras."
-- **Texto novo**: "4 especialistas. 1 dia. O bastidor que transforma carreiras."
+Subtitulo novo:
+> "Um dia inteiro dedicado ao que ninguem mostra: gestao de obra, escritorio, iluminacao e contratos -- o bastidor que define quem cresce de verdade."
 
-### Footer
-
-- **Descricao atual**: "O evento presencial definitivo para arquitetas e designers que buscam gestao, lucratividade e seguranca juridica."
-- **Descricao nova**: "O evento que revela os bastidores de uma carreira solida em arquitetura: gestao, lucratividade e seguranca juridica."
-
-### Copyright
-
-- **Ano atual**: 2025
-- **Ano novo**: 2026
+A expressao "Um dia inteiro dedicado" deixa claro que e um evento com duracao definida, sem perder a promessa dos bastidores.
 
 ---
 
 ## Detalhes Tecnicos
 
-### Arquivos editados:
+### Arquivo: `client/src/pages/AlemDaTendencia.tsx`
 
-1. **`client/src/pages/AlemDaTendencia.tsx`**
-   - Linha 147: H1 do hero
-   - Linha 151: subtitulo do hero
-   - Linhas 222-228: paragrafos da secao O Conceito
-   - Linha 273: subtitulo "Para Quem E"
-   - Linha 428: texto CTA palestrantes
-   - Linha 628: descricao footer
-   - Linha 665: copyright 2025 para 2026
+**Alteracao 1 -- Badge de evento presencial (antes do H1, ~linha 147):**
+Inserir um novo elemento `div` com badge acima do `h1`:
 
-2. **`client/src/components/ui/hosts-section.tsx`**
-   - Linha 96: frase final das anfitrias
+```tsx
+<div className="flex items-center gap-2 mb-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
+  <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+  <span>Evento Presencial</span>
+  <span className="text-white/30">|</span>
+  <span>Sao Paulo - SP</span>
+</div>
+```
 
-3. **`client/src/components/ui/scarcity-banner.tsx`**
-   - Linha 20: adicionar horario
+**Alteracao 2 -- Subtitulo (linha 151-153):**
+Trocar o texto do paragrafo para:
+> "Um dia inteiro dedicado ao que ninguem mostra: gestao de obra, escritorio, iluminacao e contratos -- o bastidor que define quem cresce de verdade."
 
-4. **`client/src/components/ui/sticky-header.tsx`**
-   - Linha 51: adicionar horario
+**Alteracao 3 -- Cards de data/local visiveis no mobile (linhas 159-175):**
+Substituir o bloco atual por dois layouts:
 
-5. **`client/src/components/ui/faq-accordion.tsx`**
-   - Linha 24: "4 horas" para "mais de 5 horas"
-   - Linha 32: "14h as 18h" para "13h30 as 19h"
+- **Mobile** (`flex md:hidden`): layout compacto em uma linha com data e local lado a lado, fonte menor
+- **Desktop** (`hidden md:flex`): manter o layout atual com os cards detalhados
 
-### Principio da edicao:
-Todas as alteracoes sao cirurgicas na copy -- nenhuma mudanca de layout, estrutura ou componentes. Apenas texto atualizado para coerencia com a promessa e horario correto.
+```tsx
+{/* Mobile: compacto */}
+<div className="flex md:hidden items-center gap-3 text-xs text-white/80 bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15">
+  <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0" />
+  <span className="font-semibold text-white">10 de Marco</span>
+  <span className="text-white/30">|</span>
+  <MapPin className="w-4 h-4 text-[#C9A84C] shrink-0" />
+  <span className="font-semibold text-white">AFRESP - SP</span>
+</div>
+
+{/* Desktop: cards detalhados (manter atual) */}
+<div className="hidden md:flex ...">
+  ...
+</div>
+```
+
+### Resumo das alteracoes
+
+| O que muda | Onde | Impacto |
+|---|---|---|
+| Badge "Evento Presencial - Sao Paulo" | Acima do H1 (mobile + desktop) | Clareza imediata do formato |
+| Subtitulo com "Um dia inteiro dedicado" | Paragrafo abaixo do H1 | Reforco de que e um evento com duracao |
+| Cards de data/local no mobile | Abaixo do subtitulo | Informacao critica visivel em qualquer dispositivo |
+
+Nenhuma alteracao de layout, componentes ou estrutura. Apenas copy e visibilidade de elementos existentes.
 
