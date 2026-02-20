@@ -1,51 +1,95 @@
 
 
-# Correções e Ajustes na LP "Além da Tendência"
+# Atualização de Horário e Alinhamento da Copy com a Promessa "A Arquitetura Acontece nos Bastidores"
 
-## 1. Hero: Remover a foto do abraço (heroLeft)
+## Resumo
 
-Remover a imagem `heroLeft` (duas pessoas se abraçando) do hero, mantendo apenas 3 imagens: `heroFar`, `heroMain` e `heroRight`. Ajustar o posicionamento para que a composição fique equilibrada com 3 camadas.
-
-## 2. Seção "O Conceito": Remover imagem e restaurar elementos originais
-
-A imagem grande (`heroMain`) que foi colocada na coluna direita da seção será removida. No lugar, será restaurado o conteúdo conceitual original -- a citação estilizada com aspas e elementos visuais que complementam o texto, sem usar imagem.
-
-## 3. Seção "Para Quem É": Restaurar os cards de perfil
-
-Os 3 cards descritivos de público-alvo (ex: Arquitetas, Designers, Engenheiras) sumiram quando a montagem de fotos foi adicionada. Serão restaurados abaixo da montagem `AudienceMontageV2`.
-
-## 4. Correção dos erros de build
-
-- `variant="white"` não existe no `ArchitecturalSection` -- substituir por `"light"`.
-- `SpeakerCard` usa props `description` e `socialProof`, não `topic` e `bio` -- corrigir as props.
+Duas frentes de trabalho: (1) corrigir o horário do evento para 13:30 - 19h em todos os pontos da LP e (2) alinhar a copy inteira com a promessa central "A Arquitetura acontece nos bastidores", reforçando a ideia de que o que sustenta uma carreira sólida em arquitetura é o que acontece por trás dos projetos -- gestão, método, contratos, processos.
 
 ---
 
-## Detalhes Técnicos
+## 1. Atualização do Horário (13:30 - 19h)
 
-### Arquivo editado:
-- `client/src/pages/AlemDaTendencia.tsx`
+Todos os locais onde o horário ou duração do evento aparecem:
 
-### Mudanças específicas:
+| Arquivo | Texto Atual | Texto Novo |
+|---------|------------|------------|
+| `faq-accordion.tsx` (FAQ "Quando e onde") | "das 14h as 18h" | "das 13h30 as 19h" |
+| `faq-accordion.tsx` (FAQ "vale a pena?") | "4 horas com especialistas" | "mais de 5 horas com especialistas" |
+| `scarcity-banner.tsx` | "10 de Marco de 2026" (sem horario) | "10 de Marco de 2026 - 13h30 as 19h" |
+| `sticky-header.tsx` | "Evento Presencial - 10 de Marco" | "10 de Marco - 13h30 as 19h" |
 
-```text
-HERO (linhas 67-108):
-  - Remover import de heroLeft (linha 19)
-  - Remover bloco da imagem heroLeft (linhas 79-87)
-  - Ajustar heroFar para w-[35%] e heroMain para w-[60%] desktop
+---
 
-SEÇÃO O CONCEITO (linhas 258-269):
-  - Remover o bloco <motion.div> com a imagem heroMain
-  - Substituir por citação estilizada com elementos visuais (aspas decorativas, borda lateral)
+## 2. Alinhamento da Copy com "A Arquitetura Acontece nos Bastidores"
 
-SEÇÃO PARA QUEM É (linhas 273-296):
-  - Após o <AudienceMontageV2 />, adicionar grid com 3 cards de perfil:
-    - Arquitetas e Designers de Interiores
-    - Engenheiras e Gestoras de Obra  
-    - Empreendedoras do Design
+### Hero (AlemDaTendencia.tsx)
 
-ERROS DE BUILD:
-  - Linhas 279, 307, 376: variant="white" → variant="light" (com text color override)
-  - Linhas 313-326: SpeakerCard props topic→removido, bio→description, adicionar socialProof
-```
+- **H1 atual**: "Inspiracao Sem Gestao E So Tendencia Que Nao Sai do Papel"
+- **H1 novo**: "A Arquitetura Acontece nos Bastidores" -- a promessa vira o titulo principal, direto e memoravel.
+- **Subtitulo atual**: "Tudo o que voce precisa para sair da ExpoRevestir com um plano real..."
+- **Subtitulo novo**: "Gestao de obra, escritorio, iluminacao e contratos: o que ninguem mostra nas feiras, mas que define quem cresce de verdade." -- reforco dos bastidores sem mencionar ExpoRevestir.
+
+### Secao "O Conceito" (Tendencia Encanta. Estrutura Constroi.)
+
+- **Titulo**: manter "Tendencia Encanta. Estrutura Constroi." -- complementa perfeitamente a promessa.
+- **Paragrafo 1 ajustado**: Remover referencia a ExpoRevestir. Novo: "O mercado celebra tendencias, lancamentos e vitrines. Mas para que uma ideia vire obra executada e cliente satisfeito, e preciso estrutura."
+- **Paragrafo 2 ajustado**: "O evento Alem da Tendencia nasceu para revelar o que acontece nos bastidores. Enquanto o mercado fala de estetica, nos falamos do que sustenta tudo: o negocio."
+- **Citacao**: manter como esta -- ja combina perfeitamente.
+
+### Secao "Para Quem E"
+
+- **Subtitulo ajustado**: "Se voce sente que o bastidor do seu negocio precisa de mais estrutura, este evento e para voce."
+
+### Secao Anfitrias (hosts-section.tsx)
+
+- **Frase de abertura atual**: "Nos tres representamos o bastidor que sustenta uma carreira solida." -- ja esta perfeita, manter.
+- **Frase final atual**: "Juntas, mostramos que autoridade nao nasce da estetica, nasce da base."
+- **Frase final nova**: "Juntas, mostramos que a arquitetura de verdade acontece nos bastidores."
+
+### CTA dos Palestrantes
+
+- **Texto atual**: "4 especialistas. 1 dia. Conteudo que transforma carreiras."
+- **Texto novo**: "4 especialistas. 1 dia. O bastidor que transforma carreiras."
+
+### Footer
+
+- **Descricao atual**: "O evento presencial definitivo para arquitetas e designers que buscam gestao, lucratividade e seguranca juridica."
+- **Descricao nova**: "O evento que revela os bastidores de uma carreira solida em arquitetura: gestao, lucratividade e seguranca juridica."
+
+### Copyright
+
+- **Ano atual**: 2025
+- **Ano novo**: 2026
+
+---
+
+## Detalhes Tecnicos
+
+### Arquivos editados:
+
+1. **`client/src/pages/AlemDaTendencia.tsx`**
+   - Linha 147: H1 do hero
+   - Linha 151: subtitulo do hero
+   - Linhas 222-228: paragrafos da secao O Conceito
+   - Linha 273: subtitulo "Para Quem E"
+   - Linha 428: texto CTA palestrantes
+   - Linha 628: descricao footer
+   - Linha 665: copyright 2025 para 2026
+
+2. **`client/src/components/ui/hosts-section.tsx`**
+   - Linha 96: frase final das anfitrias
+
+3. **`client/src/components/ui/scarcity-banner.tsx`**
+   - Linha 20: adicionar horario
+
+4. **`client/src/components/ui/sticky-header.tsx`**
+   - Linha 51: adicionar horario
+
+5. **`client/src/components/ui/faq-accordion.tsx`**
+   - Linha 24: "4 horas" para "mais de 5 horas"
+   - Linha 32: "14h as 18h" para "13h30 as 19h"
+
+### Principio da edicao:
+Todas as alteracoes sao cirurgicas na copy -- nenhuma mudanca de layout, estrutura ou componentes. Apenas texto atualizado para coerencia com a promessa e horario correto.
 
