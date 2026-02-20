@@ -513,7 +513,10 @@ export default function AlemDaTendencia() {
             O Que Você Vai Aprender
           </ArchitecturalTitle>
           <p className="text-[oklch(0.75_0.18_65)] font-bold tracking-widest uppercase text-sm mt-4">
-            Programação
+            Programação do Evento
+          </p>
+          <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm">
+            Confira as palestras que vão transformar a forma como você gerencia seu negócio de arquitetura.
           </p>
         </div>
 

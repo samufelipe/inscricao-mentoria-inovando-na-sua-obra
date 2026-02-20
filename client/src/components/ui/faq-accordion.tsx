@@ -34,6 +34,14 @@ export function FAQAccordion() {
     {
       question: "Qual a política de cancelamento?",
       answer: "Cancelamentos podem ser solicitados até 7 dias após a compra, desde que a solicitação seja realizada 48h antes do início do evento, conforme política do Sympla."
+    },
+    {
+      question: "O pagamento é seguro? Qual plataforma é utilizada?",
+      answer: "Sim, totalmente seguro. Utilizamos o Sympla, a maior plataforma de eventos do Brasil, com criptografia de dados e métodos de pagamento confiáveis (cartão de crédito, boleto e PIX). Seus dados financeiros são processados diretamente pelo Sympla, sem qualquer acesso nosso."
+    },
+    {
+      question: "Como vou receber meu ingresso?",
+      answer: "Após a confirmação do pagamento, o Sympla envia automaticamente o ingresso para o e-mail cadastrado na compra. Você também pode acessá-lo pelo app do Sympla. No dia do evento, basta apresentar o ingresso digital (QR Code) na entrada do auditório."
     }
   ];
 
