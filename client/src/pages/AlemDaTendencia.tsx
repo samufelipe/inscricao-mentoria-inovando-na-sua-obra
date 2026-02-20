@@ -14,7 +14,7 @@ import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
 import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { AudienceMontage } from "@/components/ui/audience-montage";
+import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroLeft from "@/assets/alem-da-tendencia/hero-left.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
@@ -111,11 +111,13 @@ export default function AlemDaTendencia() {
             className="absolute inset-0 z-[10] pointer-events-none"
             style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(26,26,26,0.5) 45%, rgba(26,26,26,0.85) 65%, #1a1a1a 85%)' }}
           />
-          {/* Radial vignette */}
+          {/* Radial vignette - Stronger on mobile for text readability */}
           <div
             className="absolute inset-0 z-[11] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%)' }}
+            style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)' }}
           />
+          {/* Mobile specific overlay for text contrast */}
+          <div className="md:hidden absolute inset-0 z-[12] bg-black/40 pointer-events-none" />
         </div>
 
         {/* Content overlaid on images */}
@@ -146,19 +148,19 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
             >
-              <h1 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 uppercase">
+              <h1 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 uppercase drop-shadow-lg">
                 Inspiração Sem Gestão É Só Tendência Que{" "}
                 <span className="text-[#C9A84C]">Não Sai do Papel</span>
               </h1>
-              <p className="text-sm md:text-base text-gray-300 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
+              <p className="text-sm md:text-base text-gray-200 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5 drop-shadow-md">
                 Tudo o que você precisa para sair da ExpoRevestir com um plano real de gestão de obra, escritório, iluminação e contratos.
               </p>
-              <p className="text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2">
+              <p className="text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2 drop-shadow-md">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                 Apenas 297 lugares — Lote Promocional com 50% OFF
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto shadow-lg">
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-[#C9A84C]" />
                   <div>
@@ -184,7 +186,7 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-full"
             >
-              <div className="backdrop-blur-md bg-white/10 border border-white/15 rounded-2xl p-1">
+              <div className="backdrop-blur-md bg-white/10 border border-white/15 rounded-2xl p-1 shadow-2xl">
                 <HeroRegistrationForm />
               </div>
             </motion.div>
@@ -224,39 +226,41 @@ export default function AlemDaTendencia() {
                 A ExpoRevestir apresenta lançamentos. Mostra possibilidades. Desperta ideias.
                 Mas para que uma tendência saia do stand e vire obra executada e cliente satisfeito, é preciso estrutura.
               </p>
-              <p className="font-medium text-[oklch(0.35_0.12_320)] border-l-4 border-[oklch(0.35_0.12_320)] pl-6 py-2 bg-purple-50/50">
-                Além da Tendência é um evento voltado para arquitetas que entendem que inspiração é apenas o ponto de partida.
-              </p>
               <p>
-                Para transformar referências em projetos viáveis, obras bem conduzidas e crescimento sustentável, é preciso dominar aquilo que sustenta a profissão: <strong>gestão de escritório e gestão de obra.</strong>
+                O evento <strong className="text-[oklch(0.35_0.12_320)]">Além da Tendência</strong> nasceu para preencher essa lacuna.
+                Enquanto o mercado fala de estética, nós vamos falar de <strong className="text-[oklch(0.35_0.12_320)]">negócio</strong>.
               </p>
+              <ul className="space-y-3 pt-4">
+                {[
+                  "Como gerenciar obras sem perder o controle financeiro",
+                  "Processos de escritório que blindam seu lucro",
+                  "Contratos que protegem sua autoria e responsabilidade",
+                  "Iluminação técnica que valoriza o projeto real"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-[oklch(0.75_0.18_65)]/20 flex items-center justify-center text-[oklch(0.75_0.18_65)] mt-0.5">
+                      <Check className="w-4 h-4" />
+                    </span>
+                    <span className="text-gray-700 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6 pt-4">
-              <div className="p-6 bg-white shadow-lg border-t-4 border-[oklch(0.35_0.12_320)] hover:-translate-y-1 transition-transform duration-300">
-                <h4 className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)] mb-2 uppercase">Gestão de Escritório</h4>
-                <p className="text-sm text-gray-500">Processos, contratos e posicionamento para crescer com segurança.</p>
-              </div>
-              <div className="p-6 bg-white shadow-lg border-t-4 border-[oklch(0.75_0.18_65)] hover:-translate-y-1 transition-transform duration-300">
-                <h4 className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)] mb-2 uppercase">Gestão de Obra</h4>
-                <p className="text-sm text-gray-500">Técnica, especificação e execução para entregar o que foi prometido.</p>
-              </div>
+            <motion.div variants={fadeInUp} className="pt-4">
+              <ArchitecturalButton onClick={scrollToInscricao}>
+                Quero Profissionalizar Minha Gestão
+              </ArchitecturalButton>
             </motion.div>
           </div>
-          
+
+          {/* Nova Montagem Cinemática */}
           <motion.div variants={fadeInUp} className="relative">
-            <div className="absolute -top-10 -left-10 w-64 h-64 bg-[oklch(0.75_0.18_65)]/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[oklch(0.35_0.12_320)]/10 rounded-full blur-3xl animate-pulse delay-700" />
-            
-            <img 
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/gestao-escritorio.jpg" 
-              alt="Gestão de escritório de arquitetura" 
-              className="relative z-10 w-full shadow-2xl border-8 border-white transform hover:scale-[1.02] transition-transform duration-500"
-            />
-            
-            <div className="absolute -bottom-8 -left-8 bg-[oklch(0.35_0.12_320)] p-6 md:p-8 text-white max-w-[240px] md:max-w-xs shadow-xl z-20">
-              <p className="font-display text-base md:text-xl italic leading-snug">"Autoridade não nasce da estética, nasce da base."</p>
-            </div>
+            <div className="absolute -inset-4 bg-[oklch(0.75_0.18_65)]/10 rounded-3xl -z-10 blur-2xl" />
+            <AudienceMontageV2 />
+            <p className="text-center text-xs text-gray-400 mt-4 uppercase tracking-widest">
+              Networking de alto nível com profissionais de todo o Brasil
+            </p>
           </motion.div>
         </motion.div>
       </ArchitecturalSection>
@@ -264,238 +268,153 @@ export default function AlemDaTendencia() {
       {/* ANFITRIÃS */}
       <HostsSection />
 
-      {/* PARA QUEM É */}
-      <ArchitecturalSection variant="dark" className="text-center">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="max-w-4xl mx-auto space-y-12"
-        >
-          <motion.div variants={fadeInUp} className="space-y-4">
-            <ArchitecturalTitle variant="h2" color="orange" className="mx-auto">
-              Para Quem é Este Evento?
-            </ArchitecturalTitle>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
-              Você sai da ExpoRevestir cheia de ideias... mas na segunda-feira, a realidade do escritório e da obra continua a mesma?
-            </p>
-          </motion.div>
-
-          {/* Montagem cinematográfica de fotos reais com parallax */}
-          <AudienceMontage />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Users,
-                title: "Arquitetas e Designers",
-                desc: "Que atuam no mercado mas sentem que a gestão do escritório e da obra ainda é o calcanhar de Aquiles."
-              },
-              {
-                icon: Check,
-                title: "Quem Quer Ter Escritório Próprio",
-                desc: "Que desejam começar com base sólida — não apenas com portfólio bonito, mas com processos, contratos e método."
-              },
-              {
-                icon: MapPin,
-                title: "Profissionais que Gerenciam Obras",
-                desc: "Engenheiras e arquitetas que precisam dominar a execução para entregar o que foi prometido no projeto."
-              }
-            ].map((item, index) => (
-              <motion.div 
-                key={index}
-                variants={fadeInUp}
-                className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-300 group"
-              >
-                <div className="w-16 h-16 bg-[oklch(0.75_0.18_65)]/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <item.icon className="w-8 h-8 text-[oklch(0.75_0.18_65)]" />
-                </div>
-                <h3 className="font-display text-xl font-bold text-white mb-4 uppercase">{item.title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </ArchitecturalSection>
-
-      {/* CTA Strip after "Para Quem É" */}
-      <motion.div 
-        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-        className="bg-[oklch(0.75_0.18_65)] py-6 text-center"
-      >
-        <div className="container flex flex-col sm:flex-row items-center justify-center gap-4">
-          <p className="text-white font-bold text-lg uppercase tracking-wide">Vagas limitadas — Lote Promocional com 50% OFF</p>
-          <button onClick={scrollToInscricao} className="bg-white text-[oklch(0.35_0.12_320)] font-bold px-8 py-3 rounded-none uppercase tracking-wider text-sm hover:bg-gray-100 transition-colors shadow-lg">
-            Garantir Minha Vaga →
-          </button>
-        </div>
-      </motion.div>
-
       {/* PALESTRANTES */}
-      <ArchitecturalSection id="palestrantes" variant="light">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="space-y-16"
-        >
-          <div className="text-center max-w-3xl mx-auto">
-            <ArchitecturalTitle variant="h3" color="orange">
-              Line-up Exclusivo
-            </ArchitecturalTitle>
-            <ArchitecturalTitle variant="h2" color="purple">
-              Quem Vai Guiar Você
-            </ArchitecturalTitle>
-            <p className="mt-6 text-lg text-gray-600">
-              Reunimos especialistas que vivem o campo de batalha da arquitetura e engenharia todos os dias.
-            </p>
-          </div>
+      <ArchitecturalSection id="palestrantes" variant="dark">
+        <div className="text-center mb-16">
+          <ArchitecturalTitle variant="h3" color="orange">
+            Line-up Oficial
+          </ArchitecturalTitle>
+          <ArchitecturalTitle variant="h2" color="white">
+            Quem Vai Guiar Sua Jornada
+          </ArchitecturalTitle>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <SpeakerCard 
-              name="Luciana Guerra"
-              role="Especialista em Iluminação"
-              description="Arquiteta e Urbanista especialista em iluminação. Defende que a luz é o elemento mais importante de qualquer espaço. Mentora de profissionais de elite com metodologia exclusiva de cálculo e sensibilidade."
-              socialProof="64,1 mil seguidores • 2.500+ alunos formados"
-              image={lucianaGuerraImg}
-            />
-            <SpeakerCard 
-              name="Marcia Pereira"
-              role="Advogada — Contratos para Arquitetos"
-              description="Especialista em unir segurança jurídica e identidade profissional. Traduz o 'juridiquês' para a linguagem do projeto, ajudando escritórios a criarem contratos que valorizam a marca e protegem o profissional."
-              socialProof="Referência em contratos de arquitetura"
-              image={marciaPereira}
-            />
-          </div>
-        </motion.div>
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <SpeakerCard 
+            name="Luciana Guerra"
+            role="Especialista em Iluminação"
+            topic="Iluminação que Vende e Valoriza"
+            image={lucianaGuerraImg}
+            bio="Referência nacional em Lighting Design, Luciana ensina como a luz pode transformar ambientes e aumentar o valor percebido dos seus projetos."
+          />
+          <SpeakerCard 
+            name="Marcia Pereira"
+            role="Advogada Especialista em Arquitetura"
+            topic="Blindagem Jurídica para Arquitetos"
+            image={marciaPereira}
+            bio="Especialista em contratos e responsabilidade civil para arquitetos e engenheiros. Aprenda a se proteger de riscos e garantir seus honorários."
+          />
+        </div>
       </ArchitecturalSection>
 
       {/* CONTEÚDO / MÓDULOS */}
-      <ArchitecturalSection id="conteudo" variant="purple" className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
-        
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="relative z-10 max-w-5xl mx-auto"
-        >
-          <div className="text-center mb-16">
-            <ArchitecturalTitle variant="h2" color="light">
-              O Que Você Vai Aprender
-            </ArchitecturalTitle>
-          </div>
+      <ArchitecturalSection id="conteudo" variant="light">
+        <div className="text-center mb-16">
+          <ArchitecturalTitle variant="h3" color="purple">
+            Programação
+          </ArchitecturalTitle>
+          <ArchitecturalTitle variant="h2" color="purple">
+            O Que Você Vai Aprender
+          </ArchitecturalTitle>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <LearningModule 
-              number="01"
-              title="Gestão de Obra"
-              speaker="Ingrid Zarza & Fernanda Bradaschia"
-              description="Como gerenciar obras de interiores com segurança e lucro — do planejamento à entrega final, antecipando problemas e fidelizando clientes."
-            />
-            <LearningModule 
-              number="02"
-              title="Gestão de Escritório"
-              speaker="Juliana Campelo"
-              description="Estratégias práticas para estruturar seu escritório de arquitetura com processos, precificação e posicionamento que geram lucro e consistência."
-            />
-            <LearningModule 
-              number="03"
-              title="Iluminação que Transforma"
-              speaker="Luciana Guerra"
-              description="Iluminar é mais do que escolher luminária. Unindo ciência, saúde e estética para criar atmosferas que elevam qualquer projeto."
-            />
-            <LearningModule 
-              number="04"
-              title="Contratos que Protegem"
-              speaker="Marcia Pereira"
-              description="Como criar contratos que comunicam com clareza, valorizam sua marca e fortalecem a relação com os clientes — sem juridiquês."
-            />
-          </div>
-        </motion.div>
+        <div className="grid md:grid-cols-2 gap-8">
+          <LearningModule 
+            number="01"
+            title="Gestão de Escritório"
+            description="Processos, precificação e organização interna para escalar seu negócio sem perder a qualidade de vida."
+            speaker="Ingrid Zarza"
+          />
+          <LearningModule 
+            number="02"
+            title="Gestão de Obras"
+            description="Do cronograma à entrega das chaves: como evitar prejuízos, atrasos e dores de cabeça na execução."
+            speaker="Fernanda Bradaschia"
+          />
+          <LearningModule 
+            number="03"
+            title="Iluminação Estratégica"
+            description="Técnicas de lighting design que valorizam o projeto e encantam o cliente final."
+            speaker="Luciana Guerra"
+          />
+          <LearningModule 
+            number="04"
+            title="Segurança Jurídica"
+            description="Contratos à prova de falhas e como se proteger legalmente em todas as etapas do projeto."
+            speaker="Marcia Pereira"
+          />
+        </div>
       </ArchitecturalSection>
 
-      {/* CTA Strip after Módulos */}
-      <motion.div 
-        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-        className="bg-[oklch(0.2_0.02_320)] py-8 text-center border-y border-white/10"
-      >
-        <div className="container space-y-3">
-          <p className="text-white/80 text-base">De <span className="line-through">R$ 297</span> por apenas</p>
-          <p className="text-white font-bold text-4xl">R$ 147,00</p>
-          <button onClick={scrollToInscricao} className="bg-[oklch(0.75_0.18_65)] text-white font-bold px-10 py-4 rounded-none uppercase tracking-wider text-sm hover:bg-[oklch(0.7_0.18_65)] transition-colors shadow-lg mt-2">
-            Quero Minha Vaga com 50% OFF →
-          </button>
-          <p className="text-white/40 text-xs">Apenas 297 lugares disponíveis</p>
-        </div>
-      </motion.div>
-
       {/* LOCAL */}
-      <ArchitecturalSection id="local" variant="light">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid lg:grid-cols-2 gap-12 items-center"
-        >
-          <div className="space-y-8">
+      <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+          <div>
             <ArchitecturalTitle variant="h3" color="orange">
               O Palco
             </ArchitecturalTitle>
-            <ArchitecturalTitle variant="h2" color="purple">
+            <ArchitecturalTitle variant="h2" color="white">
               Auditório AFRESP
             </ArchitecturalTitle>
             
-            <div className="space-y-6 text-lg text-gray-600">
+            <div className="space-y-6 mt-8 text-gray-300 text-lg">
               <p>
-                Um espaço moderno e confortável, localizado no coração de São Paulo, preparado para receber você com toda a infraestrutura necessária para um dia de imersão.
+                Um espaço moderno e confortável no coração de São Paulo, preparado para receber você com toda a estrutura necessária para um dia de imersão.
               </p>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C]">
+                    <MapPin />
+                  </div>
+                  <div>
+                    <strong className="block text-white">Localização Privilegiada</strong>
+                    Av. Brig. Luís Antônio, 4843 - Jardim Paulista, SP
+                  </div>
+                </li>
+                <li className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C]">
+                    <Users />
+                  </div>
+                  <div>
+                    <strong className="block text-white">Networking Exclusivo</strong>
+                    Coffee break incluso para conexões de alto nível
+                  </div>
+                </li>
+              </ul>
               
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-[oklch(0.75_0.18_65)] mt-1 shrink-0" />
-                <div>
-                  <h4 className="font-bold text-[oklch(0.35_0.12_320)]">Endereço</h4>
-                  <p>Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Calendar className="w-6 h-6 text-[oklch(0.75_0.18_65)] mt-1 shrink-0" />
-                <div>
-                  <h4 className="font-bold text-[oklch(0.35_0.12_320)]">Data e Horário</h4>
-                  <p>10 de Março de 2026</p>
-                  <p>Das 14h às 18h</p>
-                </div>
+              <div className="pt-6">
+                <a 
+                  href="https://maps.app.goo.gl/xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-white transition-colors uppercase tracking-wider font-bold text-sm border-b border-[#C9A84C] pb-1"
+                >
+                  Ver no Google Maps <ArrowDown className="-rotate-90 w-4 h-4" />
+                </a>
               </div>
             </div>
-
-            <ArchitecturalButton 
-              variant="outline" 
-              className="mt-4"
-              onClick={() => window.open("https://maps.google.com/?q=Av.+Brigadeiro+Luís+Antônio,+4843+-+Jardim+Paulista,+São+Paulo+-+SP", "_blank")}
-            >
-              Ver no Google Maps
-            </ArchitecturalButton>
           </div>
-
-          <div className="h-[400px] w-full rounded-lg overflow-hidden shadow-2xl border-4 border-white">
-            <LocationMap />
+          
+          <div className="h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
+            {/* Google Maps Embed */}
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.786699368388!2d-46.66479692376166!3d-23.57604497879058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59e6f0a6b0b1%3A0x6f6b6b6b6b6b6b6b!2sAv.%20Brig.%20Lu%C3%ADs%20Ant%C3%B4nio%2C%204843%20-%20Jardim%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001401-002!5e0!3m2!1spt-BR!2sbr!4v1708450000000!5m2!1spt-BR!2sbr" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              className="grayscale group-hover:grayscale-0 transition-all duration-700"
+            ></iframe>
+            
+            {/* Overlay interativo */}
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent pointer-events-none transition-colors duration-500" />
           </div>
-        </motion.div>
+        </div>
       </ArchitecturalSection>
 
       {/* DEPOIMENTOS */}
-      <ArchitecturalSection variant="dark" className="bg-[oklch(0.2_0.02_320)]">
+      <ArchitecturalSection variant="light">
         <div className="text-center mb-16">
-          <ArchitecturalTitle variant="h2" color="light">
+          <ArchitecturalTitle variant="h3" color="purple">
+            Depoimentos
+          </ArchitecturalTitle>
+          <ArchitecturalTitle variant="h2" color="purple">
             Quem Já Viveu a Experiência
           </ArchitecturalTitle>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           <TestimonialCard 
             name="Ana Clara"
