@@ -3,6 +3,7 @@ import { ArchitecturalButton } from "./architectural-button";
 import { ArchitecturalTitle } from "./architectural-title";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { captureLead } from "@/lib/capture-lead";
 
 export function RegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,27 +18,33 @@ export function RegistrationForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Basic validation
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error("Por favor, preencha todos os campos obrigatórios.");
       setIsLoading(false);
       return;
     }
 
-    // Format WhatsApp message
+    try {
+      await captureLead({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        product: "alem-da-tendencia",
+      });
+    } catch {
+      // Non-blocking: don't prevent redirect on capture failure
+    }
+
     const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}`;
     const whatsappUrl = `https://wa.me/551155717229?text=${message}`;
 
-    // Simulate processing delay for better UX
-    setTimeout(() => {
-      window.open(whatsappUrl, "_blank");
-      setIsLoading(false);
-      toast.success("Redirecionando para o WhatsApp...");
-    }, 1000);
+    window.open(whatsappUrl, "_blank");
+    setIsLoading(false);
+    toast.success("Redirecionando para o WhatsApp...");
   };
 
   return (
