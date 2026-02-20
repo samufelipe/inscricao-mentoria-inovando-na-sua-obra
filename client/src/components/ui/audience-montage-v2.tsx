@@ -6,82 +6,92 @@ import audience4 from "@/assets/alem-da-tendencia/audience-4.jpg";
 
 export function AudienceMontageV2() {
   return (
-    <div className="relative w-full overflow-hidden rounded-xl bg-black shadow-2xl">
+    <div className="relative w-full overflow-hidden rounded-xl bg-[#1a1a1a] shadow-2xl">
       {/* Container Panorâmico (Desktop) */}
       <div className="hidden md:grid grid-cols-4 h-[400px] relative">
         {/* Imagem 1 */}
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden group">
           <img
             src={audience1}
             alt="Plateia atenta"
-            className="absolute inset-0 w-full h-full object-cover opacity-60 hover:opacity-80 transition-opacity duration-700"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-transparent to-transparent" />
+          {/* Vinheta suave apenas nas bordas */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
         </div>
 
         {/* Imagem 2 */}
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden group">
           <img
             src={audience2}
             alt="Networking"
-            className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-transparent to-transparent" />
+          {/* Vinheta suave */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
         </div>
 
         {/* Imagem 3 */}
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden group">
           <img
             src={audience3}
             alt="Foco no conteúdo"
-            className="absolute inset-0 w-full h-full object-cover opacity-60 hover:opacity-80 transition-opacity duration-700"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-transparent to-transparent" />
+          {/* Vinheta suave */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
         </div>
 
         {/* Imagem 4 */}
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden group">
           <img
             src={audience4}
             alt="Palestrante"
-            className="absolute inset-0 w-full h-full object-cover opacity-50 hover:opacity-70 transition-opacity duration-700"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black" />
+          {/* Vinheta suave apenas nas bordas */}
+          <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
         </div>
-
-        {/* Overlay Geral para Unificar */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       </div>
 
-      {/* Versão Mobile (Carrossel Vertical Suave) */}
-      <div className="md:hidden flex flex-col gap-0 relative h-[500px]">
-        <div className="flex-1 relative overflow-hidden">
+      {/* Versão Mobile (Grid 2x2 Limpo - Sem cortes estranhos) */}
+      <div className="md:hidden grid grid-cols-2 h-[400px]">
+        <div className="relative overflow-hidden border-r border-b border-white/10">
           <img
             src={audience2}
             alt="Networking"
-            className="absolute inset-0 w-full h-full object-cover opacity-80"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         </div>
-        <div className="flex-1 relative overflow-hidden">
+        <div className="relative overflow-hidden border-b border-white/10">
           <img
             src={audience1}
             alt="Plateia"
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         </div>
-        
-        {/* Vinheta Forte Mobile */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+        <div className="relative overflow-hidden border-r border-white/10">
+          <img
+            src={audience3}
+            alt="Foco"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
+        <div className="relative overflow-hidden">
+          <img
+            src={audience4}
+            alt="Palestra"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
       </div>
 
-      {/* Bordas Cinemáticas (Vinheta Geral) */}
-      <div className="absolute inset-0 pointer-events-none border-[1px] border-white/10 rounded-xl shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]" />
+      {/* Borda sutil para acabamento */}
+      <div className="absolute inset-0 pointer-events-none border border-white/10 rounded-xl" />
     </div>
   );
 }
