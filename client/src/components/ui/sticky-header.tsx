@@ -35,13 +35,16 @@ export function StickyHeader() {
       )}
     >
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex items-center gap-2 cursor-pointer"
+        >
           <img 
             src={logoDark}
             alt="Além da Tendência" 
             className="h-12 w-auto object-contain"
           />
-        </div>
+        </button>
         
         <div className="flex items-center gap-4">
           <span className="hidden md:block text-sm font-medium text-gray-600">
