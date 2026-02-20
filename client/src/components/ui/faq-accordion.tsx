@@ -8,32 +8,40 @@ import {
 export function FAQAccordion() {
   const faqs = [
     {
+      question: "Já tenho experiência. O evento é só para iniciantes?",
+      answer: "De forma alguma. O conteúdo foi desenhado para profissionais que já atuam no mercado e querem escalar — com processos mais sólidos, contratos mais seguros e gestão de obra mais lucrativa. Quanto mais experiência você tem, mais vai aproveitar."
+    },
+    {
+      question: "O que torna este evento diferente de outros do mercado?",
+      answer: "Reunimos 4 especialistas de áreas complementares (gestão de obra, gestão de escritório, iluminação e contratos) em um único dia. Não é palestra motivacional — é conteúdo prático que você aplica na segunda-feira. Além disso, o formato presencial com apenas 297 lugares garante networking de altíssimo nível."
+    },
+    {
+      question: "Vou conseguir aplicar o conteúdo imediatamente?",
+      answer: "Sim. Cada módulo é focado em ações práticas. Você sai com um plano claro para gestão de obra, precificação, contratos e iluminação — tudo aplicável na semana seguinte, sem depender de cursos longos."
+    },
+    {
+      question: "O investimento de R$147 realmente vale a pena?",
+      answer: "R$147 é menos do que um almoço de negócios em São Paulo. No evento, você acessa 4 horas com especialistas que cobram milhares por consultoria, além de networking com centenas de profissionais. Um único contrato bem feito ou uma obra melhor gerida já paga o investimento dezenas de vezes."
+    },
+    {
+      question: "Não moro em São Paulo. Vale a pena ir?",
+      answer: "Profissionais de todo o Brasil participam justamente pelo conteúdo exclusivo e pelo networking presencial que não existe online. O retorno em conexões, parcerias e aprendizado prático supera em muito o custo do deslocamento."
+    },
+    {
       question: "Quando e onde será o evento?",
-      answer: "O evento será realizado no dia 10 de Março de 2026, das 14h às 18h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP)."
+      answer: "10 de Março de 2026, das 14h às 18h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP). Fácil acesso por transporte público e com estacionamento conveniado nas proximidades."
     },
     {
-      question: "O evento é presencial ou online?",
-      answer: "O evento é 100% presencial, focado em networking e imersão prática. Não haverá transmissão online."
+      question: "Receberei certificado de participação?",
+      answer: "Sim, todas as participantes recebem certificado digital após o evento."
     },
     {
-      question: "Receberei certificado?",
-      answer: "Sim, todas as participantes receberão certificado de participação digital após o evento."
-    },
-    {
-      question: "Posso levar acompanhante?",
-      answer: "O ingresso é individual. Caso queira levar acompanhante, é necessário adquirir um ingresso adicional."
+      question: "Haverá coffee break?",
+      answer: "Sim. Haverá um momento dedicado ao networking com coffee break incluso no valor da inscrição — um dos momentos mais valiosos do evento."
     },
     {
       question: "Qual a política de cancelamento?",
       answer: "Cancelamentos podem ser solicitados até 7 dias após a compra, desde que a solicitação seja realizada 48h antes do início do evento, conforme política do Sympla."
-    },
-    {
-      question: "Haverá coffee break?",
-      answer: "Sim, haverá um momento de networking com coffee break incluso no valor da inscrição."
-    },
-    {
-      question: "Como faço para chegar ao local?",
-      answer: "O local possui fácil acesso por transporte público e estacionamento conveniado nas proximidades."
     }
   ];
 
