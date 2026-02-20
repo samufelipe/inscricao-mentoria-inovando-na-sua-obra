@@ -20,6 +20,7 @@ import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 // heroLeft removed per plan
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
+import heroEvent from "@/assets/alem-da-tendencia/hero-event.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra.png";
 import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo.jpg";
@@ -80,11 +81,20 @@ export default function AlemDaTendencia() {
             }}
           />
           {/* Camada 2 removida (heroLeft) - agora só 3 imagens */}
-          {/* Camada 3: CENTRAL principal - larger on mobile */}
+          {/* Camada 3: CENTRAL principal - heroMain on desktop, heroEvent on mobile */}
+          <img
+            src={heroEvent}
+            alt="Evento Além da Tendência - Mentoras"
+            className="md:hidden absolute left-1/2 -translate-x-1/2 top-0 w-[95%] h-full object-cover object-[center_30%] z-[3]"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            }}
+          />
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[95%] md:w-[60%] h-full object-cover object-[center_35%] z-[3]"
+            className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 w-[60%] h-full object-cover object-[center_35%] z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
@@ -208,10 +218,10 @@ export default function AlemDaTendencia() {
           </div>
         </div>
 
-        {/* Transition gradient from dark hero to light page */}
+        {/* Transition gradient from dark hero to light page - smoother */}
         <div 
-          className="relative z-20 w-full h-20 md:h-32"
-          style={{ background: 'linear-gradient(to bottom, #1a1a1a 0%, oklch(0.97 0.01 95) 100%)' }}
+          className="relative z-20 w-full h-32 md:h-40"
+          style={{ background: 'linear-gradient(to bottom, #1a1a1a 0%, rgba(26,26,26,0.6) 30%, rgba(26,26,26,0.2) 55%, oklch(0.97 0.01 95 / 0.6) 75%, oklch(0.97 0.01 95) 100%)' }}
         />
       </section>
 
