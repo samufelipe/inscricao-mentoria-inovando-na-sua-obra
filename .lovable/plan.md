@@ -1,49 +1,34 @@
 
 
-# Salvar dados do formulario no banco antes de redirecionar para o Sympla
+# Corrigir tela branca - Variáveis de ambiente do banco de dados
 
-## Resumo
+## Problema
 
-Criar uma edge function para salvar os dados de lead (nome, email, telefone) na tabela `checkout_intents` existente antes de redirecionar o usuario para o Sympla. Os dois formularios da LP "Alem da Tendencia" (hero e secao de inscricao) serao atualizados para enviar os dados ao backend antes do redirecionamento.
+O aplicativo está exibindo uma tela branca em todas as rotas porque o cliente do banco de dados não consegue inicializar. O erro no console é:
 
-## O que sera feito
+```
+Error: supabaseUrl is required.
+```
 
-1. **Criar edge function `capture-lead`** que recebe nome, email, telefone, produto, UTMs e page_url, e insere na tabela `checkout_intents` com status "started".
+Isso indica que as variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_PUBLISHABLE_KEY` não estão sendo lidas corretamente do arquivo `.env`.
 
-2. **Atualizar os dois formularios da LP** (`hero-registration-form.tsx` e `registration-form.tsx`) para:
-   - Chamar a edge function antes de redirecionar
-   - Redirecionar para o Sympla (por enquanto mantendo o link do WhatsApp ate voce fornecer o link do Sympla)
-   - Manter feedback visual de loading e tratamento de erros
+## Causa raiz
 
-3. **Capturar UTMs da URL** para fins de rastreamento de campanhas (utm_source, utm_medium, etc.)
+O arquivo `.env` foi sobrescrito manualmente durante a implementação anterior (capture-lead), o que pode ter corrompido ou removido as variáveis necessárias. Este arquivo é gerenciado automaticamente pelo Lovable Cloud e não deve ser editado.
 
----
+## Solução
+
+1. **Restaurar o arquivo `.env`** com os valores corretos das variáveis de ambiente do Lovable Cloud (que já estão disponíveis no sistema). O arquivo será recriado com o conteúdo correto:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_PUBLISHABLE_KEY`
+   - `VITE_SUPABASE_PROJECT_ID`
+
+2. **Verificar** que ambas as páginas (`/` e `/alem-da-tendencia`) voltam a carregar normalmente após a correção.
 
 ## Detalhes tecnicos
 
-### 1. Edge function `supabase/functions/capture-lead/index.ts`
-
-- Recebe POST com `{ name, email, phone, product, page_url, utm_source, utm_medium, utm_campaign, utm_content, utm_term }`
-- Valida email e campos obrigatorios no servidor
-- Insere na tabela `checkout_intents` usando `SUPABASE_SERVICE_ROLE_KEY` (ja configurado como secret)
-- Retorna `{ success: true, id }` ou erro
-- Inclui headers CORS padrao
-
-### 2. Atualizacao dos formularios
-
-- Importar o cliente Supabase
-- No `handleSubmit`, antes do redirecionamento:
-  - Chamar `supabase.functions.invoke('capture-lead', { body: { ... } })`
-  - Se falhar, exibir toast de erro mas ainda redirecionar (nao bloquear a compra)
-- Extrair UTMs de `window.location.search`
-
-### 3. Configuracao
-
-- Adicionar entrada `[functions.capture-lead]` com `verify_jwt = false` no `supabase/config.toml`
-- Nao sao necessarios novos secrets (ja existem `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`)
-- Nao sao necessarias alteracoes no schema da tabela `checkout_intents` (ja possui todos os campos necessarios)
-
-### Observacao sobre o Sympla
-
-Assim que voce fornecer o link do evento no Sympla, substituirei o redirecionamento atual (WhatsApp) pelo link correto do Sympla nos dois formularios.
+- O arquivo `src/integrations/supabase/client.ts` lê `import.meta.env.VITE_SUPABASE_URL` e `import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY`
+- Quando essas variáveis estão `undefined`, o `createClient` lança o erro `supabaseUrl is required`
+- Como esse erro ocorre no nível do módulo (fora de try/catch), ele impede toda a aplicação de renderizar
+- A correção é simplesmente garantir que o `.env` contenha os valores corretos novamente
 
