@@ -1,82 +1,70 @@
 
 
-# Ajustes na LP "Alem da Tendencia"
+# Otimizacao da imagem Hero - Tres anfitrias visiveis
 
-## Resumo das alteracoes
+## Problemas identificados
 
-Sao 5 ajustes principais que serao feitos em arquivos especificos, sem afetar a pagina principal.
+### Desktop (image-82)
+- `object-position: center 15%` puxa a imagem para cima demais, mostrando teto/estrutura metalica
+- O gradiente escuro comeca a cobrir a partir de 55% da altura, exatamente onde as mulheres ficam posicionadas
+- O formulario no canto direito nao e o problema principal - e a combinacao de posicao + overlay
 
----
+### Mobile (image-81)
+- Mesmo problema de `object-position: center 15%` mostrando teto
+- O overlay adicional `bg-black/25` + vinheta radial escurecem demais os rostos
+- As mulheres aparecem na metade inferior, ja na zona do gradiente escuro
 
-## 1. Hero Desktop - Reposicionar imagem das tres mulheres
+## Solucao proposta
 
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
+### 1. Reposicionar a imagem (Desktop e Mobile)
 
-A imagem central (`heroMain`) atualmente usa `object-position: center 35%`, o que corta parte das anfitrias. Vou ajustar para `object-position: center 15%` (ou similar) para "subir" a imagem e mostrar as tres mulheres de forma mais nitida. Tambem posso aumentar levemente a largura da imagem central (de 60% para 65%) para dar mais destaque.
+Trocar `object-position` de `center 15%` para `center 38%` - isso "desce" o enquadramento para centralizar nos rostos/bustos das tres mulheres em vez do teto.
 
-## 2. Hero Mobile - Trocar imagem e reorganizar layout
+- **Desktop:** `objectPosition: 'center 38%'`
+- **Mobile:** `object-[center_38%]`
 
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
+### 2. Ajustar o gradiente de overlay (Desktop e Mobile)
 
-- Trocar a imagem mobile de `heroFar` (publico sentado) para `heroMain` (tres mulheres em pe)
-- Reorganizar o layout mobile para que a imagem das anfitrias apareca primeiro com mais destaque, e o formulario fique abaixo da imagem (em vez de sobrepor)
-- Ajustar `object-position` para centralizar as tres mulheres no mobile tambem
-- Manter os efeitos visuais (gradientes, vinheta) que ja estao aplicados
-
-## 3. Preco com parcelamento estrategico
-
-**Arquivo:** `client/src/components/ui/hero-registration-form.tsx`
-
-Atualizar a exibicao de preco no formulario:
-- Manter o preco cheio riscado: ~~R$ 297,00~~
-- Manter o preco total: R$ 147,00
-- Adicionar abaixo: **ou 5x de R$ 29,40** (mais acessivel visualmente)
-
-Concordo com a sugestao de 5x de R$ 29,40 - e um valor psicologicamente atraente (abaixo de R$ 30 por parcela).
-
-## 4. Reduzir tamanho dos titulos das secoes
-
-**Arquivo:** `client/src/components/ui/architectural-title.tsx`
-
-Reduzir levemente os tamanhos tipograficos do variant `h2` (usado em todas as secoes):
+O gradiente atual comeca a escurecer a partir de 35% da altura, ficando forte demais em 55%. Vou empurrar o inicio do escurecimento mais para baixo, deixando a area central (onde as mulheres estao) mais clara:
 
 De:
-```
-text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
+```text
+transparent 0% -> transparent 35% -> rgba(0.4) 55% -> rgba(0.85) 75% -> solido 90%
 ```
 Para:
+```text
+transparent 0% -> transparent 50% -> rgba(0.4) 65% -> rgba(0.85) 80% -> solido 92%
 ```
-text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl
-```
 
-Uma reducao de 1 nivel em cada breakpoint - sutil mas suficiente para ficar mais clean.
+Isso mantem a legibilidade do texto na parte inferior mas libera a area central para as mulheres aparecerem.
 
-## 5. Remover duas perguntas do FAQ
+### 3. Reduzir overlay mobile
 
-**Arquivo:** `client/src/components/ui/faq-accordion.tsx`
+- Reduzir o overlay fixo mobile de `bg-black/25` para `bg-black/10`
+- Suavizar a vinheta radial: mudar de `transparent 30%` para `transparent 45%`
 
-Remover as duas perguntas marcadas em vermelho na imagem:
-- "Receberei certificado de participacao?"
-- "Havera coffee break?"
+### 4. Reduzir o spacer superior
 
-O FAQ ficara com 7 perguntas em vez de 9.
-
----
+O spacer `min-h-[80px] md:min-h-[180px]` empurra o conteudo para baixo. Reduzir para `min-h-[40px] md:min-h-[100px]` para que o texto e formulario nao fiquem tao baixos (na zona mais escura), liberando mais area visivel das mulheres acima.
 
 ## Detalhes tecnicos
 
-### Arquivos modificados
+### Arquivo modificado
 
-| Arquivo | Alteracao |
-|---------|-----------|
-| `client/src/pages/AlemDaTendencia.tsx` | Reposicionar heroMain no desktop (object-position), trocar imagem mobile para heroMain, reorganizar layout mobile (imagem + formulario empilhados) |
-| `client/src/components/ui/hero-registration-form.tsx` | Adicionar linha de parcelamento "ou 5x de R$ 29,40" |
-| `client/src/components/ui/architectural-title.tsx` | Reduzir tamanhos do variant h2 em 1 nivel por breakpoint |
-| `client/src/components/ui/faq-accordion.tsx` | Remover 2 itens do array de FAQs (certificado e coffee break) |
+`client/src/pages/AlemDaTendencia.tsx`
+
+| Alteracao | Linha | De | Para |
+|-----------|-------|-----|------|
+| object-position mobile | ~88 | `object-[center_15%]` | `object-[center_38%]` |
+| object-position desktop | ~101 | `center 15%` | `center 38%` |
+| Gradiente overlay | ~118 | `transparent 35%, rgba 55%, rgba 75%, solido 90%` | `transparent 50%, rgba 65%, rgba 80%, solido 92%` |
+| Overlay mobile | ~126 | `bg-black/25` | `bg-black/10` |
+| Vinheta radial | ~123 | `transparent 30%` | `transparent 45%` |
+| Spacer | ~146 | `min-h-[80px] md:min-h-[180px]` | `min-h-[40px] md:min-h-[100px]` |
 
 ### Impacto
 
-- Nenhuma alteracao afeta a pagina principal (Home/Mentoria)
-- O componente `ArchitecturalTitle` e compartilhado, mas a reducao e sutil e melhora ambas as paginas
-- Nenhuma dependencia nova necessaria
+- Apenas a pagina Alem da Tendencia e afetada
+- Nenhum outro componente ou pagina e modificado
+- A legibilidade do texto e mantida pelo gradiente (apenas empurrado mais para baixo)
 
