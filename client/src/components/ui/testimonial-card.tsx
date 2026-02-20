@@ -16,12 +16,12 @@ export function TestimonialCard({
   className,
 }: TestimonialCardProps) {
   return (
-    <div className={cn("bg-white p-8 shadow-lg border-t-4 border-[oklch(0.35_0.12_320)] relative", className)}>
-      <div className="absolute -top-6 left-8 w-12 h-12 bg-[oklch(0.75_0.18_65)] rounded-full flex items-center justify-center text-white text-2xl font-serif font-bold">
+    <div className={cn("bg-white p-5 sm:p-8 shadow-lg border-t-4 border-[oklch(0.35_0.12_320)] relative", className)}>
+      <div className="absolute -top-5 sm:-top-6 left-5 sm:left-8 w-10 h-10 sm:w-12 sm:h-12 bg-[oklch(0.75_0.18_65)] rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-serif font-bold">
         "
       </div>
       
-      <p className="text-gray-600 italic mb-6 pt-4 leading-relaxed">
+      <p className="text-gray-600 italic mb-4 sm:mb-6 pt-3 sm:pt-4 leading-relaxed text-sm sm:text-base">
         "{quote}"
       </p>
       

@@ -41,7 +41,7 @@ export function RegistrationForm() {
   };
 
   return (
-    <div className="bg-white p-8 md:p-12 shadow-2xl border-l-8 border-[oklch(0.75_0.18_65)]">
+    <div className="bg-white p-5 sm:p-8 md:p-12 shadow-2xl border-l-4 sm:border-l-8 border-[oklch(0.75_0.18_65)]">
       <ArchitecturalTitle variant="h3" color="purple" className="mb-6">
         Garanta Sua Vaga
       </ArchitecturalTitle>
@@ -51,7 +51,7 @@ export function RegistrationForm() {
       </p>
       
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-bold uppercase tracking-wider text-gray-500">Nome Completo *</label>
             <input 

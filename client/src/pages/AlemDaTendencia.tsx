@@ -61,7 +61,7 @@ export default function AlemDaTendencia() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-[oklch(0.97_0.01_95)] overflow-x-hidden">
+    <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-[oklch(0.97_0.01_95)] overflow-x-hidden w-full max-w-[100vw]">
       <StickyHeader />
       
       {/* HERO SECTION - Full Dark Cinematic Integrated */}
@@ -116,7 +116,7 @@ export default function AlemDaTendencia() {
         </div>
 
         {/* Content overlaid on images */}
-        <div className="relative z-20 flex-1 flex flex-col container mx-auto px-4">
+        <div className="relative z-20 flex-1 flex flex-col container mx-auto px-3 sm:px-4">
           {/* Logo - top center */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -132,10 +132,10 @@ export default function AlemDaTendencia() {
           </motion.div>
 
           {/* Spacer to push content to bottom half */}
-          <div className="flex-1 min-h-[40px] md:min-h-[180px]" />
+          <div className="flex-1 min-h-[20px] md:min-h-[180px]" />
 
           {/* Bottom content: text + form */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end pb-8 md:pb-16">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-end pb-6 md:pb-16">
             {/* Left: Text Content */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
@@ -143,14 +143,14 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
             >
-              <h1 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 uppercase drop-shadow-lg">
+              <h1 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3 sm:mb-4 uppercase drop-shadow-lg">
                 Inspiração Sem Gestão É Só Tendência Que{" "}
                 <span className="text-[#C9A84C]">Não Sai do Papel</span>
               </h1>
-              <p className="text-sm md:text-base text-gray-200 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5 drop-shadow-md">
+              <p className="text-xs sm:text-sm md:text-base text-gray-200 max-w-lg mb-3 sm:mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4 sm:pl-5 drop-shadow-md">
                 Tudo o que você precisa para sair da ExpoRevestir com um plano real de gestão de obra, escritório, iluminação e contratos.
               </p>
-              <p className="text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2 drop-shadow-md">
+              <p className="text-[10px] sm:text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-4 sm:mb-6 flex items-center gap-2 drop-shadow-md">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                 Vagas Limitadas • Lote Promocional com 50% OFF
               </p>
@@ -204,7 +204,7 @@ export default function AlemDaTendencia() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
         >
           <div className="space-y-8">
             <motion.div variants={fadeInUp}>
@@ -216,7 +216,7 @@ export default function AlemDaTendencia() {
               </p>
             </motion.div>
             
-            <motion.div variants={fadeInUp} className="text-gray-600 space-y-6 text-lg leading-relaxed">
+            <motion.div variants={fadeInUp} className="text-gray-600 space-y-4 sm:space-y-6 text-base sm:text-lg leading-relaxed">
               <p>
                 A ExpoRevestir apresenta lançamentos. Mostra possibilidades. Desperta ideias.
                 Mas para que uma tendência saia do stand e vire obra executada e cliente satisfeito, é preciso estrutura.
@@ -251,15 +251,15 @@ export default function AlemDaTendencia() {
 
           {/* Citação estilizada */}
           <motion.div variants={fadeInUp} className="relative flex items-center justify-center">
-            <div className="relative bg-[oklch(0.35_0.12_320)]/5 border-l-4 border-[oklch(0.75_0.18_65)] p-8 md:p-12 rounded-r-2xl">
-              <span className="absolute -top-6 -left-2 text-[oklch(0.75_0.18_65)] text-8xl font-serif leading-none opacity-30">"</span>
-              <p className="text-xl md:text-2xl font-serif italic text-[oklch(0.35_0.12_320)] leading-relaxed mb-4">
+            <div className="relative bg-[oklch(0.35_0.12_320)]/5 border-l-4 border-[oklch(0.75_0.18_65)] p-6 sm:p-8 md:p-12 rounded-r-2xl">
+              <span className="absolute -top-4 sm:-top-6 -left-2 text-[oklch(0.75_0.18_65)] text-5xl sm:text-8xl font-serif leading-none opacity-30">"</span>
+              <p className="text-lg sm:text-xl md:text-2xl font-serif italic text-[oklch(0.35_0.12_320)] leading-relaxed mb-4">
                 Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas, quando existe método.
               </p>
               <p className="text-sm uppercase tracking-widest text-[oklch(0.75_0.18_65)] font-bold">
                 Filosofia do Evento
               </p>
-              <span className="absolute -bottom-6 right-4 text-[oklch(0.75_0.18_65)] text-8xl font-serif leading-none opacity-30 rotate-180">"</span>
+              <span className="absolute -bottom-4 sm:-bottom-6 right-4 text-[oklch(0.75_0.18_65)] text-5xl sm:text-8xl font-serif leading-none opacity-30 rotate-180">"</span>
             </div>
           </motion.div>
         </motion.div>
@@ -271,7 +271,7 @@ export default function AlemDaTendencia() {
           <ArchitecturalTitle variant="h2" color="light">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
-          <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
+          <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-sm sm:text-base px-2">
             Reunimos profissionais que buscam ir além do óbvio e transformar seus escritórios em empresas sólidas e lucrativas.
           </p>
         </div>
@@ -289,32 +289,32 @@ export default function AlemDaTendencia() {
         {/* Cards de perfil do público-alvo */}
         <motion.div 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-8 mt-12 relative z-10"
+          className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12 relative z-10"
         >
           {[
             {
               icon: <Users className="w-8 h-8 text-[#C9A84C]" />,
               title: "Arquitetas e Designers de Interiores",
-              desc: "Você que projeta, especifica e executa - mas sente que falta método para escalar. Aqui você vai estruturar seu escritório como uma empresa real, com processos que sustentam o crescimento."
+              desc: "Você que projeta, especifica e executa, mas sente que falta método para escalar. Aqui você vai estruturar seu escritório como uma empresa real."
             },
             {
               icon: <CheckCircle2 className="w-8 h-8 text-[#C9A84C]" />,
               title: "Quem Busca Estrutura e Processos",
-              desc: "Talento sem gestão não escala. Se você precisa precificar com segurança, organizar sua operação e proteger seu lucro, este evento foi desenhado para você sair com um plano concreto."
+              desc: "Talento sem gestão não escala. Se você precisa precificar com segurança e organizar sua operação, este evento foi desenhado para você."
             },
             {
               icon: <Calendar className="w-8 h-8 text-[#C9A84C]" />,
               title: "Quem Quer Transformar Tendência em Execução",
-              desc: "Você acompanha feiras, se inspira e consome conteúdo - mas na hora de executar, falta segurança jurídica, controle financeiro e método de obra. Aqui a tendência vira projeto entregue."
+              desc: "Você acompanha feiras, se inspira e consome conteúdo, mas na hora de executar, falta segurança jurídica e método de obra. Aqui a tendência vira projeto entregue."
             }
           ].map((card, i) => (
             <motion.div 
               key={i} variants={fadeInUp}
-              className="border-l-2 border-[#C9A84C]/30 pl-8 py-2 hover:border-[#C9A84C] transition-all duration-500 group"
+              className="border-l-2 border-[#C9A84C]/30 pl-5 sm:pl-8 py-2 hover:border-[#C9A84C] transition-all duration-500 group"
             >
               <div className="mb-4">{card.icon}</div>
-              <h3 className="text-white font-bold text-lg mb-3 group-hover:text-[#C9A84C] transition-colors">{card.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{card.desc}</p>
+              <h3 className="text-white font-bold text-base sm:text-lg mb-2 sm:mb-3 group-hover:text-[#C9A84C] transition-colors">{card.title}</h3>
+              <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">{card.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -325,7 +325,7 @@ export default function AlemDaTendencia() {
           className="text-center mt-14 relative z-10"
         >
           <p className="text-gray-400 text-sm mb-4 uppercase tracking-wider">Se você se identificou, o próximo passo é simples:</p>
-          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-12 py-4 uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1">
+          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-8 sm:px-12 py-4 uppercase tracking-wider text-xs sm:text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
             Garantir Minha Vaga →
           </button>
         </motion.div>
@@ -347,21 +347,21 @@ export default function AlemDaTendencia() {
 
         <motion.div 
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          className="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto"
         >
           {/* Card 1: Inovando na Sua Obra */}
           <motion.div variants={fadeInUp} className="group">
-            <div className="overflow-hidden relative aspect-[4/5]">
+            <div className="overflow-hidden relative aspect-[4/5] sm:aspect-[4/5]">
               <img src={inovandoObraImg} alt="Ingrid Zarza e Fernanda Bradaschia" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Gestão de Obras de Interiores</p>
-                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Ingrid Zarza & Fernanda Bradaschia</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">Especialistas em gestão de obras com método, segurança e resultados reais. Criaram uma metodologia para arquitetas e designers que querem gerenciar obras com mais qualidade e controle.</p>
-                <div className="flex flex-wrap gap-3 text-xs">
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">200+ Alunas</span>
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">250+ Obras Concluídas</span>
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8">
+                <p className="text-[#C9A84C] text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-1 sm:mb-2">Gestão de Obras de Interiores</p>
+                <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">Ingrid Zarza & Fernanda Bradaschia</h3>
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">Especialistas em gestão de obras com método, segurança e resultados reais. Criaram uma metodologia para arquitetas e designers que querem gerenciar obras com mais qualidade e controle.</p>
+                <div className="flex flex-wrap gap-2 sm:gap-3 text-[10px] sm:text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">200+ Alunas</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">250+ Obras Concluídas</span>
                 </div>
               </div>
             </div>
@@ -373,13 +373,13 @@ export default function AlemDaTendencia() {
               <img src={julianaCapelo} alt="Juliana Capelo" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Gestão Estratégica de Escritórios</p>
-                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Juliana Capelo</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">Especialista em gestão estratégica para escritórios de arquitetura. Ao lado de Larissa Kock e Guilherme Lessa, é sócia da MONU Arquitetura, com projetos no Brasil, Emirados Árabes, EUA e Inglaterra.</p>
-                <div className="flex flex-wrap gap-3 text-xs">
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">500+ Escritórios</span>
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">2000+ Alunos</span>
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8">
+                <p className="text-[#C9A84C] text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-1 sm:mb-2">Gestão Estratégica de Escritórios</p>
+                <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">Juliana Capelo</h3>
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">Especialista em gestão estratégica para escritórios de arquitetura. Ao lado de Larissa Kock e Guilherme Lessa, é sócia da MONU Arquitetura, com projetos no Brasil, Emirados Árabes, EUA e Inglaterra.</p>
+                <div className="flex flex-wrap gap-2 sm:gap-3 text-[10px] sm:text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">500+ Escritórios</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">2000+ Alunos</span>
                 </div>
               </div>
             </div>
@@ -391,13 +391,13 @@ export default function AlemDaTendencia() {
               <img src={lucianaGuerraImg} alt="Luciana Guerra" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Especialista em Iluminação</p>
-                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Luciana Guerra</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">Arquiteta e Urbanista com foco em iluminação e metodologia própria. Referência para marcas globais e projetos de luxo, defende que a luz é o elemento mais importante de qualquer espaço.</p>
-                <div className="flex flex-wrap gap-3 text-xs">
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">2.500+ Alunos Formados</span>
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">Metodologia Exclusiva</span>
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8">
+                <p className="text-[#C9A84C] text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-1 sm:mb-2">Especialista em Iluminação</p>
+                <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">Luciana Guerra</h3>
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">Arquiteta e Urbanista com foco em iluminação e metodologia própria. Referência para marcas globais e projetos de luxo, defende que a luz é o elemento mais importante de qualquer espaço.</p>
+                <div className="flex flex-wrap gap-2 sm:gap-3 text-[10px] sm:text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">2.500+ Alunos Formados</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">Metodologia Exclusiva</span>
                 </div>
               </div>
             </div>
@@ -409,13 +409,13 @@ export default function AlemDaTendencia() {
               <img src={marciaPereira} alt="Márcia Pereira" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-                <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Contratos para Arquitetos</p>
-                <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Márcia Pereira</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">Advogada que traduz o juridiquês para a linguagem do projeto. Ajuda escritórios a criarem contratos que comunicam com clareza, valorizam a marca e fortalecem a relação com clientes.</p>
-                <div className="flex flex-wrap gap-3 text-xs">
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">Segurança Jurídica</span>
-                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-white">Contratos Estratégicos</span>
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8">
+                <p className="text-[#C9A84C] text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-1 sm:mb-2">Contratos para Arquitetos</p>
+                <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">Márcia Pereira</h3>
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none">Advogada que traduz o juridiquês para a linguagem do projeto. Ajuda escritórios a criarem contratos que comunicam com clareza, valorizam a marca e fortalecem a relação com clientes.</p>
+                <div className="flex flex-wrap gap-2 sm:gap-3 text-[10px] sm:text-xs">
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">Segurança Jurídica</span>
+                  <span className="bg-white/10 backdrop-blur-sm border border-white/10 px-2 sm:px-3 py-1 sm:py-1.5 text-white">Contratos Estratégicos</span>
                 </div>
               </div>
             </div>
@@ -428,7 +428,7 @@ export default function AlemDaTendencia() {
           className="text-center mt-16"
         >
           <p className="text-gray-400 text-sm mb-4 uppercase tracking-wider">4 especialistas. 1 dia. Conteúdo que transforma carreiras.</p>
-          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-12 py-4 uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1">
+          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-8 sm:px-12 py-4 uppercase tracking-wider text-xs sm:text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
             Quero Aprender Com Elas →
           </button>
         </motion.div>
@@ -445,7 +445,7 @@ export default function AlemDaTendencia() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
           <LearningModule 
             number="01"
             title="Gestão de Obras de Interiores"
@@ -477,7 +477,7 @@ export default function AlemDaTendencia() {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-center mt-14"
         >
-          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-12 py-4 uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1">
+          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-8 sm:px-12 py-4 uppercase tracking-wider text-xs sm:text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
             Inscrever-se Agora →
           </button>
         </motion.div>
@@ -494,7 +494,7 @@ export default function AlemDaTendencia() {
               O Palco
             </p>
             
-            <div className="space-y-6 mt-8 text-gray-300 text-lg">
+            <div className="space-y-4 sm:space-y-6 mt-6 sm:mt-8 text-gray-300 text-base sm:text-lg">
               <p>
                 Um espaço moderno e confortável no coração de São Paulo, preparado para receber você com toda a estrutura necessária para um dia de imersão.
               </p>
@@ -535,7 +535,7 @@ export default function AlemDaTendencia() {
             </div>
           </div>
           
-          <div className="h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
+          <div className="h-[280px] sm:h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
             {/* Google Maps Embed */}
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.786699368388!2d-46.66479692376166!3d-23.57604497879058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59e6f0a6b0b1%3A0x6f6b6b6b6b6b6b6b!2sAv.%20Brig.%20Lu%C3%ADs%20Ant%C3%B4nio%2C%204843%20-%20Jardim%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001401-002!5e0!3m2!1spt-BR!2sbr!4v1708450000000!5m2!1spt-BR!2sbr" 
@@ -565,7 +565,7 @@ export default function AlemDaTendencia() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           <TestimonialCard 
             name="Ana Clara"
             role="Arquiteta"
@@ -591,7 +591,7 @@ export default function AlemDaTendencia() {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-12 py-4 rounded-none uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1">
+          <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-8 sm:px-12 py-4 rounded-none uppercase tracking-wider text-xs sm:text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
             Inscreva-se Agora →
           </button>
         </motion.div>
@@ -609,7 +609,7 @@ export default function AlemDaTendencia() {
           
           {/* CTA after FAQ */}
           <div className="text-center mt-10">
-            <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-10 py-4 rounded-none uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1">
+            <button onClick={scrollToInscricao} className="bg-[#2E7D32] text-white font-bold px-8 sm:px-10 py-4 rounded-none uppercase tracking-wider text-xs sm:text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 w-full sm:w-auto">
               Ainda tem dúvidas? Garanta sua vaga →
             </button>
           </div>
@@ -617,10 +617,10 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* FOOTER */}
-      <footer className="bg-[#1a1a1a] text-white py-16 border-t border-white/10">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 md:col-span-2">
+      <footer className="bg-[#1a1a1a] text-white py-10 sm:py-16 border-t border-white/10">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
+            <div className="col-span-1 sm:col-span-2">
               <img 
                 src={logoTransparent} 
                 alt="Além da Tendência" 

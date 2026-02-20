@@ -17,8 +17,8 @@ export function LearningModule({
   className,
 }: LearningModuleProps) {
   return (
-    <div className={cn("relative group p-8 bg-white border-l-4 border-[oklch(0.35_0.12_320)] hover:border-[oklch(0.75_0.18_65)] transition-colors duration-300", className)}>
-      <div className="absolute top-0 right-0 p-4 opacity-10 font-serif text-8xl font-bold text-[oklch(0.35_0.12_320)] leading-none select-none">
+    <div className={cn("relative group p-5 sm:p-8 bg-white border-l-4 border-[oklch(0.35_0.12_320)] hover:border-[oklch(0.75_0.18_65)] transition-colors duration-300 overflow-hidden", className)}>
+      <div className="absolute top-0 right-0 p-2 sm:p-4 opacity-10 font-serif text-5xl sm:text-8xl font-bold text-[oklch(0.35_0.12_320)] leading-none select-none">
         {number}
       </div>
       

@@ -23,7 +23,7 @@ export function ArchitecturalSection({
   };
 
   return (
-    <section id={id} className={cn("relative py-20 md:py-32 overflow-hidden", variants[variant], className)}>
+    <section id={id} className={cn("relative py-12 sm:py-20 md:py-32 overflow-hidden", variants[variant], className)}>
       {gridLines && (
         <div className="absolute inset-0 pointer-events-none opacity-10">
           <div className="absolute left-0 top-0 w-px h-full bg-current" style={{ left: "5%" }} />
@@ -36,7 +36,7 @@ export function ArchitecturalSection({
           <div className="absolute left-0 top-0 h-px w-full bg-current" style={{ top: "90%" }} />
         </div>
       )}
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-3 sm:px-4">
         {children}
       </div>
     </section>
