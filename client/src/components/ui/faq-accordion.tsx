@@ -21,7 +21,7 @@ export function FAQAccordion() {
     },
     {
       question: "O investimento de R$147 realmente vale a pena?",
-      answer: "R$147 é menos do que um almoço de negócios em São Paulo. No evento, você acessa 4 horas com especialistas que cobram milhares por consultoria, além de networking com centenas de profissionais. Um único contrato bem feito ou uma obra melhor gerida já paga o investimento dezenas de vezes."
+      answer: "R$147 é menos do que um almoço de negócios em São Paulo. No evento, você acessa mais de 5 horas com especialistas que cobram milhares por consultoria, além de networking com centenas de profissionais. Um único contrato bem feito ou uma obra melhor gerida já paga o investimento dezenas de vezes."
     },
     {
       question: "Não moro em São Paulo. Vale a pena ir?",
@@ -29,7 +29,7 @@ export function FAQAccordion() {
     },
     {
       question: "Quando e onde será o evento?",
-      answer: "10 de Março de 2026, das 14h às 18h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP). Fácil acesso por transporte público e com estacionamento conveniado nas proximidades."
+      answer: "10 de Março de 2026, das 13h30 às 19h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP). Fácil acesso por transporte público e com estacionamento conveniado nas proximidades."
     },
     {
       question: "Receberei certificado de participação?",

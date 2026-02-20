@@ -17,7 +17,7 @@ export function ScarcityBanner() {
         <div className="hidden md:block w-1 h-1 bg-white/20 rounded-full" />
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-[oklch(0.75_0.18_65)]" />
-          <span>10 de Março de 2026</span>
+          <span>10 de Março de 2026 • 13h30 às 19h</span>
         </div>
       </div>
     </div>

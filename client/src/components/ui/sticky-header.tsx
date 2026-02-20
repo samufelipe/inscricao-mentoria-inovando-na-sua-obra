@@ -48,7 +48,7 @@ export function StickyHeader() {
         
         <div className="flex items-center gap-4">
           <span className="hidden md:block text-sm font-medium text-gray-600">
-            Evento Presencial • 10 de Março
+            10 de Março • 13h30 às 19h
           </span>
           <Button 
             onClick={scrollToForm}
