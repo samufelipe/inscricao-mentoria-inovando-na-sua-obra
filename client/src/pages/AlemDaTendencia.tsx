@@ -10,6 +10,7 @@ import { SpeakerCard } from "@/components/ui/speaker-card";
 import { TestimonialCard } from "@/components/ui/testimonial-card";
 import { StickyHeader } from "@/components/ui/sticky-header";
 import { ScarcityBanner } from "@/components/ui/scarcity-banner";
+import { SponsorsSection } from "@/components/ui/sponsors-section";
 import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
 import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -612,6 +613,9 @@ export default function AlemDaTendencia() {
           </div>
         </div>
       </ArchitecturalSection>
+
+      {/* SPONSORS */}
+      <SponsorsSection />
 
       {/* FOOTER */}
       <footer className="bg-[#1a1a1a] text-white py-10 sm:py-16 border-t border-white/10">
