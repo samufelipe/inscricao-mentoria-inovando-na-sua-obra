@@ -54,23 +54,45 @@ export function HostsSection() {
                 "Porque antes do projeto fotografado, existe organização, método, responsabilidade e estrutura."
               </p>
 
-              {/* Metrics */}
-              <div className="grid grid-cols-3 gap-4 pt-4">
-                <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                  <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">55mil+</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores Inovando</p>
+              {/* Metrics - Inovando na Sua Obra */}
+              <div className="pt-6">
+                <p className="font-display text-sm font-bold tracking-widest uppercase text-[oklch(0.35_0.12_320)] mb-4">Inovando na Sua Obra</p>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">55mil+</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores no Instagram</p>
+                  </div>
+                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">250+</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Obras Concluídas</p>
+                  </div>
+                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">200+</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Alunas na Mentoria</p>
+                  </div>
                 </div>
-                <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                  <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">850+</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">Escritórios Atendidos</p>
-                </div>
-                <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                  <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">47,3mil</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores AjudaMONU</p>
+              </div>
+
+              {/* Metrics - Juliana Capelo */}
+              <div className="pt-2">
+                <p className="font-display text-sm font-bold tracking-widest uppercase text-[oklch(0.35_0.12_320)] mb-4">Juliana Capelo</p>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">500+</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Escritórios Atendidos</p>
+                  </div>
+                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">2000+</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Alunos</p>
+                  </div>
+                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
+                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">47mil+</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores no Instagram</p>
+                  </div>
                 </div>
               </div>
               
-              <p className="font-serif text-xl text-[oklch(0.35_0.12_320)] font-bold pt-4">
+              <p className="font-display text-xl text-[oklch(0.35_0.12_320)] font-bold pt-4">
                 Juntas, mostramos que autoridade não nasce da estética, nasce da base.
               </p>
             </div>
