@@ -1,5 +1,3 @@
-import { supabase } from "../../../src/integrations/supabase/client";
-
 function getUtmParams() {
   const params = new URLSearchParams(window.location.search);
   return {
@@ -17,6 +15,7 @@ export async function captureLead(data: {
   phone: string;
   product: string;
 }) {
+  const { supabase } = await import("../../../src/integrations/supabase/client");
   const utms = getUtmParams();
 
   const { error } = await supabase.functions.invoke("capture-lead", {
