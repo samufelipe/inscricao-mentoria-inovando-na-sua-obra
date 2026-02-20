@@ -2,11 +2,14 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
+import { componentTagger } from "lovable-tagger";
 
-const plugins = [react(), tailwindcss()];
-
-export default defineConfig({
-  plugins,
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    tailwindcss(),
+    mode === 'development' && componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -30,4 +33,4 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
-});
+}));
