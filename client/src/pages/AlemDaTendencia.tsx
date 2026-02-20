@@ -265,9 +265,6 @@ export default function AlemDaTendencia() {
       {/* NOVA SEÇÃO: PARA QUEM É (Movida para cá) */}
       <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
         <div className="text-center mb-12 relative z-10">
-          <ArchitecturalTitle variant="h3" color="orange">
-            Público-Alvo
-          </ArchitecturalTitle>
           <ArchitecturalTitle variant="h2" color="light">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
@@ -326,11 +323,11 @@ export default function AlemDaTendencia() {
       {/* PALESTRANTES */}
       <ArchitecturalSection id="palestrantes" variant="dark">
         <div className="text-center mb-16">
-          <ArchitecturalTitle variant="h3" color="orange">
-            Line-up Oficial
-          </ArchitecturalTitle>
           <ArchitecturalTitle variant="h2" color="light">
             Quem Vai Guiar Sua Jornada
+          </ArchitecturalTitle>
+          <ArchitecturalTitle variant="h3" color="orange">
+            Palestrantes
           </ArchitecturalTitle>
         </div>
 
@@ -355,11 +352,11 @@ export default function AlemDaTendencia() {
       {/* CONTEÚDO / MÓDULOS */}
       <ArchitecturalSection id="conteudo" variant="light">
         <div className="text-center mb-16">
-          <ArchitecturalTitle variant="h3" color="purple">
-            Programação
-          </ArchitecturalTitle>
           <ArchitecturalTitle variant="h2" color="purple">
             O Que Você Vai Aprender
+          </ArchitecturalTitle>
+          <ArchitecturalTitle variant="h3" color="purple">
+            Programação
           </ArchitecturalTitle>
         </div>
 
