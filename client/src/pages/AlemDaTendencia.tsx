@@ -425,27 +425,27 @@ export default function AlemDaTendencia() {
         <div className="grid md:grid-cols-2 gap-8">
           <LearningModule 
             number="01"
-            title="Gestão de Escritório"
-            description="Processos, precificação e organização interna para escalar seu negócio sem perder a qualidade de vida."
-            speaker="Ingrid Zarza"
+            title="Gestão de Obras de Interiores"
+            description="Método, segurança e resultados reais para gerenciar obras com mais qualidade, controle financeiro e sem dores de cabeça."
+            speaker="Ingrid Zarza & Fernanda Bradaschia"
           />
           <LearningModule 
             number="02"
-            title="Gestão de Obras"
-            description="Do cronograma à entrega das chaves: como evitar prejuízos, atrasos e dores de cabeça na execução."
-            speaker="Fernanda Bradaschia"
+            title="Gestão Estratégica de Escritório"
+            description="Como estruturar um escritório próspero e lucrativo, com processos, precificação e organização para escalar sem perder qualidade de vida."
+            speaker="Juliana Capelo"
           />
           <LearningModule 
             number="03"
             title="Iluminação Estratégica"
-            description="Técnicas de lighting design que valorizam o projeto e encantam o cliente final."
+            description="Metodologia exclusiva de cálculo e sensibilidade: como criar atmosferas e cuidar da saúde das pessoas através da iluminação."
             speaker="Luciana Guerra"
           />
           <LearningModule 
             number="04"
-            title="Segurança Jurídica"
-            description="Contratos à prova de falhas e como se proteger legalmente em todas as etapas do projeto."
-            speaker="Marcia Pereira"
+            title="Segurança Jurídica e Contratos"
+            description="Contratos que comunicam com clareza, valorizam sua marca e fortalecem a relação com clientes — do juridiquês à linguagem do projeto."
+            speaker="Márcia Pereira"
           />
         </div>
       </ArchitecturalSection>
