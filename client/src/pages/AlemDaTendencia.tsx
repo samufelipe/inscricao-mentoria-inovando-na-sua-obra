@@ -207,12 +207,12 @@ export default function AlemDaTendencia() {
         >
           <div className="space-y-8">
             <motion.div variants={fadeInUp}>
-              <ArchitecturalTitle variant="h3" color="orange">
-                O Conceito
-              </ArchitecturalTitle>
               <ArchitecturalTitle variant="h2" color="purple">
                 Tendência Encanta.<br />Estrutura Constrói.
               </ArchitecturalTitle>
+              <p className="text-[oklch(0.75_0.18_65)] font-bold tracking-widest uppercase text-sm mt-4">
+                O Conceito
+              </p>
             </motion.div>
             
             <motion.div variants={fadeInUp} className="text-gray-600 space-y-6 text-lg leading-relaxed">
@@ -340,8 +340,9 @@ export default function AlemDaTendencia() {
           {/* Card 1: Inovando na Sua Obra */}
           <motion.div variants={fadeInUp} className="group">
             <div className="overflow-hidden relative aspect-[4/5]">
-              <img src={inovandoObraImg} alt="Ingrid Zarza e Fernanda Bradaschia" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <img src={inovandoObraImg} alt="Ingrid Zarza e Fernanda Bradaschia" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
                 <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Gestão de Obras de Interiores</p>
                 <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Ingrid Zarza & Fernanda Bradaschia</h3>
@@ -357,8 +358,9 @@ export default function AlemDaTendencia() {
           {/* Card 2: Juliana Capelo */}
           <motion.div variants={fadeInUp} className="group">
             <div className="overflow-hidden relative aspect-[4/5]">
-              <img src={julianaCapelo} alt="Juliana Capelo" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <img src={julianaCapelo} alt="Juliana Capelo" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
                 <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Gestão Estratégica de Escritórios</p>
                 <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Juliana Capelo</h3>
@@ -374,8 +376,9 @@ export default function AlemDaTendencia() {
           {/* Card 3: Luciana Guerra */}
           <motion.div variants={fadeInUp} className="group">
             <div className="overflow-hidden relative aspect-[4/5]">
-              <img src={lucianaGuerraImg} alt="Luciana Guerra" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <img src={lucianaGuerraImg} alt="Luciana Guerra" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
                 <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Especialista em Iluminação</p>
                 <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Luciana Guerra</h3>
@@ -391,8 +394,9 @@ export default function AlemDaTendencia() {
           {/* Card 4: Márcia Pereira */}
           <motion.div variants={fadeInUp} className="group">
             <div className="overflow-hidden relative aspect-[4/5]">
-              <img src={marciaPereira} alt="Márcia Pereira" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/40 to-transparent" />
+              <img src={marciaPereira} alt="Márcia Pereira" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/60 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
                 <p className="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Contratos para Arquitetos</p>
                 <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-3">Márcia Pereira</h3>
@@ -450,12 +454,12 @@ export default function AlemDaTendencia() {
       <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <ArchitecturalTitle variant="h3" color="orange">
-              O Palco
-            </ArchitecturalTitle>
             <ArchitecturalTitle variant="h2" color="light">
               Auditório AFRESP
             </ArchitecturalTitle>
+            <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mt-4">
+              O Palco
+            </p>
             
             <div className="space-y-6 mt-8 text-gray-300 text-lg">
               <p>
@@ -517,12 +521,12 @@ export default function AlemDaTendencia() {
       {/* DEPOIMENTOS */}
       <ArchitecturalSection variant="light">
         <div className="text-center mb-16">
-          <ArchitecturalTitle variant="h3" color="purple">
-            Depoimentos
-          </ArchitecturalTitle>
           <ArchitecturalTitle variant="h2" color="purple">
             Quem Já Viveu a Experiência
           </ArchitecturalTitle>
+          <p className="text-[oklch(0.75_0.18_65)] font-bold tracking-widest uppercase text-sm mt-4">
+            Depoimentos
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
