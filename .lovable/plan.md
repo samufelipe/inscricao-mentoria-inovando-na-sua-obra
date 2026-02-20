@@ -1,70 +1,51 @@
 
 
-# Montagem de Imagens na Secao "Para Quem E Este Evento"
+# Correções e Ajustes na LP "Além da Tendência"
 
-## Conceito Visual
+## 1. Hero: Remover a foto do abraço (heroLeft)
 
-Inserir as 4 fotos reais de eventos anteriores na secao "PARA QUEM E", criando uma montagem cinematica inspirada no hero -- imagens sobrepostas com masks de gradiente, opacidade controlada e blending -- mantendo o fundo escuro atual (`variant="dark"`).
+Remover a imagem `heroLeft` (duas pessoas se abraçando) do hero, mantendo apenas 3 imagens: `heroFar`, `heroMain` e `heroRight`. Ajustar o posicionamento para que a composição fique equilibrada com 3 camadas.
 
-## Layout Proposto
+## 2. Seção "O Conceito": Remover imagem e restaurar elementos originais
 
-A composicao ficara ACIMA dos 3 cards de perfil, entre o subtitulo e o grid de cards:
+A imagem grande (`heroMain`) que foi colocada na coluna direita da seção será removida. No lugar, será restaurado o conteúdo conceitual original -- a citação estilizada com aspas e elementos visuais que complementam o texto, sem usar imagem.
 
-```text
-Desktop (md+):
-+----------------------------------------------------------+
-|           PARA QUEM E ESTE EVENTO?                       |
-|   "Voce sai da ExpoRevestir cheia de ideias..."          |
-|                                                           |
-|   [img1]  [img2 principal]  [img3]  [img4]               |
-|    fade     destaque          fade    fade                |
-|    overlap  maior/centro      overlap overlap             |
-|                                                           |
-|   [Card 1]      [Card 2]      [Card 3]                  |
-+----------------------------------------------------------+
+## 3. Seção "Para Quem É": Restaurar os cards de perfil
 
-Mobile:
-+-------------------------+
-| PARA QUEM E?            |
-| subtitulo               |
-|                         |
-| [img2]  [img1]          |
-|  (apenas 2 fotos,      |
-|   menor altura)         |
-|                         |
-| [Card 1]                |
-| [Card 2]                |
-| [Card 3]                |
-+-------------------------+
-```
+Os 3 cards descritivos de público-alvo (ex: Arquitetas, Designers, Engenheiras) sumiram quando a montagem de fotos foi adicionada. Serão restaurados abaixo da montagem `AudienceMontageV2`.
 
-## Detalhes Tecnicos
+## 4. Correção dos erros de build
 
-### Arquivos criados:
-1. `client/src/assets/alem-da-tendencia/audience-1.jpg` (DSC03250 - plateia atenta)
-2. `client/src/assets/alem-da-tendencia/audience-2.jpg` (DSC03085 - abraco/networking)
-3. `client/src/assets/alem-da-tendencia/audience-3.jpg` (DSC03247 - plateia focada)
-4. `client/src/assets/alem-da-tendencia/audience-4.jpg` (DSC03243 - palestrante com microfone)
+- `variant="white"` não existe no `ArchitecturalSection` -- substituir por `"light"`.
+- `SpeakerCard` usa props `description` e `socialProof`, não `topic` e `bio` -- corrigir as props.
+
+---
+
+## Detalhes Técnicos
 
 ### Arquivo editado:
-- `client/src/pages/AlemDaTendencia.tsx` -- secao "PARA QUEM E" (linhas 262-312)
+- `client/src/pages/AlemDaTendencia.tsx`
 
-### Implementacao da montagem:
+### Mudanças específicas:
 
-- Container `relative` com altura fixa (`h-[250px] md:h-[350px]`) para a composicao
-- 4 imagens posicionadas com `absolute`, usando:
-  - `object-cover` + `object-center` para crop inteligente
-  - CSS `mask-image` com gradientes lineares para fade suave nas bordas (mesmo estilo do hero)
-  - `z-index` escalonado para criar profundidade (imagem central mais a frente)
-  - Opacidade variada (central 90%, laterais 60-70%)
-- No mobile (`hidden md:block` nas imagens 3 e 4), mostrando apenas 2 fotos com altura reduzida
-- Leve tint de cor brand-purple via overlay semitransparente para manter coerencia cromatica com o fundo escuro
+```text
+HERO (linhas 67-108):
+  - Remover import de heroLeft (linha 19)
+  - Remover bloco da imagem heroLeft (linhas 79-87)
+  - Ajustar heroFar para w-[35%] e heroMain para w-[60%] desktop
 
-### Responsividade:
-- Mobile: 2 imagens visiveis, altura `h-[200px]`, imagens com `w-[55%]` sobrepostas no centro
-- Tablet (md): 3-4 imagens, altura `h-[300px]`
-- Desktop (lg): 4 imagens completas, altura `h-[350px]`, composicao expandida
+SEÇÃO O CONCEITO (linhas 258-269):
+  - Remover o bloco <motion.div> com a imagem heroMain
+  - Substituir por citação estilizada com elementos visuais (aspas decorativas, borda lateral)
 
-### Animacao:
-- Usar `motion.div` com `fadeInUp` existente para a entrada suave da composicao no scroll
+SEÇÃO PARA QUEM É (linhas 273-296):
+  - Após o <AudienceMontageV2 />, adicionar grid com 3 cards de perfil:
+    - Arquitetas e Designers de Interiores
+    - Engenheiras e Gestoras de Obra  
+    - Empreendedoras do Design
+
+ERROS DE BUILD:
+  - Linhas 279, 307, 376: variant="white" → variant="light" (com text color override)
+  - Linhas 313-326: SpeakerCard props topic→removido, bio→description, adicionar socialProof
+```
 
