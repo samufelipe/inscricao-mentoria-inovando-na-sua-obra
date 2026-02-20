@@ -1,92 +1,49 @@
 
-# Otimizacao da Visibilidade da Imagem Hero
 
-## Problema Atual
+# Salvar dados do formulario no banco antes de redirecionar para o Sympla
 
-A foto das tres mulheres (heroMain) esta praticamente invisivel porque:
+## Resumo
 
-1. **Object-position muito alto** (`center 15%`) -- mostra so a parte superior da imagem
-2. **Overlay escuro muito agressivo** -- comeca a escurecer a partir de 45% da altura, cobrindo os rostos
-3. **Spacer minimo no mobile** (`min-h-[20px]`) -- empurra o conteudo para cima das imagens
-4. **Formulario sobrepoe a area da imagem** no grid de 2 colunas
+Criar uma edge function para salvar os dados de lead (nome, email, telefone) na tabela `checkout_intents` existente antes de redirecionar o usuario para o Sympla. Os dois formularios da LP "Alem da Tendencia" (hero e secao de inscricao) serao atualizados para enviar os dados ao backend antes do redirecionamento.
 
----
+## O que sera feito
 
-## Solucao Proposta
+1. **Criar edge function `capture-lead`** que recebe nome, email, telefone, produto, UTMs e page_url, e insere na tabela `checkout_intents` com status "started".
 
-### 1. Aumentar a altura minima da hero
+2. **Atualizar os dois formularios da LP** (`hero-registration-form.tsx` e `registration-form.tsx`) para:
+   - Chamar a edge function antes de redirecionar
+   - Redirecionar para o Sympla (por enquanto mantendo o link do WhatsApp ate voce fornecer o link do Sympla)
+   - Manter feedback visual de loading e tratamento de erros
 
-Dar mais espaco vertical para as imagens respirarem antes do conteudo comecar.
-
-- Mobile: de `min-h-[60vh]` para `min-h-[75vh]`
-- Desktop: manter `min-h-[90vh]` (ja esta bom)
-
-### 2. Ajustar o object-position da imagem principal
-
-Mudar de `center 15%` para `center 35%` -- isso desce o enquadramento para mostrar o torso e rostos das mulheres em vez de so o topo das cabecas.
-
-### 3. Suavizar o overlay gradiente
-
-O gradiente atual escurece cedo demais. Ajustar para comecar a escurecer mais abaixo, preservando a area das imagens:
-
-- Atual: `transparent 25%, rgba(0.5) 45%, rgba(0.85) 65%, solid 85%`
-- Novo: `transparent 35%, rgba(0.4) 55%, rgba(0.85) 75%, solid 90%`
-
-### 4. Reduzir a opacidade do overlay mobile
-
-O overlay mobile (`bg-black/40`) esta muito pesado. Reduzir para `bg-black/25`.
-
-### 5. Aumentar o spacer para empurrar conteudo mais para baixo
-
-Garantir que o conteudo de texto/formulario fique na parte inferior, deixando a area da imagem visivel:
-
-- Mobile: de `min-h-[20px]` para `min-h-[80px]`
-- Desktop: manter `min-h-[180px]`
+3. **Capturar UTMs da URL** para fins de rastreamento de campanhas (utm_source, utm_medium, etc.)
 
 ---
 
-## Detalhes Tecnicos
+## Detalhes tecnicos
 
-### Arquivo: `client/src/pages/AlemDaTendencia.tsx`
+### 1. Edge function `supabase/functions/capture-lead/index.ts`
 
-**Alteracao 1 -- Altura da hero (linha 69):**
-```
-Antes: min-h-[60vh] md:min-h-[90vh]
-Depois: min-h-[75vh] md:min-h-[90vh]
-```
+- Recebe POST com `{ name, email, phone, product, page_url, utm_source, utm_medium, utm_campaign, utm_content, utm_term }`
+- Valida email e campos obrigatorios no servidor
+- Insere na tabela `checkout_intents` usando `SUPABASE_SERVICE_ROLE_KEY` (ja configurado como secret)
+- Retorna `{ success: true, id }` ou erro
+- Inclui headers CORS padrao
 
-**Alteracao 2 -- Object-position da heroMain (linhas 87-92):**
-```
-Antes: object-[center_15%] / objectPosition: 'center 15%'
-Depois: object-[center_35%] / objectPosition: 'center 35%'
-```
+### 2. Atualizacao dos formularios
 
-**Alteracao 3 -- Overlay gradiente (linha 108):**
-```
-Antes: transparent 0%, transparent 25%, rgba(26,26,26,0.5) 45%, rgba(26,26,26,0.85) 65%, #1a1a1a 85%
-Depois: transparent 0%, transparent 35%, rgba(26,26,26,0.4) 55%, rgba(26,26,26,0.85) 75%, #1a1a1a 90%
-```
+- Importar o cliente Supabase
+- No `handleSubmit`, antes do redirecionamento:
+  - Chamar `supabase.functions.invoke('capture-lead', { body: { ... } })`
+  - Se falhar, exibir toast de erro mas ainda redirecionar (nao bloquear a compra)
+- Extrair UTMs de `window.location.search`
 
-**Alteracao 4 -- Overlay mobile (linha 116):**
-```
-Antes: bg-black/40
-Depois: bg-black/25
-```
+### 3. Configuracao
 
-**Alteracao 5 -- Spacer (linha 136):**
-```
-Antes: min-h-[20px] md:min-h-[180px]
-Depois: min-h-[80px] md:min-h-[180px]
-```
+- Adicionar entrada `[functions.capture-lead]` com `verify_jwt = false` no `supabase/config.toml`
+- Nao sao necessarios novos secrets (ja existem `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`)
+- Nao sao necessarias alteracoes no schema da tabela `checkout_intents` (ja possui todos os campos necessarios)
 
-### Resumo do impacto
+### Observacao sobre o Sympla
 
-| Alteracao | Efeito |
-|---|---|
-| Hero mais alta no mobile | Mais espaco vertical para imagem + conteudo |
-| Object-position 35% | Rostos e torso das mulheres visiveis |
-| Gradiente mais suave | Imagem visivel por mais tempo antes de escurecer |
-| Overlay mobile mais leve | Foto mais visivel no celular |
-| Spacer maior no mobile | Conteudo desce, liberando area da imagem |
+Assim que voce fornecer o link do evento no Sympla, substituirei o redirecionamento atual (WhatsApp) pelo link correto do Sympla nos dois formularios.
 
-Nenhuma mudanca estrutural -- apenas ajustes de CSS em 5 propriedades no mesmo arquivo.
