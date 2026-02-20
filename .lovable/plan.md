@@ -1,45 +1,47 @@
 
+# Otimizacao da Visibilidade da Imagem Hero
 
-# Otimizacao da Hero para Clareza de "Evento Presencial"
+## Problema Atual
 
-## Problema
+A foto das tres mulheres (heroMain) esta praticamente invisivel porque:
 
-Um lead que acessa a pagina nao entende imediatamente que se trata de um evento presencial com data e local definidos. Especificamente:
-
-- No **mobile**, os cards de Data e Local estao ocultos (classe `hidden md:flex`), entao nao ha nenhuma referencia a evento presencial na primeira dobra.
-- No **desktop**, a informacao de data/local existe mas esta posicionada de forma discreta no canto inferior.
-- A palavra "evento" ou "presencial" nao aparece em nenhum ponto da hero.
+1. **Object-position muito alto** (`center 15%`) -- mostra so a parte superior da imagem
+2. **Overlay escuro muito agressivo** -- comeca a escurecer a partir de 45% da altura, cobrindo os rostos
+3. **Spacer minimo no mobile** (`min-h-[20px]`) -- empurra o conteudo para cima das imagens
+4. **Formulario sobrepoe a area da imagem** no grid de 2 colunas
 
 ---
 
 ## Solucao Proposta
 
-### 1. Adicionar badge "EVENTO PRESENCIAL" acima do H1
+### 1. Aumentar a altura minima da hero
 
-Inserir um micro-badge logo antes do titulo principal, visivel em todos os dispositivos:
+Dar mais espaco vertical para as imagens respirarem antes do conteudo comecar.
 
-```
-EVENTO PRESENCIAL  |  SAO PAULO - SP
-```
+- Mobile: de `min-h-[60vh]` para `min-h-[75vh]`
+- Desktop: manter `min-h-[90vh]` (ja esta bom)
 
-Estilizado como um badge discreto em uppercase, com icone de MapPin, usando as cores gold (#C9A84C) sobre fundo semi-transparente. Funciona como ancora visual que comunica instantaneamente o formato.
+### 2. Ajustar o object-position da imagem principal
 
-### 2. Mostrar data e local no mobile
+Mudar de `center 15%` para `center 35%` -- isso desce o enquadramento para mostrar o torso e rostos das mulheres em vez de so o topo das cabecas.
 
-Remover o `hidden md:flex` dos cards de Data e Local, adaptando-os para mobile com um layout mais compacto:
+### 3. Suavizar o overlay gradiente
 
-- Versao mobile: uma unica linha horizontal com "10 de Marco | Auditorio AFRESP - SP" 
-- Versao desktop: manter o layout atual com os cards separados
+O gradiente atual escurece cedo demais. Ajustar para comecar a escurecer mais abaixo, preservando a area das imagens:
 
-### 3. Ajustar o subtitulo para mencionar o formato
+- Atual: `transparent 25%, rgba(0.5) 45%, rgba(0.85) 65%, solid 85%`
+- Novo: `transparent 35%, rgba(0.4) 55%, rgba(0.85) 75%, solid 90%`
 
-Subtitulo atual:
-> "Gestao de obra, escritorio, iluminacao e contratos: o que ninguem mostra nas feiras, mas que define quem cresce de verdade."
+### 4. Reduzir a opacidade do overlay mobile
 
-Subtitulo novo:
-> "Um dia inteiro dedicado ao que ninguem mostra: gestao de obra, escritorio, iluminacao e contratos -- o bastidor que define quem cresce de verdade."
+O overlay mobile (`bg-black/40`) esta muito pesado. Reduzir para `bg-black/25`.
 
-A expressao "Um dia inteiro dedicado" deixa claro que e um evento com duracao definida, sem perder a promessa dos bastidores.
+### 5. Aumentar o spacer para empurrar conteudo mais para baixo
+
+Garantir que o conteudo de texto/formulario fique na parte inferior, deixando a area da imagem visivel:
+
+- Mobile: de `min-h-[20px]` para `min-h-[80px]`
+- Desktop: manter `min-h-[180px]`
 
 ---
 
@@ -47,51 +49,44 @@ A expressao "Um dia inteiro dedicado" deixa claro que e um evento com duracao de
 
 ### Arquivo: `client/src/pages/AlemDaTendencia.tsx`
 
-**Alteracao 1 -- Badge de evento presencial (antes do H1, ~linha 147):**
-Inserir um novo elemento `div` com badge acima do `h1`:
-
-```tsx
-<div className="flex items-center gap-2 mb-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
-  <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-  <span>Evento Presencial</span>
-  <span className="text-white/30">|</span>
-  <span>Sao Paulo - SP</span>
-</div>
+**Alteracao 1 -- Altura da hero (linha 69):**
+```
+Antes: min-h-[60vh] md:min-h-[90vh]
+Depois: min-h-[75vh] md:min-h-[90vh]
 ```
 
-**Alteracao 2 -- Subtitulo (linha 151-153):**
-Trocar o texto do paragrafo para:
-> "Um dia inteiro dedicado ao que ninguem mostra: gestao de obra, escritorio, iluminacao e contratos -- o bastidor que define quem cresce de verdade."
-
-**Alteracao 3 -- Cards de data/local visiveis no mobile (linhas 159-175):**
-Substituir o bloco atual por dois layouts:
-
-- **Mobile** (`flex md:hidden`): layout compacto em uma linha com data e local lado a lado, fonte menor
-- **Desktop** (`hidden md:flex`): manter o layout atual com os cards detalhados
-
-```tsx
-{/* Mobile: compacto */}
-<div className="flex md:hidden items-center gap-3 text-xs text-white/80 bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15">
-  <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0" />
-  <span className="font-semibold text-white">10 de Marco</span>
-  <span className="text-white/30">|</span>
-  <MapPin className="w-4 h-4 text-[#C9A84C] shrink-0" />
-  <span className="font-semibold text-white">AFRESP - SP</span>
-</div>
-
-{/* Desktop: cards detalhados (manter atual) */}
-<div className="hidden md:flex ...">
-  ...
-</div>
+**Alteracao 2 -- Object-position da heroMain (linhas 87-92):**
+```
+Antes: object-[center_15%] / objectPosition: 'center 15%'
+Depois: object-[center_35%] / objectPosition: 'center 35%'
 ```
 
-### Resumo das alteracoes
+**Alteracao 3 -- Overlay gradiente (linha 108):**
+```
+Antes: transparent 0%, transparent 25%, rgba(26,26,26,0.5) 45%, rgba(26,26,26,0.85) 65%, #1a1a1a 85%
+Depois: transparent 0%, transparent 35%, rgba(26,26,26,0.4) 55%, rgba(26,26,26,0.85) 75%, #1a1a1a 90%
+```
 
-| O que muda | Onde | Impacto |
-|---|---|---|
-| Badge "Evento Presencial - Sao Paulo" | Acima do H1 (mobile + desktop) | Clareza imediata do formato |
-| Subtitulo com "Um dia inteiro dedicado" | Paragrafo abaixo do H1 | Reforco de que e um evento com duracao |
-| Cards de data/local no mobile | Abaixo do subtitulo | Informacao critica visivel em qualquer dispositivo |
+**Alteracao 4 -- Overlay mobile (linha 116):**
+```
+Antes: bg-black/40
+Depois: bg-black/25
+```
 
-Nenhuma alteracao de layout, componentes ou estrutura. Apenas copy e visibilidade de elementos existentes.
+**Alteracao 5 -- Spacer (linha 136):**
+```
+Antes: min-h-[20px] md:min-h-[180px]
+Depois: min-h-[80px] md:min-h-[180px]
+```
 
+### Resumo do impacto
+
+| Alteracao | Efeito |
+|---|---|
+| Hero mais alta no mobile | Mais espaco vertical para imagem + conteudo |
+| Object-position 35% | Rostos e torso das mulheres visiveis |
+| Gradiente mais suave | Imagem visivel por mais tempo antes de escurecer |
+| Overlay mobile mais leve | Foto mais visivel no celular |
+| Spacer maior no mobile | Conteudo desce, liberando area da imagem |
+
+Nenhuma mudanca estrutural -- apenas ajustes de CSS em 5 propriedades no mesmo arquivo.
