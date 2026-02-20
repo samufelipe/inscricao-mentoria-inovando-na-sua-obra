@@ -9,7 +9,7 @@ const sponsors = [
 
 export function SponsorsSection() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-[oklch(0.97_0.01_95)]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-[oklch(0.75_0.18_65)] font-bold tracking-widest uppercase text-sm mb-3">
