@@ -83,9 +83,9 @@ export default function AlemDaTendencia() {
           {/* Camada 2 removida (heroLeft) - agora só 3 imagens */}
           {/* Camada 3: CENTRAL principal - heroMain on desktop, heroEvent on mobile */}
           <img
-            src={heroEvent}
-            alt="Evento Além da Tendência - Mentoras"
-            className="md:hidden absolute left-1/2 -translate-x-1/2 top-0 w-[95%] h-full object-cover object-[center_30%] z-[3]"
+            src={heroFar}
+            alt="Evento Além da Tendência - Público"
+            className="md:hidden absolute inset-0 w-full h-full object-cover object-[center_40%] z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
