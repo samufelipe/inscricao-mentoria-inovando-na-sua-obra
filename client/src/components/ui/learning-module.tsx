@@ -6,6 +6,7 @@ interface LearningModuleProps {
   title: string;
   description: string;
   speaker: string;
+  time?: string;
   className?: string;
 }
 
@@ -14,6 +15,7 @@ export function LearningModule({
   title,
   description,
   speaker,
+  time,
   className,
 }: LearningModuleProps) {
   return (
@@ -24,7 +26,7 @@ export function LearningModule({
       
       <div className="relative z-10">
         <p className="text-[oklch(0.75_0.18_65)] text-xs font-bold tracking-widest uppercase mb-4">
-          Módulo {number} • {speaker}
+          Palestra {number}{time ? ` • ${time}` : ''} • {speaker}
         </p>
         
         <ArchitecturalTitle variant="h3" color="purple" className="mb-4">

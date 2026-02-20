@@ -96,12 +96,12 @@ export function HeroRegistrationForm() {
             {isLoading ? (
               <><Loader2 className="w-5 h-5 animate-spin" /> PROCESSANDO...</>
             ) : (
-              <><MessageCircle className="w-5 h-5" /> FINALIZAR INSCRIÇÃO</>
+              <>GARANTIR MINHA VAGA</>
             )}
           </ArchitecturalButton>
           <p className="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-2">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            Dados enviados de forma segura via WhatsApp
+            Pagamento 100% seguro via Sympla
           </p>
         </div>
       </form>
