@@ -206,7 +206,7 @@ export default function AlemDaTendencia() {
           variants={staggerContainer}
           className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
         >
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8 min-w-0">
             <motion.div variants={fadeInUp}>
               <ArchitecturalTitle variant="h2" color="purple">
                 Tendência Encanta.<br />Estrutura Constrói.
@@ -216,7 +216,7 @@ export default function AlemDaTendencia() {
               </p>
             </motion.div>
             
-            <motion.div variants={fadeInUp} className="text-gray-600 space-y-4 sm:space-y-6 text-base sm:text-lg leading-relaxed">
+            <motion.div variants={fadeInUp} className="text-gray-600 space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg leading-relaxed">
               <p>
                 A ExpoRevestir apresenta lançamentos. Mostra possibilidades. Desperta ideias.
                 Mas para que uma tendência saia do stand e vire obra executada e cliente satisfeito, é preciso estrutura.
@@ -232,11 +232,11 @@ export default function AlemDaTendencia() {
                   "Contratos que protegem sua autoria e responsabilidade",
                   "Iluminação técnica que valoriza o projeto real"
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-full bg-[oklch(0.75_0.18_65)]/20 flex items-center justify-center text-[oklch(0.75_0.18_65)] mt-0.5">
-                      <Check className="w-4 h-4" />
+                  <li key={i} className="flex items-start gap-2 sm:gap-3">
+                    <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[oklch(0.75_0.18_65)]/20 flex items-center justify-center text-[oklch(0.75_0.18_65)] mt-0.5 shrink-0">
+                      <Check className="w-3 h-3 sm:w-4 sm:h-4" />
                     </span>
-                    <span className="text-gray-700 font-medium">{item}</span>
+                    <span className="text-gray-700 font-medium text-sm sm:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -251,13 +251,10 @@ export default function AlemDaTendencia() {
 
           {/* Citação estilizada */}
           <motion.div variants={fadeInUp} className="relative flex items-center justify-center">
-            <div className="relative bg-[oklch(0.35_0.12_320)]/5 border-l-4 border-[oklch(0.75_0.18_65)] p-6 sm:p-8 md:p-12 rounded-r-2xl">
+            <div className="relative border-l-4 border-[oklch(0.75_0.18_65)] pl-5 sm:pl-8 md:pl-12 py-4">
               <span className="absolute -top-4 sm:-top-6 -left-2 text-[oklch(0.75_0.18_65)] text-5xl sm:text-8xl font-serif leading-none opacity-30">"</span>
-              <p className="text-lg sm:text-xl md:text-2xl font-serif italic text-[oklch(0.35_0.12_320)] leading-relaxed mb-4">
+              <p className="text-base sm:text-xl md:text-2xl font-serif italic text-[oklch(0.35_0.12_320)] leading-relaxed">
                 Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas, quando existe método.
-              </p>
-              <p className="text-sm uppercase tracking-widest text-[oklch(0.75_0.18_65)] font-bold">
-                Filosofia do Evento
               </p>
               <span className="absolute -bottom-4 sm:-bottom-6 right-4 text-[oklch(0.75_0.18_65)] text-5xl sm:text-8xl font-serif leading-none opacity-30 rotate-180">"</span>
             </div>
