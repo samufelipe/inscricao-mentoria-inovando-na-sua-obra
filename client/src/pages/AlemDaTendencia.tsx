@@ -38,6 +38,10 @@ export default function AlemDaTendencia() {
   }, []);
   const whatsappLink = "https://wa.me/551155717229?text=Ol%C3%A1!%20Gostaria%20de%20me%20inscrever%20no%20evento%20Al%C3%A9m%20da%20Tend%C3%AAncia.";
 
+  const scrollToInscricao = () => {
+    document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -147,7 +151,7 @@ export default function AlemDaTendencia() {
                 <span className="text-[#C9A84C]">Não Sai do Papel</span>
               </h1>
               <p className="text-sm md:text-base text-gray-300 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
-                4 especialistas. 4 horas. Tudo o que você precisa para sair da ExpoRevestir com um plano real de gestão de obra, escritório, iluminação e contratos.
+                Tudo o que você precisa para sair da ExpoRevestir com um plano real de gestão de obra, escritório, iluminação e contratos.
               </p>
               <p className="text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
@@ -197,7 +201,7 @@ export default function AlemDaTendencia() {
       <ScarcityBanner />
 
       {/* PROPOSTA DE VALOR */}
-      <ArchitecturalSection variant="light" className="relative">
+      <ArchitecturalSection id="sobre" variant="light" className="relative">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -250,8 +254,8 @@ export default function AlemDaTendencia() {
               className="relative z-10 w-full shadow-2xl border-8 border-white transform hover:scale-[1.02] transition-transform duration-500"
             />
             
-            <div className="absolute -bottom-8 -left-8 bg-[oklch(0.35_0.12_320)] p-8 text-white max-w-xs shadow-xl z-20 hidden md:block">
-              <p className="font-display text-xl italic">"Autoridade não nasce da estética, nasce da base."</p>
+            <div className="absolute -bottom-8 -left-8 bg-[oklch(0.35_0.12_320)] p-6 md:p-8 text-white max-w-[240px] md:max-w-xs shadow-xl z-20">
+              <p className="font-display text-base md:text-xl italic leading-snug">"Autoridade não nasce da estética, nasce da base."</p>
             </div>
           </motion.div>
         </motion.div>
@@ -315,8 +319,21 @@ export default function AlemDaTendencia() {
         </motion.div>
       </ArchitecturalSection>
 
+      {/* CTA Strip after "Para Quem É" */}
+      <motion.div 
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+        className="bg-[oklch(0.75_0.18_65)] py-6 text-center"
+      >
+        <div className="container flex flex-col sm:flex-row items-center justify-center gap-4">
+          <p className="text-white font-bold text-lg uppercase tracking-wide">Vagas limitadas — Lote Promocional com 50% OFF</p>
+          <button onClick={scrollToInscricao} className="bg-white text-[oklch(0.35_0.12_320)] font-bold px-8 py-3 rounded-none uppercase tracking-wider text-sm hover:bg-gray-100 transition-colors shadow-lg">
+            Garantir Minha Vaga →
+          </button>
+        </div>
+      </motion.div>
+
       {/* PALESTRANTES */}
-      <ArchitecturalSection variant="light">
+      <ArchitecturalSection id="palestrantes" variant="light">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -356,7 +373,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* CONTEÚDO / MÓDULOS */}
-      <ArchitecturalSection variant="purple" className="relative overflow-hidden">
+      <ArchitecturalSection id="conteudo" variant="purple" className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
         
         <motion.div 
@@ -401,8 +418,23 @@ export default function AlemDaTendencia() {
         </motion.div>
       </ArchitecturalSection>
 
+      {/* CTA Strip after Módulos */}
+      <motion.div 
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+        className="bg-[oklch(0.2_0.02_320)] py-8 text-center border-y border-white/10"
+      >
+        <div className="container space-y-3">
+          <p className="text-white/80 text-base">De <span className="line-through">R$ 297</span> por apenas</p>
+          <p className="text-white font-bold text-4xl">R$ 147,00</p>
+          <button onClick={scrollToInscricao} className="bg-[oklch(0.75_0.18_65)] text-white font-bold px-10 py-4 rounded-none uppercase tracking-wider text-sm hover:bg-[oklch(0.7_0.18_65)] transition-colors shadow-lg mt-2">
+            Quero Minha Vaga com 50% OFF →
+          </button>
+          <p className="text-white/40 text-xs">Apenas 297 lugares disponíveis</p>
+        </div>
+      </motion.div>
+
       {/* LOCAL */}
-      <ArchitecturalSection variant="light">
+      <ArchitecturalSection id="local" variant="light">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -484,6 +516,16 @@ export default function AlemDaTendencia() {
             image="https://randomuser.me/api/portraits/women/32.jpg"
           />
         </div>
+
+        {/* CTA after testimonials */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <button onClick={scrollToInscricao} className="bg-[oklch(0.75_0.18_65)] text-white font-bold px-12 py-4 rounded-none uppercase tracking-wider text-sm hover:bg-[oklch(0.7_0.18_65)] transition-all shadow-lg hover:-translate-y-1">
+            Inscreva-se Agora — R$ 147 →
+          </button>
+        </motion.div>
       </ArchitecturalSection>
 
       {/* FAQ */}
@@ -495,6 +537,13 @@ export default function AlemDaTendencia() {
             </ArchitecturalTitle>
           </div>
           <FAQAccordion />
+          
+          {/* CTA after FAQ */}
+          <div className="text-center mt-10">
+            <button onClick={scrollToInscricao} className="bg-[oklch(0.35_0.12_320)] text-white font-bold px-10 py-4 rounded-none uppercase tracking-wider text-sm hover:bg-[oklch(0.3_0.12_320)] transition-all shadow-lg">
+              Ainda tem dúvidas? Garanta sua vaga →
+            </button>
+          </div>
         </div>
       </ArchitecturalSection>
 
@@ -555,12 +604,12 @@ export default function AlemDaTendencia() {
       {/* PARCEIROS E PATROCINADORES */}
       <ArchitecturalSection variant="light" className="py-16">
         <div className="text-center mb-12">
-          <ArchitecturalTitle variant="h3" color="orange">
-            Quem Apoia
-          </ArchitecturalTitle>
           <ArchitecturalTitle variant="h2" color="purple">
             Parceiros e Patrocinadores
           </ArchitecturalTitle>
+          <p className="text-lg text-[oklch(0.75_0.18_65)] font-semibold uppercase tracking-wider mt-4">
+            Quem Apoia
+          </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-4xl mx-auto items-center">
           {Array.from({ length: 8 }).map((_, i) => (
@@ -608,10 +657,28 @@ export default function AlemDaTendencia() {
           <div>
             <h4 className="font-display font-bold text-lg mb-6 text-[oklch(0.75_0.18_65)] uppercase tracking-wider">Navegação</h4>
             <ul className="space-y-4 text-sm text-white/60">
-              <li><a href="#" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-[oklch(0.75_0.18_65)] rounded-full"></span> Início</a></li>
-              <li><a href="#sobre" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-[oklch(0.75_0.18_65)] rounded-full"></span> Sobre o Evento</a></li>
-              <li><a href="#palestrantes" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-[oklch(0.75_0.18_65)] rounded-full"></span> Palestrantes</a></li>
-              <li><a href="#inscricao" className="hover:text-white transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-[oklch(0.75_0.18_65)] rounded-full"></span> Inscrição</a></li>
+              {[
+                { label: "Início", href: "#" },
+                { label: "Sobre o Evento", href: "#sobre" },
+                { label: "Palestrantes", href: "#palestrantes" },
+                { label: "Conteúdo", href: "#conteudo" },
+                { label: "Local", href: "#local" },
+                { label: "Inscrição", href: "#inscricao" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a 
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const target = item.href === "#" ? document.body : document.querySelector(item.href);
+                      target?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 bg-[oklch(0.75_0.18_65)] rounded-full"></span> {item.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           
