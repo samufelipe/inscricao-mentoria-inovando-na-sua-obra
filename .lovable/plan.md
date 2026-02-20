@@ -1,34 +1,82 @@
 
 
-# Corrigir tela branca - Variáveis de ambiente do banco de dados
+# Ajustes na LP "Alem da Tendencia"
 
-## Problema
+## Resumo das alteracoes
 
-O aplicativo está exibindo uma tela branca em todas as rotas porque o cliente do banco de dados não consegue inicializar. O erro no console é:
+Sao 5 ajustes principais que serao feitos em arquivos especificos, sem afetar a pagina principal.
 
+---
+
+## 1. Hero Desktop - Reposicionar imagem das tres mulheres
+
+**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
+
+A imagem central (`heroMain`) atualmente usa `object-position: center 35%`, o que corta parte das anfitrias. Vou ajustar para `object-position: center 15%` (ou similar) para "subir" a imagem e mostrar as tres mulheres de forma mais nitida. Tambem posso aumentar levemente a largura da imagem central (de 60% para 65%) para dar mais destaque.
+
+## 2. Hero Mobile - Trocar imagem e reorganizar layout
+
+**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
+
+- Trocar a imagem mobile de `heroFar` (publico sentado) para `heroMain` (tres mulheres em pe)
+- Reorganizar o layout mobile para que a imagem das anfitrias apareca primeiro com mais destaque, e o formulario fique abaixo da imagem (em vez de sobrepor)
+- Ajustar `object-position` para centralizar as tres mulheres no mobile tambem
+- Manter os efeitos visuais (gradientes, vinheta) que ja estao aplicados
+
+## 3. Preco com parcelamento estrategico
+
+**Arquivo:** `client/src/components/ui/hero-registration-form.tsx`
+
+Atualizar a exibicao de preco no formulario:
+- Manter o preco cheio riscado: ~~R$ 297,00~~
+- Manter o preco total: R$ 147,00
+- Adicionar abaixo: **ou 5x de R$ 29,40** (mais acessivel visualmente)
+
+Concordo com a sugestao de 5x de R$ 29,40 - e um valor psicologicamente atraente (abaixo de R$ 30 por parcela).
+
+## 4. Reduzir tamanho dos titulos das secoes
+
+**Arquivo:** `client/src/components/ui/architectural-title.tsx`
+
+Reduzir levemente os tamanhos tipograficos do variant `h2` (usado em todas as secoes):
+
+De:
 ```
-Error: supabaseUrl is required.
+text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
+```
+Para:
+```
+text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl
 ```
 
-Isso indica que as variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_PUBLISHABLE_KEY` não estão sendo lidas corretamente do arquivo `.env`.
+Uma reducao de 1 nivel em cada breakpoint - sutil mas suficiente para ficar mais clean.
 
-## Causa raiz
+## 5. Remover duas perguntas do FAQ
 
-O arquivo `.env` foi sobrescrito manualmente durante a implementação anterior (capture-lead), o que pode ter corrompido ou removido as variáveis necessárias. Este arquivo é gerenciado automaticamente pelo Lovable Cloud e não deve ser editado.
+**Arquivo:** `client/src/components/ui/faq-accordion.tsx`
 
-## Solução
+Remover as duas perguntas marcadas em vermelho na imagem:
+- "Receberei certificado de participacao?"
+- "Havera coffee break?"
 
-1. **Restaurar o arquivo `.env`** com os valores corretos das variáveis de ambiente do Lovable Cloud (que já estão disponíveis no sistema). O arquivo será recriado com o conteúdo correto:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_PUBLISHABLE_KEY`
-   - `VITE_SUPABASE_PROJECT_ID`
+O FAQ ficara com 7 perguntas em vez de 9.
 
-2. **Verificar** que ambas as páginas (`/` e `/alem-da-tendencia`) voltam a carregar normalmente após a correção.
+---
 
 ## Detalhes tecnicos
 
-- O arquivo `src/integrations/supabase/client.ts` lê `import.meta.env.VITE_SUPABASE_URL` e `import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY`
-- Quando essas variáveis estão `undefined`, o `createClient` lança o erro `supabaseUrl is required`
-- Como esse erro ocorre no nível do módulo (fora de try/catch), ele impede toda a aplicação de renderizar
-- A correção é simplesmente garantir que o `.env` contenha os valores corretos novamente
+### Arquivos modificados
+
+| Arquivo | Alteracao |
+|---------|-----------|
+| `client/src/pages/AlemDaTendencia.tsx` | Reposicionar heroMain no desktop (object-position), trocar imagem mobile para heroMain, reorganizar layout mobile (imagem + formulario empilhados) |
+| `client/src/components/ui/hero-registration-form.tsx` | Adicionar linha de parcelamento "ou 5x de R$ 29,40" |
+| `client/src/components/ui/architectural-title.tsx` | Reduzir tamanhos do variant h2 em 1 nivel por breakpoint |
+| `client/src/components/ui/faq-accordion.tsx` | Remover 2 itens do array de FAQs (certificado e coffee break) |
+
+### Impacto
+
+- Nenhuma alteracao afeta a pagina principal (Home/Mentoria)
+- O componente `ArchitecturalTitle` e compartilhado, mas a reducao e sutil e melhora ambas as paginas
+- Nenhuma dependencia nova necessaria
 
