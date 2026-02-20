@@ -253,10 +253,10 @@ export default function AlemDaTendencia() {
             <div className="relative bg-[oklch(0.35_0.12_320)]/5 border-l-4 border-[oklch(0.75_0.18_65)] p-8 md:p-12 rounded-r-2xl">
               <span className="absolute -top-6 -left-2 text-[oklch(0.75_0.18_65)] text-8xl font-serif leading-none opacity-30">"</span>
               <p className="text-xl md:text-2xl font-serif italic text-[oklch(0.35_0.12_320)] leading-relaxed mb-4">
-                Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas — quando existe método.
+                Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas, quando existe método.
               </p>
               <p className="text-sm uppercase tracking-widest text-[oklch(0.75_0.18_65)] font-bold">
-                — Filosofia do Evento
+                Filosofia do Evento
               </p>
               <span className="absolute -bottom-6 right-4 text-[oklch(0.75_0.18_65)] text-8xl font-serif leading-none opacity-30 rotate-180">"</span>
             </div>
@@ -466,7 +466,7 @@ export default function AlemDaTendencia() {
           <LearningModule 
             number="04"
             title="Segurança Jurídica e Contratos"
-            description="Contratos que comunicam com clareza, valorizam sua marca e fortalecem a relação com clientes — do juridiquês à linguagem do projeto."
+            description="Contratos que comunicam com clareza, valorizam sua marca e fortalecem a relação com clientes, do juridiquês à linguagem do projeto."
             speaker="Márcia Pereira"
           />
         </div>
