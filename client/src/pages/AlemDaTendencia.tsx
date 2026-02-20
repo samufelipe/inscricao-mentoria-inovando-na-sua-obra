@@ -116,7 +116,7 @@ export default function AlemDaTendencia() {
               <span className="text-[#C9A84C]">nos Bastidores</span>
             </h1>
             <p className="text-xs sm:text-sm text-gray-200 max-w-lg mb-3 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4">
-              Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos — o bastidor que define quem cresce de verdade.
+              Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos, o bastidor que define quem cresce de verdade.
             </p>
             <p className="text-[10px] sm:text-xs text-[#C9A84C] font-semibold uppercase tracking-wider mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
@@ -224,7 +224,7 @@ export default function AlemDaTendencia() {
                 <span className="text-[#C9A84C]">nos Bastidores</span>
               </h1>
               <p className="text-base text-gray-200 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
-                Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos — o bastidor que define quem cresce de verdade.
+                Um dia inteiro dedicado ao que ninguém mostra: gestão de obra, escritório, iluminação e contratos, o bastidor que define quem cresce de verdade.
               </p>
               <p className="text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.6)' }}>
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
