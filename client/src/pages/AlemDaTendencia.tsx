@@ -57,44 +57,44 @@ export default function AlemDaTendencia() {
       <StickyHeader />
       
       {/* HERO SECTION - Full Dark Cinematic Integrated */}
-      <section className="relative overflow-hidden bg-[#1a1a1a] min-h-[80vh] md:min-h-[90vh] flex flex-col">
+      <section className="relative overflow-hidden bg-[#1a1a1a] min-h-[60vh] md:min-h-[90vh] flex flex-col">
         {/* Background: 4-image composition covering entire hero */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Camada 1: Far image (profundidade) */}
+          {/* Camada 1: Far image (profundidade) - hidden on mobile */}
           <img
             src={heroFar}
             alt=""
-            className="absolute left-0 top-0 w-[30%] md:w-[28%] h-full object-cover object-[center_20%] opacity-70"
+            className="hidden md:block absolute left-0 top-0 w-[28%] h-full object-cover object-[center_20%] opacity-70"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
               maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
             }}
           />
-          {/* Camada 2: Left image */}
+          {/* Camada 2: Left image - hidden on mobile */}
           <img
             src={heroLeft}
             alt=""
-            className="absolute left-[5%] md:left-[8%] top-0 w-[42%] md:w-[40%] h-full object-cover object-[center_20%] z-[2]"
+            className="hidden md:block absolute left-[8%] top-0 w-[40%] h-full object-cover object-[center_20%] z-[2]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 55%, transparent 92%)',
             }}
           />
-          {/* Camada 3: CENTRAL principal (três mulheres em pé) */}
+          {/* Camada 3: CENTRAL principal - larger on mobile */}
           <img
             src={heroMain}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] md:w-[58%] h-full object-cover object-[center_15%] z-[3]"
+            className="absolute left-1/2 -translate-x-1/2 top-0 w-[95%] md:w-[58%] h-full object-cover object-[center_15%] z-[3]"
             style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
               maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
             }}
           />
-          {/* Camada 4: Right image */}
+          {/* Camada 4: Right image - hidden on mobile */}
           <img
             src={heroRight}
             alt=""
-            className="absolute right-0 top-0 w-[38%] md:w-[35%] h-full object-cover object-[center_20%] z-[2]"
+            className="hidden md:block absolute right-0 top-0 w-[35%] h-full object-cover object-[center_20%] z-[2]"
             style={{
               WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
               maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
@@ -130,7 +130,7 @@ export default function AlemDaTendencia() {
           </motion.div>
 
           {/* Spacer to push content to bottom half */}
-          <div className="flex-1 min-h-[120px] md:min-h-[180px]" />
+          <div className="flex-1 min-h-[40px] md:min-h-[180px]" />
 
           {/* Bottom content: text + form */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end pb-8 md:pb-16">
@@ -141,12 +141,16 @@ export default function AlemDaTendencia() {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-start"
             >
-              <p className="text-base md:text-lg text-gray-200 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
-                O evento presencial que une as especialistas que você acompanha online — ao vivo, em São Paulo.
+              <h1 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 uppercase">
+                Inspiração Sem Gestão É Só Tendência Que{" "}
+                <span className="text-[#C9A84C]">Não Sai do Papel</span>
+              </h1>
+              <p className="text-sm md:text-base text-gray-300 max-w-lg mb-4 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-5">
+                4 especialistas. 4 horas. Tudo o que você precisa para sair da ExpoRevestir com um plano real de gestão de obra, escritório, iluminação e contratos.
               </p>
-              <p className="text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2">
+              <p className="text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                Auditório para apenas 297 pessoas — Vagas Limitadas
+                Apenas 297 lugares — Lote Promocional com 50% OFF
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto">
