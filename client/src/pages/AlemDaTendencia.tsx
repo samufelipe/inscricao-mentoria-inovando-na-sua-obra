@@ -149,7 +149,7 @@ export default function AlemDaTendencia() {
               </p>
               <p className="text-xs md:text-sm text-[#C9A84C] font-semibold uppercase tracking-wider mb-6 flex items-center gap-2 drop-shadow-md">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                Apenas 297 lugares — Lote Promocional com 50% OFF
+                Vagas Limitadas • Lote Promocional com 50% OFF
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 w-full sm:w-auto shadow-lg">
@@ -307,7 +307,7 @@ export default function AlemDaTendencia() {
           ].map((card, i) => (
             <motion.div 
               key={i} variants={fadeInUp}
-              className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-xl p-8 hover:bg-white/10 transition-all duration-500 group"
+              className="border-l-2 border-[#C9A84C]/30 pl-8 py-2 hover:border-[#C9A84C] transition-all duration-500 group"
             >
               <div className="mb-4">{card.icon}</div>
               <h3 className="text-white font-bold text-lg mb-3 group-hover:text-[#C9A84C] transition-colors">{card.title}</h3>
