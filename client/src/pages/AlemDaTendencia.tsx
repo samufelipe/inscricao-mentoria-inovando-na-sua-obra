@@ -144,15 +144,15 @@ export default function AlemDaTendencia() {
       </section>
 
       {/* HERO - DESKTOP */}
-      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] min-h-[90vh] flex-col">
+      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] min-h-[75vh] lg:min-h-[80vh] flex-col">
         <div className="absolute inset-0 overflow-hidden">
           {/* Background Image Full Width */}
           <img
             src={newHostsImage}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute inset-0 w-full h-full object-contain z-[1] bg-[#1a1a1a]"
+            className="absolute inset-0 w-full h-full object-cover z-[1]"
             style={{
-              objectPosition: 'center center'
+              objectPosition: 'center 38%'
             }}
           />
           
