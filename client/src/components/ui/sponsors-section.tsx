@@ -10,14 +10,16 @@ const sponsors = [
 
 export function SponsorsSection() {
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <p className="text-gray-400 font-bold tracking-[0.2em] uppercase text-xs mb-4">
+    <section className="py-20 bg-[#1a1a1a] border-t border-white/10 relative overflow-hidden">
+      {/* Background Texture */}
+      <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-12">
+          <p className="text-[#C9A84C] font-bold tracking-[0.2em] uppercase text-xs mb-4">
             Realização e Apoio
           </p>
-          {/* Título reduzido conforme solicitado */}
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 uppercase tracking-wide">
+          <h2 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
             Parceiros Oficiais
           </h2>
         </div>
@@ -26,13 +28,13 @@ export function SponsorsSection() {
           {sponsors.map((sponsor) => (
             <div
               key={sponsor.name}
-              className="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500 transform hover:scale-105"
+              className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500 transform hover:scale-105 bg-white/5 p-6 rounded-xl backdrop-blur-sm border border-white/5 hover:border-[#C9A84C]/30 hover:bg-white/10"
             >
-              {/* Logos aumentados conforme solicitado */}
               <img
                 src={sponsor.logo}
                 alt={sponsor.name}
-                className="h-28 md:h-40 w-auto object-contain"
+                className="h-24 md:h-32 w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-500"
+                style={{ filter: 'brightness(0) invert(1)' }} // Força logos brancos inicialmente
               />
             </div>
           ))}

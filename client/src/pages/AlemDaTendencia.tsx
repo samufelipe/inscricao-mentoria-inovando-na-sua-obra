@@ -12,7 +12,7 @@ import { StickyHeader } from "@/components/ui/sticky-header";
 import { ScarcityBanner } from "@/components/ui/scarcity-banner";
 import { SponsorsSection } from "@/components/ui/sponsors-section";
 import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
-import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2 } from "lucide-react";
+import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
@@ -25,6 +25,10 @@ import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra.png";
 import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo.jpg";
 import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra-new.jpg";
 import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
+
+// Nova imagem das anfitriãs (será substituída pelo upload real)
+const newHostsImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/Gemini_Generated_Image_mpxyptmpxyptmpxy.png";
+const videoUrl = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/INOVANDO-EventoMentoria_v2.mp4";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
@@ -65,18 +69,19 @@ export default function AlemDaTendencia() {
     <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-[oklch(0.97_0.01_95)] overflow-x-hidden w-full max-w-[100vw]">
       <StickyHeader />
       
-      {/* HERO SECTION - OTIMIZADA CONFORME PDF */}
+      {/* HERO SECTION - COM NOVA IMAGEM E AJUSTES DE LEGIBILIDADE */}
       {/* HERO - MOBILE */}
       <section className="md:hidden bg-[#1a1a1a] flex flex-col">
         <div className="relative w-full aspect-[3/4] max-h-[65vh] overflow-hidden">
           <img
-            src={heroMain}
+            src={newHostsImage}
             alt="Evento Além da Tendência - Anfitriãs"
-            className="absolute inset-0 w-full h-full object-cover object-[center_20%]"
+            className="absolute inset-0 w-full h-full object-cover object-[center_top]"
           />
+          {/* Gradiente reforçado para legibilidade no mobile */}
           <div 
             className="absolute inset-0 z-[10] pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, transparent 20%, transparent 60%, rgba(26,26,26,0.7) 85%, #1a1a1a 100%)' }}
+            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.4) 0%, transparent 25%, transparent 50%, rgba(26,26,26,0.8) 75%, #1a1a1a 100%)' }}
           />
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -87,19 +92,19 @@ export default function AlemDaTendencia() {
             <img 
               src={logoTransparent}
               alt="Além da Tendência - Logo Oficial" 
-              className="w-[150px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
+              className="w-[150px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
             />
           </motion.div>
         </div>
 
-        <div className="relative z-20 px-4 py-6 flex flex-col gap-5">
+        <div className="relative z-20 px-4 py-6 flex flex-col gap-5 -mt-12">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >
-            <div className="flex items-center gap-2 mb-3 text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
+            <div className="flex items-center gap-2 mb-3 text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold drop-shadow-md">
               <MapPin className="w-3 h-3" />
               <span>Evento Presencial</span>
               <span className="text-white/30">|</span>
@@ -108,19 +113,19 @@ export default function AlemDaTendencia() {
               <span>Durante a Revestir</span>
             </div>
 
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mb-3 uppercase">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mb-3 uppercase drop-shadow-lg">
               Como transformar <span className="text-[#C9A84C]">inspiração</span> em <span className="text-[#C9A84C]">realidade</span>
             </h1>
             
-            <p className="text-sm text-gray-200 max-w-lg mb-3 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4">
+            <p className="text-sm text-gray-200 max-w-lg mb-3 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4 drop-shadow-md bg-black/20 p-2 rounded-r-lg backdrop-blur-sm">
               A Arquitetura acontece nos bastidores. Uma tarde inteira focada no outro lado da moeda dos escritórios de arquitetura, além da tendência: Gestão de escritório, Gestão de Obra e Projeto.
             </p>
             
-            <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-4">
+            <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-4 font-medium">
               Evento por Inovando na sua obra @inovandonasuaobra e AjudaMONU @arq.julianacampelo
             </p>
 
-            <div className="flex items-center gap-3 text-xs text-white/80 bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15 w-full mb-4">
+            <div className="flex items-center gap-3 text-xs text-white/80 bg-black/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15 w-full mb-4 shadow-lg">
               <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0" />
               <span className="font-semibold text-white">10 de Março</span>
               <span className="text-white/30">|</span>
@@ -130,7 +135,7 @@ export default function AlemDaTendencia() {
 
             <button 
               onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-              className="w-full bg-[#C9A84C] text-white font-bold py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg"
+              className="w-full bg-[#C9A84C] text-white font-bold py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg border border-[#C9A84C]/50"
             >
               Garantir meu ingresso
             </button>
@@ -141,41 +146,24 @@ export default function AlemDaTendencia() {
       {/* HERO - DESKTOP */}
       <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] min-h-[90vh] flex-col">
         <div className="absolute inset-0 overflow-hidden">
+          {/* Background Image Full Width */}
           <img
-            src={heroFar}
-            alt=""
-            className="absolute left-0 top-0 w-[35%] h-full object-cover object-[center_20%] opacity-70"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
-              maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 95%)',
-            }}
-          />
-          <img
-            src={heroMain}
+            src={newHostsImage}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-[65%] h-full object-cover z-[3]"
+            className="absolute inset-0 w-full h-full object-cover z-[1]"
             style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-              objectPosition: 'center 25%' // Ajustado para destacar mais as 3
+              objectPosition: 'center 20%'
             }}
           />
-          <img
-            src={heroRight}
-            alt=""
-            className="absolute right-0 top-0 w-[35%] h-full object-cover object-[center_45%] z-[2]"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
-              maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 92%)',
-            }}
+          
+          {/* Overlay Gradients para Legibilidade */}
+          <div 
+            className="absolute inset-0 z-[2] pointer-events-none"
+            style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%)' }}
           />
           <div 
-            className="absolute inset-0 z-[10] pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(26,26,26,0.4) 65%, rgba(26,26,26,0.85) 80%, #1a1a1a 92%)' }}
-          />
-          <div
-            className="absolute inset-0 z-[11] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.6) 100%)' }}
+            className="absolute inset-0 z-[2] pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 80%, #1a1a1a 100%)' }}
           />
         </div>
 
@@ -184,7 +172,7 @@ export default function AlemDaTendencia() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-center pt-12"
+            className="flex justify-start pt-12"
           >
             <img 
               src={logoTransparent}
@@ -200,9 +188,9 @@ export default function AlemDaTendencia() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="col-span-8 flex flex-col items-start"
+              className="col-span-7 flex flex-col items-start"
             >
-              <div className="flex items-center gap-2 mb-4 text-sm uppercase tracking-[0.2em] text-[#C9A84C] font-semibold bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">
+              <div className="flex items-center gap-2 mb-4 text-sm uppercase tracking-[0.2em] text-[#C9A84C] font-semibold bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
                 <MapPin className="w-4 h-4" />
                 <span>Evento Presencial</span>
                 <span className="text-white/30">|</span>
@@ -216,19 +204,19 @@ export default function AlemDaTendencia() {
                 <span className="text-[#C9A84C]">inspiração</span> em <span className="text-[#C9A84C]">realidade</span>
               </h1>
               
-              <div className="border-l-4 border-[#C9A84C] pl-6 mb-8 bg-gradient-to-r from-black/40 to-transparent p-4 rounded-r-xl backdrop-blur-sm">
+              <div className="border-l-4 border-[#C9A84C] pl-6 mb-8 bg-gradient-to-r from-black/60 to-transparent p-6 rounded-r-xl backdrop-blur-md shadow-xl max-w-2xl">
                 <h2 className="text-2xl text-white font-bold mb-2 uppercase">A Arquitetura acontece nos bastidores</h2>
-                <p className="text-lg text-gray-200 font-light leading-relaxed max-w-2xl">
+                <p className="text-lg text-gray-200 font-light leading-relaxed">
                   Uma tarde inteira focada no outro lado da moeda dos escritórios de arquitetura, além da tendência: <strong className="text-white">Gestão de escritório, Gestão de Obra e Projeto.</strong>
                 </p>
               </div>
               
-              <p className="text-sm text-gray-400 uppercase tracking-wider mb-8 font-medium">
+              <p className="text-sm text-gray-300 uppercase tracking-wider mb-8 font-medium bg-black/20 p-2 rounded inline-block backdrop-blur-sm">
                 Evento por Inovando na sua obra <span className="text-[#C9A84C]">@inovandonasuaobra</span> e AjudaMONU <span className="text-[#C9A84C]">@arq.julianacampelo</span>
               </p>
 
               <div className="flex gap-6 items-center">
-                <div className="flex items-center gap-6 text-sm font-medium tracking-wide uppercase bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-lg">
+                <div className="flex items-center gap-6 text-sm font-medium tracking-wide uppercase bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-lg">
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-[#C9A84C]" />
                     <div>
@@ -248,7 +236,7 @@ export default function AlemDaTendencia() {
 
                 <button 
                   onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-                  className="bg-[#C9A84C] text-white font-bold px-10 py-5 rounded-xl uppercase tracking-wider text-base hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 hover:shadow-[#C9A84C]/20"
+                  className="bg-[#C9A84C] text-white font-bold px-10 py-5 rounded-xl uppercase tracking-wider text-base hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 hover:shadow-[#C9A84C]/20 border border-[#C9A84C]/50"
                 >
                   Garantir meu ingresso
                 </button>
@@ -260,7 +248,7 @@ export default function AlemDaTendencia() {
 
       <ScarcityBanner />
 
-      {/* SEÇÃO 2 - CONCEITO (OTIMIZADA) */}
+      {/* SEÇÃO 2 - CONCEITO (COM NOVA IMAGEM) */}
       <ArchitecturalSection id="sobre" variant="light" className="relative">
         <motion.div 
           initial="hidden"
@@ -314,10 +302,10 @@ export default function AlemDaTendencia() {
             </motion.div>
           </div>
 
-          {/* Imagem Ilustrativa Conceitual */}
+          {/* Imagem Ilustrativa Conceitual - Substituída pela nova foto */}
           <motion.div variants={fadeInUp} className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
              <img 
-               src={heroMain} 
+               src={newHostsImage} 
                alt="Conceito do Evento" 
                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
              />
@@ -329,7 +317,7 @@ export default function AlemDaTendencia() {
         </motion.div>
       </ArchitecturalSection>
 
-      {/* SEÇÃO 3 - PÚBLICO-ALVO (OTIMIZADA) */}
+      {/* SEÇÃO 3 - PÚBLICO-ALVO (REVERTIDA ESTRUTURA, MANTIDA COPY PDF) */}
       <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
         <div className="text-center mb-12 relative z-10">
           <div className="inline-block border-b-2 border-[#C9A84C] pb-2 mb-4">
@@ -392,13 +380,42 @@ export default function AlemDaTendencia() {
         </div>
       </ArchitecturalSection>
 
-      {/* ANFITRIÃS - OTIMIZADA */}
+      {/* ANFITRIÃS */}
       <HostsSection />
 
-      {/* PALESTRANTES - OCULTADO CONFORME PDF */}
-      {/* <ArchitecturalSection id="palestrantes" variant="dark"> ... </ArchitecturalSection> */}
+      {/* PALESTRANTES - RESTAURADA E INTEGRADA */}
+      <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200">
+        <div className="text-center mb-16">
+          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-2">
+            Especialistas Convidadas
+          </p>
+          <ArchitecturalTitle variant="h2" color="purple">
+            Conteúdo de Alto Nível
+          </ArchitecturalTitle>
+          <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto font-light">
+            Além das anfitriãs, trouxemos referências do mercado para complementar sua visão estratégica.
+          </p>
+        </div>
 
-      {/* INFORMAÇÕES IMPORTANTES (ANTIGO LOCAL) */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <SpeakerCard 
+            name="Luciana Guerra"
+            role="Especialista em Iluminação"
+            description="Arquiteta especialista em iluminação, vai te ensinar como valorizar seus projetos e evitar erros comuns que comprometem o resultado final."
+            image={lucianaGuerraImg}
+            socialProof="Referência em Lighting Design"
+          />
+          <SpeakerCard 
+            name="Márcia Pereira"
+            role="Advogada Especialista"
+            description="Advogada focada em arquitetura e design, trará a segurança jurídica que seu escritório precisa para fechar contratos blindados."
+            image={marciaPereira}
+            socialProof="Proteção Jurídica para Arquitetos"
+          />
+        </div>
+      </ArchitecturalSection>
+
+      {/* INFORMAÇÕES IMPORTANTES */}
       <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
@@ -471,13 +488,17 @@ export default function AlemDaTendencia() {
         </div>
       </ArchitecturalSection>
 
-      {/* PREÇO - NOVO CARD (OTIMIZADO) */}
-      <section id="inscricao" className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
+      {/* PREÇO - BACKGROUND DARK/CINEMÁTICO */}
+      <section id="inscricao" className="py-20 bg-[#1a1a1a] relative overflow-hidden">
+        {/* Background Texture */}
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-md mx-auto">
-            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 transform hover:-translate-y-2 transition-transform duration-300">
-              <div className="bg-[#1a1a1a] p-8 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/10 transform hover:-translate-y-2 transition-transform duration-300">
+              <div className="bg-black p-8 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
                 <img 
                   src={logoTransparent} 
                   alt="Além da Tendência" 
@@ -524,60 +545,33 @@ export default function AlemDaTendencia() {
         </div>
       </section>
 
-      {/* DEPOIMENTOS - COM VÍDEO (OTIMIZADO) */}
+      {/* DEPOIMENTOS - VÍDEO ÚNICO E TÍTULO AJUSTADO */}
       <ArchitecturalSection variant="light">
         <div className="text-center mb-12">
-          <ArchitecturalTitle variant="h3" color="purple">
-            Depoimentos
-          </ArchitecturalTitle>
           <ArchitecturalTitle variant="h2" color="purple">
             Quem Já Viveu a Experiência
           </ArchitecturalTitle>
         </div>
 
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group cursor-pointer">
-            {/* Placeholder para vídeo - Imagem estática por enquanto */}
-            <img 
-              src={heroEvent} 
-              alt="Vídeo do último evento" 
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 bg-[#C9A84C] rounded-full flex items-center justify-center pl-2 shadow-lg group-hover:scale-110 transition-transform">
-                <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1"></div>
-              </div>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-              <p className="text-white font-bold text-lg">Confira como foi nossa última edição</p>
-            </div>
+        <div className="max-w-5xl mx-auto">
+          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border-4 border-white">
+            <video 
+              src={videoUrl} 
+              controls 
+              className="w-full h-full object-cover"
+              poster={heroEvent} // Usando imagem do evento como poster
+            >
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
           </div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <TestimonialCard 
-            name="Ana Clara"
-            role="Arquiteta"
-            quote="A Inovando na Sua Obra mudou minha visão sobre gestão. Antes eu era refém da obra, hoje eu lidero o processo com segurança."
-            image="https://randomuser.me/api/portraits/women/44.jpg"
-          />
-          <TestimonialCard 
-            name="Beatriz Souza"
-            role="Designer de Interiores"
-            quote="Conteúdo denso, prático e direto ao ponto. Saí do evento com um plano de ação claro para aplicar no meu escritório na segunda-feira."
-            image="https://randomuser.me/api/portraits/women/68.jpg"
-          />
-          <TestimonialCard 
-            name="Carla Mendes"
-            role="Engenheira"
-            quote="Networking incrível e palestras de altíssimo nível. Valeu cada centavo do investimento. Já garanti meu lugar na próxima edição!"
-            image="https://randomuser.me/api/portraits/women/32.jpg"
-          />
+          <p className="text-center text-gray-500 mt-4 italic">
+            Confira os melhores momentos da nossa última edição
+          </p>
         </div>
       </ArchitecturalSection>
 
-      {/* FAQ (OTIMIZADO) */}
-      <ArchitecturalSection variant="light">
+      {/* FAQ */}
+      <ArchitecturalSection variant="light" className="bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <ArchitecturalTitle variant="h2" color="purple">
@@ -600,7 +594,7 @@ export default function AlemDaTendencia() {
         </div>
       </ArchitecturalSection>
 
-      {/* SPONSORS (MOVIDO PARA CIMA E AJUSTADO) */}
+      {/* SPONSORS - BACKGROUND DARK/CINEMÁTICO */}
       <SponsorsSection />
 
       {/* FOOTER */}
