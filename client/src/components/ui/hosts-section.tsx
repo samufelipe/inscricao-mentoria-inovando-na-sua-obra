@@ -1,5 +1,6 @@
 import { ArchitecturalTitle } from "./architectural-title";
 import { cn } from "@/lib/utils";
+import { Instagram } from "lucide-react";
 
 export function HostsSection() {
   return (
@@ -8,93 +9,89 @@ export function HostsSection() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[oklch(0.97_0.01_95)] -skew-x-12 translate-x-1/4 z-0" />
       
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image Column */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-[oklch(0.35_0.12_320)] translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
-            <div className="relative aspect-[4/5] overflow-hidden border-4 border-white shadow-2xl">
+        <div className="text-center mb-16">
+          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-2">
+            Suas Anfitriãs
+          </p>
+          <ArchitecturalTitle variant="h2" color="purple">
+            Unidas por um propósito
+          </ArchitecturalTitle>
+          <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto font-light">
+            São os bastidores que constroem e sustentam uma carreira sólida na arquitetura.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+          {/* Inovando na Sua Obra */}
+          <div className="space-y-8 group">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               <img 
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg" 
-                alt="Anfitriãs: Ingrid Zarza, Fernanda Bradaschia e Juliana Campelo" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                alt="Ingrid Zarza e Fernanda Bradaschia - Inovando na Sua Obra" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[center_20%]"
               />
-              
-              {/* Names Overlay */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                <div className="flex flex-col sm:flex-row justify-between text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase gap-1 sm:gap-0">
-                  <span>Ingrid Zarza</span>
-                  <span>Fernanda Bradaschia</span>
-                  <span>Juliana Campelo</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-6 left-6 text-white">
+                <h3 className="text-2xl font-bold uppercase tracking-wide mb-1">Ingrid Zarza & <br/>Fernanda Bradaschia</h3>
+                <p className="text-[#C9A84C] font-medium text-sm uppercase tracking-wider">Inovando na Sua Obra</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4 px-2">
+              <div className="flex items-center gap-2 text-[#C9A84C] font-bold uppercase tracking-wider text-sm">
+                <Instagram className="w-4 h-4" />
+                <span>@inovandonasuaobra</span>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Especialistas em Gestão de Obras de Interiores. Ensinam arquitetos e designers a transformarem obras caóticas em processos lucrativos e organizados.
+              </p>
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                  <span className="block text-2xl font-bold text-gray-800">55mil+</span>
+                  <span className="text-xs text-gray-500 uppercase">Seguidores</span>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                  <span className="block text-2xl font-bold text-gray-800">250+</span>
+                  <span className="text-xs text-gray-500 uppercase">Obras Realizadas</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Content Column */}
-          <div className="space-y-8">
-            <div className="space-y-2">
-              <p className="text-[oklch(0.75_0.18_65)] font-bold tracking-widest uppercase text-sm">
-                Suas Anfitriãs
-              </p>
-              <ArchitecturalTitle variant="h2" color="purple">
-                Unidas Pelo Propósito
-              </ArchitecturalTitle>
+          {/* Juliana Campelo */}
+          <div className="space-y-8 group">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
+              {/* Usando a mesma imagem por enquanto, mas focado na Juliana se possível, ou placeholder se não tiver foto individual */}
+              <img 
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg" 
+                alt="Juliana Campelo - AjudaMONU" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[right_20%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-6 left-6 text-white">
+                <h3 className="text-2xl font-bold uppercase tracking-wide mb-1">Juliana Campelo</h3>
+                <p className="text-[#C9A84C] font-medium text-sm uppercase tracking-wider">AjudaMONU</p>
+              </div>
             </div>
-
-            <div className="space-y-4 sm:space-y-6 text-gray-600 text-base sm:text-lg leading-relaxed font-light">
-              <p>
-                <span className="text-[oklch(0.35_0.12_320)] font-medium">Nós três representamos o bastidor que sustenta uma carreira sólida.</span>
+            
+            <div className="space-y-4 px-2">
+              <div className="flex items-center gap-2 text-[#C9A84C] font-bold uppercase tracking-wider text-sm">
+                <Instagram className="w-4 h-4" />
+                <span>@arq.julianacampelo</span>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Arquiteta e mentora de gestão de escritórios. Ajuda profissionais a estruturarem seus negócios para crescerem com segurança e previsibilidade.
               </p>
-              
-              <p>
-                Enquanto o mercado se encanta com tendências, lançamentos e vitrines, nós defendemos aquilo que realmente transforma a trajetória de uma arquiteta: <strong>gestão de escritório e gestão de obra.</strong>
-              </p>
-              
-              <p className="border-l-4 border-[oklch(0.75_0.18_65)] pl-6 italic text-gray-800">
-                "Porque antes do projeto fotografado, existe organização, método, responsabilidade e estrutura."
-              </p>
-
-              {/* Metrics - Inovando na Sua Obra */}
-              <div className="pt-6">
-                <p className="font-display text-sm font-bold tracking-widest uppercase text-[oklch(0.35_0.12_320)] mb-4">Inovando na Sua Obra</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">55mil+</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores no Instagram</p>
-                  </div>
-                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">250+</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Obras Concluídas</p>
-                  </div>
-                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">200+</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Alunas na Mentoria</p>
-                  </div>
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                  <span className="block text-2xl font-bold text-gray-800">+850</span>
+                  <span className="text-xs text-gray-500 uppercase">Escritórios Estruturados</span>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                  <span className="block text-2xl font-bold text-gray-800">+3000</span>
+                  <span className="text-xs text-gray-500 uppercase">Alunos</span>
                 </div>
               </div>
-
-              {/* Metrics - Juliana Capelo */}
-              <div className="pt-2">
-                <p className="font-display text-sm font-bold tracking-widest uppercase text-[oklch(0.35_0.12_320)] mb-4">Juliana Capelo</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">500+</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Escritórios Atendidos</p>
-                  </div>
-                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">2000+</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Alunos</p>
-                  </div>
-                  <div className="text-center p-4 bg-[oklch(0.97_0.01_95)] rounded-lg">
-                    <p className="font-display text-2xl font-bold text-[oklch(0.35_0.12_320)]">47mil+</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Seguidores no Instagram</p>
-                  </div>
-                </div>
-              </div>
-              
-              <p className="font-display text-xl text-[oklch(0.35_0.12_320)] font-bold pt-4">
-                Juntas, mostramos que a arquitetura de verdade acontece nos bastidores.
-              </p>
             </div>
           </div>
         </div>

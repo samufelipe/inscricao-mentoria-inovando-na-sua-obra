@@ -8,20 +8,16 @@ import {
 export function FAQAccordion() {
   const faqs = [
     {
-      question: "Já tenho experiência. O evento é só para iniciantes?",
-      answer: "De forma alguma. O conteúdo foi desenhado para profissionais que já atuam no mercado e querem escalar, com processos mais sólidos, contratos mais seguros e gestão de obra mais lucrativa. Quanto mais experiência você tem, mais vai aproveitar."
-    },
-    {
       question: "O que torna este evento diferente de outros do mercado?",
-      answer: "Reunimos 4 especialistas de áreas complementares (gestão de obra, gestão de escritório, iluminação e contratos) em um único dia. Não é palestra motivacional, é conteúdo prático que você aplica na segunda-feira. Além disso, o formato presencial com apenas 297 lugares garante networking de altíssimo nível."
+      answer: "Reunimos especialistas de áreas complementares (gestão de obra, gestão de escritório, iluminação e contratos) em um único dia. Não é palestra motivacional, é conteúdo prático que você aplica na segunda-feira. Além disso, o formato presencial garante networking de altíssimo nível."
     },
     {
       question: "Vou conseguir aplicar o conteúdo imediatamente?",
-      answer: "Sim. Cada módulo é focado em ações práticas. Você sai com um plano claro para gestão de obra, precificação, contratos e iluminação, tudo aplicável na semana seguinte, sem depender de cursos longos."
+      answer: "Sim. Cada módulo é focado em ações práticas. Você sai com um plano claro para gestão de obra, precificação, contratos e iluminação, tudo aplicável na semana seguinte."
     },
     {
       question: "O investimento de R$147 realmente vale a pena?",
-      answer: "R$147 é menos do que um almoço de negócios em São Paulo. No evento, você acessa mais de 5 horas com especialistas que cobram milhares por consultoria, além de networking com centenas de profissionais. Um único contrato bem feito ou uma obra melhor gerida já paga o investimento dezenas de vezes."
+      answer: "R$147 é menos do que um almoço de negócios em São Paulo. No evento, você acessa conteúdo de especialistas que cobram milhares por consultoria, além de networking com centenas de profissionais. Um único contrato bem feito ou uma obra melhor gerida já paga o investimento dezenas de vezes."
     },
     {
       question: "Não moro em São Paulo. Vale a pena ir?",
@@ -29,15 +25,15 @@ export function FAQAccordion() {
     },
     {
       question: "Quando e onde será o evento?",
-      answer: "10 de Março de 2026, das 13h30 às 19h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP). Fácil acesso por transporte público e com estacionamento conveniado nas proximidades."
+      answer: "10 de Março de 2026, das 13h30 às 19h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP)."
+    },
+    {
+      question: "Tem estacionamento?",
+      answer: "O local não conta com estacionamento próprio, mas há diversos estacionamentos pagos ao redor para sua comodidade."
     },
     {
       question: "Qual a política de cancelamento?",
       answer: "Cancelamentos podem ser solicitados até 7 dias após a compra, desde que a solicitação seja realizada 48h antes do início do evento, conforme política do Sympla."
-    },
-    {
-      question: "O pagamento é seguro? Qual plataforma é utilizada?",
-      answer: "Sim, totalmente seguro. Utilizamos o Sympla, a maior plataforma de eventos do Brasil, com criptografia de dados e métodos de pagamento confiáveis (cartão de crédito, boleto e PIX). Seus dados financeiros são processados diretamente pelo Sympla, sem qualquer acesso nosso."
     },
     {
       question: "Como vou receber meu ingresso?",
