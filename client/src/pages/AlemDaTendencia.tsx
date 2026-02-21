@@ -27,8 +27,8 @@ import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra-new.jpg"
 import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
 
 // Nova imagem das anfitriãs (será substituída pelo upload real)
-const newHostsImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/Gemini_Generated_Image_mpxyptmpxyptmpxy.png";
-const videoUrl = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/INOVANDO-EventoMentoria_v2.mp4";
+const newHostsImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/vHxDiyaMsWHITuBB.png";
+const videoUrl = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/BzRHClvGpXplcBna.mp4";
 
 export default function AlemDaTendencia() {
   useEffect(() => {
