@@ -150,9 +150,9 @@ export default function AlemDaTendencia() {
           <img
             src={newHostsImage}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute inset-0 w-full h-full object-cover z-[1]"
+            className="absolute inset-0 w-full h-full object-contain z-[1] bg-[#1a1a1a]"
             style={{
-              objectPosition: 'center 20%'
+              objectPosition: 'center center'
             }}
           />
           
@@ -325,7 +325,7 @@ export default function AlemDaTendencia() {
               Público-Alvo
             </h3>
           </div>
-          <ArchitecturalTitle variant="h2" color="white" className="!text-3xl md:!text-4xl">
+          <ArchitecturalTitle variant="h2" color="light" className="!text-3xl md:!text-4xl">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
         </div>
@@ -422,7 +422,7 @@ export default function AlemDaTendencia() {
             <ArchitecturalTitle variant="h3" color="orange">
               INFORMAÇÕES IMPORTANTES
             </ArchitecturalTitle>
-            <ArchitecturalTitle variant="h2" color="white">
+            <ArchitecturalTitle variant="h2" color="light">
               Auditório AFRESP
             </ArchitecturalTitle>
             
