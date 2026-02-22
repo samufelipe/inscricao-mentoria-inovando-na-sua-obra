@@ -2,7 +2,12 @@ import { ArchitecturalTitle } from "./architectural-title";
 import { cn } from "@/lib/utils";
 import { Instagram } from "lucide-react";
 
-export function HostsSection() {
+interface HostsSectionProps {
+  inovandoImage?: string;
+  julianaImage?: string;
+}
+
+export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps) {
   return (
     <section className="relative py-12 md:py-32 bg-white overflow-hidden">
       {/* Background Elements */}
@@ -26,7 +31,7 @@ export function HostsSection() {
           <div className="space-y-8 group">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               <img 
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg" 
+                src={inovandoImage || "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg"} 
                 alt="Ingrid Zarza e Fernanda Bradaschia - Inovando na Sua Obra" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[center_20%]"
               />
@@ -63,9 +68,9 @@ export function HostsSection() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               {/* Usando a mesma imagem por enquanto, mas focado na Juliana se possível, ou placeholder se não tiver foto individual */}
               <img 
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg" 
+                src={julianaImage || "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg"} 
                 alt="Juliana Campelo - AjudaMONU" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[right_20%]"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[center_20%]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-6 left-6 text-white">
