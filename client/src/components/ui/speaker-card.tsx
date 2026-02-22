@@ -30,7 +30,7 @@ export function SpeakerCard({
         
         <div className="absolute bottom-0 left-0 w-full p-6">
           <p className="text-[oklch(0.75_0.18_65)] text-xs font-bold tracking-widest uppercase mb-1">{role}</p>
-          <h3 className="font-serif text-2xl font-bold text-white mb-2">{name}</h3>
+          <h3 className="font-display text-2xl font-bold text-white mb-2 uppercase tracking-wide">{name}</h3>
           <p className="text-white/80 text-xs font-medium mb-1">{socialProof}</p>
           <p className="text-white/70 text-sm leading-relaxed">{description}</p>
         </div>
