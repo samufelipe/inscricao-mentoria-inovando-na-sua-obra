@@ -22,6 +22,7 @@ import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 import heroEvent from "@/assets/alem-da-tendencia/hero-event.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra.png";
+import hostsSection2 from "@/assets/alem-da-tendencia/hosts-section2.jpg";
 import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo.jpg";
 import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra-new.jpg";
 import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
@@ -284,9 +285,6 @@ export default function AlemDaTendencia() {
         >
           <div className="space-y-8">
             <motion.div variants={fadeInUp}>
-              <h3 className="text-xl md:text-2xl font-bold text-[#C9A84C] uppercase tracking-wider mb-4 leading-snug">
-                Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas quando existe método.
-              </h3>
               <ArchitecturalTitle variant="h2" color="purple" className="!text-3xl md:!text-4xl">
                 Tendência Encanta.<br />Estrutura Constrói.
               </ArchitecturalTitle>
@@ -300,7 +298,7 @@ export default function AlemDaTendencia() {
                 Transformar inspiração em realidade exige estrutura e conhecimento técnico e é isso que você vai ver no evento:
               </p>
               
-              <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-[#C9A84C]">
+              <div className="pl-5 border-l-4 border-[#C9A84C]">
                 <p className="font-bold text-gray-800 mb-4 uppercase tracking-wide">Um aprofundamento em:</p>
                 <ul className="space-y-3">
                   {[
@@ -330,8 +328,8 @@ export default function AlemDaTendencia() {
           {/* Imagem Ilustrativa Conceitual - Substituída pela nova foto */}
           <motion.div variants={fadeInUp} className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
              <img 
-               src={newHostsImage} 
-               alt="Conceito do Evento" 
+               src={hostsSection2} 
+               alt="Conceito do Evento"
                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
