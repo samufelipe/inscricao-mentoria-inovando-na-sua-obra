@@ -343,11 +343,9 @@ export default function AlemDaTendencia() {
       {/* SEÇÃO 3 - PÚBLICO-ALVO (REVERTIDA ESTRUTURA, MANTIDA COPY PDF) */}
       <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
         <div className="text-center mb-12 relative z-10">
-          <div className="inline-block border-b-2 border-[#C9A84C] pb-2 mb-4">
-            <h3 className="text-[#C9A84C] font-bold uppercase tracking-widest text-sm">
-              Público-Alvo
-            </h3>
-          </div>
+          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-3">
+            Público-Alvo
+          </p>
           <ArchitecturalTitle variant="h2" color="light" className="!text-3xl md:!text-4xl">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
@@ -409,7 +407,7 @@ export default function AlemDaTendencia() {
       {/* PALESTRANTES - RESTAURADA E INTEGRADA */}
       <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200">
         <div className="text-center mb-16">
-          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-2">
+          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-3">
             Especialistas Convidadas
           </p>
           <ArchitecturalTitle variant="h2" color="purple">

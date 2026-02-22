@@ -33,7 +33,7 @@ export function ArchitecturalTitle({
     <Tag className={cn(variants[variant], colors[color], "relative inline-block", className)}>
       {children}
       {variant === "h2" && (
-        <span className="absolute -bottom-4 left-0 w-24 h-1 bg-[oklch(0.75_0.18_65)]" />
+        <span className="absolute -bottom-2 left-0 w-24 h-1 bg-[#C9A84C]" />
       )}
     </Tag>
   );
