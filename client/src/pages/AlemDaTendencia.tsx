@@ -468,7 +468,7 @@ export default function AlemDaTendencia() {
             <div className="space-y-6 mt-8 text-gray-300 text-lg">
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C] shrink-0">
+                   <div className="w-10 h-10 flex items-center justify-center text-[#C9A84C] shrink-0">
                     <MapPin />
                   </div>
                   <div>
@@ -477,7 +477,7 @@ export default function AlemDaTendencia() {
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C] shrink-0">
+                   <div className="w-10 h-10 flex items-center justify-center text-[#C9A84C] shrink-0">
                     <Calendar />
                   </div>
                   <div>
@@ -488,7 +488,7 @@ export default function AlemDaTendencia() {
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C] shrink-0">
+                  <div className="w-10 h-10 flex items-center justify-center text-[#C9A84C] shrink-0">
                     <Users />
                   </div>
                   <div>
