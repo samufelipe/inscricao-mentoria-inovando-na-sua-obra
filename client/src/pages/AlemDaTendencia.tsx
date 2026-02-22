@@ -285,7 +285,7 @@ export default function AlemDaTendencia() {
         >
           <div className="space-y-8">
             <motion.div variants={fadeInUp}>
-              <ArchitecturalTitle variant="h2" color="purple" className="!text-3xl md:!text-4xl">
+              <ArchitecturalTitle variant="h2" color="purple">
                 Tendência Encanta.<br />Estrutura Constrói.
               </ArchitecturalTitle>
             </motion.div>
@@ -343,7 +343,7 @@ export default function AlemDaTendencia() {
       {/* SEÇÃO 3 - PÚBLICO-ALVO (REVERTIDA ESTRUTURA, MANTIDA COPY PDF) */}
       <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
         <div className="text-center mb-12 relative z-10">
-          <ArchitecturalTitle variant="h2" color="light" className="!text-3xl md:!text-4xl">
+          <ArchitecturalTitle variant="h2" color="light">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
         </div>
@@ -458,10 +458,10 @@ export default function AlemDaTendencia() {
       <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <ArchitecturalTitle variant="h3" color="orange">
+            <ArchitecturalTitle variant="h4" color="orange">
               INFORMAÇÕES IMPORTANTES
             </ArchitecturalTitle>
-            <ArchitecturalTitle variant="h2" color="light">
+            <ArchitecturalTitle variant="h3" color="light">
               SOBRE O EVENTO ALÉM DA TENDÊNCIA
             </ArchitecturalTitle>
             
