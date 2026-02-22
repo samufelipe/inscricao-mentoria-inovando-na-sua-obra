@@ -71,94 +71,107 @@ export default function AlemDaTendencia() {
       
       {/* HERO SECTION - COM NOVA IMAGEM E AJUSTES DE LEGIBILIDADE */}
       {/* HERO - MOBILE */}
-      <section className="md:hidden bg-[#1a1a1a] flex flex-col h-[100svh] overflow-hidden">
-        {/* Image area - takes remaining space */}
-        <div className="relative flex-[1_1_0%] min-h-0 overflow-hidden">
+      <section className="md:hidden bg-[#1a1a1a] flex flex-col h-[100svh] overflow-hidden relative">
+        {/* Full-bleed image */}
+        <div className="absolute inset-0 overflow-hidden">
           <img
             src={newHostsImage}
             alt="Evento Além da Tendência - Anfitriãs"
-            className="absolute inset-0 w-full h-full object-cover object-[center_top]"
+            className="absolute inset-0 w-full h-full object-cover object-[center_15%]"
           />
           <div 
-            className="absolute inset-0 z-[10] pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, transparent 20%, transparent 35%, rgba(26,26,26,0.85) 65%, #1a1a1a 88%)' }}
+            className="absolute inset-0 z-[2] pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.5) 0%, transparent 15%, transparent 30%, rgba(26,26,26,0.6) 50%, rgba(26,26,26,0.92) 65%, #1a1a1a 80%)' }}
           />
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute top-3 left-0 right-0 z-20 flex justify-center"
-          >
-            <img 
-              src={logoTransparent}
-              alt="Além da Tendência - Logo Oficial" 
-              className="w-[100px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
-            />
-          </motion.div>
         </div>
 
-        {/* Content area - fixed height, no shrink */}
-        <div className="relative z-20 px-4 pt-0 pb-3 flex flex-col gap-1.5 -mt-14 shrink-0">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-start"
+        {/* Logo top */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative z-20 flex justify-center pt-4 pb-2"
+        >
+          <img 
+            src={logoTransparent}
+            alt="Além da Tendência - Logo Oficial" 
+            className="w-[90px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+          />
+        </motion.div>
+
+        {/* Spacer to push content down */}
+        <div className="flex-1" />
+
+        {/* Content overlay at bottom */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative z-20 px-5 pb-5 flex flex-col"
+        >
+          {/* Badge */}
+          <div className="flex items-center gap-1.5 mb-3 text-[8px] uppercase tracking-[0.25em] text-[#C9A84C]/90 font-medium">
+            <span>Evento Presencial</span>
+            <span className="text-white/20">•</span>
+            <span>São Paulo</span>
+            <span className="text-white/20">•</span>
+            <span>Durante a Revestir</span>
+          </div>
+
+          {/* Main title */}
+          <h1 className="font-display text-[22px] sm:text-2xl font-bold text-white leading-[1.15] uppercase tracking-wide mb-3">
+            A Arquitetura acontece{" "}
+            <span className="text-[#C9A84C]">nos bastidores</span>
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-[11px] text-white/60 mb-4 font-light leading-relaxed border-l-2 border-[#C9A84C]/60 pl-3 max-w-[90%]">
+            Como transformar inspiração em realidade. Gestão de escritório, Gestão de Obra e Projeto.
+          </p>
+
+          {/* Event info bar */}
+          <div className="flex items-center justify-between bg-white/[0.06] backdrop-blur-lg rounded-xl px-4 py-2.5 mb-4 border border-white/[0.08]">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-3.5 h-3.5 text-[#C9A84C]" />
+              <div className="flex flex-col">
+                <span className="text-[9px] text-white/40 uppercase tracking-wider">Data</span>
+                <span className="text-[11px] font-semibold text-white">10 de Março</span>
+              </div>
+            </div>
+            <div className="w-px h-7 bg-white/10" />
+            <div className="flex items-center gap-2">
+              <MapPin className="w-3.5 h-3.5 text-[#C9A84C]" />
+              <div className="flex flex-col">
+                <span className="text-[9px] text-white/40 uppercase tracking-wider">Local</span>
+                <span className="text-[11px] font-semibold text-white">AFRESP - SP</span>
+              </div>
+            </div>
+            <div className="w-px h-7 bg-white/10" />
+            <div className="flex items-center gap-2">
+              <Users className="w-3.5 h-3.5 text-[#C9A84C]" />
+              <div className="flex flex-col">
+                <span className="text-[9px] text-white/40 uppercase tracking-wider">Horário</span>
+                <span className="text-[11px] font-semibold text-white">13h30 – 19h</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <button 
+            onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
+            className="w-full bg-[#C9A84C] text-white font-bold py-3.5 rounded-xl uppercase tracking-widest text-xs hover:bg-[#b08d35] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] border border-[#C9A84C]/50"
           >
-            <div className="flex items-center gap-1.5 mb-1.5 text-[8px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
-              <MapPin className="w-2.5 h-2.5" />
-              <span>Evento Presencial</span>
-              <span className="text-white/30">|</span>
-              <span>São Paulo</span>
-              <span className="text-white/30">|</span>
-              <span>Durante a Revestir</span>
-            </div>
+            Garantir meu ingresso
+          </button>
 
-            <h1 className="font-display text-lg sm:text-xl font-bold text-white leading-tight mb-1 uppercase drop-shadow-lg">
-              A Arquitetura acontece <span className="text-[#C9A84C]">nos bastidores</span>
-            </h1>
-            
-            <p className="text-[11px] text-gray-300 mb-1.5 font-light leading-snug border-l-2 border-[#C9A84C] pl-2.5">
-              Como transformar inspiração em realidade. Gestão de escritório, Gestão de Obra e Projeto.
-            </p>
-            
-            <p className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">
-              Por <a href="https://www.instagram.com/inovandonasuaobra" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@inovandonasuaobra</a> e <a href="https://www.instagram.com/arq.julianacampelo" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@arq.julianacampelo</a>
-            </p>
-
-            <div className="flex items-center gap-2.5 text-[9px] text-white/80 bg-black/50 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-white/10 w-full mb-2">
-              <Calendar className="w-3 h-3 text-[#C9A84C] shrink-0" />
-              <span className="font-semibold text-white">10 de Março</span>
-              <span className="text-white/30">|</span>
-              <MapPin className="w-3 h-3 text-[#C9A84C] shrink-0" />
-              <span className="font-semibold text-white">AFRESP - SP</span>
-            </div>
-
-            <button 
-              onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-              className="w-full bg-[#C9A84C] text-white font-bold py-2.5 rounded-lg uppercase tracking-wider text-[11px] hover:bg-[#b08d35] transition-all shadow-lg border border-[#C9A84C]/50 mb-2"
-            >
-              Garantir meu ingresso
-            </button>
-
-            {/* Info badges below CTA */}
-            <div className="flex flex-col items-center w-full gap-1 text-[9px] text-gray-400">
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-2.5 h-2.5 text-[#C9A84C]" />
-                <span>Evento Presencial Exclusivo</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Users className="w-2.5 h-2.5 text-[#C9A84C]" />
-                <span>Vagas Limitadas (Auditório AFRESP)</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Calendar className="w-2.5 h-2.5 text-[#C9A84C]" />
-                <span>10 de Março de 2026 • 13h30 às 19h</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          {/* Credits */}
+          <p className="text-[8px] text-white/30 text-center mt-2.5 uppercase tracking-wider">
+            Por <a href="https://www.instagram.com/inovandonasuaobra" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C]/60 hover:text-[#C9A84C]">@inovandonasuaobra</a> e <a href="https://www.instagram.com/arq.julianacampelo" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C]/60 hover:text-[#C9A84C]">@arq.julianacampelo</a>
+          </p>
+        </motion.div>
       </section>
+
+
 
       {/* HERO - DESKTOP */}
       <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] h-[100vh] flex-col">
