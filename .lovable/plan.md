@@ -1,44 +1,59 @@
 
 
-# Otimizacao Hero Desktop + Correcao de Build Errors
+# Reestruturar Secao "Para Quem E Este Evento"
 
-## Problemas identificados
+## Objetivo
+Restaurar o layout da secao para corresponder exatamente a imagem de referencia: titulo no topo, montagem de imagens em largura total abaixo, seguida por 3 cards em grid e CTA centralizado.
 
-### 1. Imagem cortada no desktop
-A imagem hero no desktop usa `object-cover` dentro de um container `min-h-[90vh]`, o que faz a imagem expandir e cortar as pessoas. A solucao e mudar a estrategia de exibicao para que a imagem apareca completa, usando `object-contain` ou ajustando o layout para que o container respeite as proporcoes da imagem.
+## Layout atual vs. desejado
 
-### 2. Build errors (color="white")
-Existem dois usos de `color="white"` no componente `ArchitecturalTitle` (linhas 328 e 425), mas o tipo so aceita `"dark" | "light" | "orange" | "purple"`. Precisa trocar para `color="light"`.
+**Atual:** Grid de 2 colunas (montagem a esquerda, lista de texto a direita)
 
-## Solucao proposta
+**Desejado (conforme imagem):**
+1. Titulo "PARA QUEM E ESTE EVENTO?" centralizado no topo com subtitulo
+2. Montagem de imagens em largura total (AudienceMontageV2) abaixo do titulo
+3. Tres cards lado a lado em grid de 3 colunas
+4. Texto "SE VOCE SE IDENTIFICOU..." + botao CTA centralizado abaixo
 
-### A. Imagem hero desktop visivel por completo
+## Cards planejados
 
-Mudar a abordagem da imagem de background para que ela apareca inteira sem cortes:
+**Card 1 - "Arquitetas e Designers de Interiores"**
+- Icone: Users
+- Texto conforme solicitado: "Voce que projeta, especifica e executa, mas sente que falta metodo para escalar. Aqui voce vai estruturar seu escritorio como uma empresa real."
+- Titulo principal: "Arquitetas e Designers de Interiores"
+- Abaixo, os 4 topicos fornecidos como lista compacta
 
-- Trocar `object-cover` para `object-contain` na imagem hero desktop
-- Adicionar `bg-[#1a1a1a]` no container da imagem para preencher as laterais com fundo escuro
-- Manter os gradientes de overlay para legibilidade do texto
-- Ajustar `objectPosition` para `center center` ja que a imagem estara contida
+**Card 2 - "Quem Busca Estrutura e Processos"**
+- Icone: CheckCircle2
+- Texto: "Talento sem gestao nao escala. Se voce precisa profissionalizar com seguranca e organizar sua operacao, este evento foi desenhado para voce."
 
-### B. Corrigir build errors
+**Card 3 - "Quem Quer Transformar Tendencia em Execucao"**
+- Icone: Calendar/Building
+- Texto: "Voce acompanha feiras, se inspira e consome conteudo, mas na hora de executar, falta seguranca juridica e metodo de obra. Aqui a tendencia vira projeto entregue."
 
-- Linha 328: trocar `color="white"` para `color="light"`
-- Linha 425: trocar `color="white"` para `color="light"`
+## Estilo dos cards
+- Fundo escuro sutil com borda esquerda dourada (border-l-2 border-[#C9A84C]/30)
+- Sem background branco, mantendo coerencia com o fundo escuro da secao
+- Icones dourados no topo de cada card
 
 ## Detalhes tecnicos
 
-### Arquivo: `client/src/pages/AlemDaTendencia.tsx`
+### Arquivo: `client/src/pages/AlemDaTendencia.tsx` (linhas 343-402)
 
-| Alteracao | Linha | De | Para |
-|-----------|-------|-----|------|
-| Imagem desktop | 153 | `object-cover` | `object-contain` |
-| objectPosition | 155 | `center 20%` | `center center` |
-| Build error 1 | 328 | `color="white"` | `color="light"` |
-| Build error 2 | 425 | `color="white"` | `color="light"` |
+Substituir o grid de 2 colunas por layout empilhado:
 
-### Impacto
-- A imagem aparecera completa no desktop, sem cortar as pessoas
-- O fundo escuro preenche as areas laterais mantendo a estetica
-- Os dois erros de build serao corrigidos
+```
+Titulo + subtitulo (centralizado)
+   |
+AudienceMontageV2 (largura total, sem grid)
+   |
+Grid 3 colunas com cards (md:grid-cols-3)
+   |
+CTA centralizado
+```
+
+- A `AudienceMontageV2` sera movida para fora do grid e exibida em largura total
+- O primeiro card incluira o titulo "Arquitetas e Designers de Interiores" com os 4 bullet points do usuario em formato compacto
+- Cards usam `bg-white/5` com `border-l-2 border-[#C9A84C]/30` e padding generoso
+- Subtitulo abaixo do titulo principal: "Se voce sente que o bastidor do seu negocio precisa de mais estrutura, este evento e para voce."
 
