@@ -459,11 +459,11 @@ export default function AlemDaTendencia() {
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
            <div>
             <div className="mb-3">
-              <ArchitecturalTitle variant="h3" color="orange" className="block">
+              <ArchitecturalTitle variant="h2" color="orange" className="block">
                 INFORMAÇÕES IMPORTANTES
               </ArchitecturalTitle>
             </div>
-            <ArchitecturalTitle variant="h4" color="light" className="block">
+            <ArchitecturalTitle variant="h3" color="light" className="block">
               SOBRE O EVENTO ALÉM DA TENDÊNCIA
             </ArchitecturalTitle>
             
