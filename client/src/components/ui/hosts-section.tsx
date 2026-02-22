@@ -10,7 +10,7 @@ export function HostsSection() {
       
       <div className="container relative z-10">
         <div className="text-center mb-16">
-          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-2">
+          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-3">
             Suas Anfitriãs
           </p>
           <ArchitecturalTitle variant="h2" color="purple">
