@@ -29,7 +29,7 @@ export function SponsorsSection() {
             <img
               src={sponsor.logo}
               alt={sponsor.name}
-              className="h-24 md:h-32 lg:h-40 w-auto object-contain transition-all duration-500"
+              className="h-28 md:h-40 lg:h-52 w-auto object-contain transition-all duration-500"
             />
           </div>
         ))}
