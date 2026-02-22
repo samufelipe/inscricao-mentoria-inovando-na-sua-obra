@@ -18,10 +18,10 @@ export function AudienceMontageV2() {
   const y4 = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   const images = [
-    { src: audience1, alt: "Plateia atenta", y: y1 },
-    { src: audience2, alt: "Networking", y: y2 },
-    { src: audience3, alt: "Foco no conteúdo", y: y3 },
-    { src: audience4, alt: "Palestrante", y: y4 },
+    { src: audience1, alt: "Plateia atenta", y: y1, mobileVisible: true },
+    { src: audience2, alt: "Networking", y: y2, mobileVisible: false },
+    { src: audience3, alt: "Foco no conteúdo", y: y3, mobileVisible: false },
+    { src: audience4, alt: "Palestrante", y: y4, mobileVisible: true },
   ];
 
   return (
@@ -38,7 +38,7 @@ export function AudienceMontageV2() {
           <motion.div
             key={i}
             style={{ y: img.y }}
-            className="relative flex-1 h-[120%]"
+            className={`relative flex-1 h-[120%] ${!img.mobileVisible ? "hidden md:block" : ""}`}
           >
             <img
               src={img.src}
