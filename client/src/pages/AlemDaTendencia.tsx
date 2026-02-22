@@ -12,6 +12,7 @@ import { StickyHeader } from "@/components/ui/sticky-header";
 import { ScarcityBanner } from "@/components/ui/scarcity-banner";
 import { SponsorsSection } from "@/components/ui/sponsors-section";
 import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
+import { CountdownTimer } from "@/components/ui/countdown-timer";
 import { ArrowDown, Building, Calendar, Check, CheckCircle2, MapPin, Play, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -539,6 +540,9 @@ export default function AlemDaTendencia() {
               Últimas vagas disponíveis
             </div>
           </div>
+
+          {/* Contador Regressivo */}
+          <CountdownTimer />
 
           <div className="bg-[oklch(0.15_0.02_320)] rounded-2xl shadow-2xl overflow-hidden border border-[#C9A84C]/20 transform hover:-translate-y-1 transition-transform duration-300">
             {/* Header do card */}

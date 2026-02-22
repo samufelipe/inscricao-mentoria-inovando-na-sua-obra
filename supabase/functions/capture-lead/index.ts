@@ -62,6 +62,34 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Non-blocking: send simplified lead data to Make webhook
+    const makeWebhookUrl = Deno.env.get("MAKE_WEBHOOK_URL");
+    if (makeWebhookUrl) {
+      const now = new Date();
+      const brDate = new Intl.DateTimeFormat("pt-BR", {
+        timeZone: "America/Sao_Paulo",
+        day: "2-digit", month: "2-digit", year: "numeric",
+        hour: "2-digit", minute: "2-digit", second: "2-digit",
+        hour12: false,
+      }).format(now);
+
+      try {
+        await fetch(makeWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            data_hora: brDate,
+            nome: name || "",
+            email,
+            whatsapp: phone || "",
+            fonte: utm_source || "direto",
+          }),
+        });
+      } catch (webhookErr) {
+        console.error("Make webhook error:", webhookErr);
+      }
+    }
+
     return new Response(JSON.stringify({ success: true, id: data.id }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
