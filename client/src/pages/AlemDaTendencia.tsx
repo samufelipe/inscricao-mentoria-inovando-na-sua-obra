@@ -367,7 +367,7 @@ export default function AlemDaTendencia() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0 }}
-            className="bg-white/5 border-l-2 border-[#C9A84C]/30 p-6 rounded-r-lg"
+            className="border-l-2 border-[#C9A84C]/30 p-6"
           >
             <Users className="w-8 h-8 text-[#C9A84C] mb-4" />
             <h4 className="text-white font-bold text-lg mb-3">Arquitetas e Designers de Interiores</h4>
@@ -391,7 +391,7 @@ export default function AlemDaTendencia() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="bg-white/5 border-l-2 border-[#C9A84C]/30 p-6 rounded-r-lg"
+            className="border-l-2 border-[#C9A84C]/30 p-6"
           >
             <CheckCircle2 className="w-8 h-8 text-[#C9A84C] mb-4" />
             <h4 className="text-white font-bold text-lg mb-3">Quem Busca Estrutura e Processos</h4>
@@ -403,7 +403,7 @@ export default function AlemDaTendencia() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white/5 border-l-2 border-[#C9A84C]/30 p-6 rounded-r-lg"
+            className="border-l-2 border-[#C9A84C]/30 p-6"
           >
             <Building className="w-8 h-8 text-[#C9A84C] mb-4" />
             <h4 className="text-white font-bold text-lg mb-3">Quem Quer Transformar Tendência em Execução</h4>

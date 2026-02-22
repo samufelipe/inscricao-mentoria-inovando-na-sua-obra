@@ -24,18 +24,15 @@ export function AudienceMontageV2() {
     { src: audience4, alt: "Palestrante", y: y4, mobileVisible: true },
   ];
 
-  // Each image gets a mask that fades its edges so they blend into neighbors
+  // Refined edge-fade masks for seamless blending between images
   const getMaskStyle = (index: number, total: number) => {
     if (index === 0) {
-      // First: fade only the right edge
-      return "linear-gradient(to right, black 50%, transparent 100%)";
+      return "linear-gradient(to right, black 40%, transparent 95%)";
     }
     if (index === total - 1) {
-      // Last: fade only the left edge
-      return "linear-gradient(to right, transparent 0%, black 50%)";
+      return "linear-gradient(to right, transparent 5%, black 60%)";
     }
-    // Middle: fade both edges
-    return "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)";
+    return "linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%)";
   };
 
   return (
@@ -47,8 +44,7 @@ export function AudienceMontageV2() {
         WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
       }}
     >
-      {/* Stacked images with overlap and edge fade masks */}
-      <div className="absolute inset-0 flex" style={{ margin: "0 -4%" }}>
+      <div className="absolute inset-0 flex" style={{ margin: "0 -6%" }}>
         {images.map((img, i) => {
           const maskImg = getMaskStyle(i, images.length);
           return (
@@ -58,8 +54,8 @@ export function AudienceMontageV2() {
                 y: img.y,
                 maskImage: maskImg,
                 WebkitMaskImage: maskImg,
-                flex: "1 0 28%",
-                marginLeft: i === 0 ? 0 : "-3%",
+                flex: "1 0 30%",
+                marginLeft: i === 0 ? 0 : "-5%",
               }}
               className={`relative h-[120%] ${!img.mobileVisible ? "hidden md:block" : ""}`}
             >
