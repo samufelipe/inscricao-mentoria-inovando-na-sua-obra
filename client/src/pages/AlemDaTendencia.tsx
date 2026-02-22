@@ -535,7 +535,7 @@ export default function AlemDaTendencia() {
         <div className="max-w-lg mx-auto">
           {/* Urgência */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider animate-pulse">
+            <div className="inline-flex items-center gap-2 text-red-400 px-4 py-2 text-sm font-bold uppercase tracking-wider animate-pulse">
               <Users className="w-4 h-4" />
               Últimas vagas disponíveis
             </div>
@@ -558,8 +558,9 @@ export default function AlemDaTendencia() {
                 alt="Além da Tendência" 
                 className="w-56 mx-auto mb-5 relative z-10"
               />
-              <div className="inline-block bg-[#C9A84C] text-black text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest relative z-10">
-                Lote 01
+              <div className="relative z-10 text-center">
+                <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">1º LOTE</div>
+                <div className="text-xs text-white/50 mt-1">Valor exclusivo para as primeiras inscritas</div>
               </div>
             </div>
             
