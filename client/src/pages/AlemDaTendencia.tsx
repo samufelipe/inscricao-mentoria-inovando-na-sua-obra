@@ -459,7 +459,7 @@ export default function AlemDaTendencia() {
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
             <ArchitecturalTitle variant="h3" color="orange">
-              INFORMAÇÕES IMPORTANTES
+              INFORMAÇÕES IMPORTANTES SOBRE O EVENTO ALÉM DA TENDÊNCIA
             </ArchitecturalTitle>
             <ArchitecturalTitle variant="h2" color="light">
               Auditório AFRESP
