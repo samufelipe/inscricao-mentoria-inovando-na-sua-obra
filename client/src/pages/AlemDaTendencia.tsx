@@ -121,7 +121,7 @@ export default function AlemDaTendencia() {
             </p>
             
             <p className="text-[9px] text-gray-500 uppercase tracking-wider mb-3">
-              Por @inovandonasuaobra e @arq.julianacampelo
+              Por <a href="https://www.instagram.com/inovandonasuaobra" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@inovandonasuaobra</a> e <a href="https://www.instagram.com/arq.julianacampelo" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@arq.julianacampelo</a>
             </p>
 
             <div className="flex items-center gap-3 text-[10px] text-white/80 bg-black/50 backdrop-blur-md px-3 py-2 rounded-lg border border-white/10 w-full mb-3">
@@ -206,7 +206,7 @@ export default function AlemDaTendencia() {
               </div>
               
               <p className="text-xs text-gray-400 uppercase tracking-wider mb-6">
-                Por Inovando na sua obra <span className="text-[#C9A84C]">@inovandonasuaobra</span> e AjudaMONU <span className="text-[#C9A84C]">@arq.julianacampelo</span>
+                Por Inovando na sua obra <a href="https://www.instagram.com/inovandonasuaobra" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@inovandonasuaobra</a> e AjudaMONU <a href="https://www.instagram.com/arq.julianacampelo" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@arq.julianacampelo</a>
               </p>
 
               <div className="flex gap-4 items-center">
