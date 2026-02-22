@@ -24,31 +24,57 @@ export function AudienceMontageV2() {
     { src: audience4, alt: "Palestrante", y: y4, mobileVisible: true },
   ];
 
+  // Each image gets a mask that fades its edges so they blend into neighbors
+  const getMaskStyle = (index: number, total: number) => {
+    if (index === 0) {
+      // First: fade only the right edge
+      return "linear-gradient(to right, black 50%, transparent 100%)";
+    }
+    if (index === total - 1) {
+      // Last: fade only the left edge
+      return "linear-gradient(to right, transparent 0%, black 50%)";
+    }
+    // Middle: fade both edges
+    return "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)";
+  };
+
   return (
     <div
       ref={containerRef}
       className="relative w-full h-[280px] sm:h-[340px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-2xl"
       style={{
-        maskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
+        maskImage: "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
       }}
     >
-      <div className="absolute inset-0 flex">
-        {images.map((img, i) => (
-          <motion.div
-            key={i}
-            style={{ y: img.y }}
-            className={`relative flex-1 h-[120%] ${!img.mobileVisible ? "hidden md:block" : ""}`}
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
-          </motion.div>
-        ))}
+      {/* Stacked images with overlap and edge fade masks */}
+      <div className="absolute inset-0 flex" style={{ margin: "0 -4%" }}>
+        {images.map((img, i) => {
+          const maskImg = getMaskStyle(i, images.length);
+          return (
+            <motion.div
+              key={i}
+              style={{
+                y: img.y,
+                maskImage: maskImg,
+                WebkitMaskImage: maskImg,
+                flex: "1 0 28%",
+                marginLeft: i === 0 ? 0 : "-3%",
+              }}
+              className={`relative h-[120%] ${!img.mobileVisible ? "hidden md:block" : ""}`}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-full object-cover"
+              />
+              {/* Subtle top/bottom vignette for cinematic feel */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15 pointer-events-none" />
+            </motion.div>
+          );
+        })}
       </div>
+      {/* Bottom fade into dark section background */}
       <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.15_0.02_280)] via-transparent to-transparent pointer-events-none" />
     </div>
   );
