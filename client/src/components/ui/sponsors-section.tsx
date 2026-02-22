@@ -20,16 +20,16 @@ export function SponsorsSection() {
         </ArchitecturalTitle>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20 max-w-5xl mx-auto">
+      <div className="flex flex-wrap items-center justify-center gap-16 md:gap-24 max-w-5xl mx-auto">
         {sponsors.map((sponsor) => (
           <div
             key={sponsor.name}
-            className="hover:scale-105 transition-all duration-500 p-10 md:p-14 rounded-2xl border border-black/5 hover:border-[#C9A84C]/40 bg-white/80 hover:bg-white hover:shadow-xl"
+            className="hover:scale-105 transition-all duration-500"
           >
             <img
               src={sponsor.logo}
               alt={sponsor.name}
-              className="h-28 md:h-40 lg:h-52 w-auto object-contain transition-all duration-500"
+              className="h-32 md:h-48 lg:h-60 w-auto object-contain mix-blend-multiply transition-all duration-500"
             />
           </div>
         ))}
