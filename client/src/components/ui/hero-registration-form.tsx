@@ -51,7 +51,7 @@ export function HeroRegistrationForm() {
           <input 
             type="text" id="hero-name" name="name"
             value={formData.name} onChange={handleChange} required
-            className="w-full p-3 md:p-4 bg-white/10 border border-white/10 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
+            className="w-full p-3 md:p-4 bg-white/5 border border-white/5 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="Seu nome"
           />
         </div>
@@ -61,7 +61,7 @@ export function HeroRegistrationForm() {
           <input 
             type="email" id="hero-email" name="email"
             value={formData.email} onChange={handleChange} required
-            className="w-full p-3 md:p-4 bg-white/10 border border-white/10 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
+            className="w-full p-3 md:p-4 bg-white/5 border border-white/5 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="seu@email.com"
           />
         </div>
@@ -71,7 +71,7 @@ export function HeroRegistrationForm() {
           <input 
             type="tel" id="hero-phone" name="phone"
             value={formData.phone} onChange={handleChange} required
-            className="w-full p-3 md:p-4 bg-white/10 border border-white/10 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
+            className="w-full p-3 md:p-4 bg-white/5 border border-white/5 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="(00) 00000-0000"
           />
         </div>
