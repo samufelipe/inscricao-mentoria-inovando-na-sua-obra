@@ -1,79 +1,46 @@
 
-# Plano: Webhook Make + Contador Regressivo + Correcao do Formulario
 
-## Resumo
+# Otimizacao: Badge "Ultimas Vagas" + Destaque para 1o Lote
 
-Tres alteracoes: integrar o webhook do Make para enviar leads a planilha Google Sheets (com 5 colunas simplificadas), adicionar contador regressivo na secao de preco, e corrigir o background dos inputs do formulario.
+## 1. Remover background do badge "ULTIMAS VAGAS DISPONIVEIS"
 
----
+**Arquivo:** `client/src/pages/AlemDaTendencia.tsx` (linha 538)
 
-## 1. Estrutura da Planilha Google Sheets
-
-Crie uma planilha com estas 5 colunas na linha 1:
-
-| A | B | C | D | E |
-|---|---|---|---|---|
-| Data/Hora | Nome | Email | WhatsApp | Fonte |
-
-- **Data/Hora**: data e horario do preenchimento (formato brasileiro: 22/02/2026 14:30:00)
-- **Nome**: nome completo informado
-- **Email**: e-mail informado
-- **WhatsApp**: numero informado
-- **Fonte**: de onde veio o lead (utm_source, ou "direto" se sem UTM)
-
-No Make, mapeie cada campo do webhook para a coluna correspondente.
-
----
-
-## 2. Secret do Webhook
-
-Sera adicionado um secret chamado `MAKE_WEBHOOK_URL` com o valor da URL que voce ja forneceu:
-`https://hook.us1.make.com/xhn8ehmzqopi4q525v8m1znqoxx7t5u4`
-
----
-
-## 3. Alteracao na Edge Function `capture-lead`
-
-**Arquivo:** `supabase/functions/capture-lead/index.ts`
-
-Apos o insert no banco (linha 55), adicionar um bloco non-blocking que envia 5 campos ao Make:
-
+Atual:
 ```text
-Payload enviado:
-{
-  "data_hora": "22/02/2026 14:30:00",
-  "nome": "Maria Silva",
-  "email": "maria@email.com",
-  "whatsapp": "(11) 99999-0000",
-  "fonte": "instagram"   (ou "direto" se sem utm_source)
-}
+bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2 rounded-full
 ```
 
-- Usa `Deno.env.get("MAKE_WEBHOOK_URL")`
-- Envolvido em try/catch para nao bloquear a resposta ao usuario
-- Data/hora calculada no fuso de Brasilia (UTC-3)
+Novo: remover `bg-red-500/10` e `border border-red-500/30`, mantendo apenas o texto com a animacao:
+```text
+text-red-400 px-4 py-2 text-sm font-bold uppercase tracking-wider animate-pulse
+```
+
+Resultado: badge sem fundo e sem borda, apenas o texto vermelho pulsando.
 
 ---
 
-## 4. Contador Regressivo
+## 2. Otimizar tag "LOTE 01" com destaque e escassez
 
-**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
+**Arquivo:** `client/src/pages/AlemDaTendencia.tsx` (linhas 561-563)
 
-Adicionar entre o badge "Ultimas vagas disponiveis" (linha 541) e o card de preco (linha 543):
+Atual: um simples badge dourado com texto "Lote 01"
 
-- 4 blocos: Dias | Horas | Min | Seg
-- Data alvo: 10 de marco de 2026 as 13:30 (horario de Brasilia)
-- Estilo: `bg-white/5 border border-[#C9A84C]/20 rounded-lg` com numeros dourados grandes
-- Logica: `useState` + `useEffect` com `setInterval` de 1 segundo
-- Quando zerar: exibe "Evento em andamento!"
+Novo: substituir por um bloco maior e mais impactante com:
+- Titulo em destaque: **1o LOTE** (texto maior, dourado, sem background no badge)
+- Subtitulo de escassez logo abaixo: "Valor exclusivo para as primeiras inscritas" em texto claro/dourado menor
+- Remover o `bg-[#C9A84C]` do badge e usar apenas texto dourado destaque
+- Layout: texto centralizado, sem pill/badge, direto no header do card
 
----
+Estrutura visual:
+```text
+[Logo Alem da Tendencia]
 
-## 5. Correcao do Background do Formulario
+1o LOTE
+Valor exclusivo para as primeiras inscritas
+```
 
-**Arquivo:** `client/src/components/ui/hero-registration-form.tsx`
-
-Linhas 54, 64, 74: trocar `bg-white/10` por `bg-white/5` e `border-white/10` por `border-white/5` nos 3 inputs para integrar visualmente com o card escuro.
+O texto "1o LOTE" sera grande (`text-2xl font-bold text-[#C9A84C] tracking-widest uppercase`) e o subtitulo sera menor (`text-xs text-white/50`).
 
 ---
 
@@ -81,7 +48,5 @@ Linhas 54, 64, 74: trocar `bg-white/10` por `bg-white/5` e `border-white/10` por
 
 | Arquivo | Alteracao |
 |---------|-----------|
-| `supabase/functions/capture-lead/index.ts` | Envio non-blocking ao webhook do Make com 5 campos |
-| `client/src/pages/AlemDaTendencia.tsx` | Contador regressivo acima do card de preco |
-| `client/src/components/ui/hero-registration-form.tsx` | Inputs com bg-white/5 e border-white/5 |
-| Secret `MAKE_WEBHOOK_URL` | URL do webhook do Make |
+| `client/src/pages/AlemDaTendencia.tsx` | Linha 538: remover bg/border do badge de urgencia. Linhas 561-563: substituir pill dourada por texto grande "1o LOTE" + frase de escassez |
+
