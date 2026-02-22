@@ -21,9 +21,9 @@ import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
 import heroEvent from "@/assets/alem-da-tendencia/hero-event.png";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
-import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra.png";
+import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
 import hostsSection2 from "@/assets/alem-da-tendencia/hosts-section2.jpg";
-import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo.jpg";
+import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo-new.jpg";
 import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra-new.jpg";
 import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
 
@@ -420,7 +420,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* ANFITRIÃS */}
-      <HostsSection />
+      <HostsSection inovandoImage={inovandoObraImg} julianaImage={julianaCapelo} />
 
       {/* PALESTRANTES - RESTAURADA E INTEGRADA */}
       <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200">
