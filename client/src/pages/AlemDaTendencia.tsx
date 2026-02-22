@@ -459,7 +459,7 @@ export default function AlemDaTendencia() {
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
            <div>
             <div className="mb-3">
-              <ArchitecturalTitle variant="h2" color="orange" className="block">
+              <ArchitecturalTitle variant="h2" color="orange" className="block [&>span]:hidden">
                 INFORMAÇÕES IMPORTANTES
               </ArchitecturalTitle>
             </div>
