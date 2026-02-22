@@ -344,7 +344,7 @@ export default function AlemDaTendencia() {
       <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
         <div className="text-center mb-12 relative z-10">
           <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-3">
-            Público-Alvo
+            Para Quem É
           </p>
           <ArchitecturalTitle variant="h2" color="light" className="!text-3xl md:!text-4xl">
             Para Quem É Este Evento?
