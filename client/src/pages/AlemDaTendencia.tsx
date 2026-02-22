@@ -15,7 +15,7 @@ import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
 import { CountdownTimer } from "@/components/ui/countdown-timer";
 import { ArrowDown, Building, Calendar, Check, CheckCircle2, MapPin, Play, Users } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
@@ -46,6 +46,10 @@ export default function AlemDaTendencia() {
       if (link) link.href = prevFavicon;
     };
   }, []);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const handleVideoPlay = () => setIsVideoPlaying(true);
+
   const whatsappLink = "https://wa.me/551155717229?text=Ol%C3%A1!%20Gostaria%20de%20me%20inscrever%20no%20evento%20Al%C3%A9m%20da%20Tend%C3%AAncia.";
 
   const scrollToInscricao = () => {
@@ -613,15 +617,18 @@ export default function AlemDaTendencia() {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border-4 border-white">
-            <video 
-              src={videoUrl} 
-              controls 
-              className="w-full h-full object-cover"
-              poster={heroEvent} // Usando imagem do evento como poster
-            >
-              Seu navegador não suporta o elemento de vídeo.
-            </video>
+          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border border-gray-200">
+            {!isVideoPlaying ? (
+              <div className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer" onClick={handleVideoPlay}>
+                <video ref={videoRef} src={videoUrl} preload="metadata" className="absolute inset-0 w-full h-full object-contain" />
+                <div className="absolute inset-0 bg-black/30" />
+                <div className="relative w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                  <Play className="w-8 h-8 text-[#C9A84C] ml-1" />
+                </div>
+              </div>
+            ) : (
+              <video ref={videoRef} src={videoUrl} controls autoPlay className="w-full h-full object-contain" />
+            )}
           </div>
           <p className="text-center text-gray-500 mt-4 italic">
             Confira os melhores momentos da nossa última edição
