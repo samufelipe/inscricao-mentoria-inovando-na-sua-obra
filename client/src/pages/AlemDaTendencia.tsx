@@ -458,7 +458,7 @@ export default function AlemDaTendencia() {
       <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <ArchitecturalTitle variant="h4" color="orange">
+            <ArchitecturalTitle variant="h4" color="orange" className="mb-3">
               INFORMAÇÕES IMPORTANTES
             </ArchitecturalTitle>
             <ArchitecturalTitle variant="h3" color="light">
