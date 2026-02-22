@@ -1,59 +1,87 @@
 
+# Plano: Webhook Make + Contador Regressivo + Correcao do Formulario
 
-# Reestruturar Secao "Para Quem E Este Evento"
+## Resumo
 
-## Objetivo
-Restaurar o layout da secao para corresponder exatamente a imagem de referencia: titulo no topo, montagem de imagens em largura total abaixo, seguida por 3 cards em grid e CTA centralizado.
+Tres alteracoes: integrar o webhook do Make para enviar leads a planilha Google Sheets (com 5 colunas simplificadas), adicionar contador regressivo na secao de preco, e corrigir o background dos inputs do formulario.
 
-## Layout atual vs. desejado
+---
 
-**Atual:** Grid de 2 colunas (montagem a esquerda, lista de texto a direita)
+## 1. Estrutura da Planilha Google Sheets
 
-**Desejado (conforme imagem):**
-1. Titulo "PARA QUEM E ESTE EVENTO?" centralizado no topo com subtitulo
-2. Montagem de imagens em largura total (AudienceMontageV2) abaixo do titulo
-3. Tres cards lado a lado em grid de 3 colunas
-4. Texto "SE VOCE SE IDENTIFICOU..." + botao CTA centralizado abaixo
+Crie uma planilha com estas 5 colunas na linha 1:
 
-## Cards planejados
+| A | B | C | D | E |
+|---|---|---|---|---|
+| Data/Hora | Nome | Email | WhatsApp | Fonte |
 
-**Card 1 - "Arquitetas e Designers de Interiores"**
-- Icone: Users
-- Texto conforme solicitado: "Voce que projeta, especifica e executa, mas sente que falta metodo para escalar. Aqui voce vai estruturar seu escritorio como uma empresa real."
-- Titulo principal: "Arquitetas e Designers de Interiores"
-- Abaixo, os 4 topicos fornecidos como lista compacta
+- **Data/Hora**: data e horario do preenchimento (formato brasileiro: 22/02/2026 14:30:00)
+- **Nome**: nome completo informado
+- **Email**: e-mail informado
+- **WhatsApp**: numero informado
+- **Fonte**: de onde veio o lead (utm_source, ou "direto" se sem UTM)
 
-**Card 2 - "Quem Busca Estrutura e Processos"**
-- Icone: CheckCircle2
-- Texto: "Talento sem gestao nao escala. Se voce precisa profissionalizar com seguranca e organizar sua operacao, este evento foi desenhado para voce."
+No Make, mapeie cada campo do webhook para a coluna correspondente.
 
-**Card 3 - "Quem Quer Transformar Tendencia em Execucao"**
-- Icone: Calendar/Building
-- Texto: "Voce acompanha feiras, se inspira e consome conteudo, mas na hora de executar, falta seguranca juridica e metodo de obra. Aqui a tendencia vira projeto entregue."
+---
 
-## Estilo dos cards
-- Fundo escuro sutil com borda esquerda dourada (border-l-2 border-[#C9A84C]/30)
-- Sem background branco, mantendo coerencia com o fundo escuro da secao
-- Icones dourados no topo de cada card
+## 2. Secret do Webhook
 
-## Detalhes tecnicos
+Sera adicionado um secret chamado `MAKE_WEBHOOK_URL` com o valor da URL que voce ja forneceu:
+`https://hook.us1.make.com/xhn8ehmzqopi4q525v8m1znqoxx7t5u4`
 
-### Arquivo: `client/src/pages/AlemDaTendencia.tsx` (linhas 343-402)
+---
 
-Substituir o grid de 2 colunas por layout empilhado:
+## 3. Alteracao na Edge Function `capture-lead`
 
-```
-Titulo + subtitulo (centralizado)
-   |
-AudienceMontageV2 (largura total, sem grid)
-   |
-Grid 3 colunas com cards (md:grid-cols-3)
-   |
-CTA centralizado
+**Arquivo:** `supabase/functions/capture-lead/index.ts`
+
+Apos o insert no banco (linha 55), adicionar um bloco non-blocking que envia 5 campos ao Make:
+
+```text
+Payload enviado:
+{
+  "data_hora": "22/02/2026 14:30:00",
+  "nome": "Maria Silva",
+  "email": "maria@email.com",
+  "whatsapp": "(11) 99999-0000",
+  "fonte": "instagram"   (ou "direto" se sem utm_source)
+}
 ```
 
-- A `AudienceMontageV2` sera movida para fora do grid e exibida em largura total
-- O primeiro card incluira o titulo "Arquitetas e Designers de Interiores" com os 4 bullet points do usuario em formato compacto
-- Cards usam `bg-white/5` com `border-l-2 border-[#C9A84C]/30` e padding generoso
-- Subtitulo abaixo do titulo principal: "Se voce sente que o bastidor do seu negocio precisa de mais estrutura, este evento e para voce."
+- Usa `Deno.env.get("MAKE_WEBHOOK_URL")`
+- Envolvido em try/catch para nao bloquear a resposta ao usuario
+- Data/hora calculada no fuso de Brasilia (UTC-3)
 
+---
+
+## 4. Contador Regressivo
+
+**Arquivo:** `client/src/pages/AlemDaTendencia.tsx`
+
+Adicionar entre o badge "Ultimas vagas disponiveis" (linha 541) e o card de preco (linha 543):
+
+- 4 blocos: Dias | Horas | Min | Seg
+- Data alvo: 10 de marco de 2026 as 13:30 (horario de Brasilia)
+- Estilo: `bg-white/5 border border-[#C9A84C]/20 rounded-lg` com numeros dourados grandes
+- Logica: `useState` + `useEffect` com `setInterval` de 1 segundo
+- Quando zerar: exibe "Evento em andamento!"
+
+---
+
+## 5. Correcao do Background do Formulario
+
+**Arquivo:** `client/src/components/ui/hero-registration-form.tsx`
+
+Linhas 54, 64, 74: trocar `bg-white/10` por `bg-white/5` e `border-white/10` por `border-white/5` nos 3 inputs para integrar visualmente com o card escuro.
+
+---
+
+## Arquivos modificados
+
+| Arquivo | Alteracao |
+|---------|-----------|
+| `supabase/functions/capture-lead/index.ts` | Envio non-blocking ao webhook do Make com 5 campos |
+| `client/src/pages/AlemDaTendencia.tsx` | Contador regressivo acima do card de preco |
+| `client/src/components/ui/hero-registration-form.tsx` | Inputs com bg-white/5 e border-white/5 |
+| Secret `MAKE_WEBHOOK_URL` | URL do webhook do Make |
