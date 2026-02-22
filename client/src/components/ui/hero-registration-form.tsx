@@ -44,46 +44,34 @@ export function HeroRegistrationForm() {
   };
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl">
-      <div className="text-center mb-6">
-        <h3 className="font-display text-xl md:text-2xl font-bold text-[oklch(0.35_0.12_320)] uppercase mb-2">
-          Garanta Sua Vaga
-        </h3>
-        <div className="flex items-baseline justify-center gap-2 mb-1">
-          <span className="text-sm text-gray-400 line-through">R$ 297,00</span>
-          <span className="text-3xl md:text-4xl font-bold text-[oklch(0.35_0.12_320)]">R$ 147,00</span>
-        </div>
-        <p className="text-sm text-[oklch(0.75_0.18_65)] font-semibold">ou 5x de R$ 29,40</p>
-        <p className="text-xs text-gray-400 mt-0.5">Lote Promocional por Tempo Limitado</p>
-      </div>
-      
+    <div className="pt-2">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
-          <label htmlFor="hero-name" className="text-xs font-bold uppercase tracking-wider text-gray-500">Nome Completo *</label>
+          <label htmlFor="hero-name" className="text-xs font-bold uppercase tracking-wider text-white/50">Nome Completo *</label>
           <input 
             type="text" id="hero-name" name="name"
             value={formData.name} onChange={handleChange} required
-            className="w-full p-3 md:p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors rounded-lg text-sm"
+            className="w-full p-3 md:p-4 bg-white/10 border border-white/10 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="Seu nome"
           />
         </div>
         
         <div className="space-y-1.5">
-          <label htmlFor="hero-email" className="text-xs font-bold uppercase tracking-wider text-gray-500">E-mail *</label>
+          <label htmlFor="hero-email" className="text-xs font-bold uppercase tracking-wider text-white/50">E-mail *</label>
           <input 
             type="email" id="hero-email" name="email"
             value={formData.email} onChange={handleChange} required
-            className="w-full p-3 md:p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors rounded-lg text-sm"
+            className="w-full p-3 md:p-4 bg-white/10 border border-white/10 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="seu@email.com"
           />
         </div>
         
         <div className="space-y-1.5">
-          <label htmlFor="hero-phone" className="text-xs font-bold uppercase tracking-wider text-gray-500">WhatsApp *</label>
+          <label htmlFor="hero-phone" className="text-xs font-bold uppercase tracking-wider text-white/50">WhatsApp *</label>
           <input 
             type="tel" id="hero-phone" name="phone"
             value={formData.phone} onChange={handleChange} required
-            className="w-full p-3 md:p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors rounded-lg text-sm"
+            className="w-full p-3 md:p-4 bg-white/10 border border-white/10 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="(00) 00000-0000"
           />
         </div>
@@ -99,7 +87,7 @@ export function HeroRegistrationForm() {
               <>GARANTIR MINHA VAGA</>
             )}
           </ArchitecturalButton>
-          <p className="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-2">
+          <p className="text-center text-xs text-white/40 mt-3 flex items-center justify-center gap-2">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
             Pagamento 100% seguro via Sympla
           </p>

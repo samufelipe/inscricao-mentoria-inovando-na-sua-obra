@@ -529,62 +529,75 @@ export default function AlemDaTendencia() {
         </div>
       </ArchitecturalSection>
 
-      {/* PREÇO - BACKGROUND DARK/CINEMÁTICO */}
-      <section id="inscricao" className="py-20 bg-[#1a1a1a] relative overflow-hidden">
-        {/* Background Texture */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent pointer-events-none"></div>
+      {/* PREÇO */}
+      <ArchitecturalSection id="inscricao" variant="dark">
+        <div className="max-w-lg mx-auto">
+          {/* Urgência */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider animate-pulse">
+              <Users className="w-4 h-4" />
+              Últimas vagas disponíveis
+            </div>
+          </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-md mx-auto">
-            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/10 transform hover:-translate-y-2 transition-transform duration-300">
-              <div className="bg-black p-8 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-                <img 
-                  src={logoTransparent} 
-                  alt="Além da Tendência" 
-                  className="w-40 mx-auto mb-4 relative z-10"
-                />
-                <div className="inline-block bg-[#C9A84C] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest relative z-10">
-                  Lote 01
-                </div>
+          <div className="bg-[oklch(0.15_0.02_320)] rounded-2xl shadow-2xl overflow-hidden border border-[#C9A84C]/20 transform hover:-translate-y-1 transition-transform duration-300">
+            {/* Header do card */}
+            <div className="bg-black p-10 text-center relative overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute left-0 top-0 w-px h-full bg-white" style={{ left: "20%" }} />
+                <div className="absolute left-0 top-0 w-px h-full bg-white" style={{ left: "80%" }} />
+                <div className="absolute left-0 top-0 h-px w-full bg-white" style={{ top: "30%" }} />
+                <div className="absolute left-0 top-0 h-px w-full bg-white" style={{ top: "70%" }} />
               </div>
+              <img 
+                src={logoTransparent} 
+                alt="Além da Tendência" 
+                className="w-56 mx-auto mb-5 relative z-10"
+              />
+              <div className="inline-block bg-[#C9A84C] text-black text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest relative z-10">
+                Lote 01
+              </div>
+            </div>
+            
+            {/* Conteúdo */}
+            <div className="p-8">
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
+                  <span className="font-medium">Acesso ao evento presencial dia 10.03</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
+                  <span className="font-medium">Coffee break com networking</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
+                  <span className="font-medium">Certificado de participação</span>
+                </li>
+              </ul>
+
+              <div className="text-center mb-6">
+                <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em] mb-3">Garanta Sua Vaga</p>
+                <div className="flex items-baseline justify-center gap-1 text-white mb-1">
+                  <span className="text-lg font-medium line-through text-white/40">R$ 297,00</span>
+                </div>
+                <div className="flex items-baseline justify-center gap-1 text-white">
+                  <span className="text-2xl font-bold">R$</span>
+                  <span className="text-6xl font-bold tracking-tighter">147</span>
+                  <span className="text-2xl font-bold">,00</span>
+                </div>
+                <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 29,40</p>
+              </div>
+
+              <HeroRegistrationForm />
               
-              <div className="p-8">
-                <ul className="space-y-4 mb-8">
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
-                    <span className="font-medium">Acesso ao evento presencial dia 10.03</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
-                    <span className="font-medium">Coffee break com networking</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
-                    <span className="font-medium">Certificado de participação</span>
-                  </li>
-                </ul>
-
-                <div className="text-center mb-8">
-                  <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Por apenas</p>
-                  <div className="flex items-center justify-center gap-1 text-[#1a1a1a]">
-                    <span className="text-2xl font-bold">R$</span>
-                    <span className="text-6xl font-bold tracking-tighter">147</span>
-                    <span className="text-2xl font-bold">,00</span>
-                  </div>
-                </div>
-
-                <HeroRegistrationForm />
-                
-                <p className="text-center text-xs text-gray-400 mt-4">
-                  Pagamento seguro via Sympla. Vagas limitadas.
-                </p>
-              </div>
+              <p className="text-center text-xs text-white/40 mt-4">
+                Pagamento seguro via Sympla. Auditório com capacidade limitada.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </ArchitecturalSection>
 
       {/* DEPOIMENTOS - VÍDEO ÚNICO E TÍTULO AJUSTADO */}
       <ArchitecturalSection variant="light">
