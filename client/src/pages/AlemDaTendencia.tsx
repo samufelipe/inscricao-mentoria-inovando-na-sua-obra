@@ -71,40 +71,39 @@ export default function AlemDaTendencia() {
       
       {/* HERO SECTION - COM NOVA IMAGEM E AJUSTES DE LEGIBILIDADE */}
       {/* HERO - MOBILE */}
-      <section className="md:hidden bg-[#1a1a1a] flex flex-col">
-        <div className="relative w-full aspect-[3/4] max-h-[65vh] overflow-hidden">
+      <section className="md:hidden bg-[#1a1a1a] flex flex-col h-[100svh] overflow-hidden">
+        <div className="relative flex-1 overflow-hidden">
           <img
             src={newHostsImage}
             alt="Evento Além da Tendência - Anfitriãs"
             className="absolute inset-0 w-full h-full object-cover object-[center_top]"
           />
-          {/* Gradiente reforçado para legibilidade no mobile */}
           <div 
             className="absolute inset-0 z-[10] pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.4) 0%, transparent 25%, transparent 50%, rgba(26,26,26,0.8) 75%, #1a1a1a 100%)' }}
+            style={{ background: 'linear-gradient(to bottom, rgba(26,26,26,0.4) 0%, transparent 25%, transparent 40%, rgba(26,26,26,0.85) 70%, #1a1a1a 90%)' }}
           />
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="absolute top-6 left-0 right-0 z-20 flex justify-center"
+            className="absolute top-4 left-0 right-0 z-20 flex justify-center"
           >
             <img 
               src={logoTransparent}
               alt="Além da Tendência - Logo Oficial" 
-              className="w-[150px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+              className="w-[120px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
             />
           </motion.div>
         </div>
 
-        <div className="relative z-20 px-4 py-6 flex flex-col gap-5 -mt-12">
+        <div className="relative z-20 px-4 py-4 flex flex-col gap-3 -mt-16">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >
-            <div className="flex items-center gap-2 mb-3 text-[10px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold drop-shadow-md">
+            <div className="flex items-center gap-2 mb-2 text-[9px] uppercase tracking-[0.2em] text-[#C9A84C] font-semibold">
               <MapPin className="w-3 h-3" />
               <span>Evento Presencial</span>
               <span className="text-white/30">|</span>
@@ -113,29 +112,29 @@ export default function AlemDaTendencia() {
               <span>Durante a Revestir</span>
             </div>
 
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mb-3 uppercase drop-shadow-lg">
-              Como transformar <span className="text-[#C9A84C]">inspiração</span> em <span className="text-[#C9A84C]">realidade</span>
+            <h1 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight mb-1.5 uppercase drop-shadow-lg">
+              A Arquitetura acontece <span className="text-[#C9A84C]">nos bastidores</span>
             </h1>
             
-            <p className="text-sm text-gray-200 max-w-lg mb-3 font-light leading-relaxed border-l-4 border-[#C9A84C] pl-4 drop-shadow-md bg-black/20 p-2 rounded-r-lg backdrop-blur-sm">
-              A Arquitetura acontece nos bastidores. Uma tarde inteira focada no outro lado da moeda dos escritórios de arquitetura, além da tendência: Gestão de escritório, Gestão de Obra e Projeto.
+            <p className="text-xs text-gray-300 mb-2 font-light leading-relaxed border-l-2 border-[#C9A84C] pl-3">
+              Como transformar inspiração em realidade. Gestão de escritório, Gestão de Obra e Projeto.
             </p>
             
-            <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-4 font-medium">
-              Evento por Inovando na sua obra @inovandonasuaobra e AjudaMONU @arq.julianacampelo
+            <p className="text-[9px] text-gray-500 uppercase tracking-wider mb-3">
+              Por @inovandonasuaobra e @arq.julianacampelo
             </p>
 
-            <div className="flex items-center gap-3 text-xs text-white/80 bg-black/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/15 w-full mb-4 shadow-lg">
-              <Calendar className="w-4 h-4 text-[#C9A84C] shrink-0" />
+            <div className="flex items-center gap-3 text-[10px] text-white/80 bg-black/50 backdrop-blur-md px-3 py-2 rounded-lg border border-white/10 w-full mb-3">
+              <Calendar className="w-3.5 h-3.5 text-[#C9A84C] shrink-0" />
               <span className="font-semibold text-white">10 de Março</span>
               <span className="text-white/30">|</span>
-              <MapPin className="w-4 h-4 text-[#C9A84C] shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-[#C9A84C] shrink-0" />
               <span className="font-semibold text-white">AFRESP - SP</span>
             </div>
 
             <button 
               onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-              className="w-full bg-[#C9A84C] text-white font-bold py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg border border-[#C9A84C]/50"
+              className="w-full bg-[#C9A84C] text-white font-bold py-3 rounded-lg uppercase tracking-wider text-xs hover:bg-[#b08d35] transition-all shadow-lg border border-[#C9A84C]/50"
             >
               Garantir meu ingresso
             </button>
@@ -144,19 +143,14 @@ export default function AlemDaTendencia() {
       </section>
 
       {/* HERO - DESKTOP */}
-      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] min-h-[75vh] lg:min-h-[80vh] flex-col">
+      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] h-[100vh] flex-col">
         <div className="absolute inset-0 overflow-hidden">
-          {/* Background Image Full Width */}
           <img
             src={newHostsImage}
             alt="Evento Além da Tendência - Mentoras"
             className="absolute inset-0 w-full h-full object-cover z-[1]"
-            style={{
-              objectPosition: 'center 38%'
-            }}
+            style={{ objectPosition: 'center 38%' }}
           />
-          
-          {/* Overlay Gradients para Legibilidade */}
           <div 
             className="absolute inset-0 z-[2] pointer-events-none"
             style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%)' }}
@@ -172,26 +166,26 @@ export default function AlemDaTendencia() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-start pt-12"
+            className="flex justify-start pt-8"
           >
             <img 
               src={logoTransparent}
               alt="Além da Tendência - Logo Oficial" 
-              className="w-[220px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
+              className="w-[180px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
             />
           </motion.div>
 
-          <div className="flex-1 min-h-[100px]" />
+          <div className="flex-1" />
 
-          <div className="grid lg:grid-cols-12 gap-12 items-end pb-16">
+          <div className="grid lg:grid-cols-12 gap-8 items-end pb-10">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="col-span-7 flex flex-col items-start"
             >
-              <div className="flex items-center gap-2 mb-4 text-sm uppercase tracking-[0.2em] text-[#C9A84C] font-semibold bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
-                <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-2 mb-3 text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10">
+                <MapPin className="w-3.5 h-3.5" />
                 <span>Evento Presencial</span>
                 <span className="text-white/30">|</span>
                 <span>São Paulo</span>
@@ -199,44 +193,44 @@ export default function AlemDaTendencia() {
                 <span>Durante a Revestir</span>
               </div>
 
-              <h1 className="font-display text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 uppercase drop-shadow-2xl">
-                Como transformar <br/>
-                <span className="text-[#C9A84C]">inspiração</span> em <span className="text-[#C9A84C]">realidade</span>
+              <h1 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 uppercase drop-shadow-2xl">
+                A Arquitetura acontece <br/>
+                <span className="text-[#C9A84C]">nos bastidores</span>
               </h1>
               
-              <div className="border-l-4 border-[#C9A84C] pl-6 mb-8 bg-gradient-to-r from-black/60 to-transparent p-6 rounded-r-xl backdrop-blur-md shadow-xl max-w-2xl">
-                <h2 className="text-2xl text-white font-bold mb-2 uppercase">A Arquitetura acontece nos bastidores</h2>
-                <p className="text-lg text-gray-200 font-light leading-relaxed">
-                  Uma tarde inteira focada no outro lado da moeda dos escritórios de arquitetura, além da tendência: <strong className="text-white">Gestão de escritório, Gestão de Obra e Projeto.</strong>
+              <div className="border-l-4 border-[#C9A84C] pl-5 mb-6 bg-gradient-to-r from-black/50 to-transparent p-4 rounded-r-xl backdrop-blur-md max-w-xl">
+                <h2 className="text-lg text-white/90 font-semibold mb-1 uppercase">Como transformar inspiração em realidade</h2>
+                <p className="text-sm text-gray-300 font-light leading-relaxed">
+                  Uma tarde focada no outro lado da moeda dos escritórios de arquitetura: <strong className="text-white">Gestão de escritório, Gestão de Obra e Projeto.</strong>
                 </p>
               </div>
               
-              <p className="text-sm text-gray-300 uppercase tracking-wider mb-8 font-medium bg-black/20 p-2 rounded inline-block backdrop-blur-sm">
-                Evento por Inovando na sua obra <span className="text-[#C9A84C]">@inovandonasuaobra</span> e AjudaMONU <span className="text-[#C9A84C]">@arq.julianacampelo</span>
+              <p className="text-xs text-gray-400 uppercase tracking-wider mb-6">
+                Por Inovando na sua obra <span className="text-[#C9A84C]">@inovandonasuaobra</span> e AjudaMONU <span className="text-[#C9A84C]">@arq.julianacampelo</span>
               </p>
 
-              <div className="flex gap-6 items-center">
-                <div className="flex items-center gap-6 text-sm font-medium tracking-wide uppercase bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-lg">
-                  <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-[#C9A84C]" />
+              <div className="flex gap-4 items-center">
+                <div className="flex items-center gap-5 text-sm font-medium tracking-wide uppercase bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/15">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-[#C9A84C]" />
                     <div>
-                      <span className="block text-xs text-gray-400 mb-0.5">Data</span>
-                      <span className="text-base font-bold text-white">10 de Março</span>
+                      <span className="block text-[10px] text-gray-400">Data</span>
+                      <span className="text-sm font-bold text-white">10 de Março</span>
                     </div>
                   </div>
-                  <div className="w-px h-10 bg-white/10" />
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-[#C9A84C]" />
+                  <div className="w-px h-8 bg-white/10" />
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-[#C9A84C]" />
                     <div>
-                      <span className="block text-xs text-gray-400 mb-0.5">Local</span>
-                      <span className="text-base font-bold text-white">Auditório AFRESP - SP</span>
+                      <span className="block text-[10px] text-gray-400">Local</span>
+                      <span className="text-sm font-bold text-white">Auditório AFRESP - SP</span>
                     </div>
                   </div>
                 </div>
 
                 <button 
                   onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-                  className="bg-[#C9A84C] text-white font-bold px-10 py-5 rounded-xl uppercase tracking-wider text-base hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 hover:shadow-[#C9A84C]/20 border border-[#C9A84C]/50"
+                  className="bg-[#C9A84C] text-white font-bold px-8 py-4 rounded-xl uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 border border-[#C9A84C]/50"
                 >
                   Garantir meu ingresso
                 </button>
