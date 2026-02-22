@@ -12,7 +12,7 @@ import { StickyHeader } from "@/components/ui/sticky-header";
 import { ScarcityBanner } from "@/components/ui/scarcity-banner";
 import { SponsorsSection } from "@/components/ui/sponsors-section";
 import { HeroRegistrationForm } from "@/components/ui/hero-registration-form";
-import { ArrowDown, Calendar, Check, MapPin, Users, CheckCircle2, Play } from "lucide-react";
+import { ArrowDown, Building, Calendar, Check, CheckCircle2, MapPin, Play, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
@@ -351,53 +351,74 @@ export default function AlemDaTendencia() {
           </ArchitecturalTitle>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <AudienceMontageV2 />
-          </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto relative z-10 mb-12"
+        >
+          <AudienceMontageV2 />
+        </motion.div>
 
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10 mb-12">
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+            transition={{ duration: 0.6, delay: 0 }}
+            className="bg-white/5 border-l-2 border-[#C9A84C]/30 p-6 rounded-r-lg"
           >
-            <h4 className="text-2xl text-white font-light">
-              Arquitetos e Designers de Interiores que:
-            </h4>
-            
-            <ul className="space-y-6">
+            <Users className="w-8 h-8 text-[#C9A84C] mb-4" />
+            <h4 className="text-white font-bold text-lg mb-3">Arquitetas e Designers de Interiores</h4>
+            <ul className="space-y-2">
               {[
                 "Têm o próprio escritório e querem crescer, com equipe ou sem, home office ou físico",
                 "Sonham em ter o próprio escritório com segurança",
                 "Sabem que a parte mais difícil do escritório está nos bastidores, onde ninguém vê",
                 "Querem aprofundar seus conhecimentos além das tendências"
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-4 group">
-                  <span className="w-8 h-8 rounded-full bg-[#C9A84C]/20 flex items-center justify-center text-[#C9A84C] mt-0.5 group-hover:bg-[#C9A84C] group-hover:text-white transition-colors">
-                    <Check className="w-5 h-5" />
-                  </span>
-                  <span className="text-gray-300 text-lg font-light group-hover:text-white transition-colors">{item}</span>
+                <li key={i} className="flex items-start gap-2 text-gray-300 text-sm font-light">
+                  <Check className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
-
-            <div className="pt-6 border-t border-white/10">
-              <p className="text-white text-lg mb-6 font-medium">Se você se identificou, o próximo passo é simples:</p>
-              <button 
-                onClick={scrollToInscricao}
-                className="bg-[#C9A84C] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg w-full sm:w-auto"
-              >
-                Garantir minha vaga
-              </button>
-            </div>
           </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="bg-white/5 border-l-2 border-[#C9A84C]/30 p-6 rounded-r-lg"
+          >
+            <CheckCircle2 className="w-8 h-8 text-[#C9A84C] mb-4" />
+            <h4 className="text-white font-bold text-lg mb-3">Quem Busca Estrutura e Processos</h4>
+            <p className="text-gray-300 text-sm font-light">Talento sem gestão não escala. Se você precisa profissionalizar com segurança e organizar sua operação, este evento foi desenhado para você.</p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-white/5 border-l-2 border-[#C9A84C]/30 p-6 rounded-r-lg"
+          >
+            <Building className="w-8 h-8 text-[#C9A84C] mb-4" />
+            <h4 className="text-white font-bold text-lg mb-3">Quem Quer Transformar Tendência em Execução</h4>
+            <p className="text-gray-300 text-sm font-light">Você acompanha feiras, se inspira e consome conteúdo, mas na hora de executar, falta segurança jurídica e método de obra. Aqui a tendência vira projeto entregue.</p>
+          </motion.div>
+        </div>
+
+        <div className="text-center relative z-10">
+          <p className="text-white text-lg mb-6 font-medium">Se você se identificou, o próximo passo é simples:</p>
+          <button 
+            onClick={scrollToInscricao}
+            className="bg-[#C9A84C] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg"
+          >
+            Garantir minha vaga
+          </button>
         </div>
       </ArchitecturalSection>
 
