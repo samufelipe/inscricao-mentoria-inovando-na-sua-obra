@@ -5,7 +5,7 @@ export default function TermosDeUso() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300">
       <div className="container mx-auto px-4 py-16 max-w-3xl">
-        <Link href="/" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-white transition-colors mb-10 text-sm uppercase tracking-wider">
+        <Link href="/alem-da-tendencia" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-white transition-colors mb-10 text-sm uppercase tracking-wider">
           <ArrowLeft className="w-4 h-4" />
           Voltar ao site
         </Link>
