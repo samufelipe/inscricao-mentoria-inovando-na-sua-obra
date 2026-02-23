@@ -703,7 +703,7 @@ export default function AlemDaTendencia() {
           </div>
           
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <p>© 2025 Inovando na Sua Obra. Todos os direitos reservados.</p>
+            <p>© 2026 Inovando na Sua Obra. Todos os direitos reservados.</p>
             <div className="flex gap-6">
               <a href="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</a>
               <a href="/politica-de-privacidade" className="hover:text-white transition-colors">Política de Privacidade</a>
