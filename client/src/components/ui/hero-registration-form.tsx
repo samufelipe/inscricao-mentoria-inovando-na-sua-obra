@@ -49,7 +49,7 @@ export function HeroRegistrationForm() {
     }
 
     trackFormSubmit("hero-inscricao", true);
-    window.open("https://www.sympla.com.br/evento/alem-da-tendencia/3315090", "_blank");
+    window.location.href = "https://www.sympla.com.br/evento/alem-da-tendencia/3315090";
     setIsLoading(false);
     toast.success("Redirecionando para o Sympla...");
   };
