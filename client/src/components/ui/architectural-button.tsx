@@ -20,8 +20,8 @@ export function ArchitecturalButton({
   
   const variants = {
     primary: "bg-[#2E7D32] text-white hover:bg-[#256829] shadow-lg hover:shadow-xl hover:-translate-y-1",
-    secondary: "bg-[oklch(0.35_0.12_320)] text-white hover:bg-[oklch(0.3_0.12_320)] shadow-lg hover:shadow-xl hover:-translate-y-1",
-    outline: "bg-transparent border-2 border-[oklch(0.35_0.12_320)] text-[oklch(0.35_0.12_320)] hover:bg-[oklch(0.35_0.12_320)] hover:text-white"
+    secondary: "bg-[#2E7D32] text-white hover:bg-[#256829] shadow-lg hover:shadow-xl hover:-translate-y-1",
+    outline: "bg-transparent border-2 border-[#2E7D32] text-[#2E7D32] hover:bg-[#2E7D32] hover:text-white"
   };
 
   return (
