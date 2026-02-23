@@ -230,8 +230,8 @@ export default function AlemDaTendencia() {
                 <span>Durante a Revestir</span>
               </div>
 
-              <h1 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 uppercase drop-shadow-2xl">
-                A Arquitetura acontece <br/>
+              <h1 className="font-display text-3xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 uppercase drop-shadow-2xl">
+                <span className="whitespace-nowrap">A Arquitetura acontece</span> <br/>
                 <span className="text-[#C9A84C]">nos bastidores</span>
               </h1>
               
