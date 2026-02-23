@@ -165,7 +165,7 @@ export default function AlemDaTendencia() {
           {/* CTA */}
           <button 
             onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-            className="w-full bg-[#C9A84C] text-white font-bold py-3.5 rounded-xl uppercase tracking-widest text-xs hover:bg-[#b08d35] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] border border-[#C9A84C]/50"
+            className="w-full bg-[#2E7D32] text-white font-bold py-3.5 rounded-xl uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50"
           >
             Garantir meu ingresso
           </button>
@@ -267,7 +267,7 @@ export default function AlemDaTendencia() {
 
                 <button 
                   onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-                  className="bg-[#C9A84C] text-white font-bold px-8 py-4 rounded-xl uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 border border-[#C9A84C]/50"
+                  className="bg-[#2E7D32] text-white font-bold px-8 py-4 rounded-xl uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 border border-[#2E7D32]/50"
                 >
                   Garantir meu ingresso
                 </button>
@@ -417,7 +417,7 @@ export default function AlemDaTendencia() {
           <p className="text-white text-lg mb-6 font-medium">Se você se identificou, o próximo passo é simples:</p>
           <button 
             onClick={scrollToInscricao}
-            className="bg-[#C9A84C] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg"
+            className="bg-[#2E7D32] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg"
           >
             Garantir minha vaga
           </button>
