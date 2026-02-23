@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { trackCTAClick } from "@/lib/gtm-tracking";
 import logoDark from "@/assets/alem-da-tendencia/logo-dark.png";
 
 export function StickyHeader() {
@@ -21,6 +22,7 @@ export function StickyHeader() {
   }, []);
 
   const scrollToForm = () => {
+    trackCTAClick("Garantir Vaga", "sticky-header");
     const formSection = document.getElementById("inscricao");
     if (formSection) {
       formSection.scrollIntoView({ behavior: "smooth" });

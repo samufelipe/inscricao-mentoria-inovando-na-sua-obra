@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
+import { trackFAQOpen } from "@/lib/gtm-tracking";
 export function FAQAccordion() {
   const faqs = [
     {
@@ -38,7 +38,12 @@ export function FAQAccordion() {
   ];
 
   return (
-    <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto space-y-4">
+    <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto space-y-4" onValueChange={(value) => {
+      if (value) {
+        const idx = parseInt(value.replace("item-", ""), 10);
+        if (!isNaN(idx) && faqs[idx]) trackFAQOpen(faqs[idx].question);
+      }
+    }}>
       {faqs.map((faq, index) => (
         <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200">
           <AccordionTrigger className="text-left font-sans font-bold text-lg hover:text-[oklch(0.75_0.18_65)] transition-colors py-6">

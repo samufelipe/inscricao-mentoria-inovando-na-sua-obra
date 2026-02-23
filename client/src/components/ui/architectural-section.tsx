@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
 
-interface ArchitecturalSectionProps {
+interface ArchitecturalSectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
   variant?: "light" | "dark" | "purple" | "orange";
   gridLines?: boolean;
   id?: string;
+  "data-track-section"?: string;
 }
 
 export function ArchitecturalSection({
@@ -14,6 +15,7 @@ export function ArchitecturalSection({
   variant = "light",
   gridLines = true,
   id,
+  ...rest
 }: ArchitecturalSectionProps) {
   const variants = {
     light: "bg-[oklch(0.97_0.01_95)] text-[oklch(0.2_0.02_320)]",
@@ -23,7 +25,7 @@ export function ArchitecturalSection({
   };
 
   return (
-    <section id={id} className={cn("relative py-12 sm:py-20 md:py-32 overflow-hidden", variants[variant], className)}>
+    <section id={id} {...rest} className={cn("relative py-12 sm:py-20 md:py-32 overflow-hidden", variants[variant], className)}>
       {gridLines && (
         <div className="absolute inset-0 pointer-events-none opacity-10">
           <div className="absolute left-0 top-0 w-px h-full bg-current" style={{ left: "5%" }} />
