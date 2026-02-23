@@ -155,9 +155,12 @@ export default function AlemDaTendencia() {
           </h1>
           
           {/* Subtitle */}
-          <p className="text-[11px] text-white/60 mb-4 font-light leading-relaxed border-l-2 border-[#C9A84C]/60 pl-3 max-w-[90%]">
-            Como transformar inspiração em realidade. Gestão de escritório, Gestão de Obra e Projeto.
-          </p>
+          <div className="border-l-2 border-[#C9A84C]/60 pl-3 mb-4 max-w-[90%]">
+            <h2 className="text-[11px] text-white/90 font-semibold mb-0.5 uppercase">Como transformar inspiração em realidade</h2>
+            <p className="text-[10px] text-white/60 font-light leading-relaxed">
+              Uma tarde focada no outro lado da moeda dos escritórios de arquitetura: <strong className="text-white">Gestão de escritório, Gestão de Obra e Projeto.</strong>
+            </p>
+          </div>
 
           {/* Event info bar */}
           <div className="flex items-center justify-between bg-white/[0.06] backdrop-blur-lg rounded-xl px-4 py-2.5 mb-4 border border-white/[0.08]">
