@@ -16,7 +16,7 @@ export function ArchitecturalButton({
   showIcon = true,
   ...props
 }: ArchitecturalButtonProps) {
-  const baseStyles = "relative overflow-hidden transition-all duration-300 group font-sans font-bold tracking-wider uppercase text-sm py-6 px-8 rounded-none border-0";
+  const baseStyles = "relative overflow-hidden transition-all duration-300 group font-sans font-bold tracking-wider uppercase text-xs sm:text-sm py-4 sm:py-6 px-6 sm:px-8 rounded-none border-0 whitespace-normal text-center";
   
   const variants = {
     primary: "bg-[#2E7D32] text-white hover:bg-[#256829] shadow-lg hover:shadow-xl hover:-translate-y-1",
