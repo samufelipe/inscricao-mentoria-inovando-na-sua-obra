@@ -20,7 +20,7 @@ export function SponsorsSection() {
         </ArchitecturalTitle>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-16 md:gap-24 max-w-5xl mx-auto">
+      <div className="flex flex-nowrap items-center justify-center gap-8 md:gap-24 max-w-5xl mx-auto">
         {sponsors.map((sponsor) => (
           <div
             key={sponsor.name}
