@@ -29,7 +29,7 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
         <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Inovando na Sua Obra */}
           <div className="space-y-8 group">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
+            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               <img 
                 src={inovandoImage || "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg"} 
                 alt="Ingrid Zarza e Fernanda Bradaschia - Inovando na Sua Obra" 
@@ -37,7 +37,7 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold uppercase tracking-wide mb-1">Ingrid Zarza & <br/>Fernanda Bradaschia</h3>
+                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-1">Ingrid Zarza & <br/>Fernanda Bradaschia</h3>
                 <p className="text-[#C9A84C] font-medium text-sm uppercase tracking-wider">Inovando na Sua Obra</p>
               </div>
             </div>
@@ -51,11 +51,11 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
                 Especialistas em Gestão de Obras de Interiores. Ensinam arquitetos e designers a transformarem obras caóticas em processos lucrativos e organizados.
               </p>
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                <div className="bg-gray-50 p-3 md:p-4 rounded-lg border-l-2 border-[#C9A84C]">
                   <span className="block text-2xl font-bold text-gray-800">55mil+</span>
                   <span className="text-xs text-gray-500 uppercase">Seguidores</span>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                <div className="bg-gray-50 p-3 md:p-4 rounded-lg border-l-2 border-[#C9A84C]">
                   <span className="block text-2xl font-bold text-gray-800">250+</span>
                   <span className="text-xs text-gray-500 uppercase">Obras Realizadas</span>
                 </div>
@@ -65,8 +65,7 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
 
           {/* Juliana Campelo */}
           <div className="space-y-8 group">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
-              {/* Usando a mesma imagem por enquanto, mas focado na Juliana se possível, ou placeholder se não tiver foto individual */}
+            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
               <img 
                 src={julianaImage || "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg"} 
                 alt="Juliana Campelo - AjudaMONU" 
@@ -74,7 +73,7 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold uppercase tracking-wide mb-1">Juliana Campelo</h3>
+                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-1">Juliana Campelo</h3>
                 <p className="text-[#C9A84C] font-medium text-sm uppercase tracking-wider">AjudaMONU</p>
               </div>
             </div>
@@ -88,11 +87,11 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
                 Arquiteta e mentora de gestão de escritórios. Ajuda profissionais a estruturarem seus negócios para crescerem com segurança e previsibilidade.
               </p>
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                <div className="bg-gray-50 p-3 md:p-4 rounded-lg border-l-2 border-[#C9A84C]">
                   <span className="block text-2xl font-bold text-gray-800">+850</span>
                   <span className="text-xs text-gray-500 uppercase">Escritórios Estruturados</span>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg border-l-2 border-[#C9A84C]">
+                <div className="bg-gray-50 p-3 md:p-4 rounded-lg border-l-2 border-[#C9A84C]">
                   <span className="block text-2xl font-bold text-gray-800">+3000</span>
                   <span className="text-xs text-gray-500 uppercase">Alunos</span>
                 </div>
