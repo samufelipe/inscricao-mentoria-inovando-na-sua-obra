@@ -109,7 +109,7 @@ export default function PoliticaDePrivacidade() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 text-xs text-gray-500">
-          <p>© 2025 Inovando na Sua Obra. Todos os direitos reservados.</p>
+          <p>© 2026 Inovando na Sua Obra. Todos os direitos reservados.</p>
         </div>
       </div>
     </div>
