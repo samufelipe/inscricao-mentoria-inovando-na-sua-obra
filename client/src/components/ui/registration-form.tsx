@@ -42,7 +42,7 @@ export function RegistrationForm() {
     const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}`;
     const whatsappUrl = `https://wa.me/551155717229?text=${message}`;
 
-    window.open(whatsappUrl, "_blank");
+    window.location.href = whatsappUrl;
     setIsLoading(false);
     toast.success("Redirecionando para o WhatsApp...");
   };
