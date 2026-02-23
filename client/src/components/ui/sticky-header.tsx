@@ -42,7 +42,7 @@ export function StickyHeader() {
           <img 
             src={logoDark}
             alt="Além da Tendência" 
-            className="h-12 w-auto object-contain"
+            className="h-8 md:h-12 w-auto object-contain"
           />
         </button>
         

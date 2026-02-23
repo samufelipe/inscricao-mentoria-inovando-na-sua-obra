@@ -286,7 +286,7 @@ export default function AlemDaTendencia() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
         >
           <div className="space-y-8">
             <motion.div variants={fadeInUp}>
@@ -295,7 +295,7 @@ export default function AlemDaTendencia() {
               </ArchitecturalTitle>
             </motion.div>
             
-            <motion.div variants={fadeInUp} className="text-gray-600 space-y-6 text-lg leading-relaxed">
+            <motion.div variants={fadeInUp} className="text-gray-600 space-y-6 text-base lg:text-lg leading-relaxed">
               <p>
                 <strong>Além da Tendência</strong> é um evento presencial que acontece junto à semana da Expo Revestir como um complemento perfeito para arquitetos e designers de interiores que querem aprofundar seus conhecimentos além das tendências.
               </p>
@@ -331,7 +331,7 @@ export default function AlemDaTendencia() {
           </div>
 
           {/* Imagem Ilustrativa Conceitual - Substituída pela nova foto */}
-          <motion.div variants={fadeInUp} className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+          <motion.div variants={fadeInUp} className="relative h-[300px] md:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
              <img 
                src={hostsSection2} 
                alt="Conceito do Evento"
@@ -518,7 +518,7 @@ export default function AlemDaTendencia() {
             </div>
           </div>
           
-          <div className="h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
+          <div className="h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.786699368388!2d-46.66479692376166!3d-23.57604497879058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59e6f0a6b0b1%3A0x6f6b6b6b6b6b6b6b!2sAv.%20Brig.%20Lu%C3%ADs%20Ant%C3%B4nio%2C%204843%20-%20Jardim%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001401-002!5e0!3m2!1spt-BR!2sbr!4v1708450000000!5m2!1spt-BR!2sbr" 
               width="100%" 
@@ -550,7 +550,7 @@ export default function AlemDaTendencia() {
 
           <div className="bg-[oklch(0.15_0.02_320)] rounded-2xl shadow-2xl overflow-hidden border border-[#C9A84C]/20 transform hover:-translate-y-1 transition-transform duration-300">
             {/* Header do card */}
-            <div className="bg-black p-10 text-center relative overflow-hidden">
+            <div className="bg-black p-6 md:p-10 text-center relative overflow-hidden">
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute left-0 top-0 w-px h-full bg-white" style={{ left: "20%" }} />
                 <div className="absolute left-0 top-0 w-px h-full bg-white" style={{ left: "80%" }} />
@@ -560,7 +560,7 @@ export default function AlemDaTendencia() {
               <img 
                 src={logoTransparent} 
                 alt="Além da Tendência" 
-                className="w-56 mx-auto mb-5 relative z-10"
+                className="w-40 md:w-56 mx-auto mb-5 relative z-10"
               />
               <div className="relative z-10 text-center">
                 <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">1º LOTE</div>
@@ -592,7 +592,7 @@ export default function AlemDaTendencia() {
                 </div>
                 <div className="flex items-baseline justify-center gap-1 text-white">
                   <span className="text-2xl font-bold">R$</span>
-                  <span className="text-6xl font-bold tracking-tighter">147</span>
+                  <span className="text-5xl md:text-6xl font-bold tracking-tighter">147</span>
                   <span className="text-2xl font-bold">,00</span>
                 </div>
                 <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 29,40</p>
