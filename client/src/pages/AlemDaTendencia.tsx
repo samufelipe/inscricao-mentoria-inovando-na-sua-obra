@@ -16,6 +16,7 @@ import { CountdownTimer } from "@/components/ui/countdown-timer";
 import { ArrowDown, Building, Calendar, Check, CheckCircle2, MapPin, Play, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { trackCTAClick, trackVideoPlay, trackExternalLink, trackFooterNav, initScrollTracking, createSectionObserver } from "@/lib/gtm-tracking";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
@@ -46,13 +47,36 @@ export default function AlemDaTendencia() {
       if (link) link.href = prevFavicon;
     };
   }, []);
+
+  // GTM: scroll depth + section visibility tracking
+  useEffect(() => {
+    const cleanupScroll = initScrollTracking();
+    const observer = createSectionObserver();
+    
+    if (observer) {
+      // Observe all sections with data-track-section attribute after a short delay
+      setTimeout(() => {
+        document.querySelectorAll("[data-track-section]").forEach(el => observer.observe(el));
+      }, 500);
+    }
+
+    return () => {
+      cleanupScroll();
+      observer?.disconnect();
+    };
+  }, []);
+
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const handleVideoPlay = () => setIsVideoPlaying(true);
+  const handleVideoPlay = () => {
+    setIsVideoPlaying(true);
+    trackVideoPlay();
+  };
 
   const whatsappLink = "https://wa.me/551155717229?text=Ol%C3%A1!%20Gostaria%20de%20me%20inscrever%20no%20evento%20Al%C3%A9m%20da%20Tend%C3%AAncia.";
 
-  const scrollToInscricao = () => {
+  const scrollToInscricao = (section?: string) => {
+    if (section) trackCTAClick("Garantir vaga", section);
     document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -164,7 +188,7 @@ export default function AlemDaTendencia() {
 
           {/* CTA */}
           <button 
-            onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => scrollToInscricao("hero-mobile")}
             className="w-full bg-[#2E7D32] text-white font-bold py-3.5 rounded-xl uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50"
           >
             Garantir meu ingresso
@@ -266,7 +290,7 @@ export default function AlemDaTendencia() {
                 </div>
 
                 <button 
-                  onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
+                  onClick={() => scrollToInscricao("hero-desktop")}
                   className="bg-[#2E7D32] text-white font-bold px-8 py-4 rounded-xl uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg hover:-translate-y-1 border border-[#2E7D32]/50"
                 >
                   Garantir meu ingresso
@@ -280,7 +304,7 @@ export default function AlemDaTendencia() {
       <ScarcityBanner />
 
       {/* SEÇÃO 2 - CONCEITO (COM NOVA IMAGEM) */}
-      <ArchitecturalSection id="sobre" variant="light" className="relative">
+      <ArchitecturalSection id="sobre" variant="light" className="relative" data-track-section="conceito">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -324,7 +348,7 @@ export default function AlemDaTendencia() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="pt-4">
-              <ArchitecturalButton onClick={scrollToInscricao}>
+              <ArchitecturalButton onClick={() => scrollToInscricao("conceito")}>
                 QUERO PROFISSIONALIZAR MEU ESCRITÓRIO
               </ArchitecturalButton>
             </motion.div>
@@ -346,7 +370,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* SEÇÃO 3 - PÚBLICO-ALVO (REVERTIDA ESTRUTURA, MANTIDA COPY PDF) */}
-      <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
+      <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden" data-track-section="publico-alvo">
         <div className="text-center mb-12 relative z-10">
           <ArchitecturalTitle variant="h2" color="light">
             Para Quem É Este Evento?
@@ -416,7 +440,7 @@ export default function AlemDaTendencia() {
         <div className="text-center relative z-10">
           <p className="text-white text-lg mb-6 font-medium">Se você se identificou, o próximo passo é simples:</p>
           <button 
-            onClick={scrollToInscricao}
+            onClick={() => scrollToInscricao("publico-alvo")}
             className="bg-[#2E7D32] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#256829] transition-all shadow-lg"
           >
             Garantir minha vaga
@@ -428,7 +452,7 @@ export default function AlemDaTendencia() {
       <HostsSection inovandoImage={inovandoObraImg} julianaImage={julianaCapelo} />
 
       {/* PALESTRANTES - RESTAURADA E INTEGRADA */}
-      <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200">
+      <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200" data-track-section="palestrantes">
         <div className="text-center mb-16">
           <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-3">
             Especialistas Convidadas
@@ -535,7 +559,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* PREÇO */}
-      <ArchitecturalSection id="inscricao" variant="dark">
+      <ArchitecturalSection id="inscricao" variant="dark" data-track-section="inscricao">
         <div className="max-w-lg mx-auto">
           {/* Urgência */}
           <div className="text-center mb-8">
@@ -637,7 +661,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* FAQ */}
-      <ArchitecturalSection variant="light" className="bg-gray-50">
+      <ArchitecturalSection variant="light" className="bg-gray-50" data-track-section="faq">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <ArchitecturalTitle variant="h2" color="purple">
@@ -652,6 +676,7 @@ export default function AlemDaTendencia() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackExternalLink(whatsappLink, "WhatsApp FAQ")}
               className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-8 py-3 rounded-full uppercase tracking-wider text-sm hover:bg-[#128C7E] transition-all shadow-lg hover:-translate-y-1"
             >
               Ir para o WhatsApp
@@ -681,9 +706,9 @@ export default function AlemDaTendencia() {
             <div>
               <h4 className="text-[#C9A84C] font-bold uppercase tracking-wider mb-6 text-sm">Links Rápidos</h4>
               <ul className="space-y-3 text-sm text-gray-400">
-                <li><button onClick={() => document.getElementById("sobre")?.scrollIntoView({behavior: "smooth"})} className="hover:text-white transition-colors">O Conceito</button></li>
-                <li><button onClick={() => document.getElementById("local")?.scrollIntoView({behavior: "smooth"})} className="hover:text-white transition-colors">Local</button></li>
-                <li><button onClick={() => document.getElementById("inscricao")?.scrollIntoView({behavior: "smooth"})} className="hover:text-white transition-colors">Inscrição</button></li>
+                <li><button onClick={() => { trackFooterNav("O Conceito"); document.getElementById("sobre")?.scrollIntoView({behavior: "smooth"}); }} className="hover:text-white transition-colors">O Conceito</button></li>
+                <li><button onClick={() => { trackFooterNav("Local"); document.getElementById("local")?.scrollIntoView({behavior: "smooth"}); }} className="hover:text-white transition-colors">Local</button></li>
+                <li><button onClick={() => { trackFooterNav("Inscrição"); document.getElementById("inscricao")?.scrollIntoView({behavior: "smooth"}); }} className="hover:text-white transition-colors">Inscrição</button></li>
               </ul>
             </div>
             

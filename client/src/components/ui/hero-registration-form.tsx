@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ArchitecturalButton } from "./architectural-button";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { captureLead } from "@/lib/capture-lead";
+import { trackFormStart, trackFormFieldFocus, trackFormSubmit } from "@/lib/gtm-tracking";
 
 export function HeroRegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const hasTrackedStart = useRef(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +16,15 @@ export function HeroRegistrationForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    if (!hasTrackedStart.current) {
+      hasTrackedStart.current = true;
+      trackFormStart("hero-inscricao");
+    }
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFocus = (fieldName: string) => {
+    trackFormFieldFocus("hero-inscricao", fieldName);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,6 +48,7 @@ export function HeroRegistrationForm() {
       // Non-blocking: don't prevent redirect on capture failure
     }
 
+    trackFormSubmit("hero-inscricao", true);
     window.open("https://www.sympla.com.br/evento/alem-da-tendencia/3315090", "_blank");
     setIsLoading(false);
     toast.success("Redirecionando para o Sympla...");
@@ -50,7 +61,7 @@ export function HeroRegistrationForm() {
           <label htmlFor="hero-name" className="text-xs font-bold uppercase tracking-wider text-white/50">Nome Completo *</label>
           <input 
             type="text" id="hero-name" name="name"
-            value={formData.name} onChange={handleChange} required
+            value={formData.name} onChange={handleChange} onFocus={() => handleFocus("name")} required
             className="w-full p-3 md:p-4 bg-white/5 border border-white/5 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="Seu nome"
           />
@@ -60,7 +71,7 @@ export function HeroRegistrationForm() {
           <label htmlFor="hero-email" className="text-xs font-bold uppercase tracking-wider text-white/50">E-mail *</label>
           <input 
             type="email" id="hero-email" name="email"
-            value={formData.email} onChange={handleChange} required
+            value={formData.email} onChange={handleChange} onFocus={() => handleFocus("email")} required
             className="w-full p-3 md:p-4 bg-white/5 border border-white/5 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="seu@email.com"
           />
@@ -70,7 +81,7 @@ export function HeroRegistrationForm() {
           <label htmlFor="hero-phone" className="text-xs font-bold uppercase tracking-wider text-white/50">WhatsApp *</label>
           <input 
             type="tel" id="hero-phone" name="phone"
-            value={formData.phone} onChange={handleChange} required
+            value={formData.phone} onChange={handleChange} onFocus={() => handleFocus("phone")} required
             className="w-full p-3 md:p-4 bg-white/5 border border-white/5 focus:border-[#C9A84C] outline-none transition-colors rounded-lg text-sm text-white placeholder:text-white/30"
             placeholder="(00) 00000-0000"
           />
