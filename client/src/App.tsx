@@ -6,6 +6,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import AlemDaTendencia from "./pages/AlemDaTendencia";
+import TermosDeUso from "./pages/TermosDeUso";
+import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
 
 
 function Router() {
@@ -13,6 +15,8 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/alem-da-tendencia"} component={AlemDaTendencia} />
+      <Route path={"/termos-de-uso"} component={TermosDeUso} />
+      <Route path={"/politica-de-privacidade"} component={PoliticaDePrivacidade} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

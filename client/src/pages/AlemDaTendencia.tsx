@@ -692,7 +692,7 @@ export default function AlemDaTendencia() {
               <ul className="space-y-3 text-sm text-gray-400">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full"></span>
-                  suporte@inovandonasuaobra.com.br
+                  contato@inovandonasuaobra.com.br
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full"></span>
@@ -705,8 +705,8 @@ export default function AlemDaTendencia() {
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
             <p>© 2025 Inovando na Sua Obra. Todos os direitos reservados.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
-              <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
+              <a href="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</a>
+              <a href="/politica-de-privacidade" className="hover:text-white transition-colors">Política de Privacidade</a>
             </div>
           </div>
         </div>
