@@ -125,7 +125,7 @@ export default function AlemDaTendencia() {
           <img 
             src={logoTransparent}
             alt="Além da Tendência - Logo Oficial" 
-            className="w-[130px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+            className="w-[160px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
           />
         </motion.div>
 
