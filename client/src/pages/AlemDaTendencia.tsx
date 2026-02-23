@@ -277,25 +277,25 @@ export default function AlemDaTendencia() {
       <ScarcityBanner />
 
       {/* SEÇÃO 2 - CONCEITO (COM NOVA IMAGEM) */}
-      <ArchitecturalSection id="sobre" variant="light" className="relative">
+      <ArchitecturalSection id="sobre" variant="light" className="relative" gridLines={false}>
         <motion.div 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
         >
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8 overflow-hidden">
             <motion.div variants={fadeInUp}>
-              <h3 className="text-xl md:text-2xl font-bold text-[#C9A84C] uppercase tracking-wider mb-4 leading-snug">
+              <h3 className="text-lg md:text-2xl font-bold text-[#C9A84C] uppercase tracking-wider mb-4 leading-snug break-words">
                 Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas quando existe método.
               </h3>
-              <ArchitecturalTitle variant="h2" color="purple" className="!text-3xl md:!text-4xl">
+              <ArchitecturalTitle variant="h2" color="purple" className="!text-2xl md:!text-3xl lg:!text-4xl">
                 Tendência Encanta.<br />Estrutura Constrói.
               </ArchitecturalTitle>
             </motion.div>
             
-            <motion.div variants={fadeInUp} className="text-gray-600 space-y-6 text-lg leading-relaxed">
+            <motion.div variants={fadeInUp} className="text-gray-600 space-y-4 md:space-y-6 text-base md:text-lg leading-relaxed">
               <p>
                 <strong>Além da Tendência</strong> é um evento presencial que acontece junto à semana da Expo Revestir como um complemento perfeito para arquitetos e designers de interiores que querem aprofundar seus conhecimentos além das tendências.
               </p>
@@ -303,8 +303,8 @@ export default function AlemDaTendencia() {
                 Transformar inspiração em realidade exige estrutura e conhecimento técnico e é isso que você vai ver no evento:
               </p>
               
-              <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-[#C9A84C]">
-                <p className="font-bold text-gray-800 mb-4 uppercase tracking-wide">Um aprofundamento em:</p>
+              <div className="bg-gray-50 p-4 md:p-6 rounded-xl border-l-4 border-[#C9A84C]">
+                <p className="font-bold text-gray-800 mb-4 uppercase tracking-wide text-sm md:text-base">Um aprofundamento em:</p>
                 <ul className="space-y-3">
                   {[
                     "Gestão de Escritório",
@@ -312,10 +312,10 @@ export default function AlemDaTendencia() {
                     "Projeto"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-[#C9A84C] flex items-center justify-center text-white shadow-sm">
+                      <span className="w-6 h-6 rounded-full bg-[#C9A84C] flex items-center justify-center text-white shadow-sm shrink-0">
                         <Check className="w-3.5 h-3.5" />
                       </span>
-                      <span className="text-gray-800 font-bold text-lg">{item}</span>
+                      <span className="text-gray-800 font-bold text-base md:text-lg">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -323,30 +323,31 @@ export default function AlemDaTendencia() {
               </div>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="pt-4">
-              <ArchitecturalButton onClick={scrollToInscricao}>
+            <motion.div variants={fadeInUp} className="pt-2 md:pt-4">
+              <ArchitecturalButton onClick={scrollToInscricao} className="w-full sm:w-auto text-sm">
                 QUERO PROFISSIONALIZAR MEU ESCRITÓRIO
               </ArchitecturalButton>
             </motion.div>
           </div>
 
-          {/* Imagem Ilustrativa Conceitual - Substituída pela nova foto */}
-          <motion.div variants={fadeInUp} className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+          {/* Imagem Ilustrativa Conceitual */}
+          <motion.div variants={fadeInUp} className="relative h-[350px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
              <img 
                src={newHostsImage} 
                alt="Conceito do Evento" 
+               loading="lazy"
                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-             <div className="absolute bottom-8 left-8 right-8 text-white">
-               <p className="text-lg font-light italic">"Não existe arquitetura sem gestão. Não existe obra sem processo."</p>
+             <div className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 md:right-8 text-white">
+               <p className="text-base md:text-lg font-light italic">"Não existe arquitetura sem gestão. Não existe obra sem processo."</p>
              </div>
           </motion.div>
         </motion.div>
       </ArchitecturalSection>
 
       {/* SEÇÃO 3 - PÚBLICO-ALVO (REVERTIDA ESTRUTURA, MANTIDA COPY PDF) */}
-      <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
+      <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden" gridLines={false}>
         <div className="text-center mb-12 relative z-10">
           <div className="inline-block border-b-2 border-[#C9A84C] pb-2 mb-4">
             <h3 className="text-[#C9A84C] font-bold uppercase tracking-widest text-sm">
@@ -412,7 +413,7 @@ export default function AlemDaTendencia() {
       <HostsSection />
 
       {/* PALESTRANTES - RESTAURADA E INTEGRADA */}
-      <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200">
+      <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200" gridLines={false}>
         <div className="text-center mb-16">
           <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-2">
             Especialistas Convidadas
@@ -444,7 +445,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* INFORMAÇÕES IMPORTANTES */}
-      <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
+      <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden" gridLines={false}>
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <div>
             <ArchitecturalTitle variant="h3" color="orange">
@@ -574,7 +575,7 @@ export default function AlemDaTendencia() {
       </section>
 
       {/* DEPOIMENTOS - VÍDEO ÚNICO E TÍTULO AJUSTADO */}
-      <ArchitecturalSection variant="light">
+      <ArchitecturalSection variant="light" gridLines={false}>
         <div className="text-center mb-12">
           <ArchitecturalTitle variant="h2" color="purple">
             Quem Já Viveu a Experiência
@@ -582,12 +583,13 @@ export default function AlemDaTendencia() {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border-4 border-white">
-            <video 
+          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border border-gray-200">
+            <video
               src={videoUrl} 
               controls 
-              className="w-full h-full object-cover"
-              poster={heroEvent} // Usando imagem do evento como poster
+              className="w-full h-full object-contain"
+              poster={heroEvent}
+              preload="none"
             >
               Seu navegador não suporta o elemento de vídeo.
             </video>
@@ -599,7 +601,7 @@ export default function AlemDaTendencia() {
       </ArchitecturalSection>
 
       {/* FAQ */}
-      <ArchitecturalSection variant="light" className="bg-gray-50">
+      <ArchitecturalSection variant="light" className="bg-gray-50" gridLines={false}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <ArchitecturalTitle variant="h2" color="purple">

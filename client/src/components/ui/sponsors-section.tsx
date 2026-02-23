@@ -10,7 +10,7 @@ const sponsors = [
 
 export function SponsorsSection() {
   return (
-    <ArchitecturalSection variant="light" className="bg-gray-50">
+    <ArchitecturalSection variant="light" className="bg-gray-50" gridLines={false}>
       <div className="text-center mb-14">
         <p className="text-[#C9A84C] font-bold tracking-[0.2em] uppercase text-xs mb-4">
           Realização e Apoio
