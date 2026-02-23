@@ -20,10 +20,6 @@ export function FAQAccordion() {
       answer: "R$147 é menos do que um almoço de negócios em São Paulo. No evento, você acessa conteúdo de especialistas que cobram milhares por consultoria, além de networking com centenas de profissionais. Um único contrato bem feito ou uma obra melhor gerida já paga o investimento dezenas de vezes."
     },
     {
-      question: "Não moro em São Paulo. Vale a pena ir?",
-      answer: "Profissionais de todo o Brasil participam justamente pelo conteúdo exclusivo e pelo networking presencial que não existe online. O retorno em conexões, parcerias e aprendizado prático supera em muito o custo do deslocamento."
-    },
-    {
       question: "Quando e onde será o evento?",
       answer: "10 de Março de 2026, das 13h30 às 19h, no Auditório da AFRESP (Av. Brigadeiro Luís Antônio, 4843 - Jardim Paulista, São Paulo - SP)."
     },
