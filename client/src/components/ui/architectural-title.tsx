@@ -4,7 +4,7 @@ interface ArchitecturalTitleProps {
   children: React.ReactNode;
   className?: string;
   variant?: "h1" | "h2" | "h3" | "h4";
-  color?: "purple" | "orange" | "dark" | "light" | "white";
+  color?: "purple" | "orange" | "dark" | "light";
 }
 
 export function ArchitecturalTitle({
@@ -25,7 +25,6 @@ export function ArchitecturalTitle({
     orange: "text-[oklch(0.75_0.18_65)]",
     dark: "text-[oklch(0.2_0.02_320)]",
     light: "text-[oklch(0.97_0.01_95)]",
-    white: "text-white",
   };
 
   const Tag = variant === "h1" ? "h1" : variant === "h2" ? "h2" : variant === "h3" ? "h3" : "h4";
