@@ -28,8 +28,8 @@ import julianaCapelo from "@/assets/alem-da-tendencia/juliana-capelo-new.jpg";
 import lucianaGuerraImg from "@/assets/alem-da-tendencia/luciana-guerra-new.jpg";
 import marciaPereira from "@/assets/alem-da-tendencia/marcia-pereira-new.png";
 
-// Nova imagem das anfitriãs (será substituída pelo upload real)
-const newHostsImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/vHxDiyaMsWHITuBB.png";
+// Nova imagem das anfitriãs (upload real)
+const newHostsImage = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/jnlGACyGzzQUJypr.png";
 const videoUrl = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/BzRHClvGpXplcBna.mp4";
 
 export default function AlemDaTendencia() {
@@ -75,8 +75,7 @@ export default function AlemDaTendencia() {
     <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-[oklch(0.97_0.01_95)] overflow-x-hidden w-full max-w-[100vw]">
       <StickyHeader />
       
-      {/* HERO SECTION - COM NOVA IMAGEM E AJUSTES DE LEGIBILIDADE */}
-      {/* HERO - MOBILE */}
+      {/* HERO SECTION - MOBILE (MANTIDO ORIGINAL) */}
       <section className="md:hidden bg-[#1a1a1a] flex flex-col h-[100svh] overflow-hidden relative">
         {/* Full-bleed image */}
         <div className="absolute inset-0 overflow-hidden">
@@ -177,52 +176,50 @@ export default function AlemDaTendencia() {
         </motion.div>
       </section>
 
-
-
-      {/* HERO - DESKTOP */}
-      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] h-[100vh] flex-col">
-        <div className="absolute inset-0 overflow-hidden">
+      {/* HERO - DESKTOP (OTIMIZADO - SPLIT LAYOUT) */}
+      <section className="hidden md:flex relative overflow-hidden bg-[#1a1a1a] min-h-[90vh] items-center">
+        {/* Background Image Container - Direita */}
+        <div className="absolute right-0 top-0 w-[55%] h-full z-[1]">
           <img
             src={newHostsImage}
             alt="Evento Além da Tendência - Mentoras"
-            className="absolute inset-0 w-full h-full object-cover z-[1]"
-            style={{ objectPosition: 'center 38%' }}
+            className="w-full h-full object-contain object-right-bottom"
           />
+          {/* Gradiente de fusão suave com o fundo preto à esquerda */}
           <div 
-            className="absolute inset-0 z-[2] pointer-events-none"
-            style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%)' }}
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #1a1a1a 0%, transparent 30%, transparent 100%)' }}
           />
+          {/* Gradiente inferior para fusão suave */}
           <div 
-            className="absolute inset-0 z-[2] pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 80%, #1a1a1a 100%)' }}
+            className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+            style={{ background: 'linear-gradient(to top, #1a1a1a 0%, transparent 100%)' }}
           />
         </div>
 
-        <div className="relative z-20 flex-1 flex flex-col container mx-auto px-4">
+        <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-start pt-8"
+            className="mb-12"
           >
             <img 
               src={logoTransparent}
               alt="Além da Tendência - Logo Oficial" 
-              className="w-[180px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
+              className="w-[220px] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
             />
           </motion.div>
 
-          <div className="flex-1" />
-
-          <div className="grid lg:grid-cols-12 gap-8 items-end pb-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="col-span-7 flex flex-col items-start"
+              className="col-span-6 flex flex-col items-start"
             >
-              <div className="flex items-center gap-2 mb-3 text-xs uppercase tracking-[0.2em] text-[#C9A84C] font-semibold bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10">
-                <MapPin className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2 mb-6 text-sm uppercase tracking-[0.2em] text-[#C9A84C] font-semibold bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
+                <MapPin className="w-4 h-4" />
                 <span>Evento Presencial</span>
                 <span className="text-white/30">|</span>
                 <span>São Paulo</span>
@@ -230,47 +227,47 @@ export default function AlemDaTendencia() {
                 <span>Durante a Revestir</span>
               </div>
 
-              <h1 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 uppercase drop-shadow-2xl">
-                A Arquitetura acontece <br/>
-                <span className="text-[#C9A84C]">nos bastidores</span>
+              <h1 className="font-display text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 uppercase drop-shadow-2xl">
+                Como transformar <br/>
+                <span className="text-[#C9A84C]">inspiração</span> em <span className="text-[#C9A84C]">realidade</span>
               </h1>
               
-              <div className="border-l-4 border-[#C9A84C] pl-5 mb-6 bg-gradient-to-r from-black/50 to-transparent p-4 rounded-r-xl backdrop-blur-md max-w-xl">
-                <h2 className="text-lg text-white/90 font-semibold mb-1 uppercase">Como transformar inspiração em realidade</h2>
-                <p className="text-sm text-gray-300 font-light leading-relaxed">
-                  Uma tarde focada no outro lado da moeda dos escritórios de arquitetura: <strong className="text-white">Gestão de escritório, Gestão de Obra e Projeto.</strong>
+              <div className="border-l-4 border-[#C9A84C] pl-6 mb-10 bg-gradient-to-r from-black/60 to-transparent p-6 rounded-r-xl backdrop-blur-md shadow-xl max-w-2xl">
+                <h2 className="text-2xl text-white font-bold mb-2 uppercase">A Arquitetura acontece nos bastidores</h2>
+                <p className="text-lg text-gray-200 font-light leading-relaxed">
+                  Uma tarde inteira focada no outro lado da moeda dos escritórios de arquitetura, além da tendência: <strong className="text-white">Gestão de escritório, Gestão de Obra e Projeto.</strong>
                 </p>
               </div>
               
-              <p className="text-xs text-gray-400 uppercase tracking-wider mb-6">
-                Por Inovando na sua obra <a href="https://www.instagram.com/inovandonasuaobra" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@inovandonasuaobra</a> e AjudaMONU <a href="https://www.instagram.com/arq.julianacampelo" target="_blank" rel="noopener noreferrer" className="text-[#C9A84C] hover:underline">@arq.julianacampelo</a>
+              <p className="text-sm text-gray-300 uppercase tracking-wider mb-10 font-medium bg-black/20 p-2 rounded inline-block backdrop-blur-sm">
+                Evento por Inovando na sua obra <span className="text-[#C9A84C]">@inovandonasuaobra</span> e AjudaMONU <span className="text-[#C9A84C]">@arq.julianacampelo</span>
               </p>
 
-              <div className="flex gap-4 items-center">
-                <div className="flex items-center gap-5 text-sm font-medium tracking-wide uppercase bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/15">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-[#C9A84C]" />
-                    <div>
-                      <span className="block text-[10px] text-gray-400">Data</span>
-                      <span className="text-sm font-bold text-white">10 de Março</span>
-                    </div>
-                  </div>
-                  <div className="w-px h-8 bg-white/10" />
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-[#C9A84C]" />
-                    <div>
-                      <span className="block text-[10px] text-gray-400">Local</span>
-                      <span className="text-sm font-bold text-white">Auditório AFRESP - SP</span>
-                    </div>
-                  </div>
-                </div>
-
+              <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center w-full">
                 <button 
                   onClick={() => document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })}
-                  className="bg-[#C9A84C] text-white font-bold px-8 py-4 rounded-xl uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 border border-[#C9A84C]/50"
+                  className="bg-[#C9A84C] text-white font-bold px-10 py-5 rounded-xl uppercase tracking-wider text-base hover:bg-[#b08d35] transition-all shadow-lg hover:-translate-y-1 hover:shadow-[#C9A84C]/20 border border-[#C9A84C]/50 w-full sm:w-auto text-center"
                 >
                   Garantir meu ingresso
                 </button>
+
+                <div className="flex items-center gap-6 text-sm font-medium tracking-wide uppercase bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/15 shadow-lg w-full sm:w-auto">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-5 h-5 text-[#C9A84C]" />
+                    <div>
+                      <span className="block text-xs text-gray-400 mb-0.5">Data</span>
+                      <span className="text-base font-bold text-white">10 de Março</span>
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/10" />
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-[#C9A84C]" />
+                    <div>
+                      <span className="block text-xs text-gray-400 mb-0.5">Local</span>
+                      <span className="text-base font-bold text-white">Auditório AFRESP - SP</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -290,7 +287,10 @@ export default function AlemDaTendencia() {
         >
           <div className="space-y-8">
             <motion.div variants={fadeInUp}>
-              <ArchitecturalTitle variant="h2" color="purple">
+              <h3 className="text-xl md:text-2xl font-bold text-[#C9A84C] uppercase tracking-wider mb-4 leading-snug">
+                Você não precisa escolher entre criar com beleza e entregar com eficiência. As duas coisas caminham juntas quando existe método.
+              </h3>
+              <ArchitecturalTitle variant="h2" color="purple" className="!text-3xl md:!text-4xl">
                 Tendência Encanta.<br />Estrutura Constrói.
               </ArchitecturalTitle>
             </motion.div>
@@ -303,7 +303,7 @@ export default function AlemDaTendencia() {
                 Transformar inspiração em realidade exige estrutura e conhecimento técnico e é isso que você vai ver no evento:
               </p>
               
-              <div className="pl-5 border-l-4 border-[#C9A84C]">
+              <div className="bg-gray-50 p-6 rounded-xl border-l-4 border-[#C9A84C]">
                 <p className="font-bold text-gray-800 mb-4 uppercase tracking-wide">Um aprofundamento em:</p>
                 <ul className="space-y-3">
                   {[
@@ -333,8 +333,8 @@ export default function AlemDaTendencia() {
           {/* Imagem Ilustrativa Conceitual - Substituída pela nova foto */}
           <motion.div variants={fadeInUp} className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
              <img 
-               src={hostsSection2} 
-               alt="Conceito do Evento"
+               src={newHostsImage} 
+               alt="Conceito do Evento" 
                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -348,89 +348,73 @@ export default function AlemDaTendencia() {
       {/* SEÇÃO 3 - PÚBLICO-ALVO (REVERTIDA ESTRUTURA, MANTIDA COPY PDF) */}
       <ArchitecturalSection id="publico" variant="dark" className="relative overflow-hidden">
         <div className="text-center mb-12 relative z-10">
-          <ArchitecturalTitle variant="h2" color="light">
+          <div className="inline-block border-b-2 border-[#C9A84C] pb-2 mb-4">
+            <h3 className="text-[#C9A84C] font-bold uppercase tracking-widest text-sm">
+              Público-Alvo
+            </h3>
+          </div>
+          <ArchitecturalTitle variant="h2" color="white" className="!text-3xl md:!text-4xl">
             Para Quem É Este Evento?
           </ArchitecturalTitle>
         </div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-6xl mx-auto relative z-10 mb-12"
-        >
-          <AudienceMontageV2 />
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10 mb-12">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto relative z-10">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0 }}
-            className="border-l-2 border-[#C9A84C]/30 p-6"
+            transition={{ duration: 0.8 }}
           >
-            <Users className="w-8 h-8 text-[#C9A84C] mb-4" />
-            <h4 className="text-white font-bold text-lg mb-3">Arquitetas e Designers de Interiores</h4>
-            <ul className="space-y-2">
+            <AudienceMontageV2 />
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <h4 className="text-2xl text-white font-light">
+              Arquitetos e Designers de Interiores que:
+            </h4>
+            
+            <ul className="space-y-6">
               {[
                 "Têm o próprio escritório e querem crescer, com equipe ou sem, home office ou físico",
                 "Sonham em ter o próprio escritório com segurança",
                 "Sabem que a parte mais difícil do escritório está nos bastidores, onde ninguém vê",
                 "Querem aprofundar seus conhecimentos além das tendências"
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-gray-300 text-sm font-light">
-                  <Check className="w-4 h-4 text-[#C9A84C] mt-0.5 shrink-0" />
-                  <span>{item}</span>
+                <li key={i} className="flex items-start gap-4 group">
+                  <span className="w-8 h-8 rounded-full bg-[#C9A84C]/20 flex items-center justify-center text-[#C9A84C] mt-0.5 group-hover:bg-[#C9A84C] group-hover:text-white transition-colors">
+                    <Check className="w-5 h-5" />
+                  </span>
+                  <span className="text-gray-300 text-lg font-light group-hover:text-white transition-colors">{item}</span>
                 </li>
               ))}
             </ul>
-          </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="border-l-2 border-[#C9A84C]/30 p-6"
-          >
-            <CheckCircle2 className="w-8 h-8 text-[#C9A84C] mb-4" />
-            <h4 className="text-white font-bold text-lg mb-3">Quem Busca Estrutura e Processos</h4>
-            <p className="text-gray-300 text-sm font-light">Talento sem gestão não escala. Se você precisa profissionalizar com segurança e organizar sua operação, este evento foi desenhado para você.</p>
+            <div className="pt-6 border-t border-white/10">
+              <p className="text-white text-lg mb-6 font-medium">Se você se identificou, o próximo passo é simples:</p>
+              <button 
+                onClick={scrollToInscricao}
+                className="bg-[#C9A84C] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg w-full sm:w-auto"
+              >
+                Garantir minha vaga
+              </button>
+            </div>
           </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="border-l-2 border-[#C9A84C]/30 p-6"
-          >
-            <Building className="w-8 h-8 text-[#C9A84C] mb-4" />
-            <h4 className="text-white font-bold text-lg mb-3">Quem Quer Transformar Tendência em Execução</h4>
-            <p className="text-gray-300 text-sm font-light">Você acompanha feiras, se inspira e consome conteúdo, mas na hora de executar, falta segurança jurídica e método de obra. Aqui a tendência vira projeto entregue.</p>
-          </motion.div>
-        </div>
-
-        <div className="text-center relative z-10">
-          <p className="text-white text-lg mb-6 font-medium">Se você se identificou, o próximo passo é simples:</p>
-          <button 
-            onClick={scrollToInscricao}
-            className="bg-[#C9A84C] text-white font-bold px-10 py-4 rounded-lg uppercase tracking-wider text-sm hover:bg-[#b08d35] transition-all shadow-lg"
-          >
-            Garantir minha vaga
-          </button>
         </div>
       </ArchitecturalSection>
 
       {/* ANFITRIÃS */}
-      <HostsSection inovandoImage={inovandoObraImg} julianaImage={julianaCapelo} />
+      <HostsSection />
 
       {/* PALESTRANTES - RESTAURADA E INTEGRADA */}
       <ArchitecturalSection id="palestrantes" variant="light" className="bg-gray-50 border-t border-gray-200">
         <div className="text-center mb-16">
-          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-3">
+          <p className="text-[#C9A84C] font-bold tracking-widest uppercase text-sm mb-2">
             Especialistas Convidadas
           </p>
           <ArchitecturalTitle variant="h2" color="purple">
@@ -462,20 +446,18 @@ export default function AlemDaTendencia() {
       {/* INFORMAÇÕES IMPORTANTES */}
       <ArchitecturalSection id="local" variant="dark" className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
-           <div>
-            <div className="mb-3">
-              <ArchitecturalTitle variant="h2" color="orange" className="block [&>span]:hidden">
-                INFORMAÇÕES IMPORTANTES
-              </ArchitecturalTitle>
-            </div>
-            <ArchitecturalTitle variant="h3" color="light" className="block">
-              SOBRE O EVENTO ALÉM DA TENDÊNCIA
+          <div>
+            <ArchitecturalTitle variant="h3" color="orange">
+              INFORMAÇÕES IMPORTANTES
+            </ArchitecturalTitle>
+            <ArchitecturalTitle variant="h2" color="white">
+              Auditório AFRESP
             </ArchitecturalTitle>
             
             <div className="space-y-6 mt-8 text-gray-300 text-lg">
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
-                   <div className="w-10 h-10 flex items-center justify-center text-[#C9A84C] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C] shrink-0">
                     <MapPin />
                   </div>
                   <div>
@@ -484,7 +466,7 @@ export default function AlemDaTendencia() {
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                   <div className="w-10 h-10 flex items-center justify-center text-[#C9A84C] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C] shrink-0">
                     <Calendar />
                   </div>
                   <div>
@@ -495,7 +477,7 @@ export default function AlemDaTendencia() {
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-10 h-10 flex items-center justify-center text-[#C9A84C] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#C9A84C] shrink-0">
                     <Users />
                   </div>
                   <div>
@@ -534,79 +516,62 @@ export default function AlemDaTendencia() {
         </div>
       </ArchitecturalSection>
 
-      {/* PREÇO */}
-      <ArchitecturalSection id="inscricao" variant="dark">
-        <div className="max-w-lg mx-auto">
-          {/* Urgência */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 text-red-400 px-4 py-2 text-sm font-bold uppercase tracking-wider animate-pulse">
-              <Users className="w-4 h-4" />
-              Últimas vagas disponíveis
-            </div>
-          </div>
+      {/* PREÇO - BACKGROUND DARK/CINEMÁTICO */}
+      <section id="inscricao" className="py-20 bg-[#1a1a1a] relative overflow-hidden">
+        {/* Background Texture */}
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent pointer-events-none"></div>
 
-          {/* Contador Regressivo */}
-          <CountdownTimer />
-
-          <div className="bg-[oklch(0.15_0.02_320)] rounded-2xl shadow-2xl overflow-hidden border border-[#C9A84C]/20 transform hover:-translate-y-1 transition-transform duration-300">
-            {/* Header do card */}
-            <div className="bg-black p-10 text-center relative overflow-hidden">
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute left-0 top-0 w-px h-full bg-white" style={{ left: "20%" }} />
-                <div className="absolute left-0 top-0 w-px h-full bg-white" style={{ left: "80%" }} />
-                <div className="absolute left-0 top-0 h-px w-full bg-white" style={{ top: "30%" }} />
-                <div className="absolute left-0 top-0 h-px w-full bg-white" style={{ top: "70%" }} />
-              </div>
-              <img 
-                src={logoTransparent} 
-                alt="Além da Tendência" 
-                className="w-56 mx-auto mb-5 relative z-10"
-              />
-              <div className="relative z-10 text-center">
-                <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">1º LOTE</div>
-                <div className="text-xs text-white/50 mt-1">Valor exclusivo para as primeiras inscritas</div>
-              </div>
-            </div>
-            
-            {/* Conteúdo */}
-            <div className="p-8">
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center gap-3 text-white/80">
-                  <CheckCircle2 className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
-                  <span className="font-medium">Acesso ao evento presencial dia 10.03</span>
-                </li>
-                <li className="flex items-center gap-3 text-white/80">
-                  <CheckCircle2 className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
-                  <span className="font-medium">Coffee break com networking</span>
-                </li>
-                <li className="flex items-center gap-3 text-white/80">
-                  <CheckCircle2 className="w-5 h-5 text-[#C9A84C] flex-shrink-0" />
-                  <span className="font-medium">Certificado de participação</span>
-                </li>
-              </ul>
-
-              <div className="text-center mb-6">
-                <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em] mb-3">Garanta Sua Vaga</p>
-                <div className="flex items-baseline justify-center gap-1 text-white mb-1">
-                  <span className="text-lg font-medium line-through text-white/40">R$ 297,00</span>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-md mx-auto">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/10 transform hover:-translate-y-2 transition-transform duration-300">
+              <div className="bg-black p-8 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+                <img 
+                  src={logoTransparent} 
+                  alt="Além da Tendência" 
+                  className="w-40 mx-auto mb-4 relative z-10"
+                />
+                <div className="inline-block bg-[#C9A84C] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest relative z-10">
+                  Lote 01
                 </div>
-                <div className="flex items-baseline justify-center gap-1 text-white">
-                  <span className="text-2xl font-bold">R$</span>
-                  <span className="text-6xl font-bold tracking-tighter">147</span>
-                  <span className="text-2xl font-bold">,00</span>
-                </div>
-                <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 29,40</p>
               </div>
-
-              <HeroRegistrationForm />
               
-              <p className="text-center text-xs text-white/40 mt-4">
-                Pagamento seguro via Sympla. Auditório com capacidade limitada.
-              </p>
+              <div className="p-8">
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
+                    <span className="font-medium">Acesso ao evento presencial dia 10.03</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
+                    <span className="font-medium">Coffee break com networking</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
+                    <span className="font-medium">Certificado de participação</span>
+                  </li>
+                </ul>
+
+                <div className="text-center mb-8">
+                  <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Por apenas</p>
+                  <div className="flex items-center justify-center gap-1 text-[#1a1a1a]">
+                    <span className="text-2xl font-bold">R$</span>
+                    <span className="text-6xl font-bold tracking-tighter">147</span>
+                    <span className="text-2xl font-bold">,00</span>
+                  </div>
+                </div>
+
+                <HeroRegistrationForm />
+                
+                <p className="text-center text-xs text-gray-400 mt-4">
+                  Pagamento seguro via Sympla. Vagas limitadas.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </ArchitecturalSection>
+      </section>
 
       {/* DEPOIMENTOS - VÍDEO ÚNICO E TÍTULO AJUSTADO */}
       <ArchitecturalSection variant="light">
@@ -617,18 +582,15 @@ export default function AlemDaTendencia() {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border border-gray-200">
-            {!isVideoPlaying ? (
-              <div className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer" onClick={handleVideoPlay}>
-                <video ref={videoRef} src={videoUrl} preload="metadata" className="absolute inset-0 w-full h-full object-contain" />
-                <div className="absolute inset-0 bg-black/30" />
-                <div className="relative w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                  <Play className="w-8 h-8 text-[#C9A84C] ml-1" />
-                </div>
-              </div>
-            ) : (
-              <video ref={videoRef} src={videoUrl} controls autoPlay className="w-full h-full object-contain" />
-            )}
+          <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border-4 border-white">
+            <video 
+              src={videoUrl} 
+              controls 
+              className="w-full h-full object-cover"
+              poster={heroEvent} // Usando imagem do evento como poster
+            >
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
           </div>
           <p className="text-center text-gray-500 mt-4 italic">
             Confira os melhores momentos da nossa última edição
