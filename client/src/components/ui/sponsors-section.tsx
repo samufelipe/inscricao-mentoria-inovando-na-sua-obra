@@ -22,7 +22,7 @@ export function SponsorsSection() {
         </ArchitecturalTitle>
       </div>
 
-      <div className="flex flex-nowrap items-center justify-center gap-8 md:gap-24 max-w-5xl mx-auto">
+      <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-20 max-w-6xl mx-auto">
         {sponsors.map((sponsor) => (
           <div
             key={sponsor.name}
@@ -31,7 +31,7 @@ export function SponsorsSection() {
             <img
               src={sponsor.logo}
               alt={sponsor.name}
-              className="h-32 md:h-48 lg:h-60 w-auto object-contain mix-blend-multiply transition-all duration-500"
+              className="h-28 md:h-44 lg:h-52 w-auto object-contain mix-blend-multiply transition-all duration-500"
             />
           </div>
         ))}
