@@ -2,10 +2,12 @@ import { ArchitecturalTitle } from "./architectural-title";
 import { ArchitecturalSection } from "./architectural-section";
 import sponsorHomeney from "@/assets/alem-da-tendencia/sponsors/homeney.png";
 import sponsorGuararapes from "@/assets/alem-da-tendencia/sponsors/guararapes.png";
+import sponsorWikeep from "@/assets/alem-da-tendencia/sponsors/wikeep.png";
 
 const sponsors = [
   { name: "Homeney Acabamentos", logo: sponsorHomeney },
   { name: "Guararapes", logo: sponsorGuararapes },
+  { name: "Wikeep", logo: sponsorWikeep },
 ];
 
 export function SponsorsSection() {
