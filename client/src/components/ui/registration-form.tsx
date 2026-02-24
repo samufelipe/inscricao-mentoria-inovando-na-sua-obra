@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { ArchitecturalButton } from "./architectural-button";
 import { ArchitecturalTitle } from "./architectural-title";
-import { MessageCircle, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { captureLead } from "@/lib/capture-lead";
-import { sendToGoogleSheets } from "@/lib/google-sheets";
 
 export function RegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [, navigate] = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,43 +19,17 @@ export function RegistrationForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error("Por favor, preencha todos os campos obrigatórios.");
-      setIsLoading(false);
       return;
     }
 
-    try {
-      await captureLead({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        product: "alem-da-tendencia",
-      });
-
-      // Enviar para Google Sheets
-      await sendToGoogleSheets({
-        name: formData.name,
-        email: formData.email,
-        whatsapp: formData.phone,
-      });
-    } catch {
-      // Non-blocking: don't prevent redirect on capture failure
-    }
-
-    const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}`;
-    const whatsappUrl = `https://wa.me/551155717229?text=${message}`;
-
-    // Pequeno delay para garantir envio
-    setTimeout(() => {
-      window.location.href = whatsappUrl;
-      setIsLoading(false);
-      toast.success("Redirecionando para o WhatsApp...");
-    }, 500);
+    setIsLoading(true);
+    sessionStorage.setItem("lead-data", JSON.stringify(formData));
+    navigate("/redirecionando");
   };
 
   return (
@@ -65,7 +39,7 @@ export function RegistrationForm() {
       </ArchitecturalTitle>
       
       <p className="text-gray-600 mb-8">
-        Preencha seus dados abaixo para iniciar sua inscrição. Você será redirecionada para o nosso WhatsApp oficial para finalizar o pagamento seguro.
+        Preencha seus dados abaixo para iniciar sua inscrição. Você será redirecionada para o checkout seguro do Sympla.
       </p>
       
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -73,12 +47,8 @@ export function RegistrationForm() {
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-bold uppercase tracking-wider text-gray-500">Nome Completo *</label>
             <input 
-              type="text" 
-              id="name" 
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
+              type="text" id="name" name="name"
+              value={formData.name} onChange={handleChange} required
               className="w-full p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors"
               placeholder="Seu nome"
             />
@@ -87,12 +57,8 @@ export function RegistrationForm() {
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-bold uppercase tracking-wider text-gray-500">E-mail *</label>
             <input 
-              type="email" 
-              id="email" 
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
+              type="email" id="email" name="email"
+              value={formData.email} onChange={handleChange} required
               className="w-full p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors"
               placeholder="seu@email.com"
             />
@@ -100,23 +66,18 @@ export function RegistrationForm() {
         </div>
         
         <div className="space-y-2">
-            <label htmlFor="phone" className="text-sm font-bold uppercase tracking-wider text-gray-500">WhatsApp *</label>
-            <input 
-              type="tel" 
-              id="phone" 
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="w-full p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors"
-              placeholder="(00) 00000-0000"
-            />
-          </div>
+          <label htmlFor="phone" className="text-sm font-bold uppercase tracking-wider text-gray-500">WhatsApp *</label>
+          <input 
+            type="tel" id="phone" name="phone"
+            value={formData.phone} onChange={handleChange} required
+            className="w-full p-4 bg-gray-50 border-b-2 border-gray-200 focus:border-[oklch(0.35_0.12_320)] outline-none transition-colors"
+            placeholder="(00) 00000-0000"
+          />
+        </div>
         
         <div className="pt-4">
           <ArchitecturalButton 
-            type="submit" 
-            disabled={isLoading}
+            type="submit" disabled={isLoading}
             className="w-full justify-center text-lg py-8 flex items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isLoading ? (
@@ -125,15 +86,12 @@ export function RegistrationForm() {
                 PROCESSANDO...
               </>
             ) : (
-              <>
-                <MessageCircle className="w-6 h-6" />
-                FINALIZAR INSCRIÇÃO NO WHATSAPP
-              </>
+              <>GARANTIR MINHA VAGA</>
             )}
           </ArchitecturalButton>
           <p className="text-center text-xs text-gray-400 mt-4 flex items-center justify-center gap-2">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            Seus dados serão enviados de forma segura
+            Pagamento 100% seguro via Sympla
           </p>
         </div>
       </form>
