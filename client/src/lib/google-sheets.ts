@@ -15,18 +15,17 @@ export async function sendToGoogleSheets(data: {
       hour12: false,
     }).format(now);
 
-    const params = new URLSearchParams();
-    params.append("Data/Hora", brDate);
-    params.append("Nome", data.name);
-    params.append("Email", data.email);
-    params.append("WhatsApp", data.whatsapp);
-    params.append("Fonte", data.fonte || "Landing Page");
+    const params = new URLSearchParams({
+      "data_hora": brDate,
+      "nome": data.name,
+      "email": data.email,
+      "whatsapp": data.whatsapp,
+      "fonte": data.fonte || "Landing Page",
+    });
 
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
+    await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
+      method: "GET",
       mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
     });
 
     console.log("Dados enviados para o Google Sheets com sucesso!");
