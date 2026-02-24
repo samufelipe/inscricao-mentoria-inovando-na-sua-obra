@@ -9,20 +9,33 @@ function getUtmParams() {
   };
 }
 
+interface UtmParams {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+}
+
 export async function captureLead(data: {
   name: string;
   email: string;
   phone: string;
   product: string;
+  utms?: UtmParams;
+  page_url?: string;
 }) {
   const { supabase } = await import("../../../src/integrations/supabase/client");
-  const utms = getUtmParams();
+  const utms = data.utms || getUtmParams();
 
   const { error } = await supabase.functions.invoke("capture-lead", {
     body: {
-      ...data,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      product: data.product,
       ...utms,
-      page_url: window.location.href,
+      page_url: data.page_url || window.location.href,
     },
   });
 
