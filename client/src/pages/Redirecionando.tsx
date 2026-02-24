@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { captureLead } from "@/lib/capture-lead";
-import { sendToGoogleSheets } from "@/lib/google-sheets";
 import { trackFormSubmit } from "@/lib/gtm-tracking";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 
@@ -32,7 +31,10 @@ export default function Redirecionando() {
     }
 
     const data: LeadData = JSON.parse(raw);
+    const utmsRaw = sessionStorage.getItem("lead-utms");
+    const utms = utmsRaw ? JSON.parse(utmsRaw) : undefined;
     sessionStorage.removeItem("lead-data");
+    sessionStorage.removeItem("lead-utms");
 
     const safetyTimer = setTimeout(() => {
       // If requests take too long, redirect anyway
@@ -41,19 +43,13 @@ export default function Redirecionando() {
 
     (async () => {
       try {
-        await Promise.all([
-          captureLead({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            product: "alem-da-tendencia",
-          }),
-          sendToGoogleSheets({
-            name: data.name,
-            email: data.email,
-            whatsapp: data.phone,
-          }),
-        ]);
+        await captureLead({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          product: "alem-da-tendencia",
+          utms,
+        });
         trackFormSubmit("inscricao", true);
       } catch (err) {
         console.error("Lead capture error (non-blocking):", err);

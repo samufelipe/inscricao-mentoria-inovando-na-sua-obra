@@ -28,7 +28,17 @@ export function RegistrationForm() {
     }
 
     setIsLoading(true);
+
+    const params = new URLSearchParams(window.location.search);
+    const utms = {
+      utm_source: params.get("utm_source") || undefined,
+      utm_medium: params.get("utm_medium") || undefined,
+      utm_campaign: params.get("utm_campaign") || undefined,
+      utm_content: params.get("utm_content") || undefined,
+      utm_term: params.get("utm_term") || undefined,
+    };
     sessionStorage.setItem("lead-data", JSON.stringify(formData));
+    sessionStorage.setItem("lead-utms", JSON.stringify(utms));
     navigate("/redirecionando");
   };
 

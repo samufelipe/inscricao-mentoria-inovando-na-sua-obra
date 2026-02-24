@@ -73,6 +73,15 @@ Deno.serve(async (req) => {
         hour12: false,
       }).format(now);
 
+      // Classify traffic source for human-readable reporting
+      function classifySource(src?: string): string {
+        if (!src) return "Orgânico/Direto";
+        const s = src.toLowerCase();
+        if (["facebook", "fb", "ig", "instagram", "meta"].includes(s)) return "Meta Ads";
+        if (s === "google") return "Google Ads";
+        return src;
+      }
+
       try {
         await fetch(makeWebhookUrl, {
           method: "POST",
@@ -82,7 +91,7 @@ Deno.serve(async (req) => {
             nome: name || "",
             email,
             whatsapp: phone || "",
-            fonte: utm_source || "direto",
+            fonte: classifySource(utm_source),
           }),
         });
       } catch (webhookErr) {
