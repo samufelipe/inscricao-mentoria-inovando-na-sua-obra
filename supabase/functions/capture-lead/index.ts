@@ -83,7 +83,7 @@ Deno.serve(async (req) => {
       }
 
       try {
-        await fetch(makeWebhookUrl, {
+        const webhookRes = await fetch(makeWebhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -94,6 +94,7 @@ Deno.serve(async (req) => {
             fonte: classifySource(utm_source),
           }),
         });
+        console.log("Make webhook status:", webhookRes.status, await webhookRes.text());
       } catch (webhookErr) {
         console.error("Make webhook error:", webhookErr);
       }

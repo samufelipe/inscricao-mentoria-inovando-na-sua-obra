@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { captureLead } from "@/lib/capture-lead";
+import { sendToGoogleSheets } from "@/lib/google-sheets";
 import { trackFormSubmit } from "@/lib/gtm-tracking";
 import logoTransparent from "@/assets/alem-da-tendencia/logo-transparent.png";
 
@@ -43,13 +44,20 @@ export default function Redirecionando() {
 
     (async () => {
       try {
-        await captureLead({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          product: "alem-da-tendencia",
-          utms,
-        });
+        await Promise.allSettled([
+          captureLead({
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            product: "alem-da-tendencia",
+            utms,
+          }),
+          sendToGoogleSheets({
+            name: data.name,
+            email: data.email,
+            whatsapp: data.phone,
+          }),
+        ]);
         trackFormSubmit("inscricao", true);
       } catch (err) {
         console.error("Lead capture error (non-blocking):", err);
