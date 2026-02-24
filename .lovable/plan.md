@@ -1,80 +1,80 @@
 
-# Ajuste de Responsividade Mobile - LP Alem da Tendencia
+## Correcao: Dados Incompletos na Planilha + FONTE com Atribuicao Correta
 
-## Problemas Identificados
+### Problemas Identificados
 
-Apos inspecao visual e analise do codigo, encontrei os seguintes problemas de responsividade no mobile (375px):
+1. **UTMs perdidos na navegacao**: Quando o usuario acessa a LP com `?utm_source=facebook&...`, esses parametros estao na URL da LP. Mas quando o formulario navega para `/redirecionando`, a URL muda e os UTMs somem. A funcao `getUtmParams()` le de `window.location.search` na pagina `/redirecionando`, que nao tem parametros.
 
-1. **Secao 2 (Conceito)**: Texto cortado na lateral direita. O container nao tem padding suficiente e o texto transborda o viewport.
-2. **Imagem da Secao 2**: Altura fixa de `h-[500px]` causa corte desproporcional no mobile.
-3. **Botao CTA da Secao 2**: Texto longo "QUERO PROFISSIONALIZAR MEU ESCRITORIO" fica cortado horizontalmente.
-4. **Secao Publico-Alvo**: Cards com texto potencialmente cortado em telas pequenas.
-5. **Secao Anfitrias (HostsSection)**: Imagens com `aspect-[4/5]` e texto que pode transbordar.
-6. **Secao Informacoes Importantes**: Grid de 2 colunas com mapa iframe pode causar corte.
-7. **Footer**: Grid `md:grid-cols-4` pode amontoar em tablets.
+2. **Integracao duplicada com Google Sheets**: Existem DUAS integracoes enviando para a planilha:
+   - `sendToGoogleSheets` (direto via Google Apps Script com `no-cors` — sem confirmacao de sucesso)
+   - Webhook do Make na edge function `capture-lead`
+   
+   A duplicidade causa confusao e a integracao direta e pouco confiavel.
 
-## Solucao
+3. **FONTE sem atribuicao clara**: O campo `fonte` envia o valor bruto de `utm_source` (ex: "facebook") ou "direto". Deveria enviar algo mais descritivo como "Meta Ads" ou "Organico/Direto".
 
-Apenas ajustes de CSS/Tailwind nas classes existentes, sem alterar nenhum conteudo (texto ou imagem).
+### Solucao
 
----
+**Arquivo 1: `client/src/components/ui/hero-registration-form.tsx`**
+- Ao submeter o formulario, capturar os UTMs da URL ATUAL (que ainda e a LP com parametros) e salva-los no sessionStorage junto com os dados do lead
 
-## Alteracoes Tecnicas
+**Arquivo 2: `client/src/components/ui/registration-form.tsx`**
+- Mesma logica: salvar UTMs no sessionStorage antes de navegar
 
-### 1. `client/src/pages/AlemDaTendencia.tsx`
+**Arquivo 3: `client/src/pages/Redirecionando.tsx`**
+- Ler os UTMs do sessionStorage (em vez de depender da URL)
+- Passa-los para `captureLead()`
+- Remover a chamada `sendToGoogleSheets()` (redundante — o Make webhook ja faz isso)
+- Remover o import de `sendToGoogleSheets`
 
-**Secao 2 - Grid e Imagem (linhas 289, 334)**
-- Grid: trocar `gap-16` por `gap-8 lg:gap-16` para mobile
-- Imagem: trocar `h-[500px]` por `h-[300px] md:h-[400px] lg:h-[500px]` para evitar corte
-- Texto da secao 2 (linha 298): adicionar `text-base lg:text-lg` para responsividade tipografica
+**Arquivo 4: `client/src/lib/capture-lead.ts`**
+- Aceitar UTMs como parametro opcional (para quando vierem do sessionStorage)
+- Se nao receber UTMs como parametro, usar `getUtmParams()` como fallback
 
-**Botao CTA (linha 327-330)**
-- Adicionar `text-xs sm:text-sm` e `whitespace-normal text-center` ao ArchitecturalButton para que o texto quebre naturalmente no mobile
+**Arquivo 5: `supabase/functions/capture-lead/index.ts`**
+- Atualizar o campo `fonte` no webhook do Make para enviar:
+  - `"Meta Ads"` quando `utm_source` for "facebook", "fb", "ig", "instagram" ou "meta"
+  - `"Google Ads"` quando `utm_source` for "google"
+  - `"Organico/Direto"` quando nao houver utm_source
 
-**Secao Publico-Alvo (linha 366)**
-- Grid: ja tem `md:grid-cols-3`, esta correto (1 coluna no mobile)
+### Detalhes Tecnicos
 
-**Secao Informacoes Importantes (linhas 464, 521)**
-- Grid: ja tem `lg:grid-cols-2`, mas o mapa `h-[400px]` pode ser reduzido: `h-[250px] md:h-[400px]`
+**Fluxo corrigido:**
 
-**Secao Preco (linhas 553, 563, 595)**
-- Logo no card: `w-56` pode ser `w-40 md:w-56`
-- Preco grande: `text-6xl` pode ser `text-5xl md:text-6xl`
-- Padding header: `p-10` para `p-6 md:p-10`
+```text
+LP (/alem-da-tendencia?utm_source=facebook&...)
+  |
+  v
+Formulario submit:
+  sessionStorage = { lead-data: {name, email, phone}, lead-utms: {utm_source, ...} }
+  navigate("/redirecionando")
+  |
+  v
+/redirecionando:
+  Le lead-data + lead-utms do sessionStorage
+  await captureLead({ ...data, utms })  <-- UTMs preservados!
+  redirect -> Sympla
+```
 
-### 2. `client/src/components/ui/architectural-section.tsx`
+**Mudanca no webhook Make (edge function):**
 
-- Container padding: verificar que `px-3 sm:px-4` e suficiente (ja esta conservador, mas o `container` CSS pode estar causando overflow)
+```typescript
+// Antes:
+fonte: utm_source || "direto"
 
-### 3. `client/src/components/ui/hosts-section.tsx`
+// Depois:
+function classifySource(utm_source?: string): string {
+  if (!utm_source) return "Organico/Direto";
+  const s = utm_source.toLowerCase();
+  if (["facebook","fb","ig","instagram","meta"].includes(s)) return "Meta Ads";
+  if (s === "google") return "Google Ads";
+  return utm_source; // outros fontes mantém o valor original
+}
+fonte: classifySource(utm_source)
+```
 
-- Imagem: `aspect-[4/5]` para `aspect-[3/4] md:aspect-[4/5]` para mobile mais compacto
-- Nome no overlay: `text-2xl` para `text-xl md:text-2xl`
-- Stats grid: `grid-cols-2` manter, mas ajustar `p-4` para `p-3 md:p-4`
+**Sobre a integracao direta `sendToGoogleSheets`:**
+Sera removida da pagina de redirecionamento pois e redundante com o webhook do Make. O Make ja envia os dados para a planilha do Google de forma mais confiavel (com confirmacao de entrega), enquanto a integracao direta usa `no-cors` e nao tem como confirmar se os dados chegaram. O arquivo `google-sheets.ts` sera mantido no projeto caso seja necessario no futuro, mas nao sera mais chamado no fluxo da LP Alem da Tendencia.
 
-### 4. `client/src/components/ui/architectural-button.tsx`
-
-- Adicionar `whitespace-normal text-center` ao baseStyles para evitar corte de texto longo em telas pequenas
-- Padding: `py-6 px-8` para `py-4 px-4 sm:py-6 sm:px-8`
-
-### 5. `client/src/components/ui/sticky-header.tsx`
-
-- Logo: `h-12` para `h-8 md:h-12` para nao ocupar tanto espaco no header mobile
-
----
-
-## Resumo de Arquivos Modificados
-
-| Arquivo | O que muda |
-|---------|-----------|
-| `client/src/pages/AlemDaTendencia.tsx` | Gaps, alturas fixas, tamanhos de fonte responsivos |
-| `client/src/components/ui/architectural-button.tsx` | Padding e quebra de texto responsivos |
-| `client/src/components/ui/hosts-section.tsx` | Aspect ratio e tipografia mobile |
-| `client/src/components/ui/sticky-header.tsx` | Tamanho do logo no mobile |
-
-## O que NAO muda
-
-- Nenhum texto ou conteudo
-- Nenhuma imagem
-- Nenhuma cor ou identidade visual
-- Nenhuma estrutura de secao
+### Tempo de Redirecionamento
+O timeout de seguranca de 5 segundos esta adequado. A chamada real leva menos de 1 segundo (confirmado no teste). O usuario vera a tela de loading por menos de 2 segundos na maioria dos casos.
