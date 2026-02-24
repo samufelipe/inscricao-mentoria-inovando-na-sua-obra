@@ -42,6 +42,15 @@ export default function Redirecionando() {
       window.location.href = SYMPLA_URL;
     }, SAFETY_TIMEOUT_MS);
 
+    // Classify source for Google Sheets backup
+    function classifySource(src?: string): string {
+      if (!src) return "Orgânico/Direto";
+      const s = src.toLowerCase();
+      if (["facebook", "fb", "ig", "instagram"].includes(s) || s.startsWith("meta")) return "Meta Ads";
+      if (s === "google") return "Google Ads";
+      return src;
+    }
+
     (async () => {
       try {
         await Promise.allSettled([
@@ -56,6 +65,7 @@ export default function Redirecionando() {
             name: data.name,
             email: data.email,
             whatsapp: data.phone,
+            fonte: classifySource(utms?.utm_source),
           }),
         ]);
         trackFormSubmit("inscricao", true);
