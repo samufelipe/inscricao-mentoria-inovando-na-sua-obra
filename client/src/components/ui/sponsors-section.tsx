@@ -31,7 +31,7 @@ export function SponsorsSection() {
             <img
               src={sponsor.logo}
               alt={sponsor.name}
-              className="h-28 md:h-44 lg:h-52 w-auto object-contain mix-blend-multiply transition-all duration-500"
+              className="h-28 md:h-52 lg:h-64 w-auto object-contain mix-blend-multiply transition-all duration-500"
             />
           </div>
         ))}
