@@ -19,6 +19,7 @@ export async function sendToGoogleSheets(data: {
       "data_hora": brDate,
       "nome": data.name,
       "email": data.email,
+      "e-mail": data.email,
       "whatsapp": data.whatsapp,
       "fonte": data.fonte || "Landing Page",
     });
