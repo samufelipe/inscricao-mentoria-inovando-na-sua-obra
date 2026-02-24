@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
+import { useLocation } from "wouter";
 import { ArchitecturalButton } from "./architectural-button";
-import { MessageCircle, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { captureLead } from "@/lib/capture-lead";
-import { sendToGoogleSheets } from "@/lib/google-sheets";
-import { trackFormStart, trackFormFieldFocus, trackFormSubmit } from "@/lib/gtm-tracking";
+import { trackFormStart, trackFormFieldFocus } from "@/lib/gtm-tracking";
 
 export function HeroRegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [, navigate] = useLocation();
   const hasTrackedStart = useRef(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -28,42 +28,17 @@ export function HeroRegistrationForm() {
     trackFormFieldFocus("hero-inscricao", fieldName);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error("Por favor, preencha todos os campos obrigatórios.");
-      setIsLoading(false);
       return;
     }
 
-    try {
-      await captureLead({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        product: "alem-da-tendencia",
-      });
-
-      // Enviar para Google Sheets
-      await sendToGoogleSheets({
-        name: formData.name,
-        email: formData.email,
-        whatsapp: formData.phone,
-      });
-    } catch {
-      // Non-blocking: don't prevent redirect on capture failure
-    }
-
-    trackFormSubmit("hero-inscricao", true);
-    
-    // Pequeno delay para garantir envio
-    setTimeout(() => {
-      window.location.href = "https://www.sympla.com.br/evento/alem-da-tendencia/3315090";
-      setIsLoading(false);
-      toast.success("Redirecionando para o Sympla...");
-    }, 500);
+    setIsLoading(true);
+    sessionStorage.setItem("lead-data", JSON.stringify(formData));
+    navigate("/redirecionando");
   };
 
   return (
