@@ -4,6 +4,7 @@ import { ArchitecturalTitle } from "./architectural-title";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { captureLead } from "@/lib/capture-lead";
+import { sendToGoogleSheets } from "@/lib/google-sheets";
 
 export function RegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +36,13 @@ export function RegistrationForm() {
         phone: formData.phone,
         product: "alem-da-tendencia",
       });
+
+      // Enviar para Google Sheets
+      await sendToGoogleSheets({
+        name: formData.name,
+        email: formData.email,
+        whatsapp: formData.phone,
+      });
     } catch {
       // Non-blocking: don't prevent redirect on capture failure
     }
@@ -42,9 +50,12 @@ export function RegistrationForm() {
     const message = `Olá! Gostaria de me inscrever no evento Além da Tendência.%0A%0A*Meus Dados:*%0ANome: ${formData.name}%0AE-mail: ${formData.email}%0ATelefone: ${formData.phone}`;
     const whatsappUrl = `https://wa.me/551155717229?text=${message}`;
 
-    window.location.href = whatsappUrl;
-    setIsLoading(false);
-    toast.success("Redirecionando para o WhatsApp...");
+    // Pequeno delay para garantir envio
+    setTimeout(() => {
+      window.location.href = whatsappUrl;
+      setIsLoading(false);
+      toast.success("Redirecionando para o WhatsApp...");
+    }, 500);
   };
 
   return (

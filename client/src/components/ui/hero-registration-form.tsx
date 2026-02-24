@@ -3,6 +3,7 @@ import { ArchitecturalButton } from "./architectural-button";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { captureLead } from "@/lib/capture-lead";
+import { sendToGoogleSheets } from "@/lib/google-sheets";
 import { trackFormStart, trackFormFieldFocus, trackFormSubmit } from "@/lib/gtm-tracking";
 
 export function HeroRegistrationForm() {
@@ -44,14 +45,25 @@ export function HeroRegistrationForm() {
         phone: formData.phone,
         product: "alem-da-tendencia",
       });
+
+      // Enviar para Google Sheets
+      await sendToGoogleSheets({
+        name: formData.name,
+        email: formData.email,
+        whatsapp: formData.phone,
+      });
     } catch {
       // Non-blocking: don't prevent redirect on capture failure
     }
 
     trackFormSubmit("hero-inscricao", true);
-    window.location.href = "https://www.sympla.com.br/evento/alem-da-tendencia/3315090";
-    setIsLoading(false);
-    toast.success("Redirecionando para o Sympla...");
+    
+    // Pequeno delay para garantir envio
+    setTimeout(() => {
+      window.location.href = "https://www.sympla.com.br/evento/alem-da-tendencia/3315090";
+      setIsLoading(false);
+      toast.success("Redirecionando para o Sympla...");
+    }, 500);
   };
 
   return (
