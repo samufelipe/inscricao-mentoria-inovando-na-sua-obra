@@ -4,7 +4,7 @@ export async function sendToGoogleSheets(data: {
   whatsapp: string;
   fonte?: string;
 }) {
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN9dac97y_fLGRuuu2DIrHO2KJwxSDwV4CiMh16g31mvBqivpQSNoKeSdO-oCd8nrEvw/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcGsKsQUgyebQB6UB_m-ZtyoZWlLw1XVCPJasIXOoBciXTCpbM6thP6_vu6D69QIHhzg/exec";
 
   try {
     const now = new Date();
