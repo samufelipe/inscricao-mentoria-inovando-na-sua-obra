@@ -16,13 +16,13 @@ let html = fs.readFileSync(indexPath, 'utf-8');
 const ogTags = `
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Além da Tendência - Evento Presencial" />
-    <meta property="og:description" content="Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteúdo prático para transformar sua carreira e seus projetos." />
+    <meta property="og:description" content="Evento presencial durante a semana da Expo Revestir. Palestras, networking e muito conteúdo de qualidade para transformar seu escritório e seus projetos." />
     <meta property="og:image" content="https://www.inovandonasuaobra.com.br/images/alem-da-tendencia/og-logo.png" />
     <meta property="og:url" content="https://www.inovandonasuaobra.com.br/alem-da-tendencia" />
     <meta property="og:site_name" content="Além da Tendência" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Além da Tendência - Evento Presencial" />
-    <meta name="twitter:description" content="Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteúdo prático para transformar sua carreira e seus projetos." />
+    <meta name="twitter:description" content="Evento presencial durante a semana da Expo Revestir. Palestras, networking e muito conteúdo de qualidade para transformar seu escritório e seus projetos." />
     <meta name="twitter:image" content="https://www.inovandonasuaobra.com.br/images/alem-da-tendencia/og-logo.png" />`;
 
 // Inject OG tags after <head>
