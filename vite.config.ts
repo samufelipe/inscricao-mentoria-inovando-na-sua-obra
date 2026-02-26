@@ -3,12 +3,14 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
 import { componentTagger } from "lovable-tagger";
+import generateOgPages from "./plugins/vite-plugin-og-pages";
 
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     tailwindcss(),
     mode === 'development' && componentTagger(),
+    mode === 'production' && generateOgPages(),
   ].filter(Boolean),
   resolve: {
     alias: {
