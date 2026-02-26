@@ -1,146 +1,69 @@
 
 
-## Correção: Dados chegando vazios na planilha do Google Sheets
+## Corrigir Meta Tags OG para "/alem-da-tendencia" (Deploy Estatico)
 
-### Problema
+### Problema Identificado
+O `server/index.ts` que injeta as meta tags OG **nao roda em producao**. O site e deployado como **site estatico** (Vite build + Vercel/Lovable), e o `vercel.json` redireciona todas as rotas para o mesmo `index.html`. Os crawlers do WhatsApp, Instagram e LinkedIn recebem o HTML original sem nenhuma meta tag do evento.
 
-O `mode: "no-cors"` com `fetch` POST para o Google Apps Script causa um redirect 302. O navegador segue o redirect mas converte o POST em GET, **perdendo o body** com os dados. Por isso Nome, Email e WhatsApp chegam vazios na planilha.
+### Solucao
+Criar um **script pos-build** que gera automaticamente uma versao do `index.html` com as meta tags OG do evento, e configurar o `vercel.json` para servir esse arquivo especifico na rota `/alem-da-tendencia`.
 
-### Solução (2 partes)
+### Etapas
 
----
+**1. Criar script `scripts/generate-og-pages.js`**
+- Apos o `vite build`, esse script le o `dist/public/index.html` (ja processado pelo Vite, com os scripts e CSS corretos)
+- Injeta as meta tags OG do evento:
+  - `og:title` = "Alem da Tendencia - Evento Presencial"
+  - `og:description` = "Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteudo pratico para transformar sua carreira e seus projetos."
+  - `og:image` = URL absoluta da logo do evento
+  - Twitter cards equivalentes
+- Substitui o `<title>` pelo titulo do evento
+- Troca o favicon pelo do evento
+- Salva como `dist/public/alem-da-tendencia.html`
 
-#### Parte 1: Alteração no projeto (feita automaticamente)
+**2. Atualizar `package.json`**
+- Modificar o script `build`:
+```text
+"build": "vite build && node scripts/generate-og-pages.js"
+```
 
-**Arquivo: `client/src/lib/google-sheets.ts`**
-
-Trocar de POST com body para **GET com query parameters na URL**. Os parâmetros na URL sobrevivem ao redirect 302. Também usar nomes em minúsculo para coincidir com o que o Apps Script procura via `e.parameter.nome`.
-
-Código final:
-
-```typescript
-export async function sendToGoogleSheets(data: {
-  name: string;
-  email: string;
-  whatsapp: string;
-  fonte?: string;
-}) {
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN9dac97y_fLGRuuu2DIrHO2KJwxSDwV4CiMh16g31mvBqivpQSNoKeSdO-oCd8nrEvw/exec";
-
-  try {
-    const now = new Date();
-    const brDate = new Intl.DateTimeFormat("pt-BR", {
-      timeZone: "America/Sao_Paulo",
-      day: "2-digit", month: "2-digit", year: "numeric",
-      hour: "2-digit", minute: "2-digit", second: "2-digit",
-      hour12: false,
-    }).format(now);
-
-    const params = new URLSearchParams({
-      "data_hora": brDate,
-      "nome": data.name,
-      "email": data.email,
-      "whatsapp": data.whatsapp,
-      "fonte": data.fonte || "Landing Page",
-    });
-
-    await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
-      method: "GET",
-      mode: "no-cors",
-    });
-
-    console.log("Dados enviados para o Google Sheets com sucesso!");
-  } catch (error) {
-    console.error("Erro ao enviar para o Google Sheets:", error);
-  }
+**3. Atualizar `vercel.json`**
+- Adicionar rewrite especifico para `/alem-da-tendencia` ANTES do fallback generico:
+```text
+{
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
 ```
 
----
-
-#### Parte 2: Atualização no Google Apps Script (feita manualmente por voce)
-
-A funcao `doGet` atual nao processa dados. Voce precisa substituir ela por uma versao que salva os dados, igual ao `doPost`. Copie e cole o codigo completo abaixo no Apps Script, **substituindo todo o conteudo atual**:
+### Como funciona
 
 ```text
-// ============================================================================
-// SCRIPT DE INTEGRACAO: LANDING PAGE -> GOOGLE SHEETS
-// ============================================================================
+Crawler do WhatsApp acessa /alem-da-tendencia
+  --> Vercel serve alem-da-tendencia.html (com OG tags do evento)
+  --> Preview mostra logo + titulo + descricao do evento
 
-function doPost(e) {
-  return processRequest(e);
-}
-
-function doGet(e) {
-  return processRequest(e);
-}
-
-function processRequest(e) {
-  var lock = LockService.getScriptLock();
-  lock.tryLock(10000);
-
-  try {
-    var doc = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = doc.getSheetByName('Página1');
-
-    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    var nextRow = sheet.getLastRow() + 1;
-
-    var newRow = headers.map(function(header) {
-      header = header.toLowerCase();
-
-      if (header === 'data/hora' || header === 'data' || header === 'timestamp') {
-        return e.parameter.data_hora || new Date();
-      }
-
-      var val = e.parameter[header] || e.parameter[normalizeKey(header)] || '';
-
-      if (!val) {
-        if (header.includes('nome')) val = e.parameter.nome || e.parameter.name || '';
-        else if (header.includes('email')) val = e.parameter.email || '';
-        else if (header.includes('whats') || header.includes('telef') || header.includes('celular'))
-          val = e.parameter.whatsapp || e.parameter.telefone || e.parameter.phone || '';
-        else if (header.includes('fonte') || header.includes('origem'))
-          val = e.parameter.fonte || 'Landing Page';
-      }
-
-      return val;
-    });
-
-    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow]);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } finally {
-    lock.releaseLock();
-  }
-}
-
-function normalizeKey(key) {
-  return key.toLowerCase().replace(/\s/g, '');
-}
+Crawler do WhatsApp acessa /
+  --> Vercel serve index.html (original, sem alteracoes)
+  --> Preview mostra dados da Mentoria como hoje
 ```
 
-**Apos colar o codigo, voce precisa:**
+### Garantia de seguranca para o dominio principal
+- O `index.html` original NAO e modificado em nenhum momento
+- O script apenas LE o `index.html` e cria um NOVO arquivo separado
+- O `vercel.json` so redireciona `/alem-da-tendencia` para o novo arquivo
+- Todas as outras rotas (incluindo `/`) continuam servindo o `index.html` original
+- O comportamento do SPA (React/wouter) permanece identico em ambos os arquivos
 
-1. Salvar (icone de disquete)
-2. Ir em **Implantar > Nova implantacao**
-3. Tipo: App da Web
-4. Executar como: Eu / Quem pode acessar: Qualquer pessoa
-5. Clicar em **Implantar**
-6. Se a URL mudar, me envie a nova URL para eu atualizar no codigo
+### Arquivos modificados
+1. `scripts/generate-og-pages.js` -- novo (script pos-build)
+2. `package.json` -- alterar script `build`
+3. `vercel.json` -- adicionar rewrite especifico
 
-### Resumo
-
-| Acao | Quem faz | Motivo |
-|------|----------|--------|
-| Trocar POST por GET com params na URL | Lovable (automatico) | Params na URL sobrevivem ao redirect 302 |
-| Usar nomes em minusculo nos params | Lovable (automatico) | Apps Script procura `e.parameter.nome` |
-| Atualizar `doGet` no Apps Script | Voce (manualmente) | Atual `doGet` nao salva dados |
-| Nova implantacao do Apps Script | Voce (manualmente) | Necessario para ativar nova versao |
+### Observacao
+- Apos o deploy, pode ser necessario limpar o cache do WhatsApp (pode levar ate 7 dias). Ferramentas como o Facebook Sharing Debugger podem forcar a atualizacao.
+- A URL da imagem OG usa o dominio `inovandonasuaobra.com.br` de forma fixa no script para garantir que funcione corretamente com os crawlers.
 
