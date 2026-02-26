@@ -1,6 +1,8 @@
 {
   "outputDirectory": "dist/public",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
+    { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
     {
       "source": "/(.*)",
       "destination": "/index.html"
