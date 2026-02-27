@@ -3,11 +3,13 @@ import { ArchitecturalSection } from "./architectural-section";
 import sponsorHomeney from "@/assets/alem-da-tendencia/sponsors/homeney.png";
 import sponsorGuararapes from "@/assets/alem-da-tendencia/sponsors/guararapes.png";
 import sponsorWikeep from "@/assets/alem-da-tendencia/sponsors/wikeep.png";
+import sponsorKairox from "@/assets/alem-da-tendencia/sponsors/kairox-ai.png";
 
 const sponsors = [
   { name: "Homeney Acabamentos", logo: sponsorHomeney },
   { name: "Guararapes", logo: sponsorGuararapes },
   { name: "Wikeep", logo: sponsorWikeep },
+  { name: "Kairox AI", logo: sponsorKairox },
 ];
 
 export function SponsorsSection() {
