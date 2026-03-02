@@ -4,12 +4,14 @@ import sponsorHomeney from "@/assets/alem-da-tendencia/sponsors/homeney.png";
 import sponsorGuararapes from "@/assets/alem-da-tendencia/sponsors/guararapes.png";
 import sponsorWikeep from "@/assets/alem-da-tendencia/sponsors/wikeep.png";
 import sponsorKairox from "@/assets/alem-da-tendencia/sponsors/kairox-ai.png";
+import sponsorCasaMansur from "@/assets/alem-da-tendencia/sponsors/casa-mansur.png";
 
 const sponsors = [
   { name: "Homeney Acabamentos", logo: sponsorHomeney, className: "" },
   { name: "Guararapes", logo: sponsorGuararapes, className: "" },
   { name: "Wikeep", logo: sponsorWikeep, className: "" },
   { name: "Kairox AI", logo: sponsorKairox, className: "scale-125" },
+  { name: "Casa Mansur", logo: sponsorCasaMansur, className: "" },
 ];
 
 export function SponsorsSection() {
