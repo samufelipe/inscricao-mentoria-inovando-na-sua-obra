@@ -11,7 +11,7 @@ const sponsors = [
   { name: "Guararapes", logo: sponsorGuararapes, className: "" },
   { name: "Wikeep", logo: sponsorWikeep, className: "" },
   { name: "Kairox AI", logo: sponsorKairox, className: "scale-125" },
-  { name: "Casa Mansur", logo: sponsorCasaMansur, className: "" },
+  { name: "Casa Mansur", logo: sponsorCasaMansur, className: "!h-24 md:!h-32 lg:!h-36" },
 ];
 
 export function SponsorsSection() {
