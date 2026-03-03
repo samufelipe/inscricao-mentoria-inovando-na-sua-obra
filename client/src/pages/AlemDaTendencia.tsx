@@ -614,9 +614,6 @@ export default function AlemDaTendencia() {
 
               <div className="text-center mb-6">
                 <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em] mb-3">Garanta Sua Vaga</p>
-                <div className="flex items-baseline justify-center gap-1 text-white mb-1">
-                  <span className="text-lg font-medium line-through text-white/40">R$ 297,00</span>
-                </div>
                 <div className="flex items-baseline justify-center gap-1 text-white">
                   <span className="text-2xl font-bold">R$</span>
                   <span className="text-5xl md:text-6xl font-bold tracking-tighter">147</span>
