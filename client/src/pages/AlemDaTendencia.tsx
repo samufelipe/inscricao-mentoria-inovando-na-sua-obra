@@ -648,7 +648,7 @@ export default function AlemDaTendencia() {
           <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border border-gray-200">
             {!isVideoPlaying ? (
               <div className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer" onClick={handleVideoPlay}>
-                <video ref={videoRef} src={videoUrl} preload="metadata" className="absolute inset-0 w-full h-full object-contain" />
+                <video ref={videoRef} src={videoUrl} preload="none" className="absolute inset-0 w-full h-full object-contain" />
                 <div className="absolute inset-0 bg-black/30" />
                 <div className="relative w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
                   <Play className="w-8 h-8 text-[#C9A84C] ml-1" />
