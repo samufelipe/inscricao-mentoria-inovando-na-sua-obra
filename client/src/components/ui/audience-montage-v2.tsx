@@ -62,6 +62,8 @@ export function AudienceMontageV2() {
               <img
                 src={img.src}
                 alt={img.alt}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               {/* Subtle top/bottom vignette for cinematic feel */}

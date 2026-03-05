@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { trackCTAClick, trackVideoPlay, trackExternalLink, trackFooterNav, initScrollTracking, createSectionObserver } from "@/lib/gtm-tracking";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
+import { LazyIframe } from "@/components/ui/lazy-image";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";
@@ -108,6 +109,7 @@ export default function AlemDaTendencia() {
             src={newHostsImage}
             alt="Evento Além da Tendência - Anfitriãs"
             className="absolute inset-0 w-full h-full object-cover object-[center_15%]"
+            fetchPriority="high"
           />
           <div 
             className="absolute inset-0 z-[2] pointer-events-none"
@@ -214,6 +216,7 @@ export default function AlemDaTendencia() {
             alt="Evento Além da Tendência - Mentoras"
             className="absolute inset-0 w-full h-full object-cover z-[1]"
             style={{ objectPosition: 'center 38%' }}
+            fetchPriority="high"
           />
           <div 
             className="absolute inset-0 z-[2] pointer-events-none"
@@ -362,6 +365,8 @@ export default function AlemDaTendencia() {
              <img 
                src={hostsSection2} 
                alt="Conceito do Evento"
+               loading="lazy"
+               decoding="async"
                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -546,16 +551,15 @@ export default function AlemDaTendencia() {
           </div>
           
           <div className="h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
-            <iframe 
+            <LazyIframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.786699368388!2d-46.66479692376166!3d-23.57604497879058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59e6f0a6b0b1%3A0x6f6b6b6b6b6b6b6b!2sAv.%20Brig.%20Lu%C3%ADs%20Ant%C3%B4nio%2C%204843%20-%20Jardim%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001401-002!5e0!3m2!1spt-BR!2sbr!4v1708450000000!5m2!1spt-BR!2sbr" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen={true} 
-              loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
               className="transition-all duration-700"
-            ></iframe>
+            />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent pointer-events-none transition-colors duration-500" />
           </div>
         </div>
@@ -644,7 +648,7 @@ export default function AlemDaTendencia() {
           <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative group border border-gray-200">
             {!isVideoPlaying ? (
               <div className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer" onClick={handleVideoPlay}>
-                <video ref={videoRef} src={videoUrl} preload="metadata" className="absolute inset-0 w-full h-full object-contain" />
+                <video ref={videoRef} src={videoUrl} preload="none" className="absolute inset-0 w-full h-full object-contain" />
                 <div className="absolute inset-0 bg-black/30" />
                 <div className="relative w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
                   <Play className="w-8 h-8 text-[#C9A84C] ml-1" />

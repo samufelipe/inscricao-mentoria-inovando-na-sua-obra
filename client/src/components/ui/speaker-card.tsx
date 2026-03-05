@@ -24,6 +24,8 @@ export function SpeakerCard({
         <img 
           src={image} 
           alt={name} 
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.35_0.12_320)]/90 via-[oklch(0.35_0.12_320)]/40 to-transparent" />
