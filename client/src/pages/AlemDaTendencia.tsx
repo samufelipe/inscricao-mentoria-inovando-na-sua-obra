@@ -108,6 +108,7 @@ export default function AlemDaTendencia() {
             src={newHostsImage}
             alt="Evento Além da Tendência - Anfitriãs"
             className="absolute inset-0 w-full h-full object-cover object-[center_15%]"
+            fetchPriority="high"
           />
           <div 
             className="absolute inset-0 z-[2] pointer-events-none"
