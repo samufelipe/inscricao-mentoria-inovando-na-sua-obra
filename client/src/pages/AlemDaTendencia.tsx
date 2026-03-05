@@ -590,8 +590,8 @@ export default function AlemDaTendencia() {
                 className="w-40 md:w-56 mx-auto mb-5 relative z-10"
               />
               <div className="relative z-10 text-center">
-                <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">1º LOTE</div>
-                <div className="text-xs text-white/50 mt-1">Valor exclusivo para as primeiras inscritas</div>
+                <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">2º LOTE</div>
+                <div className="text-xs text-white/50 mt-1">Garanta sua vaga no segundo lote</div>
               </div>
             </div>
             
@@ -616,10 +616,10 @@ export default function AlemDaTendencia() {
                 <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em] mb-3">Garanta Sua Vaga</p>
                 <div className="flex items-baseline justify-center gap-1 text-white">
                   <span className="text-2xl font-bold">R$</span>
-                  <span className="text-5xl md:text-6xl font-bold tracking-tighter">147</span>
+                  <span className="text-5xl md:text-6xl font-bold tracking-tighter">167</span>
                   <span className="text-2xl font-bold">,00</span>
                 </div>
-                <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 29,40</p>
+                <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 33,40</p>
               </div>
 
               <HeroRegistrationForm />
