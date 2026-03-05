@@ -616,10 +616,10 @@ export default function AlemDaTendencia() {
                 <p className="text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em] mb-3">Garanta Sua Vaga</p>
                 <div className="flex items-baseline justify-center gap-1 text-white">
                   <span className="text-2xl font-bold">R$</span>
-                  <span className="text-5xl md:text-6xl font-bold tracking-tighter">147</span>
+                  <span className="text-5xl md:text-6xl font-bold tracking-tighter">167</span>
                   <span className="text-2xl font-bold">,00</span>
                 </div>
-                <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 29,40</p>
+                <p className="text-[#C9A84C] text-sm font-semibold mt-1">ou 5x de R$ 33,40</p>
               </div>
 
               <HeroRegistrationForm />
