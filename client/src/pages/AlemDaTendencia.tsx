@@ -590,8 +590,8 @@ export default function AlemDaTendencia() {
                 className="w-40 md:w-56 mx-auto mb-5 relative z-10"
               />
               <div className="relative z-10 text-center">
-                <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">1º LOTE</div>
-                <div className="text-xs text-white/50 mt-1">Valor exclusivo para as primeiras inscritas</div>
+                <div className="text-2xl font-bold text-[#C9A84C] tracking-widest uppercase">2º LOTE</div>
+                <div className="text-xs text-white/50 mt-1">Garanta sua vaga no segundo lote</div>
               </div>
             </div>
             
