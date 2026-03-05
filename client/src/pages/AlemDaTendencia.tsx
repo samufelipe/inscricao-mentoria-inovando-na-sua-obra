@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { trackCTAClick, trackVideoPlay, trackExternalLink, trackFooterNav, initScrollTracking, createSectionObserver } from "@/lib/gtm-tracking";
 import { AudienceMontageV2 } from "@/components/ui/audience-montage-v2";
+import { LazyIframe } from "@/components/ui/lazy-image";
 import heroMain from "@/assets/alem-da-tendencia/hero-main.png";
 import heroRight from "@/assets/alem-da-tendencia/hero-right.png";
 import heroFar from "@/assets/alem-da-tendencia/hero-far.png";

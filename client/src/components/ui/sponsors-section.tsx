@@ -35,6 +35,8 @@ export function SponsorsSection() {
             <img
               src={sponsor.logo}
               alt={sponsor.name}
+              loading="lazy"
+              decoding="async"
               className={`h-40 md:h-52 lg:h-64 w-auto object-contain mix-blend-multiply transition-all duration-500 ${sponsor.className}`}
             />
           </div>

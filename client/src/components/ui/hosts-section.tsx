@@ -72,7 +72,10 @@ export function HostsSection({ inovandoImage, julianaImage }: HostsSectionProps)
               <img 
                 src={julianaImage || "https://files.manuscdn.com/user_upload_by_module/session_file/310519663217190391/LAKSQEpLPcJkePXw.jpg"} 
                 alt="Juliana Campelo - AjudaMONU" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[center_20%]"
+              />
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-6 left-6 text-white">
