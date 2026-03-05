@@ -550,16 +550,15 @@ export default function AlemDaTendencia() {
           </div>
           
           <div className="h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
-            <iframe 
+            <LazyIframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.786699368388!2d-46.66479692376166!3d-23.57604497879058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59e6f0a6b0b1%3A0x6f6b6b6b6b6b6b6b!2sAv.%20Brig.%20Lu%C3%ADs%20Ant%C3%B4nio%2C%204843%20-%20Jardim%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001401-002!5e0!3m2!1spt-BR!2sbr!4v1708450000000!5m2!1spt-BR!2sbr" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen={true} 
-              loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
               className="transition-all duration-700"
-            ></iframe>
+            />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent pointer-events-none transition-colors duration-500" />
           </div>
         </div>
