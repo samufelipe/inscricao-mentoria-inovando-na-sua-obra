@@ -215,6 +215,7 @@ export default function AlemDaTendencia() {
             alt="Evento Além da Tendência - Mentoras"
             className="absolute inset-0 w-full h-full object-cover z-[1]"
             style={{ objectPosition: 'center 38%' }}
+            fetchPriority="high"
           />
           <div 
             className="absolute inset-0 z-[2] pointer-events-none"
