@@ -523,21 +523,6 @@ export default function Relatorio() {
               </div>
             </CardBox>
 
-            {/* Ações Prioritárias */}
-            <CardBox>
-              <div className="flex items-center gap-2 mb-4">
-                <Target className="w-4 h-4 text-[#C9A84C]" />
-                <SubTitle>Ações Prioritárias</SubTitle>
-              </div>
-              <div className="space-y-4">
-                {OBSERVACOES.acoesPrioritarias.map((p) => (
-                  <div key={p.titulo}>
-                    <div className="text-[#C9A84C] font-semibold text-sm mb-1">{p.titulo}</div>
-                    <div className="text-gray-400 text-sm">{p.descricao}</div>
-                  </div>
-                ))}
-              </div>
-            </CardBox>
           </div>
         </FadeInSection>
 
