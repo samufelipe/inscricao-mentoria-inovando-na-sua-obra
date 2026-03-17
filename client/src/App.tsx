@@ -9,6 +9,7 @@ import AlemDaTendencia from "./pages/AlemDaTendencia";
 import Redirecionando from "./pages/Redirecionando";
 import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
+import Relatorio from "./pages/Relatorio";
 
 
 function Router() {
