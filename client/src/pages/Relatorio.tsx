@@ -10,7 +10,7 @@ import logoDark from "@/assets/alem-da-tendencia/logo-dark.png";
 // =============================================
 const REPORT_META = {
   title: "RELATÓRIO DE RESULTADOS",
-  subtitle: "Campanhas Meta Ads — Além da Tendência",
+  subtitle: "Campanhas Meta Ads · Além da Tendência",
   periodo: "23/02 - 10/03/2026 · 15 dias de campanha",
   geradoEm: "17/03/2026",
 };
