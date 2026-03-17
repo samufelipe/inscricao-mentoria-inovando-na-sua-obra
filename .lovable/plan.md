@@ -1,47 +1,69 @@
 
 
-## Plano: Atualizar Relatório para Além da Tendência
+## Corrigir Meta Tags OG para "/alem-da-tendencia" (Deploy Estatico)
 
-### Dados calculados
-- **Taxa de conversão da LP**: 35 leads / 514 visualizações = **6,81%**
-- **Receita rastreada (remarketing)**: 35 compras × R$ 167 = **R$ 5.845,00**
-- **ROAS do remarketing**: R$ 5.845 / R$ 480,62 = **12,16x**
-- **ROAS parcial consolidado**: R$ 5.845 / R$ 1.148,61 = **5,09x**
+### Problema Identificado
+O `server/index.ts` que injeta as meta tags OG **nao roda em producao**. O site e deployado como **site estatico** (Vite build + Vercel/Lovable), e o `vercel.json` redireciona todas as rotas para o mesmo `index.html`. Os crawlers do WhatsApp, Instagram e LinkedIn recebem o HTML original sem nenhuma meta tag do evento.
 
-### Estrutura do novo relatório
+### Solucao
+Criar um **script pos-build** que gera automaticamente uma versao do `index.html` com as meta tags OG do evento, e configurar o `vercel.json` para servir esse arquivo especifico na rota `/alem-da-tendencia`.
 
-Reescrever **todo o conteúdo** de `client/src/pages/Relatorio.tsx` mantendo o mesmo design (dark theme, cards, animações, gráficos), mas com estrutura adaptada:
+### Etapas
 
-1. **Header** — Logo Além da Tendência (`logo-dark.png`), título "Relatório de Resultados - Campanhas Meta Ads", período 23/02 - 10/03/2026 (15 dias)
+**1. Criar script `scripts/generate-og-pages.js`**
+- Apos o `vite build`, esse script le o `dist/public/index.html` (ja processado pelo Vite, com os scripts e CSS corretos)
+- Injeta as meta tags OG do evento:
+  - `og:title` = "Alem da Tendencia - Evento Presencial"
+  - `og:description` = "Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteudo pratico para transformar sua carreira e seus projetos."
+  - `og:image` = URL absoluta da logo do evento
+  - Twitter cards equivalentes
+- Substitui o `<title>` pelo titulo do evento
+- Troca o favicon pelo do evento
+- Salva como `dist/public/alem-da-tendencia.html`
 
-2. **Resumo Executivo** — 4 KPIs:
-   - Investimento Total: R$ 1.148,61
-   - Receita Rastreada (Remarketing): R$ 5.845,00
-   - Compras via Ads: 35
-   - ROAS Remarketing: 12,16x
-   - Disclaimer: receita rastreada refere-se apenas às compras atribuídas à campanha de remarketing
+**2. Atualizar `package.json`**
+- Modificar o script `build`:
+```text
+"build": "vite build && node scripts/generate-og-pages.js"
+```
 
-3. **Seção: Campanha de Captação de Leads** — Card com stats (investimento R$ 415,04, CPL R$ 11,85, leads 35, visualizações LP 514, custo/visualização R$ 0,81, CTR campeão 2,34%, taxa conversão LP 6,81%), link do criativo campeão
+**3. Atualizar `vercel.json`**
+- Adicionar rewrite especifico para `/alem-da-tendencia` ANTES do fallback generico:
+```text
+{
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
 
-4. **Seção: Campanha de Distribuição de Vídeo** — Card com stats (investimento R$ 252,95, reproduções 3s+ 8.186, custo/visualização R$ 0,03, visualizações LP 45), links dos 3 melhores vídeos
+### Como funciona
 
-5. **Seção: Campanha de Remarketing** — Card com stats (investimento R$ 480,62, compras 35, CPA R$ 13,73, ticket R$ 167, CTR 13,22%, receita R$ 5.845), destaque do criativo campeão (todas as 35 vendas), ROAS 12,16x
+```text
+Crawler do WhatsApp acessa /alem-da-tendencia
+  --> Vercel serve alem-da-tendencia.html (com OG tags do evento)
+  --> Preview mostra logo + titulo + descricao do evento
 
-6. **Distribuição de Investimento** — Donut chart com as 3 campanhas (Captação R$ 415,04, Vídeo R$ 252,95, Remarketing R$ 480,62)
+Crawler do WhatsApp acessa /
+  --> Vercel serve index.html (original, sem alteracoes)
+  --> Preview mostra dados da Mentoria como hoje
+```
 
-7. **Consolidado Financeiro** — Tabela com investimento, receita rastreada, ROAS por campanha
+### Garantia de seguranca para o dominio principal
+- O `index.html` original NAO e modificado em nenhum momento
+- O script apenas LE o `index.html` e cria um NOVO arquivo separado
+- O `vercel.json` so redireciona `/alem-da-tendencia` para o novo arquivo
+- Todas as outras rotas (incluindo `/`) continuam servindo o `index.html` original
+- O comportamento do SPA (React/wouter) permanece identico em ambos os arquivos
 
-8. **Observações e Recomendações** — Pontos Fortes (CTR 13,22% do RMKT excepcional, CPL competitivo, custo de vídeo R$ 0,03 excelente, conversão LP 6,81%), Pontos de Atenção (sem rastreamento completo Sympla, base de leads pequena), Ações Prioritárias (implementar pixel Sympla, escalar remarketing, ampliar captação)
+### Arquivos modificados
+1. `scripts/generate-og-pages.js` -- novo (script pos-build)
+2. `package.json` -- alterar script `build`
+3. `vercel.json` -- adicionar rewrite especifico
 
-9. **Fontes dos Dados** — Gerenciador Meta, Sympla (parcial)
-
-### Seções REMOVIDAS (não se aplicam)
-- Imersão e Mentoria separados → substituídos pelas 3 campanhas
-- E-mails → não houve disparos
-- Funil de checkout → sem dados
-- Comparativo Imersão vs Mentoria → não se aplica
-- Oportunidade leads quentes → sem dados de abandono
-
-### Arquivo alterado
-- `client/src/pages/Relatorio.tsx` — reescrita completa dos dados e seções, mantendo componentes auxiliares (AnimatedNumber, FadeInSection, CardBox, etc.)
+### Observacao
+- Apos o deploy, pode ser necessario limpar o cache do WhatsApp (pode levar ate 7 dias). Ferramentas como o Facebook Sharing Debugger podem forcar a atualizacao.
+- A URL da imagem OG usa o dominio `inovandonasuaobra.com.br` de forma fixa no script para garantir que funcione corretamente com os crawlers.
 
