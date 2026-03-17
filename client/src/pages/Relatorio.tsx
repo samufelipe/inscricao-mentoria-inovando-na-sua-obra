@@ -35,7 +35,7 @@ const CAPTACAO = {
   taxaConversaoLP: "6,81%",
   creativoCampeao: {
     link: "https://www.instagram.com/p/DVOhjcUAEYS/#advertiser",
-    label: "Criativo campeão — CTR 2,34%",
+    label: "Criativo campeão · CTR 2,34%",
   },
 };
 
