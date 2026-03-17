@@ -1,69 +1,53 @@
 
 
-## Corrigir Meta Tags OG para "/alem-da-tendencia" (Deploy Estatico)
+## Plano: Recriar Relatório de Resultados em nova página "/"
 
-### Problema Identificado
-O `server/index.ts` que injeta as meta tags OG **nao roda em producao**. O site e deployado como **site estatico** (Vite build + Vercel/Lovable), e o `vercel.json` redireciona todas as rotas para o mesmo `index.html`. Os crawlers do WhatsApp, Instagram e LinkedIn recebem o HTML original sem nenhuma meta tag do evento.
+### O que será feito
 
-### Solucao
-Criar um **script pos-build** que gera automaticamente uma versao do `index.html` com as meta tags OG do evento, e configurar o `vercel.json` para servir esse arquivo especifico na rota `/alem-da-tendencia`.
+Recriar a página de relatório que existe no link compartilhado (`/relatorio` do projeto publicado) como uma nova página no projeto atual. A página atual `Home` (Mentoria) será movida para `/mentoria` e a nova página de relatório ocupará a rota `/`.
 
-### Etapas
+### Identidade Visual (resgatada do relatório original)
 
-**1. Criar script `scripts/generate-og-pages.js`**
-- Apos o `vite build`, esse script le o `dist/public/index.html` (ja processado pelo Vite, com os scripts e CSS corretos)
-- Injeta as meta tags OG do evento:
-  - `og:title` = "Alem da Tendencia - Evento Presencial"
-  - `og:description` = "Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteudo pratico para transformar sua carreira e seus projetos."
-  - `og:image` = URL absoluta da logo do evento
-  - Twitter cards equivalentes
-- Substitui o `<title>` pelo titulo do evento
-- Troca o favicon pelo do evento
-- Salva como `dist/public/alem-da-tendencia.html`
+- Fundo escuro (#1a1a1a) com cards em bordas sutis
+- Acentos dourados (#C9A84C / #D4AF37) para títulos e destaques
+- Tipografia Montserrat/Inter com tracking wide e uppercase nos títulos de seção
+- Separadores com ponto central dourado
+- Cards com borda lateral esquerda colorida (verde para positivo, vermelho para atenção, azul para estratégia)
+- Gráficos de rosca (donut) para distribuição de leads
+- Gráfico de barras para vendas por dia e comparativos
+- KPIs com animação count-up ao entrar na viewport
+- Glossário colapsável (O que é ROI? / O que é ROAS?)
+- Botão fixo "Exportar PDF" com classe `.no-print`
+- Scroll-triggered fade-in animations
 
-**2. Atualizar `package.json`**
-- Modificar o script `build`:
-```text
-"build": "vite build && node scripts/generate-og-pages.js"
-```
+### Estrutura da Página
 
-**3. Atualizar `vercel.json`**
-- Adicionar rewrite especifico para `/alem-da-tendencia` ANTES do fallback generico:
-```text
-{
-  "outputDirectory": "dist/public",
-  "rewrites": [
-    { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
+A página será um componente único `Relatorio.tsx` com as seguintes seções (mesma estrutura do original):
 
-### Como funciona
+1. **Header**: Logo + título "Relatório Geral de Resultados" + período + data de geração
+2. **Resumo Executivo**: 4 KPIs (Investimento, Receita, Resultado, ROI) + frase ROAS + disclaimer + glossário
+3. **Imersão - Captação e Vendas**: Meta Ads desempenho, leads por fonte (donut chart), vendas Hotmart, criativos, financeiro, e-mails
+4. **Mentoria - Vendas**: Meta Ads, vendas, distribuição, funil checkout, vendas por dia (bar chart), criativos, financeiro, e-mails
+5. **Comparativo**: Tabela lado a lado + gráfico de barras comparativo
+6. **Consolidado Financeiro**: Tabela final
+7. **Oportunidade**: 206 leads quentes com 3 estratégias
+8. **Observações e Recomendações**: Pontos fortes, atenção, ações prioritárias, estratégia de crescimento
+9. **Fontes dos Dados**: Tabela de fontes
+10. **Footer**
 
-```text
-Crawler do WhatsApp acessa /alem-da-tendencia
-  --> Vercel serve alem-da-tendencia.html (com OG tags do evento)
-  --> Preview mostra logo + titulo + descricao do evento
+### Alterações Técnicas
 
-Crawler do WhatsApp acessa /
-  --> Vercel serve index.html (original, sem alteracoes)
-  --> Preview mostra dados da Mentoria como hoje
-```
+1. **Criar `client/src/pages/Relatorio.tsx`** com toda a estrutura e dados do relatório original, usando os mesmos padrões visuais (dark theme, gold accents, count-up animations, fade-in on scroll, donut/bar charts com CSS/SVG puro)
 
-### Garantia de seguranca para o dominio principal
-- O `index.html` original NAO e modificado em nenhum momento
-- O script apenas LE o `index.html` e cria um NOVO arquivo separado
-- O `vercel.json` so redireciona `/alem-da-tendencia` para o novo arquivo
-- Todas as outras rotas (incluindo `/`) continuam servindo o `index.html` original
-- O comportamento do SPA (React/wouter) permanece identico em ambos os arquivos
+2. **Atualizar `client/src/App.tsx`**: A rota `/` apontará para o novo `Relatorio`, e a atual `Home` (Mentoria) será movida para `/mentoria`
 
-### Arquivos modificados
-1. `scripts/generate-og-pages.js` -- novo (script pos-build)
-2. `package.json` -- alterar script `build`
-3. `vercel.json` -- adicionar rewrite especifico
+3. **Componentes auxiliares criados inline** no próprio Relatorio.tsx: CountUpNumber, DonutChart, BarChart, CollapsibleGlossary, para manter simplicidade
 
-### Observacao
-- Apos o deploy, pode ser necessario limpar o cache do WhatsApp (pode levar ate 7 dias). Ferramentas como o Facebook Sharing Debugger podem forcar a atualizacao.
-- A URL da imagem OG usa o dominio `inovandonasuaobra.com.br` de forma fixa no script para garantir que funcione corretamente com os crawlers.
+### Dados
+
+A página será criada com a estrutura e layout completos, mas **sem dados reais preenchidos ainda**. Vou aguardar o envio dos novos dados para popular o relatório. Todos os valores serão facilmente editáveis como constantes no topo do arquivo.
+
+### Observação
+
+Nenhuma alteração será feita na LP Além da Tendência nem em outras páginas existentes, apenas a rota `/` será redirecionada.
 
