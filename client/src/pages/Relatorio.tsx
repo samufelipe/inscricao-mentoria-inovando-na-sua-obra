@@ -75,9 +75,9 @@ const DISTRIBUICAO_INVESTIMENTO = [
 
 const CONSOLIDADO_ROWS = [
   { metrica: "Investimento", captacao: "R$ 415,04", video: "R$ 252,95", remarketing: "R$ 480,62", total: "R$ 1.148,61" },
-  { metrica: "Receita Rastreada", captacao: "—", video: "—", remarketing: "R$ 5.845,00", total: "R$ 5.845,00" },
-  { metrica: "ROAS", captacao: "—", video: "—", remarketing: "12,16x", total: "5,09x" },
-  { metrica: "Compras", captacao: "—", video: "—", remarketing: "35", total: "35" },
+  { metrica: "Receita Rastreada", captacao: "n/a", video: "n/a", remarketing: "R$ 5.845,00", total: "R$ 5.845,00" },
+  { metrica: "ROAS", captacao: "n/a", video: "n/a", remarketing: "12,16x", total: "5,09x" },
+  { metrica: "Compras", captacao: "n/a", video: "n/a", remarketing: "35", total: "35" },
 ];
 
 const OBSERVACOES = {
