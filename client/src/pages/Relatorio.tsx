@@ -10,7 +10,7 @@ import logoDark from "@/assets/alem-da-tendencia/logo-dark.png";
 // =============================================
 const REPORT_META = {
   title: "RELATÓRIO DE RESULTADOS",
-  subtitle: "Campanhas Meta Ads — Além da Tendência",
+  subtitle: "Campanhas Meta Ads · Além da Tendência",
   periodo: "23/02 - 10/03/2026 · 15 dias de campanha",
   geradoEm: "17/03/2026",
 };
@@ -35,7 +35,7 @@ const CAPTACAO = {
   taxaConversaoLP: "6,81%",
   creativoCampeao: {
     link: "https://www.instagram.com/p/DVOhjcUAEYS/#advertiser",
-    label: "Criativo campeão — CTR 2,34%",
+    label: "Criativo campeão · CTR 2,34%",
   },
 };
 
@@ -62,7 +62,7 @@ const REMARKETING = {
   publicoUtilizado: "Pessoas que acessaram a LP sem concluir cadastro + pessoas que chegaram ao checkout sem concluir a compra",
   creativoCampeao: {
     link: "https://www.instagram.com/p/DVJG3KlgFyT/#advertiser",
-    label: "Criativo campeão — CTR 13,22% · 35 vendas",
+    label: "Criativo campeão · CTR 13,22% · 35 vendas",
     destaque: "Este criativo gerou 100% das 35 vendas da campanha de remarketing.",
   },
 };
@@ -75,9 +75,9 @@ const DISTRIBUICAO_INVESTIMENTO = [
 
 const CONSOLIDADO_ROWS = [
   { metrica: "Investimento", captacao: "R$ 415,04", video: "R$ 252,95", remarketing: "R$ 480,62", total: "R$ 1.148,61" },
-  { metrica: "Receita Rastreada", captacao: "—", video: "—", remarketing: "R$ 5.845,00", total: "R$ 5.845,00" },
-  { metrica: "ROAS", captacao: "—", video: "—", remarketing: "12,16x", total: "5,09x" },
-  { metrica: "Compras", captacao: "—", video: "—", remarketing: "35", total: "35" },
+  { metrica: "Receita Rastreada", captacao: "n/a", video: "n/a", remarketing: "R$ 5.845,00", total: "R$ 5.845,00" },
+  { metrica: "ROAS", captacao: "n/a", video: "n/a", remarketing: "12,16x", total: "5,09x" },
+  { metrica: "Compras", captacao: "n/a", video: "n/a", remarketing: "35", total: "35" },
 ];
 
 const OBSERVACOES = {
@@ -375,7 +375,7 @@ export default function Relatorio() {
             <SubTitle>Melhores Vídeos</SubTitle>
             <div className="flex flex-col gap-3">
               {VIDEO.melhoresVideos.map((v, i) => (
-                <CreativeLink key={i} link={v.link} label={`${v.label} — Ver no Instagram`} />
+                <CreativeLink key={i} link={v.link} label={`${v.label} · Ver no Instagram`} />
               ))}
             </div>
           </CardBox>
