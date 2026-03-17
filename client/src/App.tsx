@@ -9,12 +9,14 @@ import AlemDaTendencia from "./pages/AlemDaTendencia";
 import Redirecionando from "./pages/Redirecionando";
 import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
+import Relatorio from "./pages/Relatorio";
 
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"} component={Relatorio} />
+      <Route path={"/mentoria"} component={Home} />
       <Route path={"/alem-da-tendencia"} component={AlemDaTendencia} />
       <Route path={"/redirecionando"} component={Redirecionando} />
       <Route path={"/termos-de-uso"} component={TermosDeUso} />
