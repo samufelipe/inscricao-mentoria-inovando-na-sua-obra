@@ -62,7 +62,7 @@ const REMARKETING = {
   publicoUtilizado: "Pessoas que acessaram a LP sem concluir cadastro + pessoas que chegaram ao checkout sem concluir a compra",
   creativoCampeao: {
     link: "https://www.instagram.com/p/DVJG3KlgFyT/#advertiser",
-    label: "Criativo campeão — CTR 13,22% · 35 vendas",
+    label: "Criativo campeão · CTR 13,22% · 35 vendas",
     destaque: "Este criativo gerou 100% das 35 vendas da campanha de remarketing.",
   },
 };
