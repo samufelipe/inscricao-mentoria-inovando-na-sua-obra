@@ -375,7 +375,7 @@ export default function Relatorio() {
             <SubTitle>Melhores Vídeos</SubTitle>
             <div className="flex flex-col gap-3">
               {VIDEO.melhoresVideos.map((v, i) => (
-                <CreativeLink key={i} link={v.link} label={`${v.label} — Ver no Instagram`} />
+                <CreativeLink key={i} link={v.link} label={`${v.label} · Ver no Instagram`} />
               ))}
             </div>
           </CardBox>
