@@ -9,6 +9,7 @@ import AlemDaTendencia from "./pages/AlemDaTendencia";
 import Redirecionando from "./pages/Redirecionando";
 import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
+import Relatorio from "./pages/Relatorio";
 
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/redirecionando"} component={Redirecionando} />
       <Route path={"/termos-de-uso"} component={TermosDeUso} />
       <Route path={"/politica-de-privacidade"} component={PoliticaDePrivacidade} />
+      <Route path={"/relatorio-2"} component={Relatorio} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
