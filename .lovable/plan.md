@@ -1,69 +1,36 @@
 
 
-## Corrigir Meta Tags OG para "/alem-da-tendencia" (Deploy Estatico)
+## Plano: Criar nova página de Relatório de Resultados
 
-### Problema Identificado
-O `server/index.ts` que injeta as meta tags OG **nao roda em producao**. O site e deployado como **site estatico** (Vite build + Vercel/Lovable), e o `vercel.json` redireciona todas as rotas para o mesmo `index.html`. Os crawlers do WhatsApp, Instagram e LinkedIn recebem o HTML original sem nenhuma meta tag do evento.
+### Resumo
+Criar uma nova página `/relatorio-2` (ou rota similar) que replique exatamente o layout e design do relatório existente em `/relatorio` da URL publicada, mas como página completamente independente. Nenhuma página existente será alterada. Os dados ficarão preparados para serem atualizados com os novos números que você enviará.
 
-### Solucao
-Criar um **script pos-build** que gera automaticamente uma versao do `index.html` com as meta tags OG do evento, e configurar o `vercel.json` para servir esse arquivo especifico na rota `/alem-da-tendencia`.
+### O que será feito
 
-### Etapas
+1. **Criar `client/src/pages/Relatorio.tsx`** — Página completa com todas as seções do relatório original:
+   - Header com logo Inovando na Obra, título, período e data de geração
+   - Resumo Executivo (4 KPIs: Investimento, Receita, Resultado sobre Ads, ROI/ROAS)
+   - Frase de ROAS + disclaimer + accordions "O que é ROI?" e "O que é ROAS?"
+   - Seção Imersão (Meta Ads, gráfico de leads por fonte com donut chart, vendas Hotmart, criativos, desempenho financeiro, e-mails)
+   - Seção Mentoria (Meta Ads, vendas, distribuição de vendas, funil de checkout, gráfico de vendas por dia, criativos, desempenho financeiro, e-mails)
+   - Tabela comparativa Imersão vs Mentoria + gráfico de barras comparativo
+   - Consolidado Financeiro (tabela)
+   - Seção de Oportunidade (leads quentes)
+   - Observações e Recomendações (Pontos Fortes, Pontos de Atenção, Ações Prioritárias, Estratégia de Crescimento)
+   - Fontes dos Dados (tabela)
+   - Botão fixo "Exportar PDF"
 
-**1. Criar script `scripts/generate-og-pages.js`**
-- Apos o `vite build`, esse script le o `dist/public/index.html` (ja processado pelo Vite, com os scripts e CSS corretos)
-- Injeta as meta tags OG do evento:
-  - `og:title` = "Alem da Tendencia - Evento Presencial"
-  - `og:description` = "Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteudo pratico para transformar sua carreira e seus projetos."
-  - `og:image` = URL absoluta da logo do evento
-  - Twitter cards equivalentes
-- Substitui o `<title>` pelo titulo do evento
-- Troca o favicon pelo do evento
-- Salva como `dist/public/alem-da-tendencia.html`
+2. **Design e estilo** — Tema escuro (fundo `#1a1a2e` / `#16213e`), cards com bordas sutis, tipografia uppercase tracking-wide nos títulos de seção, cores douradas (#C9A84C) nos destaques, verde nos valores positivos, gráficos com Recharts (donut chart, bar chart, line chart).
 
-**2. Atualizar `package.json`**
-- Modificar o script `build`:
-```text
-"build": "vite build && node scripts/generate-og-pages.js"
-```
+3. **Adicionar rota em `client/src/App.tsx`** — Nova rota `/relatorio-2` apontando para o componente, sem alterar nenhuma rota existente.
 
-**3. Atualizar `vercel.json`**
-- Adicionar rewrite especifico para `/alem-da-tendencia` ANTES do fallback generico:
-```text
-{
-  "outputDirectory": "dist/public",
-  "rewrites": [
-    { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
+4. **Dados separados em constantes** — Todos os dados do relatório serão organizados em objetos/constantes no topo do arquivo, facilitando a troca posterior pelos novos dados que você enviará.
 
-### Como funciona
+### O que NÃO será alterado
+- Nenhuma página existente (Home, AlemDaTendencia, etc.)
+- Nenhum componente existente
+- Apenas adição de arquivos novos + uma linha de rota no App.tsx
 
-```text
-Crawler do WhatsApp acessa /alem-da-tendencia
-  --> Vercel serve alem-da-tendencia.html (com OG tags do evento)
-  --> Preview mostra logo + titulo + descricao do evento
-
-Crawler do WhatsApp acessa /
-  --> Vercel serve index.html (original, sem alteracoes)
-  --> Preview mostra dados da Mentoria como hoje
-```
-
-### Garantia de seguranca para o dominio principal
-- O `index.html` original NAO e modificado em nenhum momento
-- O script apenas LE o `index.html` e cria um NOVO arquivo separado
-- O `vercel.json` so redireciona `/alem-da-tendencia` para o novo arquivo
-- Todas as outras rotas (incluindo `/`) continuam servindo o `index.html` original
-- O comportamento do SPA (React/wouter) permanece identico em ambos os arquivos
-
-### Arquivos modificados
-1. `scripts/generate-og-pages.js` -- novo (script pos-build)
-2. `package.json` -- alterar script `build`
-3. `vercel.json` -- adicionar rewrite especifico
-
-### Observacao
-- Apos o deploy, pode ser necessario limpar o cache do WhatsApp (pode levar ate 7 dias). Ferramentas como o Facebook Sharing Debugger podem forcar a atualizacao.
-- A URL da imagem OG usa o dominio `inovandonasuaobra.com.br` de forma fixa no script para garantir que funcione corretamente com os crawlers.
+### Próximo passo
+Após aprovação, crio a página com os dados atuais do relatório original. Depois você me envia os novos dados para eu atualizar.
 
