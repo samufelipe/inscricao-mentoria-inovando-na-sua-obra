@@ -27,12 +27,12 @@ const EXECUTIVE_SUMMARY = {
 
 const CAPTACAO = {
   investimento: 415.04,
-  cpl: 11.85,
-  leads: 35,
+  cpl: 59.29,
+  leads: 7,
   visualizacoesLP: 514,
   custoPorVisualizacao: 0.81,
   ctrCampeao: "2,34%",
-  taxaConversaoLP: "6,81%",
+  taxaConversaoLP: "1,36%",
   creativoCampeao: {
     link: "https://www.instagram.com/p/DVOhjcUAEYS/#advertiser",
     label: "Criativo campeão · CTR 2,34%",
