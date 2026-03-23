@@ -89,7 +89,7 @@ const OBSERVACOES = {
   ],
   pontosAtencao: [
     { titulo: "Sem rastreamento completo do Sympla", descricao: "Não foi possível atribuir todas as vendas do Sympla às campanhas. O ROAS consolidado (5,09x) considera apenas as vendas rastreadas via remarketing." },
-    { titulo: "Base de leads pequena", descricao: "35 leads captados. Para próximas campanhas, ampliar o período e investimento em captação pode gerar uma base maior para remarketing." },
+    { titulo: "Base de leads pequena", descricao: "7 leads captados via LP. Para próximas campanhas, ampliar o período e investimento em captação pode gerar uma base maior para remarketing." },
     { titulo: "Visualizações LP via vídeo baixas", descricao: "Apenas 45 visualizações da LP vieram dos vídeos (de 8.186 reproduções). A campanha de vídeo funcionou melhor como awareness do que como tráfego direto." },
   ],
   acoesPrioritarias: [
