@@ -83,7 +83,7 @@ const CONSOLIDADO_ROWS = [
 const OBSERVACOES = {
   pontosFortes: [
     { titulo: "CTR de remarketing excepcional: 13,22%", descricao: "O criativo de remarketing atingiu um CTR muito acima da média do mercado (1-2%), demonstrando alta relevância da mensagem para o público impactado." },
-    { titulo: "CPL competitivo: R$ 11,85", descricao: "Custo por lead abaixo de R$ 15 é excelente para eventos presenciais no segmento de arquitetura e design." },
+    { titulo: "CPA de remarketing extremamente baixo: R$ 13,73", descricao: "O custo por aquisição no remarketing ficou muito abaixo do ticket médio de R$ 167, demonstrando alta eficiência na conversão de vendas." },
     { titulo: "Custo por visualização de vídeo: R$ 0,03", descricao: "Valor extremamente baixo, indicando alto interesse do público pelo conteúdo em vídeo produzido." },
     { titulo: "Taxa de conversão da LP: 6,81%", descricao: "A landing page converteu 35 dos 514 visitantes, taxa acima da média de mercado para páginas de evento (3-5%)." },
   ],
