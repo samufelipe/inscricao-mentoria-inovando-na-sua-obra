@@ -27,12 +27,12 @@ const EXECUTIVE_SUMMARY = {
 
 const CAPTACAO = {
   investimento: 415.04,
-  cpl: 11.85,
-  leads: 35,
+  cpl: 59.29,
+  leads: 7,
   visualizacoesLP: 514,
   custoPorVisualizacao: 0.81,
   ctrCampeao: "2,34%",
-  taxaConversaoLP: "6,81%",
+  taxaConversaoLP: "1,36%",
   creativoCampeao: {
     link: "https://www.instagram.com/p/DVOhjcUAEYS/#advertiser",
     label: "Criativo campeão · CTR 2,34%",
@@ -83,13 +83,13 @@ const CONSOLIDADO_ROWS = [
 const OBSERVACOES = {
   pontosFortes: [
     { titulo: "CTR de remarketing excepcional: 13,22%", descricao: "O criativo de remarketing atingiu um CTR muito acima da média do mercado (1-2%), demonstrando alta relevância da mensagem para o público impactado." },
-    { titulo: "CPL competitivo: R$ 11,85", descricao: "Custo por lead abaixo de R$ 15 é excelente para eventos presenciais no segmento de arquitetura e design." },
+    { titulo: "CPA de remarketing extremamente baixo: R$ 13,73", descricao: "O custo por aquisição no remarketing ficou muito abaixo do ticket médio de R$ 167, demonstrando alta eficiência na conversão de vendas." },
     { titulo: "Custo por visualização de vídeo: R$ 0,03", descricao: "Valor extremamente baixo, indicando alto interesse do público pelo conteúdo em vídeo produzido." },
-    { titulo: "Taxa de conversão da LP: 6,81%", descricao: "A landing page converteu 35 dos 514 visitantes, taxa acima da média de mercado para páginas de evento (3-5%)." },
+    { titulo: "Taxa de conversão da LP: 1,36%", descricao: "A landing page converteu 7 dos 514 visitantes. Há espaço para otimização da LP visando aumentar a taxa de conversão em futuras campanhas." },
   ],
   pontosAtencao: [
     { titulo: "Sem rastreamento completo do Sympla", descricao: "Não foi possível atribuir todas as vendas do Sympla às campanhas. O ROAS consolidado (5,09x) considera apenas as vendas rastreadas via remarketing." },
-    { titulo: "Base de leads pequena", descricao: "35 leads captados. Para próximas campanhas, ampliar o período e investimento em captação pode gerar uma base maior para remarketing." },
+    { titulo: "Base de leads pequena", descricao: "7 leads captados via LP. Para próximas campanhas, ampliar o período e investimento em captação pode gerar uma base maior para remarketing." },
     { titulo: "Visualizações LP via vídeo baixas", descricao: "Apenas 45 visualizações da LP vieram dos vídeos (de 8.186 reproduções). A campanha de vídeo funcionou melhor como awareness do que como tráfego direto." },
   ],
   acoesPrioritarias: [
