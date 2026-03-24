@@ -662,12 +662,15 @@ export default function Materiais() {
                   href={COMBO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] group"
+                  className="mt-5 inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                 >
                   Quero o Kit Completo com 10% OFF
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
-                <p className="text-[#C9A84C]/60 text-[10px] font-semibold mt-3">
+                <p className="text-white/40 text-[10px] mt-3 flex items-center justify-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento seguro via Hotmart
+                </p>
+                <p className="text-[#C9A84C]/60 text-[10px] font-semibold mt-1">
                   Esse é o menor valor que esses materiais já tiveram juntos.
                 </p>
               </div>
