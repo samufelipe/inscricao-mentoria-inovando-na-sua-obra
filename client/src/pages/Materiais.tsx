@@ -662,7 +662,7 @@ export default function Materiais() {
 
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn className="text-center mb-12">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Nossos Materiais</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Materiais Individuais</p>
             <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-white uppercase tracking-tight mb-4">
               Escolha o material ideal para você
             </h2>
