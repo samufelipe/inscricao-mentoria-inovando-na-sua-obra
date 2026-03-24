@@ -465,10 +465,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ PRODUTOS ═══════════════════ */}
       <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-          <div className="absolute left-[5%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[95%] top-0 w-px h-full bg-white" />
-        </div>
+        <GridLines variant="dark" />
 
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn className="text-center mb-12">
