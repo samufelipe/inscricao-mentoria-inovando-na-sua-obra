@@ -486,16 +486,10 @@ export default function Materiais() {
                   <div className="absolute top-0 left-0 w-8 h-px bg-[#C9A84C]" />
                   <div className="absolute top-0 left-0 w-px h-8 bg-[#C9A84C]" />
                   <item.icon className="w-5 h-5 text-[#C9A84C] mx-auto mb-2" />
-                  {item.isText ? (
-                    <p className="text-xs font-bold text-[#1a1a1a] leading-tight">{item.label}</p>
-                  ) : (
-                    <>
-                      <p className="font-display text-2xl md:text-3xl font-bold text-[#1a1a1a]">
-                        <AnimatedNumber value={item.value} suffix={item.suffix} />
-                      </p>
-                      <p className="text-[10px] text-[#1a1a1a]/50 uppercase tracking-wider mt-1">{item.label}</p>
-                    </>
-                  )}
+                  <p className="font-display text-2xl md:text-3xl font-bold text-[#1a1a1a]">
+                    <AnimatedNumber value={item.value} suffix={item.suffix} />
+                  </p>
+                  <p className="text-[10px] text-[#1a1a1a]/50 uppercase tracking-wider mt-1">{item.label}</p>
                 </div>
               ))}
             </div>
