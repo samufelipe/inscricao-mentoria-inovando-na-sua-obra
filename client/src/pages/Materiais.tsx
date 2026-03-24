@@ -398,7 +398,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ QUEM SOMOS ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
           <GridLines variant="light" />
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl mx-auto">
