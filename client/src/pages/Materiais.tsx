@@ -1079,7 +1079,7 @@ function MobileStickyBar() {
         rel="noopener noreferrer"
         className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-3 px-5 uppercase tracking-wider text-[11px] hover:bg-[#d4b65c] transition-all inline-flex items-center gap-1.5 shrink-0"
       >
-        Quero o Combo
+        Quero o Kit Completo
         <ArrowRight className="w-3.5 h-3.5" />
       </a>
     </div>
