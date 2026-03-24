@@ -818,7 +818,7 @@ export default function Materiais() {
                       {PRODUCTS.ebook.cta}
                     </a>
                     <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
-                      <Lock className="w-3 h-3" /> Acesso imediato após o pagamento
+                      <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
                   </div>
                 </div>
