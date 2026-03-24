@@ -209,7 +209,7 @@ export default function Materiais() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#faf9f6] overflow-x-hidden w-full max-w-[100vw]">
+    <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#f0ede8] overflow-x-hidden w-full max-w-[100vw]">
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
       <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex items-end md:items-center overflow-hidden">
