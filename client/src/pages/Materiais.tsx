@@ -731,7 +731,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ FAQ ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6]">
+        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Dúvidas Frequentes</p>
             <h2 className="font-display text-xl md:text-2xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-8 text-center">
