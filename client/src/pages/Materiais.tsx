@@ -218,7 +218,7 @@ export default function Materiais() {
     <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#f0ede8] overflow-x-hidden w-full max-w-[100vw]">
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
-      <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden">
+      <section className="relative bg-[#1a1a1a] min-h-0 md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden">
         {/* Dark base */}
         <div className="absolute inset-0 bg-[#1a1a1a]" />
         {/* Desktop: gold glow behind mockups */}
@@ -662,7 +662,7 @@ export default function Materiais() {
 
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn className="text-center mb-12">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Nossos Materiais</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Materiais Individuais</p>
             <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-white uppercase tracking-tight mb-4">
               Escolha o material ideal para você
             </h2>
@@ -810,9 +810,6 @@ export default function Materiais() {
               <div className="absolute top-4 right-4 flex gap-2">
                 <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
                   Mais Popular
-                </span>
-                <span className="bg-[#2E7D32] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                  Menor Preço
                 </span>
               </div>
 
