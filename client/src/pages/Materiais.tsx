@@ -436,6 +436,19 @@ export default function Materiais() {
 
         {/* Desktop: Floating mockups on the right */}
         <div className="hidden md:flex absolute right-[6%] lg:right-[10%] top-1/2 -translate-y-1/2 z-[5] items-end">
+          {/* Badges overlay on mockups */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            className="absolute -top-8 left-1/2 -translate-x-1/2 z-[6] flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-[#C9A84C] font-medium bg-[#1a1a1a]/80 backdrop-blur-sm px-5 py-2 border border-[#C9A84C]/20 rounded-sm whitespace-nowrap"
+          >
+            <span>Materiais Digitais</span>
+            <span className="text-white/20">·</span>
+            <span>Acesso Imediato</span>
+            <span className="text-white/20">·</span>
+            <span>Garantia 7 Dias</span>
+          </motion.div>
           <motion.img
             src={ebookMockup}
             alt="E-book Domine a Sua Obra"
