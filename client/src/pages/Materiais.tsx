@@ -593,7 +593,13 @@ export default function Materiais() {
                     +100 alunas
                   </div>
                 </div>
-              </div>
+                <button
+                  onClick={scrollToProducts}
+                  className="mt-6 bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
+                >
+                  Conhecer os materiais
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
             </div>
           </div>
         </section>
