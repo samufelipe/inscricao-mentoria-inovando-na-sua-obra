@@ -460,9 +460,9 @@ export default function Materiais() {
           <motion.img
             src={checklistsMockup}
             alt="21 Checklists de Obra"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.45 }}
+            transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="w-[220px] lg:w-[270px] xl:w-[320px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] relative z-[1]"
           />
         </div>
