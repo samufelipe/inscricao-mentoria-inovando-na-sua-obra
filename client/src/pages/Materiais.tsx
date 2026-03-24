@@ -795,7 +795,7 @@ export default function Materiais() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
-              <img src={logoImg} alt="Inovando na Sua Obra" className="h-8 brightness-0 invert opacity-60 mx-auto md:mx-0 mb-3" loading="lazy" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="h-10 opacity-60 mx-auto md:mx-0 mb-3" loading="lazy" />
               <p className="text-white/30 text-xs leading-relaxed">
                 Transformando a forma como arquitetas e designers gerenciam suas obras.
               </p>
