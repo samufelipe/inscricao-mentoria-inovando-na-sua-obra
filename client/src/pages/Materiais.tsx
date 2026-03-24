@@ -212,34 +212,59 @@ export default function Materiais() {
     <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#f0ede8] overflow-x-hidden w-full max-w-[100vw]">
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
-      <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex items-end md:items-center overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img
-            src={irmasObra}
-            alt="Ingrid Zarza e Fernanda Bradaschia em obra"
-            className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
-            fetchPriority="high"
-          />
-          {/* Gradient overlays for legibility */}
-          <div
-            className="absolute inset-0 z-[1]"
-            style={{
-              background: isMobile
-                ? "linear-gradient(to bottom, rgba(26,26,26,0.4) 0%, transparent 20%, transparent 35%, rgba(26,26,26,0.7) 50%, rgba(26,26,26,0.95) 65%, #1a1a1a 80%)"
-                : "linear-gradient(to right, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.85) 35%, rgba(26,26,26,0.4) 60%, transparent 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-0 z-[1] hidden md:block"
-            style={{ background: "linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, transparent 30%, transparent 70%, rgba(26,26,26,0.5) 100%)" }}
-          />
-        </div>
+      <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden">
+        {/* Dark base + subtle gold glow behind mockups */}
+        <div className="absolute inset-0 bg-[#1a1a1a]" />
+        <div
+          className="absolute z-[1] hidden md:block"
+          style={{
+            right: "10%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "500px",
+            height: "500px",
+            background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)",
+          }}
+        />
+        {/* Mobile: gold glow at top */}
+        <div
+          className="absolute z-[1] md:hidden"
+          style={{
+            left: "50%",
+            top: "15%",
+            transform: "translateX(-50%)",
+            width: "350px",
+            height: "350px",
+            background: "radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)",
+          }}
+        />
 
         <GridLines variant="dark" />
 
+        {/* Mobile: Mockups at top with fade */}
+        <div className="relative w-full md:hidden pt-16 pb-4 flex justify-center items-center z-[3]">
+          <motion.img
+            src={ebookMockup}
+            alt="E-book Domine a Sua Obra"
+            initial={{ opacity: 0, y: 30, rotate: -3 }}
+            animate={{ opacity: 1, y: 0, rotate: -3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-[130px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] -mr-4 relative z-[2]"
+          />
+          <motion.img
+            src={checklistsMockup}
+            alt="21 Checklists de Obra"
+            initial={{ opacity: 0, y: 30, rotate: 2 }}
+            animate={{ opacity: 1, y: 0, rotate: 2 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="w-[160px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] relative z-[1]"
+          />
+          {/* Fade bottom into content */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1a1a1a] to-transparent z-[4]" />
+        </div>
+
         {/* Content */}
-        <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0">
+        <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0 flex-1 flex items-center">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <img src={logoLight} alt="Inovando na Sua Obra" className="w-[140px] md:w-[200px] lg:w-[240px] mb-7 opacity-90" />
