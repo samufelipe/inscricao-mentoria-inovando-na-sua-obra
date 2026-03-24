@@ -909,6 +909,27 @@ export default function Materiais() {
         </section>
       </FadeIn>
 
+      {/* ═══════════════════ PARA QUEM NÃO É ═══════════════════ */}
+      <FadeIn>
+        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
+          <div className="container mx-auto px-4 max-w-3xl">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-red-400/80 font-semibold mb-3 text-center">Para quem NÃO é</p>
+            <h2 className="font-display text-lg md:text-xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-6 text-center">
+              Esse material não é para todo mundo
+            </h2>
+            <div className="space-y-3 max-w-xl mx-auto">
+              {NOT_FOR_AUDIENCE.map((item, i) => (
+                <div key={i} className="flex items-start gap-3 bg-red-50 p-4 border-l-2 border-red-400/50">
+                  <X className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
+                  <p className="text-sm text-[#1a1a1a]/70">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
       {/* ═══════════════════ GARANTIA ═══════════════════ */}
       <FadeIn>
         <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
