@@ -251,7 +251,7 @@ export default function Materiais() {
             transition={{ duration: 0.6 }}
             className="pt-6 pl-5"
           >
-            <img src={logoLight} alt="Inovando na Sua Obra" className="w-[120px] opacity-90" />
+            <img src={logoLight} alt="Inovando na Sua Obra" className="w-[120px] opacity-90 mx-auto" />
           </motion.div>
 
           {/* Mockups centered */}
