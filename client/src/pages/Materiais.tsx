@@ -1092,24 +1092,34 @@ function MobileStickyBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToProducts = () => {
+    document.getElementById("produtos")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#C9A84C]/20 px-4 py-3 flex items-center justify-between gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
-      <div className="flex flex-col">
-        <span className="text-white/40 text-[10px] line-through">R$ 164,00</span>
-        <span className="text-white font-bold text-lg leading-tight">R$ 147,60</span>
-        <span className="text-[#C9A84C] text-[10px] font-semibold">Combo · 10% OFF</span>
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#C9A84C]/20 px-3 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+      <div className="flex gap-2">
+        <button
+          onClick={scrollToProducts}
+          className="flex-1 bg-[#2E7D32]/20 border border-[#2E7D32]/40 text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#2E7D32]/30 transition-all text-center"
+        >
+          Ver Materiais
+        </button>
+        <a
+          href={COMBO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-[2] bg-[#2E7D32] text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#256829] transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
+        >
+          Quero o Kit Completo
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
       </div>
-      <a
-        href={COMBO_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-3 px-5 uppercase tracking-wider text-[11px] hover:bg-[#d4b65c] transition-all inline-flex items-center gap-1.5 shrink-0"
-      >
-        Quero o Kit Completo
-        <ArrowRight className="w-3.5 h-3.5" />
-      </a>
+      <p className="text-white/30 text-[9px] text-center mt-1.5 flex items-center justify-center gap-1">
+        <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
+      </p>
     </div>
   );
 }
