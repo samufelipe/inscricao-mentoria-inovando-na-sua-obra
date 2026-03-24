@@ -436,7 +436,7 @@ export default function Materiais() {
                 href={COMBO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2 group"
+                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Quero o Kit Completo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
