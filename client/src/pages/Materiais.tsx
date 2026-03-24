@@ -441,7 +441,7 @@ export default function Materiais() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="absolute -top-6 left-1/2 -translate-x-1/2 z-[6] flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-[#C9A84C]/70 font-medium whitespace-nowrap"
+            className="absolute -top-8 left-1/2 -translate-x-1/2 z-[6] flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-[#C9A84C]/70 font-medium whitespace-nowrap"
           >
             <span>Materiais Digitais</span>
             <span className="text-white/20">·</span>
