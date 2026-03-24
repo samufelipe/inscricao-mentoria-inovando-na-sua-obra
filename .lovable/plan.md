@@ -1,54 +1,86 @@
 
 
-## Plano: Nova Página de Materiais Digitais · `/materiais`
+## Plano: Otimizacao Completa da Pagina /materiais
 
-### Resumo
-Criar uma página de vendas para dois produtos digitais da Inovando Arquitetura, seguindo o design editorial das páginas Além da Tendência e Mentoria (dark theme, gold accents, tipografia premium, animações fade-in).
+### Problemas Identificados
 
-### Dados dos Produtos
-- **Checklists Inovando na Sua Obra**: R$ 67,00
-- **E-book Domine a Sua Obra**: R$ 97,00
-- **Combo (ambos)**: R$ 147,60 (10% de desconto sobre R$ 164,00)
-- Links Hotmart: `F99460291O` (Checklists), link do E-book (extraído da página Hotmart)
+**Dados incorretos dos produtos:**
+- Checklists: a pagina diz "6 checklists" mas o produto real tem **21 Checklists de Obra de Interiores**
+- E-book: o link de checkout esta errado (aponta para o checkout dos Checklists). O correto e `https://pay.hotmart.com/Q99258692R?off=ivk4h3rr&checkoutMode=10`
+- Beneficios e dores estao genericos, nao refletem o conteudo real dos produtos
 
-### Prova Social
-- +250 Obras gerenciadas
-- +100 Alunas transformadas
-- 12 Anos de experiência
-- Criadoras da Mentoria Inovando na Sua Obra
+**Design vs Alem da Tendencia:**
+- Hero atual e flat (grid simples texto+imagem), sem a imersao cinematografica da AT
+- Falta o hero full-screen com imagem de fundo e gradientes escuros
+- Nao tem sticky CTA no mobile
+- Secao de produtos sem imagens dos mockups reais
 
-### Estrutura da Página (seções)
+---
 
-1. **Hero** · Background dark (#1a1a1a) com imagem das mentoras (reutilizar asset existente `inovando-obra-new.png`), logo Inovando, headline focada na dor ("Pare de perder dinheiro e tempo em obras desorganizadas"), badges de prova social
+### Otimizacoes Planejadas
 
-2. **Prova Social** · 4 cards com números animados (+250 obras, +100 alunas, 12 anos, Mentoria Inovando) · Fundo claro com bordas gold
+#### 1. Corrigir dados dos produtos com conteudo real
 
-3. **Quem Somos** · Apresentação de Ingrid Zarza e Fernanda Bradaschia · Foto + bio curta · Credibilidade e experiência
+**Checklists (R$ 67,00):**
+- Nome: "21 Checklists Inovando na Sua Obra"
+- Lista completa dos 21 checklists (Inicio de Obra, Primeiro dia, Levantamento, Demolicao, Hidraulica, Ar-condicionado, Eletrica, Impermeabilizacao, Construcao, Revestimentos, Forro de Gesso, Portas e Janelas, Pintura, Iluminacao, Piso Vinilico, Piso de Madeira, Marcenaria, Marmoraria, Vidros Box/Espelhos, Vidros Varanda, Verificacoes Finais)
+- Dores: "Esquece detalhes importantes no canteiro", "Sempre apagando incendio na obra", "Nao tem processo padronizado por etapa"
+- Resultado: obras mais organizadas, clientes mais satisfeitos, menos retrabalho
 
-4. **Produtos** · Dois cards lado a lado (mobile: empilhados):
-   - **Card Checklists** (R$ 67,00): descrição das dores que resolve, lista de benefícios, CTA para Hotmart
-   - **Card E-book** (R$ 97,00): descrição, benefícios, CTA para Hotmart
-   - **Card Combo** (destaque visual, badge "Mais Popular"): ambos por R$ 147,60, economia de R$ 16,40, CTA
+**E-book (R$ 97,00):**
+- Corrigir URL de checkout para `https://pay.hotmart.com/Q99258692R?off=ivk4h3rr&checkoutMode=10`
+- Conteudo real: Planejamento de Obra (cronograma, orcamento), Acompanhamento por Fases (Cinza, Branca, Colorida), Habilidades Tecnicas + Emocionais
+- Dores: "Se sente perdida na fase de obra", "Esta sempre apagando incendio mesmo com projeto lindo", "Nao sabe como se posicionar como lider na obra"
 
-5. **Para Quem É** · Lista de perfis ideais (arquitetas que gerenciam obras, designers de interiores, profissionais que querem organizar processos)
+#### 2. Inserir mockups reais dos produtos
 
-6. **Depoimentos/Resultados** · Reutilizar estrutura de testimonials existente
+Usar as imagens do Hotmart CDN como mockups visuais dentro dos cards de produto:
+- Checklists: imagem do tablet com checklist aberto (`https://static-media.hotmart.com/IzBR7gYJQMLs2WpVobsEJo0LVuk=/1024x575/filters:quality(100)/hotmart/checkout_custom/846a1be6-e0f1-4292-b131-c26f093a3caf/adgdt769s.png`)
+- E-book: mockup do celular com capa do ebook (`https://static-media.hotmart.com/HiIqt2sa_LCowhLmcljNoU7KJ0Y=/filters:quality(1):format(webp)/klickart-prod/uploads/media/file/9312656/ebook_mockupscapaalternativa_(7).png`)
+- Foto das criadoras em obra (`https://static-media.hotmart.com/RjkdOsfhrQmNrW2QcoWoGuqNrZ4=/filters:quality(1):format(webp)/klickart-prod/uploads/media/file/9281425/irmas_a_obra.png`)
 
-7. **FAQ** · Perguntas frequentes sobre os produtos digitais
+Cada card de produto tera uma imagem de mockup no topo antes do texto.
 
-8. **Footer** · Links institucionais, redes sociais, CNPJ
+#### 3. Hero cinematografico (estilo Alem da Tendencia)
 
-### Detalhes Técnicos
+- Full-screen dark com imagem de fundo das mentoras (usando a foto `irmas_a_obra.png` da Hotmart ou a existente `inovando-obra-new.png`)
+- Gradientes escuros laterais e inferiores para legibilidade
+- Headline mais agressiva na dor: "Sua obra nao precisa ser um caos"
+- Sub-headline: "21 Checklists + E-book criados por quem ja gerenciou mais de 250 obras de interiores"
+- Badge de prova social inline no hero
 
-**Arquivos criados:**
-- `client/src/pages/Materiais.tsx` · Página completa self-contained (mesmo padrão do Home.tsx)
+#### 4. Secao de dor antes dos produtos
 
-**Arquivos editados:**
-- `client/src/App.tsx` · Adicionar rota `/materiais` apontando para o novo componente
+Nova secao "Voce se identifica?" com cenarios reais de dor:
+- "Chega na obra e nao sabe por onde comecar a conferencia"
+- "O cliente liga reclamando e voce nao tem controle do que foi feito"
+- "Sente que esta sempre correndo atras do prejuizo"
+- "O projeto ficou lindo, mas a obra virou um pesadelo"
 
-**Design system:** Reutilizar componentes existentes (`ArchitecturalSection`, `ArchitecturalTitle`, `ArchitecturalButton`, `FAQAccordion`) e padrões visuais (gold #C9A84C, dark #1a1a1a, green CTAs #2E7D32, framer-motion fade-in)
+Estilo visual: fundo escuro, texto branco, icones vermelhos (X) para cada dor, transicao para a solucao
 
-**Checkout:** Cada CTA abre o link Hotmart em nova aba (`target="_blank"`)
+#### 5. Ancoragem de preco e urgencia
 
-**Nenhuma alteração** nas páginas existentes (Home, AlemDaTendencia, Relatorio, etc.)
+- Mostrar o valor que uma unica obra mal gerenciada custa (retrabalho, atraso, cliente insatisfeito)
+- Comparar: "Por menos que um almoco de negocios, voce organiza todas as suas obras"
+- Destacar "Parcelado em ate 3x" (info real do Hotmart)
+- Badge de "Acesso imediato" e "Pagamento 100% seguro"
+
+#### 6. Sticky CTA mobile
+
+Barra fixa no rodape do mobile (como na pagina da Mentoria) com o preco do combo e CTA "Quero o combo completo"
+
+#### 7. Otimizacoes de persuasao nos textos
+
+- CTAs mais diretos: "Quero organizar minhas obras" em vez de "Quero os Checklists"
+- Secao "Para Quem E" mais emocional, usando linguagem da pagina original da Hotmart
+- Adicionar micro-copy de seguranca nos botoes: "Acesso imediato apos o pagamento"
+
+---
+
+### Arquivos alterados
+
+- `client/src/pages/Materiais.tsx` - reescrita significativa (dados corrigidos, hero cinematografico, mockups, secao de dor, sticky CTA, ancoragem de preco)
+
+Nenhuma alteracao em outras paginas.
 
