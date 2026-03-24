@@ -242,7 +242,7 @@ export default function Materiais() {
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <img src={logoLight} alt="Inovando na Sua Obra" className="h-12 md:h-14 mb-6 opacity-80" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="h-20 md:h-28 mb-6 opacity-90" />
             </motion.div>
 
             <motion.div
@@ -412,6 +412,7 @@ export default function Materiais() {
                 />
               </div>
               <div>
+                <img src={logoDark} alt="Inovando na Sua Obra" className="h-14 md:h-20 mb-5 opacity-90" loading="lazy" />
                 <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Quem criou esses materiais</p>
                 <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-5">
                   Ingrid Zarza &<br />Fernanda Bradaschia
@@ -795,7 +796,7 @@ export default function Materiais() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
-              <img src={logoLight} alt="Inovando na Sua Obra" className="h-10 opacity-60 mx-auto md:mx-0 mb-3" loading="lazy" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="h-16 md:h-20 opacity-70 mx-auto md:mx-0 mb-4" loading="lazy" />
               <p className="text-white/30 text-xs leading-relaxed">
                 Transformando a forma como arquitetas e designers gerenciam suas obras.
               </p>
