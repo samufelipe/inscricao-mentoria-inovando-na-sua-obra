@@ -764,7 +764,7 @@ export default function Materiais() {
 
                 {/* Mockup image */}
                 <div className="relative bg-gradient-to-b from-[#2a2a2a] to-[#242424] p-6 flex justify-center">
-                  <img src={ebookMockup} alt="E-book Domine a Sua Obra" className="w-full max-w-[200px] h-auto" loading="lazy" />
+                  <img src={ebookMockup} alt="E-book Domine a Sua Obra" className="w-full max-w-[200px] h-auto" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-1">
