@@ -412,6 +412,7 @@ export default function Materiais() {
                 />
               </div>
               <div>
+                <img src={logoDark} alt="Inovando na Sua Obra" className="h-14 md:h-20 mb-5 opacity-90" loading="lazy" />
                 <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Quem criou esses materiais</p>
                 <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-5">
                   Ingrid Zarza &<br />Fernanda Bradaschia
