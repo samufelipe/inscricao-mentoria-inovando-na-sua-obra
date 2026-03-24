@@ -242,7 +242,7 @@ export default function Materiais() {
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <img src={logoLight} alt="Inovando na Sua Obra" className="h-20 md:h-28 mb-6 opacity-90" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="w-[200px] md:w-[280px] lg:w-[320px] mb-8 opacity-90" />
             </motion.div>
 
             <motion.div
