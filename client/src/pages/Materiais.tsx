@@ -15,6 +15,22 @@ import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 import irmasObra from "@/assets/materiais/irmas-obra.png";
 
+/* ─── Architectural grid lines (matches Além da Tendência) ─── */
+function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
+  const color = variant === "dark" ? "bg-white" : "bg-[#1a1a1a]";
+  return (
+    <div className="absolute inset-0 pointer-events-none opacity-[0.04] z-[1]">
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "5%" }} />
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "35%" }} />
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "65%" }} />
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "95%" }} />
+      <div className={`absolute left-0 h-px w-full ${color}`} style={{ top: "10%" }} />
+      <div className={`absolute left-0 h-px w-full ${color}`} style={{ top: "50%" }} />
+      <div className={`absolute left-0 h-px w-full ${color}`} style={{ top: "90%" }} />
+    </div>
+  );
+}
+
 /* ─── Fade-in wrapper ─── */
 function FadeIn({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
