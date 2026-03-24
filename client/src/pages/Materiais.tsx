@@ -1038,6 +1038,9 @@ export default function Materiais() {
             <p className="text-white/30 text-[10px] mt-4 flex items-center justify-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento 100% seguro via Hotmart
             </p>
+          </FadeIn>
+        </div>
+      </section>
 
       {/* ═══════════════════ FOOTER ═══════════════════ */}
       <footer className="bg-[#111] py-10 border-t border-white/5">
