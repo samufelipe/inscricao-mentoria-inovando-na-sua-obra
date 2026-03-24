@@ -1003,7 +1003,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all inline-flex items-center justify-center gap-2 group"
               >
-                Quero o Kit Completo — 10% OFF
+                Quero o Kit Completo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
