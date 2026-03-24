@@ -556,27 +556,15 @@ export default function Materiais() {
                     é o que realmente funciona no dia a dia de quem vive obra.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-3 mt-6">
-                  <div className="flex items-center gap-2 text-xs text-[#1a1a1a]/50 bg-[#1a1a1a]/5 px-3 py-1.5">
-                    <Award className="w-3.5 h-3.5 text-[#C9A84C]" />
-                    12 anos de mercado
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-[#1a1a1a]/50 bg-[#1a1a1a]/5 px-3 py-1.5">
-                    <Building className="w-3.5 h-3.5 text-[#C9A84C]" />
-                    +250 obras
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-[#1a1a1a]/50 bg-[#1a1a1a]/5 px-3 py-1.5">
-                    <Users className="w-3.5 h-3.5 text-[#C9A84C]" />
-                    +100 alunas
-                  </div>
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={scrollToProducts}
+                    className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group"
+                  >
+                    Conhecer os materiais
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </button>
                 </div>
-                <button
-                  onClick={scrollToProducts}
-                  className="mt-6 bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
-                >
-                  Conhecer os materiais
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
               </div>
             </div>
           </div>
