@@ -709,7 +709,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ GARANTIA ═══════════════════ */}
       <FadeIn>
-        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc]">
+        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-2xl text-center">
             <ShieldCheck className="w-12 h-12 text-[#2E7D32] mx-auto mb-4" />
             <h2 className="font-display text-lg md:text-xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-3">
