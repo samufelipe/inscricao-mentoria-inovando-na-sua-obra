@@ -137,7 +137,6 @@ const SOCIAL_PROOF = [
   { value: 250, suffix: "+", label: "Obras gerenciadas", icon: Building },
   { value: 100, suffix: "+", label: "Alunas transformadas", icon: Users },
   { value: 12, suffix: "", label: "Anos de experiência", icon: Award },
-  { value: 0, suffix: "", label: "Criadoras da Mentoria Inovando na Sua Obra", icon: Star, isText: true },
 ];
 
 const PAIN_SCENARIOS = [
