@@ -370,19 +370,6 @@ export default function Materiais() {
               <img src={logoLight} alt="Inovando na Sua Obra" className="w-[200px] lg:w-[240px] mb-7 opacity-90" />
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex items-center gap-2 mb-4 text-[10px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
-            >
-              <span>Materiais Digitais</span>
-              <span className="text-white/20">·</span>
-              <span>Acesso Imediato</span>
-              <span className="text-white/20">·</span>
-              <span>Garantia 7 Dias</span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
