@@ -10,6 +10,7 @@ import Redirecionando from "./pages/Redirecionando";
 import TermosDeUso from "./pages/TermosDeUso";
 import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
 import Relatorio from "./pages/Relatorio";
+import Materiais from "./pages/Materiais";
 
 
 function Router() {
