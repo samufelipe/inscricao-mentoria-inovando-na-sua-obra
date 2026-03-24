@@ -274,10 +274,11 @@ export default function Materiais() {
             <motion.img
               src={checklistsMockup}
               alt="21 Checklists de Obra"
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="w-[165px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] relative z-[1]"
+              loading="lazy" decoding="async"
             />
             {/* Fade bottom */}
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#1a1a1a] to-transparent z-[4]" />
