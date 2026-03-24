@@ -15,6 +15,22 @@ import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 import irmasObra from "@/assets/materiais/irmas-obra.png";
 
+/* ─── Architectural grid lines (matches Além da Tendência) ─── */
+function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
+  const color = variant === "dark" ? "bg-white" : "bg-[#1a1a1a]";
+  return (
+    <div className="absolute inset-0 pointer-events-none opacity-[0.04] z-[1]">
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "5%" }} />
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "35%" }} />
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "65%" }} />
+      <div className={`absolute top-0 w-px h-full ${color}`} style={{ left: "95%" }} />
+      <div className={`absolute left-0 h-px w-full ${color}`} style={{ top: "10%" }} />
+      <div className={`absolute left-0 h-px w-full ${color}`} style={{ top: "50%" }} />
+      <div className={`absolute left-0 h-px w-full ${color}`} style={{ top: "90%" }} />
+    </div>
+  );
+}
+
 /* ─── Fade-in wrapper ─── */
 function FadeIn({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -219,13 +235,7 @@ export default function Materiais() {
           />
         </div>
 
-        {/* Grid lines */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-[2]">
-          <div className="absolute left-[5%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[35%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[65%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[95%] top-0 w-px h-full bg-white" />
-        </div>
+        <GridLines variant="dark" />
 
         {/* Content */}
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0">
@@ -326,8 +336,9 @@ export default function Materiais() {
 
       {/* ═══════════════════ SOCIAL PROOF NUMBERS ═══════════════════ */}
       <FadeIn>
-        <section className="py-10 md:py-14 bg-white border-b border-[#e8e4dc]">
-          <div className="container mx-auto px-4">
+        <section className="py-10 md:py-14 bg-white border-b border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
+          <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {SOCIAL_PROOF.map((item, i) => (
                 <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#faf9f6] relative">
@@ -353,10 +364,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ SEÇÃO DE DOR ═══════════════════ */}
       <section className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-          <div className="absolute left-[5%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[95%] top-0 w-px h-full bg-white" />
-        </div>
+        <GridLines variant="dark" />
         <div className="container mx-auto px-4 relative z-10 max-w-3xl">
           <FadeIn className="text-center mb-10">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Você se identifica?</p>
@@ -389,7 +397,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ QUEM SOMOS ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6]">
+        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl mx-auto">
               <div className="relative">
@@ -440,7 +449,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ ANCORAGEM DE PREÇO ═══════════════════ */}
       <FadeIn>
-        <section className="py-10 md:py-14 bg-white border-y border-[#e8e4dc]">
+        <section className="py-10 md:py-14 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl text-center">
             <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-4">
               Uma única obra mal gerenciada pode custar <strong className="text-[#1a1a1a]">milhares de reais</strong> em retrabalho,
@@ -456,10 +466,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ PRODUTOS ═══════════════════ */}
       <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-          <div className="absolute left-[5%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[95%] top-0 w-px h-full bg-white" />
-        </div>
+        <GridLines variant="dark" />
 
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn className="text-center mb-12">
@@ -682,7 +689,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ PARA QUEM É ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6]">
+        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Para quem é</p>
             <h2 className="font-display text-xl md:text-2xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-8 text-center">
@@ -702,7 +710,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ GARANTIA ═══════════════════ */}
       <FadeIn>
-        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc]">
+        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-2xl text-center">
             <ShieldCheck className="w-12 h-12 text-[#2E7D32] mx-auto mb-4" />
             <h2 className="font-display text-lg md:text-xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-3">
@@ -723,7 +732,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ FAQ ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6]">
+        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Dúvidas Frequentes</p>
             <h2 className="font-display text-xl md:text-2xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-8 text-center">
@@ -747,7 +757,8 @@ export default function Materiais() {
       </FadeIn>
 
       {/* ═══════════════════ CTA FINAL ═══════════════════ */}
-      <section className="py-16 md:py-20 bg-[#1a1a1a]">
+      <section className="py-16 md:py-20 bg-[#1a1a1a] relative overflow-hidden">
+        <GridLines variant="dark" />
         <div className="container mx-auto px-4 text-center max-w-2xl">
           <FadeIn>
             <h2 className="font-display text-xl md:text-2xl font-bold text-white uppercase tracking-tight mb-4">
