@@ -300,9 +300,9 @@ export default function Materiais() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-display text-[24px] sm:text-[28px] font-bold text-white leading-[1.1] uppercase tracking-wide mb-3"
             >
               Sua obra não precisa{" "}
