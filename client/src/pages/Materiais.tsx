@@ -526,12 +526,21 @@ export default function Materiais() {
             ))}
           </div>
 
-          <FadeIn className="mt-10 text-center">
+          <FadeIn className="mt-10 text-center space-y-4">
             <div className="inline-flex items-center gap-2 bg-[#2E7D32]/10 border border-[#2E7D32]/20 px-5 py-3">
               <Check className="w-5 h-5 text-[#2E7D32]" />
               <p className="text-sm text-white/80 font-medium">
                 A solução está em ter <strong className="text-[#C9A84C]">processos claros</strong> para cada etapa da obra
               </p>
+            </div>
+            <div>
+              <button
+                onClick={scrollToProducts}
+                className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
+              >
+                Quero resolver isso agora
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
             </div>
           </FadeIn>
         </div>
