@@ -35,14 +35,15 @@ function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
 /* ─── Fade-in wrapper ─── */
 function FadeIn({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: "easeOut", delay }}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay }}
       className={className}
+      style={{ willChange: "opacity, transform" }}
     >
       {children}
     </motion.div>
@@ -251,9 +252,9 @@ export default function Materiais() {
         <div className="w-full md:hidden flex flex-col relative z-[3]">
           {/* Logo top-left */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             className="pt-6 px-5 flex justify-center"
           >
             <img src={logoLight} alt="Inovando na Sua Obra" className="w-[120px] opacity-90 mx-auto" />
@@ -264,18 +265,20 @@ export default function Materiais() {
             <motion.img
               src={ebookMockup}
               alt="E-book Domine a Sua Obra"
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               className="w-[130px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] -mr-3 relative z-[2]"
+              loading="lazy" decoding="async"
             />
             <motion.img
               src={checklistsMockup}
               alt="21 Checklists de Obra"
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="w-[165px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] relative z-[1]"
+              loading="lazy" decoding="async"
             />
             {/* Fade bottom */}
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#1a1a1a] to-transparent z-[4]" />
@@ -286,7 +289,7 @@ export default function Materiais() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.35 }}
+              transition={{ duration: 0.5, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex items-center gap-2 mb-3 text-[9px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
             >
               <span>Materiais Digitais</span>
@@ -297,9 +300,9 @@ export default function Materiais() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-display text-[24px] sm:text-[28px] font-bold text-white leading-[1.1] uppercase tracking-wide mb-3"
             >
               Sua obra não precisa{" "}
@@ -307,9 +310,9 @@ export default function Materiais() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45 }}
+              transition={{ duration: 0.5, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-white/60 text-sm leading-relaxed mb-5 max-w-md"
             >
               21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
@@ -319,7 +322,7 @@ export default function Materiais() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-wrap items-center gap-4 mb-6"
             >
               {[
@@ -335,9 +338,9 @@ export default function Materiais() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.55 }}
+              transition={{ duration: 0.5, delay: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-col gap-3"
             >
               <button
@@ -363,14 +366,14 @@ export default function Materiais() {
         {/* ── DESKTOP LAYOUT ── */}
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0 flex-1 hidden md:flex items-center">
           <div className="max-w-xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
               <img src={logoLight} alt="Inovando na Sua Obra" className="w-[200px] lg:w-[240px] mb-7 opacity-90" />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex items-center gap-2 mb-4 text-[10px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
             >
               <span>Materiais Digitais</span>
@@ -381,9 +384,9 @@ export default function Materiais() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-display text-4xl lg:text-5xl font-bold text-white leading-[1.1] uppercase tracking-wide mb-4"
             >
               Sua obra não precisa{" "}
@@ -391,9 +394,9 @@ export default function Materiais() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-white/60 text-base leading-relaxed mb-6 max-w-md"
             >
               21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
@@ -403,7 +406,7 @@ export default function Materiais() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-wrap items-center gap-4 mb-8"
             >
               {[
@@ -419,9 +422,9 @@ export default function Materiais() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex flex-row gap-3"
             >
               <button
@@ -449,17 +452,17 @@ export default function Materiais() {
           <motion.img
             src={ebookMockup}
             alt="E-book Domine a Sua Obra"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             className="w-[180px] lg:w-[220px] xl:w-[260px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] -mr-6 relative z-[2]"
           />
           <motion.img
             src={checklistsMockup}
             alt="21 Checklists de Obra"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.45 }}
+            transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="w-[220px] lg:w-[270px] xl:w-[320px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] relative z-[1]"
           />
         </div>
@@ -467,7 +470,7 @@ export default function Materiais() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          transition={{ delay: 1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2"
         >
           <span className="text-white/20 text-[9px] uppercase tracking-widest">Descubra mais</span>
@@ -480,7 +483,7 @@ export default function Materiais() {
         <section className="py-10 md:py-14 bg-white border-b border-[#e8e4dc] relative overflow-hidden">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto">
               {SOCIAL_PROOF.map((item, i) => (
                 <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#f0ede8] relative">
                   <div className="absolute top-0 left-0 w-8 h-px bg-[#C9A84C]" />
@@ -551,7 +554,7 @@ export default function Materiais() {
                   src={inovandoObraImg}
                   alt="Ingrid Zarza e Fernanda Bradaschia"
                   className="w-full rounded-sm shadow-lg"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </div>
               <div>
@@ -696,7 +699,7 @@ export default function Materiais() {
 
                 {/* Mockup image */}
                 <div className="relative bg-gradient-to-b from-[#2a2a2a] to-[#242424] p-4 flex justify-center">
-                  <img src={checklistsMockup} alt="21 Checklists de Obra" className="w-full max-w-[280px] h-auto" loading="lazy" />
+                  <img src={checklistsMockup} alt="21 Checklists de Obra" className="w-full max-w-[280px] h-auto" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-1">
@@ -761,7 +764,7 @@ export default function Materiais() {
 
                 {/* Mockup image */}
                 <div className="relative bg-gradient-to-b from-[#2a2a2a] to-[#242424] p-6 flex justify-center">
-                  <img src={ebookMockup} alt="E-book Domine a Sua Obra" className="w-full max-w-[200px] h-auto" loading="lazy" />
+                  <img src={ebookMockup} alt="E-book Domine a Sua Obra" className="w-full max-w-[200px] h-auto" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-1">
@@ -1040,7 +1043,7 @@ export default function Materiais() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
-              <img src={logoLight} alt="Inovando na Sua Obra" className="h-10 md:h-12 opacity-70 mx-auto md:mx-0 mb-4" loading="lazy" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="h-10 md:h-12 opacity-70 mx-auto md:mx-0 mb-4" loading="lazy" decoding="async" />
               <p className="text-white/30 text-xs leading-relaxed">
                 Transformando a forma como arquitetas e designers gerenciam suas obras.
               </p>
@@ -1095,7 +1098,13 @@ function MobileStickyBar() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#C9A84C]/20 px-3 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 100, opacity: 0 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+      className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#C9A84C]/20 px-3 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]"
+    >
       <div className="flex gap-2">
         <button
           onClick={scrollToProducts}
@@ -1116,6 +1125,6 @@ function MobileStickyBar() {
       <p className="text-white/30 text-[9px] text-center mt-1.5 flex items-center justify-center gap-1">
         <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
       </p>
-    </div>
+    </motion.div>
   );
 }
