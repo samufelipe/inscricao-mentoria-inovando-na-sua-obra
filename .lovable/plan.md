@@ -1,50 +1,57 @@
 
 
-## Plano: Hero com Mockups dos Produtos como Background
+## Plano: Substituir mockups do Hero por novas imagens sem fundo
 
 ### O que muda
 
-Substituir a foto das mentoras (`irmas-obra.png`) por uma composicao visual dos mockups dos dois produtos (checklist no tablet + e-book no celular) como imagem de fundo do Hero.
+Substituir as imagens atuais dos mockups (`checklists-mockup.png` e `ebook-mockup.png`) pelas novas imagens enviadas (sem fundo), e reestruturar o layout do Hero, especialmente no mobile.
 
 ### Como sera feito
 
-**Arquivo:** `client/src/pages/Materiais.tsx`
+**1. Copiar as novas imagens para o projeto**
+- `user-uploads://3d2092c0-...` → `client/src/assets/materiais/checklists-mockup.png` (substituir)
+- `user-uploads://ea83a170-...` → `client/src/assets/materiais/ebook-mockup.png` (substituir)
 
-1. **Remover** a imagem `irmasObra` do background do Hero
-2. **Posicionar os dois mockups** (`checklistsMockup` e `ebookMockup`) como elementos absolutos no lado direito do Hero (desktop) ou atras do conteudo com fade (mobile):
-   - Desktop: os dois mockups flutuam lado a lado no lado direito com leve rotacao e sombra, criando profundidade (estilo "floating devices")
-   - Mobile: mockups aparecem no topo da secao com gradiente escuro forte por baixo para o texto permanecer legivel
-3. **Manter** o fundo base `#1a1a1a`, gradientes escuros no lado esquerdo (desktop) e inferior (mobile) para legibilidade do texto
-4. **Adicionar** leve glow dourado (#C9A84C com baixa opacidade) atras dos mockups como efeito de destaque
-5. **Manter** a logo, headline, sub-headline, badges e CTAs exatamente como estao, apenas ajustando z-index
+**2. Reestruturar o Hero mobile** (`client/src/pages/Materiais.tsx`)
 
-### Resultado visual
-
+Nova arquitetura mobile:
 ```text
-Desktop:
-┌──────────────────────────────────────────────┐
-│  [Logo]                    ┌─────┐ ┌───────┐ │
-│  Headline...               │ebook│ │checklist││
-│  Sub-headline...           │     │ │       │ │
-│  [CTA] [CTA]              └─────┘ └───────┘ │
-│  badges                        glow dourado  │
-└──────────────────────────────────────────────┘
-
-Mobile:
-┌──────────────┐
-│  mockups     │
-│  (fade out)  │
-│──────────────│
-│  [Logo]      │
-│  Headline    │
-│  [CTA]       │
-└──────────────┘
+┌──────────────────┐
+│ [Logo] (top-left) │
+│                    │
+│  ┌──────┐┌─────┐  │
+│  │tablet││phone│  │
+│  │check ││ebook│  │
+│  └──────┘└─────┘  │
+│                    │
+│  Headline          │
+│  Sub-headline      │
+│  [CTA] [CTA]      │
+│  badges            │
+└──────────────────┘
 ```
+
+- Logo posicionada no canto superior esquerdo com padding (pt-6 pl-5), fora do bloco de conteudo
+- Mockups centralizados abaixo da logo, com o checklist (tablet) levemente maior que o ebook (celular)
+- Checklist: `w-[180px]`, Ebook: `w-[140px]` no mobile
+- Fade gradient suave na transicao mockups → texto
+- Remover a logo duplicada que aparece dentro do bloco de conteudo no mobile
+
+**3. Ajustar o Hero desktop**
+
+- Manter layout lado a lado (conteudo esquerda, mockups direita)
+- Checklist um pouco maior: `xl:w-[320px]` (era 300px), proporcionalmente
+- Logo permanece no bloco de conteudo (canto superior esquerdo natural)
+
+**4. Ajustes visuais**
+
+- Remover `rotate` das imagens novas (as fotos ja tem perspectiva propria, rotacao adicional ficaria estranho)
+- Manter drop-shadow forte para destaque contra fundo escuro
+- Manter glow dourado atras dos mockups
 
 ### Detalhes tecnicos
 
-- Os mockups usam `drop-shadow` e leve `rotate` CSS (2-3 graus) para efeito editorial
-- Gradientes laterais/inferiores garantem contraste com o texto
-- Grid lines permanecem intactas
-- Nenhum outro arquivo alterado
+- Apenas o arquivo `Materiais.tsx` sera editado (alem da copia dos assets)
+- As novas imagens ja vem sem fundo, entao se integram naturalmente ao fundo escuro
+- z-index dos mockups permanece abaixo do conteudo textual
 
