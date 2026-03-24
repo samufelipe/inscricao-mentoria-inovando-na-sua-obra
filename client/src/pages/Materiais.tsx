@@ -262,6 +262,19 @@ export default function Materiais() {
 
           {/* Mockups centered */}
           <div className="relative flex justify-center items-end pt-6 pb-2 px-4">
+            {/* Badges overlay on mockups */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              className="absolute top-2 left-1/2 -translate-x-1/2 z-[5] flex items-center gap-2 text-[8px] uppercase tracking-[0.2em] text-[#C9A84C] font-medium bg-[#1a1a1a]/80 backdrop-blur-sm px-4 py-1.5 border border-[#C9A84C]/20 rounded-sm"
+            >
+              <span>Materiais Digitais</span>
+              <span className="text-white/20">·</span>
+              <span>Acesso Imediato</span>
+              <span className="text-white/20">·</span>
+              <span>Garantia 7 Dias</span>
+            </motion.div>
             <motion.img
               src={ebookMockup}
               alt="E-book Domine a Sua Obra"
@@ -286,19 +299,6 @@ export default function Materiais() {
 
           {/* Content */}
           <div className="px-5 pt-4 pb-8">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex items-center gap-2 mb-3 text-[9px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
-            >
-              <span>Materiais Digitais</span>
-              <span className="text-white/20">·</span>
-              <span>Acesso Imediato</span>
-              <span className="text-white/20">·</span>
-              <span>Garantia 7 Dias</span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
