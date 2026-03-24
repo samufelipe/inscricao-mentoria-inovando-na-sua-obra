@@ -289,7 +289,7 @@ export default function Materiais() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.35 }}
+              transition={{ duration: 0.5, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex items-center gap-2 mb-3 text-[9px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
             >
               <span>Materiais Digitais</span>
