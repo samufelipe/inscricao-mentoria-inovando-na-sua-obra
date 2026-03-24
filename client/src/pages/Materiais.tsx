@@ -596,12 +596,15 @@ export default function Materiais() {
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl text-center">
             <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-4">
-              Uma única obra mal gerenciada pode custar <strong className="text-[#1a1a1a]">milhares de reais</strong> em retrabalho,
-              atrasos e clientes insatisfeitos.
+              Um único retrabalho de piso pode custar <strong className="text-[#1a1a1a]">R$ 3.000 ou mais</strong>.
+              Atrasos, refações e clientes insatisfeitos corroem seu lucro e sua reputação.
             </p>
-            <p className="text-lg md:text-xl font-bold text-[#1a1a1a]">
-              Por menos que um almoço de negócios, você organiza{" "}
+            <p className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-2">
+              Por menos que um metro quadrado de porcelanato, você organiza{" "}
               <span className="text-[#C9A84C]">todas</span> as suas obras.
+            </p>
+            <p className="text-xs text-[#1a1a1a]/40">
+              3x de R$ 49,20 no combo · menos de R$ 50/mês para ter controle total
             </p>
           </div>
         </section>
