@@ -756,7 +756,8 @@ export default function Materiais() {
       </FadeIn>
 
       {/* ═══════════════════ CTA FINAL ═══════════════════ */}
-      <section className="py-16 md:py-20 bg-[#1a1a1a]">
+      <section className="py-16 md:py-20 bg-[#1a1a1a] relative overflow-hidden">
+        <GridLines variant="dark" />
         <div className="container mx-auto px-4 text-center max-w-2xl">
           <FadeIn>
             <h2 className="font-display text-xl md:text-2xl font-bold text-white uppercase tracking-tight mb-4">
