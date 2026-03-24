@@ -249,7 +249,7 @@ export default function Materiais() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="pt-6 pl-5"
+            className="pt-6 px-5 flex justify-center"
           >
             <img src={logoLight} alt="Inovando na Sua Obra" className="w-[120px] opacity-90 mx-auto" />
           </motion.div>
