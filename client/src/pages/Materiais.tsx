@@ -408,15 +408,16 @@ export default function Materiais() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-wrap items-center gap-4 mb-8"
+              className="flex items-center gap-5 mb-8"
             >
               {[
-                { label: "+250 obras", icon: Building },
-                { label: "+100 alunas", icon: Users },
-                { label: "12 anos", icon: Award },
+                { value: 250, suffix: "+", label: "obras", icon: Building },
+                { value: 100, suffix: "+", label: "alunas", icon: Users },
+                { value: 12, suffix: "", label: "anos", icon: Award },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-wider">
                   <item.icon className="w-3.5 h-3.5 text-[#C9A84C]/70" />
+                  <span className="text-white/70 font-bold"><AnimatedNumber value={item.value} suffix={item.suffix} /></span>
                   <span>{item.label}</span>
                 </div>
               ))}
