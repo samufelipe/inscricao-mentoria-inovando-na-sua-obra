@@ -972,7 +972,7 @@ export default function Materiais() {
               dentro de 7 dias e devolvemos 100% do seu investimento. Sem burocracia, sem perguntas.
             </p>
             <div className="flex items-center justify-center gap-6 text-[10px] text-[#1a1a1a]/40 uppercase tracking-wider">
-              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Pagamento seguro</span>
+              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart</span>
               <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> Acesso imediato</span>
               <span className="flex items-center gap-1"><CreditCard className="w-3.5 h-3.5" /> Até 3x sem juros</span>
             </div>
