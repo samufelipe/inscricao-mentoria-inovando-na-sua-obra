@@ -150,12 +150,18 @@ const PAIN_SCENARIOS = [
 ];
 
 const TARGET_AUDIENCE = [
-  "Arquitetas que acompanham obras e querem parar de improvisar",
-  "Designers de interiores que precisam de processos claros no canteiro",
-  "Profissionais que estão começando a atuar em obra e sentem insegurança",
-  "Quem já perdeu dinheiro com retrabalho e quer evitar que aconteça de novo",
-  "Profissionais que querem se posicionar como referência em gestão de obra",
-  "Quem busca mais confiança e organização no dia a dia da obra",
+  "Você entrega o projeto lindo, mas na obra sente que perde o controle",
+  "Já perdeu cliente por causa de atraso ou retrabalho que poderia ter sido evitado",
+  "Abre a planilha e não sabe se está no prazo ou no prejuízo",
+  "Quer parar de improvisar e ter processos claros no canteiro",
+  "Está começando a atuar em obra e sente insegurança",
+  "Quer se posicionar como referência em gestão de obra",
+];
+
+const NOT_FOR_AUDIENCE = [
+  "Quem busca fórmula mágica sem colocar em prática",
+  "Quem não atua ou não pretende atuar em obra",
+  "Quem espera conteúdo motivacional — aqui é processo e execução",
 ];
 
 const FAQ_ITEMS = [
