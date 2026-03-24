@@ -1,69 +1,54 @@
 
 
-## Corrigir Meta Tags OG para "/alem-da-tendencia" (Deploy Estatico)
+## Plano: Nova Página de Materiais Digitais · `/materiais`
 
-### Problema Identificado
-O `server/index.ts` que injeta as meta tags OG **nao roda em producao**. O site e deployado como **site estatico** (Vite build + Vercel/Lovable), e o `vercel.json` redireciona todas as rotas para o mesmo `index.html`. Os crawlers do WhatsApp, Instagram e LinkedIn recebem o HTML original sem nenhuma meta tag do evento.
+### Resumo
+Criar uma página de vendas para dois produtos digitais da Inovando Arquitetura, seguindo o design editorial das páginas Além da Tendência e Mentoria (dark theme, gold accents, tipografia premium, animações fade-in).
 
-### Solucao
-Criar um **script pos-build** que gera automaticamente uma versao do `index.html` com as meta tags OG do evento, e configurar o `vercel.json` para servir esse arquivo especifico na rota `/alem-da-tendencia`.
+### Dados dos Produtos
+- **Checklists Inovando na Sua Obra**: R$ 67,00
+- **E-book Domine a Sua Obra**: R$ 97,00
+- **Combo (ambos)**: R$ 147,60 (10% de desconto sobre R$ 164,00)
+- Links Hotmart: `F99460291O` (Checklists), link do E-book (extraído da página Hotmart)
 
-### Etapas
+### Prova Social
+- +250 Obras gerenciadas
+- +100 Alunas transformadas
+- 12 Anos de experiência
+- Criadoras da Mentoria Inovando na Sua Obra
 
-**1. Criar script `scripts/generate-og-pages.js`**
-- Apos o `vite build`, esse script le o `dist/public/index.html` (ja processado pelo Vite, com os scripts e CSS corretos)
-- Injeta as meta tags OG do evento:
-  - `og:title` = "Alem da Tendencia - Evento Presencial"
-  - `og:description` = "Evento presencial exclusivo para arquitetos e designers de interiores. Palestras, networking e conteudo pratico para transformar sua carreira e seus projetos."
-  - `og:image` = URL absoluta da logo do evento
-  - Twitter cards equivalentes
-- Substitui o `<title>` pelo titulo do evento
-- Troca o favicon pelo do evento
-- Salva como `dist/public/alem-da-tendencia.html`
+### Estrutura da Página (seções)
 
-**2. Atualizar `package.json`**
-- Modificar o script `build`:
-```text
-"build": "vite build && node scripts/generate-og-pages.js"
-```
+1. **Hero** · Background dark (#1a1a1a) com imagem das mentoras (reutilizar asset existente `inovando-obra-new.png`), logo Inovando, headline focada na dor ("Pare de perder dinheiro e tempo em obras desorganizadas"), badges de prova social
 
-**3. Atualizar `vercel.json`**
-- Adicionar rewrite especifico para `/alem-da-tendencia` ANTES do fallback generico:
-```text
-{
-  "outputDirectory": "dist/public",
-  "rewrites": [
-    { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
+2. **Prova Social** · 4 cards com números animados (+250 obras, +100 alunas, 12 anos, Mentoria Inovando) · Fundo claro com bordas gold
 
-### Como funciona
+3. **Quem Somos** · Apresentação de Ingrid Zarza e Fernanda Bradaschia · Foto + bio curta · Credibilidade e experiência
 
-```text
-Crawler do WhatsApp acessa /alem-da-tendencia
-  --> Vercel serve alem-da-tendencia.html (com OG tags do evento)
-  --> Preview mostra logo + titulo + descricao do evento
+4. **Produtos** · Dois cards lado a lado (mobile: empilhados):
+   - **Card Checklists** (R$ 67,00): descrição das dores que resolve, lista de benefícios, CTA para Hotmart
+   - **Card E-book** (R$ 97,00): descrição, benefícios, CTA para Hotmart
+   - **Card Combo** (destaque visual, badge "Mais Popular"): ambos por R$ 147,60, economia de R$ 16,40, CTA
 
-Crawler do WhatsApp acessa /
-  --> Vercel serve index.html (original, sem alteracoes)
-  --> Preview mostra dados da Mentoria como hoje
-```
+5. **Para Quem É** · Lista de perfis ideais (arquitetas que gerenciam obras, designers de interiores, profissionais que querem organizar processos)
 
-### Garantia de seguranca para o dominio principal
-- O `index.html` original NAO e modificado em nenhum momento
-- O script apenas LE o `index.html` e cria um NOVO arquivo separado
-- O `vercel.json` so redireciona `/alem-da-tendencia` para o novo arquivo
-- Todas as outras rotas (incluindo `/`) continuam servindo o `index.html` original
-- O comportamento do SPA (React/wouter) permanece identico em ambos os arquivos
+6. **Depoimentos/Resultados** · Reutilizar estrutura de testimonials existente
 
-### Arquivos modificados
-1. `scripts/generate-og-pages.js` -- novo (script pos-build)
-2. `package.json` -- alterar script `build`
-3. `vercel.json` -- adicionar rewrite especifico
+7. **FAQ** · Perguntas frequentes sobre os produtos digitais
 
-### Observacao
-- Apos o deploy, pode ser necessario limpar o cache do WhatsApp (pode levar ate 7 dias). Ferramentas como o Facebook Sharing Debugger podem forcar a atualizacao.
-- A URL da imagem OG usa o dominio `inovandonasuaobra.com.br` de forma fixa no script para garantir que funcione corretamente com os crawlers.
+8. **Footer** · Links institucionais, redes sociais, CNPJ
+
+### Detalhes Técnicos
+
+**Arquivos criados:**
+- `client/src/pages/Materiais.tsx` · Página completa self-contained (mesmo padrão do Home.tsx)
+
+**Arquivos editados:**
+- `client/src/App.tsx` · Adicionar rota `/materiais` apontando para o novo componente
+
+**Design system:** Reutilizar componentes existentes (`ArchitecturalSection`, `ArchitecturalTitle`, `ArchitecturalButton`, `FAQAccordion`) e padrões visuais (gold #C9A84C, dark #1a1a1a, green CTAs #2E7D32, framer-motion fade-in)
+
+**Checkout:** Cada CTA abre o link Hotmart em nova aba (`target="_blank"`)
+
+**Nenhuma alteração** nas páginas existentes (Home, AlemDaTendencia, Relatorio, etc.)
 
