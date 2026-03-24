@@ -366,7 +366,7 @@ export default function Materiais() {
         {/* ── DESKTOP LAYOUT ── */}
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0 flex-1 hidden md:flex items-center">
           <div className="max-w-xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
               <img src={logoLight} alt="Inovando na Sua Obra" className="w-[200px] lg:w-[240px] mb-7 opacity-90" />
             </motion.div>
 
