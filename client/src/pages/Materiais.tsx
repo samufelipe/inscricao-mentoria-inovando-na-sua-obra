@@ -235,13 +235,7 @@ export default function Materiais() {
           />
         </div>
 
-        {/* Grid lines */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-[2]">
-          <div className="absolute left-[5%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[35%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[65%] top-0 w-px h-full bg-white" />
-          <div className="absolute left-[95%] top-0 w-px h-full bg-white" />
-        </div>
+        <GridLines variant="dark" />
 
         {/* Content */}
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0">
