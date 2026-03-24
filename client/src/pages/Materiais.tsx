@@ -513,7 +513,7 @@ export default function Materiais() {
             <div>
               <button
                 onClick={scrollToProducts}
-                className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
+                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group w-full max-w-md mx-auto"
               >
                 Quero resolver isso agora
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
