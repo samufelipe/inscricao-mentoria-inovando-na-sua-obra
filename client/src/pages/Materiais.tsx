@@ -10,7 +10,8 @@ import { useIsMobile } from "@/hooks/useMobile";
 
 /* ─── Assets ─── */
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
-import logoImg from "@/assets/mentoria/logo.png";
+import logoLight from "@/assets/materiais/logo-inovando-light.png";
+import logoDark from "@/assets/materiais/logo-inovando-dark.png";
 import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 import irmasObra from "@/assets/materiais/irmas-obra.png";
