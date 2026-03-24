@@ -1125,6 +1125,6 @@ function MobileStickyBar() {
       <p className="text-white/30 text-[9px] text-center mt-1.5 flex items-center justify-center gap-1">
         <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
       </p>
-    </div>
+    </motion.div>
   );
 }
