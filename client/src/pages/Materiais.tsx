@@ -218,7 +218,7 @@ export default function Materiais() {
     <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#f0ede8] overflow-x-hidden w-full max-w-[100vw]">
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
-      <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden">
+      <section className="relative bg-[#1a1a1a] min-h-0 md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden">
         {/* Dark base */}
         <div className="absolute inset-0 bg-[#1a1a1a]" />
         {/* Desktop: gold glow behind mockups */}
