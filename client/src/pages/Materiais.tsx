@@ -161,7 +161,7 @@ const TARGET_AUDIENCE = [
 const NOT_FOR_AUDIENCE = [
   "Quem busca fórmula mágica sem colocar em prática",
   "Quem não atua ou não pretende atuar em obra",
-  "Quem espera conteúdo motivacional — aqui é processo e execução",
+  "Quem espera conteúdo motivacional: aqui é processo e execução",
 ];
 
 const FAQ_ITEMS = [
