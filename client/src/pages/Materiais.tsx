@@ -101,7 +101,7 @@ const PRODUCTS = {
       "Sempre apagando incêndio por falta de controle",
     ],
     hotmartUrl: "https://pay.hotmart.com/F99460291O?checkoutMode=10",
-    cta: "Quero organizar minhas obras",
+    cta: "Comprar Materiais Individuais",
   },
   ebook: {
     name: "E-book Domine a Sua Obra",
@@ -347,7 +347,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
-                Quero organizar minhas obras
+                Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
@@ -356,7 +356,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
-                Quero o Kit Completo com 10% OFF
+                Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </motion.div>
@@ -431,7 +431,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Quero organizar minhas obras
+                Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
@@ -440,7 +440,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Quero o Kit Completo com 10% OFF
+                Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </motion.div>
@@ -627,7 +627,7 @@ export default function Materiais() {
                   rel="noopener noreferrer"
                   className="mt-5 inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                 >
-                  Quero o Kit Completo com 10% OFF
+                  Garantir o Combo com 10% OFF
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <p className="text-white/40 text-[10px] mt-3 flex items-center justify-center gap-1">
@@ -889,7 +889,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
               >
-                Quero organizar minhas obras
+                Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -982,7 +982,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group"
               >
-                Quero organizar minhas obras
+                Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
@@ -991,7 +991,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Quero o Kit Completo com 10% OFF
+                Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
@@ -1082,7 +1082,7 @@ function MobileStickyBar() {
           rel="noopener noreferrer"
           className="flex-[2] bg-[#2E7D32] text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#256829] transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
         >
-          Quero o Kit Completo
+          Garantir o Combo
           <ArrowRight className="w-3.5 h-3.5" />
         </a>
       </div>
