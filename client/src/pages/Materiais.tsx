@@ -448,7 +448,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ ANCORAGEM DE PREÇO ═══════════════════ */}
       <FadeIn>
-        <section className="py-10 md:py-14 bg-white border-y border-[#e8e4dc]">
+        <section className="py-10 md:py-14 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl text-center">
             <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-4">
               Uma única obra mal gerenciada pode custar <strong className="text-[#1a1a1a]">milhares de reais</strong> em retrabalho,
