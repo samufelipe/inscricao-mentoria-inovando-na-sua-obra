@@ -150,12 +150,18 @@ const PAIN_SCENARIOS = [
 ];
 
 const TARGET_AUDIENCE = [
-  "Arquitetas que acompanham obras e querem parar de improvisar",
-  "Designers de interiores que precisam de processos claros no canteiro",
-  "Profissionais que estão começando a atuar em obra e sentem insegurança",
-  "Quem já perdeu dinheiro com retrabalho e quer evitar que aconteça de novo",
-  "Profissionais que querem se posicionar como referência em gestão de obra",
-  "Quem busca mais confiança e organização no dia a dia da obra",
+  "Você entrega o projeto lindo, mas na obra sente que perde o controle",
+  "Já perdeu cliente por causa de atraso ou retrabalho que poderia ter sido evitado",
+  "Abre a planilha e não sabe se está no prazo ou no prejuízo",
+  "Quer parar de improvisar e ter processos claros no canteiro",
+  "Está começando a atuar em obra e sente insegurança",
+  "Quer se posicionar como referência em gestão de obra",
+];
+
+const NOT_FOR_AUDIENCE = [
+  "Quem busca fórmula mágica sem colocar em prática",
+  "Quem não atua ou não pretende atuar em obra",
+  "Quem espera conteúdo motivacional — aqui é processo e execução",
 ];
 
 const FAQ_ITEMS = [
@@ -339,7 +345,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
-                Ver materiais
+                Quero organizar minhas obras
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
@@ -348,7 +354,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2 group w-full"
               >
-                Combo com 10% OFF
+                Quero o Kit Completo — 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </motion.div>
@@ -423,7 +429,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Ver materiais
+                Quero organizar minhas obras
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
@@ -432,7 +438,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2 group"
               >
-                Combo com 10% OFF
+                Quero o Kit Completo — 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </motion.div>
@@ -590,19 +596,72 @@ export default function Materiais() {
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl text-center">
             <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-4">
-              Uma única obra mal gerenciada pode custar <strong className="text-[#1a1a1a]">milhares de reais</strong> em retrabalho,
-              atrasos e clientes insatisfeitos.
+              Um único retrabalho de piso pode custar <strong className="text-[#1a1a1a]">R$ 3.000 ou mais</strong>.
+              Atrasos, refações e clientes insatisfeitos corroem seu lucro e sua reputação.
             </p>
-            <p className="text-lg md:text-xl font-bold text-[#1a1a1a]">
-              Por menos que um almoço de negócios, você organiza{" "}
+            <p className="text-lg md:text-xl font-bold text-[#1a1a1a] mb-2">
+              Por menos que um metro quadrado de porcelanato, você organiza{" "}
               <span className="text-[#C9A84C]">todas</span> as suas obras.
+            </p>
+            <p className="text-xs text-[#1a1a1a]/40">
+              3x de R$ 49,20 no combo · menos de R$ 50/mês para ter controle total
             </p>
           </div>
         </section>
       </FadeIn>
 
+      {/* ═══════════════════ STACK DE VALOR ═══════════════════ */}
+      <FadeIn>
+        <section className="py-12 md:py-16 bg-[#1a1a1a] relative overflow-hidden">
+          <GridLines variant="dark" />
+          <div className="container mx-auto px-4 max-w-2xl relative z-10">
+            <div className="border-2 border-[#C9A84C]/30 bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] p-6 md:p-8">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-5 text-center">O que você recebe no Combo</p>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center justify-between text-sm text-white/80">
+                  <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> 21 Checklists de Obra</span>
+                  <span className="text-white/40">R$ 67,00</span>
+                </div>
+                <div className="flex items-center justify-between text-sm text-white/80">
+                  <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> E-book Domine a Sua Obra</span>
+                  <span className="text-white/40">R$ 97,00</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-white/60">
+                  <Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> Acesso vitalício
+                </div>
+                <div className="flex items-center gap-2 text-sm text-white/60">
+                  <Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> Atualizações futuras inclusas
+                </div>
+                <div className="flex items-center gap-2 text-sm text-white/60">
+                  <Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> 7 dias de garantia incondicional
+                </div>
+              </div>
+
+              <div className="border-t border-[#C9A84C]/20 pt-5 text-center">
+                <p className="text-white/40 text-sm line-through mb-1">Valor total: R$ 164,00</p>
+                <p className="font-display text-3xl md:text-4xl font-bold text-white">R$ 147,60</p>
+                <p className="text-white/30 text-xs mt-1">ou 3x de R$ 49,20 no cartão</p>
+                <a
+                  href={COMBO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] group"
+                >
+                  Quero o Kit Completo — 10% OFF
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </a>
+                <p className="text-[#C9A84C]/60 text-[10px] font-semibold mt-3">
+                  Esse é o menor valor que esses materiais já tiveram juntos.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
       {/* ═══════════════════ PRODUTOS ═══════════════════ */}
-      <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
+      <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden border-t border-white/5">
         <GridLines variant="dark" />
 
         <div className="container mx-auto px-4 relative z-10">
@@ -751,9 +810,14 @@ export default function Materiais() {
           {/* Card Combo */}
           <FadeIn className="max-w-4xl mx-auto">
             <div className="relative bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] border-2 border-[#C9A84C]/40 p-6 md:p-8 overflow-hidden">
-              {/* Badge */}
-              <div className="absolute top-4 right-4 bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                Mais Popular
+              {/* Badges */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Mais Popular
+                </span>
+                <span className="bg-[#2E7D32] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Menor Preço
+                </span>
               </div>
 
               <div className="flex items-center gap-3 mb-4">
@@ -845,6 +909,27 @@ export default function Materiais() {
         </section>
       </FadeIn>
 
+      {/* ═══════════════════ PARA QUEM NÃO É ═══════════════════ */}
+      <FadeIn>
+        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
+          <div className="container mx-auto px-4 max-w-3xl">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-red-400/80 font-semibold mb-3 text-center">Para quem NÃO é</p>
+            <h2 className="font-display text-lg md:text-xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-6 text-center">
+              Esse material não é para todo mundo
+            </h2>
+            <div className="space-y-3 max-w-xl mx-auto">
+              {NOT_FOR_AUDIENCE.map((item, i) => (
+                <div key={i} className="flex items-start gap-3 bg-red-50 p-4 border-l-2 border-red-400/50">
+                  <X className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
+                  <p className="text-sm text-[#1a1a1a]/70">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
       {/* ═══════════════════ GARANTIA ═══════════════════ */}
       <FadeIn>
         <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
@@ -909,7 +994,7 @@ export default function Materiais() {
                 onClick={scrollToProducts}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group"
               >
-                Ver materiais disponíveis
+                Quero organizar minhas obras
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
@@ -918,7 +1003,7 @@ export default function Materiais() {
                 rel="noopener noreferrer"
                 className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all inline-flex items-center justify-center gap-2 group"
               >
-                Combo com 10% OFF
+                Quero o Kit Completo — 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
@@ -994,7 +1079,7 @@ function MobileStickyBar() {
         rel="noopener noreferrer"
         className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-3 px-5 uppercase tracking-wider text-[11px] hover:bg-[#d4b65c] transition-all inline-flex items-center gap-1.5 shrink-0"
       >
-        Quero o Combo
+        Quero o Kit Completo
         <ArrowRight className="w-3.5 h-3.5" />
       </a>
     </div>
