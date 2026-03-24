@@ -10,7 +10,8 @@ import { useIsMobile } from "@/hooks/useMobile";
 
 /* ─── Assets ─── */
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
-import logoImg from "@/assets/mentoria/logo.png";
+import logoLight from "@/assets/materiais/logo-inovando-light.png";
+import logoDark from "@/assets/materiais/logo-inovando-dark.png";
 import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 import irmasObra from "@/assets/materiais/irmas-obra.png";
@@ -208,7 +209,7 @@ export default function Materiais() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#faf9f6] overflow-x-hidden w-full max-w-[100vw]">
+    <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#f0ede8] overflow-x-hidden w-full max-w-[100vw]">
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
       <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex items-end md:items-center overflow-hidden">
@@ -241,7 +242,7 @@ export default function Materiais() {
         <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <img src={logoImg} alt="Inovando na Sua Obra" className="h-10 md:h-12 mb-6 brightness-0 invert opacity-70" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="h-12 md:h-14 mb-6 opacity-80" />
             </motion.div>
 
             <motion.div
@@ -341,7 +342,7 @@ export default function Materiais() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {SOCIAL_PROOF.map((item, i) => (
-                <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#faf9f6] relative">
+                <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#f0ede8] relative">
                   <div className="absolute top-0 left-0 w-8 h-px bg-[#C9A84C]" />
                   <div className="absolute top-0 left-0 w-px h-8 bg-[#C9A84C]" />
                   <item.icon className="w-5 h-5 text-[#C9A84C] mx-auto mb-2" />
@@ -397,7 +398,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ QUEM SOMOS ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
           <GridLines variant="light" />
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl mx-auto">
@@ -689,7 +690,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ PARA QUEM É ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Para quem é</p>
@@ -732,7 +733,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ FAQ ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#faf9f6] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Dúvidas Frequentes</p>
@@ -794,7 +795,7 @@ export default function Materiais() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
-              <img src={logoImg} alt="Inovando na Sua Obra" className="h-8 brightness-0 invert opacity-60 mx-auto md:mx-0 mb-3" loading="lazy" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="h-10 opacity-60 mx-auto md:mx-0 mb-3" loading="lazy" />
               <p className="text-white/30 text-xs leading-relaxed">
                 Transformando a forma como arquitetas e designers gerenciam suas obras.
               </p>
