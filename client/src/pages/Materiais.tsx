@@ -310,9 +310,9 @@ export default function Materiais() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45 }}
+              transition={{ duration: 0.5, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-white/60 text-sm leading-relaxed mb-5 max-w-md"
             >
               21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
