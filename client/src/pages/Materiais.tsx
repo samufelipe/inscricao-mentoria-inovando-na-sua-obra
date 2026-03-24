@@ -342,7 +342,7 @@ export default function Materiais() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {SOCIAL_PROOF.map((item, i) => (
-                <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#faf9f6] relative">
+                <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#f0ede8] relative">
                   <div className="absolute top-0 left-0 w-8 h-px bg-[#C9A84C]" />
                   <div className="absolute top-0 left-0 w-px h-8 bg-[#C9A84C]" />
                   <item.icon className="w-5 h-5 text-[#C9A84C] mx-auto mb-2" />
