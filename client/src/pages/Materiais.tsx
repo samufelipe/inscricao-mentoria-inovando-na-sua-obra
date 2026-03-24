@@ -384,9 +384,9 @@ export default function Materiais() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-display text-4xl lg:text-5xl font-bold text-white leading-[1.1] uppercase tracking-wide mb-4"
             >
               Sua obra não precisa{" "}
