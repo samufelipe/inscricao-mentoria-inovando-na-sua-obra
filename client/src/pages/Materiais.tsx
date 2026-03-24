@@ -810,9 +810,14 @@ export default function Materiais() {
           {/* Card Combo */}
           <FadeIn className="max-w-4xl mx-auto">
             <div className="relative bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] border-2 border-[#C9A84C]/40 p-6 md:p-8 overflow-hidden">
-              {/* Badge */}
-              <div className="absolute top-4 right-4 bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                Mais Popular
+              {/* Badges */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Mais Popular
+                </span>
+                <span className="bg-[#2E7D32] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Menor Preço
+                </span>
               </div>
 
               <div className="flex items-center gap-3 mb-4">
