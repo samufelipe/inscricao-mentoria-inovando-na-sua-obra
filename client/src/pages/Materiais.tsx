@@ -161,7 +161,7 @@ const TARGET_AUDIENCE = [
 const NOT_FOR_AUDIENCE = [
   "Quem busca fórmula mágica sem colocar em prática",
   "Quem não atua ou não pretende atuar em obra",
-  "Quem espera conteúdo motivacional — aqui é processo e execução",
+  "Quem espera conteúdo motivacional: aqui é processo e execução",
 ];
 
 const FAQ_ITEMS = [
@@ -352,9 +352,9 @@ export default function Materiais() {
                 href={COMBO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2 group w-full"
+                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
-                Quero o Kit Completo — 10% OFF
+                Quero o Kit Completo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </motion.div>
@@ -436,9 +436,9 @@ export default function Materiais() {
                 href={COMBO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2 group"
+                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Quero o Kit Completo — 10% OFF
+                Quero o Kit Completo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </motion.div>
@@ -526,12 +526,21 @@ export default function Materiais() {
             ))}
           </div>
 
-          <FadeIn className="mt-10 text-center">
+          <FadeIn className="mt-10 text-center space-y-4">
             <div className="inline-flex items-center gap-2 bg-[#2E7D32]/10 border border-[#2E7D32]/20 px-5 py-3">
               <Check className="w-5 h-5 text-[#2E7D32]" />
               <p className="text-sm text-white/80 font-medium">
                 A solução está em ter <strong className="text-[#C9A84C]">processos claros</strong> para cada etapa da obra
               </p>
+            </div>
+            <div>
+              <button
+                onClick={scrollToProducts}
+                className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
+              >
+                Quero resolver isso agora
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
             </div>
           </FadeIn>
         </div>
@@ -584,6 +593,13 @@ export default function Materiais() {
                     +100 alunas
                   </div>
                 </div>
+                <button
+                  onClick={scrollToProducts}
+                  className="mt-6 bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
+                >
+                  Conhecer os materiais
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
               </div>
             </div>
           </div>
@@ -646,12 +662,15 @@ export default function Materiais() {
                   href={COMBO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] group"
+                  className="mt-5 inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                 >
-                  Quero o Kit Completo — 10% OFF
+                  Quero o Kit Completo com 10% OFF
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
-                <p className="text-[#C9A84C]/60 text-[10px] font-semibold mt-3">
+                <p className="text-white/40 text-[10px] mt-3 flex items-center justify-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento seguro via Hotmart
+                </p>
+                <p className="text-[#C9A84C]/60 text-[10px] font-semibold mt-1">
                   Esse é o menor valor que esses materiais já tiveram juntos.
                 </p>
               </div>
@@ -734,7 +753,7 @@ export default function Materiais() {
                       {PRODUCTS.checklists.cta}
                     </a>
                     <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
-                      <Lock className="w-3 h-3" /> Acesso imediato após o pagamento
+                      <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
                   </div>
                 </div>
@@ -799,7 +818,7 @@ export default function Materiais() {
                       {PRODUCTS.ebook.cta}
                     </a>
                     <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
-                      <Lock className="w-3 h-3" /> Acesso imediato após o pagamento
+                      <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
                   </div>
                 </div>
@@ -873,13 +892,13 @@ export default function Materiais() {
                     href={COMBO_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] group"
+                    className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                   >
                     Quero o Combo Completo
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </a>
                   <p className="text-white/20 text-[10px] mt-2 flex items-center gap-1">
-                    <Lock className="w-3 h-3" /> Pagamento seguro · Acesso imediato
+                    <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart · Acesso imediato
                   </p>
                 </div>
               </div>
@@ -904,6 +923,15 @@ export default function Materiais() {
                   <p className="text-sm text-[#1a1a1a]/80">{item}</p>
                 </div>
               ))}
+            </div>
+            <div className="text-center mt-8">
+              <button
+                onClick={scrollToProducts}
+                className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
+              >
+                Quero organizar minhas obras
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
             </div>
           </div>
         </section>
@@ -944,7 +972,7 @@ export default function Materiais() {
               dentro de 7 dias e devolvemos 100% do seu investimento. Sem burocracia, sem perguntas.
             </p>
             <div className="flex items-center justify-center gap-6 text-[10px] text-[#1a1a1a]/40 uppercase tracking-wider">
-              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Pagamento seguro</span>
+              <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart</span>
               <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> Acesso imediato</span>
               <span className="flex items-center gap-1"><CreditCard className="w-3.5 h-3.5" /> Até 3x sem juros</span>
             </div>
@@ -1001,12 +1029,15 @@ export default function Materiais() {
                 href={COMBO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all inline-flex items-center justify-center gap-2 group"
+                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Quero o Kit Completo — 10% OFF
+                Quero o Kit Completo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
+            <p className="text-white/30 text-[10px] mt-4 flex items-center justify-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento 100% seguro via Hotmart
+            </p>
           </FadeIn>
         </div>
       </section>
@@ -1064,24 +1095,34 @@ function MobileStickyBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToProducts = () => {
+    document.getElementById("produtos")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#C9A84C]/20 px-4 py-3 flex items-center justify-between gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
-      <div className="flex flex-col">
-        <span className="text-white/40 text-[10px] line-through">R$ 164,00</span>
-        <span className="text-white font-bold text-lg leading-tight">R$ 147,60</span>
-        <span className="text-[#C9A84C] text-[10px] font-semibold">Combo · 10% OFF</span>
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#C9A84C]/20 px-3 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+      <div className="flex gap-2">
+        <button
+          onClick={scrollToProducts}
+          className="flex-1 bg-[#2E7D32]/20 border border-[#2E7D32]/40 text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#2E7D32]/30 transition-all text-center"
+        >
+          Ver Materiais
+        </button>
+        <a
+          href={COMBO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-[2] bg-[#2E7D32] text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#256829] transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
+        >
+          Quero o Kit Completo
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
       </div>
-      <a
-        href={COMBO_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-3 px-5 uppercase tracking-wider text-[11px] hover:bg-[#d4b65c] transition-all inline-flex items-center gap-1.5 shrink-0"
-      >
-        Quero o Kit Completo
-        <ArrowRight className="w-3.5 h-3.5" />
-      </a>
+      <p className="text-white/30 text-[9px] text-center mt-1.5 flex items-center justify-center gap-1">
+        <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
+      </p>
     </div>
   );
 }
