@@ -470,7 +470,7 @@ export default function Materiais() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          transition={{ delay: 1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2"
         >
           <span className="text-white/20 text-[9px] uppercase tracking-widest">Descubra mais</span>
