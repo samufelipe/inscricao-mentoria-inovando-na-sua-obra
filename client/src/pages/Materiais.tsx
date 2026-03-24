@@ -252,9 +252,9 @@ export default function Materiais() {
         <div className="w-full md:hidden flex flex-col relative z-[3]">
           {/* Logo top-left */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             className="pt-6 px-5 flex justify-center"
           >
             <img src={logoLight} alt="Inovando na Sua Obra" className="w-[120px] opacity-90 mx-auto" />
