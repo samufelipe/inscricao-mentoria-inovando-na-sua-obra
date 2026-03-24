@@ -323,15 +323,16 @@ export default function Materiais() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-wrap items-center gap-4 mb-6"
+              className="flex items-center justify-center gap-5 mb-6"
             >
               {[
-                { label: "+250 obras", icon: Building },
-                { label: "+100 alunas", icon: Users },
-                { label: "12 anos", icon: Award },
+                { value: 250, suffix: "+", label: "obras", icon: Building },
+                { value: 100, suffix: "+", label: "alunas", icon: Users },
+                { value: 12, suffix: "", label: "anos", icon: Award },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-wider">
                   <item.icon className="w-3.5 h-3.5 text-[#C9A84C]/70" />
+                  <span className="text-white/70 font-bold"><AnimatedNumber value={item.value} suffix={item.suffix} /></span>
                   <span>{item.label}</span>
                 </div>
               ))}
@@ -407,15 +408,16 @@ export default function Materiais() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="flex flex-wrap items-center gap-4 mb-8"
+              className="flex items-center gap-5 mb-8"
             >
               {[
-                { label: "+250 obras", icon: Building },
-                { label: "+100 alunas", icon: Users },
-                { label: "12 anos", icon: Award },
+                { value: 250, suffix: "+", label: "obras", icon: Building },
+                { value: 100, suffix: "+", label: "alunas", icon: Users },
+                { value: 12, suffix: "", label: "anos", icon: Award },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-wider">
                   <item.icon className="w-3.5 h-3.5 text-[#C9A84C]/70" />
+                  <span className="text-white/70 font-bold"><AnimatedNumber value={item.value} suffix={item.suffix} /></span>
                   <span>{item.label}</span>
                 </div>
               ))}
@@ -478,27 +480,6 @@ export default function Materiais() {
         </motion.div>
       </section>
 
-      {/* ═══════════════════ SOCIAL PROOF NUMBERS ═══════════════════ */}
-      <FadeIn>
-        <section className="py-10 md:py-14 bg-white border-b border-[#e8e4dc] relative overflow-hidden">
-          <GridLines variant="light" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto">
-              {SOCIAL_PROOF.map((item, i) => (
-                <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#f0ede8] relative">
-                  <div className="absolute top-0 left-0 w-8 h-px bg-[#C9A84C]" />
-                  <div className="absolute top-0 left-0 w-px h-8 bg-[#C9A84C]" />
-                  <item.icon className="w-5 h-5 text-[#C9A84C] mx-auto mb-2" />
-                  <p className="font-display text-2xl md:text-3xl font-bold text-[#1a1a1a]">
-                    <AnimatedNumber value={item.value} suffix={item.suffix} />
-                  </p>
-                  <p className="text-[10px] text-[#1a1a1a]/50 uppercase tracking-wider mt-1">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </FadeIn>
 
       {/* ═══════════════════ SEÇÃO DE DOR ═══════════════════ */}
       <section className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
