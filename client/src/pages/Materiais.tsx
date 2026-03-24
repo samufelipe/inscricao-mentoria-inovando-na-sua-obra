@@ -336,8 +336,8 @@ export default function Materiais() {
 
       {/* ═══════════════════ SOCIAL PROOF NUMBERS ═══════════════════ */}
       <FadeIn>
-        <section className="py-10 md:py-14 bg-white border-b border-[#e8e4dc]">
-          <div className="container mx-auto px-4">
+        <section className="py-10 md:py-14 bg-white border-b border-[#e8e4dc] relative overflow-hidden">
+          <GridLines variant="light" />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {SOCIAL_PROOF.map((item, i) => (
                 <div key={i} className="text-center p-4 md:p-6 border border-[#C9A84C]/15 bg-[#faf9f6] relative">
