@@ -699,7 +699,7 @@ export default function Materiais() {
 
                 {/* Mockup image */}
                 <div className="relative bg-gradient-to-b from-[#2a2a2a] to-[#242424] p-4 flex justify-center">
-                  <img src={checklistsMockup} alt="21 Checklists de Obra" className="w-full max-w-[280px] h-auto" loading="lazy" />
+                  <img src={checklistsMockup} alt="21 Checklists de Obra" className="w-full max-w-[280px] h-auto" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-1">
