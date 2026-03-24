@@ -213,8 +213,9 @@ export default function Materiais() {
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
       <section className="relative bg-[#1a1a1a] min-h-[100svh] md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden">
-        {/* Dark base + subtle gold glow behind mockups */}
+        {/* Dark base */}
         <div className="absolute inset-0 bg-[#1a1a1a]" />
+        {/* Desktop: gold glow behind mockups */}
         <div
           className="absolute z-[1] hidden md:block"
           style={{
@@ -226,55 +227,146 @@ export default function Materiais() {
             background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)",
           }}
         />
-        {/* Mobile: gold glow at top */}
+        {/* Mobile: gold glow behind mockups */}
         <div
           className="absolute z-[1] md:hidden"
           style={{
             left: "50%",
-            top: "15%",
+            top: "22%",
             transform: "translateX(-50%)",
-            width: "350px",
-            height: "350px",
+            width: "300px",
+            height: "300px",
             background: "radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)",
           }}
         />
 
         <GridLines variant="dark" />
 
-        {/* Mobile: Mockups at top with fade */}
-        <div className="relative w-full md:hidden pt-16 pb-4 flex justify-center items-center z-[3]">
-          <motion.img
-            src={ebookMockup}
-            alt="E-book Domine a Sua Obra"
-            initial={{ opacity: 0, y: 30, rotate: -3 }}
-            animate={{ opacity: 1, y: 0, rotate: -3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-[130px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] -mr-4 relative z-[2]"
-          />
-          <motion.img
-            src={checklistsMockup}
-            alt="21 Checklists de Obra"
-            initial={{ opacity: 0, y: 30, rotate: 2 }}
-            animate={{ opacity: 1, y: 0, rotate: 2 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="w-[160px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] relative z-[1]"
-          />
-          {/* Fade bottom into content */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1a1a1a] to-transparent z-[4]" />
+        {/* ── MOBILE LAYOUT ── */}
+        <div className="w-full md:hidden flex flex-col relative z-[3]">
+          {/* Logo top-left */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="pt-6 pl-5"
+          >
+            <img src={logoLight} alt="Inovando na Sua Obra" className="w-[120px] opacity-90" />
+          </motion.div>
+
+          {/* Mockups centered */}
+          <div className="relative flex justify-center items-end pt-6 pb-2 px-4">
+            <motion.img
+              src={ebookMockup}
+              alt="E-book Domine a Sua Obra"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="w-[130px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] -mr-3 relative z-[2]"
+            />
+            <motion.img
+              src={checklistsMockup}
+              alt="21 Checklists de Obra"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="w-[165px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] relative z-[1]"
+            />
+            {/* Fade bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#1a1a1a] to-transparent z-[4]" />
+          </div>
+
+          {/* Content */}
+          <div className="px-5 pt-4 pb-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="flex items-center gap-2 mb-3 text-[9px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
+            >
+              <span>Materiais Digitais</span>
+              <span className="text-white/20">·</span>
+              <span>Acesso Imediato</span>
+              <span className="text-white/20">·</span>
+              <span>Garantia 7 Dias</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="font-display text-[24px] sm:text-[28px] font-bold text-white leading-[1.1] uppercase tracking-wide mb-3"
+            >
+              Sua obra não precisa{" "}
+              <span className="text-[#C9A84C]">ser um caos</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="text-white/60 text-sm leading-relaxed mb-5 max-w-md"
+            >
+              21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
+              Organize seus processos, evite retrabalho e entregue com excelência.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="flex flex-wrap items-center gap-4 mb-6"
+            >
+              {[
+                { label: "+250 obras", icon: Building },
+                { label: "+100 alunas", icon: Users },
+                { label: "12 anos", icon: Award },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-wider">
+                  <item.icon className="w-3.5 h-3.5 text-[#C9A84C]/70" />
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.55 }}
+              className="flex flex-col gap-3"
+            >
+              <button
+                onClick={scrollToProducts}
+                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
+              >
+                Ver materiais
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <a
+                href={COMBO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#C9A84C] text-[#1a1a1a] font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#d4b65c] transition-all shadow-[0_4px_24px_rgba(201,168,76,0.3)] inline-flex items-center justify-center gap-2 group w-full"
+              >
+                Combo com 10% OFF
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0 flex-1 flex items-center">
+        {/* ── DESKTOP LAYOUT ── */}
+        <div className="container mx-auto px-5 md:px-8 relative z-10 pb-8 md:pb-0 flex-1 hidden md:flex items-center">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <img src={logoLight} alt="Inovando na Sua Obra" className="w-[140px] md:w-[200px] lg:w-[240px] mb-7 opacity-90" />
+              <img src={logoLight} alt="Inovando na Sua Obra" className="w-[200px] lg:w-[240px] mb-7 opacity-90" />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="flex items-center gap-2 mb-4 text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
+              className="flex items-center gap-2 mb-4 text-[10px] uppercase tracking-[0.25em] text-[#C9A84C]/80 font-medium"
             >
               <span>Materiais Digitais</span>
               <span className="text-white/20">·</span>
@@ -287,7 +379,7 @@ export default function Materiais() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-display text-[26px] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.1] uppercase tracking-wide mb-4"
+              className="font-display text-4xl lg:text-5xl font-bold text-white leading-[1.1] uppercase tracking-wide mb-4"
             >
               Sua obra não precisa{" "}
               <span className="text-[#C9A84C]">ser um caos</span>
@@ -297,13 +389,12 @@ export default function Materiais() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-md"
+              className="text-white/60 text-base leading-relaxed mb-6 max-w-md"
             >
               21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
               Organize seus processos, evite retrabalho e entregue com excelência.
             </motion.p>
 
-            {/* Social proof inline */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -326,7 +417,7 @@ export default function Materiais() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-3"
+              className="flex flex-row gap-3"
             >
               <button
                 onClick={scrollToProducts}
@@ -349,24 +440,25 @@ export default function Materiais() {
         </div>
 
         {/* Desktop: Floating mockups on the right */}
-        <div className="hidden md:flex absolute right-[6%] lg:right-[10%] top-1/2 -translate-y-1/2 z-[5] items-end gap-[-20px]">
+        <div className="hidden md:flex absolute right-[6%] lg:right-[10%] top-1/2 -translate-y-1/2 z-[5] items-end">
           <motion.img
             src={ebookMockup}
             alt="E-book Domine a Sua Obra"
-            initial={{ opacity: 0, y: 40, rotate: -4 }}
-            animate={{ opacity: 1, y: 0, rotate: -4 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
             className="w-[180px] lg:w-[220px] xl:w-[260px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] -mr-6 relative z-[2]"
           />
           <motion.img
             src={checklistsMockup}
             alt="21 Checklists de Obra"
-            initial={{ opacity: 0, y: 40, rotate: 3 }}
-            animate={{ opacity: 1, y: 0, rotate: 3 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.45 }}
-            className="w-[210px] lg:w-[260px] xl:w-[300px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] relative z-[1]"
+            className="w-[220px] lg:w-[270px] xl:w-[320px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] relative z-[1]"
           />
         </div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
