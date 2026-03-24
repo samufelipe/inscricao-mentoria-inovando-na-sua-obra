@@ -348,7 +348,25 @@ export default function Materiais() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Desktop: Floating mockups on the right */}
+        <div className="hidden md:flex absolute right-[6%] lg:right-[10%] top-1/2 -translate-y-1/2 z-[5] items-end gap-[-20px]">
+          <motion.img
+            src={ebookMockup}
+            alt="E-book Domine a Sua Obra"
+            initial={{ opacity: 0, y: 40, rotate: -4 }}
+            animate={{ opacity: 1, y: 0, rotate: -4 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="w-[180px] lg:w-[220px] xl:w-[260px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] -mr-6 relative z-[2]"
+          />
+          <motion.img
+            src={checklistsMockup}
+            alt="21 Checklists de Obra"
+            initial={{ opacity: 0, y: 40, rotate: 3 }}
+            animate={{ opacity: 1, y: 0, rotate: 3 }}
+            transition={{ duration: 0.9, delay: 0.45 }}
+            className="w-[210px] lg:w-[260px] xl:w-[300px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] relative z-[1]"
+          />
+        </div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
