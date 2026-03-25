@@ -483,6 +483,17 @@ export default function Materiais() {
       </section>
 
 
+      {/* ═══════════════════ URGENCY BANNER ═══════════════════ */}
+      <div className="bg-[#C9A84C]/10 border-y border-[#C9A84C]/20 py-3 relative z-10">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-3 text-center">
+          <Clock className="w-4 h-4 text-[#C9A84C] shrink-0" />
+          <p className="text-xs sm:text-sm text-[#1a1a1a]/80 font-medium">
+            <strong className="text-[#C9A84C]">Oferta por tempo limitado</strong> · Preço promocional pode encerrar a qualquer momento
+          </p>
+          <span className="w-2 h-2 bg-[#C9A84C] rounded-full animate-pulse shrink-0" />
+        </div>
+      </div>
+
       {/* ═══════════════════ SEÇÃO DE DOR ═══════════════════ */}
       <section className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
         <GridLines variant="dark" />
