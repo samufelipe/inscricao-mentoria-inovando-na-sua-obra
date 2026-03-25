@@ -92,6 +92,16 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
 
   return (
     <>
+      {/* Full-screen loading overlay while redirecting to checkout */}
+      {isRedirecting && (
+        <div className="fixed inset-0 z-[100] bg-black/80 flex flex-col items-center justify-center gap-4">
+          <Loader2 className="w-10 h-10 text-[#C9A84C] animate-spin" />
+          <p className="text-white text-sm font-semibold uppercase tracking-widest animate-pulse">
+            Abrindo checkout seguro...
+          </p>
+        </div>
+      )}
+
       {/* Hidden trigger for Hotmart overlay */}
       <button
         ref={triggerRef}
