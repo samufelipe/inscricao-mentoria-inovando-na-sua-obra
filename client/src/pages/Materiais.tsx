@@ -1054,7 +1054,10 @@ export default function Materiais() {
       </footer>
 
       {/* ═══════════════════ STICKY CTA MOBILE ═══════════════════ */}
-      {isMobile && <MobileStickyBar />}
+      {isMobile && <MobileStickyBar onOpenCheckout={() => openCheckout("combo")} />}
+
+      {/* ═══════════════════ LEAD CAPTURE MODAL ═══════════════════ */}
+      <LeadCaptureModal open={modalOpen} onOpenChange={setModalOpen} productKey={modalProduct} />
     </div>
   );
 }
