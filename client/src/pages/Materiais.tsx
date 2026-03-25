@@ -1063,7 +1063,7 @@ export default function Materiais() {
 }
 
 /* ─── Mobile Sticky CTA Bar ─── */
-function MobileStickyBar() {
+function MobileStickyBar({ onOpenCheckout }: { onOpenCheckout: () => void }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
