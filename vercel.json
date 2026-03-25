@@ -3,6 +3,7 @@
   "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
     { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
+    { "source": "/materiais", "destination": "/materiais.html" },
     {
       "source": "/(.*)",
       "destination": "/index.html"
