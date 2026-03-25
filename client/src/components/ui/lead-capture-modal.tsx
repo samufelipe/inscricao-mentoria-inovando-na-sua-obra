@@ -36,6 +36,7 @@ function buildFallbackUrl(productKey: string, email: string, name: string, phone
 
 export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCaptureModalProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -51,7 +52,6 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
     }
     setIsLoading(true);
 
-    // Save lead (non-blocking)
     try {
       await captureLead({
         name: formData.name,
@@ -63,37 +63,45 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
       console.error("Lead capture failed, proceeding to checkout");
     }
 
-    // Close our modal first
-    onOpenChange(false);
+    // Show redirecting state
     setIsLoading(false);
+    setIsRedirecting(true);
+    onOpenChange(false);
 
-    // Small delay to let our modal close, then open Hotmart
     setTimeout(() => {
       const { offer } = OFFER_MAP[productKey];
 
-      // Try overlay checkout
       if (window.checkoutElements && triggerRef.current) {
         try {
           const elements = window.checkoutElements.init("overlayCheckout", { offer });
           elements.attach("#hotmart-pay-trigger");
-          // Trigger click after attach
-          setTimeout(() => triggerRef.current?.click(), 100);
+          setTimeout(() => {
+            triggerRef.current?.click();
+            setIsRedirecting(false);
+          }, 100);
           return;
         } catch {
           // fall through to redirect
         }
       }
 
-      // Fallback: open in new tab with pre-filled data
-      window.open(
-        buildFallbackUrl(productKey, formData.email, formData.name, formData.phone),
-        "_blank"
-      );
+      // Fallback: open in SAME tab
+      window.location.href = buildFallbackUrl(productKey, formData.email, formData.name, formData.phone);
     }, 200);
   };
 
   return (
     <>
+      {/* Full-screen loading overlay while redirecting to checkout */}
+      {isRedirecting && (
+        <div className="fixed inset-0 z-[100] bg-black/80 flex flex-col items-center justify-center gap-4">
+          <Loader2 className="w-10 h-10 text-[#C9A84C] animate-spin" />
+          <p className="text-white text-sm font-semibold uppercase tracking-widest animate-pulse">
+            Abrindo checkout seguro...
+          </p>
+        </div>
+      )}
+
       {/* Hidden trigger for Hotmart overlay */}
       <button
         ref={triggerRef}
