@@ -981,15 +981,13 @@ export default function Materiais() {
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a
-                href={COMBO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => openCheckout("combo")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
             </div>
             <p className="text-white/30 text-[10px] mt-4 flex items-center justify-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento 100% seguro via Hotmart
