@@ -604,59 +604,8 @@ export default function Materiais() {
         </section>
       </FadeIn>
 
-      {/* ═══════════════════ STACK DE VALOR ═══════════════════ */}
-      <FadeIn>
-        <section className="py-12 md:py-16 bg-[#1a1a1a] relative overflow-hidden">
-          <GridLines variant="dark" />
-          <div className="container mx-auto px-4 max-w-2xl relative z-10">
-            <div className="border-2 border-[#C9A84C]/30 bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] p-6 md:p-8">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-5 text-center">O que você recebe no Combo</p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center justify-between text-sm text-white/80">
-                  <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> 21 Checklists de Obra</span>
-                  <span className="text-white/40">R$ 67,00</span>
-                </div>
-                <div className="flex items-center justify-between text-sm text-white/80">
-                  <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> E-book Domine a Sua Obra</span>
-                  <span className="text-white/40">R$ 97,00</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-white/60">
-                  <Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> Acesso vitalício
-                </div>
-                <div className="flex items-center gap-2 text-sm text-white/60">
-                  <Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> Atualizações futuras inclusas
-                </div>
-                <div className="flex items-center gap-2 text-sm text-white/60">
-                  <Check className="w-4 h-4 text-[#C9A84C] shrink-0" /> 7 dias de garantia incondicional
-                </div>
-              </div>
-
-              <div className="border-t border-[#C9A84C]/20 pt-5 text-center">
-                <p className="text-white/40 text-sm line-through mb-1">Valor total: R$ 164,00</p>
-                <p className="font-display text-3xl md:text-4xl font-bold text-white">R$ 147,60</p>
-                <p className="text-white/30 text-xs mt-1">ou 3x de R$ 49,20 no cartão</p>
-                <button
-                  onClick={() => openCheckout("combo")}
-                  className="mt-5 inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
-                >
-                  Garantir o Combo com 10% OFF
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
-                <p className="text-white/40 text-[10px] mt-3 flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento seguro via Hotmart
-                </p>
-                <p className="text-[#C9A84C]/60 text-[10px] font-semibold mt-1">
-                  Esse é o menor valor que esses materiais já tiveram juntos.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </FadeIn>
-
       {/* ═══════════════════ PRODUTOS ═══════════════════ */}
-      <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden border-t border-white/5">
+      <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
         <GridLines variant="dark" />
 
         <div className="container mx-auto px-4 relative z-10">
