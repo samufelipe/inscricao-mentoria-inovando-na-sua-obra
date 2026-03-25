@@ -4,9 +4,10 @@ import { motion, useInView } from "framer-motion";
 import {
   Check, BookOpen, ClipboardCheck, Package, Star, Award, Users, Building,
   ArrowRight, ShieldCheck, Instagram, Mail, X, Zap, Lock, CreditCard,
-  ChevronDown
+  ChevronDown, Clock, AlertTriangle
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMobile";
+import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
 
 /* ─── Assets ─── */
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
@@ -197,6 +198,13 @@ const FAQ_ITEMS = [
 
 export default function Materiais() {
   const isMobile = useIsMobile();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalProduct, setModalProduct] = useState<"checklists" | "ebook" | "combo">("combo");
+
+  const openCheckout = (product: "checklists" | "ebook" | "combo") => {
+    setModalProduct(product);
+    setModalOpen(true);
+  };
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -350,15 +358,13 @@ export default function Materiais() {
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a
-                href={COMBO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => openCheckout("combo")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
                 Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
             </motion.div>
           </div>
         </div>
@@ -421,15 +427,13 @@ export default function Materiais() {
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a
-                href={COMBO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => openCheckout("combo")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
             </motion.div>
           </div>
         </div>
@@ -478,6 +482,17 @@ export default function Materiais() {
         </motion.div>
       </section>
 
+
+      {/* ═══════════════════ URGENCY BANNER ═══════════════════ */}
+      <div className="bg-[#C9A84C]/10 border-y border-[#C9A84C]/20 py-3 relative z-10">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-3 text-center">
+          <Clock className="w-4 h-4 text-[#C9A84C] shrink-0" />
+          <p className="text-xs sm:text-sm text-[#1a1a1a]/80 font-medium">
+            <strong className="text-[#C9A84C]">Oferta por tempo limitado</strong> · Preço promocional pode encerrar a qualquer momento
+          </p>
+          <span className="w-2 h-2 bg-[#C9A84C] rounded-full animate-pulse shrink-0" />
+        </div>
+      </div>
 
       {/* ═══════════════════ SEÇÃO DE DOR ═══════════════════ */}
       <section className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
@@ -621,15 +636,13 @@ export default function Materiais() {
                 <p className="text-white/40 text-sm line-through mb-1">Valor total: R$ 164,00</p>
                 <p className="font-display text-3xl md:text-4xl font-bold text-white">R$ 147,60</p>
                 <p className="text-white/30 text-xs mt-1">ou 3x de R$ 49,20 no cartão</p>
-                <a
-                  href={COMBO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => openCheckout("combo")}
                   className="mt-5 inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                 >
                   Garantir o Combo com 10% OFF
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </button>
                 <p className="text-white/40 text-[10px] mt-3 flex items-center justify-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                 </p>
@@ -661,6 +674,9 @@ export default function Materiais() {
             {/* Card Checklists */}
             <FadeIn>
               <div className="bg-[#242424] border border-white/10 flex flex-col h-full relative group hover:border-[#C9A84C]/30 transition-colors overflow-hidden">
+                <div className="absolute top-3 right-3 z-10 bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-2.5 py-1">
+                  <span className="text-[9px] uppercase tracking-wider text-[#C9A84C] font-bold">Preço Promocional</span>
+                </div>
                 <div className="absolute top-0 left-0 w-12 h-px bg-[#C9A84C]" />
                 <div className="absolute top-0 left-0 w-px h-12 bg-[#C9A84C]" />
 
@@ -707,15 +723,14 @@ export default function Materiais() {
                       {PRODUCTS.checklists.priceDisplay}
                     </p>
                     <p className="text-white/30 text-xs mb-4">{PRODUCTS.checklists.installments}</p>
-                    <a
-                      href={PRODUCTS.checklists.hotmartUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => openCheckout("checklists")}
                       className="block w-full bg-[#2E7D32] text-white font-bold py-3.5 text-center uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)]"
                     >
                       {PRODUCTS.checklists.cta}
-                    </a>
-                    <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
+                    </button>
+                    <p className="text-[#C9A84C]/60 text-[9px] text-center mt-1.5 font-medium">Garanta antes que o preço aumente</p>
+                    <p className="text-white/20 text-[10px] text-center mt-1 flex items-center justify-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
                   </div>
@@ -726,6 +741,9 @@ export default function Materiais() {
             {/* Card E-book */}
             <FadeIn delay={0.1}>
               <div className="bg-[#242424] border border-white/10 flex flex-col h-full relative group hover:border-[#C9A84C]/30 transition-colors overflow-hidden">
+                <div className="absolute top-3 right-3 z-10 bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-2.5 py-1">
+                  <span className="text-[9px] uppercase tracking-wider text-[#C9A84C] font-bold">Preço Promocional</span>
+                </div>
                 <div className="absolute top-0 left-0 w-12 h-px bg-[#C9A84C]" />
                 <div className="absolute top-0 left-0 w-px h-12 bg-[#C9A84C]" />
 
@@ -772,15 +790,14 @@ export default function Materiais() {
                       {PRODUCTS.ebook.priceDisplay}
                     </p>
                     <p className="text-white/30 text-xs mb-4">{PRODUCTS.ebook.installments}</p>
-                    <a
-                      href={PRODUCTS.ebook.hotmartUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => openCheckout("ebook")}
                       className="block w-full bg-[#2E7D32] text-white font-bold py-3.5 text-center uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)]"
                     >
                       {PRODUCTS.ebook.cta}
-                    </a>
-                    <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
+                    </button>
+                    <p className="text-[#C9A84C]/60 text-[9px] text-center mt-1.5 font-medium">Garanta antes que o preço aumente</p>
+                    <p className="text-white/20 text-[10px] text-center mt-1 flex items-center justify-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
                   </div>
@@ -796,6 +813,9 @@ export default function Materiais() {
               <div className="absolute top-4 right-4 flex gap-2">
                 <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
                   Mais Popular
+                </span>
+                <span className="bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Oferta Limitada
                 </span>
               </div>
 
@@ -848,15 +868,13 @@ export default function Materiais() {
                   <p className="text-[#C9A84C] text-xs font-semibold mb-5">
                     Economia de R$ {COMBO_SAVINGS.toFixed(2).replace(".", ",")}
                   </p>
-                  <a
-                    href={COMBO_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => openCheckout("combo")}
                     className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                   >
                     Quero o Combo Completo
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </button>
                   <p className="text-white/20 text-[10px] mt-2 flex items-center gap-1">
                     <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart · Acesso imediato
                   </p>
@@ -985,15 +1003,13 @@ export default function Materiais() {
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a
-                href={COMBO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => openCheckout("combo")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Garantir o Combo com 10% OFF
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
             </div>
             <p className="text-white/30 text-[10px] mt-4 flex items-center justify-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento 100% seguro via Hotmart
@@ -1040,13 +1056,16 @@ export default function Materiais() {
       </footer>
 
       {/* ═══════════════════ STICKY CTA MOBILE ═══════════════════ */}
-      {isMobile && <MobileStickyBar />}
+      {isMobile && <MobileStickyBar onOpenCheckout={() => openCheckout("combo")} />}
+
+      {/* ═══════════════════ LEAD CAPTURE MODAL ═══════════════════ */}
+      <LeadCaptureModal open={modalOpen} onOpenChange={setModalOpen} productKey={modalProduct} />
     </div>
   );
 }
 
 /* ─── Mobile Sticky CTA Bar ─── */
-function MobileStickyBar() {
+function MobileStickyBar({ onOpenCheckout }: { onOpenCheckout: () => void }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -1076,15 +1095,13 @@ function MobileStickyBar() {
         >
           Ver Materiais
         </button>
-        <a
-          href={COMBO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={onOpenCheckout}
           className="flex-[2] bg-[#2E7D32] text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#256829] transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
         >
           Garantir o Combo
           <ArrowRight className="w-3.5 h-3.5" />
-        </a>
+        </button>
       </div>
       <p className="text-white/30 text-[9px] text-center mt-1.5 flex items-center justify-center gap-1">
         <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
