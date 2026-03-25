@@ -846,15 +846,13 @@ export default function Materiais() {
                   <p className="text-[#C9A84C] text-xs font-semibold mb-5">
                     Economia de R$ {COMBO_SAVINGS.toFixed(2).replace(".", ",")}
                   </p>
-                  <a
-                    href={COMBO_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => openCheckout("combo")}
                     className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                   >
                     Quero o Combo Completo
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </button>
                   <p className="text-white/20 text-[10px] mt-2 flex items-center gap-1">
                     <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart · Acesso imediato
                   </p>
