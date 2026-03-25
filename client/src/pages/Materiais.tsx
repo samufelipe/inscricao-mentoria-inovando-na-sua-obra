@@ -1093,15 +1093,13 @@ function MobileStickyBar({ onOpenCheckout }: { onOpenCheckout: () => void }) {
         >
           Ver Materiais
         </button>
-        <a
-          href={COMBO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={onOpenCheckout}
           className="flex-[2] bg-[#2E7D32] text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#256829] transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
         >
           Garantir o Combo
           <ArrowRight className="w-3.5 h-3.5" />
-        </a>
+        </button>
       </div>
       <p className="text-white/30 text-[9px] text-center mt-1.5 flex items-center justify-center gap-1">
         <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
