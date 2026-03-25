@@ -80,19 +80,29 @@ const PRODUCTS = {
     price: 67,
     priceDisplay: "R$ 67,00",
     installments: "ou 3x de R$ 22,33",
-    description: "21 checklists práticos para conferir cada etapa da obra. Do primeiro dia na obra até a vistoria final, com processos testados em mais de 250 obras reais.",
+    description: "Evite esquecimentos, ganhe tempo e entregue com mais segurança e profissionalismo. Criados com base em mais de 20 anos de vivência prática em obras de interiores.",
     mockup: checklistsMockup,
     benefits: [
-      "Início de Obra e Primeiro Dia",
-      "Levantamento e Demolição",
-      "Hidráulica e Ar-condicionado",
-      "Elétrica e Impermeabilização",
-      "Construção e Revestimentos",
-      "Forro de Gesso e Pintura",
-      "Iluminação e Pisos (Vinílico e Madeira)",
-      "Marcenaria e Marmoraria",
-      "Vidros, Box, Espelhos e Varanda",
+      "Início de Obra",
+      "Primeiro dia de obra",
+      "Levantamento",
+      "Demolição",
+      "Hidráulica",
+      "Ar-condicionado",
+      "Elétrica",
+      "Impermeabilização",
+      "Construção",
+      "Revestimentos",
+      "Forro de Gesso",
       "Portas e Janelas",
+      "Pintura",
+      "Iluminação",
+      "Piso Vinílico",
+      "Piso de Madeira",
+      "Marcenaria",
+      "Marmoraria",
+      "Vidros (Box e Espelhos)",
+      "Vidros (Fechamento de Varanda)",
       "Verificações Finais",
     ],
     painPoints: [
@@ -109,21 +119,22 @@ const PRODUCTS = {
     price: 97,
     priceDisplay: "R$ 97,00",
     installments: "ou 3x de R$ 32,33",
-    description: "O guia completo para dominar a gestão de obra do planejamento à entrega. Aprenda a liderar a obra com segurança, organizar cronogramas e se posicionar como referência.",
+    description: "Um guia completo para todos os profissionais que querem entender, de forma prática, como entregar uma obra sem dor de cabeça. Descubra a metodologia exclusiva de gerenciamento de obras da Inovando Arquitetura.",
     mockup: ebookMockup,
     benefits: [
-      "Planejamento de Obra (cronograma e orçamento)",
-      "Acompanhamento por Fases: Cinza, Branca e Colorida",
-      "Como se posicionar como líder na obra",
-      "Habilidades Técnicas + Emocionais para obra",
-      "Comunicação eficiente com cliente e equipe",
-      "Gestão de imprevistos e retrabalho",
+      "Planejamento de Obra na prática: prioridades, cronograma e orçamento",
+      "Etapas da Obra: Fase Cinza, Branca e Colorida",
+      "Como organizar sua rotina de visita e conferência",
+      "Comunicação eficiente com cliente, equipe e fornecedores",
+      "Gestão de imprevistos e como evitar retrabalho",
+      "Habilidades emocionais: controle emocional e postura de líder",
+      "Metodologia exclusiva da Inovando Arquitetura",
     ],
     painPoints: [
       "Se sente perdida quando começa a fase de obra",
-      "O projeto ficou lindo, mas a obra virou um pesadelo",
-      "Não sabe como se posicionar como líder na obra",
-      "Está sempre correndo atrás do prejuízo",
+      "Quer se posicionar como líder na obra, mas não sabe como",
+      "Sente que está sempre apagando incêndio, mesmo quando o projeto está lindo",
+      "Quer mais organização, previsibilidade e menos estresse na obra",
     ],
     hotmartUrl: "https://pay.hotmart.com/Q99258692R?off=ivk4h3rr&checkoutMode=10",
     cta: "Quero dominar a gestão de obra",
@@ -656,9 +667,9 @@ export default function Materiais() {
                   </ul>
 
                   <p className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C]/70 font-semibold mb-3">
-                    21 Checklists incluídos
+                    Os 21 checklists que você recebe
                   </p>
-                  <ul className="space-y-1.5 mb-6 flex-1">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 mb-6 flex-1">
                     {PRODUCTS.checklists.benefits.map((b, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-white/70">
                         <Check className="w-4 h-4 text-[#2E7D32] mt-0.5 shrink-0" />
