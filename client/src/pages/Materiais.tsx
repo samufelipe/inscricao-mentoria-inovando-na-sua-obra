@@ -625,15 +625,13 @@ export default function Materiais() {
                 <p className="text-white/40 text-sm line-through mb-1">Valor total: R$ 164,00</p>
                 <p className="font-display text-3xl md:text-4xl font-bold text-white">R$ 147,60</p>
                 <p className="text-white/30 text-xs mt-1">ou 3x de R$ 49,20 no cartão</p>
-                <a
-                  href={COMBO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => openCheckout("combo")}
                   className="mt-5 inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                 >
                   Garantir o Combo com 10% OFF
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </button>
                 <p className="text-white/40 text-[10px] mt-3 flex items-center justify-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                 </p>
