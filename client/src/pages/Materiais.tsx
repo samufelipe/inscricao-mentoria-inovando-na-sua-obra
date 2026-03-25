@@ -770,7 +770,7 @@ export default function Materiais() {
           <FadeIn className="max-w-4xl mx-auto">
             <div className="relative bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] border-2 border-[#C9A84C]/40 p-6 md:p-8 overflow-hidden">
               {/* Badges */}
-              <div className="absolute top-4 right-4 flex gap-2">
+              <div className="flex gap-2 mb-4">
                 <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
                   Mais Popular
                 </span>
