@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./dialog";
 import { Loader2, ArrowRight, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -20,32 +20,24 @@ interface LeadCaptureModalProps {
   productKey: "checklists" | "ebook" | "combo";
 }
 
-const OFFER_MAP: Record<string, { offer: string; product: string; bid?: string }> = {
+const OFFER_MAP: Record<string, { offer: string; product: string; bid?: string; off?: string }> = {
   checklists: { offer: "F99460291O", product: "materiais-checklists" },
-  ebook: { offer: "Q99258692R", product: "materiais-ebook" },
+  ebook: { offer: "Q99258692R", product: "materiais-ebook", off: "ivk4h3rr" },
   combo: { offer: "F99460291O", product: "materiais-combo", bid: "1774368616199" },
 };
+
+function buildFallbackUrl(productKey: string, email: string, name: string, phone: string) {
+  const { offer, bid, off } = OFFER_MAP[productKey];
+  let url = `https://pay.hotmart.com/${offer}?checkoutMode=10&email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&phonenumber=${encodeURIComponent(phone)}`;
+  if (bid) url += `&bid=${bid}`;
+  if (off) url += `&off=${off}`;
+  return url;
+}
 
 export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCaptureModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
-  const hiddenBtnRef = useRef<HTMLButtonElement>(null);
-  const attachedRef = useRef<string | null>(null);
-
-  // Attach Hotmart overlay to hidden button whenever productKey changes
-  useEffect(() => {
-    if (!window.checkoutElements || !hiddenBtnRef.current) return;
-    const { offer } = OFFER_MAP[productKey];
-    const key = `${productKey}-${offer}`;
-    if (attachedRef.current === key) return;
-    try {
-      const elements = window.checkoutElements.init("overlayCheckout", { offer });
-      elements.attach("#hotmart-checkout-trigger");
-      attachedRef.current = key;
-    } catch {
-      // widget not available
-    }
-  }, [productKey, open]);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -59,45 +51,56 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
     }
     setIsLoading(true);
 
+    // Save lead (non-blocking)
     try {
-      const { product } = OFFER_MAP[productKey];
       await captureLead({
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        product,
+        product: OFFER_MAP[productKey].product,
       });
     } catch {
       console.error("Lead capture failed, proceeding to checkout");
     }
 
-    // Try to trigger Hotmart overlay via hidden button click
-    if (window.checkoutElements && hiddenBtnRef.current) {
-      hiddenBtnRef.current.click();
-      setIsLoading(false);
-      onOpenChange(false);
-      return;
-    }
-
-    // Fallback: redirect to Hotmart checkout with pre-filled data
-    const { offer, bid } = OFFER_MAP[productKey];
-    let url = `https://pay.hotmart.com/${offer}?checkoutMode=10&email=${encodeURIComponent(formData.email)}&name=${encodeURIComponent(formData.name)}&phonenumber=${encodeURIComponent(formData.phone)}`;
-    if (bid) url += `&bid=${bid}`;
-    if (productKey === "ebook") url += `&off=ivk4h3rr`;
-    window.open(url, "_blank");
-
-    setIsLoading(false);
+    // Close our modal first
     onOpenChange(false);
+    setIsLoading(false);
+
+    // Small delay to let our modal close, then open Hotmart
+    setTimeout(() => {
+      const { offer } = OFFER_MAP[productKey];
+
+      // Try overlay checkout
+      if (window.checkoutElements && triggerRef.current) {
+        try {
+          const elements = window.checkoutElements.init("overlayCheckout", { offer });
+          elements.attach("#hotmart-pay-trigger");
+          // Trigger click after attach
+          setTimeout(() => triggerRef.current?.click(), 100);
+          return;
+        } catch {
+          // fall through to redirect
+        }
+      }
+
+      // Fallback: open in new tab with pre-filled data
+      window.open(
+        buildFallbackUrl(productKey, formData.email, formData.name, formData.phone),
+        "_blank"
+      );
+    }, 200);
   };
 
   return (
     <>
-      {/* Hidden button for Hotmart overlay attachment */}
+      {/* Hidden trigger for Hotmart overlay */}
       <button
-        ref={hiddenBtnRef}
-        id="hotmart-checkout-trigger"
-        style={{ display: "none" }}
+        ref={triggerRef}
+        id="hotmart-pay-trigger"
+        style={{ position: "fixed", opacity: 0, pointerEvents: "none", zIndex: -1 }}
         aria-hidden="true"
+        tabIndex={-1}
       />
 
       <Dialog open={open} onOpenChange={onOpenChange}>
