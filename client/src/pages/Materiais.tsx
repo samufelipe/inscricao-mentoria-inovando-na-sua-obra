@@ -772,14 +772,12 @@ export default function Materiais() {
                       {PRODUCTS.ebook.priceDisplay}
                     </p>
                     <p className="text-white/30 text-xs mb-4">{PRODUCTS.ebook.installments}</p>
-                    <a
-                      href={PRODUCTS.ebook.hotmartUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => openCheckout("ebook")}
                       className="block w-full bg-[#2E7D32] text-white font-bold py-3.5 text-center uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)]"
                     >
                       {PRODUCTS.ebook.cta}
-                    </a>
+                    </button>
                     <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
