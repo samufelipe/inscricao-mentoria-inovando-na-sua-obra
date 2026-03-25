@@ -729,7 +729,8 @@ export default function Materiais() {
                     >
                       {PRODUCTS.checklists.cta}
                     </button>
-                    <p className="text-white/20 text-[10px] text-center mt-2 flex items-center justify-center gap-1">
+                    <p className="text-[#C9A84C]/60 text-[9px] text-center mt-1.5 font-medium">Garanta antes que o preço aumente</p>
+                    <p className="text-white/20 text-[10px] text-center mt-1 flex items-center justify-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart
                     </p>
                   </div>
