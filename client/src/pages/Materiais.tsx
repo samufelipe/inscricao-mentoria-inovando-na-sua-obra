@@ -80,7 +80,7 @@ const PRODUCTS = {
     price: 67,
     priceDisplay: "R$ 67,00",
     installments: "ou 3x de R$ 22,33",
-    description: "21 checklists práticos para conferir cada etapa da obra. Do primeiro dia no canteiro até a vistoria final, com processos testados em mais de 250 obras reais.",
+    description: "21 checklists práticos para conferir cada etapa da obra. Do primeiro dia na obra até a vistoria final, com processos testados em mais de 250 obras reais.",
     mockup: checklistsMockup,
     benefits: [
       "Início de Obra e Primeiro Dia",
@@ -109,12 +109,12 @@ const PRODUCTS = {
     price: 97,
     priceDisplay: "R$ 97,00",
     installments: "ou 3x de R$ 32,33",
-    description: "O guia completo para dominar a gestão de obra do planejamento à entrega. Aprenda a liderar o canteiro com segurança, organizar cronogramas e se posicionar como referência.",
+    description: "O guia completo para dominar a gestão de obra do planejamento à entrega. Aprenda a liderar a obra com segurança, organizar cronogramas e se posicionar como referência.",
     mockup: ebookMockup,
     benefits: [
       "Planejamento de Obra (cronograma e orçamento)",
       "Acompanhamento por Fases: Cinza, Branca e Colorida",
-      "Como se posicionar como líder no canteiro",
+      "Como se posicionar como líder na obra",
       "Habilidades Técnicas + Emocionais para obra",
       "Comunicação eficiente com cliente e equipe",
       "Gestão de imprevistos e retrabalho",
@@ -122,7 +122,7 @@ const PRODUCTS = {
     painPoints: [
       "Se sente perdida quando começa a fase de obra",
       "O projeto ficou lindo, mas a obra virou um pesadelo",
-      "Não sabe como se posicionar como líder no canteiro",
+      "Não sabe como se posicionar como líder na obra",
       "Está sempre correndo atrás do prejuízo",
     ],
     hotmartUrl: "https://pay.hotmart.com/Q99258692R?off=ivk4h3rr&checkoutMode=10",
@@ -154,7 +154,7 @@ const TARGET_AUDIENCE = [
   "Você entrega o projeto lindo, mas na obra sente que perde o controle",
   "Já perdeu cliente por causa de atraso ou retrabalho que poderia ter sido evitado",
   "Abre a planilha e não sabe se está no prazo ou no prejuízo",
-  "Quer parar de improvisar e ter processos claros no canteiro",
+  "Quer parar de improvisar e ter processos claros na obra",
   "Está começando a atuar em obra e sente insegurança",
   "Quer se posicionar como referência em gestão de obra",
 ];
@@ -188,7 +188,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Qual a diferença entre os Checklists e o E-book?",
-    a: "Os 21 Checklists são ferramentas práticas de execução: listas que você leva pro canteiro e usa etapa por etapa. O E-book é um guia estratégico completo de gestão, com fundamentos, técnicas e estratégias para dominar todo o processo de obra, do planejamento à entrega.",
+    a: "Os 21 Checklists são ferramentas práticas de execução: listas que você leva pra obra e usa etapa por etapa. O E-book é um guia estratégico completo de gestão, com fundamentos, técnicas e estratégias para dominar todo o processo de obra, do planejamento à entrega.",
   },
   {
     q: "Consigo parcelar?",
@@ -565,7 +565,7 @@ export default function Materiais() {
                   </p>
                   <p>
                     Cada checklist e cada página do E-book foram criados com base em{" "}
-                    <strong className="text-[#1a1a1a]">experiências reais de canteiro</strong>. Nada de teoria vazia:
+                    <strong className="text-[#1a1a1a]">experiências reais de obra</strong>. Nada de teoria vazia:
                     é o que realmente funciona no dia a dia de quem vive obra.
                   </p>
                 </div>
@@ -615,7 +615,7 @@ export default function Materiais() {
               Escolha o material ideal para você
             </h2>
             <p className="text-white/50 text-sm max-w-lg mx-auto">
-              Ferramentas práticas criadas por quem vive o dia a dia do canteiro
+              Ferramentas práticas criadas por quem vive o dia a dia da obra
             </p>
           </FadeIn>
 
