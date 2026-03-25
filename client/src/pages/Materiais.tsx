@@ -198,6 +198,13 @@ const FAQ_ITEMS = [
 
 export default function Materiais() {
   const isMobile = useIsMobile();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalProduct, setModalProduct] = useState<"checklists" | "ebook" | "combo">("combo");
+
+  const openCheckout = (product: "checklists" | "ebook" | "combo") => {
+    setModalProduct(product);
+    setModalOpen(true);
+  };
 
   useEffect(() => {
     const prevTitle = document.title;
