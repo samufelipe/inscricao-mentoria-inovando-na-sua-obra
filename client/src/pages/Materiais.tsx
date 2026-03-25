@@ -564,7 +564,7 @@ export default function Materiais() {
               </div>
               <div>
                 
-                <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Quem criou esses materiais</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3">Criadoras dos materiais</p>
                 <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-5">
                   Ingrid Zarza &<br />Fernanda Bradaschia
                 </h2>
