@@ -4,9 +4,10 @@ import { motion, useInView } from "framer-motion";
 import {
   Check, BookOpen, ClipboardCheck, Package, Star, Award, Users, Building,
   ArrowRight, ShieldCheck, Instagram, Mail, X, Zap, Lock, CreditCard,
-  ChevronDown
+  ChevronDown, Clock, AlertTriangle
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMobile";
+import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
 
 /* ─── Assets ─── */
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
