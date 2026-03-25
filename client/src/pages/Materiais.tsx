@@ -674,6 +674,9 @@ export default function Materiais() {
             {/* Card Checklists */}
             <FadeIn>
               <div className="bg-[#242424] border border-white/10 flex flex-col h-full relative group hover:border-[#C9A84C]/30 transition-colors overflow-hidden">
+                <div className="absolute top-3 right-3 z-10 bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-2.5 py-1">
+                  <span className="text-[9px] uppercase tracking-wider text-[#C9A84C] font-bold">Preço Promocional</span>
+                </div>
                 <div className="absolute top-0 left-0 w-12 h-px bg-[#C9A84C]" />
                 <div className="absolute top-0 left-0 w-px h-12 bg-[#C9A84C]" />
 
