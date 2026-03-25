@@ -812,6 +812,9 @@ export default function Materiais() {
                 <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
                   Mais Popular
                 </span>
+                <span className="bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Oferta Limitada
+                </span>
               </div>
 
               <div className="flex items-center gap-3 mb-4">
