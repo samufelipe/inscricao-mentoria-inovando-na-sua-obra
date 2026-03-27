@@ -785,7 +785,7 @@ export default function Materiais() {
                   <h3 className="font-display text-lg md:text-xl font-bold text-white uppercase tracking-wide">
                     Combo Completo
                   </h3>
-                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + E-book com 10% de desconto</p>
+                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + Manual com 10% de desconto</p>
                 </div>
               </div>
 
@@ -802,7 +802,7 @@ export default function Materiais() {
                     </li>
                     <li className="flex items-center gap-2 text-sm text-white/70">
                       <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      E-book completo de gestão
+                      Manual completo de gestão
                     </li>
                     <li className="flex items-center gap-2 text-sm text-white/70">
                       <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
