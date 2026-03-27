@@ -313,7 +313,7 @@ export default function Home() {
               {[
                 { value: "+250", label: "Obras gerenciadas" },
                 { value: "+100", label: "Alunas transformadas" },
-                { value: "12", label: "Anos de experiência" },
+                { value: "20", label: "Anos de experiência" },
               ].map((s) => (
                 <div key={s.label} className="text-center">
                   <p className="text-4xl md:text-5xl font-bold text-white">{s.value}</p>
