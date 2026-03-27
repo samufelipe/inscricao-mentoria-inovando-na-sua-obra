@@ -149,7 +149,7 @@ const COMBO_URL = "https://pay.hotmart.com/F99460291O?checkoutMode=10&bid=177436
 const SOCIAL_PROOF = [
   { value: 250, suffix: "+", label: "Obras gerenciadas", icon: Building },
   { value: 100, suffix: "+", label: "Alunas transformadas", icon: Users },
-  { value: 12, suffix: "", label: "Anos de experiência", icon: Award },
+  { value: 20, suffix: "", label: "Anos de experiência", icon: Award },
 ];
 
 const PAIN_SCENARIOS = [
@@ -560,7 +560,7 @@ export default function Materiais() {
                 </h2>
                 <div className="space-y-4 text-sm text-[#1a1a1a]/70 leading-relaxed">
                   <p>
-                    Arquitetas com mais de <strong className="text-[#1a1a1a]">12 anos de experiência</strong> no mercado,
+                    Arquitetas com mais de <strong className="text-[#1a1a1a]">20 anos de experiência</strong> no mercado,
                     já gerenciaram mais de 250 obras e transformaram a carreira de centenas de profissionais
                     através da Mentoria Inovando na Sua Obra.
                   </p>
