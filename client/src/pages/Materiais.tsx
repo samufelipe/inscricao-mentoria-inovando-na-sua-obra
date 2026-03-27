@@ -115,7 +115,7 @@ const PRODUCTS = {
     cta: "Comprar Materiais Individuais",
   },
   ebook: {
-    name: "E-book Domine a Sua Obra",
+    name: "Manual de Gerenciamento da Sua Obra",
     price: 97,
     priceDisplay: "R$ 97,00",
     installments: "ou 3x de R$ 32,33",
@@ -179,7 +179,7 @@ const NOT_FOR_AUDIENCE = [
 const FAQ_ITEMS = [
   {
     q: "Os materiais são digitais?",
-    a: "Sim, tanto os 21 Checklists quanto o E-book são materiais 100% digitais. Após a compra, você recebe acesso imediato pela plataforma Hotmart.",
+    a: "Sim, tanto os 21 Checklists quanto o Manual são materiais 100% digitais. Após a compra, você recebe acesso imediato pela plataforma Hotmart.",
   },
   {
     q: "Como vou receber o material?",
@@ -198,8 +198,8 @@ const FAQ_ITEMS = [
     a: "Sim. Você tem 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeita, basta solicitar o reembolso dentro do prazo.",
   },
   {
-    q: "Qual a diferença entre os Checklists e o E-book?",
-    a: "Os 21 Checklists são ferramentas práticas de execução: listas que você leva pra obra e usa etapa por etapa. O E-book é um guia estratégico completo de gestão, com fundamentos, técnicas e estratégias para dominar todo o processo de obra, do planejamento à entrega.",
+    q: "Qual a diferença entre os Checklists e o Manual?",
+    a: "Os 21 Checklists são ferramentas práticas de execução: listas que você leva pra obra e usa etapa por etapa. O Manual é um guia estratégico completo de gestão, com fundamentos, técnicas e estratégias para dominar todo o processo de obra, do planejamento à entrega.",
   },
   {
     q: "Consigo parcelar?",
@@ -296,7 +296,7 @@ export default function Materiais() {
             </motion.div>
             <motion.img
               src={ebookMockup}
-              alt="E-book Domine a Sua Obra"
+              alt="Manual de Gerenciamento da Sua Obra"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
@@ -324,7 +324,7 @@ export default function Materiais() {
               transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-display text-[18px] sm:text-[22px] font-bold text-white leading-[1.2] uppercase tracking-wide mb-3"
             >
-              Os materiais que vão te dar <span className="text-[#C9A84C]">segurança em cada etapa da obra</span>
+              <span className="text-[#C9A84C]">Checklists de Obra de Interiores</span>{" "}+{" "}<span className="text-[#C9A84C]">Manual de Gerenciamento</span>
             </motion.h1>
 
             <motion.p
@@ -333,7 +333,7 @@ export default function Materiais() {
               transition={{ duration: 0.5, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-white/60 text-sm leading-relaxed mb-5 max-w-md"
             >
-              21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
+              21 Checklists + Manual criados por quem já gerenciou mais de 250 obras de interiores.
               Organize seus processos, evite retrabalho e entregue com excelência.
             </motion.p>
 
@@ -393,7 +393,7 @@ export default function Materiais() {
               transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-display text-3xl lg:text-4xl font-bold text-white leading-[1.15] uppercase tracking-wide mb-4"
             >
-              Os materiais que vão te dar <span className="text-[#C9A84C]">segurança em cada etapa da obra</span>
+              <span className="text-[#C9A84C]">Checklists de Obra de Interiores</span>{" "}+{" "}<span className="text-[#C9A84C]">Manual de Gerenciamento</span>
             </motion.h1>
 
             <motion.p
@@ -402,7 +402,7 @@ export default function Materiais() {
               transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-white/60 text-base leading-relaxed mb-6 max-w-md"
             >
-              21 Checklists + E-book criados por quem já gerenciou mais de 250 obras de interiores.
+              21 Checklists + Manual criados por quem já gerenciou mais de 250 obras de interiores.
               Organize seus processos, evite retrabalho e entregue com excelência.
             </motion.p>
 
@@ -466,7 +466,7 @@ export default function Materiais() {
           </motion.div>
           <motion.img
             src={ebookMockup}
-            alt="E-book Domine a Sua Obra"
+            alt="Manual de Gerenciamento da Sua Obra"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -575,7 +575,7 @@ export default function Materiais() {
                     através da Mentoria Inovando na Sua Obra.
                   </p>
                   <p>
-                    Cada checklist e cada página do E-book foram criados com base em{" "}
+                    Cada checklist e cada página do Manual foram criados com base em{" "}
                     <strong className="text-[#1a1a1a]">experiências reais de obra</strong>. Nada de teoria vazia:
                     é o que realmente funciona no dia a dia de quem vive obra.
                   </p>
@@ -698,7 +698,7 @@ export default function Materiais() {
               </div>
             </FadeIn>
 
-            {/* Card E-book */}
+            {/* Card Manual */}
             <FadeIn delay={0.1}>
               <div className="bg-[#242424] border border-white/10 flex flex-col h-full relative group hover:border-[#C9A84C]/30 transition-colors overflow-hidden">
                 <div className="absolute top-3 right-3 z-10 bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-2.5 py-1">
@@ -709,7 +709,7 @@ export default function Materiais() {
 
                 {/* Mockup image */}
                 <div className="relative bg-gradient-to-b from-[#2a2a2a] to-[#242424] p-6 flex justify-center">
-                  <img src={ebookMockup} alt="E-book Domine a Sua Obra" className="w-full max-w-[200px] h-auto" loading="lazy" decoding="async" />
+                  <img src={ebookMockup} alt="Manual de Gerenciamento da Sua Obra" className="w-full max-w-[200px] h-auto" loading="lazy" decoding="async" />
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-1">
@@ -785,7 +785,7 @@ export default function Materiais() {
                   <h3 className="font-display text-lg md:text-xl font-bold text-white uppercase tracking-wide">
                     Combo Completo
                   </h3>
-                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + E-book com 10% de desconto</p>
+                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + Manual com 10% de desconto</p>
                 </div>
               </div>
 
@@ -802,7 +802,7 @@ export default function Materiais() {
                     </li>
                     <li className="flex items-center gap-2 text-sm text-white/70">
                       <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      E-book completo de gestão
+                      Manual completo de gestão
                     </li>
                     <li className="flex items-center gap-2 text-sm text-white/70">
                       <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
