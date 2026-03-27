@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import {
   Check, BookOpen, ClipboardCheck, Package, Star, Award, Users, Building,
   ArrowRight, ShieldCheck, Instagram, Mail, X, Zap, Lock, CreditCard,
-  ChevronDown, Clock, AlertTriangle
+  ChevronDown, Clock, AlertTriangle, Download
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMobile";
 import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
