@@ -309,9 +309,12 @@ export default function Materiais() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="font-display text-[18px] sm:text-[22px] font-bold text-white leading-[1.2] uppercase tracking-wide mb-3"
+              className="font-display text-[20px] sm:text-[22px] font-bold text-white leading-[1.15] uppercase tracking-wide mb-3 text-center"
             >
-              <span className="text-[#C9A84C]">Checklists de Obra de Interiores</span>{" "}+{" "}<span className="text-[#C9A84C]">Manual de Gerenciamento</span>
+              <span className="text-[#C9A84C] block">Checklists de Obra</span>
+              <span className="text-[#C9A84C] block">de Interiores</span>
+              <span className="block text-white/60 text-[16px] sm:text-[18px] my-1">+</span>
+              <span className="text-[#C9A84C] block">Manual de Gerenciamento</span>
             </motion.h1>
 
             <motion.p
@@ -486,7 +489,7 @@ export default function Materiais() {
         <div className="container mx-auto px-4 flex items-center justify-center gap-3 text-center">
           <Clock className="w-4 h-4 text-[#C9A84C] shrink-0" />
           <p className="text-xs sm:text-sm text-[#1a1a1a]/80 font-medium">
-            <strong className="text-[#C9A84C]">Oferta por tempo limitado</strong> · Preço promocional pode encerrar a qualquer momento
+            <strong className="text-red-600">Oferta por tempo limitado</strong> · Preço promocional pode encerrar a qualquer momento
           </p>
           <span className="w-2 h-2 bg-[#C9A84C] rounded-full animate-pulse shrink-0" />
         </div>
