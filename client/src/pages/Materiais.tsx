@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import {
   Check, BookOpen, ClipboardCheck, Package, Star, Award, Users, Building,
   ArrowRight, ShieldCheck, Instagram, Mail, X, Zap, Lock, CreditCard,
-  ChevronDown, Clock, AlertTriangle
+  ChevronDown, Clock, AlertTriangle, Download
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMobile";
 import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
@@ -281,19 +281,6 @@ export default function Materiais() {
 
           {/* Mockups centered */}
           <div className="relative flex justify-center items-end pt-6 pb-2 px-4">
-            {/* Badges overlay on mockups */}
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="absolute -top-1 left-1/2 -translate-x-1/2 z-[5] flex items-center gap-2 text-[7px] uppercase tracking-[0.2em] text-[#C9A84C]/70 font-medium"
-            >
-              <span>Materiais Digitais</span>
-              <span className="text-white/20">·</span>
-              <span>Acesso Imediato</span>
-              <span className="text-white/20">·</span>
-              <span>Garantia 7 Dias</span>
-            </motion.div>
             <motion.img
               src={ebookMockup}
               alt="Manual de Gerenciamento da Sua Obra"
@@ -449,19 +436,6 @@ export default function Materiais() {
 
         {/* Desktop: Floating mockups on the right */}
         <div className="hidden md:flex absolute right-[6%] lg:right-[10%] top-1/2 -translate-y-1/2 z-[5] items-end">
-          {/* Badges overlay on mockups */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="absolute -top-8 left-1/2 -translate-x-1/2 z-[6] flex items-center gap-2 text-[9px] uppercase tracking-[0.2em] text-[#C9A84C]/70 font-medium whitespace-nowrap"
-          >
-            <span>Materiais Digitais</span>
-            <span className="text-white/20">·</span>
-            <span>Acesso Imediato</span>
-            <span className="text-white/20">·</span>
-            <span>Garantia 7 Dias</span>
-          </motion.div>
           <motion.img
             src={ebookMockup}
             alt="Manual de Gerenciamento da Sua Obra"
@@ -491,6 +465,21 @@ export default function Materiais() {
         </motion.div>
       </section>
 
+
+      {/* ═══════════════════ TRUST BADGES BAR ═══════════════════ */}
+      <div className="bg-[#1a1a1a] border-b border-white/[0.06] py-4 relative z-10">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-6 sm:gap-10">
+          <span className="flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-[0.15em] text-white/40 font-medium">
+            <Download className="w-3.5 h-3.5 text-[#C9A84C]/60" /> Materiais Digitais
+          </span>
+          <span className="flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-[0.15em] text-white/40 font-medium">
+            <Zap className="w-3.5 h-3.5 text-[#C9A84C]/60" /> Acesso Imediato
+          </span>
+          <span className="flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-[0.15em] text-white/40 font-medium">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C9A84C]/60" /> Garantia 7 Dias
+          </span>
+        </div>
+      </div>
 
       {/* ═══════════════════ URGENCY BANNER ═══════════════════ */}
       <div className="bg-[#C9A84C]/10 border-y border-[#C9A84C]/20 py-3 relative z-10">
