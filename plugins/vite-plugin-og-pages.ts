@@ -54,13 +54,13 @@ export default function generateOgPages() {
       const materiaisOgTags = `
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Materiais para Obra | Inovando na Sua Obra" />
-    <meta property="og:description" content="21 Checklists de Obra + E-book Domine a Sua Obra. Ferramentas práticas para arquitetas que querem obras mais organizadas, sem retrabalho e com mais segurança." />
+    <meta property="og:description" content="21 Checklists de Obra + Manual de Gerenciamento da Sua Obra. Ferramentas práticas para arquitetas que querem obras mais organizadas, sem retrabalho e com mais segurança." />
     <meta property="og:image" content="https://www.inovandonasuaobra.com.br/images/materiais/og-materiais.png" />
     <meta property="og:url" content="https://www.inovandonasuaobra.com.br/materiais" />
     <meta property="og:site_name" content="Inovando na Sua Obra" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Materiais para Obra | Inovando na Sua Obra" />
-    <meta name="twitter:description" content="21 Checklists de Obra + E-book Domine a Sua Obra. Ferramentas práticas para arquitetas que querem obras mais organizadas, sem retrabalho e com mais segurança." />
+    <meta name="twitter:description" content="21 Checklists de Obra + Manual de Gerenciamento da Sua Obra. Ferramentas práticas para arquitetas que querem obras mais organizadas, sem retrabalho e com mais segurança." />
     <meta name="twitter:image" content="https://www.inovandonasuaobra.com.br/images/materiais/og-materiais.png" />`;
 
       materiaisHtml = materiaisHtml.replace('<head>', `<head>${materiaisOgTags}`);
