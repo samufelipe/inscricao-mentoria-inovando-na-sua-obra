@@ -87,6 +87,20 @@ export function trackFooterNav(label: string) {
   push({ event: "footer_nav_click", nav_label: label });
 }
 
+// ── Initiate Checkout (maps to Meta Pixel InitiateCheckout) ─
+export function trackInitiateCheckout(productKey: string, value?: number) {
+  push({
+    event: "initiate_checkout",
+    product_key: productKey,
+    ...(value != null && { product_value: value }),
+  });
+}
+
+// ── Lead Captured (maps to Meta Pixel Lead) ─────────────────
+export function trackLeadCapture(productKey: string) {
+  push({ event: "lead_captured", product_key: productKey });
+}
+
 // ── Section Observer (auto-tracks when sections enter viewport) ──
 export function createSectionObserver() {
   if (typeof IntersectionObserver === "undefined") return null;

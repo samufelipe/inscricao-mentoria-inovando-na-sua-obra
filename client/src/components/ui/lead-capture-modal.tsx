@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./dialog";
 import { Loader2, ArrowRight, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { captureLead } from "@/lib/capture-lead";
+import { trackFormStart, trackFormFieldFocus, trackFormSubmit, trackInitiateCheckout, trackLeadCapture } from "@/lib/gtm-tracking";
 
 declare global {
   interface Window {
@@ -39,9 +40,22 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const formStartedRef = useRef(false);
+
+  // Track form open
+  useEffect(() => {
+    if (open) {
+      trackFormStart(`lead-capture-${productKey}`);
+      formStartedRef.current = false;
+    }
+  }, [open, productKey]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFieldFocus = (fieldName: string) => {
+    trackFormFieldFocus(`lead-capture-${productKey}`, fieldName);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,9 +73,13 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
         phone: formData.phone,
         product: OFFER_MAP[productKey].product,
       });
+      trackLeadCapture(productKey);
     } catch {
       console.error("Lead capture failed, proceeding to checkout");
     }
+
+    trackFormSubmit(`lead-capture-${productKey}`, true);
+    trackInitiateCheckout(productKey, productKey === "combo" ? 147.60 : productKey === "checklists" ? 67 : 97);
 
     // Show redirecting state
     setIsLoading(false);
@@ -136,6 +154,7 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
                 <label className="text-[10px] uppercase tracking-[0.15em] text-white/40 font-semibold">Nome completo</label>
                 <input
                   name="name" type="text" required value={formData.name} onChange={handleChange}
+                  onFocus={() => handleFieldFocus("name")}
                   placeholder="Seu nome"
                   className="w-full bg-white/5 border border-white/10 text-white text-sm px-4 py-3 outline-none focus:border-[#C9A84C]/50 transition-colors placeholder:text-white/20"
                 />
@@ -144,6 +163,7 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
                 <label className="text-[10px] uppercase tracking-[0.15em] text-white/40 font-semibold">E-mail</label>
                 <input
                   name="email" type="email" required value={formData.email} onChange={handleChange}
+                  onFocus={() => handleFieldFocus("email")}
                   placeholder="seu@email.com"
                   className="w-full bg-white/5 border border-white/10 text-white text-sm px-4 py-3 outline-none focus:border-[#C9A84C]/50 transition-colors placeholder:text-white/20"
                 />
@@ -152,6 +172,7 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
                 <label className="text-[10px] uppercase tracking-[0.15em] text-white/40 font-semibold">WhatsApp</label>
                 <input
                   name="phone" type="tel" required value={formData.phone} onChange={handleChange}
+                  onFocus={() => handleFieldFocus("phone")}
                   placeholder="(00) 00000-0000"
                   className="w-full bg-white/5 border border-white/10 text-white text-sm px-4 py-3 outline-none focus:border-[#C9A84C]/50 transition-colors placeholder:text-white/20"
                 />
