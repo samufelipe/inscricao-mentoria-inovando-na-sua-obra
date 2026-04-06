@@ -367,14 +367,14 @@ export default function Materiais() {
               className="flex flex-col gap-3"
             >
               <button
-                onClick={scrollToProducts}
+                onClick={() => scrollToProducts("hero-mobile")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <button
-                onClick={() => openCheckout("combo")}
+                onClick={() => openCheckout("combo", "hero-mobile")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
                 Garantir o Combo com 10% OFF
@@ -435,14 +435,14 @@ export default function Materiais() {
               className="flex flex-row gap-3"
             >
               <button
-                onClick={scrollToProducts}
+                onClick={() => scrollToProducts("hero-desktop")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <button
-                onClick={() => openCheckout("combo")}
+                onClick={() => openCheckout("combo", "hero-desktop")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Garantir o Combo com 10% OFF
@@ -511,7 +511,7 @@ export default function Materiais() {
       </div>
 
       {/* ═══════════════════ SEÇÃO DE DOR ═══════════════════ */}
-      <section className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden" data-track-section="dor">
         <GridLines variant="dark" />
         <div className="container mx-auto px-4 relative z-10 max-w-3xl">
           <FadeIn className="text-center mb-10">
@@ -541,7 +541,7 @@ export default function Materiais() {
             </div>
             <div>
               <button
-                onClick={scrollToProducts}
+                onClick={() => scrollToProducts("dor")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group w-full max-w-md mx-auto"
               >
                 Quero resolver isso agora
@@ -554,7 +554,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ QUEM SOMOS ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden" data-track-section="criadoras">
           <GridLines variant="light" />
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl mx-auto">
@@ -587,7 +587,7 @@ export default function Materiais() {
                 </div>
                 <div className="mt-8 text-center">
                   <button
-                    onClick={scrollToProducts}
+                    onClick={() => scrollToProducts("criadoras")}
                     className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group"
                   >
                     Conhecer os materiais
@@ -602,7 +602,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ ANCORAGEM DE PREÇO ═══════════════════ */}
       <FadeIn>
-        <section className="py-10 md:py-14 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+        <section className="py-10 md:py-14 bg-white border-y border-[#e8e4dc] relative overflow-hidden" data-track-section="ancoragem">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl text-center">
             <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-4">
@@ -619,7 +619,7 @@ export default function Materiais() {
       </FadeIn>
 
       {/* ═══════════════════ PRODUTOS ═══════════════════ */}
-      <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden">
+      <section id="produtos" className="py-16 md:py-24 bg-[#1a1a1a] relative overflow-hidden" data-track-section="produtos">
         <GridLines variant="dark" />
 
         <div className="container mx-auto px-4 relative z-10">
@@ -687,7 +687,7 @@ export default function Materiais() {
                     </p>
                     <p className="text-white/30 text-xs mb-4">{PRODUCTS.checklists.installments}</p>
                     <button
-                      onClick={() => openCheckout("checklists")}
+                      onClick={() => openCheckout("checklists", "card-checklists")}
                       className="block w-full bg-[#2E7D32] text-white font-bold py-3.5 text-center uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)]"
                     >
                       {PRODUCTS.checklists.cta}
@@ -754,7 +754,7 @@ export default function Materiais() {
                     </p>
                     <p className="text-white/30 text-xs mb-4">{PRODUCTS.ebook.installments}</p>
                     <button
-                      onClick={() => openCheckout("ebook")}
+                      onClick={() => openCheckout("ebook", "card-ebook")}
                       className="block w-full bg-[#2E7D32] text-white font-bold py-3.5 text-center uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)]"
                     >
                       {PRODUCTS.ebook.cta}
@@ -832,7 +832,7 @@ export default function Materiais() {
                     Economia de R$ {COMBO_SAVINGS.toFixed(2).replace(".", ",")}
                   </p>
                   <button
-                    onClick={() => openCheckout("combo")}
+                    onClick={() => openCheckout("combo", "combo-destaque")}
                     className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                   >
                     Quero o Combo Completo
@@ -850,7 +850,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ PARA QUEM É ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden" data-track-section="para-quem-e">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Para quem é</p>
@@ -867,7 +867,7 @@ export default function Materiais() {
             </div>
             <div className="text-center mt-8">
               <button
-                onClick={scrollToProducts}
+                onClick={() => scrollToProducts("para-quem-e")}
                 className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
               >
                 Comprar Materiais Individuais
@@ -901,7 +901,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ GARANTIA ═══════════════════ */}
       <FadeIn>
-        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden">
+        <section className="py-12 md:py-16 bg-white border-y border-[#e8e4dc] relative overflow-hidden" data-track-section="garantia">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-2xl text-center">
             <ShieldCheck className="w-12 h-12 text-[#2E7D32] mx-auto mb-4" />
@@ -923,7 +923,7 @@ export default function Materiais() {
 
       {/* ═══════════════════ FAQ ═══════════════════ */}
       <FadeIn>
-        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#f0ede8] relative overflow-hidden" data-track-section="faq">
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Dúvidas Frequentes</p>
@@ -948,7 +948,7 @@ export default function Materiais() {
       </FadeIn>
 
       {/* ═══════════════════ CTA FINAL ═══════════════════ */}
-      <section className="py-16 md:py-20 bg-[#1a1a1a] relative overflow-hidden">
+      <section className="py-16 md:py-20 bg-[#1a1a1a] relative overflow-hidden" data-track-section="cta-final">
         <GridLines variant="dark" />
         <div className="container mx-auto px-4 text-center max-w-2xl">
           <FadeIn>
@@ -960,14 +960,14 @@ export default function Materiais() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
-                onClick={scrollToProducts}
+                onClick={() => scrollToProducts("cta-final")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group"
               >
                 Comprar Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <button
-                onClick={() => openCheckout("combo")}
+                onClick={() => openCheckout("combo", "cta-final")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
                 Garantir o Combo com 10% OFF
@@ -1019,7 +1019,7 @@ export default function Materiais() {
       </footer>
 
       {/* ═══════════════════ STICKY CTA MOBILE ═══════════════════ */}
-      {isMobile && <MobileStickyBar onOpenCheckout={() => openCheckout("combo")} />}
+      {isMobile && <MobileStickyBar onOpenCheckout={() => openCheckout("combo", "sticky-bar")} />}
 
       {/* ═══════════════════ LEAD CAPTURE MODAL ═══════════════════ */}
       <LeadCaptureModal open={modalOpen} onOpenChange={setModalOpen} productKey={modalProduct} />
