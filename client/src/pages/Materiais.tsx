@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMobile";
 import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
+import { trackCTAClick, initScrollTracking, createSectionObserver } from "@/lib/gtm-tracking";
 
 /* ─── Assets ─── */
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
@@ -212,7 +213,9 @@ export default function Materiais() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState<"checklists" | "ebook" | "combo">("combo");
 
-  const openCheckout = (product: "checklists" | "ebook" | "combo") => {
+  const openCheckout = (product: "checklists" | "ebook" | "combo", section: string) => {
+    const labels: Record<string, string> = { checklists: "Comprar Checklists", ebook: "Comprar Manual", combo: "Garantir Combo" };
+    trackCTAClick(labels[product] || product, section);
     setModalProduct(product);
     setModalOpen(true);
   };
@@ -223,13 +226,25 @@ export default function Materiais() {
     const link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
     const prevFavicon = link?.href || "";
     if (link) link.href = "/favicon-inovando.png";
+
+    // Scroll depth tracking
+    const cleanupScroll = initScrollTracking();
+
+    // Section visibility tracking
+    const observer = createSectionObserver();
+    const sections = document.querySelectorAll("[data-track-section]");
+    if (observer) sections.forEach(el => observer.observe(el));
+
     return () => {
       document.title = prevTitle;
       if (link) link.href = prevFavicon;
+      cleanupScroll();
+      if (observer) sections.forEach(el => observer.unobserve(el));
     };
   }, []);
 
-  const scrollToProducts = () => {
+  const scrollToProducts = (section: string) => {
+    trackCTAClick("Ver Produtos", section);
     document.getElementById("produtos")?.scrollIntoView({ behavior: "smooth" });
   };
 
