@@ -2,18 +2,47 @@
 
 ## Análise
 
-Concordo com você. As badges **"MATERIAIS DIGITAIS · ACESSO IMEDIATO · GARANTIA 7 DIAS"** estão flutuando sobre os mockups no Hero e competem visualmente com a headline. Removê-las do Hero vai limpar a seção e dar mais destaque à oferta principal.
+A página `/materiais` **não tem nenhum rastreamento GTM/dataLayer implementado**. Todos os eventos de tracking (`trackCTAClick`, `trackFormStart`, `trackFormSubmit`, etc.) existem apenas na página `/alem-da-tendencia` e seus componentes. O `LeadCaptureModal` também não dispara nenhum evento.
 
-**Sugestão:** Inserir essas informações como **selos de confiança** logo abaixo do Hero, na seção do banner de urgência ("Oferta por tempo limitado"), ou criar uma mini barra de trust badges entre o Hero e a próxima seção. Isso ficaria mais organizado e reforçaria a segurança no momento certo (próximo aos CTAs ou logo após o primeiro impacto).
+Isso significa que o Meta Pixel (configurado via GTM) não recebe nenhum dado de interação da página de materiais.
 
 ## Plano
 
-### 1. Remover badges do Hero
-- Remover o bloco `motion.div` com "Materiais Digitais · Acesso Imediato · Garantia 7 Dias" da versão **mobile** (linha ~289) e **desktop** (linha ~453).
+### 1. Adicionar eventos ao `LeadCaptureModal`
+No `client/src/components/ui/lead-capture-modal.tsx`:
+- **Modal aberto**: disparar `trackFormStart("lead-capture-{productKey}")` quando o modal abre
+- **Foco em campos**: disparar `trackFormFieldFocus` em cada input (name, email, phone)
+- **Submit com sucesso**: disparar `trackFormSubmit("lead-capture-{productKey}", true)` após capturar o lead
+- **Evento de checkout iniciado**: novo evento `initiate_checkout` com `product_key` para mapear ao evento `InitiateCheckout` do Meta Pixel no GTM
 
-### 2. Criar barra de trust badges abaixo do Hero
-- Adicionar uma faixa discreta entre o Hero e o banner de urgência (ou integrar ao próprio banner) com os 3 itens: **Materiais Digitais**, **Acesso Imediato**, **Garantia 7 Dias**, usando ícones sutis (ex: download, zap, shield) e estilo consistente com o design da página.
+### 2. Adicionar eventos aos CTAs da página Materiais
+No `client/src/pages/Materiais.tsx`:
+- Importar `trackCTAClick` do `gtm-tracking.ts`
+- Adicionar `trackCTAClick` em cada `openCheckout()` com label e seção identificando o botão (ex: `"Comprar Agora"`, `"hero"` / `"card-checklists"` / `"card-ebook"` / `"combo-destaque"`)
+- Adicionar `trackCTAClick` em cada `scrollToProducts()` com label `"Ver Produtos"` e a seção correspondente
 
-### Arquivo alterado
-- `client/src/pages/Materiais.tsx`
+### 3. Adicionar scroll tracking e section observer à página Materiais
+No `client/src/pages/Materiais.tsx`:
+- Importar e inicializar `initScrollTracking()` e `createSectionObserver()` via `useEffect`
+- Adicionar atributos `data-track-section` nas seções principais: `"hero"`, `"urgencia"`, `"problema"`, `"o-que-voce-recebe"`, `"produtos"`, `"combo"`, `"criadoras"`, `"garantia"`, `"faq"`
+
+### 4. Adicionar novo evento `initiate_checkout` ao gtm-tracking.ts
+No `client/src/lib/gtm-tracking.ts`:
+- Nova função `trackInitiateCheckout(productKey, value)` que dispara evento `initiate_checkout` com dados do produto, alinhado ao padrão do Meta Pixel (`InitiateCheckout`)
+- Nova função `trackLeadCapture(productKey)` que dispara evento `lead_captured` para mapear ao evento `Lead` do Meta Pixel
+
+### Resumo de eventos para configurar no GTM
+| Evento dataLayer | Evento Meta Pixel |
+|---|---|
+| `cta_click` | `ViewContent` (custom) |
+| `form_start` | `AddToCart` (interesse) |
+| `form_submit` | `Lead` |
+| `initiate_checkout` | `InitiateCheckout` |
+| `scroll_depth` | Custom event |
+| `section_view` | `ViewContent` |
+
+### Arquivos alterados
+- `client/src/lib/gtm-tracking.ts` (2 novas funções)
+- `client/src/components/ui/lead-capture-modal.tsx` (tracking completo)
+- `client/src/pages/Materiais.tsx` (CTAs + scroll + section observer)
 
