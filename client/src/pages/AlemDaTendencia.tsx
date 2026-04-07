@@ -43,9 +43,34 @@ export default function AlemDaTendencia() {
     const prevFavicon = link?.href || "";
     if (link) link.href = "/favicon-alem-da-tendencia.png";
 
+    /* JSON-LD Event schema */
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Além da Tendência - Evento Presencial de Arquitetura",
+      "description": "Evento presencial durante a semana da Expo Revestir. Palestras sobre gestão de escritório, gestão de obra e projeto para arquitetas e designers de interiores.",
+      "startDate": "2026-03-10T13:30:00-03:00",
+      "endDate": "2026-03-10T19:00:00-03:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Auditório AFRESP",
+        "address": { "@type": "PostalAddress", "addressLocality": "São Paulo", "addressRegion": "SP", "addressCountry": "BR" }
+      },
+      "organizer": { "@type": "Organization", "name": "Inovando na Sua Obra", "url": "https://www.inovandonasuaobra.com.br" },
+      "image": "https://www.inovandonasuaobra.com.br/images/alem-da-tendencia/og-logo.png",
+      "offers": { "@type": "Offer", "priceCurrency": "BRL", "availability": "https://schema.org/InStock", "url": "https://www.inovandonasuaobra.com.br/alem-da-tendencia" }
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+
     return () => {
       document.title = prevTitle;
       if (link) link.href = prevFavicon;
+      document.head.removeChild(script);
     };
   }, []);
 
@@ -713,6 +738,8 @@ export default function AlemDaTendencia() {
                 <li><button onClick={() => { trackFooterNav("O Conceito"); document.getElementById("sobre")?.scrollIntoView({behavior: "smooth"}); }} className="hover:text-white transition-colors">O Conceito</button></li>
                 <li><button onClick={() => { trackFooterNav("Local"); document.getElementById("local")?.scrollIntoView({behavior: "smooth"}); }} className="hover:text-white transition-colors">Local</button></li>
                 <li><button onClick={() => { trackFooterNav("Inscrição"); document.getElementById("inscricao")?.scrollIntoView({behavior: "smooth"}); }} className="hover:text-white transition-colors">Inscrição</button></li>
+                <li><a href="/" className="hover:text-white transition-colors">Mentoria Inovando</a></li>
+                <li><a href="/materiais" className="hover:text-white transition-colors">Materiais para Obra</a></li>
               </ul>
             </div>
             

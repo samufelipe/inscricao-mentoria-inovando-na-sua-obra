@@ -222,7 +222,7 @@ export default function Materiais() {
 
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = "Materiais Digitais · Inovando na Sua Obra";
+    document.title = "Materiais para Obra | 21 Checklists + Manual de Gerenciamento";
     const link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
     const prevFavicon = link?.href || "";
     if (link) link.href = "/favicon-inovando.png";
@@ -235,11 +235,41 @@ export default function Materiais() {
     const sections = document.querySelectorAll("[data-track-section]");
     if (observer) sections.forEach(el => observer.observe(el));
 
+    /* JSON-LD Product + FAQ schema */
+    const jsonLd = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "21 Checklists de Obra de Interiores + Manual de Gerenciamento",
+        "description": "Kit completo com 21 checklists práticos para cada etapa da obra e manual estratégico de gerenciamento. Criados com base em mais de 250 obras reais.",
+        "brand": { "@type": "Organization", "name": "Inovando na Sua Obra" },
+        "offers": [
+          { "@type": "Offer", "name": "21 Checklists", "price": "67.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" },
+          { "@type": "Offer", "name": "Manual de Gerenciamento", "price": "97.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" },
+          { "@type": "Offer", "name": "Combo Completo", "price": "147.60", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": FAQ_ITEMS.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": { "@type": "Answer", "text": item.a }
+        }))
+      }
+    ];
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+
     return () => {
       document.title = prevTitle;
       if (link) link.href = prevFavicon;
       cleanupScroll();
       if (observer) sections.forEach(el => observer.unobserve(el));
+      document.head.removeChild(script);
     };
   }, []);
 
@@ -298,21 +328,21 @@ export default function Materiais() {
           <div className="relative flex justify-center items-end pt-6 pb-2 px-4">
             <motion.img
               src={ebookMockup}
-              alt="Manual de Gerenciamento da Sua Obra"
+              alt="Manual de Gerenciamento da Sua Obra - eBook digital"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               className="w-[130px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] -mr-3 relative z-[2]"
-              loading="lazy" decoding="async"
+              loading="eager" decoding="async"
             />
             <motion.img
               src={checklistsMockup}
-              alt="21 Checklists de Obra"
+              alt="21 Checklists de Obra de Interiores"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="w-[165px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] relative z-[1]"
-              loading="lazy" decoding="async"
+              loading="eager" decoding="async"
             />
             {/* Fade bottom */}
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#1a1a1a] to-transparent z-[4]" />
@@ -1003,8 +1033,10 @@ export default function Materiais() {
               </div>
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C]/60 font-semibold mb-3">Legal</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C]/60 font-semibold mb-3">Navegue</p>
               <div className="space-y-2">
+                <a href="/" className="block text-white/40 text-xs hover:text-[#C9A84C] transition-colors">Mentoria Inovando</a>
+                <a href="/alem-da-tendencia" className="block text-white/40 text-xs hover:text-[#C9A84C] transition-colors">Evento Além da Tendência</a>
                 <a href="/termos-de-uso" className="block text-white/40 text-xs hover:text-[#C9A84C] transition-colors">Termos de Uso</a>
                 <a href="/politica-de-privacidade" className="block text-white/40 text-xs hover:text-[#C9A84C] transition-colors">Política de Privacidade</a>
               </div>

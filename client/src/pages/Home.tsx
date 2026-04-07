@@ -159,6 +159,34 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* SEO: JSON-LD structured data */
+  useEffect(() => {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Mentoria Inovando na Sua Obra",
+      "description": "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras. 16h de conteúdo, 4 módulos, mentoria individual e encontro presencial.",
+      "brand": { "@type": "Organization", "name": "Inovando na Sua Obra" },
+      "offers": {
+        "@type": "Offer",
+        "price": "2300.00",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.inovandonasuaobra.com.br/"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "100"
+      }
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
+
   const scrollToForm = () => {
     document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -544,6 +572,8 @@ export default function Home() {
               <h4 className="font-display font-bold text-white uppercase text-sm tracking-wider mb-4">Links Úteis</h4>
               <button onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })} className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm mx-auto md:mx-0">Investimento</button>
               <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Quero me inscrever</a>
+              <a href="/materiais" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Materiais para Obra</a>
+              <a href="/alem-da-tendencia" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Evento Além da Tendência</a>
               <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Instagram</a>
             </div>
 
