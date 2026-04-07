@@ -15,8 +15,8 @@ import logoLight from "@/assets/materiais/logo-inovando-light.png";
 import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 
-/* Lazy-loaded below-fold image (1.2MB) */
-const inovandoObraImg = new URL("@/assets/alem-da-tendencia/inovando-obra-new.png", import.meta.url).href;
+/* Below-fold heavy image — loaded on demand */
+const INOVANDO_OBRA_URL = "/assets/alem-da-tendencia/inovando-obra-new.png";
 
 /* ─── Architectural grid lines (matches Além da Tendência) ─── */
 function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
