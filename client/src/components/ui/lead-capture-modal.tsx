@@ -24,7 +24,7 @@ interface LeadCaptureModalProps {
 const OFFER_MAP: Record<string, { offer: string; product: string; bid?: string; off?: string }> = {
   checklists: { offer: "F99460291O", product: "materiais-checklists" },
   ebook: { offer: "Q99258692R", product: "materiais-ebook", off: "ivk4h3rr" },
-  combo: { offer: "F99460291O", product: "materiais-combo", bid: "1774368616199" },
+  combo: { offer: "V105267183D", product: "materiais-combo", bid: "1775571233183" },
 };
 
 function buildFallbackUrl(productKey: string, email: string, name: string, phone: string) {
