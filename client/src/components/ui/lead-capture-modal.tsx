@@ -103,10 +103,11 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
 
     setTimeout(() => {
       const { offer } = OFFER_MAP[productKey];
+      const buyerParams = `?email=${encodeURIComponent(formData.email)}&name=${encodeURIComponent(formData.name)}&phonenumber=${encodeURIComponent(formData.phone)}&checkoutMode=10`;
 
       if (window.checkoutElements && triggerRef.current) {
         try {
-          const elements = window.checkoutElements.init("overlayCheckout", { offer });
+          const elements = window.checkoutElements.init("overlayCheckout", { offer: offer + buyerParams });
           elements.attach("#hotmart-pay-trigger");
           setTimeout(() => {
             triggerRef.current?.click();
