@@ -15,8 +15,8 @@ import logoLight from "@/assets/materiais/logo-inovando-light.png";
 import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 
-/* Below-fold heavy image — loaded on demand */
-const INOVANDO_OBRA_URL = "/assets/alem-da-tendencia/inovando-obra-new.png";
+/* Below-fold heavy image — statically imported but only rendered with loading="lazy" */
+import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
 
 /* ─── Architectural grid lines (matches Além da Tendência) ─── */
 function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
@@ -597,7 +597,7 @@ export default function Materiais() {
               <div className="relative">
                 <div className="absolute -inset-3 bg-[#C9A84C]/10 -z-10" />
                 <img
-                  src={INOVANDO_OBRA_URL}
+                  src={inovandoObraImg}
                   alt="Ingrid Zarza e Fernanda Bradaschia"
                   className="w-full rounded-sm shadow-lg"
                   loading="lazy" decoding="async"
