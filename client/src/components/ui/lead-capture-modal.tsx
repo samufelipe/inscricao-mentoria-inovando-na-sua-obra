@@ -6,10 +6,10 @@ import { captureLead } from "@/lib/capture-lead";
 import { sendToMaterialsSheet } from "@/lib/google-sheets";
 import { trackFormStart, trackFormFieldFocus, trackFormSubmit, trackInitiateCheckout, trackLeadCapture } from "@/lib/gtm-tracking";
 
-const FONTE_MAP: Record<string, string> = {
-  checklists: "Materiais - Checklists",
-  ebook: "Materiais - E-book",
-  combo: "Materiais - Combo",
+const PRODUTO_MAP: Record<string, string> = {
+  checklists: "21 Checklists",
+  ebook: "Manual de Gerenciamento",
+  combo: "Combo Completo",
 };
 
 declare global {
@@ -85,7 +85,7 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
           name: formData.name,
           email: formData.email,
           whatsapp: formData.phone,
-          fonte: FONTE_MAP[productKey],
+          produto: PRODUTO_MAP[productKey],
         }),
       ]);
       trackLeadCapture(productKey);
