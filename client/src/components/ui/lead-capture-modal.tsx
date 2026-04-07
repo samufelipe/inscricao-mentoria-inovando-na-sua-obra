@@ -3,7 +3,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Loader2, ArrowRight, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { captureLead } from "@/lib/capture-lead";
+import { sendToMaterialsSheet } from "@/lib/google-sheets";
 import { trackFormStart, trackFormFieldFocus, trackFormSubmit, trackInitiateCheckout, trackLeadCapture } from "@/lib/gtm-tracking";
+
+const FONTE_MAP: Record<string, string> = {
+  checklists: "Materiais - Checklists",
+  ebook: "Materiais - E-book",
+  combo: "Materiais - Combo",
+};
 
 declare global {
   interface Window {
@@ -67,12 +74,20 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
     setIsLoading(true);
 
     try {
-      await captureLead({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        product: OFFER_MAP[productKey].product,
-      });
+      await Promise.allSettled([
+        captureLead({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          product: OFFER_MAP[productKey].product,
+        }),
+        sendToMaterialsSheet({
+          name: formData.name,
+          email: formData.email,
+          whatsapp: formData.phone,
+          fonte: FONTE_MAP[productKey],
+        }),
+      ]);
       trackLeadCapture(productKey);
     } catch {
       console.error("Lead capture failed, proceeding to checkout");
