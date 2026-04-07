@@ -35,11 +35,24 @@ export async function sendToGoogleSheets(data: {
   }
 }
 
+function detectFonte(): string {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const source = (params.get("utm_source") || "").toLowerCase();
+    if (source === "facebook" || source === "instagram" || source === "meta-ads") {
+      return "Meta Ads";
+    }
+    return "Orgânico";
+  } catch {
+    return "Orgânico";
+  }
+}
+
 export async function sendToMaterialsSheet(data: {
   name: string;
   email: string;
   whatsapp: string;
-  fonte?: string;
+  produto?: string;
 }) {
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwuZa9h35RGHAGRnuprikP7-pvC715R_aNtmPpJXGvJrR0MGDyz1FgNEZs0bsfhR1q7xQ/exec";
 
@@ -58,7 +71,8 @@ export async function sendToMaterialsSheet(data: {
       "email": data.email,
       "e-mail": data.email,
       "whatsapp": data.whatsapp,
-      "fonte": data.fonte || "Materiais",
+      "produto": data.produto || "Não identificado",
+      "fonte": detectFonte(),
     });
 
     await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
