@@ -144,7 +144,7 @@ const PRODUCTS = {
 
 const COMBO_PRICE = 147.60;
 const COMBO_SAVINGS = 16.40;
-const COMBO_INSTALLMENTS = "ou 3x de R$ 49,20";
+const COMBO_INSTALLMENTS = "ou 4x de R$ 36,90";
 const COMBO_URL = "https://pay.hotmart.com/F99460291O?checkoutMode=10&bid=1774368616199";
 
 const SOCIAL_PROOF = [
@@ -204,7 +204,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Consigo parcelar?",
-    a: "Sim. Todos os produtos podem ser parcelados em até 3x no cartão de crédito, sem juros.",
+    a: "Sim. Todos os produtos podem ser parcelados no cartão de crédito, sem juros. O combo pode ser parcelado em até 4x.",
   },
 ];
 
@@ -612,7 +612,7 @@ export default function Materiais() {
               O Checklist te ajuda a <span className="text-[#C9A84C]">não esquecer nada!</span>
             </p>
             <p className="text-xs text-[#1a1a1a]/40">
-              3x de R$ 49,20 no combo · menos de R$ 50/mês para ter controle total
+              4x de R$ 36,90 no combo · menos de R$ 37/mês para ter controle total
             </p>
           </div>
         </section>
@@ -915,7 +915,7 @@ export default function Materiais() {
             <div className="flex items-center justify-center gap-6 text-[10px] text-[#1a1a1a]/40 uppercase tracking-wider">
               <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart</span>
               <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> Acesso imediato</span>
-              <span className="flex items-center gap-1"><CreditCard className="w-3.5 h-3.5" /> Até 3x sem juros</span>
+              <span className="flex items-center gap-1"><CreditCard className="w-3.5 h-3.5" /> Até 4x sem juros</span>
             </div>
           </div>
         </section>
