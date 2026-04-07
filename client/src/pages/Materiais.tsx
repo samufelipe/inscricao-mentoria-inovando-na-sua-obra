@@ -994,8 +994,8 @@ export default function Materiais() {
             <div>
               <p className="text-[10px] uppercase tracking-[0.2em] text-[#C9A84C]/60 font-semibold mb-3">Contato</p>
               <div className="space-y-2">
-                <a href="https://www.instagram.com/inovando.nasuaobra/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/40 text-xs hover:text-[#C9A84C] transition-colors justify-center md:justify-start">
-                  <Instagram className="w-3.5 h-3.5" /> @inovando.nasuaobra
+                <a href="https://www.instagram.com/inovandonasuaobra" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/40 text-xs hover:text-[#C9A84C] transition-colors justify-center md:justify-start">
+                  <Instagram className="w-3.5 h-3.5" /> @inovandonasuaobra
                 </a>
                 <a href="mailto:contato@inovandonasuaobra.com.br" className="flex items-center gap-2 text-white/40 text-xs hover:text-[#C9A84C] transition-colors justify-center md:justify-start">
                   <Mail className="w-3.5 h-3.5" /> contato@inovandonasuaobra.com.br
