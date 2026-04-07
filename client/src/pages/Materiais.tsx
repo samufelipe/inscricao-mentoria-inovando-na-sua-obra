@@ -11,12 +11,12 @@ import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
 import { trackCTAClick, initScrollTracking, createSectionObserver } from "@/lib/gtm-tracking";
 
 /* ─── Assets ─── */
-import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
 import logoLight from "@/assets/materiais/logo-inovando-light.png";
-import logoDark from "@/assets/materiais/logo-inovando-dark.png";
 import checklistsMockup from "@/assets/materiais/checklists-mockup.png";
 import ebookMockup from "@/assets/materiais/ebook-mockup.png";
-import irmasObra from "@/assets/materiais/irmas-obra.png";
+
+/* Lazy-loaded below-fold image (1.2MB) */
+const inovandoObraImg = new URL("@/assets/alem-da-tendencia/inovando-obra-new.png", import.meta.url).href;
 
 /* ─── Architectural grid lines (matches Além da Tendência) ─── */
 function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
