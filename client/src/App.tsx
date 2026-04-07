@@ -1,47 +1,52 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import AlemDaTendencia from "./pages/AlemDaTendencia";
-import Redirecionando from "./pages/Redirecionando";
-import TermosDeUso from "./pages/TermosDeUso";
-import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
-import Relatorio from "./pages/Relatorio";
-import Materiais from "./pages/Materiais";
 
+/* ─── Route-based code splitting ─── */
+const Home = lazy(() => import("./pages/Home"));
+const AlemDaTendencia = lazy(() => import("./pages/AlemDaTendencia"));
+const Materiais = lazy(() => import("./pages/Materiais"));
+const Redirecionando = lazy(() => import("./pages/Redirecionando"));
+const TermosDeUso = lazy(() => import("./pages/TermosDeUso"));
+const PoliticaDePrivacidade = lazy(() => import("./pages/PoliticaDePrivacidade"));
+const Relatorio = lazy(() => import("./pages/Relatorio"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
-function Router() {
+/* ─── Minimal loading fallback ─── */
+function PageLoader() {
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/alem-da-tendencia"} component={AlemDaTendencia} />
-      <Route path={"/redirecionando"} component={Redirecionando} />
-      <Route path={"/termos-de-uso"} component={TermosDeUso} />
-      <Route path={"/politica-de-privacidade"} component={PoliticaDePrivacidade} />
-      <Route path={"/relatorio-2"} component={Relatorio} />
-      <Route path={"/materiais"} component={Materiais} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <div className="min-h-screen flex items-center justify-center bg-[#1a1a1a]">
+      <div className="w-8 h-8 border-2 border-[#C9A84C] border-t-transparent rounded-full animate-spin" />
+    </div>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
+function Router() {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        <Route path={"/"} component={Home} />
+        <Route path={"/alem-da-tendencia"} component={AlemDaTendencia} />
+        <Route path={"/redirecionando"} component={Redirecionando} />
+        <Route path={"/termos-de-uso"} component={TermosDeUso} />
+        <Route path={"/politica-de-privacidade"} component={PoliticaDePrivacidade} />
+        <Route path={"/relatorio-2"} component={Relatorio} />
+        <Route path={"/materiais"} component={Materiais} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
+  );
+}
 
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
           <Router />
