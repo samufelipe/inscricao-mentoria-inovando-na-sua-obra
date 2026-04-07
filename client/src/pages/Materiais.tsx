@@ -597,7 +597,7 @@ export default function Materiais() {
               <div className="relative">
                 <div className="absolute -inset-3 bg-[#C9A84C]/10 -z-10" />
                 <img
-                  src={inovandoObraImg}
+                  src={INOVANDO_OBRA_URL}
                   alt="Ingrid Zarza e Fernanda Bradaschia"
                   className="w-full rounded-sm shadow-lg"
                   loading="lazy" decoding="async"
