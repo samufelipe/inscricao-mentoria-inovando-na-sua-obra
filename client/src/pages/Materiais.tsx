@@ -486,7 +486,10 @@ export default function Materiais() {
         <div className="hidden md:flex absolute right-[6%] lg:right-[10%] top-1/2 -translate-y-1/2 z-[5] items-end">
           <motion.img
             src={ebookMockup}
-            alt="Manual de Gerenciamento da Sua Obra"
+            alt="Manual de Gerenciamento da Sua Obra - eBook digital"
+            width={260}
+            height={370}
+            fetchPriority="high"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -494,7 +497,10 @@ export default function Materiais() {
           />
           <motion.img
             src={checklistsMockup}
-            alt="21 Checklists de Obra"
+            alt="21 Checklists de Obra de Interiores"
+            width={320}
+            height={450}
+            fetchPriority="high"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
