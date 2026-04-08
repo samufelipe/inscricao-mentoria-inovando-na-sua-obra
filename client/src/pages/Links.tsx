@@ -97,6 +97,15 @@ function LinkCard({
 export default function Links() {
   useEffect(() => {
     document.title = "Links · Inovando na Sua Obra";
+    const setMeta = (prop: string, content: string) => {
+      let el = document.querySelector(`meta[property="${prop}"]`) || document.querySelector(`meta[name="${prop}"]`);
+      if (!el) { el = document.createElement("meta"); (prop.startsWith("og:") ? el.setAttribute("property", prop) : el.setAttribute("name", prop)); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
+    setMeta("og:title", "Links · Inovando na Sua Obra");
+    setMeta("og:description", "Acesse todos os links da Inovando na Sua Obra: site oficial, materiais de obra, Instagram e mais.");
+    setMeta("og:url", "https://www.inovandonasuaobra.com.br/links");
+    setMeta("og:image", "https://www.inovandonasuaobra.com.br/images/mentoria/og-mentoria.png");
   }, []);
 
   return (
