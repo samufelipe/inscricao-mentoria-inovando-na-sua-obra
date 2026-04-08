@@ -13,6 +13,7 @@ const Redirecionando = lazy(() => import("./pages/Redirecionando"));
 const TermosDeUso = lazy(() => import("./pages/TermosDeUso"));
 const PoliticaDePrivacidade = lazy(() => import("./pages/PoliticaDePrivacidade"));
 const Relatorio = lazy(() => import("./pages/Relatorio"));
+const Links = lazy(() => import("./pages/Links"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 /* ─── Minimal loading fallback ─── */
@@ -35,6 +36,7 @@ function Router() {
         <Route path={"/politica-de-privacidade"} component={PoliticaDePrivacidade} />
         <Route path={"/relatorio-2"} component={Relatorio} />
         <Route path={"/materiais"} component={Materiais} />
+        <Route path={"/links"} component={Links} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
