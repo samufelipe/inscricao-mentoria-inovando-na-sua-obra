@@ -102,8 +102,15 @@ export function LeadCaptureModal({ open, onOpenChange, productKey }: LeadCapture
     onOpenChange(false);
 
     setTimeout(() => {
-      const { offer } = OFFER_MAP[productKey];
-      const buyerParams = `?email=${encodeURIComponent(formData.email)}&name=${encodeURIComponent(formData.name)}&phonenumber=${encodeURIComponent(formData.phone)}&checkoutMode=10`;
+      const { offer, bid } = OFFER_MAP[productKey];
+      const params = new URLSearchParams({
+        email: formData.email,
+        name: formData.name,
+        phonenumber: formData.phone,
+        checkoutMode: "10",
+      });
+      if (bid) params.set("bid", bid);
+      const buyerParams = `?${params.toString()}`;
 
       if (window.checkoutElements && triggerRef.current) {
         try {
