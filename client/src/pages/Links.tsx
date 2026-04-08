@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Instagram, BookOpen, Calendar, Home, ArrowRight, ChevronRight } from "lucide-react";
+import { Instagram, BookOpen, Home, ChevronRight } from "lucide-react";
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
 import logoLight from "@/assets/materiais/logo-inovando-light.png";
 
@@ -94,6 +95,10 @@ function LinkCard({
 
 /* ─── Page ─── */
 export default function Links() {
+  useEffect(() => {
+    document.title = "Links · Inovando na Sua Obra";
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#f0ede8] flex flex-col items-center relative overflow-hidden">
       {/* Subtle architectural grid lines */}
