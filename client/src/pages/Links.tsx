@@ -95,6 +95,10 @@ function LinkCard({
 
 /* ─── Page ─── */
 export default function Links() {
+  useEffect(() => {
+    document.title = "Links · Inovando na Sua Obra";
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#f0ede8] flex flex-col items-center relative overflow-hidden">
       {/* Subtle architectural grid lines */}
