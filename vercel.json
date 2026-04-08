@@ -4,6 +4,7 @@
   "rewrites": [
     { "source": "/alem-da-tendencia", "destination": "/alem-da-tendencia.html" },
     { "source": "/materiais", "destination": "/materiais.html" },
+    { "source": "/links", "destination": "/links.html" },
     {
       "source": "/(.*)",
       "destination": "/index.html"

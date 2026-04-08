@@ -86,6 +86,28 @@ export default function generateOgPages() {
         fs.writeFileSync(outPath, html, 'utf-8');
         console.log('✅ Generated materiais.html with OG meta tags');
       }
+
+      // ── LINKS ──
+      {
+        let html = fs.readFileSync(indexPath, 'utf-8');
+        const ogTags = `
+    <link rel="canonical" href="https://www.inovandonasuaobra.com.br/links" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Links · Inovando na Sua Obra" />
+    <meta property="og:description" content="Acesse todos os links da Inovando na Sua Obra: site oficial, materiais de obra, Instagram e mais." />
+    <meta property="og:image" content="https://www.inovandonasuaobra.com.br/images/mentoria/og-mentoria.png" />
+    <meta property="og:url" content="https://www.inovandonasuaobra.com.br/links" />
+    <meta property="og:site_name" content="Inovando na Sua Obra" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Links · Inovando na Sua Obra" />
+    <meta name="twitter:description" content="Acesse todos os links da Inovando na Sua Obra: site oficial, materiais de obra, Instagram e mais." />
+    <meta name="twitter:image" content="https://www.inovandonasuaobra.com.br/images/mentoria/og-mentoria.png" />`;
+        html = html.replace('<head>', `<head>${ogTags}`);
+        html = html.replace(/<title>.*?<\/title>/, '<title>Links · Inovando na Sua Obra</title>');
+        const outPath = path.join(distDir, 'links.html');
+        fs.writeFileSync(outPath, html, 'utf-8');
+        console.log('✅ Generated links.html with OG meta tags');
+      }
     },
   };
 }
