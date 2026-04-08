@@ -22,14 +22,6 @@ const LINKS = [
     accent: "#2E7D32",
   },
   {
-    label: "Evento Além da Tendência",
-    description: "O evento presencial para arquitetas",
-    href: "/alem-da-tendencia",
-    icon: Calendar,
-    internal: true,
-    accent: "#C9A84C",
-  },
-  {
     label: "Instagram",
     description: "@inovandodasuaobra",
     href: "https://www.instagram.com/inovandodasuaobra/",
