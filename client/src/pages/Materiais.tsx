@@ -163,6 +163,8 @@ const PAIN_SCENARIOS = [
 ];
 
 const TARGET_AUDIENCE = [
+  "É arquiteta ou designer e quer profissionalizar sua atuação em obra",
+  "Gerencia obras de interiores e precisa de ferramentas práticas no dia a dia",
   "Você entrega o projeto lindo, mas na obra sente que perde o controle",
   "Já perdeu cliente por causa de atraso ou retrabalho que poderia ter sido evitado",
   "Abre a planilha e não sabe se está no prazo ou no prejuízo",
@@ -890,9 +892,12 @@ export default function Materiais() {
           <GridLines variant="light" />
           <div className="container mx-auto px-4 max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-semibold mb-3 text-center">Para quem é</p>
-            <h2 className="font-display text-xl md:text-2xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-8 text-center">
-              Esses materiais são para você que...
+            <h2 className="font-display text-xl md:text-2xl font-bold text-[#1a1a1a] uppercase tracking-tight mb-3 text-center">
+              Esses materiais são para arquitetas e designers que...
             </h2>
+            <p className="text-sm md:text-base text-[#1a1a1a]/70 text-center mb-8 max-w-2xl mx-auto leading-relaxed">
+              Criados para arquitetas, designers de interiores e profissionais que atuam ou querem atuar em gerenciamento de obras. Seja você iniciante ou experiente, se a obra faz parte da sua rotina, esses materiais foram pensados para você.
+            </p>
             <div className="grid sm:grid-cols-2 gap-4">
               {TARGET_AUDIENCE.map((item, i) => (
                 <div key={i} className="flex items-start gap-3 bg-white p-4 border-l-2 border-[#C9A84C]">
