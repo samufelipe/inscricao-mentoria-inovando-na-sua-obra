@@ -88,8 +88,8 @@ function StickyPromoBanner() {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const DURATION = 48 * 60 * 60 * 1000; // 48 hours
-    const KEY = "materiais_offer_start";
+    const DURATION = 10 * 60 * 1000; // 10 minutes
+    const KEY = "materiais_offer_start_10m";
     let start = localStorage.getItem(KEY);
     if (!start) {
       start = String(Date.now());
