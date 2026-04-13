@@ -152,7 +152,7 @@ function StickyPromoBanner() {
         </div>
         <button
           onClick={goToCheckout}
-          className="bg-[#C9A84C] hover:bg-[#D4B85C] text-[#1a1a1a] font-bold py-2 px-5 uppercase tracking-widest text-[10px] transition-all inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+          className="bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold py-2 px-5 uppercase tracking-widest text-[10px] transition-all inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
         >
           Garantir Combo
           <ArrowRight className="w-3.5 h-3.5" />
