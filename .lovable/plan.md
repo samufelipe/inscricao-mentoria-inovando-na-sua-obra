@@ -1,28 +1,53 @@
 
 
-## Plano: Otimizar comunicação com público-alvo na seção "Para quem é"
+## Plano: Atualizar preço do Combo + Banner fixo + Remover pop-up de captura
 
-### Alteração
+### Resumo
+Três frentes: (1) atualizar preço do combo para R$ 97, (2) criar banner fixo de urgência, (3) eliminar o modal de captura de lead — todos os CTAs passam a redirecionar direto para o checkout da Hotmart.
 
-**Arquivo:** `client/src/pages/Materiais.tsx`
+---
 
-Enriquecer a seção "Para quem é" (linhas 887-915) com:
+### 1. Remover pop-up e redirecionar direto ao checkout
 
-1. **Subtítulo descritivo** abaixo do heading, nomeando o público diretamente:
-   > "Criados para arquitetas, designers de interiores e profissionais que atuam ou querem atuar em gerenciamento de obras. Seja você iniciante ou experiente, se a obra faz parte da sua rotina, esses materiais foram pensados para você."
+**`client/src/pages/Materiais.tsx`**
+- Remover import do `LeadCaptureModal` e os states `modalOpen`/`modalProduct`
+- Remover o componente `<LeadCaptureModal />` do JSX
+- Reescrever `openCheckout()` para redirecionar direto:
+  - Combo: `https://pay.hotmart.com/V105267183D?off=g1ocpn30&checkoutMode=10`
+  - Checklists: `https://pay.hotmart.com/F99460291O?bid=1775577667420&checkoutMode=10`
+  - Manual: `https://pay.hotmart.com/Q99258692R?bid=1775577656590&checkoutMode=10`
+- Todos abrem na mesma aba (`window.location.href`)
 
-2. **Reorganizar os itens do TARGET_AUDIENCE** para começar pelos mais identificáveis e adicionar 1-2 novos cenários que reforcem o perfil profissional:
-   - Adicionar: "É arquiteta ou designer e quer profissionalizar sua atuação em obra"
-   - Adicionar: "Gerencia obras de interiores e precisa de ferramentas práticas no dia a dia"
+### 2. Atualizar preço do Combo para R$ 97
 
-3. **Ajustar o heading** de "Esses materiais são para você que..." para algo mais direto como:
-   > "Esses materiais são para arquitetas e designers que..."
+**`client/src/pages/Materiais.tsx`**
+- Alterar `COMBO_PRICE` para 97
+- Parcelamento: "3x de R$ 32,33"
+- Ancoragem: mostrar "De R$ 147" riscado → "Por R$ 97"
+- Atualizar economia e schema JSON-LD
+- Atualizar FAQ de parcelamento
+
+**`client/src/components/ui/lead-capture-modal.tsx`**
+- Atualizar `OFFER_MAP` do combo com `off: "g1ocpn30"` (para caso algum outro componente ainda use)
+
+### 3. Reforçar comunicação de urgência
+
+**`client/src/pages/Materiais.tsx`**
+- Hero CTA: "Garantir o Combo por R$ 97"
+- Urgency Banner: "Promoção inédita — nunca fizemos isso antes na história da Inovando"
+- Card do Combo: badge "PROMOÇÃO INÉDITA" + copy reforçando a oportunidade
+
+### 4. Criar Banner Fixo no Topo (StickyPromoBanner)
+
+**`client/src/pages/Materiais.tsx`** (componente inline ou arquivo separado)
+- Barra fixa no topo, aparece após scroll de ~400px
+- Fundo escuro (#1a1a1a) com acentos dourados
+- Texto: "PROMOÇÃO INÉDITA · De R$ 147 por R$ 97 · Milhares de arquitetas já garantiram"
+- Botão CTA compacto "Garantir Combo" que redireciona direto ao checkout
+- Responsivo: uma linha no desktop, duas linhas no mobile
 
 ### O que NÃO muda
-- Estrutura visual (cards com borda dourada, grid 2 colunas)
-- Seção "Para quem NÃO é" permanece como está
-- Nenhuma seção nova é criada
-
-### Resultado esperado
-A arquiteta que chega na página se identifica imediatamente ao ler o nome da sua profissão, antes mesmo de ler os cenários. Isso reduz a fricção cognitiva e aumenta o engajamento com o restante da página.
+- Preços individuais (Checklists R$ 67, Manual R$ 97)
+- Links de checkout dos produtos individuais
+- Estrutura geral das seções da página
 
