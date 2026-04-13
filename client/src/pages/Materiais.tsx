@@ -97,24 +97,24 @@ function StickyPromoBanner() {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-b border-[#C9A84C]/20 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 transform ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7B1A1A] via-[#8B2020] to-[#7B1A1A] backdrop-blur-md border-b border-[#C9A84C]/30 shadow-[0_4px_20px_rgba(123,26,26,0.4)] transition-all duration-300 transform ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="container mx-auto px-3 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
         <div className="flex items-center gap-2 text-center sm:text-left">
-          <Flame className="w-4 h-4 text-[#C9A84C] shrink-0 hidden sm:block" />
-          <p className="text-[10px] sm:text-xs text-white/80 font-medium">
-            <strong className="text-[#C9A84C]">PROMOÇÃO INÉDITA</strong>
-            <span className="mx-1.5 text-white/20 hidden sm:inline">·</span>
+          <Flame className="w-4 h-4 text-[#C9A84C] shrink-0 hidden sm:block animate-pulse" />
+          <p className="text-[10px] sm:text-xs text-white/90 font-medium">
+            <strong className="text-[#F5D77A] uppercase tracking-wider">Promoção Inédita</strong>
+            <span className="mx-1.5 text-white/30 hidden sm:inline">·</span>
             <span className="block sm:inline">
-              Combo de <span className="line-through text-white/40">R$ 147</span> por apenas <strong className="text-white">R$ 97</strong>
+              Combo de <span className="line-through text-white/50">R$ 147</span> por apenas <strong className="text-white text-xs sm:text-sm">R$ 97</strong>
             </span>
-            <span className="mx-1.5 text-white/20 hidden md:inline">·</span>
-            <span className="hidden md:inline text-white/50">Milhares de arquitetas já garantiram</span>
+            <span className="mx-1.5 text-white/30 hidden md:inline">·</span>
+            <span className="hidden md:inline text-white/60">Milhares de arquitetas já garantiram</span>
           </p>
         </div>
         <button
           onClick={goToCheckout}
-          className="bg-[#2E7D32] text-white font-bold py-2 px-5 uppercase tracking-widest text-[10px] hover:bg-[#256829] transition-all inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+          className="bg-[#C9A84C] hover:bg-[#D4B85C] text-[#1a1a1a] font-bold py-2 px-5 uppercase tracking-widest text-[10px] transition-all inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
         >
           Garantir Combo
           <ArrowRight className="w-3.5 h-3.5" />
