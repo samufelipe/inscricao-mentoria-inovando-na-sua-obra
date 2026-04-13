@@ -757,7 +757,95 @@ export default function Materiais() {
             </p>
           </FadeIn>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+          {/* Card Combo */}
+          <FadeIn className="max-w-4xl mx-auto mb-8">
+            <div className="relative bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] border-2 border-[#C9A84C]/40 p-6 md:p-8 overflow-hidden">
+              {/* Badges */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Mais Popular
+                </span>
+                <span className="bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
+                  Promoção Inédita
+                </span>
+                <span className="bg-red-500/20 text-red-400 text-[10px] font-bold uppercase tracking-wider px-3 py-1 border border-red-500/30">
+                  Tempo Limitado
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 mb-4">
+                <Package className="w-8 h-8 text-[#C9A84C]" />
+                <div>
+                  <h3 className="font-display text-lg md:text-xl font-bold text-white uppercase tracking-wide">
+                    Combo Completo
+                  </h3>
+                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + Manual · Primeira vez nesse preço</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-white/50 text-sm leading-relaxed mb-4">
+                    Leve os dois materiais e tenha o kit completo para dominar a gestão das suas obras.
+                    Do planejamento à entrega, com processos claros e ferramentas práticas.
+                  </p>
+                  <div className="bg-red-500/10 border border-red-500/20 p-3 mb-4">
+                    <p className="text-xs text-red-400 font-semibold flex items-center gap-1.5">
+                      <AlertTriangle className="w-3.5 h-3.5" />
+                      Promoção inédita na história da Inovando na Sua Obra — nunca oferecemos esse valor antes.
+                    </p>
+                  </div>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                      Todos os 21 Checklists de obra
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                      Manual completo de gestão
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                      Acesso imediato e vitalício
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                      7 dias de garantia incondicional
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
+                      Pagamento 100% seguro
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="flex flex-col justify-center items-center md:items-end text-center md:text-right">
+                  <p className="text-white/40 text-sm line-through mb-1">De R$ {COMBO_ORIGINAL_PRICE},00</p>
+                  <p className="font-display text-3xl md:text-4xl font-bold text-white mb-0.5">
+                    R$ {COMBO_PRICE.toFixed(2).replace(".", ",")}
+                  </p>
+                  <p className="text-white/30 text-xs mb-1">{COMBO_INSTALLMENTS}</p>
+                  <p className="text-[#C9A84C] text-xs font-semibold mb-5">
+                    Economia de R$ {COMBO_SAVINGS},00
+                  </p>
+                  <button
+                    onClick={() => openCheckout("combo", "combo-destaque")}
+                    className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
+                  >
+                    Quero o Combo por R$ 97
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </button>
+                  <p className="text-white/20 text-[10px] mt-2 flex items-center gap-1">
+                    <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart · Acesso imediato
+                  </p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+
+          <p className="text-center text-white/40 text-xs uppercase tracking-widest mb-6">Ou adquira individualmente</p>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* Card Checklists */}
             <FadeIn>
               <div className="bg-[#242424] border border-white/10 flex flex-col h-full relative group hover:border-[#C9A84C]/30 transition-colors overflow-hidden">
@@ -892,92 +980,6 @@ export default function Materiais() {
               </div>
             </FadeIn>
           </div>
-
-          {/* Card Combo */}
-          <FadeIn className="max-w-4xl mx-auto">
-            <div className="relative bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] border-2 border-[#C9A84C]/40 p-6 md:p-8 overflow-hidden">
-              {/* Badges */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                  Mais Popular
-                </span>
-                <span className="bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                  Promoção Inédita
-                </span>
-                <span className="bg-red-500/20 text-red-400 text-[10px] font-bold uppercase tracking-wider px-3 py-1 border border-red-500/30">
-                  Tempo Limitado
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3 mb-4">
-                <Package className="w-8 h-8 text-[#C9A84C]" />
-                <div>
-                  <h3 className="font-display text-lg md:text-xl font-bold text-white uppercase tracking-wide">
-                    Combo Completo
-                  </h3>
-                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + Manual · Primeira vez nesse preço</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <p className="text-white/50 text-sm leading-relaxed mb-4">
-                    Leve os dois materiais e tenha o kit completo para dominar a gestão das suas obras.
-                    Do planejamento à entrega, com processos claros e ferramentas práticas.
-                  </p>
-                  <div className="bg-red-500/10 border border-red-500/20 p-3 mb-4">
-                    <p className="text-xs text-red-400 font-semibold flex items-center gap-1.5">
-                      <AlertTriangle className="w-3.5 h-3.5" />
-                      Promoção inédita na história da Inovando na Sua Obra — nunca oferecemos esse valor antes.
-                    </p>
-                  </div>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2 text-sm text-white/70">
-                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      Todos os 21 Checklists de obra
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-white/70">
-                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      Manual completo de gestão
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-white/70">
-                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      Acesso imediato e vitalício
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-white/70">
-                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      7 dias de garantia incondicional
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-white/70">
-                      <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
-                      Pagamento 100% seguro
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="flex flex-col justify-center items-center md:items-end text-center md:text-right">
-                  <p className="text-white/40 text-sm line-through mb-1">De R$ {COMBO_ORIGINAL_PRICE},00</p>
-                  <p className="font-display text-3xl md:text-4xl font-bold text-white mb-0.5">
-                    R$ {COMBO_PRICE.toFixed(2).replace(".", ",")}
-                  </p>
-                  <p className="text-white/30 text-xs mb-1">{COMBO_INSTALLMENTS}</p>
-                  <p className="text-[#C9A84C] text-xs font-semibold mb-5">
-                    Economia de R$ {COMBO_SAVINGS},00
-                  </p>
-                  <button
-                    onClick={() => openCheckout("combo", "combo-destaque")}
-                    className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
-                  >
-                    Quero o Combo por R$ 97
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </button>
-                  <p className="text-white/20 text-[10px] mt-2 flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3 text-[#2E7D32]" /> Pagamento seguro via Hotmart · Acesso imediato
-                  </p>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
         </div>
       </section>
 
