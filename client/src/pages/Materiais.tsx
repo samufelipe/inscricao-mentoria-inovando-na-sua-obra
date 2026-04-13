@@ -84,6 +84,32 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
 function StickyPromoBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
+  // Countdown: 48h rolling window from first visit
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const DURATION = 48 * 60 * 60 * 1000; // 48 hours
+    const KEY = "materiais_offer_start";
+    let start = localStorage.getItem(KEY);
+    if (!start) {
+      start = String(Date.now());
+      localStorage.setItem(KEY, start);
+    }
+    const endTime = Number(start) + DURATION;
+
+    const tick = () => {
+      const diff = Math.max(0, endTime - Date.now());
+      setTimeLeft({
+        hours: Math.floor(diff / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => setIsVisible(window.scrollY > 400);
     window.addEventListener("scroll", handleScroll);
@@ -95,6 +121,9 @@ function StickyPromoBanner() {
     window.location.href = CHECKOUT_URLS.combo;
   };
 
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const expired = timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
+
   return (
     <div
       className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#7B1A1A] via-[#8B2020] to-[#7B1A1A] backdrop-blur-md border-b border-[#C9A84C]/30 shadow-[0_4px_20px_rgba(123,26,26,0.4)] transition-all duration-300 transform ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
@@ -102,14 +131,23 @@ function StickyPromoBanner() {
       <div className="container mx-auto px-3 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
         <div className="flex items-center gap-2 text-center sm:text-left">
           <Flame className="w-4 h-4 text-[#C9A84C] shrink-0 hidden sm:block animate-pulse" />
-          <p className="text-[10px] sm:text-xs text-white/90 font-medium">
-            <strong className="text-[#F5D77A] uppercase tracking-wider">Promoção Inédita</strong>
-            <span className="mx-1.5 text-white/30 hidden sm:inline">·</span>
-            <span className="block sm:inline">
-              Combo de <span className="line-through text-white/50">R$ 147</span> por apenas <strong className="text-white text-xs sm:text-sm">R$ 97</strong>
+          <p className="text-[10px] sm:text-xs text-white/90 font-medium flex flex-wrap items-center justify-center sm:justify-start gap-x-1.5 gap-y-0.5">
+            <span className="text-[#F5D77A] uppercase tracking-wider font-bold">
+              {expired ? "Últimas horas!" : "Oferta encerra em"}
             </span>
-            <span className="mx-1.5 text-white/30 hidden md:inline">·</span>
-            <span className="hidden md:inline text-white/60">Milhares de arquitetas já garantiram</span>
+            {!expired && (
+              <span className="inline-flex gap-1 font-mono text-white text-xs sm:text-sm font-bold">
+                <span className="bg-white/15 rounded px-1.5 py-0.5">{pad(timeLeft.hours)}</span>
+                <span className="text-[#C9A84C]">:</span>
+                <span className="bg-white/15 rounded px-1.5 py-0.5">{pad(timeLeft.minutes)}</span>
+                <span className="text-[#C9A84C]">:</span>
+                <span className="bg-white/15 rounded px-1.5 py-0.5">{pad(timeLeft.seconds)}</span>
+              </span>
+            )}
+            <span className="hidden sm:inline text-white/30">·</span>
+            <span>
+              Combo de <span className="line-through text-white/50">R$ 147</span> por <strong className="text-white text-xs sm:text-sm">R$ 97</strong>
+            </span>
           </p>
         </div>
         <button
