@@ -90,15 +90,23 @@ function StickyPromoBanner() {
   useEffect(() => {
     const DURATION = 10 * 60 * 1000; // 10 minutes
     const KEY = "materiais_offer_start_10m";
-    let start = localStorage.getItem(KEY);
-    if (!start) {
-      start = String(Date.now());
-      localStorage.setItem(KEY, start);
-    }
-    const endTime = Number(start) + DURATION;
+
+    const getEndTime = () => {
+      let start = localStorage.getItem(KEY);
+      if (!start || Number(start) + DURATION <= Date.now()) {
+        start = String(Date.now());
+        localStorage.setItem(KEY, start);
+      }
+      return Number(start) + DURATION;
+    };
+
+    let endTime = getEndTime();
 
     const tick = () => {
       const diff = Math.max(0, endTime - Date.now());
+      if (diff === 0) {
+        endTime = getEndTime();
+      }
       setTimeLeft({
         hours: Math.floor(diff / 3600000),
         minutes: Math.floor((diff % 3600000) / 60000),
