@@ -792,7 +792,7 @@ export default function Materiais() {
                   <div className="bg-red-500/10 border border-red-500/20 p-3 mb-4">
                     <p className="text-xs text-red-400 font-semibold flex items-center gap-1.5">
                       <AlertTriangle className="w-3.5 h-3.5" />
-                      Promoção inédita na história da Inovando na Sua Obra — nunca oferecemos esse valor antes.
+                      Promoção inédita! Nunca oferecemos esse valor antes.
                     </p>
                   </div>
                   <ul className="space-y-2">
