@@ -4,10 +4,9 @@ import { motion, useInView } from "framer-motion";
 import {
   Check, BookOpen, ClipboardCheck, Package, Star, Award, Users, Building,
   ArrowRight, ShieldCheck, Instagram, Mail, X, Zap, Lock, CreditCard,
-  ChevronDown, Clock, AlertTriangle, Download
+  ChevronDown, Clock, AlertTriangle, Download, Flame
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LeadCaptureModal } from "@/components/ui/lead-capture-modal";
 import { trackCTAClick, initScrollTracking, createSectionObserver } from "@/lib/gtm-tracking";
 
 /* ─── Assets ─── */
@@ -17,6 +16,13 @@ import ebookMockup from "@/assets/materiais/ebook-mockup.png";
 
 /* Below-fold heavy image — statically imported but only rendered with loading="lazy" */
 import inovandoObraImg from "@/assets/alem-da-tendencia/inovando-obra-new.png";
+
+/* ─── Checkout URLs ─── */
+const CHECKOUT_URLS: Record<string, string> = {
+  checklists: "https://pay.hotmart.com/F99460291O?bid=1775577667420&checkoutMode=10",
+  ebook: "https://pay.hotmart.com/Q99258692R?bid=1775577656590&checkoutMode=10",
+  combo: "https://pay.hotmart.com/V105267183D?off=g1ocpn30&checkoutMode=10",
+};
 
 /* ─── Architectural grid lines (matches Além da Tendência) ─── */
 function GridLines({ variant = "dark" }: { variant?: "dark" | "light" }) {
@@ -74,7 +80,51 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
   return <span ref={ref}>{display}{suffix}</span>;
 }
 
-/* ─── Product data (CORRECTED) ─── */
+/* ─── Sticky Promo Banner ─── */
+function StickyPromoBanner() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsVisible(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const goToCheckout = () => {
+    trackCTAClick("Garantir Combo", "sticky-promo-banner");
+    window.location.href = CHECKOUT_URLS.combo;
+  };
+
+  return (
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md border-b border-[#C9A84C]/20 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 transform ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+    >
+      <div className="container mx-auto px-3 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 text-center sm:text-left">
+          <Flame className="w-4 h-4 text-[#C9A84C] shrink-0 hidden sm:block" />
+          <p className="text-[10px] sm:text-xs text-white/80 font-medium">
+            <strong className="text-[#C9A84C]">PROMOÇÃO INÉDITA</strong>
+            <span className="mx-1.5 text-white/20 hidden sm:inline">·</span>
+            <span className="block sm:inline">
+              Combo de <span className="line-through text-white/40">R$ 147</span> por apenas <strong className="text-white">R$ 97</strong>
+            </span>
+            <span className="mx-1.5 text-white/20 hidden md:inline">·</span>
+            <span className="hidden md:inline text-white/50">Milhares de arquitetas já garantiram</span>
+          </p>
+        </div>
+        <button
+          onClick={goToCheckout}
+          className="bg-[#2E7D32] text-white font-bold py-2 px-5 uppercase tracking-widest text-[10px] hover:bg-[#256829] transition-all inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+        >
+          Garantir Combo
+          <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Product data ─── */
 const PRODUCTS = {
   checklists: {
     name: "21 Checklists Inovando na Sua Obra",
@@ -112,7 +162,6 @@ const PRODUCTS = {
       "Não tem um processo padronizado por etapa",
       "Sempre apagando incêndio por falta de controle",
     ],
-    hotmartUrl: "https://pay.hotmart.com/F99460291O?checkoutMode=10",
     cta: "Comprar Materiais Individuais",
   },
   ebook: {
@@ -137,15 +186,14 @@ const PRODUCTS = {
       "Sente que está sempre apagando incêndio, mesmo quando o projeto está lindo",
       "Quer mais organização, previsibilidade e menos estresse na obra",
     ],
-    hotmartUrl: "https://pay.hotmart.com/Q99258692R?off=ivk4h3rr&checkoutMode=10",
     cta: "Quero dominar a gestão de obra",
   },
 };
 
-const COMBO_PRICE = 147.60;
-const COMBO_SAVINGS = 16.40;
-const COMBO_INSTALLMENTS = "ou 4x de R$ 36,90";
-const COMBO_URL = "https://pay.hotmart.com/F99460291O?checkoutMode=10&bid=1774368616199";
+const COMBO_PRICE = 97;
+const COMBO_ORIGINAL_PRICE = 147;
+const COMBO_SAVINGS = COMBO_ORIGINAL_PRICE - COMBO_PRICE;
+const COMBO_INSTALLMENTS = "ou 3x de R$ 32,33";
 
 const SOCIAL_PROOF = [
   { value: 250, suffix: "+", label: "Obras gerenciadas", icon: Building },
@@ -206,20 +254,17 @@ const FAQ_ITEMS = [
   },
   {
     q: "Consigo parcelar?",
-    a: "Sim. Todos os produtos podem ser parcelados no cartão de crédito, sem juros. O combo pode ser parcelado em até 4x.",
+    a: "Sim. Todos os produtos podem ser parcelados no cartão de crédito, sem juros. O combo pode ser parcelado em até 3x.",
   },
 ];
 
 export default function Materiais() {
   const isMobile = useIsMobile();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalProduct, setModalProduct] = useState<"checklists" | "ebook" | "combo">("combo");
 
   const openCheckout = (product: "checklists" | "ebook" | "combo", section: string) => {
     const labels: Record<string, string> = { checklists: "Comprar Checklists", ebook: "Comprar Manual", combo: "Garantir Combo" };
     trackCTAClick(labels[product] || product, section);
-    setModalProduct(product);
-    setModalOpen(true);
+    window.location.href = CHECKOUT_URLS[product];
   };
 
   useEffect(() => {
@@ -248,7 +293,7 @@ export default function Materiais() {
         "offers": [
           { "@type": "Offer", "name": "21 Checklists", "price": "67.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" },
           { "@type": "Offer", "name": "Manual de Gerenciamento", "price": "97.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" },
-          { "@type": "Offer", "name": "Combo Completo", "price": "147.60", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" }
+          { "@type": "Offer", "name": "Combo Completo", "price": "97.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" }
         ]
       },
       {
@@ -282,6 +327,9 @@ export default function Materiais() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans text-[#1a1a1a] bg-[#f0ede8] overflow-x-hidden w-full max-w-[100vw]">
+
+      {/* ═══════════════════ STICKY PROMO BANNER ═══════════════════ */}
+      <StickyPromoBanner />
 
       {/* ═══════════════════ HERO CINEMATOGRÁFICO ═══════════════════ */}
       <section className="relative bg-[#1a1a1a] min-h-0 md:min-h-[85vh] flex flex-col md:flex-row items-center overflow-hidden" data-track-section="hero">
@@ -399,17 +447,17 @@ export default function Materiais() {
               className="flex flex-col gap-3"
             >
               <button
-                onClick={() => scrollToProducts("hero-mobile")}
-                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
-              >
-                Comprar Materiais Individuais
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button
                 onClick={() => openCheckout("combo", "hero-mobile")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group w-full"
               >
-                Garantir o Combo com 10% OFF
+                Garantir o Combo por R$ 97
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <button
+                onClick={() => scrollToProducts("hero-mobile")}
+                className="bg-transparent text-white/60 font-bold py-3 px-8 uppercase tracking-widest text-[10px] hover:text-white/80 transition-all border border-white/10 inline-flex items-center justify-center gap-2 group w-full"
+              >
+                Ver Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </motion.div>
@@ -467,17 +515,17 @@ export default function Materiais() {
               className="flex flex-row gap-3"
             >
               <button
-                onClick={() => scrollToProducts("hero-desktop")}
-                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
-              >
-                Comprar Materiais Individuais
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button
                 onClick={() => openCheckout("combo", "hero-desktop")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Garantir o Combo com 10% OFF
+                Garantir o Combo por R$ 97
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <button
+                onClick={() => scrollToProducts("hero-desktop")}
+                className="bg-transparent text-white/60 font-bold py-4 px-8 uppercase tracking-widest text-xs hover:text-white/80 transition-all border border-white/10 inline-flex items-center justify-center gap-2 group"
+              >
+                Ver Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </motion.div>
@@ -540,11 +588,11 @@ export default function Materiais() {
       {/* ═══════════════════ URGENCY BANNER ═══════════════════ */}
       <div className="bg-[#C9A84C]/10 border-y border-[#C9A84C]/20 py-3 relative z-10">
         <div className="container mx-auto px-4 flex items-center justify-center gap-3 text-center">
-          <Clock className="w-4 h-4 text-[#C9A84C] shrink-0" />
+          <Flame className="w-4 h-4 text-[#C9A84C] shrink-0" />
           <p className="text-xs sm:text-sm text-[#1a1a1a]/80 font-medium">
-            <strong className="text-red-600">Oferta por tempo limitado</strong> · Preço promocional pode encerrar a qualquer momento
+            <strong className="text-red-600">Promoção inédita na história da Inovando</strong> · Combo de R$ 147 por apenas R$ 97 — nunca fizemos isso antes
           </p>
-          <span className="w-2 h-2 bg-[#C9A84C] rounded-full animate-pulse shrink-0" />
+          <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse shrink-0" />
         </div>
       </div>
 
@@ -579,10 +627,10 @@ export default function Materiais() {
             </div>
             <div>
               <button
-                onClick={() => scrollToProducts("dor")}
+                onClick={() => openCheckout("combo", "dor")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group w-full max-w-md mx-auto"
               >
-                Quero resolver isso agora
+                Garantir o Combo por R$ 97
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -650,7 +698,7 @@ export default function Materiais() {
               O Checklist te ajuda a <span className="text-[#C9A84C]">não esquecer nada!</span>
             </p>
             <p className="text-xs text-[#1a1a1a]/40">
-              4x de R$ 36,90 no combo · menos de R$ 37/mês para ter controle total
+              3x de R$ 32,33 no combo · menos de R$ 33/mês para ter controle total
             </p>
           </div>
         </section>
@@ -811,12 +859,15 @@ export default function Materiais() {
           <FadeIn className="max-w-4xl mx-auto">
             <div className="relative bg-gradient-to-br from-[#2a2520] to-[#1a1a1a] border-2 border-[#C9A84C]/40 p-6 md:p-8 overflow-hidden">
               {/* Badges */}
-              <div className="flex gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-4">
                 <span className="bg-[#C9A84C] text-[#1a1a1a] text-[10px] font-bold uppercase tracking-wider px-3 py-1">
                   Mais Popular
                 </span>
                 <span className="bg-red-500/90 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                  Oferta Limitada
+                  Promoção Inédita
+                </span>
+                <span className="bg-red-500/20 text-red-400 text-[10px] font-bold uppercase tracking-wider px-3 py-1 border border-red-500/30">
+                  Tempo Limitado
                 </span>
               </div>
 
@@ -826,7 +877,7 @@ export default function Materiais() {
                   <h3 className="font-display text-lg md:text-xl font-bold text-white uppercase tracking-wide">
                     Combo Completo
                   </h3>
-                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + Manual com 10% de desconto</p>
+                  <p className="text-[#C9A84C]/70 text-xs">21 Checklists + Manual · Primeira vez nesse preço</p>
                 </div>
               </div>
 
@@ -836,6 +887,12 @@ export default function Materiais() {
                     Leve os dois materiais e tenha o kit completo para dominar a gestão das suas obras.
                     Do planejamento à entrega, com processos claros e ferramentas práticas.
                   </p>
+                  <div className="bg-red-500/10 border border-red-500/20 p-3 mb-4">
+                    <p className="text-xs text-red-400 font-semibold flex items-center gap-1.5">
+                      <AlertTriangle className="w-3.5 h-3.5" />
+                      Promoção inédita na história da Inovando na Sua Obra — nunca oferecemos esse valor antes.
+                    </p>
+                  </div>
                   <ul className="space-y-2">
                     <li className="flex items-center gap-2 text-sm text-white/70">
                       <Check className="w-4 h-4 text-[#C9A84C] shrink-0" />
@@ -861,19 +918,19 @@ export default function Materiais() {
                 </div>
 
                 <div className="flex flex-col justify-center items-center md:items-end text-center md:text-right">
-                  <p className="text-white/40 text-sm line-through mb-1">De R$ 164,00</p>
+                  <p className="text-white/40 text-sm line-through mb-1">De R$ {COMBO_ORIGINAL_PRICE},00</p>
                   <p className="font-display text-3xl md:text-4xl font-bold text-white mb-0.5">
                     R$ {COMBO_PRICE.toFixed(2).replace(".", ",")}
                   </p>
                   <p className="text-white/30 text-xs mb-1">{COMBO_INSTALLMENTS}</p>
                   <p className="text-[#C9A84C] text-xs font-semibold mb-5">
-                    Economia de R$ {COMBO_SAVINGS.toFixed(2).replace(".", ",")}
+                    Economia de R$ {COMBO_SAVINGS},00
                   </p>
                   <button
                     onClick={() => openCheckout("combo", "combo-destaque")}
                     className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] group"
                   >
-                    Quero o Combo Completo
+                    Quero o Combo por R$ 97
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </button>
                   <p className="text-white/20 text-[10px] mt-2 flex items-center gap-1">
@@ -908,10 +965,10 @@ export default function Materiais() {
             </div>
             <div className="text-center mt-8">
               <button
-                onClick={() => scrollToProducts("para-quem-e")}
+                onClick={() => openCheckout("combo", "para-quem-e")}
                 className="bg-[#2E7D32] text-white font-bold py-3.5 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center gap-2 group"
               >
-                Comprar Materiais Individuais
+                Garantir o Combo por R$ 97
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -956,7 +1013,7 @@ export default function Materiais() {
             <div className="flex items-center justify-center gap-6 text-[10px] text-[#1a1a1a]/40 uppercase tracking-wider">
               <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart</span>
               <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5" /> Acesso imediato</span>
-              <span className="flex items-center gap-1"><CreditCard className="w-3.5 h-3.5" /> Até 4x sem juros</span>
+              <span className="flex items-center gap-1"><CreditCard className="w-3.5 h-3.5" /> Até 3x sem juros</span>
             </div>
           </div>
         </section>
@@ -1001,17 +1058,17 @@ export default function Materiais() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
-                onClick={() => scrollToProducts("cta-final")}
-                className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] inline-flex items-center justify-center gap-2 group"
-              >
-                Comprar Materiais Individuais
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button
                 onClick={() => openCheckout("combo", "cta-final")}
                 className="bg-[#2E7D32] text-white font-bold py-4 px-8 uppercase tracking-widest text-xs hover:bg-[#256829] transition-all shadow-[0_4px_24px_rgba(46,125,50,0.3)] border border-[#2E7D32]/50 inline-flex items-center justify-center gap-2 group"
               >
-                Garantir o Combo com 10% OFF
+                Garantir o Combo por R$ 97
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <button
+                onClick={() => scrollToProducts("cta-final")}
+                className="bg-transparent text-white/60 font-bold py-4 px-8 uppercase tracking-widest text-xs hover:text-white/80 transition-all border border-white/10 inline-flex items-center justify-center gap-2 group"
+              >
+                Ver Materiais Individuais
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -1063,9 +1120,6 @@ export default function Materiais() {
 
       {/* ═══════════════════ STICKY CTA MOBILE ═══════════════════ */}
       {isMobile && <MobileStickyBar onOpenCheckout={() => openCheckout("combo", "sticky-bar")} />}
-
-      {/* ═══════════════════ LEAD CAPTURE MODAL ═══════════════════ */}
-      <LeadCaptureModal open={modalOpen} onOpenChange={setModalOpen} productKey={modalProduct} />
     </div>
   );
 }
@@ -1105,7 +1159,7 @@ function MobileStickyBar({ onOpenCheckout }: { onOpenCheckout: () => void }) {
           onClick={onOpenCheckout}
           className="flex-[2] bg-[#2E7D32] text-white font-bold py-3 uppercase tracking-wider text-[10px] hover:bg-[#256829] transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
         >
-          Garantir o Combo
+          Combo R$ 97
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
