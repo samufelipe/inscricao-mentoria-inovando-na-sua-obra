@@ -518,7 +518,7 @@ export default function Home() {
           <img
             src={imgLogo}
             alt="Inovando na Sua Obra"
-            className="h-10 object-contain mix-blend-multiply"
+            className="h-14 object-contain mix-blend-multiply"
           />
           <button
             onClick={() => scrollTo("pricing")}
@@ -553,12 +553,6 @@ export default function Home() {
               transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
               className="space-y-8"
             >
-              <img
-                src={imgLogo}
-                alt="Mentoria Inovando na Sua Obra"
-                className="h-16 md:h-20 object-contain mix-blend-multiply"
-              />
-
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
