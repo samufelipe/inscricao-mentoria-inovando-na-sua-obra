@@ -1,6 +1,25 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ShieldCheck, Lock, ArrowRight, Phone, Mail, Instagram } from "lucide-react";
+import {
+  Check,
+  ShieldCheck,
+  Lock,
+  ArrowRight,
+  Phone,
+  Mail,
+  Instagram,
+  ChevronDown,
+  FileText,
+  Clock,
+  Users,
+  MapPin,
+  BookOpen,
+  TrendingUp,
+  Layers,
+  MessageSquare,
+  DollarSign,
+  AlertCircle,
+} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -8,52 +27,54 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-/* ─── Image imports (ES6 — Vite bundles these into build output) ─── */
+/* ─── Asset imports ─── */
 import imgLogo from "@/assets/mentoria/logo.png";
 import imgHeroPhoto from "@/assets/mentoria/hero-photo.png";
-import imgSkills from "@/assets/mentoria/skills.png";
-import imgAudience from "@/assets/mentoria/audience.png";
-import imgHowWorks from "@/assets/mentoria/how-works.png";
-import imgModule1 from "@/assets/mentoria/module1.png";
-import imgModule2 from "@/assets/mentoria/module2.png";
-import imgModule3 from "@/assets/mentoria/module3.png";
-import imgModule4 from "@/assets/mentoria/module4.png";
-import imgBonus1 from "@/assets/mentoria/bonus1.png";
-import imgBonus2 from "@/assets/mentoria/bonus2.png";
-import imgRevenue1 from "@/assets/mentoria/revenue1.png";
-import imgRevenue2 from "@/assets/mentoria/revenue2.png";
+import imgAbout from "@/assets/mentoria/about.png";
+import imgGuarantee from "@/assets/mentoria/guarantee.png";
+import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
 import imgTestimonial1 from "@/assets/mentoria/testimonial1.png";
 import imgTestimonial2 from "@/assets/mentoria/testimonial2.png";
 import imgTestimonial3 from "@/assets/mentoria/testimonial3.png";
 import imgTestimonial4 from "@/assets/mentoria/testimonial4.png";
-import imgGuarantee from "@/assets/mentoria/guarantee.png";
-import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
-import imgAbout from "@/assets/mentoria/about.png";
 
-const modules = [imgModule1, imgModule2, imgModule3, imgModule4];
-const moduleLabels = [
-  "Módulo 01 - Primeiros Passos",
-  "Módulo 02 - Projeto Executável",
-  "Módulo 03 - Gerenciamento de Obra",
-  "Módulo 04 - Finalização e Fidelização",
-];
-const testimonials = [
-  { src: imgTestimonial1, name: "Beatriz Francini" },
-  { src: imgTestimonial2, name: "Ingrid Cristina" },
-  { src: imgTestimonial3, name: "Monique Figueiredo" },
-  { src: imgTestimonial4, name: "Aline Araujo" },
-];
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════ */
+const C = {
+  cream: "#FAF8F4",
+  white: "#FFFFFF",
+  ink: "#1C1C1A",
+  inkLight: "#3A3A38",
+  muted: "#8A8A87",
+  border: "#E8E4DC",
+  gold: "#C9A257",
+  goldLight: "#F0E6CC",
+  green: "#2E7D32",
+  greenDark: "#256829",
+  dark: "#1A1510",
+};
 
-/* ─── Fade-in wrapper ─── */
-function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+/* ═══════════════════════════════════════
+   ANIMATION WRAPPER
+   ═══════════════════════════════════════ */
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay }}
       className={className}
     >
       {children}
@@ -61,7 +82,27 @@ function FadeIn({ children, className = "" }: { children: React.ReactNode; class
   );
 }
 
-/* ─── Phone mask helper ─── */
+/* ═══════════════════════════════════════
+   SECTION LABEL
+   ═══════════════════════════════════════ */
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-3 justify-center mb-5">
+      <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+      <span
+        className="text-xs font-semibold uppercase tracking-[0.2em]"
+        style={{ color: C.gold }}
+      >
+        {children}
+      </span>
+      <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════
+   PHONE MASK
+   ═══════════════════════════════════════ */
 function phoneMask(v: string) {
   const d = v.replace(/\D/g, "").slice(0, 11);
   if (d.length <= 2) return `(${d}`;
@@ -69,8 +110,18 @@ function phoneMask(v: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
-/* ─── Lead form component ─── */
-function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; ctaLabel?: string }) {
+/* ═══════════════════════════════════════
+   LEAD FORM
+   ═══════════════════════════════════════ */
+function LeadForm({
+  id,
+  ctaLabel = "QUERO ENTRAR NA MENTORIA",
+  dark = false,
+}: {
+  id?: string;
+  ctaLabel?: string;
+  dark?: boolean;
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -100,17 +151,25 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
     window.location.href = `https://pay.hotmart.com/Y93975016X?${params}`;
   };
 
+  const inputClass = `w-full px-4 py-3.5 text-sm border focus:outline-none focus:ring-1 transition-colors ${
+    dark
+      ? "bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:ring-white/40"
+      : "bg-white border-[#E8E4DC] text-[#1C1C1A] placeholder:text-[#9A9A97] focus:ring-[#C9A257] focus:border-[#C9A257]"
+  }`;
+
   return (
-    <form id={id} onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
+    <form id={id} onSubmit={handleSubmit} className="space-y-3 w-full">
       <div>
         <input
           type="text"
           placeholder="Seu nome completo"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
+          className={inputClass}
         />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+        {errors.name && (
+          <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+        )}
       </div>
       <div>
         <input
@@ -118,9 +177,11 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu melhor e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
+          className={inputClass}
         />
-        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        {errors.email && (
+          <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+        )}
       </div>
       <div>
         <input
@@ -128,497 +189,1132 @@ function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA" }: { id?: string; 
           placeholder="Seu WhatsApp (99) 99999-9999"
           value={phone}
           onChange={(e) => setPhone(phoneMask(e.target.value))}
-          className="w-full px-4 py-3 border border-gray-300 bg-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]"
+          className={inputClass}
         />
-        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+        {errors.phone && (
+          <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+        )}
       </div>
       <button
         type="submit"
-        className="w-full py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-lg rounded-lg transition-colors uppercase tracking-wide flex items-center justify-center gap-2"
+        className="w-full py-4 font-bold text-sm tracking-widest uppercase transition-colors flex items-center justify-center gap-2.5"
+        style={{ backgroundColor: C.green, color: C.white }}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.backgroundColor = C.greenDark)
+        }
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.backgroundColor = C.green)
+        }
       >
         {ctaLabel}
-        <ArrowRight className="w-5 h-5" />
+        <ArrowRight className="w-4 h-4" />
       </button>
-      <p className="flex items-center justify-center gap-2 text-sm text-gray-500">
-        <Lock className="w-4 h-4" />
-        Seus dados estão 100% seguros
+      <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: dark ? "rgba(255,255,255,0.45)" : C.muted }}>
+        <Lock className="w-3.5 h-3.5" />
+        Ambiente 100% seguro
       </p>
     </form>
   );
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════ */
+const SKILLS = [
+  {
+    icon: Layers,
+    title: "Gestão de Obra Eficiente",
+    desc: "Planejamento, cronograma e controle de etapas com precisão do início ao fim.",
+  },
+  {
+    icon: FileText,
+    title: "Documentação Profissional",
+    desc: "Contratos, memoriais descritivos e checklists que protegem você e seu cliente.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Comunicação com Clientes",
+    desc: "Como conduzir reuniões, alinhar expectativas e criar uma experiência inesquecível.",
+  },
+  {
+    icon: DollarSign,
+    title: "Controle Financeiro da Obra",
+    desc: "Orçamentos, planilhas e como garantir sua margem de lucro em cada projeto.",
+  },
+  {
+    icon: AlertCircle,
+    title: "Resolução de Imprevistos",
+    desc: "Como agir com segurança diante de problemas na obra sem perder o cliente.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Posicionamento de Mercado",
+    desc: "Diferencie-se, cobre o que seu trabalho vale e construa uma carteira sólida.",
+  },
+];
+
+const AUDIENCE = [
+  {
+    title: "Arquitetas",
+    desc: "Que querem estruturar o gerenciamento de obras com método e segurança.",
+  },
+  {
+    title: "Designers de Interiores",
+    desc: "Que perdem o controle das obras dos clientes e buscam um processo eficiente.",
+  },
+  {
+    title: "Engenheiras",
+    desc: "Que atuam com projetos de interiores e desejam elevar a qualidade da entrega.",
+  },
+  {
+    title: "Profissionais em Crescimento",
+    desc: "Que querem transformar o caos da obra em um processo previsível e lucrativo.",
+  },
+];
+
+const MODULES = [
+  {
+    number: "01",
+    title: "Primeiros Passos",
+    desc: "Fundamentos do gerenciamento de interiores: organização do início do projeto, onboarding do cliente e estruturação do escritório para crescer com consistência.",
+    items: [
+      "Diagnóstico e alinhamento com o cliente",
+      "Estrutura do contrato de gerenciamento",
+      "Checklist de início de obra",
+      "Organização do escritório e fluxo de trabalho",
+    ],
+  },
+  {
+    number: "02",
+    title: "Projeto Executável",
+    desc: "Como criar um projeto de interiores que realmente funciona na obra: compatibilização, memoriais e comunicação com fornecedores e equipe.",
+    items: [
+      "Memorial descritivo completo",
+      "Compatibilização de projetos",
+      "Seleção e gestão de fornecedores",
+      "Comunicação técnica com pedreiros e instaladores",
+    ],
+  },
+  {
+    number: "03",
+    title: "Gerenciamento de Obra",
+    desc: "Gestão de cronograma, visitas técnicas, controle de execução e resolução de imprevistos em tempo real com segurança e clareza.",
+    items: [
+      "Cronograma detalhado por etapas",
+      "Relatórios de visita técnica",
+      "Controle de qualidade em campo",
+      "Protocolo para imprevistos e retrabalhos",
+    ],
+  },
+  {
+    number: "04",
+    title: "Finalização e Fidelização",
+    desc: "Entrega impecável, vistoria final, satisfação do cliente e estratégias para transformar cada projeto em indicações e novos contratos.",
+    items: [
+      "Protocolo de vistoria e entrega",
+      "Gestão do pós-obra",
+      "Como gerar indicações orgânicas",
+      "Fidelização e recorrência de clientes",
+    ],
+  },
+];
+
+const BONUS = [
+  {
+    icon: FileText,
+    title: "Pack Completo de Documentos",
+    subtitle: "Biblioteca de ferramentas prontas para uso",
+    items: [
+      "Modelo de contrato de gerenciamento",
+      "Planilha de orçamento e controle financeiro",
+      "Checklist completo de visita técnica",
+      "Modelos de e-mail e comunicação profissional",
+    ],
+  },
+  {
+    icon: BookOpen,
+    title: "Aulas Bônus Exclusivas",
+    subtitle: "Conteúdo extra para acelerar seus resultados",
+    items: [
+      "Precificação e como cobrar o que você vale",
+      "Posicionamento digital para arquitetas",
+      "Como construir uma carteira de clientes sólida",
+      "Plantões de dúvidas ao vivo com as mentoras",
+    ],
+  },
+];
+
+const STATS = [
+  { value: "+250", label: "Obras gerenciadas" },
+  { value: "+100", label: "Alunas transformadas" },
+  { value: "20", label: "Anos de experiência" },
+];
+
+const INCLUDES = [
+  { icon: Clock, text: "16h de conteúdo gravado em 4 módulos" },
+  { icon: BookOpen, text: "12 meses de acesso à plataforma" },
+  { icon: Users, text: "1h de mentoria individual com as fundadoras" },
+  { icon: MapPin, text: "Encontro presencial em São Paulo" },
+  { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
+  { icon: MessageSquare, text: "Suporte e grupo exclusivo de networking" },
+];
+
+const FAQS = [
+  {
+    q: "As aulas são gravadas ou ao vivo?",
+    a: "Todo o conteúdo já está gravado e organizado por temas na plataforma. Assim que você comprar, terá acesso imediato aos 4 módulos. As aulas bônus e os plantões de dúvidas serão ao vivo pelo Zoom, com gravações disponíveis na Hotmart.",
+  },
+  {
+    q: "Em quanto tempo eu termino a mentoria?",
+    a: "Aproximadamente 3 meses. O conteúdo gravado tem 16h — o equivalente a 1h33 por semana ao longo de 12 semanas.",
+  },
+  {
+    q: "Por quanto tempo eu tenho acesso ao conteúdo?",
+    a: "1 ano de acesso completo à plataforma e a todos os materiais.",
+  },
+  {
+    q: "Consigo conciliar a mentoria com meu dia a dia?",
+    a: "Sim. As aulas foram planejadas para se ajustar à rotina de quem trabalha em obra. Conteúdo prático e direto, em módulos concisos, para você aprender no seu ritmo e aplicar no dia seguinte.",
+  },
+  {
+    q: "Não encontrei a resposta para minha dúvida, como faço?",
+    a: "Entre em contato pelo WhatsApp ou e-mail. Nossa equipe está pronta para te ajudar antes, durante e após a compra.",
+  },
+];
+
+/* ═══════════════════════════════════════
    HOME PAGE
-   ═══════════════════════════════════════════════ */
+   ═══════════════════════════════════════ */
 export default function Home() {
-  const [showSticky, setShowSticky] = useState(false);
+  const [stickyNav, setStickyNav] = useState(false);
+  const [showMobileCTA, setShowMobileCTA] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 800);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      setStickyNav(window.scrollY > 60);
+      setShowMobileCTA(window.scrollY > 800);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* SEO: JSON-LD structured data */
   useEffect(() => {
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Product",
-      "name": "Mentoria Inovando na Sua Obra",
-      "description": "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras. 16h de conteúdo, 4 módulos, mentoria individual e encontro presencial.",
-      "brand": { "@type": "Organization", "name": "Inovando na Sua Obra" },
-      "offers": {
+      name: "Mentoria Inovando na Sua Obra",
+      description:
+        "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras.",
+      brand: { "@type": "Organization", name: "Inovando na Sua Obra" },
+      offers: {
         "@type": "Offer",
-        "price": "2300.00",
-        "priceCurrency": "BRL",
-        "availability": "https://schema.org/InStock",
-        "url": "https://www.inovandonasuaobra.com.br/"
+        price: "2300.00",
+        priceCurrency: "BRL",
+        availability: "https://schema.org/InStock",
+        url: "https://www.inovandonasuaobra.com.br/",
       },
-      "aggregateRating": {
+      aggregateRating: {
         "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "100"
-      }
+        ratingValue: "5",
+        reviewCount: "100",
+      },
     };
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify(jsonLd);
-    document.head.appendChild(script);
-    return () => { document.head.removeChild(script); };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(s);
+    return () => document.head.removeChild(s);
   }, []);
 
-  const scrollToForm = () => {
-    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <div className="min-h-screen bg-[#F5F0E8] font-sans">
+    <div className="min-h-screen" style={{ backgroundColor: C.cream, fontFamily: "Inter, sans-serif" }}>
 
-      {/* ── 1. HERO ── */}
-      <section className="relative bg-[#F5F0E8] overflow-hidden" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4 py-12 md:py-20">
-          <div className="flex flex-col lg:flex-row items-center gap-10">
-            <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+      {/* ══════════════════════════════
+          STICKY NAV
+      ══════════════════════════════ */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          backgroundColor: stickyNav ? "rgba(250,248,244,0.97)" : "transparent",
+          backdropFilter: stickyNav ? "blur(12px)" : "none",
+          borderBottom: stickyNav ? `1px solid ${C.border}` : "none",
+        }}
+      >
+        <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+          <img
+            src={imgLogo}
+            alt="Inovando na Sua Obra"
+            className="h-10 object-contain mix-blend-multiply"
+          />
+          <button
+            onClick={() => scrollTo("pricing")}
+            className="hidden md:flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-colors"
+            style={{ backgroundColor: C.green, color: C.white }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = C.greenDark)
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = C.green)
+            }
+          >
+            Quero me inscrever
+          </button>
+        </div>
+      </header>
+
+      {/* ══════════════════════════════
+          HERO
+      ══════════════════════════════ */}
+      <section
+        className="relative min-h-screen flex items-center pt-16"
+        style={{ backgroundColor: C.cream }}
+      >
+        <div className="container mx-auto px-4 md:px-8 py-16 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+            {/* Left — copy + form */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+              className="space-y-8"
+            >
               <img
                 src={imgLogo}
-                alt="Mentoria Inovando na sua Obra"
-                className="h-20 md:h-28 object-contain mix-blend-multiply"
+                alt="Mentoria Inovando na Sua Obra"
+                className="h-16 md:h-20 object-contain mix-blend-multiply"
               />
-              <h1 className="font-display font-bold text-2xl md:text-4xl lg:text-[2.75rem] uppercase leading-tight text-[#2D2D2D]">
-                Domine o gerenciamento de obra de interiores de maneira lucrativa e eficiente
-              </h1>
-              <p className="text-[#555] text-sm md:text-base uppercase tracking-wide font-medium max-w-xl">
-                Transforme cada projeto em uma jornada inesquecível para seus clientes, desde o primeiro contato até a entrega final.
-              </p>
-              <LeadForm id="hero-form" />
-            </div>
-            <div className="flex-1 flex justify-center">
-              <img
-                src={imgHeroPhoto}
-                alt="Ingrid Zarza e Fernanda Bradaschia"
-                className="max-w-full h-auto mix-blend-multiply"
-                loading="eager"
-              />
-            </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+                  <span
+                    className="text-xs font-semibold uppercase tracking-[0.2em]"
+                    style={{ color: C.gold }}
+                  >
+                    Mentoria para Arquitetas e Designers
+                  </span>
+                </div>
+
+                <h1
+                  className="font-display text-3xl md:text-4xl xl:text-5xl font-bold uppercase leading-[1.1]"
+                  style={{ color: C.ink, fontFamily: "Montserrat, sans-serif" }}
+                >
+                  Domine o gerenciamento de obra de interiores de forma{" "}
+                  <em className="not-italic" style={{ color: C.gold }}>lucrativa</em>{" "}
+                  e eficiente
+                </h1>
+
+                <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight }}>
+                  Transforme cada projeto em uma jornada inesquecível para seus clientes — do primeiro contato à entrega final.
+                </p>
+              </div>
+
+              <div
+                className="p-6 md:p-8 space-y-5"
+                style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
+              >
+                <p
+                  className="text-sm font-semibold uppercase tracking-wider"
+                  style={{ color: C.ink }}
+                >
+                  Garante sua vaga agora
+                </p>
+                <LeadForm id="hero-form" />
+              </div>
+            </motion.div>
+
+            {/* Right — photo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 }}
+              className="relative flex justify-center lg:justify-end"
+            >
+              <div className="relative">
+                {/* Gold accent frame */}
+                <div
+                  className="absolute -top-3 -right-3 w-full h-full"
+                  style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
+                />
+                <img
+                  src={imgHeroPhoto}
+                  alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
+                  className="relative z-10 max-w-full h-auto mix-blend-multiply"
+                  style={{ maxHeight: "560px", objectFit: "cover" }}
+                  loading="eager"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <ChevronDown className="w-5 h-5" style={{ color: C.muted }} />
+        </motion.div>
       </section>
 
-      {/* ── 2. SKILLS ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center">
-            <img
-              src={imgSkills}
-              alt="O que você vai aprender - Habilidades técnicas e comportamentais"
-              className="mx-auto max-w-4xl w-full mix-blend-multiply"
-              loading="lazy"
-            />
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 3. AUDIENCE ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center space-y-8">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#D4AF37] italic">
-              Para quem é?
-            </h2>
-            <p className="text-[#555] max-w-2xl mx-auto text-base md:text-lg">
-              Para arquitetas, designers de interiores e engenheiras que queiram aprender a organizar obras de forma eficiente e previsível.
-            </p>
-            <img
-              src={imgAudience}
-              alt="Para quem é a mentoria"
-              className="mx-auto max-w-4xl w-full mix-blend-multiply"
-              loading="lazy"
-            />
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 4. HOW IT WORKS ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center">
-            <img
-              src={imgHowWorks}
-              alt="Como funciona a Mentoria Inovando na sua Obra"
-              className="mx-auto max-w-5xl w-full mix-blend-multiply"
-              loading="lazy"
-            />
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 5. MODULES (vertical stacked) ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center mb-12">
-            <h2 className="font-display font-bold text-2xl md:text-4xl uppercase text-[#2D2D2D] italic">
-              Como é a mentoria por dentro?
-            </h2>
-          </FadeIn>
-          <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
-            {modules.map((src, i) => (
-              <FadeIn key={i} className="w-full">
-                <img
-                  src={src}
-                  alt={moduleLabels[i]}
-                  className="w-full mix-blend-multiply"
-                  loading="lazy"
-                />
-              </FadeIn>
+      {/* ══════════════════════════════
+          STATS BAR
+      ══════════════════════════════ */}
+      <section style={{ backgroundColor: C.dark }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-3 divide-x" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+            {STATS.map((s) => (
+              <Reveal key={s.label} className="py-10 md:py-14 text-center px-4">
+                <p
+                  className="font-display text-3xl md:text-5xl font-bold"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+                >
+                  {s.value}
+                </p>
+                <p className="text-xs md:text-sm mt-2 uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  {s.label}
+                </p>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 6. BONUS (vertical stacked) ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
-            <FadeIn className="w-full">
-              <img src={imgBonus1} alt="Pack de documentos" className="w-full mix-blend-multiply" loading="lazy" />
-            </FadeIn>
-            <FadeIn className="w-full">
-              <img src={imgBonus2} alt="Aulas bônus exclusivas" className="w-full mix-blend-multiply" loading="lazy" />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. REVENUE ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center mb-12">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] italic">
-              Como você pode faturar mais?
+      {/* ══════════════════════════════
+          PARA QUEM É
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-16">
+            <Label>Para Quem É</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              Esta mentoria foi feita para você
             </h2>
-          </FadeIn>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <FadeIn>
-              <img src={imgRevenue1} alt="Como faturar mais" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
-            </FadeIn>
-            <FadeIn>
-              <img src={imgRevenue2} alt="Como faturar mais" className="w-full rounded-lg shadow-lg mix-blend-multiply" loading="lazy" />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
+          </Reveal>
 
-      {/* ── 8. PRICING ── */}
-      <section id="pricing" className="bg-[#2D2018] py-16 md:py-24 text-white">
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center space-y-8">
-            <p className="text-[#D4AF37] font-bold uppercase tracking-widest text-sm">Investimento</p>
-            <h2 className="font-display font-bold text-2xl md:text-4xl uppercase">
-              E quanto é o investimento mais importante do seu ano?
-            </h2>
-
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16 py-6">
-              {[
-                { value: "+250", label: "Obras gerenciadas" },
-                { value: "+100", label: "Alunas transformadas" },
-                { value: "20", label: "Anos de experiência" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <p className="text-4xl md:text-5xl font-bold text-white">{s.value}</p>
-                  <p className="text-gray-400 text-sm mt-1">{s.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-white text-gray-800 rounded-2xl shadow-2xl max-w-lg mx-auto overflow-hidden">
-              {/* Gold header */}
-              <div className="bg-gradient-to-br from-[#D4AF37] to-[#C49B30] text-center py-8 px-6">
-                <p className="text-white/90 text-sm font-medium">Acesso completo por</p>
-                <p className="text-white mt-2">
-                  <span className="text-lg">12x</span>{" "}
-                  <span className="text-5xl md:text-6xl font-bold">R$ 237</span>
-                  <span className="text-2xl font-bold">,87</span>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ backgroundColor: C.border }}>
+            {AUDIENCE.map((a, i) => (
+              <Reveal
+                key={a.title}
+                delay={i * 0.08}
+                className="p-8 md:p-10 space-y-3"
+                style={{ backgroundColor: C.white }}
+              >
+                <div
+                  className="w-8 h-0.5"
+                  style={{ backgroundColor: C.gold }}
+                />
+                <h3
+                  className="font-display font-bold text-lg uppercase"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                >
+                  {a.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
+                  {a.desc}
                 </p>
-                <p className="text-white/80 text-sm mt-2">ou R$ 2.300,00 à vista</p>
-              </div>
-              {/* White body */}
-              <div className="p-8 space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-                  {[
-                    "16h de conteúdo gravado em 4 módulos",
-                    "12 meses de acesso à plataforma",
-                    "1h de mentoria individual",
-                    "Encontro presencial em São Paulo",
-                    "Materiais, checklists e ferramentas",
-                    "Suporte e grupo de networking",
-                  ].map((b) => (
-                    <div key={b} className="flex items-start gap-2">
-                      <Check className="w-5 h-5 text-[#2E7D32] mt-0.5 shrink-0" />
-                      <span className="text-sm">{b}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  <a
-                    href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-base rounded-lg transition-colors uppercase"
-                  >
-                    Quero meu acesso agora
-                    <ArrowRight className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center w-full py-3 border border-gray-300 rounded-lg font-bold text-sm uppercase text-gray-600 hover:bg-gray-50 transition-colors"
-                  >
-                    Prefiro pagar com Boleto Parcelado
-                  </a>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
-                  <ShieldCheck className="w-4 h-4 text-[#2E7D32]" />
-                  Compra 100% segura - Garantia de 15 dias
-                </div>
-              </div>
-            </div>
-          </FadeIn>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── 9. TESTIMONIALS ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="text-center mb-12">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-              Veja o que dizem <strong>nossas alunas:</strong>
+      {/* ══════════════════════════════
+          O QUE VOCÊ VAI APRENDER
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-16">
+            <Label>Habilidades</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O que você vai aprender
             </h2>
-          </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {testimonials.map((t) => (
-              <FadeIn key={t.name}>
+          </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SKILLS.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <Reveal
+                  key={s.title}
+                  delay={i * 0.07}
+                  className="p-8 space-y-4 group transition-shadow hover:shadow-md"
+                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
+                >
+                  <div
+                    className="w-10 h-10 flex items-center justify-center"
+                    style={{ backgroundColor: C.goldLight }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: C.gold }} />
+                  </div>
+                  <h3
+                    className="font-display font-bold text-base uppercase tracking-wide"
+                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
+                    {s.desc}
+                  </p>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          COMO FUNCIONA
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-16">
+            <Label>Como Funciona</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O que está incluído na mentoria
+            </h2>
+          </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {INCLUDES.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <Reveal key={item.text} delay={i * 0.07} className="flex items-start gap-4">
+                  <div
+                    className="w-9 h-9 flex-shrink-0 flex items-center justify-center mt-0.5"
+                    style={{ backgroundColor: C.dark }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                  </div>
+                  <p className="text-sm leading-relaxed pt-1.5" style={{ color: C.inkLight }}>
+                    {item.text}
+                  </p>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          <Reveal className="text-center mt-14">
+            <button
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = C.greenDark)
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = C.green)
+              }
+            >
+              Quero meu acesso
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          MÓDULOS
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-16">
+            <Label>Conteúdo</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              Os 4 módulos da mentoria
+            </h2>
+          </Reveal>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {MODULES.map((mod, i) => (
+              <Reveal key={mod.number} delay={i * 0.08}>
+                <details
+                  className="group"
+                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
+                >
+                  <summary
+                    className="flex items-center gap-5 p-6 md:p-8 cursor-pointer list-none select-none"
+                    style={{ color: C.ink }}
+                  >
+                    <span
+                      className="font-display font-bold text-2xl md:text-3xl leading-none shrink-0"
+                      style={{ fontFamily: "Montserrat, sans-serif", color: C.gold, opacity: 0.6 }}
+                    >
+                      {mod.number}
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: C.muted }}>
+                        Módulo {mod.number}
+                      </p>
+                      <h3
+                        className="font-display font-bold text-base md:text-lg uppercase"
+                        style={{ fontFamily: "Montserrat, sans-serif" }}
+                      >
+                        {mod.title}
+                      </h3>
+                    </div>
+                    <ChevronDown
+                      className="w-5 h-5 shrink-0 transition-transform group-open:rotate-180"
+                      style={{ color: C.muted }}
+                    />
+                  </summary>
+                  <div className="px-6 md:px-8 pb-8 pt-0" style={{ borderTop: `1px solid ${C.border}` }}>
+                    <p className="text-sm leading-relaxed mt-5 mb-5" style={{ color: C.muted }}>
+                      {mod.desc}
+                    </p>
+                    <ul className="space-y-2">
+                      {mod.items.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
+                          <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          BÔNUS
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.dark }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-16">
+            <Label>Bônus Exclusivos</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase text-white"
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+            >
+              Você também recebe
+            </h2>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {BONUS.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <Reveal
+                  key={b.title}
+                  delay={i * 0.1}
+                  className="p-8 md:p-10 space-y-6"
+                  style={{ border: `1px solid rgba(201,162,87,0.3)`, backgroundColor: "rgba(255,255,255,0.04)" }}
+                >
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="w-10 h-10 flex items-center justify-center"
+                      style={{ backgroundColor: C.gold }}
+                    >
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3
+                        className="font-display font-bold text-base uppercase text-white"
+                        style={{ fontFamily: "Montserrat, sans-serif" }}
+                      >
+                        {b.title}
+                      </h3>
+                      <p className="text-xs mt-0.5" style={{ color: C.gold }}>
+                        {b.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                  <ul className="space-y-3">
+                    {b.items.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+                        <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.gold }} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          DEPOIMENTOS
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-14">
+            <Label>Resultados Reais</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O que nossas alunas dizem
+            </h2>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {[
+              { src: imgTestimonial1, name: "Beatriz Francini" },
+              { src: imgTestimonial2, name: "Ingrid Cristina" },
+              { src: imgTestimonial3, name: "Monique Figueiredo" },
+              { src: imgTestimonial4, name: "Aline Araujo" },
+            ].map((t, i) => (
+              <Reveal key={t.name} delay={i * 0.08}>
                 <img
                   src={t.src}
                   alt={`Depoimento ${t.name}`}
-                  className="w-full rounded-lg shadow-lg mix-blend-multiply"
+                  className="w-full mix-blend-multiply"
                   loading="lazy"
                 />
-              </FadeIn>
+              </Reveal>
             ))}
           </div>
-          <FadeIn className="text-center mt-10">
+
+          <Reveal className="text-center mt-12">
             <button
-              onClick={scrollToForm}
-              className="px-10 py-4 bg-[#2E7D32] hover:bg-[#256829] text-white font-bold text-lg rounded-lg transition-colors uppercase"
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = C.greenDark)
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = C.green)
+              }
             >
-              quero entrar na mentoria
+              Quero ser a próxima
+              <ArrowRight className="w-4 h-4" />
             </button>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── 10. GUARANTEE ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
-            <div className="flex-1 space-y-6 text-center md:text-left">
-              <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-                Risco Zero para você
-              </h2>
-              <p className="text-[#555] leading-relaxed text-lg">
-                Confiamos tanto no nosso conteúdo que damos uma{" "}
-                <strong>garantia incondicional de 15 dias</strong> pra você.
-              </p>
-            </div>
-            <div className="flex-1 flex justify-center">
-              <img
-                src={imgGuarantee}
-                alt="Garantia de 15 dias"
-                className="hidden md:block max-w-xs w-full mix-blend-multiply"
-                loading="lazy"
-              />
-              <img
-                src={imgGarantiaMobile}
-                alt="Garantia incondicional de 15 dias"
-                className="block md:hidden max-w-[200px] w-full mix-blend-multiply"
-                loading="lazy"
-              />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 11. ABOUT ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
-            <div className="flex-1 space-y-6">
-              <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D]">
-                Quem Somos
-              </h2>
-              <div className="text-[#555] leading-relaxed space-y-4 text-base">
-                <p>
-                  Somos <strong>Ingrid Zarza e Fernanda Bradaschia</strong>, arquitetas <strong>apaixonadas</strong> por compartilhar conhecimento e <strong>transformar a gestão de obras de interiores</strong>.
-                </p>
-                <p>
-                  Unimos nossas experiências para fundar a <strong>INOVANDO ARQUITETURA</strong>, um escritório dedicado ao desenvolvimento e gerenciamento de projetos residenciais e comerciais de interiores. Ao longo da nossa trajetória, <strong>já concluímos mais de 250 obras</strong>, ajudando clientes a realizarem o seu sonho.
-                </p>
-                <p>
-                  Criamos a <strong>@inovandonasuaobra</strong>, um instagram para arquitetas, designers de interiores e engenheiras que querem aprender a gerenciar obras de interiores com mais segurança e qualidade. Lá, <strong>compartilhamos experiências reais de obra, dicas valiosas e estratégias práticas</strong> baseadas na nossa vivência em campo.
-                </p>
-                <p>
-                  Em <strong>2024</strong>, criamos a <strong>Mentoria Inovando na Sua Obra</strong> para <strong>compartilhar todo esse conhecimento de forma organizada e acessível</strong>. Já são dezenas de alunas impactadas diretamente pela nossa metodologia, conquistando mais confiança e resultados.
-                </p>
-              </div>
-            </div>
-            <div className="flex-1 flex justify-center">
-              <img
-                src={imgAbout}
-                alt="Ingrid Zarza e Fernanda Bradaschia"
-                className="max-w-md w-full rounded-lg shadow-lg mix-blend-multiply"
-                loading="lazy"
-              />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 12. FAQ ── */}
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="container mx-auto px-4">
-          <FadeIn className="max-w-3xl mx-auto">
-            <h2 className="font-display font-bold text-2xl md:text-3xl uppercase text-[#2D2D2D] text-center mb-10">
-              <strong>Perguntas Frequentes</strong>
+      {/* ══════════════════════════════
+          INVESTIMENTO
+      ══════════════════════════════ */}
+      <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-14">
+            <Label>Investimento</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O investimento mais importante do seu ano
             </h2>
-            <Accordion type="single" collapsible className="space-y-4">
-              {[
-                {
-                  q: "As aulas são gravadas ou ao vivo?",
-                  a: "Todo o conteúdo já está gravado e organizado por temas na plataforma. Assim que você comprar, terá acesso imediato aos 4 primeiros módulos. Além disso, as aulas bônus e os plantões de dúvidas serão ao vivo pelo Zoom, com as gravações disponíveis na plataforma Hotmart.",
-                },
-                {
-                  q: "Em quanto tempo eu termino a mentoria?",
-                  a: "Aproximadamente 3 meses. Todo conteúdo gravado são 16h e isso dá 1h33 por semana (12 semanas)",
-                },
-                {
-                  q: "Por quanto tempo eu tenho acesso ao conteúdo?",
-                  a: "1 ano de acesso.",
-                },
-                {
-                  q: "Será que consigo conciliar a mentoria com meus outros compromissos?",
-                  a: "Sabemos que o dia a dia nas obras são corridos, e é por isso que nossas aulas foram planejadas para se ajustarem à sua rotina. Conteúdo prático e direto ao ponto, em módulos concisos, para você aprender no seu ritmo e aplicar no dia seguinte.",
-                },
-                {
-                  q: "Não encontrei a resposta para a minha dúvida, como faço?",
-                  a: "Entre em contato com nosso time pelo WhatsApp ou e-mail. Estamos prontos para te ajudar!",
-                },
-              ].map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-lg px-6 border border-gray-200">
-                  <AccordionTrigger className="text-left font-bold text-base md:text-lg py-5 hover:no-underline text-[#2D2D2D]">
+          </Reveal>
+
+          <div className="max-w-md mx-auto">
+            <Reveal>
+              <div
+                className="overflow-hidden shadow-xl"
+                style={{ border: `1px solid ${C.border}` }}
+              >
+                {/* Gold header */}
+                <div
+                  className="py-10 px-8 text-center space-y-2"
+                  style={{ backgroundColor: C.dark }}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
+                    Acesso completo à Mentoria
+                  </p>
+                  <div className="flex items-end justify-center gap-1 pt-2">
+                    <span className="text-lg font-medium text-white/80">12x</span>
+                    <span
+                      className="font-display text-6xl font-bold text-white leading-none"
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                    >
+                      R$&nbsp;237
+                    </span>
+                    <span className="text-2xl font-bold text-white/80 pb-1">,87</span>
+                  </div>
+                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+                    ou <strong className="text-white/70">R$ 2.300,00</strong> à vista
+                  </p>
+                </div>
+
+                {/* White body */}
+                <div className="p-8 space-y-7" style={{ backgroundColor: C.white }}>
+                  <div
+                    className="pb-6"
+                    style={{ borderBottom: `1px solid ${C.border}` }}
+                  >
+                    <p
+                      className="text-xs font-semibold uppercase tracking-[0.15em] mb-4"
+                      style={{ color: C.muted }}
+                    >
+                      Tudo que você recebe
+                    </p>
+                    <ul className="space-y-3">
+                      {INCLUDES.map((item) => (
+                        <li key={item.text} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
+                          <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
+                          {item.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-3">
+                    <a
+                      href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+                      style={{ backgroundColor: C.green, color: C.white }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = C.greenDark)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = C.green)
+                      }
+                    >
+                      Quero meu acesso agora
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <a
+                      href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-full py-3 text-xs font-semibold uppercase tracking-wider transition-colors"
+                      style={{ border: `1px solid ${C.border}`, color: C.muted }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = C.ink;
+                        e.currentTarget.style.color = C.ink;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = C.border;
+                        e.currentTarget.style.color = C.muted;
+                      }}
+                    >
+                      Prefiro pagar com Boleto Parcelado
+                    </a>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: C.muted }}>
+                    <ShieldCheck className="w-4 h-4" style={{ color: C.green }} />
+                    Compra 100% segura — Garantia incondicional de 15 dias
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          GARANTIA
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-4xl mx-auto">
+            <Reveal className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1 space-y-6 text-center md:text-left">
+                <Label>Risco Zero</Label>
+                <h2
+                  className="font-display text-2xl md:text-3xl font-bold uppercase"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                >
+                  Garantia incondicional de 15 dias
+                </h2>
+                <p className="text-base leading-relaxed" style={{ color: C.inkLight }}>
+                  Confiamos tanto no nosso conteúdo que, se por qualquer motivo você não ficar satisfeita nos primeiros 15 dias, devolvemos 100% do seu investimento. Sem perguntas, sem burocracia.
+                </p>
+                <div className="flex items-center gap-3 justify-center md:justify-start">
+                  <ShieldCheck className="w-5 h-5" style={{ color: C.green }} />
+                  <span className="text-sm font-semibold" style={{ color: C.green }}>
+                    Compra 100% segura e protegida
+                  </span>
+                </div>
+              </div>
+              <div className="flex-shrink-0 flex justify-center">
+                <img
+                  src={imgGuarantee}
+                  alt="Garantia de 15 dias"
+                  className="hidden md:block w-44 mix-blend-multiply"
+                  loading="lazy"
+                />
+                <img
+                  src={imgGarantiaMobile}
+                  alt="Garantia incondicional de 15 dias"
+                  className="block md:hidden w-36 mix-blend-multiply"
+                  loading="lazy"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          SOBRE NÓS
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-5xl mx-auto">
+            <Reveal>
+              <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                {/* Photo */}
+                <div className="relative flex justify-center md:justify-start order-2 md:order-1">
+                  <div className="relative">
+                    <div
+                      className="absolute -bottom-3 -left-3 w-full h-full"
+                      style={{ border: `2px solid ${C.gold}` }}
+                    />
+                    <img
+                      src={imgAbout}
+                      alt="Ingrid Zarza e Fernanda Bradaschia"
+                      className="relative z-10 w-full max-w-sm mix-blend-multiply"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                {/* Text */}
+                <div className="order-1 md:order-2 space-y-7">
+                  <div>
+                    <Label>Quem Somos</Label>
+                    <h2
+                      className="font-display text-2xl md:text-3xl font-bold uppercase text-center md:text-left"
+                      style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                    >
+                      Ingrid Zarza &{" "}
+                      <br className="hidden md:block" />
+                      Fernanda Bradaschia
+                    </h2>
+                  </div>
+
+                  <div className="space-y-4 text-sm leading-relaxed" style={{ color: C.inkLight }}>
+                    <p>
+                      Somos arquitetas <strong style={{ color: C.ink }}>apaixonadas</strong> por compartilhar conhecimento e transformar a gestão de obras de interiores.
+                    </p>
+                    <p>
+                      Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório dedicado ao desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, <strong style={{ color: C.ink }}>já concluímos mais de 250 obras</strong>.
+                    </p>
+                    <p>
+                      Em 2024 criamos a <strong style={{ color: C.ink }}>Mentoria Inovando na Sua Obra</strong> para compartilhar toda essa vivência de forma organizada e acessível. Já são dezenas de alunas impactadas pela nossa metodologia.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+                    <a
+                      href="https://www.instagram.com/inovandonasuaobra/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold uppercase tracking-[0.2em] flex items-center gap-2 transition-opacity hover:opacity-70"
+                      style={{ color: C.gold }}
+                    >
+                      <Instagram className="w-3.5 h-3.5" />
+                      @inovandonasuaobra
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════
+          FAQ
+      ══════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-14">
+            <Label>Dúvidas</Label>
+            <h2
+              className="font-display text-2xl md:text-4xl font-bold uppercase"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              Perguntas Frequentes
+            </h2>
+          </Reveal>
+
+          <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-3">
+            {FAQS.map((faq, i) => (
+              <Reveal key={i} delay={i * 0.06}>
+                <AccordionItem
+                  value={`faq-${i}`}
+                  className="overflow-hidden"
+                  style={{
+                    backgroundColor: C.cream,
+                    border: `1px solid ${C.border}`,
+                  }}
+                >
+                  <AccordionTrigger
+                    className="px-6 py-5 text-left text-sm font-semibold hover:no-underline"
+                    style={{ color: C.ink }}
+                  >
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-[#555] leading-relaxed pb-5">
+                  <AccordionContent
+                    className="px-6 pb-6 text-sm leading-relaxed"
+                    style={{ color: C.muted }}
+                  >
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
-              ))}
-            </Accordion>
-          </FadeIn>
+              </Reveal>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      {/* ── 13. FOOTER ── */}
-      <footer className="bg-[#1a1a1a] text-gray-300 py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-            {/* Logo & brand */}
-            <div className="space-y-4 text-center md:text-left">
+      {/* ══════════════════════════════
+          FOOTER
+      ══════════════════════════════ */}
+      <footer style={{ backgroundColor: C.dark }}>
+        <div className="container mx-auto px-4 md:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start pb-10" style={{ borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
+            <div className="space-y-4">
               <img
                 src={imgLogo}
-                alt="Inovando na sua Obra"
-                className="h-16 mx-auto md:mx-0"
+                alt="Inovando na Sua Obra"
+                className="h-12 object-contain"
                 loading="lazy"
               />
-              <p className="text-sm text-gray-500 leading-relaxed">
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
                 Transformando a gestão de obras de interiores com método, segurança e resultados reais.
               </p>
             </div>
 
-            {/* Links */}
-            <div className="space-y-3 text-center md:text-left">
-              <h4 className="font-display font-bold text-white uppercase text-sm tracking-wider mb-4">Links Úteis</h4>
-              <button onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })} className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm mx-auto md:mx-0">Investimento</button>
-              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Quero me inscrever</a>
-              <a href="/materiais" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Materiais para Obra</a>
-              <a href="/alem-da-tendencia" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Evento Além da Tendência</a>
-              <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-[#D4AF37] transition-colors text-sm">Instagram</a>
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-5" style={{ color: C.gold }}>
+                Links
+              </p>
+              {[
+                { label: "Investimento", action: () => scrollTo("pricing") },
+              ].map((l) => (
+                <button
+                  key={l.label}
+                  onClick={l.action}
+                  className="block text-xs transition-opacity hover:opacity-60"
+                  style={{ color: "rgba(255,255,255,0.45)" }}
+                >
+                  {l.label}
+                </button>
+              ))}
+              {[
+                { label: "Quero me inscrever", href: "https://pay.hotmart.com/Y93975016X?off=22jnl093" },
+                { label: "Materiais para Obra", href: "/materiais" },
+                { label: "Instagram", href: "https://www.instagram.com/inovandonasuaobra/" },
+                { label: "Termos de Uso", href: "/termos-de-uso" },
+                { label: "Política de Privacidade", href: "/politica-de-privacidade" },
+              ].map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target={l.href.startsWith("http") ? "_blank" : undefined}
+                  rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="block text-xs transition-opacity hover:opacity-60"
+                  style={{ color: "rgba(255,255,255,0.45)" }}
+                >
+                  {l.label}
+                </a>
+              ))}
             </div>
 
-            {/* Contact */}
-            <div className="space-y-3 text-center md:text-left">
-              <h4 className="font-display font-bold text-white uppercase text-sm tracking-wider mb-4">Contato</h4>
-              <a href="https://wa.me/5511955717229" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] transition-colors text-sm justify-center md:justify-start">
-                <Phone className="w-4 h-4" />
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-5" style={{ color: C.gold }}>
+                Contato
+              </p>
+              <a
+                href="https://wa.me/5511955717229"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-60"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                <Phone className="w-3.5 h-3.5" />
                 (11) 5571-7229
               </a>
-              <a href="mailto:contato@inovandonasuaobra.com.br" className="flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] transition-colors text-sm justify-center md:justify-start">
-                <Mail className="w-4 h-4" />
+              <a
+                href="mailto:contato@inovandonasuaobra.com.br"
+                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-60"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                <Mail className="w-3.5 h-3.5" />
                 contato@inovandonasuaobra.com.br
               </a>
-              <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] transition-colors text-sm justify-center md:justify-start">
-                <Instagram className="w-4 h-4" />
+              <a
+                href="https://www.instagram.com/inovandonasuaobra/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-60"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                <Instagram className="w-3.5 h-3.5" />
                 @inovandonasuaobra
               </a>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-10 pt-6 text-center">
-            <p className="text-xs text-gray-600">
+          <div className="pt-8 text-center">
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
               © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
             </p>
           </div>
         </div>
       </footer>
 
-      {/* ── STICKY MOBILE CTA ── */}
+      {/* ══════════════════════════════
+          MOBILE STICKY CTA
+      ══════════════════════════════ */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 bg-[#2E7D32] text-white p-3 flex items-center justify-between md:hidden transition-transform duration-300 shadow-[0_-4px_12px_rgba(0,0,0,0.2)] ${
-          showSticky ? "translate-y-0" : "translate-y-full"
+        className={`fixed bottom-0 left-0 right-0 z-50 md:hidden transition-transform duration-300 ${
+          showMobileCTA ? "translate-y-0" : "translate-y-full"
         }`}
+        style={{
+          backgroundColor: C.dark,
+          borderTop: `1px solid rgba(201,162,87,0.3)`,
+          boxShadow: "0 -8px 32px rgba(0,0,0,0.3)",
+        }}
       >
-        <div>
-          <p className="text-xs font-medium">A partir de</p>
-          <p className="text-lg font-bold">12x R$ 237</p>
+        <div className="flex items-center justify-between px-5 py-3.5">
+          <div>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
+              A partir de
+            </p>
+            <p
+              className="font-display text-lg font-bold text-white"
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+            >
+              12× R$ 237<span className="text-sm font-normal text-white/60">,87</span>
+            </p>
+          </div>
+          <button
+            onClick={() => scrollTo("pricing")}
+            className="px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
+            style={{ backgroundColor: C.green, color: C.white }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = C.greenDark)
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = C.green)
+            }
+          >
+            Garantir Vaga
+          </button>
         </div>
-        <button
-          onClick={scrollToForm}
-          className="px-6 py-2 bg-white text-[#2E7D32] font-bold rounded-lg text-sm uppercase animate-pulse"
-        >
-          Garantir Vaga
-        </button>
       </div>
     </div>
   );
