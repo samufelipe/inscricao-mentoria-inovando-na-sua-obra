@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   Check,
@@ -62,10 +62,13 @@ function Reveal({
   children,
   className = "",
   delay = 0,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  style?: React.CSSProperties;
+  [key: string]: unknown;
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -76,6 +79,7 @@ function Reveal({
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
@@ -383,6 +387,73 @@ const FAQS = [
 ];
 
 /* ═══════════════════════════════════════
+   SKILL HERO CARD
+   ═══════════════════════════════════════ */
+function SkillHero({ skill }: { skill: typeof SKILLS[0] }) {
+  const Icon = skill.icon;
+  return (
+    <Reveal
+      delay={0}
+      className="lg:row-span-2 relative overflow-hidden flex flex-col justify-between p-10"
+      style={{ backgroundColor: C.dark, minHeight: "320px" }}
+    >
+      <div
+        className="absolute bottom-0 right-0 font-display font-bold leading-none select-none pointer-events-none"
+        style={{ fontFamily: "Montserrat, sans-serif", fontSize: "11rem", color: C.gold, opacity: 0.06, lineHeight: 1 }}
+      >
+        01
+      </div>
+      <div className="relative z-10 space-y-5">
+        <div className="w-10 h-10 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
+          <Icon className="w-5 h-5 text-white" />
+        </div>
+        <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+        <h3
+          className="font-display font-bold text-xl uppercase text-white leading-tight"
+          style={{ fontFamily: "Montserrat, sans-serif" }}
+        >
+          {skill.title}
+        </h3>
+        <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+          {skill.desc}
+        </p>
+      </div>
+      <div className="relative z-10 mt-8">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
+          Habilidade principal
+        </span>
+      </div>
+    </Reveal>
+  );
+}
+
+function SkillWide({ skill }: { skill: typeof SKILLS[0] }) {
+  const Icon = skill.icon;
+  return (
+    <Reveal
+      delay={0.42}
+      className="lg:col-span-2 p-7 flex flex-col sm:flex-row items-start gap-6"
+      style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
+    >
+      <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
+        <Icon className="w-5 h-5 text-white" />
+      </div>
+      <div className="space-y-2">
+        <h3
+          className="font-display font-bold text-base uppercase tracking-wide"
+          style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+        >
+          {skill.title}
+        </h3>
+        <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
+          {skill.desc}
+        </p>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ═══════════════════════════════════════
    HOME PAGE
    ═══════════════════════════════════════ */
 export default function Home() {
@@ -588,7 +659,7 @@ export default function Home() {
       {/* ══════════════════════════════
           PARA QUEM É
       ══════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+      <section className="py-24 md:py-32 overflow-hidden" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="text-center mb-16">
             <Label>Para Quem É</Label>
@@ -600,27 +671,45 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ backgroundColor: C.border }}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {AUDIENCE.map((a, i) => (
               <Reveal
                 key={a.title}
-                delay={i * 0.08}
-                className="p-8 md:p-10 space-y-3"
-                style={{ backgroundColor: C.white }}
+                delay={i * 0.1}
+                className="relative overflow-hidden group"
+                style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
               >
+                {/* Ghost ordinal number */}
                 <div
-                  className="w-8 h-0.5"
-                  style={{ backgroundColor: C.gold }}
-                />
-                <h3
-                  className="font-display font-bold text-lg uppercase"
-                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                  className="absolute -top-4 -right-2 font-display font-bold leading-none select-none pointer-events-none"
+                  style={{
+                    fontFamily: "Montserrat, sans-serif",
+                    fontSize: "7rem",
+                    color: C.gold,
+                    opacity: 0.07,
+                  }}
                 >
-                  {a.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
-                  {a.desc}
-                </p>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+
+                <div className="relative z-10 p-8 space-y-4">
+                  <div
+                    className="w-7 h-7 flex items-center justify-center text-xs font-bold"
+                    style={{ backgroundColor: C.gold, color: C.white, fontFamily: "Montserrat, sans-serif" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h3
+                    className="font-display font-bold text-base uppercase"
+                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                  >
+                    {a.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
+                    {a.desc}
+                  </p>
+                  <div className="w-0 h-px transition-all duration-500 group-hover:w-full" style={{ backgroundColor: C.gold }} />
+                </div>
               </Reveal>
             ))}
           </div>
@@ -642,34 +731,41 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SKILLS.map((s, i) => {
+          {/* Featured layout: 1 large hero skill + 5 supporting */}
+          <div className="grid lg:grid-cols-3 gap-6">
+
+            {/* Hero skill — spans 1 col full height */}
+            <SkillHero skill={SKILLS[0]} />
+
+            {/* Supporting skills — 2 cols × 2 rows + last row spans 2 */}
+            {SKILLS.slice(1, 5).map((s, i) => {
               const Icon = s.icon;
               return (
                 <Reveal
                   key={s.title}
-                  delay={i * 0.07}
-                  className="p-8 space-y-4 group transition-shadow hover:shadow-md"
+                  delay={(i + 1) * 0.07}
+                  className="p-7 space-y-3 group"
                   style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
                 >
-                  <div
-                    className="w-10 h-10 flex items-center justify-center"
-                    style={{ backgroundColor: C.goldLight }}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: C.gold }} />
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 flex items-center justify-center shrink-0" style={{ backgroundColor: C.goldLight }}>
+                      <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                    </div>
+                    <h3
+                      className="font-display font-bold text-sm uppercase tracking-wide leading-tight"
+                      style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                    >
+                      {s.title}
+                    </h3>
                   </div>
-                  <h3
-                    className="font-display font-bold text-base uppercase tracking-wide"
-                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                  >
-                    {s.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
-                    {s.desc}
-                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{s.desc}</p>
+                  <div className="w-0 h-px transition-all duration-500 group-hover:w-full" style={{ backgroundColor: C.gold }} />
                 </Reveal>
               );
             })}
+
+            {/* Last skill spans 2 cols */}
+            <SkillWide skill={SKILLS[5]} />
           </div>
         </div>
       </section>
@@ -679,7 +775,7 @@ export default function Home() {
       ══════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-16">
+          <Reveal className="text-center mb-20">
             <Label>Como Funciona</Label>
             <h2
               className="font-display text-2xl md:text-4xl font-bold uppercase"
@@ -689,20 +785,36 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {/* Visual timeline grid */}
+          <div className="max-w-4xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {INCLUDES.map((item, i) => {
               const Icon = item.icon;
               return (
-                <Reveal key={item.text} delay={i * 0.07} className="flex items-start gap-4">
-                  <div
-                    className="w-9 h-9 flex-shrink-0 flex items-center justify-center mt-0.5"
-                    style={{ backgroundColor: C.dark }}
-                  >
-                    <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                <Reveal key={item.text} delay={i * 0.08} className="relative">
+                  {/* Connector line (desktop only, not on last of each row) */}
+                  <div className="flex flex-col items-start gap-4">
+                    {/* Icon with number badge */}
+                    <div className="relative">
+                      <div
+                        className="w-14 h-14 flex items-center justify-center"
+                        style={{ backgroundColor: C.cream, border: `2px solid ${C.gold}` }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: C.gold }} />
+                      </div>
+                      <div
+                        className="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center text-[10px] font-bold"
+                        style={{ backgroundColor: C.dark, color: C.gold, fontFamily: "Montserrat, sans-serif" }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </div>
+                    </div>
+                    <p
+                      className="text-sm leading-relaxed font-medium"
+                      style={{ color: C.inkLight }}
+                    >
+                      {item.text}
+                    </p>
                   </div>
-                  <p className="text-sm leading-relaxed pt-1.5" style={{ color: C.inkLight }}>
-                    {item.text}
-                  </p>
                 </Reveal>
               );
             })}
@@ -742,7 +854,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto space-y-3">
             {MODULES.map((mod, i) => (
               <Reveal key={mod.number} delay={i * 0.08}>
                 <details
@@ -750,36 +862,50 @@ export default function Home() {
                   style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
                 >
                   <summary
-                    className="flex items-center gap-5 p-6 md:p-8 cursor-pointer list-none select-none"
+                    className="flex items-center gap-0 cursor-pointer list-none select-none overflow-hidden"
                     style={{ color: C.ink }}
                   >
-                    <span
-                      className="font-display font-bold text-2xl md:text-3xl leading-none shrink-0"
-                      style={{ fontFamily: "Montserrat, sans-serif", color: C.gold, opacity: 0.6 }}
+                    {/* Large number accent */}
+                    <div
+                      className="flex-shrink-0 w-16 md:w-20 self-stretch flex items-center justify-center font-display font-bold text-3xl md:text-4xl"
+                      style={{
+                        fontFamily: "Montserrat, sans-serif",
+                        color: C.white,
+                        backgroundColor: i % 2 === 0 ? C.dark : C.gold,
+                      }}
                     >
                       {mod.number}
-                    </span>
-                    <div className="flex-1">
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 px-6 py-5">
                       <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: C.muted }}>
                         Módulo {mod.number}
                       </p>
                       <h3
-                        className="font-display font-bold text-base md:text-lg uppercase"
-                        style={{ fontFamily: "Montserrat, sans-serif" }}
+                        className="font-display font-bold text-sm md:text-base uppercase"
+                        style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                       >
                         {mod.title}
                       </h3>
                     </div>
-                    <ChevronDown
-                      className="w-5 h-5 shrink-0 transition-transform group-open:rotate-180"
-                      style={{ color: C.muted }}
-                    />
+
+                    <div className="px-5 flex-shrink-0">
+                      <ChevronDown
+                        className="w-5 h-5 transition-transform group-open:rotate-180"
+                        style={{ color: C.muted }}
+                      />
+                    </div>
                   </summary>
-                  <div className="px-6 md:px-8 pb-8 pt-0" style={{ borderTop: `1px solid ${C.border}` }}>
-                    <p className="text-sm leading-relaxed mt-5 mb-5" style={{ color: C.muted }}>
+
+                  <div
+                    className="px-6 md:px-8 pb-8 pt-6"
+                    style={{ borderTop: `1px solid ${C.border}` }}
+                  >
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
                       {mod.desc}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
                       {mod.items.map((item) => (
                         <li key={item} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
                           <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
