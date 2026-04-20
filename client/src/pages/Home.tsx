@@ -1,37 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  Check,
-  ShieldCheck,
-  Lock,
-  ArrowRight,
-  Phone,
-  Mail,
-  Instagram,
-  ChevronDown,
-  FileText,
-  Clock,
-  Users,
-  MapPin,
-  BookOpen,
-  TrendingUp,
-  Layers,
-  MessageSquare,
-  DollarSign,
-  AlertCircle,
+  Check, X, ShieldCheck, Lock, ArrowRight, Phone, Mail, Instagram,
+  ChevronDown, FileText, Clock, Users, MapPin, BookOpen, TrendingUp,
+  Layers, MessageSquare, DollarSign, AlertCircle, Star,
 } from "lucide-react";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 
 /* ─── Asset imports ─── */
-import imgLogo from "@/assets/mentoria/logo.png";
-import imgHeroPhoto from "@/assets/mentoria/hero-photo.png";
-import imgAbout from "@/assets/mentoria/about.png";
-import imgGuarantee from "@/assets/mentoria/guarantee.png";
+import imgLogo       from "@/assets/mentoria/logo.png";
+import imgHeroPhoto  from "@/assets/mentoria/hero-photo.png";
+import imgAbout      from "@/assets/mentoria/about.png";
+import imgGuarantee  from "@/assets/mentoria/guarantee.png";
 import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
 import imgTestimonial1 from "@/assets/mentoria/testimonial1.png";
 import imgTestimonial2 from "@/assets/mentoria/testimonial2.png";
@@ -42,44 +24,45 @@ import imgTestimonial4 from "@/assets/mentoria/testimonial4.png";
    DESIGN TOKENS
    ═══════════════════════════════════════ */
 const C = {
-  cream: "#FAF8F4",
-  white: "#FFFFFF",
-  ink: "#1C1C1A",
-  inkLight: "#3A3A38",
-  muted: "#8A8A87",
-  border: "#E8E4DC",
-  gold: "#C9A257",
+  cream:     "#FAF8F4",
+  white:     "#FFFFFF",
+  ink:       "#1C1C1A",
+  inkLight:  "#3A3A38",
+  muted:     "#7A7A77",
+  border:    "#E8E4DC",
+  gold:      "#C9A257",
   goldLight: "#F0E6CC",
-  green: "#2E7D32",
+  goldDim:   "rgba(201,162,87,0.12)",
+  green:     "#2E7D32",
   greenDark: "#256829",
-  dark: "#1A1510",
+  dark:      "#1A1510",
+  darkMid:   "#252018",
+  sage:      "#B2BEB5",
 };
+
+/* ─── Grid background helper ─── */
+const gridBg = (color = "rgba(201,162,87,0.07)", size = "60px 60px") => ({
+  backgroundImage: `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`,
+  backgroundSize: size,
+});
 
 /* ═══════════════════════════════════════
    ANIMATION WRAPPER
    ═══════════════════════════════════════ */
 function Reveal({
-  children,
-  className = "",
-  delay = 0,
-  style,
+  children, className = "", delay = 0, style,
 }: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-  style?: React.CSSProperties;
-  [key: string]: unknown;
+  children: React.ReactNode; className?: string; delay?: number;
+  style?: React.CSSProperties; [key: string]: unknown;
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 32 }}
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay }}
-      className={className}
-      style={style}
+      transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1], delay }}
+      className={className} style={style}
     >
       {children}
     </motion.div>
@@ -89,18 +72,30 @@ function Reveal({
 /* ═══════════════════════════════════════
    SECTION LABEL
    ═══════════════════════════════════════ */
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+  const col = light ? "rgba(201,162,87,0.8)" : C.gold;
   return (
-    <div className="flex items-center gap-3 justify-center mb-5">
-      <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
-      <span
-        className="text-xs font-semibold uppercase tracking-[0.2em]"
-        style={{ color: C.gold }}
-      >
+    <div className="flex items-center gap-3 justify-center mb-4">
+      <div className="w-8 h-px" style={{ backgroundColor: col }} />
+      <span className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: col }}>
         {children}
       </span>
-      <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+      <div className="w-8 h-px" style={{ backgroundColor: col }} />
     </div>
+  );
+}
+
+/* ═══════════════════════════════════════
+   GOLD HIGHLIGHT WORD
+   ═══════════════════════════════════════ */
+function Highlight({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="relative inline-block">
+      <span className="absolute inset-0 -skew-x-3"
+        style={{ backgroundColor: C.gold, top: "8%", bottom: "8%", left: "-3px", right: "-3px", zIndex: 0 }}
+      />
+      <span className="relative z-10" style={{ color: C.dark }}>{children}</span>
+    </span>
   );
 }
 
@@ -117,16 +112,10 @@ function phoneMask(v: string) {
 /* ═══════════════════════════════════════
    LEAD FORM
    ═══════════════════════════════════════ */
-function LeadForm({
-  id,
-  ctaLabel = "QUERO ENTRAR NA MENTORIA",
-  dark = false,
-}: {
-  id?: string;
-  ctaLabel?: string;
-  dark?: boolean;
+function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA", dark = false }: {
+  id?: string; ctaLabel?: string; dark?: boolean;
 }) {
-  const [name, setName] = useState("");
+  const [name,  setName]  = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -145,77 +134,43 @@ function LeadForm({
     e.preventDefault();
     if (!validate()) return;
     const digits = phone.replace(/\D/g, "");
-    const params = new URLSearchParams({
-      off: "22jnl093",
-      checkoutMode: "10",
-      name,
-      email,
-      phonenumber: `55${digits}`,
-    });
+    const params = new URLSearchParams({ off: "22jnl093", checkoutMode: "10", name, email, phonenumber: `55${digits}` });
     window.location.href = `https://pay.hotmart.com/Y93975016X?${params}`;
   };
 
-  const inputClass = `w-full px-4 py-3.5 text-sm border focus:outline-none focus:ring-1 transition-colors ${
-    dark
-      ? "bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:ring-white/40"
-      : "bg-white border-[#E8E4DC] text-[#1C1C1A] placeholder:text-[#9A9A97] focus:ring-[#C9A257] focus:border-[#C9A257]"
-  }`;
+  const base = "w-full px-5 py-4 text-sm transition-colors focus:outline-none";
+  const inputClass = dark
+    ? `${base} bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:border-white/50`
+    : `${base} bg-white border border-[#E8E4DC] text-[#1C1C1A] placeholder:text-[#9A9A97] focus:border-[#C9A257]`;
 
   return (
     <form id={id} onSubmit={handleSubmit} className="space-y-3 w-full">
       <div>
-        <input
-          type="text"
-          placeholder="Seu nome completo"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={inputClass}
-        />
-        {errors.name && (
-          <p className="text-red-400 text-xs mt-1">{errors.name}</p>
-        )}
+        <input type="text" placeholder="Seu nome completo" value={name}
+          onChange={(e) => setName(e.target.value)} className={inputClass} />
+        {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
       </div>
       <div>
-        <input
-          type="email"
-          placeholder="Seu melhor e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={inputClass}
-        />
-        {errors.email && (
-          <p className="text-red-400 text-xs mt-1">{errors.email}</p>
-        )}
+        <input type="email" placeholder="Seu melhor e-mail" value={email}
+          onChange={(e) => setEmail(e.target.value)} className={inputClass} />
+        {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
-        <input
-          type="tel"
-          placeholder="Seu WhatsApp (99) 99999-9999"
-          value={phone}
-          onChange={(e) => setPhone(phoneMask(e.target.value))}
-          className={inputClass}
-        />
-        {errors.phone && (
-          <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
-        )}
+        <input type="tel" placeholder="Seu WhatsApp (99) 99999-9999" value={phone}
+          onChange={(e) => setPhone(phoneMask(e.target.value))} className={inputClass} />
+        {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
       </div>
-      <button
-        type="submit"
-        className="w-full py-4 font-bold text-sm tracking-widest uppercase transition-colors flex items-center justify-center gap-2.5"
+      <button type="submit"
+        className="w-full py-4 font-bold text-sm tracking-[0.15em] uppercase transition-all flex items-center justify-center gap-2.5 hover:gap-4"
         style={{ backgroundColor: C.green, color: C.white }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = C.greenDark)
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = C.green)
-        }
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
       >
         {ctaLabel}
         <ArrowRight className="w-4 h-4" />
       </button>
-      <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: dark ? "rgba(255,255,255,0.45)" : C.muted }}>
-        <Lock className="w-3.5 h-3.5" />
-        Ambiente 100% seguro
+      <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: dark ? "rgba(255,255,255,0.4)" : C.muted }}>
+        <Lock className="w-3.5 h-3.5" /> Ambiente 100% seguro
       </p>
     </form>
   );
@@ -224,232 +179,182 @@ function LeadForm({
 /* ═══════════════════════════════════════
    DATA
    ═══════════════════════════════════════ */
-const SKILLS = [
-  {
-    icon: Layers,
-    title: "Gestão de Obra Eficiente",
-    desc: "Planejamento, cronograma e controle de etapas com precisão do início ao fim.",
-  },
-  {
-    icon: FileText,
-    title: "Documentação Profissional",
-    desc: "Contratos, memoriais descritivos e checklists que protegem você e seu cliente.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Comunicação com Clientes",
-    desc: "Como conduzir reuniões, alinhar expectativas e criar uma experiência inesquecível.",
-  },
-  {
-    icon: DollarSign,
-    title: "Controle Financeiro da Obra",
-    desc: "Orçamentos, planilhas e como garantir sua margem de lucro em cada projeto.",
-  },
-  {
-    icon: AlertCircle,
-    title: "Resolução de Imprevistos",
-    desc: "Como agir com segurança diante de problemas na obra sem perder o cliente.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Posicionamento de Mercado",
-    desc: "Diferencie-se, cobre o que seu trabalho vale e construa uma carteira sólida.",
-  },
+const STATS = [
+  { value: "+250", label: "Obras entregues" },
+  { value: "+100", label: "Alunas transformadas" },
+  { value: "15+",  label: "Anos de experiência" },
+];
+
+const PROBLEMS = [
+  "Obra vira caos: prazo estourado, cliente insatisfeito",
+  "Você perde o controle financeiro no meio do projeto",
+  "Insegurança jurídica em cada contrato assinado",
+  "Fornecedores que não cumprem o combinado",
+  "Medo de errar e perder o cliente para sempre",
+];
+
+const SOLUTIONS = [
+  "Método validado em +250 obras entregues com segurança",
+  "Cronograma que funciona e clientes que respeitam",
+  "Contratos que blindam você em qualquer situação",
+  "Processo claro para selecionar e gerir fornecedores",
+  "Confiança para liderar qualquer obra com autoridade",
 ];
 
 const AUDIENCE = [
   {
-    title: "Arquitetas",
-    desc: "Que querem estruturar o gerenciamento de obras com método e segurança.",
+    number: "01",
+    title: "Arquitetas Inseguras em Obra",
+    desc: "Que têm talento no projeto mas travam na hora de liderar a execução. A mentoria te dá o método para ir a campo com confiança.",
   },
   {
-    title: "Designers de Interiores",
-    desc: "Que perdem o controle das obras dos clientes e buscam um processo eficiente.",
+    number: "02",
+    title: "Recém Formadas",
+    desc: "Que saíram da faculdade sem saber como gerenciar obra na prática. Aqui você aprende o que a graduação não ensinou.",
   },
   {
-    title: "Engenheiras",
-    desc: "Que atuam com projetos de interiores e desejam elevar a qualidade da entrega.",
-  },
-  {
+    number: "03",
     title: "Profissionais em Crescimento",
-    desc: "Que querem transformar o caos da obra em um processo previsível e lucrativo.",
+    desc: "Que querem cobrar honorários premium pelo gerenciamento e transformar cada projeto em uma entrega impecável.",
   },
+  {
+    number: "04",
+    title: "Quem Acha que Não Precisa",
+    desc: "Arquitetas que acreditam que obra não é sua área. A mentoria vai mostrar por que essa é a habilidade mais lucrativa do mercado.",
+  },
+];
+
+const SKILLS = [
+  { icon: Layers,       title: "Gestão de Obra",       desc: "Planejamento, cronograma e controle de etapas com precisão do início ao fim." },
+  { icon: FileText,     title: "Documentação",          desc: "Contratos, memoriais descritivos e checklists que protegem você e seu cliente." },
+  { icon: MessageSquare,title: "Comunicação",           desc: "Como conduzir reuniões, alinhar expectativas e criar uma experiência inesquecível." },
+  { icon: DollarSign,   title: "Controle Financeiro",   desc: "Orçamentos, planilhas e como garantir sua margem de lucro em cada projeto." },
+  { icon: AlertCircle,  title: "Gestão de Imprevistos", desc: "Como agir com segurança diante de problemas na obra sem perder o cliente." },
+  { icon: TrendingUp,   title: "Posicionamento",        desc: "Diferencie-se, cobre o que vale e construa uma carteira sólida de clientes." },
+];
+
+const HOW_IT_WORKS = [
+  { n: "01", title: "Acesso Imediato",      desc: "Assim que você confirmar o pagamento, recebe o acesso à plataforma Hotmart com todos os 4 módulos disponíveis." },
+  { n: "02", title: "Aprenda no Seu Ritmo", desc: "16h de conteúdo gravado + plantões ao vivo. Você assiste quando e onde quiser durante 12 meses de acesso." },
+  { n: "03", title: "Aplique no Dia Seguinte", desc: "Cada módulo foi desenhado para aplicação imediata. Você termina uma aula e já consegue usar o que aprendeu na próxima obra." },
 ];
 
 const MODULES = [
   {
-    number: "01",
-    title: "Primeiros Passos",
+    number: "01", title: "Primeiros Passos",
     desc: "Fundamentos do gerenciamento de interiores: organização do início do projeto, onboarding do cliente e estruturação do escritório para crescer com consistência.",
-    items: [
-      "Diagnóstico e alinhamento com o cliente",
-      "Estrutura do contrato de gerenciamento",
-      "Checklist de início de obra",
-      "Organização do escritório e fluxo de trabalho",
-    ],
+    items: ["Diagnóstico e alinhamento com o cliente", "Estrutura do contrato de gerenciamento", "Checklist de início de obra", "Organização do escritório e fluxo de trabalho"],
   },
   {
-    number: "02",
-    title: "Projeto Executável",
+    number: "02", title: "Projeto Executável",
     desc: "Como criar um projeto de interiores que realmente funciona na obra: compatibilização, memoriais e comunicação com fornecedores e equipe.",
-    items: [
-      "Memorial descritivo completo",
-      "Compatibilização de projetos",
-      "Seleção e gestão de fornecedores",
-      "Comunicação técnica com pedreiros e instaladores",
-    ],
+    items: ["Memorial descritivo completo", "Compatibilização de projetos", "Seleção e gestão de fornecedores", "Comunicação técnica com pedreiros e instaladores"],
   },
   {
-    number: "03",
-    title: "Gerenciamento de Obra",
+    number: "03", title: "Gerenciamento de Obra",
     desc: "Gestão de cronograma, visitas técnicas, controle de execução e resolução de imprevistos em tempo real com segurança e clareza.",
-    items: [
-      "Cronograma detalhado por etapas",
-      "Relatórios de visita técnica",
-      "Controle de qualidade em campo",
-      "Protocolo para imprevistos e retrabalhos",
-    ],
+    items: ["Cronograma detalhado por etapas", "Relatórios de visita técnica", "Controle de qualidade em campo", "Protocolo para imprevistos e retrabalhos"],
   },
   {
-    number: "04",
-    title: "Finalização e Fidelização",
+    number: "04", title: "Finalização e Fidelização",
     desc: "Entrega impecável, vistoria final, satisfação do cliente e estratégias para transformar cada projeto em indicações e novos contratos.",
-    items: [
-      "Protocolo de vistoria e entrega",
-      "Gestão do pós-obra",
-      "Como gerar indicações orgânicas",
-      "Fidelização e recorrência de clientes",
-    ],
+    items: ["Protocolo de vistoria e entrega", "Gestão do pós-obra", "Como gerar indicações orgânicas", "Fidelização e recorrência de clientes"],
   },
 ];
 
 const BONUS = [
   {
-    icon: FileText,
-    title: "Pack Completo de Documentos",
-    subtitle: "Biblioteca de ferramentas prontas para uso",
-    items: [
-      "Modelo de contrato de gerenciamento",
-      "Planilha de orçamento e controle financeiro",
-      "Checklist completo de visita técnica",
-      "Modelos de e-mail e comunicação profissional",
-    ],
+    icon: FileText, title: "Pack Completo de Documentos",
+    subtitle: "Biblioteca de ferramentas prontas para usar amanhã",
+    items: ["Modelo de contrato de gerenciamento", "Planilha de orçamento e controle financeiro", "Checklist completo de visita técnica", "Modelos de e-mail e comunicação profissional"],
   },
   {
-    icon: BookOpen,
-    title: "Aulas Bônus Exclusivas",
+    icon: BookOpen, title: "Aulas Bônus Exclusivas",
     subtitle: "Conteúdo extra para acelerar seus resultados",
-    items: [
-      "Precificação e como cobrar o que você vale",
-      "Posicionamento digital para arquitetas",
-      "Como construir uma carteira de clientes sólida",
-      "Plantões de dúvidas ao vivo com as mentoras",
-    ],
+    items: ["Precificação e como cobrar o que você vale", "Posicionamento digital para arquitetas", "Como construir uma carteira de clientes sólida", "Plantões de dúvidas ao vivo com as mentoras"],
   },
-];
-
-const STATS = [
-  { value: "+250", label: "Obras gerenciadas" },
-  { value: "+100", label: "Alunas transformadas" },
-  { value: "20", label: "Anos de experiência" },
 ];
 
 const INCLUDES = [
-  { icon: Clock, text: "16h de conteúdo gravado em 4 módulos" },
-  { icon: BookOpen, text: "12 meses de acesso à plataforma" },
-  { icon: Users, text: "1h de mentoria individual com as fundadoras" },
-  { icon: MapPin, text: "Encontro presencial em São Paulo" },
-  { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
+  { icon: Clock,         text: "16h de conteúdo gravado em 4 módulos" },
+  { icon: BookOpen,      text: "12 meses de acesso à plataforma" },
+  { icon: Users,         text: "1h de mentoria individual com as fundadoras" },
+  { icon: MapPin,        text: "Encontro presencial em São Paulo" },
+  { icon: FileText,      text: "Materiais, checklists e ferramentas prontas" },
   { icon: MessageSquare, text: "Suporte e grupo exclusivo de networking" },
 ];
 
 const FAQS = [
-  {
-    q: "As aulas são gravadas ou ao vivo?",
-    a: "Todo o conteúdo já está gravado e organizado por temas na plataforma. Assim que você comprar, terá acesso imediato aos 4 módulos. As aulas bônus e os plantões de dúvidas serão ao vivo pelo Zoom, com gravações disponíveis na Hotmart.",
-  },
-  {
-    q: "Em quanto tempo eu termino a mentoria?",
-    a: "Aproximadamente 3 meses. O conteúdo gravado tem 16h — o equivalente a 1h33 por semana ao longo de 12 semanas.",
-  },
-  {
-    q: "Por quanto tempo eu tenho acesso ao conteúdo?",
-    a: "1 ano de acesso completo à plataforma e a todos os materiais.",
-  },
-  {
-    q: "Consigo conciliar a mentoria com meu dia a dia?",
-    a: "Sim. As aulas foram planejadas para se ajustar à rotina de quem trabalha em obra. Conteúdo prático e direto, em módulos concisos, para você aprender no seu ritmo e aplicar no dia seguinte.",
-  },
-  {
-    q: "Não encontrei a resposta para minha dúvida, como faço?",
-    a: "Entre em contato pelo WhatsApp ou e-mail. Nossa equipe está pronta para te ajudar antes, durante e após a compra.",
-  },
+  { q: "As aulas são gravadas ou ao vivo?", a: "Todo o conteúdo já está gravado e organizado por temas na plataforma. Assim que você comprar, terá acesso imediato aos 4 módulos. As aulas bônus e os plantões de dúvidas serão ao vivo pelo Zoom, com gravações disponíveis na Hotmart." },
+  { q: "Em quanto tempo eu termino a mentoria?", a: "Aproximadamente 3 meses. O conteúdo gravado tem 16h, o equivalente a 1h33 por semana ao longo de 12 semanas." },
+  { q: "Por quanto tempo eu tenho acesso ao conteúdo?", a: "1 ano de acesso completo à plataforma e a todos os materiais." },
+  { q: "Consigo conciliar a mentoria com meu dia a dia?", a: "Sim. As aulas foram planejadas para se ajustar à rotina de quem trabalha em obra. Conteúdo prático e direto, em módulos concisos, para você aprender no seu ritmo e aplicar no dia seguinte." },
+  { q: "Não sou arquiteta formada, posso fazer a mentoria?", a: "A mentoria foi desenhada para arquitetas, designers de interiores e engenheiras que atuam com projetos de interiores. Se você se encaixa nesse perfil, o conteúdo é para você." },
+  { q: "Não encontrei a resposta para minha dúvida, como faço?", a: "Entre em contato pelo WhatsApp ou e-mail. Nossa equipe está pronta para te ajudar antes, durante e após a compra." },
 ];
 
 /* ═══════════════════════════════════════
-   SKILL HERO CARD
+   DEADLINE — 7 dias após a Imersão (30/05/2026)
    ═══════════════════════════════════════ */
-function SkillHero({ skill }: { skill: typeof SKILLS[0] }) {
-  const Icon = skill.icon;
-  return (
-    <Reveal
-      delay={0}
-      className="lg:row-span-2 relative overflow-hidden flex flex-col justify-between p-10"
-      style={{ backgroundColor: C.dark, minHeight: "320px" }}
-    >
-      <div
-        className="absolute bottom-0 right-0 font-display font-bold leading-none select-none pointer-events-none"
-        style={{ fontFamily: "Montserrat, sans-serif", fontSize: "11rem", color: C.gold, opacity: 0.06, lineHeight: 1 }}
-      >
-        01
-      </div>
-      <div className="relative z-10 space-y-5">
-        <div className="w-10 h-10 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
-          <Icon className="w-5 h-5 text-white" />
-        </div>
-        <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
-        <h3
-          className="font-display font-bold text-xl uppercase text-white leading-tight"
-          style={{ fontFamily: "Montserrat, sans-serif" }}
-        >
-          {skill.title}
-        </h3>
-        <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-          {skill.desc}
-        </p>
-      </div>
-      <div className="relative z-10 mt-8">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
-          Habilidade principal
-        </span>
-      </div>
-    </Reveal>
-  );
+const DEADLINE = new Date("2026-06-06T23:59:59-03:00");
+
+/* ═══════════════════════════════════════
+   COUNTDOWN TIMER
+   ═══════════════════════════════════════ */
+function useCountdown(target: Date) {
+  const calc = () => {
+    const diff = Math.max(0, target.getTime() - Date.now());
+    return {
+      days:    Math.floor(diff / 86_400_000),
+      hours:   Math.floor((diff % 86_400_000) / 3_600_000),
+      minutes: Math.floor((diff % 3_600_000)  / 60_000),
+      seconds: Math.floor((diff % 60_000)     / 1_000),
+      expired: diff === 0,
+    };
+  };
+  const [t, setT] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setT(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return t;
 }
 
-function SkillWide({ skill }: { skill: typeof SKILLS[0] }) {
-  const Icon = skill.icon;
+function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: string; dark?: boolean }) {
+  const { days, hours, minutes, seconds, expired } = useCountdown(DEADLINE);
+  if (expired) return null;
+  const textMain = dark ? C.white : C.ink;
+  const textSub  = dark ? "rgba(255,255,255,0.45)" : C.muted;
+  const bg       = dark ? "rgba(255,255,255,0.06)" : C.cream;
+  const border   = dark ? "rgba(255,255,255,0.1)"  : C.border;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const units = [
+    { v: pad(days),    l: "dias" },
+    { v: pad(hours),   l: "horas" },
+    { v: pad(minutes), l: "min" },
+    { v: pad(seconds), l: "seg" },
+  ];
   return (
-    <Reveal
-      delay={0.42}
-      className="lg:col-span-2 p-7 flex flex-col sm:flex-row items-start gap-6"
-      style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
-    >
-      <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
-        <Icon className="w-5 h-5 text-white" />
+    <div className="flex flex-col items-center gap-2">
+      <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: dark ? C.gold : C.gold }}>
+        {label}
+      </p>
+      <div className="flex items-center gap-2">
+        {units.map(({ v, l }, i) => (
+          <React.Fragment key={l}>
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="min-w-[2.4rem] px-2 py-1.5 text-center font-black text-lg leading-none"
+                style={{ fontFamily: "Montserrat, sans-serif", backgroundColor: bg, border: `1px solid ${border}`, color: textMain }}
+              >
+                {v}
+              </div>
+              <span className="text-[9px] uppercase tracking-wider" style={{ color: textSub }}>{l}</span>
+            </div>
+            {i < 3 && <span className="font-black text-lg mb-3" style={{ color: dark ? C.gold : C.gold }}>:</span>}
+          </React.Fragment>
+        ))}
       </div>
-      <div className="space-y-2">
-        <h3
-          className="font-display font-bold text-base uppercase tracking-wide"
-          style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-        >
-          {skill.title}
-        </h3>
-        <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
-          {skill.desc}
-        </p>
-      </div>
-    </Reveal>
+    </div>
   );
 }
 
@@ -457,8 +362,8 @@ function SkillWide({ skill }: { skill: typeof SKILLS[0] }) {
    HOME PAGE
    ═══════════════════════════════════════ */
 export default function Home() {
-  const [stickyNav, setStickyNav] = useState(false);
-  const [showMobileCTA, setShowMobileCTA] = useState(false);
+  const [stickyNav,    setStickyNav]    = useState(false);
+  const [showMobileCTA,setShowMobileCTA] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -471,177 +376,228 @@ export default function Home() {
 
   useEffect(() => {
     const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Product",
+      "@context": "https://schema.org", "@type": "Product",
       name: "Mentoria Inovando na Sua Obra",
-      description:
-        "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras.",
+      description: "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras.",
       brand: { "@type": "Organization", name: "Inovando na Sua Obra" },
-      offers: {
-        "@type": "Offer",
-        price: "2300.00",
-        priceCurrency: "BRL",
-        availability: "https://schema.org/InStock",
-        url: "https://www.inovandonasuaobra.com.br/",
-      },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5",
-        reviewCount: "100",
-      },
+      offers: { "@type": "Offer", price: "2300.00", priceCurrency: "BRL", availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "100" },
     };
     const s = document.createElement("script");
-    s.type = "application/ld+json";
-    s.textContent = JSON.stringify(jsonLd);
+    s.type = "application/ld+json"; s.textContent = JSON.stringify(jsonLd);
     document.head.appendChild(s);
-    return () => document.head.removeChild(s);
+    return () => { document.head.removeChild(s); };
   }, []);
 
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: C.cream, fontFamily: "Inter, sans-serif" }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: C.cream, fontFamily: "Inter, sans-serif" }}>
 
-      {/* ══════════════════════════════
-          STICKY NAV
-      ══════════════════════════════ */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      {/* ══════════════════════════════════════════
+          NAV
+      ══════════════════════════════════════════ */}
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: stickyNav ? "rgba(250,248,244,0.97)" : "transparent",
-          backdropFilter: stickyNav ? "blur(12px)" : "none",
+          backgroundColor: stickyNav ? "rgba(250,248,244,0.96)" : "transparent",
+          backdropFilter: stickyNav ? "blur(14px)" : "none",
           borderBottom: stickyNav ? `1px solid ${C.border}` : "none",
         }}
       >
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <img
-            src={imgLogo}
-            alt="Inovando na Sua Obra"
-            className="h-14 object-contain mix-blend-multiply"
-          />
-          <button
-            onClick={() => scrollTo("pricing")}
-            className="hidden md:flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-colors"
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="focus:outline-none">
+            <img src={imgLogo} alt="Inovando na Sua Obra" className="h-14 object-contain mix-blend-multiply" />
+          </button>
+          <button onClick={() => scrollTo("pricing")}
+            className="hidden md:flex items-center gap-2 px-6 py-2.5 text-xs font-bold tracking-[0.15em] uppercase transition-colors"
             style={{ backgroundColor: C.green, color: C.white }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = C.greenDark)
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = C.green)
-            }
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
           >
             Quero me inscrever
           </button>
         </div>
       </header>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
+          URGENCY BAR
+      ══════════════════════════════════════════ */}
+      <div className="pt-16">
+        <div className="w-full py-2.5 px-4 flex items-center justify-center gap-3 flex-wrap text-center"
+          style={{ backgroundColor: C.dark, borderBottom: `1px solid rgba(201,162,87,0.2)` }}
+        >
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: "#FF4444" }} />
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+            Abertura exclusiva pós-Imersão, vagas fecham em{" "}
+            <span style={{ color: C.gold }}>06/06 às 23h59</span>
+          </p>
+          <span className="hidden md:inline text-white/20">·</span>
+          <p className="text-[11px] font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
+            R$1.900 ou 12× R$197 · <span style={{ color: C.gold }}>Preço de lançamento</span>
+          </p>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
           HERO
-      ══════════════════════════════ */}
-      <section
-        className="relative min-h-screen flex items-center pt-16"
-        style={{ backgroundColor: C.cream }}
+      ══════════════════════════════════════════ */}
+      <section className="relative min-h-screen flex items-center overflow-hidden"
+        style={{ backgroundColor: C.cream, ...gridBg() }}
       >
-        <div className="container mx-auto px-4 md:px-8 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        {/* Vignette corners */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(250,248,244,0.7) 100%)" }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             {/* Left — copy + form */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              animate={{ opacity: 1, x: 0 }}
+            <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
               className="space-y-8"
             >
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
-                  <span
-                    className="text-xs font-semibold uppercase tracking-[0.2em]"
-                    style={{ color: C.gold }}
-                  >
-                    Mentoria para Arquitetas e Designers
-                  </span>
-                </div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 border"
+                style={{ borderColor: "#FF4444", backgroundColor: "rgba(255,68,68,0.06)" }}
+              >
+                <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: "#FF4444" }}>
+                  Vagas abertas · Fecha 06/06
+                </span>
+              </div>
 
-                <h1
-                  className="font-display text-3xl md:text-4xl xl:text-5xl font-bold uppercase leading-[1.1]"
-                  style={{ color: C.ink, fontFamily: "Montserrat, sans-serif" }}
+              {/* Headline */}
+              <div className="space-y-3">
+                <p className="text-sm font-semibold" style={{ color: C.muted }}>
+                  Ingrid Zarza & Fernanda Bradaschia
+                </p>
+                <h1 className="font-display font-black uppercase leading-[0.95]"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2.4rem, 5vw, 4rem)", color: C.ink }}
                 >
-                  Domine o gerenciamento de obra de interiores de forma{" "}
-                  <em className="not-italic" style={{ color: C.gold }}>lucrativa</em>{" "}
-                  e eficiente
+                  Domine o<br />gerenciamento<br />de obra de<br />forma{" "}
+                  <Highlight>lucrativa</Highlight>
                 </h1>
-
-                <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight }}>
-                  Transforme cada projeto em uma jornada inesquecível para seus clientes — do primeiro contato à entrega final.
+                <p className="text-base md:text-lg leading-relaxed max-w-lg" style={{ color: C.inkLight }}>
+                  O método completo que Ingrid e Fernanda aplicaram em +250 obras, agora disponível para você. Entregue obras impecáveis, cobre o que vale e construa uma carreira sólida.
                 </p>
               </div>
 
-              <div
-                className="p-6 md:p-8 space-y-5"
-                style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
+              {/* Social proof mini */}
+              <div className="flex items-center gap-4 flex-wrap">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 overflow-hidden grayscale"
+                      style={{ borderColor: C.cream }}
+                    >
+                      <div className="w-full h-full" style={{ backgroundColor: C.gold, opacity: 0.3 + i * 0.1 }} />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex">
+                    {[1,2,3,4,5].map(i => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: C.gold }} />
+                    ))}
+                  </div>
+                  <span className="text-xs mt-0.5" style={{ color: C.muted }}>+100 arquitetas transformadas</span>
+                </div>
+              </div>
+
+              {/* Form box */}
+              <div className="shadow-xl overflow-hidden"
+                style={{ border: `1px solid ${C.border}` }}
               >
-                <p
-                  className="text-sm font-semibold uppercase tracking-wider"
-                  style={{ color: C.ink }}
+                {/* Urgency header */}
+                <div className="px-6 py-4 flex items-center justify-between"
+                  style={{ backgroundColor: C.dark }}
                 >
-                  Garante sua vaga agora
-                </p>
-                <LeadForm id="hero-form" />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-white">
+                      Garanta sua vaga agora
+                    </p>
+                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+                      Preço de lançamento · vagas limitadas
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-black text-lg leading-none" style={{ color: C.gold, fontFamily: "Montserrat, sans-serif" }}>
+                      12× R$197
+                    </p>
+                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                      ou R$1.900 à vista
+                    </p>
+                  </div>
+                </div>
+                <div className="p-6 md:p-8 space-y-5" style={{ backgroundColor: C.white }}>
+                  <LeadForm id="hero-form" />
+                  <div className="pt-2">
+                    <CountdownTimer label="Vagas fecham em:" />
+                  </div>
+                </div>
               </div>
             </motion.div>
 
-            {/* Right — photo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
+            {/* Right — photo editorial */}
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 }}
               className="relative flex justify-center lg:justify-end"
             >
               <div className="relative">
                 {/* Gold accent frame */}
-                <div
-                  className="absolute -top-3 -right-3 w-full h-full"
+                <div className="absolute -top-4 -right-4 w-full h-full"
                   style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
                 />
-                <img
-                  src={imgHeroPhoto}
+                {/* Secondary frame */}
+                <div className="absolute -bottom-4 -left-4 w-24 h-24"
+                  style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
+                />
+                <img src={imgHeroPhoto}
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
                   className="relative z-10 max-w-full h-auto mix-blend-multiply"
-                  style={{ maxHeight: "560px", objectFit: "cover" }}
+                  style={{ maxHeight: "580px", objectFit: "cover" }}
                   loading="eager"
                 />
+                {/* Floating stat card */}
+                <div className="absolute -bottom-6 -left-6 z-20 px-5 py-4 shadow-xl"
+                  style={{ backgroundColor: C.dark }}
+                >
+                  <p className="font-display font-black text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
+                    +250
+                  </p>
+                  <p className="text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    Obras entregues
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}
         >
           <ChevronDown className="w-5 h-5" style={{ color: C.muted }} />
         </motion.div>
       </section>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
           STATS BAR
-      ══════════════════════════════ */}
-      <section style={{ backgroundColor: C.dark }}>
+      ══════════════════════════════════════════ */}
+      <section style={{ backgroundColor: C.dark, ...gridBg("rgba(201,162,87,0.04)", "40px 40px") }}>
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-3 divide-x" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-            {STATS.map((s) => (
-              <Reveal key={s.label} className="py-10 md:py-14 text-center px-4">
-                <p
-                  className="font-display text-3xl md:text-5xl font-bold"
+          <div className="grid grid-cols-3 divide-x" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+            {STATS.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.1} className="py-10 md:py-14 text-center px-4">
+                <p className="font-display font-black text-3xl md:text-5xl xl:text-6xl leading-none"
                   style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
                 >
                   {s.value}
                 </p>
-                <p className="text-xs md:text-sm mt-2 uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <p className="text-[10px] md:text-xs mt-3 uppercase tracking-[0.18em]"
+                  style={{ color: "rgba(255,255,255,0.4)" }}
+                >
                   {s.label}
                 </p>
               </Reveal>
@@ -650,59 +606,168 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
+          ROI ANCHOR
+      ══════════════════════════════════════════ */}
+      <section className="py-10 md:py-14" style={{ backgroundColor: C.cream, borderBottom: `1px solid ${C.border}` }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 md:gap-0 md:divide-x" style={{ borderColor: C.border }}>
+            {[
+              {
+                value: "1ª obra",
+                text: "é o suficiente para recuperar o investimento inteiro na mentoria",
+              },
+              {
+                value: "+R$500",
+                text: "a mais por projeto quando você cobra honorários de gerenciamento com segurança",
+              },
+              {
+                value: "7 dias",
+                text: "é o único período em que esse preço de lançamento estará disponível",
+              },
+            ].map((item, i) => (
+              <Reveal key={i} delay={i * 0.1}
+                className="flex flex-col items-center text-center gap-2 px-6"
+              >
+                <span className="font-black text-2xl md:text-3xl"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: i === 2 ? "#FF4444" : C.gold }}
+                >
+                  {item.value}
+                </span>
+                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>{item.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          PROBLEMA / SOLUÇÃO
+      ══════════════════════════════════════════ */}
+      <section className="overflow-hidden" style={{ backgroundColor: C.ink }}>
+        <div className="grid lg:grid-cols-2">
+
+          {/* Left — O problema */}
+          <div className="px-8 md:px-16 py-20 md:py-28 relative overflow-hidden"
+            style={{ backgroundColor: "#111110" }}
+          >
+            <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: "#FF4444", opacity: 0.6 }} />
+            <Reveal>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] mb-6" style={{ color: "#FF6B6B" }}>
+                Sem método
+              </p>
+              <h2 className="font-display font-black text-3xl md:text-4xl uppercase leading-[1.05] mb-10"
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
+              >
+                A realidade<br />de quem atua<br />sem processo
+              </h2>
+              <ul className="space-y-4">
+                {PROBLEMS.map((p, i) => (
+                  <motion.li key={i}
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="flex items-start gap-4 text-sm leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.55)" }}
+                  >
+                    <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-0.5"
+                      style={{ backgroundColor: "rgba(255,68,68,0.15)" }}
+                    >
+                      <X className="w-3 h-3" style={{ color: "#FF6B6B" }} />
+                    </div>
+                    {p}
+                  </motion.li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+
+          {/* Right — A solução */}
+          <div className="px-8 md:px-16 py-20 md:py-28 relative overflow-hidden"
+            style={{ backgroundColor: C.darkMid }}
+          >
+            <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: C.gold }} />
+            {/* Ghost text */}
+            <div className="absolute -right-8 -bottom-8 font-display font-black leading-none select-none pointer-events-none"
+              style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.04 }}
+            >
+              SIM
+            </div>
+            <Reveal>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] mb-6" style={{ color: C.gold }}>
+                Com a mentoria
+              </p>
+              <h2 className="font-display font-black text-3xl md:text-4xl uppercase leading-[1.05] mb-10"
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
+              >
+                O que você<br />conquista com<br />método real
+              </h2>
+              <ul className="space-y-4">
+                {SOLUTIONS.map((s, i) => (
+                  <motion.li key={i}
+                    initial={{ opacity: 0, x: 16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="flex items-start gap-4 text-sm leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.8)" }}
+                  >
+                    <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-0.5"
+                      style={{ backgroundColor: "rgba(201,162,87,0.2)" }}
+                    >
+                      <Check className="w-3 h-3" style={{ color: C.gold }} />
+                    </div>
+                    {s}
+                  </motion.li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
           PARA QUEM É
-      ══════════════════════════════ */}
-      <section className="py-24 md:py-32 overflow-hidden" style={{ backgroundColor: C.white }}>
+      ══════════════════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="text-center mb-16">
             <Label>Para Quem É</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              Esta mentoria foi feita para você
+              Esta mentoria<br className="hidden md:block" /> foi feita para você
             </h2>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {AUDIENCE.map((a, i) => (
-              <Reveal
-                key={a.title}
-                delay={i * 0.1}
-                className="relative overflow-hidden group"
+              <Reveal key={a.title} delay={i * 0.1}
+                className="relative overflow-hidden group cursor-default transition-transform duration-300 hover:-translate-y-1"
                 style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
               >
-                {/* Ghost ordinal number */}
-                <div
-                  className="absolute -top-4 -right-2 font-display font-bold leading-none select-none pointer-events-none"
-                  style={{
-                    fontFamily: "Montserrat, sans-serif",
-                    fontSize: "7rem",
-                    color: C.gold,
-                    opacity: 0.07,
-                  }}
+                {/* Ghost number */}
+                <div className="absolute -top-2 -right-1 font-display font-black leading-none select-none pointer-events-none"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "8rem", color: C.gold, opacity: 0.06 }}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {a.number}
                 </div>
-
                 <div className="relative z-10 p-8 space-y-4">
-                  <div
-                    className="w-7 h-7 flex items-center justify-center text-xs font-bold"
+                  <div className="w-8 h-8 flex items-center justify-center text-xs font-black"
                     style={{ backgroundColor: C.gold, color: C.white, fontFamily: "Montserrat, sans-serif" }}
                   >
-                    {String(i + 1).padStart(2, "0")}
+                    {a.number}
                   </div>
-                  <h3
-                    className="font-display font-bold text-base uppercase"
+                  <h3 className="font-display font-black text-sm uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                   >
                     {a.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
-                    {a.desc}
-                  </p>
-                  <div className="w-0 h-px transition-all duration-500 group-hover:w-full" style={{ backgroundColor: C.gold }} />
+                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{a.desc}</p>
+                  <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-full"
+                    style={{ backgroundColor: C.gold }}
+                  />
                 </div>
               </Reveal>
             ))}
@@ -710,195 +775,239 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
-          O QUE VOCÊ VAI APRENDER
-      ══════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          HABILIDADES — BENTO GRID
+      ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="text-center mb-16">
             <Label>Habilidades</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              O que você vai aprender
+              O que você vai<br className="hidden md:block" /> dominar
             </h2>
           </Reveal>
 
-          {/* Featured layout: 1 large hero skill + 5 supporting */}
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-3 gap-4">
+            {/* BENTO — card grande */}
+            <Reveal delay={0}
+              className="lg:row-span-2 relative overflow-hidden flex flex-col justify-between p-10"
+              style={{ backgroundColor: C.dark, minHeight: "340px" }}
+            >
+              <div className="absolute bottom-0 right-0 font-display font-black leading-none select-none pointer-events-none"
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
+              >
+                01
+              </div>
+              {/* Grid overlay */}
+              <div className="absolute inset-0 opacity-30" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
+              <div className="relative z-10 space-y-5">
+                <div className="w-10 h-10 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
+                  <Layers className="w-5 h-5 text-white" />
+                </div>
+                <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+                <h3 className="font-display font-black text-xl uppercase text-white leading-tight"
+                  style={{ fontFamily: "Montserrat, sans-serif" }}
+                >
+                  Gestão de Obra Eficiente
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  Planejamento, cronograma e controle de etapas com precisão do início ao fim. O pilar central de uma entrega profissional.
+                </p>
+              </div>
+              <div className="relative z-10 mt-8">
+                <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
+                  Habilidade central
+                </span>
+              </div>
+            </Reveal>
 
-            {/* Hero skill — spans 1 col full height */}
-            <SkillHero skill={SKILLS[0]} />
-
-            {/* Supporting skills — 2 cols × 2 rows + last row spans 2 */}
+            {/* Cards regulares */}
             {SKILLS.slice(1, 5).map((s, i) => {
               const Icon = s.icon;
               return (
-                <Reveal
-                  key={s.title}
-                  delay={(i + 1) * 0.07}
-                  className="p-7 space-y-3 group"
+                <Reveal key={s.title} delay={(i + 1) * 0.08}
+                  className="p-7 space-y-4 group transition-shadow duration-300 hover:shadow-lg"
                   style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 flex items-center justify-center shrink-0" style={{ backgroundColor: C.goldLight }}>
+                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: C.goldLight }}
+                    >
                       <Icon className="w-4 h-4" style={{ color: C.gold }} />
                     </div>
-                    <h3
-                      className="font-display font-bold text-sm uppercase tracking-wide leading-tight"
+                    <h3 className="font-display font-black text-sm uppercase tracking-wide leading-tight"
                       style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                     >
                       {s.title}
                     </h3>
                   </div>
                   <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{s.desc}</p>
-                  <div className="w-0 h-px transition-all duration-500 group-hover:w-full" style={{ backgroundColor: C.gold }} />
+                  <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-full"
+                    style={{ backgroundColor: C.gold }}
+                  />
                 </Reveal>
               );
             })}
 
-            {/* Last skill spans 2 cols */}
-            <SkillWide skill={SKILLS[5]} />
+            {/* BENTO — card largo */}
+            <Reveal delay={0.42}
+              className="lg:col-span-2 p-8 flex flex-col sm:flex-row items-start gap-6"
+              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
+            >
+              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center"
+                style={{ backgroundColor: C.gold }}
+              >
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-display font-black text-base uppercase tracking-wide"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                >
+                  Posicionamento de Mercado
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
+                  Diferencie-se no mercado, cobre o que seu trabalho realmente vale e construa uma carteira de clientes sólida que gera indicações constantes.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════
-          COMO FUNCIONA
-      ══════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          COMO FUNCIONA — NÚMEROS MASSIVOS
+      ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-20">
-            <Label>Como Funciona</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
-              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-            >
-              O que está incluído na mentoria
-            </h2>
-          </Reveal>
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-          {/* Visual timeline grid */}
-          <div className="max-w-4xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {INCLUDES.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <Reveal key={item.text} delay={i * 0.08} className="relative">
-                  {/* Connector line (desktop only, not on last of each row) */}
-                  <div className="flex flex-col items-start gap-4">
-                    {/* Icon with number badge */}
-                    <div className="relative">
-                      <div
-                        className="w-14 h-14 flex items-center justify-center"
-                        style={{ backgroundColor: C.cream, border: `2px solid ${C.gold}` }}
-                      >
-                        <Icon className="w-6 h-6" style={{ color: C.gold }} />
-                      </div>
-                      <div
-                        className="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center text-[10px] font-bold"
-                        style={{ backgroundColor: C.dark, color: C.gold, fontFamily: "Montserrat, sans-serif" }}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </div>
-                    </div>
-                    <p
-                      className="text-sm leading-relaxed font-medium"
-                      style={{ color: C.inkLight }}
-                    >
-                      {item.text}
+            {/* Left sticky title */}
+            <Reveal className="lg:col-span-4 lg:sticky lg:top-32">
+              <Label>Como Funciona</Label>
+              <h2 className="font-display font-black text-4xl md:text-6xl uppercase leading-[0.95] mt-4"
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+              >
+                O que está<br />incluído
+              </h2>
+              <div className="mt-8 grid grid-cols-3 gap-3">
+                {STATS.map((s) => (
+                  <div key={s.label} className="text-center p-4" style={{ backgroundColor: C.cream }}>
+                    <p className="font-display font-black text-xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
+                      {s.value}
                     </p>
+                    <p className="text-[9px] uppercase tracking-wider mt-1" style={{ color: C.muted }}>{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Right steps with massive numbers */}
+            <div className="lg:col-span-8 space-y-1">
+              {HOW_IT_WORKS.map((step, i) => (
+                <Reveal key={step.n} delay={i * 0.1}>
+                  <div className="group flex items-start gap-6 py-8 border-b transition-colors duration-300 hover:bg-[#FAF8F4] px-4 -mx-4"
+                    style={{ borderColor: C.border }}
+                  >
+                    <span className="font-display font-black leading-none flex-shrink-0 transition-all duration-300 group-hover:opacity-100"
+                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "5rem", color: C.gold, opacity: 0.18, lineHeight: 0.85 }}
+                    >
+                      {step.n}
+                    </span>
+                    <div className="space-y-2 pt-1">
+                      <h3 className="font-display font-black text-lg uppercase"
+                        style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                      >
+                        {step.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{step.desc}</p>
+                    </div>
                   </div>
                 </Reveal>
-              );
-            })}
-          </div>
+              ))}
 
-          <Reveal className="text-center mt-14">
-            <button
-              onClick={() => scrollTo("pricing")}
-              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
-              style={{ backgroundColor: C.green, color: C.white }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = C.greenDark)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = C.green)
-              }
-            >
-              Quero meu acesso
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </Reveal>
+              {/* Includes grid */}
+              <Reveal delay={0.3}>
+                <div className="pt-8 grid sm:grid-cols-2 gap-3">
+                  {INCLUDES.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.text} className="flex items-center gap-3 px-4 py-3"
+                        style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
+                      >
+                        <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                          style={{ backgroundColor: C.dark }}
+                        >
+                          <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                        </div>
+                        <p className="text-xs leading-relaxed font-medium" style={{ color: C.inkLight }}>
+                          {item.text}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Reveal>
+
+              <Reveal className="pt-8" delay={0.4}>
+                <button onClick={() => scrollTo("pricing")}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                  style={{ backgroundColor: C.green, color: C.white }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+                >
+                  Quero meu acesso
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
           MÓDULOS
-      ══════════════════════════════ */}
+      ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="text-center mb-16">
             <Label>Conteúdo</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              Os 4 módulos da mentoria
+              Os 4 módulos<br className="hidden md:block" /> da mentoria
             </h2>
           </Reveal>
 
-          <div className="max-w-3xl mx-auto space-y-3">
+          <div className="max-w-3xl mx-auto space-y-2">
             {MODULES.map((mod, i) => (
               <Reveal key={mod.number} delay={i * 0.08}>
-                <details
-                  className="group"
-                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
-                >
-                  <summary
-                    className="flex items-center gap-0 cursor-pointer list-none select-none overflow-hidden"
+                <details className="group" style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}>
+                  <summary className="flex items-center gap-0 cursor-pointer list-none select-none overflow-hidden"
                     style={{ color: C.ink }}
                   >
-                    {/* Large number accent */}
-                    <div
-                      className="flex-shrink-0 w-16 md:w-20 self-stretch flex items-center justify-center font-display font-bold text-3xl md:text-4xl"
-                      style={{
-                        fontFamily: "Montserrat, sans-serif",
-                        color: C.white,
-                        backgroundColor: i % 2 === 0 ? C.dark : C.gold,
-                      }}
+                    <div className="flex-shrink-0 w-16 md:w-20 self-stretch flex items-center justify-center font-display font-black text-3xl md:text-4xl"
+                      style={{ fontFamily: "Montserrat, sans-serif", color: C.white, backgroundColor: i % 2 === 0 ? C.dark : C.gold }}
                     >
                       {mod.number}
                     </div>
-
-                    {/* Content */}
                     <div className="flex-1 px-6 py-5">
-                      <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: C.muted }}>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.muted }}>
                         Módulo {mod.number}
                       </p>
-                      <h3
-                        className="font-display font-bold text-sm md:text-base uppercase"
+                      <h3 className="font-display font-black text-sm md:text-base uppercase"
                         style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                       >
                         {mod.title}
                       </h3>
                     </div>
-
                     <div className="px-5 flex-shrink-0">
-                      <ChevronDown
-                        className="w-5 h-5 transition-transform group-open:rotate-180"
-                        style={{ color: C.muted }}
-                      />
+                      <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" style={{ color: C.muted }} />
                     </div>
                   </summary>
-
-                  <div
-                    className="px-6 md:px-8 pb-8 pt-6"
-                    style={{ borderTop: `1px solid ${C.border}` }}
-                  >
-                    <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
-                      {mod.desc}
-                    </p>
+                  <div className="px-6 md:px-8 pb-8 pt-6" style={{ borderTop: `1px solid ${C.border}` }}>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>{mod.desc}</p>
                     <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
                       {mod.items.map((item) => (
                         <li key={item} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
@@ -915,53 +1024,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
           BÔNUS
-      ══════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.dark }}>
-        <div className="container mx-auto px-4 md:px-8">
+      ══════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 relative overflow-hidden"
+        style={{ backgroundColor: C.dark, ...gridBg("rgba(201,162,87,0.05)", "50px 50px") }}
+      >
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
           <Reveal className="text-center mb-16">
-            <Label>Bônus Exclusivos</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase text-white"
+            <Label light>Bônus Exclusivos</Label>
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] text-white"
               style={{ fontFamily: "Montserrat, sans-serif" }}
             >
-              Você também recebe
+              Você também<br className="hidden md:block" /> recebe
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
             {BONUS.map((b, i) => {
               const Icon = b.icon;
               return (
-                <Reveal
-                  key={b.title}
-                  delay={i * 0.1}
-                  className="p-8 md:p-10 space-y-6"
-                  style={{ border: `1px solid rgba(201,162,87,0.3)`, backgroundColor: "rgba(255,255,255,0.04)" }}
+                <Reveal key={b.title} delay={i * 0.12}
+                  className="p-8 md:p-10 space-y-6 relative overflow-hidden"
+                  style={{ border: `1px solid rgba(201,162,87,0.25)`, backgroundColor: "rgba(255,255,255,0.03)" }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-10 h-10 flex items-center justify-center"
+                  <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: C.gold }} />
+                  <div className="flex items-center gap-4 pl-2">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: C.gold }}
                     >
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3
-                        className="font-display font-bold text-base uppercase text-white"
+                      <h3 className="font-display font-black text-base uppercase text-white"
                         style={{ fontFamily: "Montserrat, sans-serif" }}
                       >
                         {b.title}
                       </h3>
-                      <p className="text-xs mt-0.5" style={{ color: C.gold }}>
-                        {b.subtitle}
-                      </p>
+                      <p className="text-xs mt-0.5" style={{ color: C.gold }}>{b.subtitle}</p>
                     </div>
                   </div>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 pl-2">
                     {b.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+                      <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
                         <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.gold }} />
                         {item}
                       </li>
@@ -974,50 +1079,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
           DEPOIMENTOS
-      ══════════════════════════════ */}
+      ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-14">
+          <Reveal className="text-center mb-16">
             <Label>Resultados Reais</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              O que nossas alunas dizem
+              O que nossas<br className="hidden md:block" /> alunas dizem
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+          {/* WhatsApp screenshot testimonials */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
               { src: imgTestimonial1, name: "Beatriz Francini" },
               { src: imgTestimonial2, name: "Ingrid Cristina" },
               { src: imgTestimonial3, name: "Monique Figueiredo" },
               { src: imgTestimonial4, name: "Aline Araujo" },
-            ].map((t, i) => (
-              <Reveal key={t.name} delay={i * 0.08}>
+            ].map((t) => (
+              <div key={t.name}
+                className="overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                style={{
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  border: `1px solid ${C.border}`,
+                }}
+              >
                 <img
                   src={t.src}
-                  alt={`Depoimento ${t.name}`}
-                  className="w-full mix-blend-multiply"
-                  loading="lazy"
+                  alt={`Depoimento de ${t.name}`}
+                  className="w-full h-auto block"
+                  loading="eager"
                 />
-              </Reveal>
+              </div>
             ))}
           </div>
 
-          <Reveal className="text-center mt-12">
-            <button
-              onClick={() => scrollTo("pricing")}
-              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-colors"
+          <Reveal className="text-center mt-14">
+            <button onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
               style={{ backgroundColor: C.green, color: C.white }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = C.greenDark)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = C.green)
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
             >
               Quero ser a próxima
               <ArrowRight className="w-4 h-4" />
@@ -1026,185 +1132,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
-          INVESTIMENTO
-      ══════════════════════════════ */}
-      <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
-        <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-14">
-            <Label>Investimento</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
-              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-            >
-              O investimento mais importante do seu ano
-            </h2>
-          </Reveal>
-
-          <div className="max-w-md mx-auto">
-            <Reveal>
-              <div
-                className="overflow-hidden shadow-xl"
-                style={{ border: `1px solid ${C.border}` }}
-              >
-                {/* Gold header */}
-                <div
-                  className="py-10 px-8 text-center space-y-2"
-                  style={{ backgroundColor: C.dark }}
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
-                    Acesso completo à Mentoria
-                  </p>
-                  <div className="flex items-end justify-center gap-1 pt-2">
-                    <span className="text-lg font-medium text-white/80">12x</span>
-                    <span
-                      className="font-display text-6xl font-bold text-white leading-none"
-                      style={{ fontFamily: "Montserrat, sans-serif" }}
-                    >
-                      R$&nbsp;237
-                    </span>
-                    <span className="text-2xl font-bold text-white/80 pb-1">,87</span>
-                  </div>
-                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-                    ou <strong className="text-white/70">R$ 2.300,00</strong> à vista
-                  </p>
-                </div>
-
-                {/* White body */}
-                <div className="p-8 space-y-7" style={{ backgroundColor: C.white }}>
-                  <div
-                    className="pb-6"
-                    style={{ borderBottom: `1px solid ${C.border}` }}
-                  >
-                    <p
-                      className="text-xs font-semibold uppercase tracking-[0.15em] mb-4"
-                      style={{ color: C.muted }}
-                    >
-                      Tudo que você recebe
-                    </p>
-                    <ul className="space-y-3">
-                      {INCLUDES.map((item) => (
-                        <li key={item.text} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
-                          <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
-                          {item.text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="space-y-3">
-                    <a
-                      href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-colors"
-                      style={{ backgroundColor: C.green, color: C.white }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.backgroundColor = C.greenDark)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.backgroundColor = C.green)
-                      }
-                    >
-                      Quero meu acesso agora
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                    <a
-                      href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center w-full py-3 text-xs font-semibold uppercase tracking-wider transition-colors"
-                      style={{ border: `1px solid ${C.border}`, color: C.muted }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = C.ink;
-                        e.currentTarget.style.color = C.ink;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = C.border;
-                        e.currentTarget.style.color = C.muted;
-                      }}
-                    >
-                      Prefiro pagar com Boleto Parcelado
-                    </a>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: C.muted }}>
-                    <ShieldCheck className="w-4 h-4" style={{ color: C.green }} />
-                    Compra 100% segura — Garantia incondicional de 15 dias
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════
-          GARANTIA
-      ══════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-4xl mx-auto">
-            <Reveal className="flex flex-col md:flex-row items-center gap-12">
-              <div className="flex-1 space-y-6 text-center md:text-left">
-                <Label>Risco Zero</Label>
-                <h2
-                  className="font-display text-2xl md:text-3xl font-bold uppercase"
-                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                >
-                  Garantia incondicional de 15 dias
-                </h2>
-                <p className="text-base leading-relaxed" style={{ color: C.inkLight }}>
-                  Confiamos tanto no nosso conteúdo que, se por qualquer motivo você não ficar satisfeita nos primeiros 15 dias, devolvemos 100% do seu investimento. Sem perguntas, sem burocracia.
-                </p>
-                <div className="flex items-center gap-3 justify-center md:justify-start">
-                  <ShieldCheck className="w-5 h-5" style={{ color: C.green }} />
-                  <span className="text-sm font-semibold" style={{ color: C.green }}>
-                    Compra 100% segura e protegida
-                  </span>
-                </div>
-              </div>
-              <div className="flex-shrink-0 flex justify-center">
-                <img
-                  src={imgGuarantee}
-                  alt="Garantia de 15 dias"
-                  className="hidden md:block w-44 mix-blend-multiply"
-                  loading="lazy"
-                />
-                <img
-                  src={imgGarantiaMobile}
-                  alt="Garantia incondicional de 15 dias"
-                  className="block md:hidden w-36 mix-blend-multiply"
-                  loading="lazy"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
           SOBRE NÓS
-      ══════════════════════════════ */}
+      ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <Reveal>
               <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-
                 {/* Photo */}
                 <div className="relative flex justify-center md:justify-start order-2 md:order-1">
                   <div className="relative">
-                    <div
-                      className="absolute -bottom-3 -left-3 w-full h-full"
-                      style={{ border: `2px solid ${C.gold}` }}
+                    <div className="absolute -bottom-4 -left-4 w-full h-full"
+                      style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
                     />
-                    <img
-                      src={imgAbout}
-                      alt="Ingrid Zarza e Fernanda Bradaschia"
-                      className="relative z-10 w-full max-w-sm mix-blend-multiply"
-                      loading="lazy"
-                    />
+                    <img src={imgAbout} alt="Ingrid Zarza e Fernanda Bradaschia"
+                      className="relative z-10 w-full max-w-sm mix-blend-multiply" loading="lazy" />
+                    {/* Stat badge */}
+                    <div className="absolute -top-5 -right-5 z-20 px-4 py-3 shadow-lg"
+                      style={{ backgroundColor: C.gold }}
+                    >
+                      <p className="font-display font-black text-xl text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
+                        +250
+                      </p>
+                      <p className="text-[9px] uppercase tracking-widest text-white/80">obras</p>
+                    </div>
                   </div>
                 </div>
 
@@ -1212,8 +1164,7 @@ export default function Home() {
                 <div className="order-1 md:order-2 space-y-7">
                   <div>
                     <Label>Quem Somos</Label>
-                    <h2
-                      className="font-display text-2xl md:text-3xl font-bold uppercase text-center md:text-left"
+                    <h2 className="font-display font-black text-2xl md:text-3xl uppercase text-center md:text-left leading-tight"
                       style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                     >
                       Ingrid Zarza &{" "}
@@ -1221,26 +1172,22 @@ export default function Home() {
                       Fernanda Bradaschia
                     </h2>
                   </div>
-
                   <div className="space-y-4 text-sm leading-relaxed" style={{ color: C.inkLight }}>
                     <p>
-                      Somos arquitetas <strong style={{ color: C.ink }}>apaixonadas</strong> por compartilhar conhecimento e transformar a gestão de obras de interiores.
+                      Somos arquitetas <strong style={{ color: C.ink }}>apaixonadas</strong> por compartilhar conhecimento e transformar a gestão de obras de interiores no Brasil.
                     </p>
                     <p>
-                      Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório dedicado ao desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, <strong style={{ color: C.ink }}>já concluímos mais de 250 obras</strong>.
+                      Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório especializado em desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, <strong style={{ color: C.ink }}>já concluímos mais de 250 obras</strong>.
                     </p>
                     <p>
-                      Em 2024 criamos a <strong style={{ color: C.ink }}>Mentoria Inovando na Sua Obra</strong> para compartilhar toda essa vivência de forma organizada e acessível. Já são dezenas de alunas impactadas pela nossa metodologia.
+                      Em 2024 criamos a <strong style={{ color: C.ink }}>Mentoria Inovando na Sua Obra</strong> para compartilhar toda essa vivência de forma organizada, prática e acessível. Já são dezenas de alunas impactadas pela nossa metodologia.
                     </p>
                   </div>
-
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
-                    <a
-                      href="https://www.instagram.com/inovandonasuaobra/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-semibold uppercase tracking-[0.2em] flex items-center gap-2 transition-opacity hover:opacity-70"
+                    <a href="https://www.instagram.com/inovandonasuaobra/"
+                      target="_blank" rel="noopener noreferrer"
+                      className="text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-2 transition-opacity hover:opacity-70"
                       style={{ color: C.gold }}
                     >
                       <Instagram className="w-3.5 h-3.5" />
@@ -1254,40 +1201,174 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
-          FAQ
-      ══════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          INVESTIMENTO
+      ══════════════════════════════════════════ */}
+      <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: C.ink, ...gridBg("rgba(201,162,87,0.05)", "50px 50px") }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-14">
+            <Label light>Investimento</Label>
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] text-white"
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+            >
+              Preço de lançamento.<br className="hidden md:block" /> Por 7 dias.
+            </h2>
+            <p className="mt-4 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+              Após o fechamento, o valor volta ao preço regular.
+            </p>
+          </Reveal>
+
+          <div className="max-w-md mx-auto">
+            <Reveal>
+              <div className="overflow-hidden shadow-2xl">
+                {/* Header */}
+                <div className="py-10 px-8 text-center space-y-4 relative overflow-hidden"
+                  style={{ backgroundColor: C.dark }}
+                >
+                  <div className="absolute inset-0 opacity-20" style={gridBg("rgba(201,162,87,0.3)", "40px 40px")} />
+                  <div className="inline-flex items-center gap-2 px-3 py-1 relative z-10"
+                    style={{ backgroundColor: "rgba(255,68,68,0.15)", border: "1px solid rgba(255,68,68,0.3)" }}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
+                    <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#FF6B6B" }}>
+                      Preço de lançamento
+                    </span>
+                  </div>
+                  <div className="relative z-10">
+                    <div className="flex items-end justify-center gap-1">
+                      <span className="text-lg font-medium text-white/70">12×</span>
+                      <span className="font-display font-black text-6xl text-white leading-none"
+                        style={{ fontFamily: "Montserrat, sans-serif" }}
+                      >
+                        R$&nbsp;197
+                      </span>
+                    </div>
+                    <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>
+                      ou <strong className="text-white/70">R$ 1.900,00</strong> à vista
+                    </p>
+                  </div>
+                  <div className="relative z-10 pt-1">
+                    <CountdownTimer label="Oferta expira em:" dark />
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="p-8 space-y-7" style={{ backgroundColor: C.white }}>
+                  {/* ROI callout */}
+                  <div className="px-4 py-3 text-sm text-center font-semibold"
+                    style={{ backgroundColor: C.goldDim, color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
+                  >
+                    Uma obra com gerenciamento cobrado paga a mentoria inteira.
+                  </div>
+
+                  <div className="pb-6" style={{ borderBottom: `1px solid ${C.border}` }}>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] mb-4" style={{ color: C.muted }}>
+                      Tudo que você recebe
+                    </p>
+                    <ul className="space-y-3">
+                      {INCLUDES.map((item) => (
+                        <li key={item.text} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
+                          <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
+                          {item.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-3">
+                    <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                      target="_blank" rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all"
+                      style={{ backgroundColor: C.green, color: C.white }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+                    >
+                      Quero meu acesso agora
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
+                      target="_blank" rel="noopener noreferrer"
+                      className="flex items-center justify-center w-full py-3 text-xs font-semibold uppercase tracking-wider transition-colors"
+                      style={{ border: `1px solid ${C.border}`, color: C.muted }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.ink; e.currentTarget.style.color = C.ink; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.muted; }}
+                    >
+                      Prefiro pagar com Boleto Parcelado
+                    </a>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: C.muted }}>
+                    <ShieldCheck className="w-4 h-4" style={{ color: C.green }} />
+                    Compra 100% segura, Garantia incondicional de 15 dias
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          GARANTIA
+      ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-4xl mx-auto">
+            <Reveal className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1 space-y-6 text-center md:text-left">
+                <Label>Risco Zero</Label>
+                <h2 className="font-display font-black text-2xl md:text-4xl uppercase leading-tight"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                >
+                  Garantia incondicional<br /> de 15 dias
+                </h2>
+                <p className="text-base leading-relaxed" style={{ color: C.inkLight }}>
+                  Confiamos tanto no nosso conteúdo que, se por qualquer motivo você não ficar satisfeita nos primeiros 15 dias, devolvemos 100% do seu investimento. Sem perguntas, sem burocracia.
+                </p>
+                <div className="flex items-center gap-3 justify-center md:justify-start">
+                  <ShieldCheck className="w-5 h-5" style={{ color: C.green }} />
+                  <span className="text-sm font-bold" style={{ color: C.green }}>
+                    Compra 100% segura e protegida
+                  </span>
+                </div>
+              </div>
+              <div className="flex-shrink-0 flex justify-center">
+                <img src={imgGuarantee} alt="Garantia de 15 dias"
+                  className="hidden md:block w-44 mix-blend-multiply" loading="lazy" />
+                <img src={imgGarantiaMobile} alt="Garantia incondicional de 15 dias"
+                  className="block md:hidden w-36 mix-blend-multiply" loading="lazy" />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          FAQ
+      ══════════════════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="text-center mb-14">
             <Label>Dúvidas</Label>
-            <h2
-              className="font-display text-2xl md:text-4xl font-bold uppercase"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              Perguntas Frequentes
+              Perguntas<br className="hidden md:block" /> Frequentes
             </h2>
           </Reveal>
 
-          <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-3">
+          <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-2">
             {FAQS.map((faq, i) => (
               <Reveal key={i} delay={i * 0.06}>
-                <AccordionItem
-                  value={`faq-${i}`}
-                  className="overflow-hidden"
-                  style={{
-                    backgroundColor: C.cream,
-                    border: `1px solid ${C.border}`,
-                  }}
+                <AccordionItem value={`faq-${i}`} className="overflow-hidden"
+                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
                 >
-                  <AccordionTrigger
-                    className="px-6 py-5 text-left text-sm font-semibold hover:no-underline"
+                  <AccordionTrigger className="px-6 py-5 text-left text-sm font-bold hover:no-underline"
                     style={{ color: C.ink }}
                   >
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent
-                    className="px-6 pb-6 text-sm leading-relaxed"
+                  <AccordionContent className="px-6 pb-6 text-sm leading-relaxed"
                     style={{ color: C.muted }}
                   >
                     {faq.a}
@@ -1299,40 +1380,88 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
+          FINAL CTA — GOLD BACKGROUND
+      ══════════════════════════════════════════ */}
+      <section className="relative overflow-hidden py-24 md:py-32" style={{ backgroundColor: C.gold }}>
+        {/* Decorative ghost text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+          <span className="font-display font-black uppercase leading-none select-none whitespace-nowrap"
+            style={{ fontFamily: "Montserrat, sans-serif", fontSize: "18vw", color: C.dark, opacity: 0.07 }}
+          >
+            OBRA
+          </span>
+        </div>
+        <div className="absolute inset-0 opacity-10" style={gridBg("rgba(26,21,16,0.3)", "50px 50px")} />
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-6"
+              style={{ backgroundColor: "rgba(26,21,16,0.12)", border: "1px solid rgba(26,21,16,0.2)" }}
+            >
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
+              <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: C.dark }}>
+                Vagas fecham em 06/06
+              </span>
+            </div>
+            <h2 className="font-display font-black uppercase leading-[0.92] mb-6"
+              style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2.5rem, 6vw, 5rem)", color: C.dark }}
+            >
+              Você veio da<br />Imersão. Você<br />já sabe o que fazer.
+            </h2>
+            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-8" style={{ color: "rgba(26,21,16,0.75)" }}>
+              Agora é a hora. O preço de lançamento existe por apenas 7 dias. Depois disso, o valor sobe e as vagas fecham. Junte-se a mais de 100 arquitetas que já transformaram sua carreira com esse método.
+            </p>
+            <div className="mb-8">
+              <CountdownTimer label="Oferta encerra em:" />
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-10 py-5 font-black text-sm tracking-[0.15em] uppercase shadow-2xl transition-all hover:-translate-y-1 hover:gap-5"
+                style={{ backgroundColor: C.dark, color: C.gold }}
+              >
+                Quero entrar agora
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <p className="text-xs font-semibold" style={{ color: "rgba(26,21,16,0.55)" }}>
+                12× R$197 ou R$1.900 à vista
+              </p>
+            </div>
+            <p className="mt-6 flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(26,21,16,0.5)" }}>
+              <ShieldCheck className="w-4 h-4" />
+              Garantia incondicional de 15 dias · Pagamento 100% seguro
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
           FOOTER
-      ══════════════════════════════ */}
+      ══════════════════════════════════════════ */}
       <footer style={{ backgroundColor: C.dark }}>
         <div className="container mx-auto px-4 md:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start pb-10" style={{ borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start pb-10"
+            style={{ borderBottom: `1px solid rgba(255,255,255,0.06)` }}
+          >
             <div className="space-y-4">
-              <img
-                src={imgLogo}
-                alt="Inovando na Sua Obra"
-                className="h-12 object-contain"
-                loading="lazy"
-              />
-              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
+              <img src={imgLogo} alt="Inovando na Sua Obra"
+                className="h-12 object-contain" loading="lazy" />
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.3)" }}>
                 Transformando a gestão de obras de interiores com método, segurança e resultados reais.
               </p>
             </div>
 
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-5" style={{ color: C.gold }}>
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] mb-5" style={{ color: C.gold }}>
                 Links
               </p>
-              {[
-                { label: "Investimento", action: () => scrollTo("pricing") },
-              ].map((l) => (
-                <button
-                  key={l.label}
-                  onClick={l.action}
-                  className="block text-xs transition-opacity hover:opacity-60"
-                  style={{ color: "rgba(255,255,255,0.45)" }}
-                >
-                  {l.label}
-                </button>
-              ))}
+              <button onClick={() => scrollTo("pricing")}
+                className="block text-xs transition-opacity hover:opacity-70"
+                style={{ color: "rgba(255,255,255,0.4)" }}
+              >
+                Investimento
+              </button>
               {[
                 { label: "Quero me inscrever", href: "https://pay.hotmart.com/Y93975016X?off=22jnl093" },
                 { label: "Materiais para Obra", href: "/materiais" },
@@ -1340,13 +1469,11 @@ export default function Home() {
                 { label: "Termos de Uso", href: "/termos-de-uso" },
                 { label: "Política de Privacidade", href: "/politica-de-privacidade" },
               ].map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
+                <a key={l.label} href={l.href}
                   target={l.href.startsWith("http") ? "_blank" : undefined}
                   rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block text-xs transition-opacity hover:opacity-60"
-                  style={{ color: "rgba(255,255,255,0.45)" }}
+                  className="block text-xs transition-opacity hover:opacity-70"
+                  style={{ color: "rgba(255,255,255,0.4)" }}
                 >
                   {l.label}
                 </a>
@@ -1354,83 +1481,56 @@ export default function Home() {
             </div>
 
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-5" style={{ color: C.gold }}>
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] mb-5" style={{ color: C.gold }}>
                 Contato
               </p>
-              <a
-                href="https://wa.me/5511955717229"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-60"
-                style={{ color: "rgba(255,255,255,0.45)" }}
+              <a href="https://wa.me/5511955717229" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-70"
+                style={{ color: "rgba(255,255,255,0.4)" }}
               >
-                <Phone className="w-3.5 h-3.5" />
-                (11) 5571-7229
+                <Phone className="w-3.5 h-3.5" /> (11) 5571-7229
               </a>
-              <a
-                href="mailto:contato@inovandonasuaobra.com.br"
-                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-60"
-                style={{ color: "rgba(255,255,255,0.45)" }}
+              <a href="mailto:contato@inovandonasuaobra.com.br"
+                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-70"
+                style={{ color: "rgba(255,255,255,0.4)" }}
               >
-                <Mail className="w-3.5 h-3.5" />
-                contato@inovandonasuaobra.com.br
+                <Mail className="w-3.5 h-3.5" /> contato@inovandonasuaobra.com.br
               </a>
-              <a
-                href="https://www.instagram.com/inovandonasuaobra/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-60"
-                style={{ color: "rgba(255,255,255,0.45)" }}
+              <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-70"
+                style={{ color: "rgba(255,255,255,0.4)" }}
               >
-                <Instagram className="w-3.5 h-3.5" />
-                @inovandonasuaobra
+                <Instagram className="w-3.5 h-3.5" /> @inovandonasuaobra
               </a>
             </div>
           </div>
 
           <div className="pt-8 text-center">
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.18)" }}>
               © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
             </p>
           </div>
         </div>
       </footer>
 
-      {/* ══════════════════════════════
+      {/* ══════════════════════════════════════════
           MOBILE STICKY CTA
-      ══════════════════════════════ */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-50 md:hidden transition-transform duration-300 ${
-          showMobileCTA ? "translate-y-0" : "translate-y-full"
-        }`}
-        style={{
-          backgroundColor: C.dark,
-          borderTop: `1px solid rgba(201,162,87,0.3)`,
-          boxShadow: "0 -8px 32px rgba(0,0,0,0.3)",
-        }}
+      ══════════════════════════════════════════ */}
+      <div className={`fixed bottom-0 left-0 right-0 z-50 md:hidden transition-transform duration-300 ${showMobileCTA ? "translate-y-0" : "translate-y-full"}`}
+        style={{ backgroundColor: C.dark, borderTop: `1px solid rgba(201,162,87,0.25)`, boxShadow: "0 -8px 32px rgba(0,0,0,0.3)" }}
       >
         <div className="flex items-center justify-between px-5 py-3.5">
           <div>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
-              A partir de
-            </p>
-            <p
-              className="font-display text-lg font-bold text-white"
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-            >
-              12× R$ 237<span className="text-sm font-normal text-white/60">,87</span>
+            <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>A partir de</p>
+            <p className="font-display font-black text-lg text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
+              12× R$ 237<span className="text-sm font-normal text-white/50">,87</span>
             </p>
           </div>
-          <button
-            onClick={() => scrollTo("pricing")}
-            className="px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
+          <button onClick={() => scrollTo("pricing")}
+            className="px-6 py-3 text-xs font-black uppercase tracking-widest transition-colors"
             style={{ backgroundColor: C.green, color: C.white }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = C.greenDark)
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = C.green)
-            }
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
           >
             Garantir Vaga
           </button>
