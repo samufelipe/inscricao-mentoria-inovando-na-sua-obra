@@ -387,14 +387,14 @@ export default function Home() {
                   Domine a obra de interiores<br />
                   com mais <Highlight>lucro</Highlight>,{" "}
                   organização<br className="hidden sm:block" />
-                  {" "}e segurança —<br />
+                  {" "}e segurança,<br />
                   do primeiro atendimento{" "}
                   <br className="hidden sm:block" />
                   à entrega final.
                 </h1>
                 <p className="text-sm md:text-base leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
                   Tenha acesso à experiência prática, técnica e comportamental
-                  {" "}que leva anos para ser construída — e aprenda a cobrar
+                  {" "}que leva anos para ser construída, e aprenda a cobrar
                   {" "}melhor, evitar erros e crescer sem transformar
                   {" "}seu escritório em um caos.
                 </p>
