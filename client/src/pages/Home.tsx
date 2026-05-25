@@ -15,10 +15,8 @@ import imgHeroPhoto  from "@/assets/mentoria/hero-photo.png";
 import imgAbout      from "@/assets/mentoria/about.png";
 import imgGuarantee  from "@/assets/mentoria/guarantee.png";
 import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
-import imgTestimonial1 from "@/assets/mentoria/testimonial1.png";
-import imgTestimonial2 from "@/assets/mentoria/testimonial2.png";
-import imgTestimonial3 from "@/assets/mentoria/testimonial3.png";
-import imgTestimonial4 from "@/assets/mentoria/testimonial4.png";
+import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
+import { VideoModal } from "@/components/ui/video-modal";
 
 /* ═══════════════════════════════════════
    DESIGN TOKENS
@@ -96,83 +94,6 @@ function Highlight({ children }: { children: React.ReactNode }) {
       />
       <span className="relative z-10" style={{ color: C.dark }}>{children}</span>
     </span>
-  );
-}
-
-/* ═══════════════════════════════════════
-   PHONE MASK
-   ═══════════════════════════════════════ */
-function phoneMask(v: string) {
-  const d = v.replace(/\D/g, "").slice(0, 11);
-  if (d.length <= 2) return `(${d}`;
-  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
-}
-
-/* ═══════════════════════════════════════
-   LEAD FORM
-   ═══════════════════════════════════════ */
-function LeadForm({ id, ctaLabel = "QUERO ENTRAR NA MENTORIA", dark = false }: {
-  id?: string; ctaLabel?: string; dark?: boolean;
-}) {
-  const [name,  setName]  = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (!name.trim()) e.name = "Informe seu nome";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "E-mail inválido";
-    const digits = phone.replace(/\D/g, "");
-    if (digits.length < 10 || digits.length > 11) e.phone = "WhatsApp inválido";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    const digits = phone.replace(/\D/g, "");
-    const params = new URLSearchParams({ off: "22jnl093", checkoutMode: "10", name, email, phonenumber: `55${digits}` });
-    window.location.href = `https://pay.hotmart.com/Y93975016X?${params}`;
-  };
-
-  const base = "w-full px-5 py-4 text-sm transition-colors focus:outline-none";
-  const inputClass = dark
-    ? `${base} bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:border-white/50`
-    : `${base} bg-white border border-[#E8E4DC] text-[#1C1C1A] placeholder:text-[#9A9A97] focus:border-[#C9A257]`;
-
-  return (
-    <form id={id} onSubmit={handleSubmit} className="space-y-3 w-full">
-      <div>
-        <input type="text" placeholder="Seu nome completo" value={name}
-          onChange={(e) => setName(e.target.value)} className={inputClass} />
-        {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
-      </div>
-      <div>
-        <input type="email" placeholder="Seu melhor e-mail" value={email}
-          onChange={(e) => setEmail(e.target.value)} className={inputClass} />
-        {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
-      </div>
-      <div>
-        <input type="tel" placeholder="Seu WhatsApp (99) 99999-9999" value={phone}
-          onChange={(e) => setPhone(phoneMask(e.target.value))} className={inputClass} />
-        {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
-      </div>
-      <button type="submit"
-        className="w-full py-4 font-bold text-sm tracking-[0.15em] uppercase transition-all flex items-center justify-center gap-2.5 hover:gap-4"
-        style={{ backgroundColor: C.green, color: C.white }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
-      >
-        {ctaLabel}
-        <ArrowRight className="w-4 h-4" />
-      </button>
-      <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: dark ? "rgba(255,255,255,0.4)" : C.muted }}>
-        <Lock className="w-3.5 h-3.5" /> Ambiente 100% seguro
-      </p>
-    </form>
   );
 }
 
@@ -364,6 +285,7 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: 
 export default function Home() {
   const [stickyNav,    setStickyNav]    = useState(false);
   const [showMobileCTA,setShowMobileCTA] = useState(false);
+  const [activeVideo,  setActiveVideo]  = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -449,67 +371,50 @@ export default function Home() {
           style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(250,248,244,0.7) 100%)" }}
         />
 
-        <div className="container mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="container mx-auto px-4 md:px-8 py-6 md:py-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
 
             {/* Left — copy + form */}
             <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-              className="space-y-8"
+              className="space-y-4"
             >
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 border"
-                style={{ borderColor: "#FF4444", backgroundColor: "rgba(255,68,68,0.06)" }}
-              >
-                <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: "#FF4444" }}>
-                  Vagas abertas · Fecha 06/06
-                </span>
-              </div>
-
               {/* Headline */}
               <div className="space-y-3">
-                <p className="text-sm font-semibold" style={{ color: C.muted }}>
-                  Ingrid Zarza & Fernanda Bradaschia
-                </p>
-                <h1 className="font-display font-black uppercase leading-[0.95]"
-                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2.4rem, 5vw, 4rem)", color: C.ink }}
+                <h1 className="font-display font-black uppercase"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.5rem, 2.8vw, 2.4rem)", color: C.ink, lineHeight: "1.15" }}
                 >
-                  Domine o<br />gerenciamento<br />de obra de<br />forma{" "}
-                  <Highlight>lucrativa</Highlight>
+                  Domine a obra de interiores<br />
+                  com mais <Highlight>lucro</Highlight>,{" "}
+                  organização<br className="hidden sm:block" />
+                  {" "}e segurança —<br />
+                  do primeiro atendimento{" "}
+                  <br className="hidden sm:block" />
+                  à entrega final.
                 </h1>
-                <p className="text-base md:text-lg leading-relaxed max-w-lg" style={{ color: C.inkLight }}>
-                  O método completo que Ingrid e Fernanda aplicaram em +250 obras, agora disponível para você. Entregue obras impecáveis, cobre o que vale e construa uma carreira sólida.
+                <p className="text-sm md:text-base leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
+                  Tenha acesso à experiência prática, técnica e comportamental
+                  {" "}que leva anos para ser construída — e aprenda a cobrar
+                  {" "}melhor, evitar erros e crescer sem transformar
+                  {" "}seu escritório em um caos.
                 </p>
               </div>
 
               {/* Social proof mini */}
-              <div className="flex items-center gap-4 flex-wrap">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 overflow-hidden grayscale"
-                      style={{ borderColor: C.cream }}
-                    >
-                      <div className="w-full h-full" style={{ backgroundColor: C.gold, opacity: 0.3 + i * 0.1 }} />
-                    </div>
+              <div className="flex flex-col gap-1">
+                <div className="flex">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: C.gold }} />
                   ))}
                 </div>
-                <div className="flex flex-col">
-                  <div className="flex">
-                    {[1,2,3,4,5].map(i => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: C.gold }} />
-                    ))}
-                  </div>
-                  <span className="text-xs mt-0.5" style={{ color: C.muted }}>+100 arquitetas transformadas</span>
-                </div>
+                <span className="text-xs" style={{ color: C.muted }}>+1000 arquitetas impactadas</span>
               </div>
 
-              {/* Form box */}
+              {/* Hero CTAs */}
               <div className="shadow-xl overflow-hidden"
                 style={{ border: `1px solid ${C.border}` }}
               >
-                {/* Urgency header */}
-                <div className="px-6 py-4 flex items-center justify-between"
+                <div className="px-5 py-3 flex items-center justify-between"
                   style={{ backgroundColor: C.dark }}
                 >
                   <div>
@@ -529,19 +434,39 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="p-6 md:p-8 space-y-5" style={{ backgroundColor: C.white }}>
-                  <LeadForm id="hero-form" />
-                  <div className="pt-2">
-                    <CountdownTimer label="Vagas fecham em:" />
+                <div className="p-4 md:p-5 space-y-3" style={{ backgroundColor: C.white }}>
+                  <div className="flex flex-col gap-2.5">
+                    <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1779720033295"
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                      style={{ backgroundColor: C.green, color: C.white }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+                    >
+                      Quero meu acesso agora <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 font-bold text-sm tracking-widest uppercase transition-all border"
+                      style={{ borderColor: C.ink, color: C.ink, backgroundColor: "transparent" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.ink; e.currentTarget.style.color = C.white; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = C.ink; }}
+                    >
+                      Prefiro pagar com Boleto Parcelado
+                    </a>
                   </div>
+                  <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: C.muted }}>
+                    <Lock className="w-3.5 h-3.5" /> Ambiente 100% seguro
+                  </p>
+                  <CountdownTimer label="Vagas fecham em:" />
                 </div>
               </div>
             </motion.div>
 
-            {/* Right — photo editorial */}
+            {/* Right — photo editorial (hidden on mobile) */}
             <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 }}
-              className="relative flex justify-center lg:justify-end"
+              className="relative hidden lg:flex justify-center lg:justify-end"
             >
               <div className="relative">
                 {/* Gold accent frame */}
@@ -552,10 +477,10 @@ export default function Home() {
                 <div className="absolute -bottom-4 -left-4 w-24 h-24"
                   style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
                 />
-                <img src={imgHeroPhoto}
+                <img src={imgAbout}
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
                   className="relative z-10 max-w-full h-auto mix-blend-multiply"
-                  style={{ maxHeight: "580px", objectFit: "cover" }}
+                  style={{ maxHeight: "480px", objectFit: "cover" }}
                   loading="eager"
                 />
                 {/* Floating stat card */}
@@ -583,26 +508,50 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════
-          STATS BAR
+          DEPOIMENTOS
       ══════════════════════════════════════════ */}
-      <section style={{ backgroundColor: C.dark, ...gridBg("rgba(201,162,87,0.04)", "40px 40px") }}>
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-3 divide-x" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-            {STATS.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.1} className="py-10 md:py-14 text-center px-4">
-                <p className="font-display font-black text-3xl md:text-5xl xl:text-6xl leading-none"
-                  style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
-                >
-                  {s.value}
-                </p>
-                <p className="text-[10px] md:text-xs mt-3 uppercase tracking-[0.18em]"
-                  style={{ color: "rgba(255,255,255,0.4)" }}
-                >
-                  {s.label}
-                </p>
-              </Reveal>
+          <Reveal className="text-center mb-16">
+            <Label>Resultados Reais</Label>
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O que nossas<br className="hidden md:block" /> alunas dizem
+            </h2>
+          </Reveal>
+
+          {/* Video testimonials — carrossel mobile, grid desktop */}
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none px-4 sm:px-0 pb-2 sm:pb-0 -mx-4 sm:mx-auto scrollbar-hide">
+            {[
+              { name: "Beatriz Francini", thumbnail: "/thumbnails/capa-beatriz.png",  video: "/videos/video-beatriz.mp4" },
+              { name: "Laura Almeida",    thumbnail: "/thumbnails/capa-laura.png",     video: "/videos/video-laura.mp4"  },
+              { name: "Ligia",            thumbnail: "/thumbnails/capa-ligia.png",     video: "/videos/video-ligia.mp4"  },
+              { name: "Luísa",            thumbnail: "/thumbnails/capa-luisa.png",     video: "/videos/video-luisa.mp4"  },
+            ].map((t) => (
+              <div key={t.name} className="snap-center flex-shrink-0 w-[72vw] sm:w-auto">
+                <VideoTestimonialCard
+                  name={t.name}
+                  thumbnailSrc={t.thumbnail}
+                  onClick={() => setActiveVideo(t.video)}
+                />
+              </div>
             ))}
           </div>
+
+          <VideoModal videoSrc={activeVideo} onClose={() => setActiveVideo(null)} />
+
+          <Reveal className="text-center mt-14">
+            <button onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+            >
+              Quero ser a próxima
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Reveal>
         </div>
       </section>
 
@@ -951,7 +900,8 @@ export default function Home() {
               </Reveal>
 
               <Reveal className="pt-8" delay={0.4}>
-                <button onClick={() => scrollTo("pricing")}
+                <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1779720033295"
+                  target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
                   style={{ backgroundColor: C.green, color: C.white }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
@@ -959,7 +909,7 @@ export default function Home() {
                 >
                   Quero meu acesso
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </Reveal>
             </div>
           </div>
@@ -1080,59 +1030,6 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════
-          DEPOIMENTOS
-      ══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
-        <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-16">
-            <Label>Resultados Reais</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
-              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-            >
-              O que nossas<br className="hidden md:block" /> alunas dizem
-            </h2>
-          </Reveal>
-
-          {/* WhatsApp screenshot testimonials */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[
-              { src: imgTestimonial1, name: "Beatriz Francini" },
-              { src: imgTestimonial2, name: "Ingrid Cristina" },
-              { src: imgTestimonial3, name: "Monique Figueiredo" },
-              { src: imgTestimonial4, name: "Aline Araujo" },
-            ].map((t) => (
-              <div key={t.name}
-                className="overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-                  border: `1px solid ${C.border}`,
-                }}
-              >
-                <img
-                  src={t.src}
-                  alt={`Depoimento de ${t.name}`}
-                  className="w-full h-auto block"
-                  loading="eager"
-                />
-              </div>
-            ))}
-          </div>
-
-          <Reveal className="text-center mt-14">
-            <button onClick={() => scrollTo("pricing")}
-              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
-              style={{ backgroundColor: C.green, color: C.white }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
-            >
-              Quero ser a próxima
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
           SOBRE NÓS
       ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
@@ -1146,7 +1043,7 @@ export default function Home() {
                     <div className="absolute -bottom-4 -left-4 w-full h-full"
                       style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
                     />
-                    <img src={imgAbout} alt="Ingrid Zarza e Fernanda Bradaschia"
+                    <img src={imgHeroPhoto} alt="Ingrid Zarza e Fernanda Bradaschia"
                       className="relative z-10 w-full max-w-sm mix-blend-multiply" loading="lazy" />
                     {/* Stat badge */}
                     <div className="absolute -top-5 -right-5 z-20 px-4 py-3 shadow-lg"
@@ -1526,7 +1423,16 @@ export default function Home() {
               12× R$ 237<span className="text-sm font-normal text-white/50">,87</span>
             </p>
           </div>
-          <button onClick={() => scrollTo("pricing")}
+          <button
+            onClick={() => {
+              const pricing = document.getElementById("pricing");
+              const pastPricing = pricing && pricing.getBoundingClientRect().top < window.innerHeight * 0.5;
+              if (pastPricing) {
+                window.open("https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1779720033295", "_blank");
+              } else {
+                scrollTo("pricing");
+              }
+            }}
             className="px-6 py-3 text-xs font-black uppercase tracking-widest transition-colors"
             style={{ backgroundColor: C.green, color: C.white }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
