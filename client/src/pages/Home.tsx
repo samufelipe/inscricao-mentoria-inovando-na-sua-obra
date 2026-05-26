@@ -350,12 +350,14 @@ export default function Home() {
         >
           <div className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: "#FF4444" }} />
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-            Abertura exclusiva pós-Imersão, vagas fecham em{" "}
-            <span style={{ color: C.gold }}>06/06 às 23h59</span>
+            Condição exclusiva para participantes da Imersão{" "}
+            <span className="hidden sm:inline">|</span>{" "}
+            <span style={{ color: C.gold }}>Vagas fecham em 12/06</span>
           </p>
           <span className="hidden md:inline text-white/20">·</span>
           <p className="text-[11px] font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
-            R$1.900 ou 12× R$197 · <span style={{ color: C.gold }}>Preço de lançamento</span>
+            Valor exclusivo nova turma Junho 2026{" "}
+            <span className="hidden md:inline">· após o fechamento, o valor volta a <span style={{ color: C.gold }}>R$ 2.300</span></span>
           </p>
         </div>
       </div>
@@ -422,7 +424,7 @@ export default function Home() {
                       Garanta sua vaga agora
                     </p>
                     <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
-                      Preço de lançamento · vagas limitadas
+                      Valor exclusivo nova turma Junho 2026
                     </p>
                   </div>
                 </div>
@@ -1091,10 +1093,10 @@ export default function Home() {
             <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] text-white"
               style={{ fontFamily: "Montserrat, sans-serif" }}
             >
-              Preço de lançamento.<br className="hidden md:block" /> Por 7 dias.
+              Condição exclusiva.<br className="hidden md:block" /> Nova turma Junho 2026.
             </h2>
             <p className="mt-4 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Após o fechamento, o valor volta ao preço regular.
+              Após o fechamento, o valor volta a R$ 2.300.
             </p>
           </Reveal>
 
@@ -1111,20 +1113,19 @@ export default function Home() {
                   >
                     <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
                     <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#FF6B6B" }}>
-                      Preço de lançamento
+                      Valor exclusivo nova turma
                     </span>
                   </div>
                   <div className="relative z-10">
                     <div className="flex items-end justify-center gap-1">
-                      <span className="text-lg font-medium text-white/70">12×</span>
                       <span className="font-display font-black text-6xl text-white leading-none"
                         style={{ fontFamily: "Montserrat, sans-serif" }}
                       >
-                        R$&nbsp;197
+                        R$&nbsp;1.997
                       </span>
                     </div>
                     <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      ou <strong className="text-white/70">R$ 1.900,00</strong> à vista
+                      Após o fechamento, volta a <strong className="text-white/70">R$ 2.300</strong>
                     </p>
                   </div>
                   <div className="relative z-10 pt-1">
@@ -1305,7 +1306,7 @@ export default function Home() {
                 <ArrowRight className="w-4 h-4" />
               </button>
               <p className="text-xs font-semibold" style={{ color: "rgba(26,21,16,0.55)" }}>
-                12× R$197 ou R$1.900 à vista
+                R$ 1.997 · valor exclusivo nova turma
               </p>
             </div>
             <p className="mt-6 flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(26,21,16,0.5)" }}>
@@ -1401,9 +1402,9 @@ export default function Home() {
       >
         <div className="flex items-center justify-between px-5 py-3.5">
           <div>
-            <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>A partir de</p>
+            <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>Turma Junho 2026</p>
             <p className="font-display font-black text-lg text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              12× R$ 237<span className="text-sm font-normal text-white/50">,87</span>
+              R$ 1.997
             </p>
           </div>
           <button
