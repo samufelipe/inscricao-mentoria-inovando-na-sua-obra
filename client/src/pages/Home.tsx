@@ -14,8 +14,7 @@ import {
 import imgLogo       from "@/assets/mentoria/logo.png";
 import imgHeroPhoto  from "@/assets/mentoria/hero-photo.png";
 import imgAbout      from "@/assets/mentoria/about.png";
-import imgGuarantee  from "@/assets/mentoria/guarantee.png";
-import imgGarantiaMobile from "@/assets/mentoria/garantia-mobile.png";
+import imgLogoGarantia from "@/assets/mentoria/logo-garantia.png";
 import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
 import { VideoModal } from "@/components/ui/video-modal";
 
@@ -1231,10 +1230,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex-shrink-0 flex justify-center">
-                <img src={imgGuarantee} alt="Garantia de 15 dias"
-                  className="hidden md:block w-44 mix-blend-multiply" loading="lazy" />
-                <img src={imgGarantiaMobile} alt="Garantia incondicional de 15 dias"
-                  className="block md:hidden w-36 mix-blend-multiply" loading="lazy" />
+                <img src={imgLogoGarantia} alt="Garantia incondicional de 15 dias"
+                  className="w-48 md:w-64 object-contain" loading="lazy" />
               </div>
             </Reveal>
           </div>
