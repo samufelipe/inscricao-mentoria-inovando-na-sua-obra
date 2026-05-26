@@ -1279,62 +1279,6 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════
-          FINAL CTA — GOLD BACKGROUND
-      ══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden py-24 md:py-32" style={{ backgroundColor: C.gold }}>
-        {/* Decorative ghost text */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-          <span className="font-display font-black uppercase leading-none select-none whitespace-nowrap"
-            style={{ fontFamily: "Montserrat, sans-serif", fontSize: "18vw", color: C.dark, opacity: 0.07 }}
-          >
-            OBRA
-          </span>
-        </div>
-        <div className="absolute inset-0 opacity-10" style={gridBg("rgba(26,21,16,0.3)", "50px 50px")} />
-
-        <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-6"
-              style={{ backgroundColor: "rgba(26,21,16,0.12)", border: "1px solid rgba(26,21,16,0.2)" }}
-            >
-              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
-              <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: C.dark }}>
-                Vagas fecham em 06/06
-              </span>
-            </div>
-            <h2 className="font-display font-black uppercase leading-[0.92] mb-6"
-              style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2.5rem, 6vw, 5rem)", color: C.dark }}
-            >
-              Você veio da<br />Imersão. Você<br />já sabe o que fazer.
-            </h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-8" style={{ color: "rgba(26,21,16,0.75)" }}>
-              Agora é a hora. O preço de lançamento existe por apenas 7 dias. Depois disso, o valor sobe e as vagas fecham. Junte-se a mais de 100 arquitetas que já transformaram sua carreira com esse método.
-            </p>
-            <div className="mb-8">
-              <CountdownTimer label="Oferta encerra em:" />
-            </div>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => scrollTo("pricing")}
-                className="inline-flex items-center gap-3 px-10 py-5 font-black text-sm tracking-[0.15em] uppercase shadow-2xl transition-all hover:-translate-y-1 hover:gap-5 cursor-pointer"
-                style={{ backgroundColor: C.dark, color: C.gold }}
-              >
-                Quero entrar agora
-                <ArrowRight className="w-4 h-4" />
-              </button>
-              <p className="text-xs font-semibold" style={{ color: "rgba(26,21,16,0.55)" }}>
-                R$ 1.997 · valor exclusivo nova turma
-              </p>
-            </div>
-            <p className="mt-6 flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(26,21,16,0.5)" }}>
-              <ShieldCheck className="w-4 h-4" />
-              Garantia incondicional de 15 dias · Pagamento 100% seguro
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
           FOOTER
       ══════════════════════════════════════════ */}
       <footer style={{ backgroundColor: C.dark }}>
