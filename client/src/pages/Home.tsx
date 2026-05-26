@@ -4,6 +4,7 @@ import {
   Check, X, ShieldCheck, Lock, ArrowRight, Phone, Mail, Instagram,
   ChevronDown, FileText, Clock, Users, MapPin, BookOpen, TrendingUp,
   Layers, MessageSquare, DollarSign, AlertCircle, Star,
+  GraduationCap, Briefcase, HardHat, RefreshCw,
 } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -129,24 +130,20 @@ const SOLUTIONS = [
 
 const AUDIENCE = [
   {
-    number: "01",
-    title: "Arquitetas Inseguras em Obra",
-    desc: "Que têm talento no projeto mas travam na hora de liderar a execução. A mentoria te dá o método para ir a campo com confiança.",
+    icon: GraduationCap,
+    desc: "Acabou de se formar e não sabe nem por onde começar",
   },
   {
-    number: "02",
-    title: "Recém Formadas",
-    desc: "Que saíram da faculdade sem saber como gerenciar obra na prática. Aqui você aprende o que a graduação não ensinou.",
+    icon: Briefcase,
+    desc: "Trabalha para um escritório e quer se diferenciar",
   },
   {
-    number: "03",
-    title: "Profissionais em Crescimento",
-    desc: "Que querem cobrar honorários premium pelo gerenciamento e transformar cada projeto em uma entrega impecável.",
+    icon: HardHat,
+    desc: "Tem um escritório e já fez algumas obras, mas sente falta de um método",
   },
   {
-    number: "04",
-    title: "Quem Acha que Não Precisa",
-    desc: "Arquitetas que acreditam que obra não é sua área. A mentoria vai mostrar por que essa é a habilidade mais lucrativa do mercado.",
+    icon: Users,
+    desc: "Tem uma equipe e já faz algumas obras ao mesmo tempo. Precisa de uma metodologia para ser mais eficiente",
   },
 ];
 
@@ -798,38 +795,35 @@ export default function Home() {
             >
               Esta mentoria<br className="hidden md:block" /> foi feita para você
             </h2>
+            <p className="text-sm md:text-base mt-4" style={{ color: C.muted }}>
+              para arquitetas, designer de interiores, engenheiras que queiram aprender sobre obra de interiores
+            </p>
           </Reveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {AUDIENCE.map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.1}
-                className="relative overflow-hidden group cursor-default transition-transform duration-300 hover:-translate-y-1"
-                style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
-              >
-                {/* Ghost number */}
-                <div className="absolute -top-2 -right-1 font-display font-black leading-none select-none pointer-events-none"
-                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "8rem", color: C.gold, opacity: 0.06 }}
+            {AUDIENCE.map((a, i) => {
+              const Icon = a.icon;
+              return (
+                <Reveal key={i} delay={i * 0.1}
+                  className="relative overflow-hidden group cursor-default transition-transform duration-300 hover:-translate-y-1 flex flex-col items-center text-center"
+                  style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
                 >
-                  {a.number}
-                </div>
-                <div className="relative z-10 p-8 space-y-4">
-                  <div className="w-8 h-8 flex items-center justify-center text-xs font-black"
-                    style={{ backgroundColor: C.gold, color: C.white, fontFamily: "Montserrat, sans-serif" }}
-                  >
-                    {a.number}
+                  <div className="relative z-10 p-8 flex flex-col items-center gap-5">
+                    <div className="w-16 h-16 flex items-center justify-center rounded-full"
+                      style={{ backgroundColor: C.goldLight }}
+                    >
+                      <Icon className="w-8 h-8" style={{ color: C.gold }} strokeWidth={1.5} />
+                    </div>
+                    <p className="text-sm md:text-base font-semibold leading-snug" style={{ color: C.ink }}>
+                      {a.desc}
+                    </p>
+                    <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-12"
+                      style={{ backgroundColor: C.gold }}
+                    />
                   </div>
-                  <h3 className="font-display font-black text-sm uppercase leading-tight"
-                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                  >
-                    {a.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{a.desc}</p>
-                  <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-full"
-                    style={{ backgroundColor: C.gold }}
-                  />
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
