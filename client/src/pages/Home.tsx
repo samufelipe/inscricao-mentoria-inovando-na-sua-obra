@@ -540,6 +540,105 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════════
+          HABILIDADES — BENTO GRID
+      ══════════════════════════════════════════ */}
+      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
+        <div className="container mx-auto px-4 md:px-8">
+          <Reveal className="text-center mb-16">
+            <Label>Habilidades</Label>
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O que você vai<br className="hidden md:block" /> dominar
+            </h2>
+          </Reveal>
+
+          <div className="grid lg:grid-cols-3 gap-4">
+            {/* BENTO — card grande */}
+            <Reveal delay={0}
+              className="lg:row-span-2 relative overflow-hidden flex flex-col justify-between p-10"
+              style={{ backgroundColor: C.dark, minHeight: "340px" }}
+            >
+              <div className="absolute bottom-0 right-0 font-display font-black leading-none select-none pointer-events-none"
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
+              >
+                01
+              </div>
+              <div className="absolute inset-0 opacity-30" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
+              <div className="relative z-10 space-y-5">
+                <div className="w-10 h-10 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
+                  <Layers className="w-5 h-5 text-white" />
+                </div>
+                <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
+                <h3 className="font-display font-black text-xl uppercase text-white leading-tight"
+                  style={{ fontFamily: "Montserrat, sans-serif" }}
+                >
+                  Gestão de Obra Eficiente
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  Planejamento, cronograma e controle de etapas com precisão do início ao fim. O pilar central de uma entrega profissional.
+                </p>
+              </div>
+              <div className="relative z-10 mt-8">
+                <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
+                  Habilidade central
+                </span>
+              </div>
+            </Reveal>
+
+            {/* Cards regulares */}
+            {SKILLS.slice(1, 5).map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <Reveal key={s.title} delay={(i + 1) * 0.08}
+                  className="p-7 space-y-4 group transition-shadow duration-300 hover:shadow-lg"
+                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: C.goldLight }}
+                    >
+                      <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                    </div>
+                    <h3 className="font-display font-black text-sm uppercase tracking-wide leading-tight"
+                      style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                    >
+                      {s.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{s.desc}</p>
+                  <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-full"
+                    style={{ backgroundColor: C.gold }}
+                  />
+                </Reveal>
+              );
+            })}
+
+            {/* BENTO — card largo */}
+            <Reveal delay={0.42}
+              className="lg:col-span-2 p-8 flex flex-col sm:flex-row items-start gap-6"
+              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
+            >
+              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center"
+                style={{ backgroundColor: C.gold }}
+              >
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-display font-black text-base uppercase tracking-wide"
+                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                >
+                  Posicionamento de Mercado
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
+                  Diferencie-se no mercado, cobre o que seu trabalho realmente vale e construa uma carteira de clientes sólida que gera indicações constantes.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════
           PROBLEMA / SOLUÇÃO
@@ -675,106 +774,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          HABILIDADES — BENTO GRID
-      ══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
-        <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-16">
-            <Label>Habilidades</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
-              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-            >
-              O que você vai<br className="hidden md:block" /> dominar
-            </h2>
-          </Reveal>
-
-          <div className="grid lg:grid-cols-3 gap-4">
-            {/* BENTO — card grande */}
-            <Reveal delay={0}
-              className="lg:row-span-2 relative overflow-hidden flex flex-col justify-between p-10"
-              style={{ backgroundColor: C.dark, minHeight: "340px" }}
-            >
-              <div className="absolute bottom-0 right-0 font-display font-black leading-none select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
-              >
-                01
-              </div>
-              {/* Grid overlay */}
-              <div className="absolute inset-0 opacity-30" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
-              <div className="relative z-10 space-y-5">
-                <div className="w-10 h-10 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
-                  <Layers className="w-5 h-5 text-white" />
-                </div>
-                <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
-                <h3 className="font-display font-black text-xl uppercase text-white leading-tight"
-                  style={{ fontFamily: "Montserrat, sans-serif" }}
-                >
-                  Gestão de Obra Eficiente
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Planejamento, cronograma e controle de etapas com precisão do início ao fim. O pilar central de uma entrega profissional.
-                </p>
-              </div>
-              <div className="relative z-10 mt-8">
-                <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
-                  Habilidade central
-                </span>
-              </div>
-            </Reveal>
-
-            {/* Cards regulares */}
-            {SKILLS.slice(1, 5).map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <Reveal key={s.title} delay={(i + 1) * 0.08}
-                  className="p-7 space-y-4 group transition-shadow duration-300 hover:shadow-lg"
-                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: C.goldLight }}
-                    >
-                      <Icon className="w-4 h-4" style={{ color: C.gold }} />
-                    </div>
-                    <h3 className="font-display font-black text-sm uppercase tracking-wide leading-tight"
-                      style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                    >
-                      {s.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{s.desc}</p>
-                  <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-full"
-                    style={{ backgroundColor: C.gold }}
-                  />
-                </Reveal>
-              );
-            })}
-
-            {/* BENTO — card largo */}
-            <Reveal delay={0.42}
-              className="lg:col-span-2 p-8 flex flex-col sm:flex-row items-start gap-6"
-              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
-            >
-              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center"
-                style={{ backgroundColor: C.gold }}
-              >
-                <TrendingUp className="w-5 h-5 text-white" />
-              </div>
-              <div className="space-y-2">
-                <h3 className="font-display font-black text-base uppercase tracking-wide"
-                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                >
-                  Posicionamento de Mercado
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
-                  Diferencie-se no mercado, cobre o que seu trabalho realmente vale e construa uma carteira de clientes sólida que gera indicações constantes.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════
           COMO FUNCIONA — NÚMEROS MASSIVOS
