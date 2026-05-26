@@ -786,40 +786,31 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           PARA QUEM É
       ══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
+      <section className="py-16 md:py-24" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-16">
+          <Reveal className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
             <Label>Para Quem É</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
+            <h2 className="font-display font-black text-2xl md:text-4xl leading-snug mt-3"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              Esta mentoria<br className="hidden md:block" /> foi feita para você
+              Para arquitetas, designer de interiores, engenheiras que queiram aprender sobre obra de interiores
             </h2>
-            <p className="text-sm md:text-base mt-4" style={{ color: C.muted }}>
-              para arquitetas, designer de interiores, engenheiras que queiram aprender sobre obra de interiores
-            </p>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {AUDIENCE.map((a, i) => {
               const Icon = a.icon;
               return (
                 <Reveal key={i} delay={i * 0.1}
-                  className="relative overflow-hidden group cursor-default transition-transform duration-300 hover:-translate-y-1 flex flex-col items-center text-center"
+                  className="group cursor-default transition-transform duration-300 hover:-translate-y-1 flex flex-col items-center text-center"
                   style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
                 >
-                  <div className="relative z-10 p-8 flex flex-col items-center gap-5">
-                    <div className="w-16 h-16 flex items-center justify-center rounded-full"
-                      style={{ backgroundColor: C.goldLight }}
-                    >
-                      <Icon className="w-8 h-8" style={{ color: C.gold }} strokeWidth={1.5} />
-                    </div>
+                  <div className="p-6 md:p-8 flex flex-col items-center gap-5">
+                    <Icon className="w-10 h-10 md:w-12 md:h-12" style={{ color: C.ink }} strokeWidth={1.25} />
+                    <div className="w-6 h-px" style={{ backgroundColor: C.gold }} />
                     <p className="text-sm md:text-base font-semibold leading-snug" style={{ color: C.ink }}>
                       {a.desc}
                     </p>
-                    <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-12"
-                      style={{ backgroundColor: C.gold }}
-                    />
                   </div>
                 </Reveal>
               );
