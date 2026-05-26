@@ -540,40 +540,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          ROI ANCHOR
-      ══════════════════════════════════════════ */}
-      <section className="py-10 md:py-14" style={{ backgroundColor: C.cream, borderBottom: `1px solid ${C.border}` }}>
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 md:gap-0 md:divide-x" style={{ borderColor: C.border }}>
-            {[
-              {
-                value: "1ª obra",
-                text: "é o suficiente para recuperar o investimento inteiro na mentoria",
-              },
-              {
-                value: "+R$500",
-                text: "a mais por projeto quando você cobra honorários de gerenciamento com segurança",
-              },
-              {
-                value: "7 dias",
-                text: "é o único período em que esse preço de lançamento estará disponível",
-              },
-            ].map((item, i) => (
-              <Reveal key={i} delay={i * 0.1}
-                className="flex flex-col items-center text-center gap-2 px-6"
-              >
-                <span className="font-black text-2xl md:text-3xl"
-                  style={{ fontFamily: "Montserrat, sans-serif", color: i === 2 ? "#FF4444" : C.gold }}
-                >
-                  {item.value}
-                </span>
-                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>{item.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════
           PROBLEMA / SOLUÇÃO
