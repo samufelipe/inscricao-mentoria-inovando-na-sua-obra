@@ -428,24 +428,15 @@ export default function Home() {
                 </div>
                 <div className="p-4 md:p-5 space-y-3" style={{ backgroundColor: C.white }}>
                   <div className="flex flex-col gap-2.5">
-                    <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1779720033295"
-                      target="_blank" rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                    <button
+                      onClick={() => scrollTo("pricing")}
+                      className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
                       style={{ backgroundColor: C.green, color: C.white }}
                       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
                     >
                       Quero meu acesso agora <ArrowRight className="w-4 h-4" />
-                    </a>
-                    <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
-                      target="_blank" rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 font-bold text-sm tracking-widest uppercase transition-all border"
-                      style={{ borderColor: C.ink, color: C.ink, backgroundColor: "transparent" }}
-                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.ink; e.currentTarget.style.color = C.white; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = C.ink; }}
-                    >
-                      Prefiro pagar com Boleto Parcelado
-                    </a>
+                    </button>
                   </div>
                   <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: C.muted }}>
                     <Lock className="w-3.5 h-3.5" /> Ambiente 100% seguro
@@ -892,16 +883,16 @@ export default function Home() {
               </Reveal>
 
               <Reveal className="pt-8" delay={0.4}>
-                <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1779720033295"
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                <button
+                  onClick={() => scrollTo("pricing")}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
                   style={{ backgroundColor: C.green, color: C.white }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
                 >
                   Quero meu acesso
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </button>
               </Reveal>
             </div>
           </div>
@@ -1305,14 +1296,14 @@ export default function Home() {
               <CountdownTimer label="Oferta encerra em:" />
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-10 py-5 font-black text-sm tracking-[0.15em] uppercase shadow-2xl transition-all hover:-translate-y-1 hover:gap-5"
+              <button
+                onClick={() => scrollTo("pricing")}
+                className="inline-flex items-center gap-3 px-10 py-5 font-black text-sm tracking-[0.15em] uppercase shadow-2xl transition-all hover:-translate-y-1 hover:gap-5 cursor-pointer"
                 style={{ backgroundColor: C.dark, color: C.gold }}
               >
                 Quero entrar agora
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <p className="text-xs font-semibold" style={{ color: "rgba(26,21,16,0.55)" }}>
                 12× R$197 ou R$1.900 à vista
               </p>
@@ -1416,15 +1407,7 @@ export default function Home() {
             </p>
           </div>
           <button
-            onClick={() => {
-              const pricing = document.getElementById("pricing");
-              const pastPricing = pricing && pricing.getBoundingClientRect().top < window.innerHeight * 0.5;
-              if (pastPricing) {
-                window.open("https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1779720033295", "_blank");
-              } else {
-                scrollTo("pricing");
-              }
-            }}
+            onClick={() => scrollTo("pricing")}
             className="px-6 py-3 text-xs font-black uppercase tracking-widest transition-colors"
             style={{ backgroundColor: C.green, color: C.white }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
