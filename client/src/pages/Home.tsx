@@ -543,49 +543,49 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           HABILIDADES — 2×2 GRID
       ══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
+      <section className="py-14 md:py-20" style={{ backgroundColor: C.cream }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-4">
+          <Reveal className="text-center mb-3">
             <Label>Habilidades</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] mt-3"
+            <h2 className="font-display font-black text-3xl md:text-4xl uppercase leading-[1.0] mt-2"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
               O que você vai dominar
             </h2>
           </Reveal>
-          <Reveal delay={0.08} className="text-center mb-16 max-w-2xl mx-auto space-y-2">
-            <p className="font-semibold text-base md:text-lg" style={{ color: C.inkLight }}>
+          <Reveal delay={0.08} className="text-center mb-8 max-w-xl mx-auto space-y-1">
+            <p className="font-semibold text-sm md:text-base" style={{ color: C.inkLight }}>
               A faculdade ensina teoria. O mercado exige muito mais.
             </p>
-            <p className="text-sm md:text-base leading-relaxed" style={{ color: C.muted }}>
-              Você vai aprender o que a graduação não ensina: como conduzir uma obra do início ao fim, como se posicionar com autoridade, lidar com clientes e imprevistos, e transformar seu conhecimento em um negócio lucrativo.
+            <p className="text-sm leading-relaxed" style={{ color: C.muted }}>
+              Você vai aprender o que a graduação não ensina: como conduzir uma obra do início ao fim, se posicionar com autoridade, lidar com clientes e imprevistos, e transformar seu conhecimento em um negócio lucrativo.
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-3">
 
             {/* Card 01 — Prática Técnica (dark) */}
             <Reveal delay={0}
-              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
-              style={{ backgroundColor: C.dark, minHeight: "360px" }}
+              className="relative overflow-hidden flex flex-col p-5 md:p-6"
+              style={{ backgroundColor: C.dark }}
             >
               <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "8rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
               >
                 01
               </div>
               <div className="absolute inset-0 opacity-25" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
-              <div className="relative z-10 flex flex-col h-full gap-5">
+              <div className="relative z-10 flex flex-col gap-3">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>01</span>
-                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
-                  <h3 className="font-display font-black text-xl uppercase text-white leading-tight"
+                  <div className="w-6 h-px mt-1.5 mb-3" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-base uppercase text-white leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif" }}
                   >
                     Prática Técnica
                   </h3>
                 </div>
-                <ul className="space-y-2 flex-1">
+                <ul className="space-y-1.5">
                   {["Passo a passo da obra", "Leitura prática da execução", "Compatibilização", "Todas as etapas da obra", "Cronograma", "Custo estimado"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
                       <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
@@ -593,7 +593,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: "rgba(255,255,255,0.4)", borderColor: "rgba(201,162,87,0.2)" }}>
+                <p className="text-xs italic leading-relaxed border-t pt-3 mt-1" style={{ color: "rgba(255,255,255,0.4)", borderColor: "rgba(201,162,87,0.2)" }}>
                   "Pare de projetar sem entender como a obra realmente funciona."
                 </p>
               </div>
@@ -601,25 +601,25 @@ export default function Home() {
 
             {/* Card 02 — Comunicação e Posicionamento (white) */}
             <Reveal delay={0.1}
-              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
-              style={{ backgroundColor: C.white, border: `1px solid ${C.border}`, minHeight: "360px" }}
+              className="relative overflow-hidden flex flex-col p-5 md:p-6"
+              style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
             >
               <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.04, lineHeight: 1 }}
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "8rem", color: C.gold, opacity: 0.04, lineHeight: 1 }}
               >
                 02
               </div>
-              <div className="relative z-10 flex flex-col h-full gap-5">
+              <div className="relative z-10 flex flex-col gap-3">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>02</span>
-                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
-                  <h3 className="font-display font-black text-xl uppercase leading-tight"
+                  <div className="w-6 h-px mt-1.5 mb-3" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-base uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                   >
                     Comunicação e Posicionamento
                   </h3>
                 </div>
-                <ul className="space-y-2 flex-1">
+                <ul className="space-y-1.5">
                   {["Apresentação de projeto", "Condução do cliente", "Alinhamento", "Limites", "Comunicação com fornecedor", "Liderança"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
                       <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
@@ -627,7 +627,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: C.muted, borderColor: C.border }}>
+                <p className="text-xs italic leading-relaxed border-t pt-3 mt-1" style={{ color: C.muted, borderColor: C.border }}>
                   "A forma como você se comunica define o quanto seu trabalho é valorizado."
                 </p>
               </div>
@@ -635,25 +635,25 @@ export default function Home() {
 
             {/* Card 03 — Mentalidade (white) */}
             <Reveal delay={0.2}
-              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
-              style={{ backgroundColor: C.white, border: `1px solid ${C.border}`, minHeight: "360px" }}
+              className="relative overflow-hidden flex flex-col p-5 md:p-6"
+              style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
             >
               <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.04, lineHeight: 1 }}
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "8rem", color: C.gold, opacity: 0.04, lineHeight: 1 }}
               >
                 03
               </div>
-              <div className="relative z-10 flex flex-col h-full gap-5">
+              <div className="relative z-10 flex flex-col gap-3">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>03</span>
-                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
-                  <h3 className="font-display font-black text-xl uppercase leading-tight"
+                  <div className="w-6 h-px mt-1.5 mb-3" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-base uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                   >
                     Mentalidade
                   </h3>
                 </div>
-                <ul className="space-y-2 flex-1">
+                <ul className="space-y-1.5">
                   {["Lidar com imprevistos", "Responsabilidade", "Emocional do cliente", "Tomada de decisão", "Maturidade profissional"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
                       <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
@@ -661,7 +661,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: C.muted, borderColor: C.border }}>
+                <p className="text-xs italic leading-relaxed border-t pt-3 mt-1" style={{ color: C.muted, borderColor: C.border }}>
                   "Arquitetas inseguras improvisam. Arquitetas preparadas conduzem."
                 </p>
               </div>
@@ -669,25 +669,25 @@ export default function Home() {
 
             {/* Card 04 — Visão Financeira (goldLight) */}
             <Reveal delay={0.3}
-              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
-              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}`, minHeight: "360px" }}
+              className="relative overflow-hidden flex flex-col p-5 md:p-6"
+              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
             >
               <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.08, lineHeight: 1 }}
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "8rem", color: C.gold, opacity: 0.08, lineHeight: 1 }}
               >
                 04
               </div>
-              <div className="relative z-10 flex flex-col h-full gap-5">
+              <div className="relative z-10 flex flex-col gap-3">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>04</span>
-                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
-                  <h3 className="font-display font-black text-xl uppercase leading-tight"
+                  <div className="w-6 h-px mt-1.5 mb-3" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-base uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                   >
                     Visão Financeira
                   </h3>
                 </div>
-                <ul className="space-y-2 flex-1">
+                <ul className="space-y-1.5">
                   {["Precificação", "Custo estimado", "Margem", "Percepção de valor", "Cobrar melhor"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.inkLight }}>
                       <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
@@ -695,7 +695,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: C.inkLight, borderColor: "rgba(201,162,87,0.3)" }}>
+                <p className="text-xs italic leading-relaxed border-t pt-3 mt-1" style={{ color: C.inkLight, borderColor: "rgba(201,162,87,0.3)" }}>
                   "A insegurança faz arquitetas cobrarem barato."
                 </p>
               </div>
