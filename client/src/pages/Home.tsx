@@ -215,9 +215,9 @@ const FAQS = [
 ];
 
 /* ═══════════════════════════════════════
-   DEADLINE — 7 dias após a Imersão (30/05/2026)
+   DEADLINE — fechamento do carrinho em 12/06/2026
    ═══════════════════════════════════════ */
-const DEADLINE = new Date("2026-06-06T23:59:59-03:00");
+const DEADLINE = new Date("2026-06-12T23:59:59-03:00");
 
 /* ═══════════════════════════════════════
    COUNTDOWN TIMER
@@ -414,7 +414,7 @@ export default function Home() {
               <div className="shadow-xl overflow-hidden"
                 style={{ border: `1px solid ${C.border}` }}
               >
-                <div className="px-5 py-3 flex items-center justify-between"
+                <div className="px-5 py-3 flex items-center"
                   style={{ backgroundColor: C.dark }}
                 >
                   <div>
@@ -423,14 +423,6 @@ export default function Home() {
                     </p>
                     <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
                       Preço de lançamento · vagas limitadas
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-black text-lg leading-none" style={{ color: C.gold, fontFamily: "Montserrat, sans-serif" }}>
-                      12× R$197
-                    </p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      ou R$1.900 à vista
                     </p>
                   </div>
                 </div>
