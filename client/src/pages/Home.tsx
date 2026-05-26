@@ -1052,106 +1052,113 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           INVESTIMENTO
       ══════════════════════════════════════════ */}
-      <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: C.ink, ...gridBg("rgba(201,162,87,0.05)", "50px 50px") }}>
+      <section id="pricing" className="py-16 md:py-24" style={{ backgroundColor: C.ink, ...gridBg("rgba(201,162,87,0.05)", "50px 50px") }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-14">
-            <Label light>Investimento</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] text-white"
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-            >
-              Condição exclusiva.<br className="hidden md:block" /> Nova turma Junho 2026.
-            </h2>
-            <p className="mt-4 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Após o fechamento, o valor volta a R$ 2.300.
-            </p>
-          </Reveal>
+          <Reveal>
+            <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl" style={{ borderRadius: "24px" }}>
 
-          <div className="max-w-md mx-auto">
-            <Reveal>
-              <div className="overflow-hidden shadow-2xl">
-                {/* Header */}
-                <div className="py-10 px-8 text-center space-y-4 relative overflow-hidden"
-                  style={{ backgroundColor: C.dark }}
-                >
-                  <div className="absolute inset-0 opacity-20" style={gridBg("rgba(201,162,87,0.3)", "40px 40px")} />
-                  <div className="inline-flex items-center gap-2 px-3 py-1 relative z-10"
-                    style={{ backgroundColor: "rgba(255,68,68,0.15)", border: "1px solid rgba(255,68,68,0.3)" }}
+              {/* LEFT — headline + urgência + CTA principal */}
+              <div className="flex-1 flex flex-col justify-between p-8 md:p-12 lg:p-14 gap-8"
+                style={{ backgroundColor: C.dark, backgroundImage: gridBg("rgba(201,162,87,0.06)", "40px 40px").backgroundImage }}
+              >
+                <div className="space-y-5">
+                  <Label light>Investimento</Label>
+                  <h2 className="font-display font-black uppercase leading-[1.05] text-white"
+                    style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
+                  >
+                    Condição exclusiva.<br />
+                    Nova turma<br />
+                    Junho 2026.
+                  </h2>
+                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
+                    Após o fechamento, o valor volta a R$ 2.300.
+                  </p>
+                  <div className="px-4 py-3 text-sm font-semibold"
+                    style={{ backgroundColor: "rgba(201,162,87,0.12)", color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
+                  >
+                    Uma obra com gerenciamento cobrado paga a mentoria inteira.
+                  </div>
+                  <CountdownTimer label="Vagas fecham em:" dark />
+                </div>
+
+                <div className="space-y-3">
+                  <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                    style={{ backgroundColor: C.green, color: C.white }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+                  >
+                    Quero meu acesso agora
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <ShieldCheck className="w-3.5 h-3.5" style={{ color: C.green }} />
+                    Compra segura · Garantia incondicional de 15 dias
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT — preço + features + boleto */}
+              <div className="flex-1 lg:max-w-[440px] flex flex-col p-8 md:p-12 lg:p-14"
+                style={{ backgroundColor: C.white, borderLeft: `1px solid ${C.border}` }}
+              >
+                {/* Badge + Preço */}
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 self-start"
+                    style={{ backgroundColor: "rgba(255,68,68,0.08)", border: "1px solid rgba(255,68,68,0.22)" }}
                   >
                     <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
                     <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#FF6B6B" }}>
                       Valor exclusivo nova turma
                     </span>
                   </div>
-                  <div className="relative z-10">
-                    <div className="flex items-end justify-center gap-1">
-                      <span className="font-display font-black text-6xl text-white leading-none"
-                        style={{ fontFamily: "Montserrat, sans-serif" }}
-                      >
-                        R$&nbsp;1.997
-                      </span>
-                    </div>
-                    <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      Após o fechamento, volta a <strong className="text-white/70">R$ 2.300</strong>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: C.muted }}>
+                      Seu investimento
                     </p>
-                  </div>
-                  <div className="relative z-10 pt-1">
-                    <CountdownTimer label="Oferta expira em:" dark />
+                    <p className="font-black leading-none"
+                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2.4rem, 5vw, 3.2rem)", color: C.ink }}
+                    >
+                      R$ 1.997
+                    </p>
                   </div>
                 </div>
 
-                {/* Body */}
-                <div className="p-8 space-y-7" style={{ backgroundColor: C.white }}>
-                  {/* ROI callout */}
-                  <div className="px-4 py-3 text-sm text-center font-semibold"
-                    style={{ backgroundColor: C.goldDim, color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
+                {/* Divider */}
+                <div className="my-7 h-px" style={{ backgroundColor: C.border }} />
+
+                {/* Features */}
+                <div className="flex-1 space-y-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: C.muted }}>
+                    Tudo que você recebe
+                  </p>
+                  <ul className="space-y-3.5">
+                    {INCLUDES.map((item) => (
+                      <li key={item.text} className="flex items-start gap-3 text-sm leading-snug" style={{ color: C.inkLight }}>
+                        <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Divider + Boleto */}
+                <div className="mt-7 pt-6 space-y-3" style={{ borderTop: `1px solid ${C.border}` }}>
+                  <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center w-full py-3 text-xs font-semibold uppercase tracking-wider transition-colors"
+                    style={{ border: `1px solid ${C.border}`, color: C.muted }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.ink; e.currentTarget.style.color = C.ink; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.muted; }}
                   >
-                    Uma obra com gerenciamento cobrado paga a mentoria inteira.
-                  </div>
-
-                  <div className="pb-6" style={{ borderBottom: `1px solid ${C.border}` }}>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] mb-4" style={{ color: C.muted }}>
-                      Tudo que você recebe
-                    </p>
-                    <ul className="space-y-3">
-                      {INCLUDES.map((item) => (
-                        <li key={item.text} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
-                          <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
-                          {item.text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="space-y-3">
-                    <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                      target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all"
-                      style={{ backgroundColor: C.green, color: C.white }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
-                    >
-                      Quero meu acesso agora
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                    <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
-                      target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-center w-full py-3 text-xs font-semibold uppercase tracking-wider transition-colors"
-                      style={{ border: `1px solid ${C.border}`, color: C.muted }}
-                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.ink; e.currentTarget.style.color = C.ink; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.muted; }}
-                    >
-                      Prefiro pagar com Boleto Parcelado
-                    </a>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: C.muted }}>
-                    <ShieldCheck className="w-4 h-4" style={{ color: C.green }} />
-                    Compra 100% segura, Garantia incondicional de 15 dias
-                  </div>
+                    Prefiro pagar com Boleto Parcelado
+                  </a>
                 </div>
               </div>
-            </Reveal>
-          </div>
+
+            </div>
+          </Reveal>
         </div>
       </section>
 
