@@ -107,19 +107,24 @@ const STATS = [
 ];
 
 const PROBLEMS = [
-  "Obra vira caos: prazo estourado, cliente insatisfeito",
-  "Você perde o controle financeiro no meio do projeto",
-  "Insegurança jurídica em cada contrato assinado",
-  "Fornecedores que não cumprem o combinado",
-  "Medo de errar e perder o cliente para sempre",
+  "Aprende errando",
+  "Cobra barato por insegurança",
+  "Tem retrabalho",
+  "Não sabe custo estimado",
+  "Pega muitos clientes para compensar",
+  "Vive no caos",
+  "Improvisa",
+  "Demora anos para ganhar experiência",
 ];
 
 const SOLUTIONS = [
-  "Método validado em +250 obras entregues com segurança",
-  "Cronograma que funciona e clientes que respeitam",
-  "Contratos que blindam você em qualquer situação",
-  "Processo claro para selecionar e gerir fornecedores",
-  "Confiança para liderar qualquer obra com autoridade",
+  "Entende a prática da obra",
+  "Cobra com mais clareza",
+  "Evita retrabalho",
+  "Faz projetos executáveis",
+  "Amplia serviços",
+  "Cresce com mais estratégia",
+  "Acelera a valorização profissional",
 ];
 
 const AUDIENCE = [
@@ -717,14 +722,9 @@ export default function Home() {
           >
             <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: "#FF4444", opacity: 0.6 }} />
             <Reveal>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] mb-6" style={{ color: "#FF6B6B" }}>
-                Sem método
+              <p className="text-xs font-bold uppercase tracking-[0.25em] mb-8" style={{ color: "#FF6B6B" }}>
+                Sem a mentoria
               </p>
-              <h2 className="font-display font-black text-3xl md:text-4xl uppercase leading-[1.05] mb-10"
-                style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
-              >
-                A realidade<br />de quem atua<br />sem processo
-              </h2>
               <ul className="space-y-4">
                 {PROBLEMS.map((p, i) => (
                   <motion.li key={i}
@@ -759,14 +759,9 @@ export default function Home() {
               SIM
             </div>
             <Reveal>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] mb-6" style={{ color: C.gold }}>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] mb-8" style={{ color: C.gold }}>
                 Com a mentoria
               </p>
-              <h2 className="font-display font-black text-3xl md:text-4xl uppercase leading-[1.05] mb-10"
-                style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
-              >
-                O que você<br />conquista com<br />método real
-              </h2>
               <ul className="space-y-4">
                 {SOLUTIONS.map((s, i) => (
                   <motion.li key={i}
