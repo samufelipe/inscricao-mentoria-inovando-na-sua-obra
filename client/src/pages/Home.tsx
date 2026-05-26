@@ -541,101 +541,166 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════
-          HABILIDADES — BENTO GRID
+          HABILIDADES — 2×2 GRID
       ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-16">
+          <Reveal className="text-center mb-4">
             <Label>Habilidades</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] mt-3"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              O que você vai<br className="hidden md:block" /> dominar
+              O que você vai dominar
             </h2>
           </Reveal>
+          <Reveal delay={0.08} className="text-center mb-16 max-w-2xl mx-auto space-y-2">
+            <p className="font-semibold text-base md:text-lg" style={{ color: C.inkLight }}>
+              A faculdade ensina teoria. O mercado exige muito mais.
+            </p>
+            <p className="text-sm md:text-base leading-relaxed" style={{ color: C.muted }}>
+              Você vai aprender o que a graduação não ensina: como conduzir uma obra do início ao fim, como se posicionar com autoridade, lidar com clientes e imprevistos, e transformar seu conhecimento em um negócio lucrativo.
+            </p>
+          </Reveal>
 
-          <div className="grid lg:grid-cols-3 gap-4">
-            {/* BENTO — card grande */}
+          <div className="grid md:grid-cols-2 gap-4">
+
+            {/* Card 01 — Prática Técnica (dark) */}
             <Reveal delay={0}
-              className="lg:row-span-2 relative overflow-hidden flex flex-col justify-between p-10"
-              style={{ backgroundColor: C.dark, minHeight: "340px" }}
+              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
+              style={{ backgroundColor: C.dark, minHeight: "360px" }}
             >
-              <div className="absolute bottom-0 right-0 font-display font-black leading-none select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
+              <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
               >
                 01
               </div>
-              <div className="absolute inset-0 opacity-30" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
-              <div className="relative z-10 space-y-5">
-                <div className="w-10 h-10 flex items-center justify-center" style={{ backgroundColor: C.gold }}>
-                  <Layers className="w-5 h-5 text-white" />
+              <div className="absolute inset-0 opacity-25" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
+              <div className="relative z-10 flex flex-col h-full gap-5">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>01</span>
+                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-xl uppercase text-white leading-tight"
+                    style={{ fontFamily: "Montserrat, sans-serif" }}
+                  >
+                    Prática Técnica
+                  </h3>
                 </div>
-                <div className="w-8 h-px" style={{ backgroundColor: C.gold }} />
-                <h3 className="font-display font-black text-xl uppercase text-white leading-tight"
-                  style={{ fontFamily: "Montserrat, sans-serif" }}
-                >
-                  Gestão de Obra Eficiente
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Planejamento, cronograma e controle de etapas com precisão do início ao fim. O pilar central de uma entrega profissional.
+                <ul className="space-y-2 flex-1">
+                  {["Passo a passo da obra", "Leitura prática da execução", "Compatibilização", "Todas as etapas da obra", "Cronograma", "Custo estimado"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: "rgba(255,255,255,0.4)", borderColor: "rgba(201,162,87,0.2)" }}>
+                  "Pare de projetar sem entender como a obra realmente funciona."
                 </p>
-              </div>
-              <div className="relative z-10 mt-8">
-                <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>
-                  Habilidade central
-                </span>
               </div>
             </Reveal>
 
-            {/* Cards regulares */}
-            {SKILLS.slice(1, 5).map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <Reveal key={s.title} delay={(i + 1) * 0.08}
-                  className="p-7 space-y-4 group transition-shadow duration-300 hover:shadow-lg"
-                  style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: C.goldLight }}
-                    >
-                      <Icon className="w-4 h-4" style={{ color: C.gold }} />
-                    </div>
-                    <h3 className="font-display font-black text-sm uppercase tracking-wide leading-tight"
-                      style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                    >
-                      {s.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{s.desc}</p>
-                  <div className="w-0 h-0.5 transition-all duration-500 group-hover:w-full"
-                    style={{ backgroundColor: C.gold }}
-                  />
-                </Reveal>
-              );
-            })}
-
-            {/* BENTO — card largo */}
-            <Reveal delay={0.42}
-              className="lg:col-span-2 p-8 flex flex-col sm:flex-row items-start gap-6"
-              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
+            {/* Card 02 — Comunicação e Posicionamento (white) */}
+            <Reveal delay={0.1}
+              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
+              style={{ backgroundColor: C.white, border: `1px solid ${C.border}`, minHeight: "360px" }}
             >
-              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center"
-                style={{ backgroundColor: C.gold }}
+              <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.04, lineHeight: 1 }}
               >
-                <TrendingUp className="w-5 h-5 text-white" />
+                02
               </div>
-              <div className="space-y-2">
-                <h3 className="font-display font-black text-base uppercase tracking-wide"
-                  style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-                >
-                  Posicionamento de Mercado
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
-                  Diferencie-se no mercado, cobre o que seu trabalho realmente vale e construa uma carteira de clientes sólida que gera indicações constantes.
+              <div className="relative z-10 flex flex-col h-full gap-5">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>02</span>
+                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-xl uppercase leading-tight"
+                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                  >
+                    Comunicação e Posicionamento
+                  </h3>
+                </div>
+                <ul className="space-y-2 flex-1">
+                  {["Apresentação de projeto", "Condução do cliente", "Alinhamento", "Limites", "Comunicação com fornecedor", "Liderança"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: C.muted, borderColor: C.border }}>
+                  "A forma como você se comunica define o quanto seu trabalho é valorizado."
                 </p>
               </div>
             </Reveal>
+
+            {/* Card 03 — Mentalidade (white) */}
+            <Reveal delay={0.2}
+              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
+              style={{ backgroundColor: C.white, border: `1px solid ${C.border}`, minHeight: "360px" }}
+            >
+              <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.04, lineHeight: 1 }}
+              >
+                03
+              </div>
+              <div className="relative z-10 flex flex-col h-full gap-5">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>03</span>
+                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-xl uppercase leading-tight"
+                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                  >
+                    Mentalidade
+                  </h3>
+                </div>
+                <ul className="space-y-2 flex-1">
+                  {["Lidar com imprevistos", "Responsabilidade", "Emocional do cliente", "Tomada de decisão", "Maturidade profissional"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: C.muted, borderColor: C.border }}>
+                  "Arquitetas inseguras improvisam. Arquitetas preparadas conduzem."
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Card 04 — Visão Financeira (goldLight) */}
+            <Reveal delay={0.3}
+              className="relative overflow-hidden flex flex-col justify-between p-8 md:p-10"
+              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}`, minHeight: "360px" }}
+            >
+              <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.08, lineHeight: 1 }}
+              >
+                04
+              </div>
+              <div className="relative z-10 flex flex-col h-full gap-5">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>04</span>
+                  <div className="w-8 h-px mt-2 mb-4" style={{ backgroundColor: C.gold }} />
+                  <h3 className="font-display font-black text-xl uppercase leading-tight"
+                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                  >
+                    Visão Financeira
+                  </h3>
+                </div>
+                <ul className="space-y-2 flex-1">
+                  {["Precificação", "Custo estimado", "Margem", "Percepção de valor", "Cobrar melhor"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.inkLight }}>
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm italic leading-relaxed border-t pt-4" style={{ color: C.inkLight, borderColor: "rgba(201,162,87,0.3)" }}>
+                  "A insegurança faz arquitetas cobrarem barato."
+                </p>
+              </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
