@@ -752,7 +752,6 @@ export default function Home() {
           <div className="px-8 md:px-16 py-20 md:py-28 relative overflow-hidden"
             style={{ backgroundColor: "#111110" }}
           >
-            <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: "#FF4444", opacity: 0.6 }} />
             <Reveal>
               <p className="text-xs font-bold uppercase tracking-[0.25em] mb-8" style={{ color: "#FF6B6B" }}>
                 Sem a mentoria
@@ -783,7 +782,6 @@ export default function Home() {
           <div className="px-8 md:px-16 py-20 md:py-28 relative overflow-hidden"
             style={{ backgroundColor: C.darkMid }}
           >
-            <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: C.gold }} />
             {/* Ghost text */}
             <div className="absolute -right-8 -bottom-8 font-display font-black leading-none select-none pointer-events-none"
               style={{ fontFamily: "Montserrat, sans-serif", fontSize: "12rem", color: C.gold, opacity: 0.04 }}
