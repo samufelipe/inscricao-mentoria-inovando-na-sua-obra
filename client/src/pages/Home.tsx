@@ -406,7 +406,7 @@ export default function Home() {
           style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(250,248,244,0.7) 100%)" }}
         />
 
-        <div className="container mx-auto px-4 md:px-8 py-6 md:py-8 relative z-10">
+        <div className="container mx-auto px-4 md:px-8 pt-20 pb-8 md:pt-24 md:pb-12 relative z-10">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
 
             {/* Left — copy + form */}
@@ -822,9 +822,9 @@ export default function Home() {
       ══════════════════════════════════════════ */}
       <section className="py-16 md:py-24" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <Reveal className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
+          <Reveal className="text-center mb-12 md:mb-16 max-w-4xl mx-auto">
             <Label>Para Quem É</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-snug mt-3"
+            <h2 className="font-display font-black text-xl md:text-2xl uppercase leading-snug mt-3"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
               Para arquitetas, designer de interiores, engenheiras que queiram aprender sobre obra de interiores
@@ -1151,6 +1151,10 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
+                    <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
+                    Mais de 250 arquitetas ja transformaram seus resultados
+                  </div>
                   <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
@@ -1182,14 +1186,20 @@ export default function Home() {
                       Valor exclusivo nova turma
                     </span>
                   </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: C.muted }}>
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.muted }}>
                       Seu investimento
                     </p>
+                    <p className="text-sm font-semibold line-through" style={{ color: C.muted }}>
+                      De R$ 2.300
+                    </p>
                     <p className="font-black leading-none"
-                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2.4rem, 5vw, 3.2rem)", color: C.ink }}
+                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
-                      R$ 1.997
+                      12x de R$ 166,41
+                    </p>
+                    <p className="text-sm" style={{ color: C.muted }}>
+                      ou R$ 1.997 a vista no cartao
                     </p>
                   </div>
                 </div>
@@ -1386,10 +1396,11 @@ export default function Home() {
       >
         <div className="flex items-center justify-between px-5 py-3.5">
           <div>
-            <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>Turma Junho 2026</p>
-            <p className="font-display font-black text-lg text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              R$ 1.997
+            <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Valor exclusivo nova turma</p>
+            <p className="font-display font-black text-base text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
+              12x de R$ 166,41
             </p>
+            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 1.997 a vista</p>
           </div>
           <button
             onClick={() => scrollTo("pricing")}
