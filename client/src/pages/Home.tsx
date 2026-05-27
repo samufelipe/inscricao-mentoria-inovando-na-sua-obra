@@ -739,6 +739,13 @@ export default function Home() {
           PROBLEMA / SOLUÇÃO
       ══════════════════════════════════════════ */}
       <section className="overflow-hidden" style={{ backgroundColor: C.ink }}>
+        <Reveal className="text-center py-12 md:py-16 px-4">
+          <h2 className="font-display font-black text-2xl md:text-4xl uppercase leading-tight"
+            style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
+          >
+            O erro que custa caro na arquitetura
+          </h2>
+        </Reveal>
         <div className="grid lg:grid-cols-2">
 
           {/* Left — O problema */}
