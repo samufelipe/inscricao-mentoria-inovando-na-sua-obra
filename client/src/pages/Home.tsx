@@ -1022,61 +1022,6 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════
-          BÔNUS
-      ══════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative overflow-hidden"
-        style={{ backgroundColor: C.dark, ...gridBg("rgba(201,162,87,0.05)", "50px 50px") }}
-      >
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <Reveal className="text-center mb-16">
-            <Label light>Bônus Exclusivos</Label>
-            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] text-white"
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-            >
-              Você também<br className="hidden md:block" /> recebe
-            </h2>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {BONUS.map((b, i) => {
-              const Icon = b.icon;
-              return (
-                <Reveal key={b.title} delay={i * 0.12}
-                  className="p-8 md:p-10 space-y-6 relative overflow-hidden"
-                  style={{ border: `1px solid rgba(201,162,87,0.25)`, backgroundColor: "rgba(255,255,255,0.03)" }}
-                >
-                  <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: C.gold }} />
-                  <div className="flex items-center gap-4 pl-2">
-                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: C.gold }}
-                    >
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-display font-black text-base uppercase text-white"
-                        style={{ fontFamily: "Montserrat, sans-serif" }}
-                      >
-                        {b.title}
-                      </h3>
-                      <p className="text-xs mt-0.5" style={{ color: C.gold }}>{b.subtitle}</p>
-                    </div>
-                  </div>
-                  <ul className="space-y-3 pl-2">
-                    {b.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-                        <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.gold }} />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
           SOBRE NÓS
       ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.cream }}>
