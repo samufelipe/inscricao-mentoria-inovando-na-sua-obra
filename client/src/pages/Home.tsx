@@ -474,7 +474,7 @@ export default function Home() {
                     </button>
                   </div>
                   <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: C.muted }}>
-                    <Lock className="w-3.5 h-3.5" /> Ambiente 100% seguro
+                    <Lock className="w-3.5 h-3.5" /> Pagamento 100% Seguro pela Hotmart
                   </p>
                   <CountdownTimer label="Vagas fecham em:" />
                 </div>
@@ -1140,7 +1140,7 @@ export default function Home() {
                     Junho 2026.
                   </h2>
                   <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
-                    Após o fechamento, o valor volta a R$ 2.300.
+                    Pagamento 100% Seguro pela Hotmart.
                   </p>
                   <div className="px-4 py-3 text-base font-semibold"
                     style={{ backgroundColor: "rgba(201,162,87,0.12)", color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
@@ -1153,7 +1153,7 @@ export default function Home() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
                     <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
-                    Mais de 250 arquitetas ja transformaram seus resultados
+                    Milhares de arquitetas ja transformaram seus resultados com a Mentoria Inovando na Sua Obra
                   </div>
                   <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
                     target="_blank" rel="noopener noreferrer"
@@ -1167,7 +1167,7 @@ export default function Home() {
                   </a>
                   <div className="flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: C.green }} />
-                    Compra segura · Garantia incondicional de 15 dias
+                    Pagamento 100% Seguro pela Hotmart · Garantia de 15 dias
                   </div>
                 </div>
               </div>
