@@ -502,13 +502,13 @@ export default function Home() {
                   loading="eager"
                 />
                 {/* Floating stat card */}
-                <div className="absolute bottom-0 left-0 lg:-bottom-6 lg:-left-6 z-20 px-4 py-3 lg:px-5 lg:py-4 shadow-xl"
+                <div className="absolute bottom-0 left-0 lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-2 lg:px-5 lg:py-4 shadow-xl"
                   style={{ backgroundColor: C.dark }}
                 >
-                  <p className="font-display font-black text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
+                  <p className="font-display font-black text-base lg:text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
                     +250
                   </p>
-                  <p className="text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <p className="text-[8px] lg:text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
                     Obras entregues
                   </p>
                 </div>
