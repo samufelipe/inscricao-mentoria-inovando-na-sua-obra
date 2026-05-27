@@ -163,24 +163,77 @@ const HOW_IT_WORKS = [
 
 const MODULES = [
   {
-    number: "01", title: "Primeiros Passos",
+    number: "01", tag: "Módulo 01", title: "Primeiros Passos",
     desc: "Fundamentos do gerenciamento de interiores: organização do início do projeto, onboarding do cliente e estruturação do escritório para crescer com consistência.",
     items: ["Diagnóstico e alinhamento com o cliente", "Estrutura do contrato de gerenciamento", "Checklist de início de obra", "Organização do escritório e fluxo de trabalho"],
   },
   {
-    number: "02", title: "Projeto Executável",
+    number: "02", tag: "Módulo 02", title: "Projeto Executável",
     desc: "Como criar um projeto de interiores que realmente funciona na obra: compatibilização, memoriais e comunicação com fornecedores e equipe.",
     items: ["Memorial descritivo completo", "Compatibilização de projetos", "Seleção e gestão de fornecedores", "Comunicação técnica com pedreiros e instaladores"],
   },
   {
-    number: "03", title: "Gerenciamento de Obra",
+    number: "03", tag: "Módulo 03", title: "Gerenciamento de Obra",
     desc: "Gestão de cronograma, visitas técnicas, controle de execução e resolução de imprevistos em tempo real com segurança e clareza.",
     items: ["Cronograma detalhado por etapas", "Relatórios de visita técnica", "Controle de qualidade em campo", "Protocolo para imprevistos e retrabalhos"],
   },
   {
-    number: "04", title: "Finalização e Fidelização",
+    number: "04", tag: "Módulo 04", title: "Finalização e Fidelização",
     desc: "Entrega impecável, vistoria final, satisfação do cliente e estratégias para transformar cada projeto em indicações e novos contratos.",
     items: ["Protocolo de vistoria e entrega", "Gestão do pós-obra", "Como gerar indicações orgânicas", "Fidelização e recorrência de clientes"],
+  },
+  {
+    number: "05", tag: "Pack de Documentos", title: "Pack de Documentos",
+    desc: "Biblioteca completa de ferramentas práticas para aplicar imediatamente em cada etapa do seu projeto e da sua obra.",
+    items: [
+      "Formulário de qualificação do cliente",
+      "Planilha de precificação",
+      "Modelo de proposta irresistível",
+      "Mapa de compatibilização de projetos",
+      "Trello com checklists detalhados de todas as etapas da obra",
+      "Modelo de cronograma de obra",
+      "Fluxograma da obra e do método de gerenciamento",
+      "Contratos, briefing, modelos de reunião, planilhas de custos e ferramentas para finalizar projetos com excelência",
+    ],
+  },
+  {
+    number: "06", tag: "Bônus Exclusivo", title: "Aulas com Especialistas ao Vivo",
+    desc: "Aulas bônus exclusivas com especialistas de mercado para ampliar sua visão técnica e comercial além dos módulos.",
+    items: [
+      "Aula com técnico de ar condicionado",
+      "Aula com Juliana Puppim: como faturar em dólar",
+      "Aula com Juliana Campelo: gestão e comercial para arquitetos",
+      "Aula com técnico de impermeabilização",
+    ],
+  },
+  {
+    number: "07", tag: "Dinâmica", title: "Dinâmicas em Grupo",
+    desc: "Práticas em grupo para exercitar e receber feedback real sobre suas habilidades comerciais e técnicas com outras alunas.",
+    items: [
+      "Apresente sua proposta comercial",
+      "Apresente sua precificação",
+      "Imersão: ritmos da obra",
+    ],
+  },
+  {
+    number: "08", tag: "Ao Vivo", title: "Plantões de Dúvidas ao Vivo",
+    desc: "Sessões ao vivo com as mentoras para tirar dúvidas em tempo real, consolidar o aprendizado e avançar com mais segurança em cada etapa.",
+    items: [
+      "Atendimento direto com as mentoras",
+      "Resolução de casos reais do seu projeto",
+      "Gravações disponíveis para rever a qualquer momento",
+      "Calendário fixo durante todo o período da mentoria",
+    ],
+  },
+  {
+    number: "09", tag: "Comunidade", title: "Grupo de Suporte e Networking",
+    desc: "Comunidade exclusiva de arquitetas, designers e engenheiras para troca de experiências, parcerias e suporte contínuo ao longo de toda a jornada.",
+    items: [
+      "Grupo exclusivo de alunas ativas",
+      "Troca de experiências e cases reais",
+      "Oportunidades de parcerias e indicações",
+      "Suporte contínuo das mentoras durante o programa",
+    ],
   },
 ];
 
@@ -920,7 +973,7 @@ export default function Home() {
             <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0]"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
-              Os 4 módulos<br className="hidden md:block" /> da mentoria
+              Tudo o que você<br className="hidden md:block" /> vai receber
             </h2>
           </Reveal>
 
@@ -938,7 +991,7 @@ export default function Home() {
                     </div>
                     <div className="flex-1 px-6 py-5">
                       <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.muted }}>
-                        Módulo {mod.number}
+                        {mod.tag}
                       </p>
                       <h3 className="font-display font-black text-sm md:text-base uppercase"
                         style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
