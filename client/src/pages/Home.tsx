@@ -487,12 +487,12 @@ export default function Home() {
               className="relative flex justify-center lg:justify-end"
             >
               <div className="relative">
-                {/* Gold accent frame */}
-                <div className="absolute -top-4 -right-4 w-full h-full"
+                {/* Gold accent frame — desktop only */}
+                <div className="hidden lg:block absolute -top-4 -right-4 w-full h-full"
                   style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
                 />
-                {/* Secondary frame */}
-                <div className="absolute -bottom-4 -left-4 w-24 h-24"
+                {/* Secondary frame — desktop only */}
+                <div className="hidden lg:block absolute -bottom-4 -left-4 w-24 h-24"
                   style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
                 />
                 <img src={imgNovaImgMentoras}
@@ -501,14 +501,14 @@ export default function Home() {
                   style={{ maxHeight: "420px", objectFit: "cover" }}
                   loading="eager"
                 />
-                {/* Floating stat card */}
-                <div className="absolute bottom-0 left-0 lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-2 lg:px-5 lg:py-4 shadow-xl"
+                {/* Floating stat card — desktop only */}
+                <div className="hidden lg:block absolute -bottom-6 -left-6 z-20 px-5 py-4 shadow-xl"
                   style={{ backgroundColor: C.dark }}
                 >
-                  <p className="font-display font-black text-base lg:text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
+                  <p className="font-display font-black text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
                     +250
                   </p>
-                  <p className="text-[8px] lg:text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <p className="text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
                     Obras entregues
                   </p>
                 </div>
