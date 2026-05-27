@@ -1091,13 +1091,13 @@ export default function Home() {
                   </div>
                   <div className="space-y-4 text-sm leading-relaxed" style={{ color: C.inkLight }}>
                     <p>
-                      Somos arquitetas <strong style={{ color: C.ink }}>apaixonadas</strong> por compartilhar conhecimento e transformar a gestão de obras de interiores no Brasil.
-                    </p>
-                    <p>
-                      Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório especializado em desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, <strong style={{ color: C.ink }}>já concluímos mais de 250 obras</strong>.
+                      Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório especializado em desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, já concluímos mais de 250 obras. Depois de anos vivendo obras reais, erros, retrabalhos, problemas com fornecedores, clientes difíceis e decisões caras, organizamos a experiência prática que realmente acelera a trajetória de uma arquiteta.
                     </p>
                     <p>
                       Em 2024 criamos a <strong style={{ color: C.ink }}>Mentoria Inovando na Sua Obra</strong> para compartilhar toda essa vivência de forma organizada, prática e acessível. Já são dezenas de alunas impactadas pela nossa metodologia.
+                    </p>
+                    <p>
+                      Tenha acesso ao repertório que normalmente só vem com o tempo. Pare de improvisar na prática.
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
