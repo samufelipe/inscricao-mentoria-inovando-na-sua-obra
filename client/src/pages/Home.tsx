@@ -481,10 +481,10 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Right — photo editorial (hidden on mobile) */}
+            {/* Right — photo editorial */}
             <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 }}
-              className="relative hidden lg:flex justify-center lg:justify-end"
+              className="relative flex justify-center lg:justify-end"
             >
               <div className="relative">
                 {/* Gold accent frame */}
@@ -498,11 +498,11 @@ export default function Home() {
                 <img src={imgNovaImgMentoras}
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
                   className="relative z-10 max-w-full h-auto mix-blend-multiply"
-                  style={{ maxHeight: "480px", objectFit: "cover" }}
+                  style={{ maxHeight: "420px", objectFit: "cover" }}
                   loading="eager"
                 />
                 {/* Floating stat card */}
-                <div className="absolute -bottom-6 -left-6 z-20 px-5 py-4 shadow-xl"
+                <div className="absolute bottom-0 left-0 lg:-bottom-6 lg:-left-6 z-20 px-4 py-3 lg:px-5 lg:py-4 shadow-xl"
                   style={{ backgroundColor: C.dark }}
                 >
                   <p className="font-display font-black text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
