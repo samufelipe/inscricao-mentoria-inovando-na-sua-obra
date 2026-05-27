@@ -395,27 +395,6 @@ export default function Home() {
       </header>
 
       {/* ══════════════════════════════════════════
-          URGENCY BAR
-      ══════════════════════════════════════════ */}
-      <div className="pt-16">
-        <div className="w-full py-2.5 px-4 flex items-center justify-center gap-3 flex-wrap text-center"
-          style={{ backgroundColor: C.dark, borderBottom: `1px solid rgba(201,162,87,0.2)` }}
-        >
-          <div className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: "#FF4444" }} />
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-            Condição exclusiva para participantes da Imersão{" "}
-            <span className="hidden sm:inline">|</span>{" "}
-            <span style={{ color: C.gold }}>Vagas fecham em 12/06</span>
-          </p>
-          <span className="hidden md:inline text-white/20">·</span>
-          <p className="text-[11px] font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
-            Valor exclusivo nova turma Junho 2026{" "}
-            <span className="hidden md:inline">· após o fechamento, o valor volta a <span style={{ color: C.gold }}>R$ 2.300</span></span>
-          </p>
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════
           HERO
       ══════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden"
