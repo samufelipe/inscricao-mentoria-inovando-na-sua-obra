@@ -417,7 +417,7 @@ export default function Home() {
               {/* Headline */}
               <div className="space-y-3">
                 <h1 className="font-display font-black uppercase"
-                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.5rem, 2.8vw, 2.4rem)", color: C.ink, lineHeight: "1.15" }}
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.875rem, 3.5vw, 3rem)", color: C.ink, lineHeight: "1.15" }}
                 >
                   Domine a obra de interiores<br />
                   com mais <Highlight>lucro</Highlight>,{" "}
@@ -427,7 +427,7 @@ export default function Home() {
                   <br className="hidden sm:block" />
                   à entrega final.
                 </h1>
-                <p className="text-sm md:text-base leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
+                <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
                   Tenha acesso à experiência prática, técnica e comportamental
                   {" "}que leva anos para ser construída, e aprenda a cobrar
                   {" "}melhor, evitar erros e crescer sem transformar
@@ -585,10 +585,10 @@ export default function Home() {
             </h2>
           </Reveal>
           <Reveal delay={0.08} className="text-center mb-10 max-w-xl mx-auto space-y-2">
-            <p className="font-semibold text-base md:text-lg" style={{ color: C.inkLight }}>
+            <p className="font-semibold text-lg md:text-xl" style={{ color: C.inkLight }}>
               A faculdade ensina teoria. O mercado exige muito mais.
             </p>
-            <p className="text-sm md:text-base leading-relaxed" style={{ color: C.muted }}>
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: C.muted }}>
               Você vai aprender o que a graduação não ensina: como conduzir uma obra do início ao fim, se posicionar com autoridade, lidar com clientes e imprevistos, e transformar seu conhecimento em um negócio lucrativo.
             </p>
           </Reveal>
@@ -618,7 +618,7 @@ export default function Home() {
                 </div>
                 <ul className="space-y-2">
                   {["Passo a passo da obra", "Leitura prática da execução", "Compatibilização", "Todas as etapas da obra", "Cronograma", "Custo estimado"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm md:text-base" style={{ color: "rgba(255,255,255,0.65)" }}>
+                    <li key={item} className="flex items-center gap-2 text-base md:text-lg" style={{ color: "rgba(255,255,255,0.65)" }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
                       {item}
                     </li>
@@ -652,7 +652,7 @@ export default function Home() {
                 </div>
                 <ul className="space-y-2">
                   {["Apresentação de projeto", "Condução do cliente", "Alinhamento", "Limites", "Comunicação com fornecedor", "Liderança"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm md:text-base" style={{ color: C.muted }}>
+                    <li key={item} className="flex items-center gap-2 text-base md:text-lg" style={{ color: C.muted }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
                       {item}
                     </li>
@@ -686,7 +686,7 @@ export default function Home() {
                 </div>
                 <ul className="space-y-2">
                   {["Lidar com imprevistos", "Responsabilidade", "Emocional do cliente", "Tomada de decisão", "Maturidade profissional"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm md:text-base" style={{ color: C.muted }}>
+                    <li key={item} className="flex items-center gap-2 text-base md:text-lg" style={{ color: C.muted }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
                       {item}
                     </li>
@@ -720,7 +720,7 @@ export default function Home() {
                 </div>
                 <ul className="space-y-2">
                   {["Precificação", "Custo estimado", "Margem", "Percepção de valor", "Cobrar melhor"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm md:text-base" style={{ color: C.inkLight }}>
+                    <li key={item} className="flex items-center gap-2 text-base md:text-lg" style={{ color: C.inkLight }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
                       {item}
                     </li>
@@ -741,7 +741,7 @@ export default function Home() {
       ══════════════════════════════════════════ */}
       <section className="overflow-hidden" style={{ backgroundColor: C.ink }}>
         <Reveal className="text-center py-12 md:py-16 px-4" style={{ backgroundColor: "#111110" }}>
-          <h2 className="font-display font-black text-2xl md:text-4xl uppercase leading-tight"
+          <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-tight"
             style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
           >
             O erro que custa caro na arquitetura
@@ -764,7 +764,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="flex items-start gap-4 text-sm leading-relaxed"
+                    className="flex items-start gap-4 text-base leading-relaxed"
                     style={{ color: "rgba(255,255,255,0.55)" }}
                   >
                     <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-0.5"
@@ -800,7 +800,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="flex items-start gap-4 text-sm leading-relaxed"
+                    className="flex items-start gap-4 text-base leading-relaxed"
                     style={{ color: "rgba(255,255,255,0.8)" }}
                   >
                     <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-0.5"
@@ -824,7 +824,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
             <Label>Para Quem É</Label>
-            <h2 className="font-display font-black text-2xl md:text-4xl leading-snug mt-3"
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-snug mt-3"
               style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
             >
               Para arquitetas, designer de interiores, engenheiras que queiram aprender sobre obra de interiores
@@ -840,9 +840,9 @@ export default function Home() {
                   style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
                 >
                   <div className="p-6 md:p-8 flex flex-col items-center gap-5">
-                    <Icon className="w-10 h-10 md:w-12 md:h-12" style={{ color: C.ink }} strokeWidth={1.25} />
+                    <Icon className="w-12 h-12 md:w-14 md:h-14" style={{ color: C.ink }} strokeWidth={1.25} />
                     <div className="w-6 h-px" style={{ backgroundColor: C.gold }} />
-                    <p className="text-sm md:text-base font-semibold leading-snug" style={{ color: C.ink }}>
+                    <p className="text-base md:text-lg font-semibold leading-snug" style={{ color: C.ink }}>
                       {a.desc}
                     </p>
                   </div>
@@ -873,13 +873,13 @@ export default function Home() {
 
             {/* Coluna 1 — Metodologia Gravada */}
             <Reveal>
-              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-3"
+              <h3 className="text-base font-black uppercase tracking-[0.2em] mb-3"
                 style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
               >
                 Metodologia Gravada
               </h3>
               <div className="mb-5" style={{ width: "36px", height: "2px", backgroundColor: C.gold }} />
-              <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+              <p className="text-base leading-relaxed mb-5" style={{ color: C.muted }}>
                 Uma jornada prática organizada como a vida real de um escritório. As aulas são curtas, organizadas por temas e acompanham toda a jornada do cliente, do projeto à obra.
               </p>
               <div className="space-y-2">
@@ -896,7 +896,7 @@ export default function Home() {
                     >
                       <Icon className="w-4 h-4" style={{ color: C.gold }} />
                     </div>
-                    <p className="text-xs leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
                   </div>
                 ))}
               </div>
@@ -904,13 +904,13 @@ export default function Home() {
 
             {/* Coluna 2 — Aulas ao Vivo */}
             <Reveal delay={0.1}>
-              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-3"
+              <h3 className="text-base font-black uppercase tracking-[0.2em] mb-3"
                 style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
               >
                 Aulas ao Vivo
               </h3>
               <div className="mb-5" style={{ width: "36px", height: "2px", backgroundColor: C.gold }} />
-              <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+              <p className="text-base leading-relaxed mb-5" style={{ color: C.muted }}>
                 Aprendizado em tempo real com as fundadoras e especialistas convidadas.
               </p>
               <ul className="space-y-2 mb-5">
@@ -920,7 +920,7 @@ export default function Home() {
                   "Imersão: rotinas na obra",
                   "Aulas ao vivo com especialistas",
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
+                  <li key={item} className="flex items-center gap-2 text-base" style={{ color: C.muted }}>
                     <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
                     {item}
                   </li>
@@ -934,7 +934,7 @@ export default function Home() {
                 >
                   <Users className="w-4 h-4" style={{ color: C.gold }} />
                 </div>
-                <p className="text-xs leading-relaxed" style={{ color: C.inkLight }}>
+                <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>
                   1h de mentoria individual com as fundadoras
                 </p>
               </div>
@@ -942,7 +942,7 @@ export default function Home() {
 
             {/* Coluna 3 — Comunidade */}
             <Reveal delay={0.15}>
-              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-3"
+              <h3 className="text-base font-black uppercase tracking-[0.2em] mb-3"
                 style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
               >
                 Comunidade
@@ -951,7 +951,7 @@ export default function Home() {
               <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
                 Acesso à Comunidade da Inovando na sua Obra. Grupo para troca de experiências, fornecedores, materiais, dúvidas, angústias e conquistas.
               </p>
-              <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+              <p className="text-base leading-relaxed mb-5" style={{ color: C.muted }}>
                 Você não vai crescer sozinha. Tenha acesso à experiência de arquitetas vivendo situações reais todos os dias.
               </p>
               <div className="space-y-2">
@@ -967,7 +967,7 @@ export default function Home() {
                     >
                       <Icon className="w-4 h-4" style={{ color: C.gold }} />
                     </div>
-                    <p className="text-xs leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
                   </div>
                 ))}
               </div>
@@ -1021,7 +1021,7 @@ export default function Home() {
                       <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color: C.muted }}>
                         {mod.tag}
                       </p>
-                      <h3 className="font-display font-black text-sm md:text-base uppercase"
+                      <h3 className="font-display font-black text-base md:text-lg uppercase"
                         style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                       >
                         {mod.title}
@@ -1032,10 +1032,10 @@ export default function Home() {
                     </div>
                   </summary>
                   <div className="px-6 md:px-8 pb-8 pt-6" style={{ borderTop: `1px solid ${C.border}` }}>
-                    <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>{mod.desc}</p>
+                    <p className="text-base leading-relaxed mb-5" style={{ color: C.muted }}>{mod.desc}</p>
                     <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
                       {mod.items.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-sm" style={{ color: C.inkLight }}>
+                        <li key={item} className="flex items-start gap-3 text-base" style={{ color: C.inkLight }}>
                           <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
                           {item}
                         </li>
@@ -1081,7 +1081,7 @@ export default function Home() {
                 <div className="order-1 md:order-2 space-y-7">
                   <div>
                     <Label>Quem Somos</Label>
-                    <h2 className="font-display font-black text-2xl md:text-3xl uppercase text-center md:text-left leading-tight"
+                    <h2 className="font-display font-black text-3xl md:text-4xl uppercase text-center md:text-left leading-tight"
                       style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                     >
                       Ingrid Zarza &{" "}
@@ -1089,7 +1089,7 @@ export default function Home() {
                       Fernanda Bradaschia
                     </h2>
                   </div>
-                  <div className="space-y-4 text-sm leading-relaxed" style={{ color: C.inkLight }}>
+                  <div className="space-y-4 text-base leading-relaxed" style={{ color: C.inkLight }}>
                     <p>
                       Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório especializado em desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, já concluímos mais de 250 obras. Depois de anos vivendo obras reais, erros, retrabalhos, problemas com fornecedores, clientes difíceis e decisões caras, organizamos a experiência prática que realmente acelera a trajetória de uma arquiteta.
                     </p>
@@ -1139,10 +1139,10 @@ export default function Home() {
                     Nova turma<br />
                     Junho 2026.
                   </h2>
-                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
+                  <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
                     Após o fechamento, o valor volta a R$ 2.300.
                   </p>
-                  <div className="px-4 py-3 text-sm font-semibold"
+                  <div className="px-4 py-3 text-base font-semibold"
                     style={{ backgroundColor: "rgba(201,162,87,0.12)", color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
                   >
                     Uma obra com gerenciamento cobrado paga a mentoria inteira.
@@ -1204,7 +1204,7 @@ export default function Home() {
                   </p>
                   <ul className="space-y-3.5">
                     {INCLUDES.map((item) => (
-                      <li key={item.text} className="flex items-start gap-3 text-sm leading-snug" style={{ color: C.inkLight }}>
+                      <li key={item.text} className="flex items-start gap-3 text-base leading-snug" style={{ color: C.inkLight }}>
                         <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
                         {item.text}
                       </li>
@@ -1240,7 +1240,7 @@ export default function Home() {
             <Reveal className="flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1 space-y-6 text-center md:text-left">
                 <Label>Risco Zero</Label>
-                <h2 className="font-display font-black text-2xl md:text-4xl uppercase leading-tight"
+                <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-tight"
                   style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                 >
                   Garantia incondicional<br /> de 15 dias
@@ -1284,12 +1284,12 @@ export default function Home() {
                 <AccordionItem value={`faq-${i}`} className="overflow-hidden"
                   style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
                 >
-                  <AccordionTrigger className="px-6 py-5 text-left text-sm font-bold hover:no-underline"
+                  <AccordionTrigger className="px-6 py-5 text-left text-base font-bold hover:no-underline"
                     style={{ color: C.ink }}
                   >
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6 text-sm leading-relaxed"
+                  <AccordionContent className="px-6 pb-6 text-base leading-relaxed"
                     style={{ color: C.muted }}
                   >
                     {faq.a}
