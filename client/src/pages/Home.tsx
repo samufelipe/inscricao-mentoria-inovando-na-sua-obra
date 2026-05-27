@@ -487,12 +487,12 @@ export default function Home() {
               className="relative flex justify-center lg:justify-end"
             >
               <div className="relative">
-                {/* Gold accent frame — desktop only */}
-                <div className="hidden lg:block absolute -top-4 -right-4 w-full h-full"
+                {/* Gold accent frame — desktop: estende para fora; mobile: fica dentro */}
+                <div className="absolute top-0 -right-2 w-full h-full lg:-top-4 lg:-right-4"
                   style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
                 />
-                {/* Secondary frame — desktop only */}
-                <div className="hidden lg:block absolute -bottom-4 -left-4 w-24 h-24"
+                {/* Secondary corner accent */}
+                <div className="absolute -bottom-2 -left-2 w-14 h-14 lg:-bottom-4 lg:-left-4 lg:w-24 lg:h-24"
                   style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
                 />
                 <img src={imgNovaImgMentoras}
@@ -501,14 +501,14 @@ export default function Home() {
                   style={{ maxHeight: "420px", objectFit: "cover" }}
                   loading="eager"
                 />
-                {/* Floating stat card — desktop only */}
-                <div className="hidden lg:block absolute -bottom-6 -left-6 z-20 px-5 py-4 shadow-xl"
+                {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
+                <div className="absolute top-2 right-2 lg:top-auto lg:right-auto lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-1.5 lg:px-5 lg:py-4 shadow-xl"
                   style={{ backgroundColor: C.dark }}
                 >
-                  <p className="font-display font-black text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
+                  <p className="font-display font-black text-sm lg:text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
                     +250
                   </p>
-                  <p className="text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <p className="text-[7px] lg:text-[10px] uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
                     Obras entregues
                   </p>
                 </div>
@@ -1199,7 +1199,7 @@ export default function Home() {
                       12x de R$ 166,41
                     </p>
                     <p className="text-sm" style={{ color: C.muted }}>
-                      ou R$ 1.997 a vista no cartao
+                      ou R$ 1.997 a vista
                     </p>
                   </div>
                 </div>
@@ -1226,12 +1226,12 @@ export default function Home() {
                 <div className="mt-7 pt-6 space-y-3" style={{ borderTop: `1px solid ${C.border}` }}>
                   <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
                     target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full py-3 text-xs font-semibold uppercase tracking-wider transition-colors"
-                    style={{ border: `1px solid ${C.border}`, color: C.muted }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.ink; e.currentTarget.style.color = C.ink; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.muted; }}
+                    className="flex items-center justify-center w-full py-3 text-xs font-bold uppercase tracking-wider transition-colors"
+                    style={{ backgroundColor: C.green, color: C.white }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
                   >
-                    Prefiro pagar com Boleto Parcelado
+                    Parcelar no Boleto
                   </a>
                 </div>
               </div>
