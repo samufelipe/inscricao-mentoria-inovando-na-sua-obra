@@ -874,80 +874,118 @@ export default function Home() {
 
 
       {/* ══════════════════════════════════════════
-          COMO FUNCIONA — NÚMEROS MASSIVOS
+          O QUE ESTÁ INCLUÍDO
       ══════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-            {/* Left sticky title */}
-            <Reveal className="lg:col-span-4 lg:sticky lg:top-32">
-              <Label>Como Funciona</Label>
-              <h2 className="font-display font-black text-4xl md:text-6xl uppercase leading-[0.95] mt-4"
-                style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
-              >
-                O que está<br />incluído
-              </h2>
-              <div className="mt-8 grid grid-cols-3 gap-3">
-                {STATS.map((s) => (
-                  <div key={s.label} className="text-center p-4" style={{ backgroundColor: C.cream }}>
-                    <p className="font-display font-black text-xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
-                      {s.value}
-                    </p>
-                    <p className="text-[9px] uppercase tracking-wider mt-1" style={{ color: C.muted }}>{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+          <Reveal className="text-center mb-14">
+            <Label>Como Funciona</Label>
+            <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-[1.0] mt-3"
+              style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+            >
+              O que está incluído
+            </h2>
+          </Reveal>
 
-            {/* Right steps with massive numbers */}
-            <div className="lg:col-span-8 space-y-1">
-              {HOW_IT_WORKS.map((step, i) => (
-                <Reveal key={step.n} delay={i * 0.1}>
-                  <div className="group flex items-start gap-6 py-8 border-b transition-colors duration-300 hover:bg-[#FAF8F4] px-4 -mx-4"
-                    style={{ borderColor: C.border }}
-                  >
-                    <span className="font-display font-black leading-none flex-shrink-0 transition-all duration-300 group-hover:opacity-100"
-                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "5rem", color: C.gold, opacity: 0.18, lineHeight: 0.85 }}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+
+            {/* Coluna esquerda: Metodologia + Aulas ao Vivo */}
+            <div className="space-y-8">
+
+              {/* Bloco 1 — Metodologia Gravada */}
+              <Reveal>
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3" style={{ color: C.gold }}>
+                  Metodologia Gravada
+                </p>
+                <p className="text-sm md:text-base font-semibold leading-snug mb-2" style={{ color: C.ink }}>
+                  Uma jornada prática organizada como a vida real de um escritório.
+                </p>
+                <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+                  As aulas são curtas, organizadas por temas e acompanham toda a jornada do cliente, do projeto à obra.
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: BookOpen, text: "16h de conteúdo gravado em 4 módulos" },
+                    { icon: Lock,     text: "12 meses de acesso à plataforma" },
+                    { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
+                  ].map(({ icon: Icon, text }) => (
+                    <div key={text} className="flex items-center gap-3 px-4 py-3"
+                      style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
                     >
-                      {step.n}
-                    </span>
-                    <div className="space-y-2 pt-1">
-                      <h3 className="font-display font-black text-lg uppercase"
-                        style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
+                      <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: C.dark }}
                       >
-                        {step.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{step.desc}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-
-              {/* Includes grid */}
-              <Reveal delay={0.3}>
-                <div className="pt-8 grid sm:grid-cols-2 gap-3">
-                  {INCLUDES.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <div key={item.text} className="flex items-center gap-3 px-4 py-3"
-                        style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
-                      >
-                        <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
-                          style={{ backgroundColor: C.dark }}
-                        >
-                          <Icon className="w-4 h-4" style={{ color: C.gold }} />
-                        </div>
-                        <p className="text-xs leading-relaxed font-medium" style={{ color: C.inkLight }}>
-                          {item.text}
-                        </p>
+                        <Icon className="w-4 h-4" style={{ color: C.gold }} />
                       </div>
-                    );
-                  })}
+                      <p className="text-xs font-medium leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
+                    </div>
+                  ))}
                 </div>
               </Reveal>
 
-              <Reveal className="pt-8" delay={0.4}>
+              {/* Bloco 2 — Aulas ao Vivo */}
+              <Reveal delay={0.1}>
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3" style={{ color: C.gold }}>
+                  Aulas ao Vivo
+                </p>
+                <ul className="space-y-1.5 mb-4">
+                  {["Plantões de dúvidas mensal", "Dinâmicas em grupo", "Imersão: rotinas na obra", "Aulas ao vivo com especialistas"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm font-medium" style={{ color: C.ink }}>
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-center gap-3 px-4 py-3"
+                  style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
+                >
+                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: C.dark }}
+                  >
+                    <Users className="w-4 h-4" style={{ color: C.gold }} />
+                  </div>
+                  <p className="text-xs font-medium leading-relaxed" style={{ color: C.inkLight }}>
+                    1h de mentoria individual com as fundadoras
+                  </p>
+                </div>
+              </Reveal>
+
+            </div>
+
+            {/* Coluna direita: Comunidade */}
+            <Reveal delay={0.15}>
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3" style={{ color: C.gold }}>
+                Comunidade
+              </p>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
+                Acesso à Comunidade da Inovando na sua Obra. Grupo para troca de experiências, fornecedores, materiais, dúvidas, angústias e conquistas.
+              </p>
+              <p className="text-sm md:text-base font-semibold mb-2" style={{ color: C.ink }}>
+                Você não vai crescer sozinha.
+              </p>
+              <p className="text-sm leading-relaxed mb-6" style={{ color: C.muted }}>
+                Tenha acesso à experiência de arquitetas vivendo situações reais todos os dias.
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: MapPin,        text: "Encontro presencial em São Paulo" },
+                  { icon: MessageSquare, text: "Suporte e grupo exclusivo de networking" },
+                ].map(({ icon: Icon, text }) => (
+                  <div key={text} className="flex items-center gap-3 px-4 py-3"
+                    style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
+                  >
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: C.dark }}
+                    >
+                      <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                    </div>
+                    <p className="text-xs font-medium leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10">
                 <button
                   onClick={() => scrollTo("pricing")}
                   className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
@@ -958,8 +996,9 @@ export default function Home() {
                   Quero meu acesso
                   <ArrowRight className="w-4 h-4" />
                 </button>
-              </Reveal>
-            </div>
+              </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
