@@ -16,7 +16,6 @@ import imgHeroPhoto  from "@/assets/mentoria/hero-photo.png";
 import imgAbout      from "@/assets/mentoria/about.png";
 import imgLogoGarantia from "@/assets/mentoria/logo-garantia.png";
 import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
-import { VideoModal } from "@/components/ui/video-modal";
 
 /* ═══════════════════════════════════════
    DESIGN TOKENS
@@ -340,7 +339,6 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: 
 export default function Home() {
   const [stickyNav,    setStickyNav]    = useState(false);
   const [showMobileCTA,setShowMobileCTA] = useState(false);
-  const [activeVideo,  setActiveVideo]  = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -573,13 +571,11 @@ export default function Home() {
                 <VideoTestimonialCard
                   name={t.name}
                   thumbnailSrc={t.thumbnail}
-                  onClick={() => setActiveVideo(t.video)}
+                  videoSrc={t.video}
                 />
               </div>
             ))}
           </div>
-
-          <VideoModal videoSrc={activeVideo} onClose={() => setActiveVideo(null)} />
 
           <Reveal className="text-center mt-14">
             <button onClick={() => scrollTo("pricing")}
