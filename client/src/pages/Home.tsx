@@ -497,8 +497,7 @@ export default function Home() {
                 />
                 <img src={imgNovaImgMentoras}
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
-                  className="relative z-10 max-w-full h-auto mix-blend-multiply"
-                  style={{ maxHeight: "420px", objectFit: "cover" }}
+                  className="relative z-10 w-full h-auto mix-blend-multiply"
                   loading="eager"
                 />
                 {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
