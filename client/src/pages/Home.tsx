@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/accordion";
 
 /* ─── Asset imports ─── */
-import imgLogo       from "@/assets/mentoria/logo.png";
-import imgHeroPhoto  from "@/assets/mentoria/hero-photo.png";
-import imgAbout      from "@/assets/mentoria/about.png";
-import imgLogoGarantia from "@/assets/mentoria/logo-garantia.png";
+import imgLogo            from "@/assets/mentoria/logo.png";
+import imgHeroPhoto       from "@/assets/mentoria/hero-photo.png";
+import imgAbout           from "@/assets/mentoria/about.png";
+import imgNovaImgMentoras from "@/assets/mentoria/nova-img-mentoras.png";
+import imgLogoGarantia    from "@/assets/mentoria/logo-garantia.png";
 import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
 
 /* ═══════════════════════════════════════
@@ -494,7 +495,7 @@ export default function Home() {
                 <div className="absolute -bottom-4 -left-4 w-24 h-24"
                   style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
                 />
-                <img src={imgAbout}
+                <img src={imgNovaImgMentoras}
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
                   className="relative z-10 max-w-full h-auto mix-blend-multiply"
                   style={{ maxHeight: "480px", objectFit: "cover" }}
@@ -868,84 +869,90 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
 
-            {/* Coluna esquerda: Metodologia + Aulas ao Vivo */}
-            <div className="space-y-8">
-
-              {/* Bloco 1 — Metodologia Gravada */}
-              <Reveal>
-                <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3" style={{ color: C.gold }}>
-                  Metodologia Gravada
-                </p>
-                <p className="text-sm md:text-base font-semibold leading-snug mb-2" style={{ color: C.ink }}>
-                  Uma jornada prática organizada como a vida real de um escritório.
-                </p>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
-                  As aulas são curtas, organizadas por temas e acompanham toda a jornada do cliente, do projeto à obra.
-                </p>
-                <div className="space-y-2">
-                  {[
-                    { icon: BookOpen, text: "16h de conteúdo gravado em 4 módulos" },
-                    { icon: Lock,     text: "12 meses de acesso à plataforma" },
-                    { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
-                  ].map(({ icon: Icon, text }) => (
-                    <div key={text} className="flex items-center gap-3 px-4 py-3"
-                      style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
-                    >
-                      <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: C.dark }}
-                      >
-                        <Icon className="w-4 h-4" style={{ color: C.gold }} />
-                      </div>
-                      <p className="text-xs font-medium leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-
-              {/* Bloco 2 — Aulas ao Vivo */}
-              <Reveal delay={0.1}>
-                <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3" style={{ color: C.gold }}>
-                  Aulas ao Vivo
-                </p>
-                <ul className="space-y-1.5 mb-4">
-                  {["Plantões de dúvidas mensal", "Dinâmicas em grupo", "Imersão: rotinas na obra", "Aulas ao vivo com especialistas"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm font-medium" style={{ color: C.ink }}>
-                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex items-center gap-3 px-4 py-3"
-                  style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
-                >
-                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: C.dark }}
-                  >
-                    <Users className="w-4 h-4" style={{ color: C.gold }} />
-                  </div>
-                  <p className="text-xs font-medium leading-relaxed" style={{ color: C.inkLight }}>
-                    1h de mentoria individual com as fundadoras
-                  </p>
-                </div>
-              </Reveal>
-
-            </div>
-
-            {/* Coluna direita: Comunidade */}
-            <Reveal delay={0.15}>
-              <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3" style={{ color: C.gold }}>
-                Comunidade
+            {/* Coluna 1 — Metodologia Gravada */}
+            <Reveal>
+              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-3"
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+              >
+                Metodologia Gravada
+              </h3>
+              <div className="mb-5" style={{ width: "36px", height: "2px", backgroundColor: C.gold }} />
+              <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+                Uma jornada prática organizada como a vida real de um escritório. As aulas são curtas, organizadas por temas e acompanham toda a jornada do cliente, do projeto à obra.
               </p>
+              <div className="space-y-2">
+                {[
+                  { icon: BookOpen, text: "16h de conteúdo gravado em 4 módulos" },
+                  { icon: Lock,     text: "12 meses de acesso à plataforma" },
+                  { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
+                ].map(({ icon: Icon, text }) => (
+                  <div key={text} className="flex items-center gap-3 px-4 py-3"
+                    style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
+                  >
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: C.dark }}
+                    >
+                      <Icon className="w-4 h-4" style={{ color: C.gold }} />
+                    </div>
+                    <p className="text-xs leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Coluna 2 — Aulas ao Vivo */}
+            <Reveal delay={0.1}>
+              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-3"
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+              >
+                Aulas ao Vivo
+              </h3>
+              <div className="mb-5" style={{ width: "36px", height: "2px", backgroundColor: C.gold }} />
+              <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+                Aprendizado em tempo real com as fundadoras e especialistas convidadas.
+              </p>
+              <ul className="space-y-2 mb-5">
+                {[
+                  "Plantões de dúvidas mensal",
+                  "Dinâmicas em grupo",
+                  "Imersão: rotinas na obra",
+                  "Aulas ao vivo com especialistas",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center gap-3 px-4 py-3"
+                style={{ backgroundColor: C.cream, border: `1px solid ${C.border}` }}
+              >
+                <div className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: C.dark }}
+                >
+                  <Users className="w-4 h-4" style={{ color: C.gold }} />
+                </div>
+                <p className="text-xs leading-relaxed" style={{ color: C.inkLight }}>
+                  1h de mentoria individual com as fundadoras
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Coluna 3 — Comunidade */}
+            <Reveal delay={0.15}>
+              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-3"
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+              >
+                Comunidade
+              </h3>
+              <div className="mb-5" style={{ width: "36px", height: "2px", backgroundColor: C.gold }} />
               <p className="text-sm leading-relaxed mb-4" style={{ color: C.muted }}>
                 Acesso à Comunidade da Inovando na sua Obra. Grupo para troca de experiências, fornecedores, materiais, dúvidas, angústias e conquistas.
               </p>
-              <p className="text-sm md:text-base font-semibold mb-2" style={{ color: C.ink }}>
-                Você não vai crescer sozinha.
-              </p>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: C.muted }}>
-                Tenha acesso à experiência de arquitetas vivendo situações reais todos os dias.
+              <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
+                Você não vai crescer sozinha. Tenha acesso à experiência de arquitetas vivendo situações reais todos os dias.
               </p>
               <div className="space-y-2">
                 {[
@@ -960,26 +967,27 @@ export default function Home() {
                     >
                       <Icon className="w-4 h-4" style={{ color: C.gold }} />
                     </div>
-                    <p className="text-xs font-medium leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: C.inkLight }}>{text}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-10">
-                <button
-                  onClick={() => scrollTo("pricing")}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
-                  style={{ backgroundColor: C.green, color: C.white }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
-                >
-                  Quero meu acesso
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </div>
             </Reveal>
 
           </div>
+
+          {/* CTA abaixo dos 3 blocos */}
+          <Reveal className="text-center mt-12">
+            <button
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+            >
+              Quero meu acesso
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Reveal>
         </div>
       </section>
 
