@@ -251,12 +251,13 @@ const BONUS = [
 ];
 
 const INCLUDES = [
-  { icon: Clock,         text: "16h de conteúdo gravado em 4 módulos" },
-  { icon: BookOpen,      text: "12 meses de acesso à plataforma" },
-  { icon: Users,         text: "1h de mentoria individual com as fundadoras" },
-  { icon: MapPin,        text: "Encontro presencial em São Paulo" },
-  { icon: FileText,      text: "Materiais, checklists e ferramentas prontas" },
-  { icon: MessageSquare, text: "Suporte e grupo exclusivo de networking" },
+  { icon: BookOpen,      text: "4 módulos gravados de gerenciamento de obra" },
+  { icon: FileText,      text: "Pack completo de documentos e ferramentas prontas" },
+  { icon: Star,          text: "Aulas ao vivo com especialistas do mercado" },
+  { icon: Users,         text: "Dinâmicas em grupo com feedback real" },
+  { icon: Clock,         text: "Plantões de dúvidas ao vivo com as mentoras" },
+  { icon: MessageSquare, text: "Grupo exclusivo de suporte e networking" },
+  { icon: Lock,          text: "12 meses de acesso completo à plataforma" },
 ];
 
 const FAQS = [
