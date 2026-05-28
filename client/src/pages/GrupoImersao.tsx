@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import imgLogo from "@/assets/mentoria/logo-mobile.png";
+import imgLogo from "@/assets/materiais/logo-inovando-light.png";
 
 const WA_GROUP_LINK   = "https://chat.whatsapp.com/BDM8VkLaGw9DiZqMjleSbd?mode=gi_t";
 const WA_CONTACT_LINK = "https://wa.me/551155717229?text=Ol%C3%A1!%20Sou%20participante%20da%20Imers%C3%A3o%20Cronograma%202.0%20e%20preciso%20de%20ajuda.";
