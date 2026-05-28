@@ -13,20 +13,22 @@ const C = {
 export default function GrupoImersao() {
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-14"
+      className="min-h-screen flex flex-col items-center px-6 py-14"
       style={{ backgroundColor: C.dark }}
     >
+      {/* Logo — maior */}
       <img
         src={imgLogo}
         alt="Inovando na Sua Obra"
-        className="w-36 mb-10"
+        className="w-52 mb-10"
         loading="eager"
       />
 
       <div className="w-10 h-px mb-10" style={{ backgroundColor: C.gold }} />
 
+      {/* Headline */}
       <h1
-        className="text-3xl md:text-4xl font-black uppercase text-center mb-5"
+        className="text-3xl md:text-4xl font-black uppercase text-center mb-4"
         style={{
           fontFamily: "Montserrat, sans-serif",
           color: C.cream,
@@ -38,13 +40,31 @@ export default function GrupoImersao() {
         <span style={{ color: C.gold }}>quase la.</span>
       </h1>
 
+      {/* Sub */}
       <p
         className="text-base text-center leading-relaxed mb-10"
-        style={{ color: "rgba(250,248,244,0.55)", maxWidth: "30ch" }}
+        style={{ color: "rgba(250,248,244,0.55)", maxWidth: "32ch" }}
       >
-        O grupo exclusivo dos participantes e o canal oficial para receber o link da aula ao vivo e os materiais.
+        O grupo exclusivo e o canal oficial da Imersao Inovando na Sua Obra.
+        Assista ao video abaixo e entre agora.
       </p>
 
+      {/* Video */}
+      <div
+        className="w-full mb-10 overflow-hidden"
+        style={{ maxWidth: "360px", borderRadius: "16px" }}
+      >
+        <video
+          src="/videos/video-grupo-wpp.mp4"
+          controls
+          playsInline
+          preload="metadata"
+          className="w-full h-auto block"
+          style={{ borderRadius: "16px" }}
+        />
+      </div>
+
+      {/* CTA */}
       <a
         href={WA_GROUP_LINK}
         target="_blank"
@@ -53,7 +73,7 @@ export default function GrupoImersao() {
         style={{
           backgroundColor: C.green,
           color: C.white,
-          maxWidth: "320px",
+          maxWidth: "360px",
         }}
       >
         <svg
@@ -65,11 +85,12 @@ export default function GrupoImersao() {
         Entrar no Grupo Agora
       </a>
 
+      {/* Footer */}
       <p
         className="text-xs mt-12 text-center"
         style={{ color: "rgba(250,248,244,0.2)" }}
       >
-        Mentoria Inovando na Sua Obra
+        Imersao Inovando na Sua Obra
       </p>
     </div>
   );
