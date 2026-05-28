@@ -1245,7 +1245,7 @@ export default function Home() {
               Ainda tem dúvidas? Fale com a nossa equipe pelo WhatsApp.
             </p>
             <a
-              href="https://wa.me/551155717229"
+              href="https://wa.me/551155717229?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Mentoria%20Inovando%20Na%20Sua%20Obra%20e%20tenho%20algumas%20d%C3%BAvidas%20sobre%20a%20mentoria."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-8 py-3.5 font-bold text-sm tracking-widest uppercase transition-opacity hover:opacity-90"
