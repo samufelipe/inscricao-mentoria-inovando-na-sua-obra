@@ -589,36 +589,35 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-4">
 
-            {/* Card 01 — Prática Técnica (dark) */}
+            {/* Card 01 — Prática Técnica (goldLight) */}
             <Reveal delay={0}
               className="relative overflow-hidden flex flex-col p-6 md:p-8"
-              style={{ backgroundColor: C.dark }}
+              style={{ backgroundColor: C.goldLight, border: `1px solid ${C.border}` }}
             >
               <div className="absolute bottom-0 right-0 font-display font-black select-none pointer-events-none"
-                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "9rem", color: C.gold, opacity: 0.05, lineHeight: 1 }}
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: "9rem", color: C.gold, opacity: 0.08, lineHeight: 1 }}
               >
                 01
               </div>
-              <div className="absolute inset-0 opacity-25" style={gridBg("rgba(201,162,87,0.15)", "40px 40px")} />
               <div className="relative z-10 flex flex-col gap-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>01</span>
                   <div className="w-7 h-px mt-2 mb-3" style={{ backgroundColor: C.gold }} />
-                  <h3 className="font-display font-black text-lg md:text-xl uppercase text-white leading-tight"
-                    style={{ fontFamily: "Montserrat, sans-serif" }}
+                  <h3 className="font-display font-black text-lg md:text-xl uppercase leading-tight"
+                    style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
                   >
                     Prática Técnica
                   </h3>
                 </div>
                 <ul className="space-y-2">
                   {["Passo a passo da obra", "Leitura prática da execução", "Compatibilização", "Todas as etapas da obra", "Cronograma", "Custo estimado"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-base md:text-lg" style={{ color: "rgba(255,255,255,0.65)" }}>
+                    <li key={item} className="flex items-center gap-2 text-base md:text-lg" style={{ color: C.inkLight }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: C.gold }} />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm italic leading-relaxed border-t pt-3" style={{ color: "rgba(255,255,255,0.4)", borderColor: "rgba(201,162,87,0.2)" }}>
+                <p className="text-sm italic leading-relaxed border-t pt-3" style={{ color: C.muted, borderColor: C.border }}>
                   "Pare de projetar sem entender como a obra realmente funciona."
                 </p>
               </div>
