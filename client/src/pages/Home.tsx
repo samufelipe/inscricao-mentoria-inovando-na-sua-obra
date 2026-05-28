@@ -1238,7 +1238,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           WHATSAPP CTA
       ══════════════════════════════════════════ */}
-      <section className="py-10 md:py-12" style={{ backgroundColor: C.cream }}>
+      <section className="py-10 md:py-12" style={{ backgroundColor: C.white }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal className="flex flex-col items-center gap-4 text-center">
             <p className="text-base" style={{ color: C.muted }}>
