@@ -419,19 +419,14 @@ export default function Home() {
                 <h1 className="font-display font-black uppercase"
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.875rem, 3.5vw, 3rem)", color: C.ink, lineHeight: "1.15" }}
                 >
-                  Domine a obra de interiores<br />
-                  com mais <Highlight>lucro</Highlight>,{" "}
-                  organização<br className="hidden sm:block" />
-                  {" "}e segurança,<br />
-                  do primeiro atendimento{" "}
-                  <br className="hidden sm:block" />
-                  à entrega final.
+                  Domine a obra de interiores com mais <Highlight>lucro</Highlight>,{" "}
+                  organização e segurança.
                 </h1>
                 <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
                   Tenha acesso à experiência prática, técnica e comportamental
                   {" "}que leva anos para ser construída, e aprenda a cobrar
                   {" "}melhor, evitar erros e crescer sem transformar
-                  {" "}seu escritório em um caos.
+                  {" "}seu escritório em um caos. Do primeiro atendimento à entrega final.
                 </p>
               </div>
 
