@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import imgLogo from "@/assets/materiais/logo-inovando-light.png";
+import imgCapa from "@/assets/mentoria/capa-video-grupo.jpg";
 
 const WA_GROUP_LINK   = "https://chat.whatsapp.com/BDM8VkLaGw9DiZqMjleSbd?mode=gi_t";
 const WA_CONTACT_LINK = "https://wa.me/551155717229?text=Ol%C3%A1!%20Sou%20participante%20da%20Imers%C3%A3o%20Cronograma%202.0%20e%20preciso%20de%20ajuda.";
@@ -13,30 +14,173 @@ const C = {
   white: "#FFFFFF",
 };
 
-export default function GrupoImersao() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [started, setStarted] = useState(false);
+/* ─── Icone play ─── */
+function IconPlay({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="white" style={{ marginLeft: "3px" }} aria-hidden="true">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  );
+}
 
+/* ─── Icone pause ─── */
+function IconPause({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="white" aria-hidden="true">
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+    </svg>
+  );
+}
+
+/* ─── Player de vídeo ─── */
+function VideoPlayer() {
+  const videoRef  = useRef<HTMLVideoElement>(null);
+  const timerRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [started,  setStarted]  = useState(false);   // usuario ja clicou ao menos uma vez
+  const [playing,  setPlaying]  = useState(false);   // esta tocando agora
+  const [overlay,  setOverlay]  = useState(false);   // overlay de controle visivel
+
+  /* mostra overlay por 2.5s apos interacao e some sozinho */
+  const flashOverlay = useCallback(() => {
+    setOverlay(true);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setOverlay(false), 2500);
+  }, []);
+
+  /* play / pause ao clicar */
+  const handleClick = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    if (!started) {
+      setStarted(true);
+      v.play();
+      return;
+    }
+
+    if (playing) {
+      v.pause();
+      setOverlay(true);           // ao pausar, overlay fica fixo
+    } else {
+      v.play();
+      flashOverlay();             // ao dar play, overlay some apos 2.5s
+    }
+  }, [started, playing, flashOverlay]);
+
+  /* sincroniza estado com eventos nativos do video */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onPlay  = () => { setPlaying(true);  flashOverlay(); };
+    const onPause = () => { setPlaying(false); setOverlay(true); };
+    const onEnded = () => { setStarted(false); setPlaying(false); setOverlay(false); };
+    v.addEventListener("play",  onPlay);
+    v.addEventListener("pause", onPause);
+    v.addEventListener("ended", onEnded);
+    return () => {
+      v.removeEventListener("play",  onPlay);
+      v.removeEventListener("pause", onPause);
+      v.removeEventListener("ended", onEnded);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [flashOverlay]);
+
+  /* no desktop, overlay aparece no hover */
+  const handleMouseEnter = () => { if (started) setOverlay(true); };
+  const handleMouseLeave = () => { if (playing) setOverlay(false); };
+
+  const showOverlay = !started || overlay;
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
+      onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(); } }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full select-none overflow-hidden"
+      style={{
+        maxWidth: "360px",
+        borderRadius: "16px",
+        cursor: "pointer",
+        WebkitTapHighlightColor: "transparent",
+      }}
+    >
+      {/* Video */}
+      <video
+        ref={videoRef}
+        src="/videos/video-grupo-wpp.mp4"
+        playsInline
+        preload="none"
+        className="w-full h-auto block"
+        style={{ borderRadius: "16px", display: "block" }}
+      />
+
+      {/* Capa — some com fade quando o video inicia */}
+      <img
+        src={imgCapa}
+        alt="Assistir vídeo"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          borderRadius: "16px",
+          opacity: started ? 0 : 1,
+          transition: "opacity 0.4s ease",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Overlay de controle — fade in/out suave */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        style={{
+          borderRadius: "16px",
+          backgroundColor: started && playing && !overlay ? "transparent" : "rgba(0,0,0,0.38)",
+          transition: "background-color 0.25s ease, opacity 0.25s ease",
+          opacity: showOverlay ? 1 : 0,
+          pointerEvents: "none",
+        }}
+      >
+        {/* Botao play/pause — touch target >= 64px */}
+        <div
+          className="flex items-center justify-center"
+          style={{
+            width: "68px",
+            height: "68px",
+            borderRadius: "50%",
+            border: `2px solid ${C.gold}`,
+            backgroundColor: "rgba(0,0,0,0.45)",
+            backdropFilter: "blur(6px)",
+            transition: "transform 0.15s ease",
+            transform: showOverlay ? "scale(1)" : "scale(0.8)",
+          }}
+        >
+          {playing ? <IconPause /> : <IconPlay />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Pagina /grupo ─── */
+export default function GrupoImersao() {
   useEffect(() => {
     const prev = document.title;
     document.title = "Imersão Cronograma 2.0 - O Mapa da Obra";
     return () => { document.title = prev; };
   }, []);
 
-  const handlePlay = () => {
-    setStarted(true);
-    videoRef.current?.play();
-  };
-
   return (
     <div
       className="min-h-screen flex flex-col items-center px-6 py-14"
       style={{ backgroundColor: C.dark }}
     >
-      {/* Logo da Imersão */}
+      {/* Logo */}
       <img
         src={imgLogo}
-        alt="Imersão Cronograma 2.0 - O Mapa da Obra"
+        alt="Inovando na Sua Obra"
         className="w-52 mb-10"
         loading="eager"
       />
@@ -66,45 +210,9 @@ export default function GrupoImersao() {
         Assista ao video abaixo e entre agora.
       </p>
 
-      {/* Video */}
-      <div
-        className="relative w-full mb-10 overflow-hidden"
-        style={{ maxWidth: "360px", borderRadius: "16px", cursor: started ? "default" : "pointer" }}
-        onClick={!started ? handlePlay : undefined}
-      >
-        <video
-          ref={videoRef}
-          src="/videos/video-grupo-wpp.mp4"
-          controls={started}
-          playsInline
-          preload="none"
-          className="w-full h-auto block"
-          style={{ borderRadius: "16px", minHeight: "200px", backgroundColor: "#0d0a07" }}
-          onEnded={() => setStarted(false)}
-        />
-
-        {/* Overlay de play — sempre visivel antes de iniciar */}
-        {!started && (
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center gap-3"
-            style={{
-              background: "linear-gradient(160deg, #1e1510 0%, #0d0a07 100%)",
-              borderRadius: "16px",
-            }}
-          >
-            <div
-              className="w-16 h-16 rounded-full flex items-center justify-center"
-              style={{ border: `2px solid ${C.gold}`, backgroundColor: "rgba(0,0,0,0.35)" }}
-            >
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="white" style={{ marginLeft: "3px" }} aria-hidden="true">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-            <p className="text-sm font-semibold tracking-wide" style={{ color: "rgba(250,248,244,0.6)" }}>
-              Toque para assistir
-            </p>
-          </div>
-        )}
+      {/* Player */}
+      <div className="w-full flex justify-center mb-10">
+        <VideoPlayer />
       </div>
 
       {/* CTA principal */}
