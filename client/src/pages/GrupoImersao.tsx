@@ -1,7 +1,8 @@
-import imgLogo from "@/assets/alem-da-tendencia/logo-dark.png";
+import { useEffect } from "react";
+import imgLogo from "@/assets/mentoria/logo-mobile.png";
 
 const WA_GROUP_LINK   = "https://chat.whatsapp.com/BDM8VkLaGw9DiZqMjleSbd?mode=gi_t";
-const WA_CONTACT_LINK = "https://wa.me/551155717229?text=Ol%C3%A1!%20Sou%20participante%20da%20Imers%C3%A3o%20Inovando%20na%20Sua%20Obra%20e%20preciso%20de%20ajuda.";
+const WA_CONTACT_LINK = "https://wa.me/551155717229?text=Ol%C3%A1!%20Sou%20participante%20da%20Imers%C3%A3o%20Cronograma%202.0%20e%20preciso%20de%20ajuda.";
 const IG_LINK         = "https://www.instagram.com/inovandonasuaobra";
 
 const C = {
@@ -13,6 +14,12 @@ const C = {
 };
 
 export default function GrupoImersao() {
+  useEffect(() => {
+    const prev = document.title;
+    document.title = "Imersão Cronograma 2.0 - O Mapa da Obra";
+    return () => { document.title = prev; };
+  }, []);
+
   return (
     <div
       className="min-h-screen flex flex-col items-center px-6 py-14"
@@ -21,7 +28,7 @@ export default function GrupoImersao() {
       {/* Logo da Imersão */}
       <img
         src={imgLogo}
-        alt="Imersão Inovando na Sua Obra"
+        alt="Imersão Cronograma 2.0 - O Mapa da Obra"
         className="w-52 mb-10"
         loading="eager"
       />
@@ -47,7 +54,7 @@ export default function GrupoImersao() {
         className="text-base text-center leading-relaxed mb-10"
         style={{ color: "rgba(250,248,244,0.55)", maxWidth: "32ch" }}
       >
-        O grupo exclusivo e o canal oficial da Imersao Inovando na Sua Obra.
+        O grupo exclusivo e o canal oficial da Imersao Cronograma 2.0.
         Assista ao video abaixo e entre agora.
       </p>
 
@@ -86,7 +93,6 @@ export default function GrupoImersao() {
 
       {/* Icones sociais */}
       <div className="flex items-center gap-6">
-        {/* WhatsApp contato */}
         <a
           href={WA_CONTACT_LINK}
           target="_blank"
@@ -105,7 +111,6 @@ export default function GrupoImersao() {
           <span className="text-xs" style={{ color: "rgba(250,248,244,0.35)" }}>WhatsApp</span>
         </a>
 
-        {/* Instagram */}
         <a
           href={IG_LINK}
           target="_blank"
@@ -141,7 +146,7 @@ export default function GrupoImersao() {
         className="text-xs mt-10 text-center"
         style={{ color: "rgba(250,248,244,0.15)" }}
       >
-        Imersao Inovando na Sua Obra
+        Imersao Cronograma 2.0 - O Mapa da Obra
       </p>
     </div>
   );
