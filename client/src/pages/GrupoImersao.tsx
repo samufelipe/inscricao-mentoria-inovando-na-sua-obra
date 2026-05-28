@@ -109,26 +109,32 @@ function VideoPlayer() {
         WebkitTapHighlightColor: "transparent",
       }}
     >
-      {/* Video */}
-      <video
-        ref={videoRef}
-        src="/videos/video-grupo-wpp.mp4"
-        playsInline
-        preload="none"
-        className="w-full h-auto block"
-        style={{ borderRadius: "16px", display: "block" }}
-      />
-
-      {/* Capa — some com fade quando o video inicia */}
+      {/* Capa — fica no fluxo e define a altura do container */}
       <img
         src={imgCapa}
         alt="Assistir vídeo"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="w-full h-auto block"
         style={{
           borderRadius: "16px",
           opacity: started ? 0 : 1,
           transition: "opacity 0.4s ease",
           pointerEvents: "none",
+        }}
+      />
+
+      {/* Video — absolute sobre a capa, aparece quando inicia */}
+      <video
+        ref={videoRef}
+        src="/videos/video-grupo-wpp.mp4"
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full"
+        style={{
+          borderRadius: "16px",
+          display: "block",
+          objectFit: "cover",
+          opacity: started ? 1 : 0,
+          transition: "opacity 0.4s ease",
         }}
       />
 
