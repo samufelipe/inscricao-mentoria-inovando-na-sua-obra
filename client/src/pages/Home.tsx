@@ -494,6 +494,7 @@ export default function Home() {
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
                   className="relative z-10 w-full h-auto mix-blend-multiply"
                   loading="eager"
+                  fetchPriority="high"
                 />
                 {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
                 <div className="absolute top-2 right-2 lg:top-auto lg:right-auto lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-1.5 lg:px-5 lg:py-4 shadow-xl"
@@ -843,6 +844,19 @@ export default function Home() {
               );
             })}
           </div>
+
+          <Reveal className="flex justify-center mt-10">
+            <button
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+            >
+              Essa sou eu — quero garantir minha vaga
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Reveal>
         </div>
       </section>
 
@@ -1039,6 +1053,22 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal className="flex flex-col items-center gap-3 mt-10 text-center">
+            <p className="text-sm" style={{ color: C.muted }}>
+              Tudo isso em um único acesso, pelo valor de uma só obra gerenciada.
+            </p>
+            <button
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+            >
+              Quero acesso ao currículo completo
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Reveal>
         </div>
       </section>
 
@@ -1108,6 +1138,19 @@ export default function Home() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal className="flex justify-center mt-10">
+            <button
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4 cursor-pointer"
+              style={{ backgroundColor: C.green, color: C.white }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+            >
+              Aprender com quem vive na obra
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Reveal>
         </div>
       </section>
 
@@ -1289,6 +1332,22 @@ export default function Home() {
                   className="w-48 md:w-64 object-contain" loading="lazy" />
               </div>
             </Reveal>
+
+            <Reveal className="flex flex-col items-center gap-3 mt-12 text-center">
+              <p className="text-sm" style={{ color: C.muted }}>
+                Sem risco. Sem perguntas. Seu investimento está protegido.
+              </p>
+              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                style={{ backgroundColor: C.green, color: C.white }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+              >
+                Garantir minha vaga agora
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -1327,6 +1386,31 @@ export default function Home() {
               </Reveal>
             ))}
           </Accordion>
+
+          <Reveal className="flex flex-col items-center gap-4 mt-14 text-center">
+            <p className="text-sm" style={{ color: C.muted }}>
+              Ainda tem dúvidas? Fale com a gente antes de decidir.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 items-center">
+              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                style={{ backgroundColor: C.green, color: C.white }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
+              >
+                Garantir minha vaga
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a href="https://wa.me/551155717229?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Mentoria%20Inovando%20Na%20Sua%20Obra%20e%20tenho%20algumas%20d%C3%BAvidas%20sobre%20a%20mentoria."
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-2"
+                style={{ color: C.muted }}
+              >
+                Prefiro tirar dúvidas no WhatsApp
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 

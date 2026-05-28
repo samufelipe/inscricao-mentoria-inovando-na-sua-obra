@@ -24,6 +24,18 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-motion": ["framer-motion"],
+          "vendor-radix": [
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-slot",
+          ],
+        },
+      },
+    },
   },
   server: {
     port: 8080,
