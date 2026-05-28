@@ -14,7 +14,7 @@ import {
 import imgLogo            from "@/assets/mentoria/logo.png";
 import imgHeroPhoto       from "@/assets/mentoria/hero-photo.png";
 import imgAbout           from "@/assets/mentoria/about.png";
-import imgNovaImgMentoras from "@/assets/mentoria/nova-img-mentoras.png";
+import imgNovaImgMentoras from "@/assets/mentoria/nova-img-secao-hero.png";
 import imgLogoGarantia    from "@/assets/mentoria/logo-garantia.png";
 import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
 
