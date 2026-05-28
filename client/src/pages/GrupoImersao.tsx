@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import imgLogo from "@/assets/materiais/logo-inovando-light.png";
 
 const WA_GROUP_LINK   = "https://chat.whatsapp.com/BDM8VkLaGw9DiZqMjleSbd?mode=gi_t";
@@ -14,11 +14,19 @@ const C = {
 };
 
 export default function GrupoImersao() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+
   useEffect(() => {
     const prev = document.title;
     document.title = "Imersão Cronograma 2.0 - O Mapa da Obra";
     return () => { document.title = prev; };
   }, []);
+
+  const handlePlay = () => {
+    setStarted(true);
+    videoRef.current?.play();
+  };
 
   return (
     <div
@@ -60,17 +68,43 @@ export default function GrupoImersao() {
 
       {/* Video */}
       <div
-        className="w-full mb-10 overflow-hidden"
-        style={{ maxWidth: "360px", borderRadius: "16px" }}
+        className="relative w-full mb-10 overflow-hidden"
+        style={{ maxWidth: "360px", borderRadius: "16px", cursor: started ? "default" : "pointer" }}
+        onClick={!started ? handlePlay : undefined}
       >
         <video
+          ref={videoRef}
           src="/videos/video-grupo-wpp.mp4"
-          controls
+          controls={started}
           playsInline
-          preload="metadata"
+          preload="none"
           className="w-full h-auto block"
-          style={{ borderRadius: "16px" }}
+          style={{ borderRadius: "16px", minHeight: "200px", backgroundColor: "#0d0a07" }}
+          onEnded={() => setStarted(false)}
         />
+
+        {/* Overlay de play — sempre visivel antes de iniciar */}
+        {!started && (
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3"
+            style={{
+              background: "linear-gradient(160deg, #1e1510 0%, #0d0a07 100%)",
+              borderRadius: "16px",
+            }}
+          >
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center"
+              style={{ border: `2px solid ${C.gold}`, backgroundColor: "rgba(0,0,0,0.35)" }}
+            >
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="white" style={{ marginLeft: "3px" }} aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+            <p className="text-sm font-semibold tracking-wide" style={{ color: "rgba(250,248,244,0.6)" }}>
+              Toque para assistir
+            </p>
+          </div>
+        )}
       </div>
 
       {/* CTA principal */}
