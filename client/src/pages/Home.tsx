@@ -1141,7 +1141,7 @@ export default function Home() {
                 </div>
                 <CountdownTimer label="Vagas fecham em:" dark />
                 <div className="space-y-2 pt-2">
-                  <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  <div className="flex items-center justify-center gap-2 text-xs text-center" style={{ color: "rgba(255,255,255,0.45)" }}>
                     <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
                     Milhares de arquitetas ja transformaram seus resultados com a Mentoria Inovando na Sua Obra
                   </div>
