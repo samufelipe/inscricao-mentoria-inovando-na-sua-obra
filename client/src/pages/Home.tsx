@@ -1119,31 +1119,28 @@ export default function Home() {
           <Reveal>
             <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl" style={{ borderRadius: "24px" }}>
 
-              {/* LEFT — headline + urgência + CTA principal */}
-              <div className="flex-1 flex flex-col justify-between p-8 md:p-12 lg:p-14 gap-8"
+              {/* LEFT — headline + urgência */}
+              <div className="flex-1 flex flex-col p-8 md:p-12 lg:p-14 gap-6"
                 style={{ backgroundColor: C.dark, backgroundImage: gridBg("rgba(201,162,87,0.06)", "40px 40px").backgroundImage }}
               >
-                <div className="space-y-5">
-                  <Label light>Investimento</Label>
-                  <h2 className="font-display font-black uppercase leading-[1.05] text-white"
-                    style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
-                  >
-                    Condição exclusiva.<br />
-                    Nova turma<br />
-                    Junho 2026.
-                  </h2>
-                  <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
-                    Pagamento 100% Seguro pela Hotmart.
-                  </p>
-                  <div className="px-4 py-3 text-base font-semibold"
-                    style={{ backgroundColor: "rgba(201,162,87,0.12)", color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
-                  >
-                    Uma obra com gerenciamento cobrado paga a mentoria inteira.
-                  </div>
-                  <CountdownTimer label="Vagas fecham em:" dark />
+                <Label light>Investimento</Label>
+                <h2 className="font-display font-black uppercase leading-[1.05] text-white"
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
+                >
+                  Condição exclusiva.<br />
+                  Nova turma<br />
+                  Junho 2026.
+                </h2>
+                <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
+                  Pagamento 100% Seguro pela Hotmart.
+                </p>
+                <div className="px-4 py-3 text-base font-semibold"
+                  style={{ backgroundColor: "rgba(201,162,87,0.12)", color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
+                >
+                  Uma obra com gerenciamento cobrado paga a mentoria inteira.
                 </div>
-
-                <div className="space-y-3">
+                <CountdownTimer label="Vagas fecham em:" dark />
+                <div className="space-y-2 pt-2">
                   <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
                     <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
                     Milhares de arquitetas ja transformaram seus resultados com a Mentoria Inovando na Sua Obra
