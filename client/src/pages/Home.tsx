@@ -1219,7 +1219,7 @@ export default function Home() {
                     <p className="font-black leading-none"
                       style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
-                      12x de R$ 166,41
+                      12x de R$ 206,54
                     </p>
                     <p className="text-sm" style={{ color: C.muted }}>
                       ou R$ 1.997 a vista
@@ -1506,7 +1506,7 @@ export default function Home() {
           <div>
             <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Valor exclusivo nova turma</p>
             <p className="font-display font-black text-base text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              12x de R$ 166,41
+              12x de R$ 206,54
             </p>
             <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 1.997 a vista</p>
           </div>
