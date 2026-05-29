@@ -1247,7 +1247,7 @@ export default function Home() {
 
                 {/* Divider + CTAs */}
                 <div className="mt-7 pt-6 space-y-3" style={{ borderTop: `1px solid ${C.border}` }}>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
+                  <a href="https://pay.hotmart.com/Y93975016X?off=jv1pibo3&bid=1780078166153"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
                     style={{ backgroundColor: C.green, color: C.white }}
@@ -1257,7 +1257,7 @@ export default function Home() {
                     Quero meu acesso agora
                     <ArrowRight className="w-4 h-4" />
                   </a>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o"
+                  <a href="https://pay.hotmart.com/Y93975016X?off=yo5qvk0c&bid=1780081112598"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center w-full py-3 text-xs font-bold uppercase tracking-wider transition-colors"
                     style={{ backgroundColor: "rgba(0,0,0,0.05)", color: C.muted, border: `1px solid ${C.border}` }}
@@ -1337,8 +1337,8 @@ export default function Home() {
               <p className="text-sm" style={{ color: C.muted }}>
                 Sem risco. Sem perguntas. Seu investimento está protegido.
               </p>
-              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                target="_blank" rel="noopener noreferrer"
+              <button
+                onClick={() => scrollTo("pricing")}
                 className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
                 style={{ backgroundColor: C.green, color: C.white }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
@@ -1346,7 +1346,7 @@ export default function Home() {
               >
                 Garantir minha vaga agora
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </Reveal>
           </div>
         </div>
@@ -1392,8 +1392,8 @@ export default function Home() {
               Ainda tem dúvidas? Fale com a gente antes de decidir.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center">
-              <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093"
-                target="_blank" rel="noopener noreferrer"
+              <button
+                onClick={() => scrollTo("pricing")}
                 className="inline-flex items-center gap-2.5 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
                 style={{ backgroundColor: C.green, color: C.white }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
@@ -1401,7 +1401,7 @@ export default function Home() {
               >
                 Garantir minha vaga
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <a href="https://wa.me/551155717229?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Mentoria%20Inovando%20Na%20Sua%20Obra%20e%20tenho%20algumas%20d%C3%BAvidas%20sobre%20a%20mentoria."
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-2"
@@ -1440,8 +1440,13 @@ export default function Home() {
               >
                 Investimento
               </button>
+              <button onClick={() => scrollTo("pricing")}
+                className="block text-xs transition-opacity hover:opacity-70"
+                style={{ color: "rgba(255,255,255,0.4)" }}
+              >
+                Quero me inscrever
+              </button>
               {[
-                { label: "Quero me inscrever", href: "https://pay.hotmart.com/Y93975016X?off=22jnl093" },
                 { label: "Materiais para Obra", href: "/materiais" },
                 { label: "Instagram", href: "https://www.instagram.com/inovandonasuaobra/" },
                 { label: "Termos de Uso", href: "/termos-de-uso" },
