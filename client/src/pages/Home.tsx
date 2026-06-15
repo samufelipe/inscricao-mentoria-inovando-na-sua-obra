@@ -1213,16 +1213,13 @@ export default function Home() {
                     <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.muted }}>
                       Seu investimento
                     </p>
-                    <p className="text-sm font-semibold line-through" style={{ color: C.muted }}>
-                      De R$ 2.300
-                    </p>
                     <p className="font-black leading-none"
                       style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
-                      12x de R$ 206,54
+                      12x de R$ 237,87
                     </p>
                     <p className="text-sm" style={{ color: C.muted }}>
-                      ou R$ 1.997 a vista
+                      ou R$ 2.300,00 à vista
                     </p>
                   </div>
                 </div>
@@ -1247,7 +1244,7 @@ export default function Home() {
 
                 {/* Divider + CTAs */}
                 <div className="mt-7 pt-6 space-y-3" style={{ borderTop: `1px solid ${C.border}` }}>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=jv1pibo3&bid=1780078166153"
+                  <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1781550321152"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
                     style={{ backgroundColor: C.green, color: C.white }}
@@ -1257,14 +1254,14 @@ export default function Home() {
                     Quero meu acesso agora
                     <ArrowRight className="w-4 h-4" />
                   </a>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=yo5qvk0c&bid=1780081112598"
+                  <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o&bid=1781550330334"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center w-full py-3 text-xs font-bold uppercase tracking-wider transition-colors"
                     style={{ backgroundColor: "rgba(0,0,0,0.05)", color: C.muted, border: `1px solid ${C.border}` }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.09)")}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.05)")}
                   >
-                    Parcelar no Boleto
+                    Parcelar no PIX
                   </a>
                   <div className="flex items-center justify-center gap-2 text-xs" style={{ color: C.muted }}>
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: C.green }} />
@@ -1504,11 +1501,11 @@ export default function Home() {
       >
         <div className="flex items-center justify-between px-5 py-3.5">
           <div>
-            <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Valor exclusivo nova turma</p>
+            <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Seu investimento</p>
             <p className="font-display font-black text-base text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              12x de R$ 206,54
+              12x de R$ 237,87
             </p>
-            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 1.997 a vista</p>
+            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 2.300,00 à vista</p>
           </div>
           <button
             onClick={() => scrollTo("pricing")}

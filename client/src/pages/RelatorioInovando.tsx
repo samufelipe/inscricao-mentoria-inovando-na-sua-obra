@@ -594,7 +594,7 @@ export default function RelatorioInovando() {
         <Fade>
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <SLabel>03 / Campanhas da Mentoria</SLabel>
-            <Badge color={C.green}>R$ 1.997 por aluna</Badge>
+            <Badge color={C.green}>R$ 2.300 por aluna</Badge>
           </div>
 
           <h2 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-2" style={{ color: C.ink }}>
