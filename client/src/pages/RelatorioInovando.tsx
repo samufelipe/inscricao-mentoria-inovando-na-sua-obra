@@ -72,9 +72,9 @@ const MENTORIA = {
   custoPorVenda:        23.84,
   vendasTotais:         14,
   ctr:                  "1,37%",
-  roasMeta:             44.42,
-  faturamentoBrutoMeta: 10594.05,
-  faturamentoBrutoTotal:14831.67,
+  roasMeta:             75.30,
+  faturamentoBrutoMeta: 17958.30,
+  faturamentoBrutoTotal:25141.62,
   criativos: [
     { link: "https://www.instagram.com/p/DZAoGEVAIQe/#advertiser", label: "Criativo Campeão 01", vendas: 3 },
     { link: "https://www.instagram.com/p/DZAoGAOgE0R/#advertiser", label: "Criativo Campeão 02", vendas: 2 },
@@ -83,8 +83,8 @@ const MENTORIA = {
 
 const TOTAL = {
   investimento:     9441.36,
-  faturamentoBruto: 24292.01,
-  roas:             2.57,
+  faturamentoBruto: 34601.96,
+  roas:             3.67,
 };
 
 const PIE_DATA = [
@@ -94,10 +94,10 @@ const PIE_DATA = [
 ];
 
 const PONTOS_FORTES = [
-  "ROAS de 2,57x no consolidado: para cada R$ 1,00 investido em anúncios, o projeto retornou R$ 2,57 em faturamento bruto.",
-  "Campanha da Mentoria com ROAS de 44,4x rastreado pelo Meta: 10 vendas com apenas R$ 238,48 investidos em 2 dias.",
+  "ROAS de 3,67x no consolidado: para cada R$ 1,00 investido em anúncios, o projeto retornou R$ 3,67 em faturamento.",
+  "Campanha da Mentoria com ROAS de 75,3x rastreado pelo Meta: 10 vendas com apenas R$ 238,48 investidos em 2 dias.",
   "14 vendas totais da Mentoria, sendo 4 delas por WhatsApp e relacionamento direto, sem custo adicional de mídia.",
-  "A captação da Imersão cobriu 106% do investimento em anúncios: o faturamento bruto da inscrição pagou toda a campanha de captação.",
+  "A captação da Imersão cobriu 106% do investimento em anúncios: o faturamento da inscrição pagou toda a campanha de captação.",
   "Alta taxa de abertura e clique nas mensagens de WhatsApp, validando o canal como forte vetor de conversão.",
 ];
 
@@ -118,7 +118,7 @@ const ACOES_RECOMENDADAS = [
 ];
 
 const DISCLAIMER_FATURAMENTO =
-  "Os valores de faturamento representam receita bruta conforme reportado pelo Hotmart. As taxas da plataforma Hotmart não estão deduzidas. O faturamento líquido será menor após a dedução dessas taxas.";
+  "Faturamento da Mentoria calculado sobre o valor líquido por venda (R$ 1.795,83), já com dedução das taxas da plataforma Hotmart.";
 
 // ─────────────────────────────────────────
 // HELPERS
@@ -375,9 +375,9 @@ export default function RelatorioInovando() {
               <Kpi light label="Total Investido"
                 value={<AnimatedNumber value={TOTAL.investimento} prefix="R$ " />}
                 sub="Meta Ads" />
-              <Kpi light label="Fat. Bruto Total"
+              <Kpi light label="Faturamento Total"
                 value={<AnimatedNumber value={TOTAL.faturamentoBruto} prefix="R$ " />}
-                sub="Imersão + Mentoria (bruto)"
+                sub="Imersão + Mentoria"
                 color={C.green} />
               <Kpi light label="Vendas da Mentoria"
                 value={<AnimatedNumber value={MENTORIA.vendasTotais} />}
@@ -385,7 +385,7 @@ export default function RelatorioInovando() {
                 color={C.gold} />
               <Kpi light label="ROAS Consolidado"
                 value={<AnimatedNumber value={TOTAL.roas} suffix="x" decimals={2} />}
-                sub="fat. bruto / investimento"
+                sub="faturamento / investimento"
                 color={C.green} />
             </div>
 
@@ -394,13 +394,13 @@ export default function RelatorioInovando() {
                 Para cada{" "}
                 <strong style={{ color: C.gold }}>R$ 1,00</strong> investido em anúncios,
                 o projeto retornou{" "}
-                <strong style={{ color: C.green }}>R$ 2,57</strong> em faturamento bruto.
+                <strong style={{ color: C.green }}>R$ 3,67</strong> em faturamento.
               </p>
             </div>
 
             <div className="mt-3 px-4 py-3 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
               <p className="text-[10px] text-center leading-relaxed" style={{ color: "rgba(255,255,255,0.3)" }}>
-                Todos os valores de faturamento são brutos, conforme reportado pelo Hotmart. As taxas da plataforma Hotmart não estão deduzidas.
+                Faturamento da Mentoria calculado sobre o valor líquido por venda (R$ 1.795,83), já com as taxas Hotmart deduzidas. Faturamento da Imersão conforme Hotmart.
               </p>
             </div>
           </Fade>
@@ -437,13 +437,13 @@ export default function RelatorioInovando() {
             <Kpi label="Custo por Inscrição"
               value={<AnimatedNumber value={CAPTACAO.custoInscricao} prefix="R$ " />}
               sub={`de R$ ${CAPTACAO.valorInscricao.toFixed(2).replace(".", ",")} por inscrição`} />
-            <Kpi label="Fat. Bruto (Hotmart)"
+            <Kpi label="Faturamento Hotmart"
               value={<AnimatedNumber value={CAPTACAO.faturamentoBruto} prefix="R$ " />}
               sub="receita bruta antes das taxas"
               color={C.green} />
             <Kpi label="ROAS da Captação"
               value={<AnimatedNumber value={CAPTACAO.roas} suffix="x" decimals={2} />}
-              sub="fat. bruto / investimento"
+              sub="faturamento / investimento"
               color={C.green} />
             <Kpi label="CTR Geral dos Criativos"
               value={CAPTACAO.ctr}
@@ -455,7 +455,7 @@ export default function RelatorioInovando() {
             style={{ background: C.greenBg, border: "1px solid rgba(46,125,50,0.2)" }}>
             <Award className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.green }} />
             <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
-              O investimento em anúncios se pagou integralmente na captação, com o faturamento bruto
+              O investimento em anúncios se pagou integralmente na captação, com o faturamento
               cobrindo <strong style={{ color: C.green }}>106%</strong> do que foi investido,
               antes de qualquer venda da Mentoria.
             </p>
@@ -469,8 +469,8 @@ export default function RelatorioInovando() {
             <Row label="Total de inscrições"             value={fmtN(CAPTACAO.inscricoes)} accent />
             <Row label="Custo por inscrição (CPL)"       value={fmt(CAPTACAO.custoInscricao)} />
             <Row label="Valor por inscrição"             value={fmt(CAPTACAO.valorInscricao)} />
-            <Row label="Fat. bruto Hotmart"              value={fmt(CAPTACAO.faturamentoBruto)} accent />
-            <Row label="ROAS da captação (bruto)"        value={`${CAPTACAO.roas.toFixed(2).replace(".", ",")}x`} accent />
+            <Row label="Faturamento Hotmart"              value={fmt(CAPTACAO.faturamentoBruto)} accent />
+            <Row label="ROAS da captação"                value={`${CAPTACAO.roas.toFixed(2).replace(".", ",")}x`} accent />
             <Row label="CTR geral dos criativos"         value={CAPTACAO.ctr} />
             <DisclaimerCard text={DISCLAIMER_FATURAMENTO} />
           </div>
@@ -614,15 +614,15 @@ export default function RelatorioInovando() {
               color={C.green} />
             <Kpi label="ROAS Meta Ads"
               value={<AnimatedNumber value={MENTORIA.roasMeta} suffix="x" decimals={1} />}
-              sub="fat. bruto / investimento Meta"
+              sub="faturamento / investimento Meta"
               color={C.green} />
             <Kpi label="Total de Vendas"
               value={<AnimatedNumber value={MENTORIA.vendasTotais} />}
               sub={`${MENTORIA.vendasMeta} Meta + ${MENTORIA.vendasTotais - MENTORIA.vendasMeta} orgânicas`}
               color={C.gold} />
-            <Kpi label="Fat. Bruto Total"
+            <Kpi label="Faturamento Total"
               value={<AnimatedNumber value={MENTORIA.faturamentoBrutoTotal} prefix="R$ " />}
-              sub="14 vendas (faturamento bruto Hotmart)"
+              sub="14 vendas (líquido Hotmart)"
               color={C.green} />
             <Kpi label="CTR Geral dos Criativos"
               value={MENTORIA.ctr}
@@ -635,7 +635,7 @@ export default function RelatorioInovando() {
             <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
               Com apenas <strong style={{ color: C.ink }}>R$ 238,48</strong> investidos em 2 dias de Meta Ads,
               as campanhas da Mentoria geraram <strong style={{ color: C.green }}>10 vendas rastreadas</strong> com
-              ROAS bruto de <strong style={{ color: C.green }}>44,4x</strong>. As 4 vendas restantes
+              ROAS de <strong style={{ color: C.green }}>75,3x</strong>. As 4 vendas restantes
               vieram de WhatsApp e relacionamento direto, sem custo adicional de mídia.
             </p>
           </div>
@@ -648,11 +648,11 @@ export default function RelatorioInovando() {
             <Row label="Investimento Meta Ads"                  value={fmt(MENTORIA.investimento)} />
             <Row label="Vendas rastreadas pelo Meta"            value={`${MENTORIA.vendasMeta} vendas`} accent />
             <Row label="Custo por venda (Meta)"                 value={fmt(MENTORIA.custoPorVenda)} />
-            <Row label="ROAS Meta Ads (bruto)"                  value={`${MENTORIA.roasMeta.toFixed(1).replace(".", ",")}x`} accent />
-            <Row label="Fat. bruto rastreado pelo Meta"         value={fmt(MENTORIA.faturamentoBrutoMeta)} accent />
+            <Row label="ROAS Meta Ads"                          value={`${MENTORIA.roasMeta.toFixed(1).replace(".", ",")}x`} accent />
+            <Row label="Faturamento rastreado pelo Meta"        value={fmt(MENTORIA.faturamentoBrutoMeta)} accent />
             <Row label="Vendas orgânicas (WhatsApp e grupos)"  value={`${MENTORIA.vendasTotais - MENTORIA.vendasMeta} vendas`} />
             <Row label="Total de vendas"                        value={`${MENTORIA.vendasTotais} vendas`} accent />
-            <Row label="Fat. bruto total"                       value={fmt(MENTORIA.faturamentoBrutoTotal)} accent />
+            <Row label="Faturamento total"                       value={fmt(MENTORIA.faturamentoBrutoTotal)} accent />
             <Row label="CTR geral dos criativos"                value={MENTORIA.ctr} />
             <DisclaimerCard text={DISCLAIMER_FATURAMENTO} />
           </div>
@@ -714,12 +714,12 @@ export default function RelatorioInovando() {
                           accent: false,
                         },
                         {
-                          m: "Fat. Bruto",
+                          m: "Faturamento",
                           v: [fmt(CAPTACAO.faturamentoBruto), "n/a", fmt(MENTORIA.faturamentoBrutoTotal), fmt(TOTAL.faturamentoBruto)],
                           accent: true,
                         },
                         {
-                          m: "ROAS (bruto)",
+                          m: "ROAS",
                           v: [
                             `${CAPTACAO.roas.toFixed(2).replace(".", ",")}x`,
                             "n/a",
@@ -743,8 +743,8 @@ export default function RelatorioInovando() {
                   </table>
                   <p className="text-[10px] mt-3 leading-relaxed" style={{ color: "rgba(255,255,255,0.2)" }}>
                     * ROAS da Mentoria refere-se apenas aos 2 dias de Meta Ads ativos.
-                    O ROAS total inclui todas as 18 vendas (Meta e orgânicas).
-                    Todos os valores de faturamento são brutos, antes das taxas Hotmart.
+                    O ROAS total inclui todas as 14 vendas (Meta e orgânicas).
+                    Faturamento da Mentoria calculado sobre o valor líquido por venda (R$ 1.795,83), já com as taxas Hotmart deduzidas.
                   </p>
                 </div>
               </div>
