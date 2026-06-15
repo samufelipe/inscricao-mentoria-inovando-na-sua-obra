@@ -70,11 +70,11 @@ const MENTORIA = {
   valorMentoria:        1997.00,
   vendasMeta:           10,
   custoPorVenda:        23.84,
-  vendasTotais:         18,
+  vendasTotais:         14,
   ctr:                  "1,37%",
-  roasMeta:             83.74,
-  faturamentoBrutoMeta: 19970.00,
-  faturamentoBrutoTotal:35946.00,
+  roasMeta:             44.42,
+  faturamentoBrutoMeta: 10594.05,
+  faturamentoBrutoTotal:14831.67,
   criativos: [
     { link: "https://www.instagram.com/p/DZAoGEVAIQe/#advertiser", label: "Criativo Campeão 01", vendas: 3 },
     { link: "https://www.instagram.com/p/DZAoGAOgE0R/#advertiser", label: "Criativo Campeão 02", vendas: 2 },
@@ -83,8 +83,8 @@ const MENTORIA = {
 
 const TOTAL = {
   investimento:     9441.36,
-  faturamentoBruto: 45406.34,
-  roas:             4.81,
+  faturamentoBruto: 24292.01,
+  roas:             2.57,
 };
 
 const PIE_DATA = [
@@ -94,9 +94,9 @@ const PIE_DATA = [
 ];
 
 const PONTOS_FORTES = [
-  "ROAS de 4,81x no consolidado: para cada R$ 1,00 investido em anúncios, o projeto retornou R$ 4,81 em faturamento bruto.",
-  "Campanha da Mentoria com ROAS de 83,7x rastreado pelo Meta: 10 vendas com apenas R$ 238,48 investidos em 2 dias.",
-  "18 vendas totais da Mentoria, sendo 8 delas por WhatsApp e relacionamento direto, sem custo adicional de mídia.",
+  "ROAS de 2,57x no consolidado: para cada R$ 1,00 investido em anúncios, o projeto retornou R$ 2,57 em faturamento bruto.",
+  "Campanha da Mentoria com ROAS de 44,4x rastreado pelo Meta: 10 vendas com apenas R$ 238,48 investidos em 2 dias.",
+  "14 vendas totais da Mentoria, sendo 4 delas por WhatsApp e relacionamento direto, sem custo adicional de mídia.",
   "A captação da Imersão cobriu 106% do investimento em anúncios: o faturamento bruto da inscrição pagou toda a campanha de captação.",
   "Alta taxa de abertura e clique nas mensagens de WhatsApp, validando o canal como forte vetor de conversão.",
 ];
@@ -394,7 +394,7 @@ export default function RelatorioInovando() {
                 Para cada{" "}
                 <strong style={{ color: C.gold }}>R$ 1,00</strong> investido em anúncios,
                 o projeto retornou{" "}
-                <strong style={{ color: C.green }}>R$ 4,81</strong> em faturamento bruto.
+                <strong style={{ color: C.green }}>R$ 2,57</strong> em faturamento bruto.
               </p>
             </div>
 
@@ -622,7 +622,7 @@ export default function RelatorioInovando() {
               color={C.gold} />
             <Kpi label="Fat. Bruto Total"
               value={<AnimatedNumber value={MENTORIA.faturamentoBrutoTotal} prefix="R$ " />}
-              sub={`${MENTORIA.vendasTotais} alunas x R$ 1.997 (bruto)`}
+              sub="14 vendas (faturamento bruto Hotmart)"
               color={C.green} />
             <Kpi label="CTR Geral dos Criativos"
               value={MENTORIA.ctr}
@@ -635,7 +635,7 @@ export default function RelatorioInovando() {
             <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
               Com apenas <strong style={{ color: C.ink }}>R$ 238,48</strong> investidos em 2 dias de Meta Ads,
               as campanhas da Mentoria geraram <strong style={{ color: C.green }}>10 vendas rastreadas</strong> com
-              ROAS bruto de <strong style={{ color: C.green }}>83,7x</strong>. As 8 vendas restantes
+              ROAS bruto de <strong style={{ color: C.green }}>44,4x</strong>. As 4 vendas restantes
               vieram de WhatsApp e relacionamento direto, sem custo adicional de mídia.
             </p>
           </div>
