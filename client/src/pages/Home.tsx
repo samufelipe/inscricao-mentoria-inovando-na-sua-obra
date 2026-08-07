@@ -1242,7 +1242,7 @@ export default function Home() {
 
                 {/* Divider + CTAs */}
                 <div className="mt-7 pt-6 space-y-3" style={{ borderTop: `1px solid ${C.border}` }}>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1781550321152"
+                  <a href="https://pay.hotmart.com/Y93975016X?checkoutMode=10&bid=1786132832493"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
                     style={{ backgroundColor: C.green, color: C.white }}
