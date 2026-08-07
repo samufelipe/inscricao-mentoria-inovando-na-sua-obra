@@ -1252,7 +1252,7 @@ export default function Home() {
                     Quero meu acesso agora
                     <ArrowRight className="w-4 h-4" />
                   </a>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=et69m72o&bid=1781550330334"
+                  <a href="https://pay.hotmart.com/Y93975016X?off=azkbpgud&bid=1786136104312"
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center w-full py-3 text-xs font-bold uppercase tracking-wider transition-colors"
                     style={{ backgroundColor: "rgba(0,0,0,0.05)", color: C.muted, border: `1px solid ${C.border}` }}
