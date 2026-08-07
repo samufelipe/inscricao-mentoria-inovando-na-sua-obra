@@ -1170,9 +1170,7 @@ export default function Home() {
                 <h2 className="font-display font-black uppercase leading-[1.05] text-white"
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
                 >
-                  Condição exclusiva.<br />
-                  Nova turma<br />
-                  Junho 2026.
+                  Condição exclusiva
                 </h2>
                 <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
                   Pagamento 100% Seguro pela Hotmart.
