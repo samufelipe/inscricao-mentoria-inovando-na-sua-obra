@@ -356,7 +356,7 @@ export default function Home() {
       name: "Mentoria Inovando na Sua Obra",
       description: "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras.",
       brand: { "@type": "Organization", name: "Inovando na Sua Obra" },
-      offers: { "@type": "Offer", price: "2999.00", priceCurrency: "BRL", availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
+      offers: { "@type": "Offer", price: "2700.00", priceCurrency: "BRL", availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
       aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "100" },
     };
     const s = document.createElement("script");
@@ -1204,20 +1204,26 @@ export default function Home() {
                   >
                     <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
                     <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#FF6B6B" }}>
-                      Valor exclusivo nova turma
+                      Valor de lançamento
                     </span>
                   </div>
                   <div className="space-y-1">
                     <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.muted }}>
                       Seu investimento
                     </p>
+                    <p className="text-sm line-through" style={{ color: C.muted }}>
+                      De R$ 3.000,00
+                    </p>
                     <p className="font-black leading-none"
                       style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
-                      12x de R$ 310,17
+                      10x de R$ 270,00
                     </p>
                     <p className="text-sm" style={{ color: C.muted }}>
-                      ou R$ 2.999,00 à vista
+                      ou R$ 2.700,00 à vista
+                    </p>
+                    <p className="text-xs font-bold uppercase tracking-wide" style={{ color: "#FF6B6B" }}>
+                      Vagas se esgotando
                     </p>
                   </div>
                 </div>
@@ -1501,9 +1507,9 @@ export default function Home() {
           <div>
             <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Seu investimento</p>
             <p className="font-display font-black text-base text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              12x de R$ 310,17
+              10x de R$ 270,00
             </p>
-            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 2.999,00 à vista</p>
+            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 2.700,00 à vista</p>
           </div>
           <button
             onClick={() => scrollTo("pricing")}
