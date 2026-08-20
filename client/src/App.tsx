@@ -16,6 +16,7 @@ const Relatorio = lazy(() => import("./pages/Relatorio"));
 const Links = lazy(() => import("./pages/Links"));
 const GrupoImersao = lazy(() => import("./pages/GrupoImersao"));
 const RelatorioInovando = lazy(() => import("./pages/RelatorioInovando"));
+const RelatorioImersaoNatal = lazy(() => import("./pages/RelatorioImersaoNatal"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 /* ─── Minimal loading fallback ─── */
@@ -41,6 +42,7 @@ function Router() {
         <Route path={"/links"} component={Links} />
         <Route path={"/grupo"} component={GrupoImersao} />
         <Route path={"/relatorio"} component={RelatorioInovando} />
+        <Route path={"/relatorio-imersao-natal"} component={RelatorioImersaoNatal} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

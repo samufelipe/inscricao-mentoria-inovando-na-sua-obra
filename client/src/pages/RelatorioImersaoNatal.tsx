@@ -1,0 +1,936 @@
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ReTooltip,
+  ResponsiveContainer, Cell, PieChart, Pie, LabelList,
+} from "recharts";
+import {
+  ExternalLink, TrendingUp, AlertCircle, CheckCircle, Zap, Award,
+  Play, Users, MousePointerClick, Eye, ShoppingCart, Clapperboard,
+  Sparkles, ArrowRight, ChevronDown,
+} from "lucide-react";
+import imgLogo from "@/assets/mentoria/logo.png";
+
+// ─────────────────────────────────────────
+// PALETA
+// ─────────────────────────────────────────
+const C = {
+  cream:   "#FAF8F4",
+  white:   "#FFFFFF",
+  ink:     "#1C1C1A",
+  inkSoft: "#3A3A38",
+  muted:   "#7A7A77",
+  border:  "#E8E4DC",
+  gold:    "#C9A257",
+  goldBg:  "rgba(201,162,87,0.10)",
+  goldRim: "rgba(201,162,87,0.22)",
+  green:   "#2E7D32",
+  greenBg: "rgba(46,125,50,0.08)",
+  greenRim:"rgba(46,125,50,0.22)",
+  slate:   "#5C6B7A",
+  slateBg: "rgba(92,107,122,0.09)",
+  slateRim:"rgba(92,107,122,0.22)",
+  dark:    "#1A1510",
+};
+
+const GROUP_COLOR: Record<string, string> = {
+  distribuicao: C.slate,
+  imersao: C.gold,
+  mentoria: C.green,
+};
+
+// ─────────────────────────────────────────
+// DADOS REAIS — Meta Ads (via Windsor.ai), conta InovandoObra CA (424518540421639)
+// ─────────────────────────────────────────
+const REPORT = {
+  geral:     "21 de julho a 20 de agosto de 2026",
+  captacao:  "22 de julho a 07 de agosto de 2026",
+  carrinho:  "08 de agosto a 14 de agosto de 2026",
+  geradoEm:  "20/08/2026",
+};
+
+const TOTAL = {
+  investimento: 4979.93,
+  impressoes: 312359,
+  cliques: 6338,
+  vendasMeta: 192,
+  faturamentoMeta: 10799.11,
+  roasMeta: 2.17,
+  ctr: 2.03,
+  cpc: 0.79,
+  cpaMeta: 25.94,
+};
+
+const DISTRIBUICAO = {
+  key: "distribuicao",
+  label: "Distribuição de Conteúdo",
+  sub: "Engajamento e Vídeo — aquecimento da audiência da Imersão",
+  periodo: "22/07 a 24/07",
+  investimento: 160.54,
+  impressoes: 57534,
+  thruplays: 25877,
+  custoPorMilThruplay: 6.21,
+  campanhas: [
+    {
+      nome: "Aquecimento em Vídeo",
+      badge: "Visualização de Vídeo",
+      spend: 55.39, impressions: 14129, reach: 13888, frequencia: 1.02,
+      thruplays: 4487, custoPorMilThruplay: 12.35,
+      p25: 5937, p50: 2830, p75: 1154, p100: 565,
+    },
+    {
+      nome: "Envolvimento com a Publicação",
+      badge: "Envolvimento",
+      spend: 105.15, impressions: 43405, reach: 43035, frequencia: 1.01,
+      thruplays: 21390, custoPorMilThruplay: 4.92,
+      p25: 21272, p50: 12516, p75: 2110, p100: 421,
+    },
+  ],
+};
+
+const VENDAS_IMERSAO = {
+  key: "imersao",
+  label: "Vendas · Imersão de Natal",
+  sub: "Campanhas de conversão para a inscrição paga (R$ 29,90)",
+  periodo: REPORT.captacao,
+  investimento: 4361.58,
+  impressoes: 232004,
+  cliques: 5814,
+  linkClicks: 3975,
+  ctr: 2.51, cpc: 0.75, cpm: 18.80,
+  landingPageViews: 3448,
+  vendasMeta: 187,
+  faturamentoMeta: 6969.63,
+  roasMeta: 1.60,
+  cpaMeta: 23.33,
+  vendasMetaPeriodoTotal: 191,
+  faturamentoMetaPeriodoTotal: 9000.81,
+  campanhas: [
+    { nome: "LP Imersão Natal — Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2198.04, roas: 1.38, ctr: 2.60, cpc: 0.71 },
+    { nome: "Retargeting — Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 3746.06, roas: 2.84, ctr: 2.37, cpc: 0.75 },
+    { nome: "LP Imersão Natal — Novos Criativos", spend: 717.08, vendas: 28, faturamento: 814.04, roas: 1.14, ctr: 2.76, cpc: 0.76 },
+    { nome: "LP Imersão Natal — Lote 1", spend: 509.49, vendas: 7, faturamento: 185.55, roas: 0.36, ctr: 2.39, cpc: 0.82 },
+    { nome: "LP Imersão Natal — Teste A/B", spend: 82.80, vendas: 1, faturamento: 25.94, roas: 0.31, ctr: 2.23, cpc: 0.91 },
+    { nome: "LP Imersão Natal — Teste Bid Cap", spend: 81.88, vendas: 0, faturamento: 0, roas: null, ctr: 1.82, cpc: 1.02 },
+    { nome: "LP Imersão Natal — Teste V2", spend: 35.40, vendas: 0, faturamento: 0, roas: null, ctr: 2.60, cpc: 0.74 },
+    { nome: "Retargeting — Checkout Direto", spend: 26.70, vendas: 0, faturamento: 0, roas: null, ctr: 2.58, cpc: 0.67 },
+  ],
+  criativos: [
+    { nome: "Sequência de Serviços", link: "https://www.instagram.com/p/DbLqhSFAzIA/", vendas: 83, spend: 1778.50, faturamento: 2370.56, cpa: 21.43, campanhas: 3 },
+    { nome: "Tadinha da Fernanda — v1", link: "https://www.instagram.com/p/Dbl06ewAFSJ/", vendas: 36, spend: 613.62, faturamento: 1009.89, cpa: 17.05, campanhas: 1 },
+    { nome: "Tadinha da Fernanda — v2", link: "https://www.instagram.com/p/Dbl0ZtagAuY/", vendas: 16, spend: 215.12, faturamento: 470.88, cpa: 13.45, campanhas: 2 },
+  ],
+};
+
+const VENDAS_MENTORIA = {
+  key: "mentoria",
+  label: "Vendas · Mentoria",
+  sub: "Carrinho aberto — campanhas de conversão direta (R$ 2.300)",
+  periodo: REPORT.carrinho,
+  investimento: 457.81,
+  impressoes: 22821,
+  cliques: 425,
+  linkClicks: 264,
+  ctr: 1.86, cpc: 1.08, cpm: 20.06,
+  landingPageViews: 204,
+  vendasMeta: 1,
+  faturamentoMeta: 1798.30,
+  roasMeta: 3.93,
+  cpaMeta: 457.81,
+  campanhas: [
+    { nome: "Mentoria — Campanha Oficial", spend: 267.96, vendas: 1, faturamento: 1798.30, roas: 6.71, ctr: 1.96, cpc: 1.02 },
+    { nome: "Mentoria — Retargeting Checkout Direto", spend: 114.72, vendas: 0, faturamento: 0, roas: null, ctr: 1.93, cpc: 1.06 },
+    { nome: "Mentoria — Campanha Oficial (Ajuste 13/08)", spend: 75.13, vendas: 0, faturamento: 0, roas: null, ctr: 1.43, cpc: 1.37 },
+  ],
+  criativo: { nome: "Cobrança de Fornecedores", link: "https://www.instagram.com/p/Db3dIl_gGGG/", vendas: 1, spend: 90.41, faturamento: 1798.30, campanha: "Mentoria — Campanha Oficial" },
+};
+
+const FUNIL = [
+  { etapa: "Impressões", valor: 254825, icon: Eye },
+  { etapa: "Cliques no link", valor: 4239, icon: MousePointerClick },
+  { etapa: "Visualizou a página", valor: 3652, icon: Users },
+  { etapa: "Compra rastreada", valor: 192, icon: ShoppingCart },
+];
+
+const PONTOS_FORTES = [
+  "CTR médio de 2,51% nas campanhas de venda da Imersão — bem acima da média de mercado para o objetivo de conversão, sinal de criativo e oferta bem alinhados ao público.",
+  "Custo por ThruPlay abaixo de R$ 0,01 nas duas campanhas de aquecimento (R$ 6,21 a cada 1.000 ThruPlays combinado) — audiência aquecida a um custo muito baixo antes da campanha de vendas.",
+  "3 criativos concentram 70,7% de todas as vendas rastreadas da Imersão (135 de 191 vendas) — sinal claro de qual linha de criativo escalar no próximo ciclo.",
+  "ROAS de 3,93x rastreado pelo Meta na única venda da Mentoria capturada via pixel, com CTR de 1,96% na campanha oficial — segue o padrão do lançamento de maio, onde a Mentoria historicamente teve o melhor retorno por real investido.",
+  "Campanha \"Retargeting — Checkout Direto (Novos Criativos)\" sozinha entregou ROAS de 2,84x com R$ 1.320,31 investidos — a campanha mais eficiente do funil de Imersão.",
+];
+
+const PONTOS_ATENCAO = [
+  "Estrutura de Imersão fragmentada em 8 campanhas simultâneas (várias com menos de R$ 90 investidos) durante o teste inicial — isso divide o aprendizado do algoritmo e atrasa a saída da fase de aprendizagem. 3 delas (Teste Bid Cap, Teste V2, Retargeting inicial) somam R$ 143,98 sem nenhuma venda rastreada.",
+  "Apenas 1 venda rastreada pelo Meta na janela de carrinho aberto da Mentoria (08 a 14/08), mesmo com 425 cliques e 204 visualizações de página — CPA de R$ 457,81 nessa métrica isolada não reflete o resultado real do produto, que historicamente fecha parte relevante das vendas fora do Meta Ads (WhatsApp, indicação).",
+  "A campanha \"LP Imersão Natal — Lote 1\" (primeira a rodar, 22/07) teve ROAS de apenas 0,36x — indício de que o público/criativo inicial não performou tão bem quanto os lotes de criativos novos introduzidos a partir de 24/07.",
+  "Números de faturamento e vendas totais (Hotmart) ainda não reconciliados neste relatório — os valores de faturamento aqui são exclusivamente o que o pixel do Meta rastreou, o que soma menos do que o negócio de fato faturou.",
+];
+
+const ACOES_RECOMENDADAS = [
+  "Consolidar a estrutura de captação da Imersão em 2-3 campanhas no próximo ciclo (hoje são 8), concentrando orçamento nos criativos vencedores desde o primeiro dia em vez de fragmentar em testes pequenos.",
+  "Escalar como ativo permanente o criativo \"Sequência de Serviços\" (83 vendas, CPA R$ 21,43) — replicar a mesma lógica de roteiro em 2-3 variações novas para não saturar a peça única.",
+  "Implementar CAPI (Conversions API) no checkout da Mentoria para reduzir a perda de atribuição — a diferença entre cliques (425) e vendas rastreadas (1) sugere parte relevante das conversões não está sendo capturada pelo pixel.",
+  "Reconciliar com os dados do Hotmart antes de qualquer decisão de corte de orçamento na Mentoria — o ROAS real tende a ser mais alto do que o rastreado, como ocorreu no ciclo de maio.",
+  "Pausar definitivamente as variantes de teste com CPA sem conversão (Bid Cap, Teste V2 inicial, Retargeting inicial) e realocar esse orçamento nas duas campanhas de melhor ROAS.",
+];
+
+// ─────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────
+const fmt = (v: number) =>
+  `R$ ${v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const fmtN = (v: number) => v.toLocaleString("pt-BR");
+const fmtPct = (v: number, d = 2) => `${v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d })}%`;
+
+// ─────────────────────────────────────────
+// ANIMATED NUMBER
+// ─────────────────────────────────────────
+function AnimatedNumber({
+  value, prefix = "", suffix = "", decimals,
+}: { value: number; prefix?: string; suffix?: string; decimals?: number }) {
+  const [disp, setDisp] = useState(0);
+  const ref  = useRef<HTMLSpanElement>(null);
+  const done = useRef(false);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !done.current) {
+        done.current = true;
+        if (reduced) { setDisp(value); return; }
+        const t0 = performance.now(), dur = 1200;
+        const tick = (now: number) => {
+          const p = Math.min((now - t0) / dur, 1);
+          setDisp((1 - Math.pow(1 - p, 3)) * value);
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.3 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [value]);
+
+  const dec = decimals ?? (suffix === "x" ? 2 : prefix === "R$ " ? 2 : 0);
+  const text =
+    prefix === "R$ "
+      ? `R$ ${disp.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      : `${prefix}${disp.toLocaleString("pt-BR", { minimumFractionDigits: dec, maximumFractionDigits: dec })}${suffix}`;
+
+  return <span ref={ref}>{text}</span>;
+}
+
+// ─────────────────────────────────────────
+// REVEAL (scroll-triggered)
+// ─────────────────────────────────────────
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function SLabel({ children, light, color }: { children: React.ReactNode; light?: boolean; color?: string }) {
+  const col = color ?? (light ? "rgba(201,162,87,0.75)" : C.gold);
+  return (
+    <div className="flex items-center gap-3 mb-3">
+      <div className="w-6 h-px" style={{ backgroundColor: col }} />
+      <span className="text-[10px] font-black uppercase tracking-[0.28em]" style={{ color: col }}>
+        {children}
+      </span>
+      <div className="w-6 h-px" style={{ backgroundColor: col }} />
+    </div>
+  );
+}
+
+function Kpi({
+  label, value, sub, color, light, icon: Icon,
+}: { label: string; value: React.ReactNode; sub?: string; color?: string; light?: boolean; icon?: any }) {
+  const bg  = light ? "rgba(255,255,255,0.05)" : C.white;
+  const brd = light ? "rgba(255,255,255,0.09)" : C.border;
+  const lbl = light ? "rgba(255,255,255,0.4)"  : C.muted;
+  const sub_ = light ? "rgba(255,255,255,0.28)" : C.muted;
+  const val  = color ?? (light ? C.white : C.ink);
+  return (
+    <motion.div
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+      className="rounded-xl p-5 flex flex-col gap-1.5"
+      style={{ background: bg, border: `1px solid ${brd}` }}
+    >
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-bold uppercase tracking-[0.18em] leading-none" style={{ color: lbl }}>{label}</span>
+        {Icon && <Icon className="w-3.5 h-3.5" style={{ color: color ?? lbl, opacity: 0.7 }} />}
+      </div>
+      <span className="text-xl md:text-[1.6rem] font-black leading-none" style={{ color: val }}>{value}</span>
+      {sub && <span className="text-[11px] leading-snug mt-0.5" style={{ color: sub_ }}>{sub}</span>}
+    </motion.div>
+  );
+}
+
+function Row({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+  return (
+    <div className="flex justify-between items-center py-2.5 border-b last:border-0" style={{ borderColor: C.border }}>
+      <span className="text-sm" style={{ color: C.muted }}>{label}</span>
+      <span className="text-sm font-semibold" style={{ color: accent ? C.green : C.ink }}>{value}</span>
+    </div>
+  );
+}
+
+function Badge({ children, color = C.gold }: { children: React.ReactNode; color?: string }) {
+  return (
+    <span
+      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-[0.15em]"
+      style={{ background: `${color}18`, color, border: `1px solid ${color}30` }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function Divider({ light }: { light?: boolean }) {
+  const c = light ? "rgba(255,255,255,0.07)" : C.border;
+  const d = light ? "rgba(201,162,87,0.35)"  : C.goldRim;
+  return (
+    <div className="flex items-center gap-4 my-14">
+      <div className="flex-1 h-px" style={{ background: c }} />
+      <div className="w-1.5 h-1.5 rotate-45" style={{ border: `1px solid ${d}` }} />
+      <div className="flex-1 h-px" style={{ background: c }} />
+    </div>
+  );
+}
+
+function DisclaimerCard({ text }: { text: string }) {
+  return (
+    <div className="flex items-start gap-3 px-4 py-3.5 rounded-lg mt-4"
+      style={{ background: "rgba(122,122,119,0.07)", border: `1px solid rgba(122,122,119,0.18)` }}>
+      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.muted }} />
+      <p className="text-xs leading-relaxed" style={{ color: C.muted }}>{text}</p>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
+// CREATIVE CARD (com ranking)
+// ─────────────────────────────────────────
+function CreativeCard({
+  rank, nome, link, vendas, spend, faturamento, cpa, campanhas, color,
+}: { rank: number; nome: string; link: string; vendas: number; spend: number; faturamento: number; cpa?: number; campanhas?: number; color: string }) {
+  return (
+    <motion.a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ y: -4, scale: 1.01 }}
+      transition={{ duration: 0.2 }}
+      className="relative flex flex-col gap-3 p-5 rounded-xl group cursor-pointer overflow-hidden"
+      style={{ background: C.white, border: `1px solid ${C.border}` }}
+    >
+      <div className="absolute top-0 right-0 w-20 h-20 opacity-[0.06] pointer-events-none"
+        style={{ background: `radial-gradient(circle at top right, ${color}, transparent 70%)` }} />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0"
+            style={{ background: color, color: C.white }}>
+            #{rank}
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-bold truncate group-hover:underline" style={{ color: C.ink }}>{nome}</p>
+            {campanhas && campanhas > 1 && (
+              <p className="text-[10px]" style={{ color: C.muted }}>ativo em {campanhas} campanhas</p>
+            )}
+          </div>
+        </div>
+        <ExternalLink className="w-3.5 h-3.5 flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity" style={{ color }} />
+      </div>
+      <div className="grid grid-cols-3 gap-2 pt-1">
+        <div>
+          <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Vendas</p>
+          <p className="text-lg font-black" style={{ color }}>{fmtN(vendas)}</p>
+        </div>
+        <div>
+          <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Investido</p>
+          <p className="text-sm font-bold" style={{ color: C.ink }}>{fmt(spend)}</p>
+        </div>
+        <div>
+          <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>CPA</p>
+          <p className="text-sm font-bold" style={{ color: C.ink }}>{cpa ? fmt(cpa) : "—"}</p>
+        </div>
+      </div>
+    </motion.a>
+  );
+}
+
+// ─────────────────────────────────────────
+// CAMPAIGN LEADERBOARD (barras animadas)
+// ─────────────────────────────────────────
+function CampaignLeaderboard({
+  campanhas, color, metricLabel = "vendas",
+}: { campanhas: Array<{ nome: string; spend: number; vendas: number; faturamento: number; roas: number | null; ctr: number; cpc: number }>; color: string; metricLabel?: string }) {
+  const max = Math.max(...campanhas.map(c => c.vendas), 1);
+  const [expanded, setExpanded] = useState<number | null>(null);
+  return (
+    <div className="flex flex-col gap-2.5">
+      {campanhas.map((c, i) => {
+        const pct = (c.vendas / max) * 100;
+        const isOpen = expanded === i;
+        return (
+          <div key={i} className="rounded-lg overflow-hidden" style={{ border: `1px solid ${C.border}` }}>
+            <button
+              onClick={() => setExpanded(isOpen ? null : i)}
+              className="w-full text-left px-4 py-3 flex flex-col gap-2"
+              style={{ background: C.white }}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-sm font-semibold truncate" style={{ color: C.ink }}>{c.nome}</span>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="text-sm font-black" style={{ color }}>{fmtN(c.vendas)} {metricLabel}</span>
+                  <ChevronDown className="w-3.5 h-3.5 transition-transform" style={{ color: C.muted, transform: isOpen ? "rotate(180deg)" : "none" }} />
+                </div>
+              </div>
+              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: C.border }}>
+                <motion.div
+                  className="h-full rounded-full"
+                  style={{ background: color }}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${Math.max(pct, 3)}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </div>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  style={{ background: C.cream }}
+                >
+                  <div className="px-4 py-3 grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div>
+                      <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Investido</p>
+                      <p className="text-sm font-bold" style={{ color: C.ink }}>{fmt(c.spend)}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Faturamento rastreado</p>
+                      <p className="text-sm font-bold" style={{ color: c.faturamento > 0 ? C.green : C.ink }}>{c.faturamento > 0 ? fmt(c.faturamento) : "—"}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>ROAS</p>
+                      <p className="text-sm font-bold" style={{ color: c.roas ? C.green : C.muted }}>{c.roas ? `${c.roas.toFixed(2).replace(".", ",")}x` : "—"}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>CTR / CPC</p>
+                      <p className="text-sm font-bold" style={{ color: C.ink }}>{fmtPct(c.ctr)} · {fmt(c.cpc)}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
+// FUNNEL
+// ─────────────────────────────────────────
+function Funnel({ steps }: { steps: typeof FUNIL }) {
+  const max = steps[0].valor;
+  return (
+    <div className="flex flex-col gap-3">
+      {steps.map((s, i) => {
+        const pct = (s.valor / max) * 100;
+        const dropFromPrev = i > 0 ? (1 - s.valor / steps[i - 1].valor) * 100 : null;
+        const Icon = s.icon;
+        return (
+          <div key={i} className="flex items-center gap-4">
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: C.goldBg }}>
+              <Icon className="w-4 h-4" style={{ color: C.gold }} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-bold uppercase tracking-wide" style={{ color: C.inkSoft }}>{s.etapa}</span>
+                <div className="flex items-center gap-2">
+                  {dropFromPrev !== null && (
+                    <span className="text-[10px] font-semibold" style={{ color: C.muted }}>-{dropFromPrev.toFixed(0)}%</span>
+                  )}
+                  <span className="text-sm font-black" style={{ color: C.ink }}>{fmtN(s.valor)}</span>
+                </div>
+              </div>
+              <div className="h-2.5 rounded-full overflow-hidden" style={{ background: C.border }}>
+                <motion.div
+                  className="h-full rounded-full"
+                  style={{ background: `linear-gradient(90deg, ${C.gold}, ${C.green})` }}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${Math.max(pct, 1.5)}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
+// RETENTION CHART (Distribuição)
+// ─────────────────────────────────────────
+function RetentionTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; dataKey: string }>; label?: string }) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="rounded-xl px-4 py-3 shadow-2xl" style={{ background: C.dark, border: `1px solid ${C.slateRim}` }}>
+      <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: C.gold }}>{label} do vídeo assistido</p>
+      {payload.map((p, i) => (
+        <p key={i} className="text-sm font-black" style={{ color: C.white }}>{fmtN(p.value)} pessoas</p>
+      ))}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
+// TABS
+// ─────────────────────────────────────────
+const TABS = [
+  { key: "distribuicao", label: "Distribuição de Conteúdo", icon: Clapperboard },
+  { key: "imersao", label: "Vendas · Imersão de Natal", icon: Sparkles },
+  { key: "mentoria", label: "Vendas · Mentoria", icon: Award },
+];
+
+// ─────────────────────────────────────────
+// MAIN PAGE
+// ─────────────────────────────────────────
+export default function RelatorioImersaoNatal() {
+  const [tab, setTab] = useState<string>("distribuicao");
+
+  useEffect(() => {
+    document.title = "Relatório de Resultados - Imersão de Natal | Inovando na Sua Obra";
+  }, []);
+
+  const retencaoChartData = [
+    { etapa: "25%", "Aquecimento em Vídeo": DISTRIBUICAO.campanhas[0].p25, "Envolvimento": DISTRIBUICAO.campanhas[1].p25 },
+    { etapa: "50%", "Aquecimento em Vídeo": DISTRIBUICAO.campanhas[0].p50, "Envolvimento": DISTRIBUICAO.campanhas[1].p50 },
+    { etapa: "75%", "Aquecimento em Vídeo": DISTRIBUICAO.campanhas[0].p75, "Envolvimento": DISTRIBUICAO.campanhas[1].p75 },
+    { etapa: "100%", "Aquecimento em Vídeo": DISTRIBUICAO.campanhas[0].p100, "Envolvimento": DISTRIBUICAO.campanhas[1].p100 },
+  ];
+
+  const GROUP_PIE = [
+    { name: "Distribuição de Conteúdo", value: DISTRIBUICAO.investimento, color: GROUP_COLOR.distribuicao },
+    { name: "Vendas · Imersão de Natal", value: VENDAS_IMERSAO.investimento, color: GROUP_COLOR.imersao },
+    { name: "Vendas · Mentoria", value: VENDAS_MENTORIA.investimento, color: GROUP_COLOR.mentoria },
+  ];
+
+  return (
+    <div className="min-h-screen" style={{ background: C.cream }}>
+
+      {/* ════════════════════════════════ HEADER ════════════════════════════════ */}
+      <div style={{ background: C.dark }}>
+        <div className="max-w-5xl mx-auto px-5 py-12 md:py-16">
+          <Reveal>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10">
+              <div className="flex items-center gap-4">
+                <img src={imgLogo} alt="Inovando na Sua Obra" className="h-9 w-auto opacity-85" />
+                <div className="w-px h-9 opacity-15" style={{ background: C.gold }} />
+                <div>
+                  <p className="text-[9px] font-black uppercase tracking-[0.3em] mb-0.5" style={{ color: C.gold }}>
+                    Relatório de Resultados
+                  </p>
+                  <h1 className="text-lg md:text-xl font-black uppercase tracking-tight leading-tight" style={{ color: C.white }}>
+                    Lançamento Imersão de Natal
+                  </h1>
+                </div>
+              </div>
+              <div className="text-left md:text-right">
+                <p className="text-[10px] uppercase tracking-wider mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>Período geral</p>
+                <p className="text-sm font-semibold" style={{ color: C.white }}>{REPORT.geral}</p>
+                <p className="text-[10px] mt-2" style={{ color: "rgba(255,255,255,0.2)" }}>Gerado em {REPORT.geradoEm}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <Kpi light icon={Zap} label="Total Investido"
+                value={<AnimatedNumber value={TOTAL.investimento} prefix="R$ " />}
+                sub="Meta Ads · 3 frentes de campanha" />
+              <Kpi light icon={ShoppingCart} label="Vendas Rastreadas (Meta)"
+                value={<AnimatedNumber value={TOTAL.vendasMeta} />}
+                sub="pixel Meta · aguardando Hotmart" color={C.gold} />
+              <Kpi light icon={TrendingUp} label="Faturamento Rastreado (Meta)"
+                value={<AnimatedNumber value={TOTAL.faturamentoMeta} prefix="R$ " />}
+                sub="valor atribuído pelo pixel" color={C.green} />
+              <Kpi light icon={Award} label="ROAS Rastreado (Meta)"
+                value={<AnimatedNumber value={TOTAL.roasMeta} suffix="x" decimals={2} />}
+                sub="faturamento / investimento" color={C.green} />
+            </div>
+
+            <div className="mt-4 flex items-start gap-3 px-4 py-3.5 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                Os números de <strong style={{ color: C.white }}>vendas e faturamento</strong> nesta página refletem exclusivamente o que o <strong style={{ color: C.white }}>pixel do Meta Ads rastreou</strong>. O faturamento comercial real (Hotmart) está em consolidação e será incorporado assim que enviado — historicamente o resultado real supera o rastreado, especialmente na Mentoria.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* ════════════════════════════════ VISÃO GERAL ════════════════════════════════ */}
+      <div className="max-w-5xl mx-auto px-5 py-14">
+        <Reveal>
+          <SLabel>Visão Geral</SLabel>
+          <h2 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-8" style={{ color: C.ink }}>
+            As três frentes da campanha
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-10">
+            {[DISTRIBUICAO, VENDAS_IMERSAO, VENDAS_MENTORIA].map((g, i) => (
+              <motion.button
+                key={g.key}
+                onClick={() => setTab(g.key)}
+                whileHover={{ y: -4 }}
+                className="text-left rounded-xl p-5 flex flex-col gap-3 transition-shadow"
+                style={{ background: C.white, border: `1px solid ${tab === g.key ? GROUP_COLOR[g.key] : C.border}`, boxShadow: tab === g.key ? `0 0 0 3px ${GROUP_COLOR[g.key]}22` : "none" }}
+              >
+                <div className="flex items-center justify-between">
+                  <Badge color={GROUP_COLOR[g.key]}>{`0${i + 1}`}</Badge>
+                  <ArrowRight className="w-3.5 h-3.5" style={{ color: GROUP_COLOR[g.key] }} />
+                </div>
+                <p className="text-sm font-black uppercase tracking-tight" style={{ color: C.ink }}>{g.label}</p>
+                <p className="text-[11px] leading-snug" style={{ color: C.muted }}>{g.sub}</p>
+                <div className="flex items-end justify-between pt-2 mt-auto" style={{ borderTop: `1px solid ${C.border}` }}>
+                  <div>
+                    <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Investido</p>
+                    <p className="text-lg font-black" style={{ color: C.ink }}>{fmt(g.investimento)}</p>
+                  </div>
+                  <p className="text-[10px] font-semibold" style={{ color: GROUP_COLOR[g.key] }}>{fmtPct((g.investimento / TOTAL.investimento) * 100, 0)}</p>
+                </div>
+              </motion.button>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-10">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+                Funil de conversão combinado (Imersão + Mentoria)
+              </p>
+              <div className="rounded-xl p-5" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+                <Funnel steps={FUNIL} />
+              </div>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+                Distribuição do investimento
+              </p>
+              <div className="rounded-xl p-5" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+                <div className="flex items-center gap-6">
+                  <div style={{ width: 150, height: 150 }} className="flex-shrink-0">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie data={GROUP_PIE} cx="50%" cy="50%" innerRadius={42} outerRadius={68} dataKey="value" paddingAngle={3}>
+                          {GROUP_PIE.map((e, i) => <Cell key={i} fill={e.color} />)}
+                        </Pie>
+                        <ReTooltip formatter={(v: number) => fmt(v)} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className="flex flex-col gap-3 min-w-0">
+                    {GROUP_PIE.map((item, i) => (
+                      <div key={i} className="flex items-start gap-2.5">
+                        <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0 mt-0.5" style={{ background: item.color }} />
+                        <div className="min-w-0">
+                          <p className="text-[11px] font-semibold leading-tight" style={{ color: C.ink }}>{item.name}</p>
+                          <p className="text-[10px]" style={{ color: C.muted }}>
+                            {fmt(item.value)} ({((item.value / TOTAL.investimento) * 100).toFixed(1)}%)
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* ════════════════════════════════ TABS NAV ════════════════════════════════ */}
+      <div className="sticky top-0 z-20" style={{ background: `${C.cream}f2`, backdropFilter: "blur(8px)", borderBottom: `1px solid ${C.border}` }}>
+        <div className="max-w-5xl mx-auto px-5">
+          <div className="flex gap-1 overflow-x-auto no-scrollbar">
+            {TABS.map(t => {
+              const Icon = t.icon;
+              const active = tab === t.key;
+              return (
+                <button
+                  key={t.key}
+                  onClick={() => setTab(t.key)}
+                  className="relative flex items-center gap-2 px-4 py-4 text-xs font-bold uppercase tracking-wide whitespace-nowrap transition-colors"
+                  style={{ color: active ? GROUP_COLOR[t.key] : C.muted }}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {t.label}
+                  {active && (
+                    <motion.div
+                      layoutId="tab-underline"
+                      className="absolute left-0 right-0 -bottom-px h-[2.5px] rounded-full"
+                      style={{ background: GROUP_COLOR[t.key] }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ════════════════════════════════ TAB PANELS ════════════════════════════════ */}
+      <div className="max-w-5xl mx-auto px-5 py-14">
+        <AnimatePresence mode="wait">
+
+          {tab === "distribuicao" && (
+            <motion.div key="distribuicao" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3 }}>
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <SLabel color={GROUP_COLOR.distribuicao}>01 / Distribuição de Conteúdo</SLabel>
+                <Badge color={GROUP_COLOR.distribuicao}>{DISTRIBUICAO.periodo}</Badge>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-2" style={{ color: C.ink }}>
+                Engajamento e vídeo — aquecimento
+              </h2>
+              <p className="text-sm mb-8" style={{ color: C.muted }}>
+                Campanhas de topo de funil, sem objetivo de venda direta: aqueceram a audiência antes das campanhas de conversão da Imersão.
+              </p>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                <Kpi label="Investimento" value={<AnimatedNumber value={DISTRIBUICAO.investimento} prefix="R$ " />} sub="2 campanhas" />
+                <Kpi label="Impressões" value={<AnimatedNumber value={DISTRIBUICAO.impressoes} />} sub="alcance combinado" color={GROUP_COLOR.distribuicao} />
+                <Kpi label="ThruPlays" value={<AnimatedNumber value={DISTRIBUICAO.thruplays} />} sub="15s+ ou vídeo completo" color={GROUP_COLOR.distribuicao} />
+                <Kpi label="Custo por 1.000 ThruPlays" value={<AnimatedNumber value={DISTRIBUICAO.custoPorMilThruplay} prefix="R$ " />} sub="aquecimento muito barato" />
+              </div>
+
+              <div className="rounded-xl p-5 md:p-7 mb-6" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-1" style={{ color: C.muted }}>Curva de retenção do vídeo</p>
+                <p className="text-xs leading-relaxed mb-6" style={{ color: C.muted }}>% de espectadores (sobre as impressões) que assistiram cada etapa, por campanha</p>
+                <div style={{ height: 240 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={retencaoChartData} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
+                      <XAxis dataKey="etapa" tick={{ fontSize: 11, fill: C.muted, fontWeight: 600 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fontSize: 10, fill: C.muted }} axisLine={false} tickLine={false} tickFormatter={v => fmtN(v)} width={46} />
+                      <ReTooltip content={<RetentionTooltip />} cursor={{ fill: "rgba(92,107,122,0.06)" }} />
+                      <Bar dataKey="Aquecimento em Vídeo" fill={GROUP_COLOR.distribuicao} radius={[6, 6, 0, 0]} maxBarSize={40} />
+                      <Bar dataKey="Envolvimento" fill={C.gold} radius={[6, 6, 0, 0]} maxBarSize={40} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                {DISTRIBUICAO.campanhas.map((c, i) => (
+                  <div key={i} className="rounded-xl p-5" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-sm font-bold" style={{ color: C.ink }}>{c.nome}</p>
+                      <Badge color={GROUP_COLOR.distribuicao}>{c.badge}</Badge>
+                    </div>
+                    <Row label="Investimento" value={fmt(c.spend)} />
+                    <Row label="Impressões" value={fmtN(c.impressions)} />
+                    <Row label="Alcance" value={fmtN(c.reach)} />
+                    <Row label="Frequência" value={c.frequencia.toFixed(2).replace(".", ",")} />
+                    <Row label="ThruPlays" value={fmtN(c.thruplays)} accent />
+                    <Row label="Custo / 1.000 ThruPlays" value={fmt(c.custoPorMilThruplay)} />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {tab === "imersao" && (
+            <motion.div key="imersao" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3 }}>
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <SLabel color={GROUP_COLOR.imersao}>02 / Vendas · Imersão de Natal</SLabel>
+                <Badge color={GROUP_COLOR.imersao}>{VENDAS_IMERSAO.periodo}</Badge>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-2" style={{ color: C.ink }}>
+                Captação de inscrições pagas
+              </h2>
+              <p className="text-sm mb-8" style={{ color: C.muted }}>
+                8 campanhas de conversão direcionadas à página de compra da Imersão (R$ 29,90 por inscrição)
+              </p>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                <Kpi label="Investimento" value={<AnimatedNumber value={VENDAS_IMERSAO.investimento} prefix="R$ " />} sub="8 campanhas" />
+                <Kpi label="Vendas Rastreadas (Meta)" value={<AnimatedNumber value={VENDAS_IMERSAO.vendasMeta} />} sub={`${fmt(VENDAS_IMERSAO.cpaMeta)} por venda`} color={GROUP_COLOR.imersao} />
+                <Kpi label="ROAS Rastreado (Meta)" value={<AnimatedNumber value={VENDAS_IMERSAO.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
+                <Kpi label="CTR" value={fmtPct(VENDAS_IMERSAO.ctr)} sub={`CPC médio ${fmt(VENDAS_IMERSAO.cpc)}`} />
+                <Kpi label="Visualizações de Página" value={<AnimatedNumber value={VENDAS_IMERSAO.landingPageViews} />} sub="landing page views" />
+                <Kpi label="Faturamento Rastreado" value={<AnimatedNumber value={VENDAS_IMERSAO.faturamentoMeta} prefix="R$ " />} sub="valor atribuído pelo pixel" color={C.green} />
+              </div>
+
+              <div className="rounded-xl px-5 py-4 flex items-start gap-3 mb-8" style={{ background: C.goldBg, border: `1px solid ${C.goldRim}` }}>
+                <TrendingUp className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
+                <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
+                  Mais <strong style={{ color: C.ink }}>{VENDAS_IMERSAO.vendasMetaPeriodoTotal - VENDAS_IMERSAO.vendasMeta} vendas</strong> ({fmt(VENDAS_IMERSAO.faturamentoMetaPeriodoTotal - VENDAS_IMERSAO.faturamentoMeta)}) foram atribuídas após 07/08 via clique de até 7 dias, mesmo com essas campanhas já sem verba ativa — no acumulado até {REPORT.geradoEm.split("/").slice(0,2).join("/")}, a Imersão soma <strong style={{ color: C.gold }}>{fmtN(VENDAS_IMERSAO.vendasMetaPeriodoTotal)} vendas rastreadas</strong> e {fmt(VENDAS_IMERSAO.faturamentoMetaPeriodoTotal)} em faturamento rastreado.
+                </p>
+              </div>
+
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+                Criativos campeões — 70,7% das vendas rastreadas
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 mb-10">
+                {VENDAS_IMERSAO.criativos.map((c, i) => (
+                  <CreativeCard key={i} rank={i + 1} nome={c.nome} link={c.link} vendas={c.vendas} spend={c.spend} faturamento={c.faturamento} cpa={c.cpa} campanhas={c.campanhas} color={GROUP_COLOR.imersao} />
+                ))}
+              </div>
+
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+                Todas as 8 campanhas (clique para detalhes)
+              </p>
+              <CampaignLeaderboard campanhas={VENDAS_IMERSAO.campanhas} color={GROUP_COLOR.imersao} />
+              <DisclaimerCard text="Vendas e faturamento rastreados pelo pixel do Meta dentro da janela de atribuição de 7 dias de clique. Números comerciais reais (Hotmart) serão incorporados após envio de Samuel." />
+            </motion.div>
+          )}
+
+          {tab === "mentoria" && (
+            <motion.div key="mentoria" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3 }}>
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <SLabel color={GROUP_COLOR.mentoria}>03 / Vendas · Mentoria</SLabel>
+                <Badge color={GROUP_COLOR.mentoria}>{VENDAS_MENTORIA.periodo} · carrinho aberto</Badge>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-2" style={{ color: C.ink }}>
+                Vendas da Mentoria Inovando
+              </h2>
+              <p className="text-sm mb-8" style={{ color: C.muted }}>
+                3 campanhas de conversão direcionadas ao checkout da Mentoria (R$ 2.300) durante a janela de carrinho aberto
+              </p>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                <Kpi label="Investimento" value={<AnimatedNumber value={VENDAS_MENTORIA.investimento} prefix="R$ " />} sub="3 campanhas" />
+                <Kpi label="Vendas Rastreadas (Meta)" value={<AnimatedNumber value={VENDAS_MENTORIA.vendasMeta} />} sub="via pixel do checkout" color={GROUP_COLOR.mentoria} />
+                <Kpi label="ROAS Rastreado (Meta)" value={<AnimatedNumber value={VENDAS_MENTORIA.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
+                <Kpi label="CTR" value={fmtPct(VENDAS_MENTORIA.ctr)} sub={`CPC médio ${fmt(VENDAS_MENTORIA.cpc)}`} />
+                <Kpi label="Visualizações de Página" value={<AnimatedNumber value={VENDAS_MENTORIA.landingPageViews} />} sub="landing page views" />
+                <Kpi label="Faturamento Rastreado" value={<AnimatedNumber value={VENDAS_MENTORIA.faturamentoMeta} prefix="R$ " />} sub="1 venda capturada pelo pixel" color={C.green} />
+              </div>
+
+              <div className="rounded-xl px-5 py-4 flex items-start gap-3 mb-8" style={{ background: C.slateBg, border: `1px solid ${C.slateRim}` }}>
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.slate }} />
+                <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
+                  Apenas <strong style={{ color: C.ink }}>1 venda</strong> foi capturada pelo pixel do Meta nesta janela, apesar de 425 cliques e 204 visualizações de página. Isso não significa que a Mentoria vendeu pouco — no ciclo de maio, 4 das 14 vendas fecharam fora do rastreamento do Meta (WhatsApp/relacionamento direto). O número real de vendas está pendente da reconciliação com o Hotmart.
+                </p>
+              </div>
+
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+                Único criativo com venda rastreada
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 mb-10">
+                <CreativeCard rank={1} nome={VENDAS_MENTORIA.criativo.nome} link={VENDAS_MENTORIA.criativo.link} vendas={VENDAS_MENTORIA.criativo.vendas} spend={VENDAS_MENTORIA.criativo.spend} faturamento={VENDAS_MENTORIA.criativo.faturamento} color={GROUP_COLOR.mentoria} />
+              </div>
+
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+                Todas as 3 campanhas (clique para detalhes)
+              </p>
+              <CampaignLeaderboard campanhas={VENDAS_MENTORIA.campanhas} color={GROUP_COLOR.mentoria} />
+              <DisclaimerCard text="Aguardando dados comerciais do Hotmart para consolidar o total real de vendas da Mentoria, incluindo fechamentos via WhatsApp fora do rastreamento do Meta Ads." />
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+      </div>
+
+      {/* ════════════════════════════════ ANÁLISE ════════════════════════════════ */}
+      <div className="max-w-5xl mx-auto px-5 py-14">
+        <Reveal>
+          <SLabel>Análise</SLabel>
+          <h2 className="text-2xl md:text-3xl font-black uppercase mb-10" style={{ color: C.ink }}>
+            Observações e próximos passos
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="rounded-xl p-6" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+              <div className="flex items-center gap-2 mb-5">
+                <TrendingUp className="w-4 h-4" style={{ color: C.green }} />
+                <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: C.green }}>Pontos fortes</p>
+              </div>
+              <div className="flex flex-col gap-4">
+                {PONTOS_FORTES.map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.green }} />
+                    <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-xl p-6" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+              <div className="flex items-center gap-2 mb-5">
+                <AlertCircle className="w-4 h-4" style={{ color: C.gold }} />
+                <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: C.gold }}>Pontos de atenção</p>
+              </div>
+              <div className="flex flex-col gap-4">
+                {PONTOS_ATENCAO.map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
+                    <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-xl p-6" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+            <div className="flex items-center gap-2 mb-5">
+              <Zap className="w-4 h-4" style={{ color: C.gold }} />
+              <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: C.gold }}>Ações recomendadas</p>
+            </div>
+            <div className="flex flex-col gap-3.5">
+              {ACOES_RECOMENDADAS.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] font-black"
+                    style={{ background: C.goldBg, color: C.gold, border: `1px solid ${C.goldRim}` }}>
+                    {i + 1}
+                  </div>
+                  <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-10 pt-8" style={{ borderTop: `1px solid ${C.border}` }}>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: C.muted }}>Fonte dos dados</p>
+            <p className="text-xs leading-relaxed" style={{ color: C.muted }}>
+              Investimento, impressões, CTR, ThruPlays e vendas rastreadas: Meta Ads (conta InovandoObra CA), via Windsor.ai.
+              Faturamento e vendas comerciais (Hotmart): em consolidação, pendente de envio.
+            </p>
+            <p className="text-xs leading-relaxed mt-2" style={{ color: C.muted }}>
+              Importante: os valores de "faturamento" e "ROAS" apresentados neste relatório refletem apenas o que o pixel do Meta Ads conseguiu atribuir. O resultado comercial real tende a ser maior, sobretudo na Mentoria.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* ════════════════════════════════ FOOTER ════════════════════════════════ */}
+      <div style={{ background: C.dark }}>
+        <div className="max-w-5xl mx-auto px-5 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <img src={imgLogo} alt="Inovando na Sua Obra" className="h-6 w-auto opacity-30" />
+          <p className="text-[10px] text-center md:text-right" style={{ color: "rgba(255,255,255,0.18)" }}>
+            Relatório gerado em {REPORT.geradoEm} · Inovando na Sua Obra · Fonte: Meta Ads (Windsor.ai) — Hotmart em consolidação
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
