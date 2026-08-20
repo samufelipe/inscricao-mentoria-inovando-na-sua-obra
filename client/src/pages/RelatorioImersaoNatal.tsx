@@ -100,13 +100,13 @@ const VENDAS_IMERSAO = {
   faturamentoMetaPeriodoTotal: 9000.81,
   campanhas: [
     { nome: "LP Imersão Natal: Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2198.04, roas: 1.38, ctr: 2.60, cpc: 0.71 },
-    { nome: "Retargeting: Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 3746.06, roas: 2.84, ctr: 2.37, cpc: 0.75 },
+    { nome: "Remarketing: Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 3746.06, roas: 2.84, ctr: 2.37, cpc: 0.75 },
     { nome: "LP Imersão Natal: Novos Criativos", spend: 717.08, vendas: 28, faturamento: 814.04, roas: 1.14, ctr: 2.76, cpc: 0.76 },
     { nome: "LP Imersão Natal: Lote 1", spend: 509.49, vendas: 7, faturamento: 185.55, roas: 0.36, ctr: 2.39, cpc: 0.82 },
     { nome: "LP Imersão Natal: Teste A/B", spend: 82.80, vendas: 1, faturamento: 25.94, roas: 0.31, ctr: 2.23, cpc: 0.91 },
     { nome: "LP Imersão Natal: Teste Bid Cap", spend: 81.88, vendas: 0, faturamento: 0, roas: null, ctr: 1.82, cpc: 1.02 },
     { nome: "LP Imersão Natal: Teste V2", spend: 35.40, vendas: 0, faturamento: 0, roas: null, ctr: 2.60, cpc: 0.74 },
-    { nome: "Retargeting: Checkout Direto", spend: 26.70, vendas: 0, faturamento: 0, roas: null, ctr: 2.58, cpc: 0.67 },
+    { nome: "Remarketing: Checkout Direto", spend: 26.70, vendas: 0, faturamento: 0, roas: null, ctr: 2.58, cpc: 0.67 },
   ],
   criativos: [
     { nome: "Sequência de Serviços", link: "https://www.instagram.com/p/DbLqhSFAzIA/", cliques: 2446, spend: 1778.50, vendas: 83, faturamento: 2370.56 },
@@ -137,7 +137,7 @@ const VENDAS_MENTORIA = {
   taxaConversao: 0.38,
   campanhas: [
     { nome: "Mentoria: Campanha Oficial", spend: 267.96, vendas: 1, faturamento: 1798.30, roas: 6.71, ctr: 1.96, cpc: 1.02 },
-    { nome: "Mentoria: Retargeting Checkout Direto", spend: 114.72, vendas: 0, faturamento: 0, roas: null, ctr: 1.93, cpc: 1.06 },
+    { nome: "Mentoria: Remarketing Checkout Direto", spend: 114.72, vendas: 0, faturamento: 0, roas: null, ctr: 1.93, cpc: 1.06 },
     { nome: "Mentoria: Campanha Oficial (Ajuste 13/08)", spend: 75.13, vendas: 0, faturamento: 0, roas: null, ctr: 1.43, cpc: 1.37 },
   ],
   criativos: [
