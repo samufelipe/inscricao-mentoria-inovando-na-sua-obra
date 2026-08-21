@@ -51,9 +51,12 @@ const REPORT = {
 
 const TOTAL = {
   investimento: 4979.93,
-  vendasMeta: 192,
-  faturamentoMeta: 8010.90,
-  roasMeta: 1.61,
+  vendasImersao: 183,
+  vendasCombo: 11,
+  vendasMentoria: 15,
+  vendasTotais: 209,
+  faturamento: 28747.25,
+  roas: 5.77,
 };
 
 const DISTRIBUICAO = {
@@ -91,13 +94,15 @@ const VENDAS_IMERSAO = {
   investimento: 4361.58,
   linkClicks: 3975,
   ctr: 2.51, cpc: 0.75,
+  vendas: 183,
+  faturamento: 4268.03,
+  vendasCombo: 11,
+  faturamentoCombo: 950.54,
+  faturamentoCaptacao: 5218.57,
+  roas: 1.20,
+  cpa: 23.83,
+  taxaConversao: 4.60,
   vendasMeta: 187,
-  faturamentoMeta: 5591.30,
-  roasMeta: 1.28,
-  cpaMeta: 23.33,
-  taxaConversao: 4.70,
-  vendasMetaPeriodoTotal: 191,
-  faturamentoMetaPeriodoTotal: 5710.90,
   campanhas: [
     { nome: "LP Imersão Cronograma: Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2272.40, roas: 1.43, ctr: 2.60, cpc: 0.71 },
     { nome: "Remarketing: Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 2242.50, roas: 1.70, ctr: 2.37, cpc: 0.75 },
@@ -130,11 +135,12 @@ const VENDAS_MENTORIA = {
   investimento: 457.81,
   linkClicks: 264,
   ctr: 1.86, cpc: 1.08,
+  vendas: 15,
+  faturamento: 23528.68,
+  roas: 51.39,
+  cpa: 30.52,
+  taxaConversao: 5.68,
   vendasMeta: 1,
-  faturamentoMeta: 2300.00,
-  roasMeta: 5.02,
-  cpaMeta: 457.81,
-  taxaConversao: 0.38,
   campanhas: [
     { nome: "Mentoria: Campanha Oficial", spend: 267.96, vendas: 1, faturamento: 2300.00, roas: 8.58, ctr: 1.96, cpc: 1.02 },
     { nome: "Mentoria: Remarketing Checkout Direto", spend: 114.72, vendas: 0, faturamento: 0, roas: null, ctr: 1.93, cpc: 1.06 },
@@ -155,27 +161,32 @@ const FUNIL = [
   { etapa: "Impressões", valor: 254825, icon: Eye },
   { etapa: "Cliques no link", valor: 4239, icon: MousePointerClick },
   { etapa: "Visualizou a página", valor: 3652, icon: Users },
-  { etapa: "Compra rastreada", valor: 192, icon: ShoppingCart },
+  { etapa: "Compra rastreada (Meta)", valor: 188, icon: ShoppingCart },
+];
+
+const ATRIBUICAO = [
+  { produto: "Imersão", rastreadoMeta: 187, real: 183, janela: REPORT.captacao },
+  { produto: "Mentoria", rastreadoMeta: 1, real: 15, janela: REPORT.carrinho },
 ];
 
 const PONTOS_FORTES = [
-  "CTR de 2,51% nas campanhas de venda da Imersão. Bem acima da média do mercado.",
-  "Pular a LP e mandar direto pro checkout converteu quase 4x mais que a página original: 5,70% contra 1,50%.",
-  "3 criativos puxaram 70,7% de todas as vendas da Imersão. \"Sequência de Serviços\" sozinho vendeu 83 vezes.",
-  "A campanha oficial da Mentoria fechou com ROAS de 8,58x, já com o ticket real de R$ 2.300. É o padrão de sempre: a Mentoria dá o melhor retorno por real investido.",
+  "O funil se pagou sozinho: Imersão e Combo faturaram R$ 5.218,57, mais do que os R$ 4.979,93 investidos no lançamento inteiro. A Mentoria (R$ 23.528,68) veio de lucro em cima disso.",
+  "ROAS global de 5,77x confirmado pelo Hotmart. Pra cada R$ 1 investido, R$ 5,77 voltaram em venda.",
+  "Custo pra conquistar um comprador da Mentoria, olhando o funil inteiro: cerca de R$ 332. Bem abaixo do que o ticket de R$ 2.300 permite gastar.",
+  "Pular a LP e mandar direto pro checkout converteu quase 4x mais que a página original: 5,70% contra 1,50% (rastreado pelo Meta).",
 ];
 
 const PONTOS_ATENCAO = [
-  "8 campanhas rodando ao mesmo tempo pra testar a Imersão é fragmentação demais. R$ 143,98 foram pra 3 variações sem nenhuma venda.",
-  "A LP original do lançamento converteu só 1,50%, a pior entre as 5 páginas testadas, mas foi a que mais recebeu tráfego direto.",
-  "Só 1 venda foi rastreada da Mentoria na semana de carrinho aberto, mesmo com 264 cliques. O número real deve ser maior, falta confirmar com o Hotmart.",
+  "O Meta só enxergou 1 das 15 vendas reais da Mentoria, 6,7% de visibilidade. O algoritmo está otimizando essa etapa quase no escuro.",
+  "8 campanhas rodando ao mesmo tempo pra testar a Imersão é fragmentação demais. R$ 143,98 foram pra 3 variações sem nenhuma venda rastreada.",
+  "A LP original do lançamento converteu só 1,50% no rastreio do Meta, bem abaixo das outras páginas com tráfego relevante, todas acima de 5%, mesmo recebendo 602 cliques, o terceiro maior volume entre as 5 testadas.",
 ];
 
 const ACOES_RECOMENDADAS = [
-  "Trocar a LP original pelo checkout direto ou pela página do quiz. As duas convertem muito mais.",
+  "Colocar Conversions API (ou um evento manual) no fechamento por WhatsApp da Mentoria. Sem isso o Meta não aprende com 93% das vendas reais e a campanha nunca otimiza direito nessa etapa.",
+  "Trocar a LP original pelo checkout direto ou pela página do quiz. As duas convertem muito mais no que dá pra medir.",
   "Escalar \"Sequência de Serviços\" com 2 ou 3 variações novas antes que o criativo sature.",
-  "Colocar a Conversions API no checkout da Mentoria. A diferença entre clique e venda rastreada hoje é grande demais pra ser só desistência.",
-  "Esperar o número real do Hotmart antes de cortar orçamento da Mentoria. Em maio, o resultado real veio bem acima do rastreado.",
+  "Com CAC tão baixo por comprador de Mentoria, dá pra testar 20 a 30% a mais de orçamento no próximo lançamento sem medo.",
 ];
 
 // ─────────────────────────────────────────
@@ -336,7 +347,7 @@ function CreativeCard({
       </div>
       <div className="grid grid-cols-3 gap-2 pt-1">
         <div>
-          <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Cliques</p>
+          <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Cliques no anúncio</p>
           <p className="text-lg font-black" style={{ color: C.ink }}>{fmtN(cliques)}</p>
         </div>
         <div>
@@ -588,21 +599,21 @@ export default function RelatorioImersaoCronograma() {
               <Kpi light label="Total Investido"
                 value={<AnimatedNumber value={TOTAL.investimento} prefix="R$ " />}
                 sub="Meta Ads · 3 frentes de campanha" />
-              <Kpi light label="Vendas Rastreadas"
-                value={<AnimatedNumber value={TOTAL.vendasMeta} />}
-                sub="pelo pixel do Meta" color={C.gold} />
+              <Kpi light label="Vendas Confirmadas"
+                value={<AnimatedNumber value={TOTAL.vendasTotais} />}
+                sub={`${TOTAL.vendasImersao} Imersão + ${TOTAL.vendasCombo} Combo + ${TOTAL.vendasMentoria} Mentoria`} color={C.gold} />
               <Kpi light label="Faturamento"
-                value={<AnimatedNumber value={TOTAL.faturamentoMeta} prefix="R$ " />}
-                sub="vendas rastreadas x ticket real" color={C.green} />
-              <Kpi light label="ROAS"
-                value={<AnimatedNumber value={TOTAL.roasMeta} suffix="x" decimals={2} />}
+                value={<AnimatedNumber value={TOTAL.faturamento} prefix="R$ " />}
+                sub="confirmado pelo Hotmart" color={C.green} />
+              <Kpi light label="ROAS Global"
+                value={<AnimatedNumber value={TOTAL.roas} suffix="x" decimals={2} />}
                 sub="faturamento / investimento" color={C.green} />
             </div>
 
             <div className="mt-4 flex items-start gap-3 px-4 py-3.5 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
+              <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.green }} />
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-                O faturamento usa o preço real de cada produto: R$ 29,90 na Imersão e R$ 2.300 na Mentoria. Não é o valor que o pixel do Meta reporta, porque esse valor vinha com inconsistência. O ROAS ainda é parcial: falta o total real de vendas da Mentoria, que também vende fora do Meta.
+                Faturamento e vendas aqui vêm direto do Hotmart, número comercial real, não estimativa de pixel. Dentro de cada aba, o detalhamento por campanha e criativo ainda usa o que o Meta rastreou, porque é a granularidade que a plataforma entrega.
               </p>
             </div>
           </Reveal>
@@ -683,6 +694,38 @@ export default function RelatorioImersaoCronograma() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="mt-10">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
+              O que o Meta viu vs. o que aconteceu de verdade
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {ATRIBUICAO.map((a, i) => {
+                const visibilidade = (a.rastreadoMeta / a.real) * 100;
+                const saudavel = visibilidade >= 80;
+                return (
+                  <div key={i} className="rounded-xl p-5" style={{ background: C.white, border: `1px solid ${C.border}` }}>
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-sm font-black uppercase" style={{ color: C.ink }}>{a.produto}</p>
+                      <Badge color={saudavel ? C.green : C.gold}>{saudavel ? "Rastreio saudável" : "Gap de atribuição"}</Badge>
+                    </div>
+                    <div className="flex items-end gap-6">
+                      <div>
+                        <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Rastreado pelo Meta</p>
+                        <p className="text-2xl font-black" style={{ color: C.muted }}>{fmtN(a.rastreadoMeta)}</p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 mb-1.5 flex-shrink-0" style={{ color: C.border }} />
+                      <div>
+                        <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Vendas reais (Hotmart)</p>
+                        <p className="text-2xl font-black" style={{ color: C.green }}>{fmtN(a.real)}</p>
+                      </div>
+                    </div>
+                    <p className="text-[11px] mt-3" style={{ color: C.muted }}>{a.janela}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </Reveal>
@@ -788,22 +831,22 @@ export default function RelatorioImersaoCronograma() {
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 <Kpi label="Investimento" value={<AnimatedNumber value={VENDAS_IMERSAO.investimento} prefix="R$ " />} sub="8 campanhas" />
-                <Kpi label="Vendas Rastreadas" value={<AnimatedNumber value={VENDAS_IMERSAO.vendasMeta} />} sub={`${fmt(VENDAS_IMERSAO.cpaMeta)} por venda`} color={GROUP_COLOR.imersao} />
-                <Kpi label="ROAS" value={<AnimatedNumber value={VENDAS_IMERSAO.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
+                <Kpi label="Vendas Confirmadas" value={<AnimatedNumber value={VENDAS_IMERSAO.vendas} />} sub={`${fmt(VENDAS_IMERSAO.cpa)} por venda · Hotmart`} color={GROUP_COLOR.imersao} />
+                <Kpi label="ROAS" value={<AnimatedNumber value={VENDAS_IMERSAO.roas} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
                 <Kpi label="Taxa de Conversão" value={fmtPct(VENDAS_IMERSAO.taxaConversao)} sub="cliques que viraram venda" color={GROUP_COLOR.imersao} />
                 <Kpi label="CTR" value={fmtPct(VENDAS_IMERSAO.ctr)} sub={`CPC médio ${fmt(VENDAS_IMERSAO.cpc)}`} />
-                <Kpi label="Faturamento" value={<AnimatedNumber value={VENDAS_IMERSAO.faturamentoMeta} prefix="R$ " />} sub="vendas rastreadas x R$ 29,90" color={C.green} />
+                <Kpi label="Faturamento" value={<AnimatedNumber value={VENDAS_IMERSAO.faturamento} prefix="R$ " />} sub="confirmado pelo Hotmart" color={C.green} />
               </div>
 
               <div className="rounded-xl px-5 py-4 flex items-start gap-3 mb-10" style={{ background: C.goldBg, border: `1px solid ${C.goldRim}` }}>
-                <TrendingUp className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
+                <Award className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
                 <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
-                  Depois do dia 07/08, mais {VENDAS_IMERSAO.vendasMetaPeriodoTotal - VENDAS_IMERSAO.vendasMeta} vendas foram atribuídas a essas mesmas campanhas. No total até hoje: {fmtN(VENDAS_IMERSAO.vendasMetaPeriodoTotal)} vendas, {fmt(VENDAS_IMERSAO.faturamentoMetaPeriodoTotal)} no ticket real.
+                  {VENDAS_IMERSAO.vendasCombo} das {VENDAS_IMERSAO.vendas} pessoas que compraram a Imersão levaram também o Combo de Materiais (checklist + manual de gerenciamento), mais {fmt(VENDAS_IMERSAO.faturamentoCombo)}. Faturamento completo da captação: {fmt(VENDAS_IMERSAO.faturamentoCaptacao)}.
                 </p>
               </div>
 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
-                Criativos que mais venderam
+                Criativos que mais venderam <span className="normal-case font-medium tracking-normal">(rastreado pelo Meta)</span>
               </p>
               <div className="grid md:grid-cols-3 gap-4 mb-10">
                 {VENDAS_IMERSAO.criativos.map((c, i) => (
@@ -812,7 +855,7 @@ export default function RelatorioImersaoCronograma() {
               </div>
 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
-                Qual página vendeu mais
+                Qual página vendeu mais <span className="normal-case font-medium tracking-normal">(rastreado pelo Meta)</span>
               </p>
               <div className="grid gap-3 mb-10">
                 {VENDAS_IMERSAO.lps.map((lp, i) => (
@@ -822,7 +865,7 @@ export default function RelatorioImersaoCronograma() {
               <DisclaimerCard text="R$ 114,51 investidos nessas 8 campanhas rodaram em anúncios sem página de destino identificada e não entram nessa comparação por LP." />
 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4 mt-10" style={{ color: C.muted }}>
-                Todas as 8 campanhas
+                Todas as 8 campanhas <span className="normal-case font-medium tracking-normal">(rastreado pelo Meta)</span>
               </p>
               <CampaignLeaderboard campanhas={VENDAS_IMERSAO.campanhas} color={GROUP_COLOR.imersao} />
             </motion.div>
@@ -841,22 +884,22 @@ export default function RelatorioImersaoCronograma() {
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 <Kpi label="Investimento" value={<AnimatedNumber value={VENDAS_MENTORIA.investimento} prefix="R$ " />} sub="3 campanhas" />
-                <Kpi label="Vendas Rastreadas" value={<AnimatedNumber value={VENDAS_MENTORIA.vendasMeta} />} sub="via pixel do checkout" color={GROUP_COLOR.mentoria} />
-                <Kpi label="ROAS" value={<AnimatedNumber value={VENDAS_MENTORIA.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
+                <Kpi label="Vendas Confirmadas" value={<AnimatedNumber value={VENDAS_MENTORIA.vendas} />} sub={`${fmt(VENDAS_MENTORIA.cpa)} por venda · Hotmart`} color={GROUP_COLOR.mentoria} />
+                <Kpi label="ROAS" value={<AnimatedNumber value={VENDAS_MENTORIA.roas} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
                 <Kpi label="Taxa de Conversão" value={fmtPct(VENDAS_MENTORIA.taxaConversao)} sub="cliques que viraram venda" color={GROUP_COLOR.mentoria} />
                 <Kpi label="CTR" value={fmtPct(VENDAS_MENTORIA.ctr)} sub={`CPC médio ${fmt(VENDAS_MENTORIA.cpc)}`} />
-                <Kpi label="Faturamento" value={<AnimatedNumber value={VENDAS_MENTORIA.faturamentoMeta} prefix="R$ " />} sub="1 venda x ticket real de R$ 2.300" color={C.green} />
+                <Kpi label="Faturamento" value={<AnimatedNumber value={VENDAS_MENTORIA.faturamento} prefix="R$ " />} sub="confirmado pelo Hotmart" color={C.green} />
               </div>
 
               <div className="rounded-xl px-5 py-4 flex items-start gap-3 mb-10" style={{ background: C.slateBg, border: `1px solid ${C.slateRim}` }}>
                 <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.slate }} />
                 <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
-                  Só 1 venda apareceu no Meta, mas isso não quer dizer que vendeu só isso. Em maio, boa parte das vendas da Mentoria fechou fora do Meta, direto no WhatsApp. O número real está com o Hotmart.
+                  O Meta só rastreou {VENDAS_MENTORIA.vendasMeta} dessas {VENDAS_MENTORIA.vendas} vendas. As outras 14 fecharam fora do checkout rastreado, a maioria direto no WhatsApp, um padrão que já se repetiu em maio. O criativo abaixo é o único com venda confirmada pelo pixel, o ranking segue por cliques.
                 </p>
               </div>
 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
-                Criativos com mais cliques
+                Criativos com mais cliques <span className="normal-case font-medium tracking-normal">(rastreado pelo Meta)</span>
               </p>
               <div className="grid md:grid-cols-3 gap-4 mb-10">
                 {VENDAS_MENTORIA.criativos.map((c, i) => (
@@ -865,7 +908,7 @@ export default function RelatorioImersaoCronograma() {
               </div>
 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: C.muted }}>
-                Qual página vendeu mais
+                Qual página vendeu mais <span className="normal-case font-medium tracking-normal">(rastreado pelo Meta)</span>
               </p>
               <div className="grid gap-3 mb-10">
                 {VENDAS_MENTORIA.lps.map((lp, i) => (
@@ -874,7 +917,7 @@ export default function RelatorioImersaoCronograma() {
               </div>
 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4 mt-10" style={{ color: C.muted }}>
-                Todas as 3 campanhas
+                Todas as 3 campanhas <span className="normal-case font-medium tracking-normal">(rastreado pelo Meta)</span>
               </p>
               <CampaignLeaderboard campanhas={VENDAS_MENTORIA.campanhas} color={GROUP_COLOR.mentoria} />
             </motion.div>
@@ -946,7 +989,7 @@ export default function RelatorioImersaoCronograma() {
           <div className="mt-10 pt-8" style={{ borderTop: `1px solid ${C.border}` }}>
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: C.muted }}>Fonte dos dados</p>
             <p className="text-xs leading-relaxed" style={{ color: C.muted }}>
-              Investimento, cliques e vendas rastreadas: Meta Ads (conta InovandoObra CA), via Windsor.ai. Faturamento calculado com o ticket real de cada produto. O total comercial completo (Hotmart) ainda está em consolidação.
+Investimento, cliques e detalhamento por campanha e criativo: Meta Ads (conta InovandoObra CA), via Windsor.ai. Vendas e faturamento confirmados: Hotmart.
             </p>
           </div>
         </Reveal>
