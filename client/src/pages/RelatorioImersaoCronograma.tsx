@@ -170,23 +170,24 @@ const ATRIBUICAO = [
 ];
 
 const PONTOS_FORTES = [
-  "O funil se pagou sozinho: Imersão e Combo faturaram R$ 5.218,57, mais do que os R$ 4.979,93 investidos no lançamento inteiro. A Mentoria (R$ 23.528,68) veio de lucro em cima disso.",
-  "ROAS global de 5,77x confirmado pelo Hotmart. Pra cada R$ 1 investido, R$ 5,77 voltaram em venda.",
-  "Custo pra conquistar um comprador da Mentoria, olhando o funil inteiro: cerca de R$ 332. Bem abaixo do que o ticket de R$ 2.300 permite gastar.",
-  "Pular a LP e mandar direto pro checkout converteu quase 4x mais que a página original: 5,70% contra 1,50% (rastreado pelo Meta).",
+  "Mesmo com pouco tempo, testamos várias estruturas de campanha diferentes.",
+  "Testamos estruturas novas de público.",
+  "Testamos criativos novos, mesmo que nem todos tenham funcionado.",
+  "As LPs novas testadas deram muito certo pra comunicação em formato de quiz.",
+  "A personalização do checkout direto da Hotmart ajudou a puxar a conversão pra cima.",
 ];
 
 const PONTOS_ATENCAO = [
-  "O Meta só enxergou 1 das 15 vendas reais da Mentoria, 6,7% de visibilidade. O algoritmo está otimizando essa etapa quase no escuro.",
-  "8 campanhas rodando ao mesmo tempo pra testar a Imersão é fragmentação demais. R$ 143,98 foram pra 3 variações sem nenhuma venda rastreada.",
-  "A LP original do lançamento converteu só 1,50% no rastreio do Meta, bem abaixo das outras páginas com tráfego relevante, todas acima de 5%, mesmo recebendo 602 cliques, o terceiro maior volume entre as 5 testadas.",
+  "As vendas da Imersão começaram na última semana do mês. Queira ou não, isso pesa um pouco na hora da decisão de compra.",
+  "O checkout não tinha a opção de PIX, e isso passou despercebido. Também impactou nas vendas.",
+  "Lançamento com prazo de planejamento muito curto tende a gerar pequenas falhas por correria, dos dois lados.",
+  "A estrutura de campanhas do Meta pro período de carrinho aberto não deu muito certo. Precisa ser repensada.",
 ];
 
 const ACOES_RECOMENDADAS = [
-  "Colocar Conversions API (ou um evento manual) no fechamento por WhatsApp da Mentoria. Sem isso o Meta não aprende com 93% das vendas reais e a campanha nunca otimiza direito nessa etapa.",
-  "Trocar a LP original pelo checkout direto ou pela página do quiz. As duas convertem muito mais no que dá pra medir.",
-  "Escalar \"Sequência de Serviços\" com 2 ou 3 variações novas antes que o criativo sature.",
-  "Com CAC tão baixo por comprador de Mentoria, dá pra testar 20 a 30% a mais de orçamento no próximo lançamento sem medo.",
+  "Modelar criativos novos a partir dos vídeos campeões, mesclando com conteúdo novo.",
+  "Criar uma conta segura no TikTok pra testar campanhas novas por lá.",
+  "Montar uma campanha de distribuição de conteúdo mais forte pro período de carrinho aberto.",
 ];
 
 // ─────────────────────────────────────────
