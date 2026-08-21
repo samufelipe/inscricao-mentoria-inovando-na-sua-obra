@@ -85,7 +85,7 @@ const DISTRIBUICAO = {
 
 const VENDAS_IMERSAO = {
   key: "imersao",
-  label: "Vendas · Imersão de Natal",
+  label: "Vendas · Imersão Cronograma",
   sub: "8 campanhas testando página, criativo e caminho até a compra (R$ 29,90)",
   periodo: REPORT.captacao,
   investimento: 4361.58,
@@ -99,13 +99,13 @@ const VENDAS_IMERSAO = {
   vendasMetaPeriodoTotal: 191,
   faturamentoMetaPeriodoTotal: 5710.90,
   campanhas: [
-    { nome: "LP Imersão Natal: Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2272.40, roas: 1.43, ctr: 2.60, cpc: 0.71 },
+    { nome: "LP Imersão Cronograma: Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2272.40, roas: 1.43, ctr: 2.60, cpc: 0.71 },
     { nome: "Remarketing: Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 2242.50, roas: 1.70, ctr: 2.37, cpc: 0.75 },
-    { nome: "LP Imersão Natal: Novos Criativos", spend: 717.08, vendas: 28, faturamento: 837.20, roas: 1.17, ctr: 2.76, cpc: 0.76 },
-    { nome: "LP Imersão Natal: Lote 1", spend: 509.49, vendas: 7, faturamento: 209.30, roas: 0.41, ctr: 2.39, cpc: 0.82 },
-    { nome: "LP Imersão Natal: Teste A/B", spend: 82.80, vendas: 1, faturamento: 29.90, roas: 0.36, ctr: 2.23, cpc: 0.91 },
-    { nome: "LP Imersão Natal: Teste Bid Cap", spend: 81.88, vendas: 0, faturamento: 0, roas: null, ctr: 1.82, cpc: 1.02 },
-    { nome: "LP Imersão Natal: Teste V2", spend: 35.40, vendas: 0, faturamento: 0, roas: null, ctr: 2.60, cpc: 0.74 },
+    { nome: "LP Imersão Cronograma: Novos Criativos", spend: 717.08, vendas: 28, faturamento: 837.20, roas: 1.17, ctr: 2.76, cpc: 0.76 },
+    { nome: "LP Imersão Cronograma: Lote 1", spend: 509.49, vendas: 7, faturamento: 209.30, roas: 0.41, ctr: 2.39, cpc: 0.82 },
+    { nome: "LP Imersão Cronograma: Teste A/B", spend: 82.80, vendas: 1, faturamento: 29.90, roas: 0.36, ctr: 2.23, cpc: 0.91 },
+    { nome: "LP Imersão Cronograma: Teste Bid Cap", spend: 81.88, vendas: 0, faturamento: 0, roas: null, ctr: 1.82, cpc: 1.02 },
+    { nome: "LP Imersão Cronograma: Teste V2", spend: 35.40, vendas: 0, faturamento: 0, roas: null, ctr: 2.60, cpc: 0.74 },
     { nome: "Remarketing: Checkout Direto", spend: 26.70, vendas: 0, faturamento: 0, roas: null, ctr: 2.58, cpc: 0.67 },
   ],
   criativos: [
@@ -117,8 +117,8 @@ const VENDAS_IMERSAO = {
     { nome: "Checkout Direto", tipo: "Sem página, direto pro checkout", link: "https://pay.hotmart.com/T106814287G?checkoutMode=10", cliques: 1158, vendas: 66, taxa: 5.70 },
     { nome: "Página Imersão", tipo: "Landing page nova", link: "https://inscricao.imersao.inovandonasuaobra.com.br/", cliques: 493, vendas: 27, taxa: 5.48 },
     { nome: "Quiz de Diagnóstico", tipo: "Funil em formato de quiz", link: "https://inscricao.imersao.inovandonasuaobra.com.br/quiz", cliques: 1550, vendas: 81, taxa: 5.23 },
-    { nome: "LP Imersão Natal", tipo: "Página original do lançamento", link: "https://cronogramadenatal.inovandonasuaobra.com.br/", cliques: 602, vendas: 9, taxa: 1.50 },
-    { nome: "LP Imersão Natal V2", tipo: "Variação de teste", link: "https://cronogramadenatal.inovandonasuaobra.com.br/natal-v2", cliques: 33, vendas: 0, taxa: 0 },
+    { nome: "LP Imersão Cronograma", tipo: "Página original do lançamento", link: "https://cronogramadenatal.inovandonasuaobra.com.br/", cliques: 602, vendas: 9, taxa: 1.50 },
+    { nome: "LP Imersão Cronograma V2", tipo: "Variação de teste", link: "https://cronogramadenatal.inovandonasuaobra.com.br/natal-v2", cliques: 33, vendas: 0, taxa: 0 },
   ],
 };
 
@@ -530,18 +530,18 @@ function RetentionTooltip({ active, payload, label }: { active?: boolean; payloa
 // ─────────────────────────────────────────
 const TABS = [
   { key: "distribuicao", label: "Distribuição de Conteúdo", icon: Clapperboard },
-  { key: "imersao", label: "Vendas · Imersão de Natal", icon: Sparkles },
+  { key: "imersao", label: "Vendas · Imersão Cronograma", icon: Sparkles },
   { key: "mentoria", label: "Vendas · Mentoria", icon: Award },
 ];
 
 // ─────────────────────────────────────────
 // MAIN PAGE
 // ─────────────────────────────────────────
-export default function RelatorioImersaoNatal() {
+export default function RelatorioImersaoCronograma() {
   const [tab, setTab] = useState<string>("distribuicao");
 
   useEffect(() => {
-    document.title = "Relatório de Resultados - Imersão de Natal | Inovando na Sua Obra";
+    document.title = "Relatório de Resultados - Imersão Cronograma Obra Pronta | Inovando na Sua Obra";
   }, []);
 
   const retencaoChartData = [
@@ -553,7 +553,7 @@ export default function RelatorioImersaoNatal() {
 
   const GROUP_PIE = [
     { name: "Distribuição de Conteúdo", value: DISTRIBUICAO.investimento, color: GROUP_COLOR.distribuicao },
-    { name: "Vendas · Imersão de Natal", value: VENDAS_IMERSAO.investimento, color: GROUP_COLOR.imersao },
+    { name: "Vendas · Imersão Cronograma", value: VENDAS_IMERSAO.investimento, color: GROUP_COLOR.imersao },
     { name: "Vendas · Mentoria", value: VENDAS_MENTORIA.investimento, color: GROUP_COLOR.mentoria },
   ];
 
@@ -573,7 +573,7 @@ export default function RelatorioImersaoNatal() {
                     Relatório de Resultados
                   </p>
                   <h1 className="text-lg md:text-xl font-black uppercase tracking-tight leading-tight" style={{ color: C.white }}>
-                    Lançamento Imersão de Natal
+                    Lançamento Imersão Cronograma Obra Pronta
                   </h1>
                 </div>
               </div>
@@ -778,7 +778,7 @@ export default function RelatorioImersaoNatal() {
           {tab === "imersao" && (
             <motion.div key="imersao" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3 }}>
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <SLabel color={GROUP_COLOR.imersao}>02 / Vendas · Imersão de Natal</SLabel>
+                <SLabel color={GROUP_COLOR.imersao}>02 / Vendas · Imersão Cronograma</SLabel>
                 <Badge color={GROUP_COLOR.imersao}>{VENDAS_IMERSAO.periodo}</Badge>
               </div>
               <h2 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-2" style={{ color: C.ink }}>
