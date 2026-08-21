@@ -52,8 +52,8 @@ const REPORT = {
 const TOTAL = {
   investimento: 4979.93,
   vendasMeta: 192,
-  faturamentoMeta: 10799.11,
-  roasMeta: 2.17,
+  faturamentoMeta: 8010.90,
+  roasMeta: 1.61,
 };
 
 const DISTRIBUICAO = {
@@ -92,26 +92,26 @@ const VENDAS_IMERSAO = {
   linkClicks: 3975,
   ctr: 2.51, cpc: 0.75,
   vendasMeta: 187,
-  faturamentoMeta: 6969.63,
-  roasMeta: 1.60,
+  faturamentoMeta: 5591.30,
+  roasMeta: 1.28,
   cpaMeta: 23.33,
   taxaConversao: 4.70,
   vendasMetaPeriodoTotal: 191,
-  faturamentoMetaPeriodoTotal: 9000.81,
+  faturamentoMetaPeriodoTotal: 5710.90,
   campanhas: [
-    { nome: "LP Imersão Natal: Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2198.04, roas: 1.38, ctr: 2.60, cpc: 0.71 },
-    { nome: "Remarketing: Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 3746.06, roas: 2.84, ctr: 2.37, cpc: 0.75 },
-    { nome: "LP Imersão Natal: Novos Criativos", spend: 717.08, vendas: 28, faturamento: 814.04, roas: 1.14, ctr: 2.76, cpc: 0.76 },
-    { nome: "LP Imersão Natal: Lote 1", spend: 509.49, vendas: 7, faturamento: 185.55, roas: 0.36, ctr: 2.39, cpc: 0.82 },
-    { nome: "LP Imersão Natal: Teste A/B", spend: 82.80, vendas: 1, faturamento: 25.94, roas: 0.31, ctr: 2.23, cpc: 0.91 },
+    { nome: "LP Imersão Natal: Teste V2 (Escala)", spend: 1587.92, vendas: 76, faturamento: 2272.40, roas: 1.43, ctr: 2.60, cpc: 0.71 },
+    { nome: "Remarketing: Checkout Direto (Novos Criativos)", spend: 1320.31, vendas: 75, faturamento: 2242.50, roas: 1.70, ctr: 2.37, cpc: 0.75 },
+    { nome: "LP Imersão Natal: Novos Criativos", spend: 717.08, vendas: 28, faturamento: 837.20, roas: 1.17, ctr: 2.76, cpc: 0.76 },
+    { nome: "LP Imersão Natal: Lote 1", spend: 509.49, vendas: 7, faturamento: 209.30, roas: 0.41, ctr: 2.39, cpc: 0.82 },
+    { nome: "LP Imersão Natal: Teste A/B", spend: 82.80, vendas: 1, faturamento: 29.90, roas: 0.36, ctr: 2.23, cpc: 0.91 },
     { nome: "LP Imersão Natal: Teste Bid Cap", spend: 81.88, vendas: 0, faturamento: 0, roas: null, ctr: 1.82, cpc: 1.02 },
     { nome: "LP Imersão Natal: Teste V2", spend: 35.40, vendas: 0, faturamento: 0, roas: null, ctr: 2.60, cpc: 0.74 },
     { nome: "Remarketing: Checkout Direto", spend: 26.70, vendas: 0, faturamento: 0, roas: null, ctr: 2.58, cpc: 0.67 },
   ],
   criativos: [
-    { nome: "Sequência de Serviços", link: "https://www.instagram.com/p/DbLqhSFAzIA/", cliques: 2446, spend: 1778.50, vendas: 83, faturamento: 2370.56 },
-    { nome: "Tadinha da Fernanda (variação 1)", link: "https://www.instagram.com/p/Dbl06ewAFSJ/", cliques: 861, spend: 613.62, vendas: 36, faturamento: 1009.89 },
-    { nome: "Tadinha da Fernanda (variação 2)", link: "https://www.instagram.com/p/Dbl0ZtagAuY/", cliques: 361, spend: 215.12, vendas: 16, faturamento: 470.88 },
+    { nome: "Sequência de Serviços", link: "https://www.instagram.com/p/DbLqhSFAzIA/", cliques: 2446, spend: 1778.50, vendas: 83, faturamento: 2481.70 },
+    { nome: "Tadinha da Fernanda (variação 1)", link: "https://www.instagram.com/p/Dbl06ewAFSJ/", cliques: 861, spend: 613.62, vendas: 36, faturamento: 1076.40 },
+    { nome: "Tadinha da Fernanda (variação 2)", link: "https://www.instagram.com/p/Dbl0ZtagAuY/", cliques: 361, spend: 215.12, vendas: 16, faturamento: 478.40 },
   ],
   lps: [
     { nome: "Checkout Direto", tipo: "Sem página, direto pro checkout", link: "https://pay.hotmart.com/T106814287G?checkoutMode=10", cliques: 1158, vendas: 66, taxa: 5.70 },
@@ -131,17 +131,17 @@ const VENDAS_MENTORIA = {
   linkClicks: 264,
   ctr: 1.86, cpc: 1.08,
   vendasMeta: 1,
-  faturamentoMeta: 1798.30,
-  roasMeta: 3.93,
+  faturamentoMeta: 2300.00,
+  roasMeta: 5.02,
   cpaMeta: 457.81,
   taxaConversao: 0.38,
   campanhas: [
-    { nome: "Mentoria: Campanha Oficial", spend: 267.96, vendas: 1, faturamento: 1798.30, roas: 6.71, ctr: 1.96, cpc: 1.02 },
+    { nome: "Mentoria: Campanha Oficial", spend: 267.96, vendas: 1, faturamento: 2300.00, roas: 8.58, ctr: 1.96, cpc: 1.02 },
     { nome: "Mentoria: Remarketing Checkout Direto", spend: 114.72, vendas: 0, faturamento: 0, roas: null, ctr: 1.93, cpc: 1.06 },
     { nome: "Mentoria: Campanha Oficial (Ajuste 13/08)", spend: 75.13, vendas: 0, faturamento: 0, roas: null, ctr: 1.43, cpc: 1.37 },
   ],
   criativos: [
-    { nome: "Cobrança de Fornecedores", link: "https://www.instagram.com/p/Db3dIl_gGGG/", cliques: 211, spend: 232.25, vendas: 1, faturamento: 1798.30 },
+    { nome: "Cobrança de Fornecedores", link: "https://www.instagram.com/p/Db3dIl_gGGG/", cliques: 211, spend: 232.25, vendas: 1, faturamento: 2300.00 },
     { nome: "Estagiária Acertando", link: "https://www.instagram.com/p/Db3dr0Agqqn/", cliques: 151, spend: 125.79, vendas: 0, faturamento: 0 },
     { nome: "Sempre na Correria", link: "https://www.instagram.com/p/Db3drvBgIb1/", cliques: 19, spend: 27.24, vendas: 0, faturamento: 0 },
   ],
@@ -162,7 +162,7 @@ const PONTOS_FORTES = [
   "CTR de 2,51% nas campanhas de venda da Imersão. Bem acima da média do mercado.",
   "Pular a LP e mandar direto pro checkout converteu quase 4x mais que a página original: 5,70% contra 1,50%.",
   "3 criativos puxaram 70,7% de todas as vendas da Imersão. \"Sequência de Serviços\" sozinho vendeu 83 vezes.",
-  "A campanha oficial da Mentoria fechou com ROAS de 6,71x. É o padrão de sempre: a Mentoria dá o melhor retorno por real investido.",
+  "A campanha oficial da Mentoria fechou com ROAS de 8,58x, já com o ticket real de R$ 2.300. É o padrão de sempre: a Mentoria dá o melhor retorno por real investido.",
 ];
 
 const PONTOS_ATENCAO = [
@@ -349,7 +349,7 @@ function CreativeCard({
         </div>
       </div>
       {faturamento > 0 && (
-        <p className="text-[11px] font-semibold" style={{ color: C.green }}>{fmt(faturamento)} em vendas rastreadas</p>
+        <p className="text-[11px] font-semibold" style={{ color: C.green }}>{fmt(faturamento)} no ticket real</p>
       )}
     </motion.a>
   );
@@ -444,7 +444,7 @@ function CampaignLeaderboard({
                       <p className="text-sm font-bold" style={{ color: C.ink }}>{fmt(c.spend)}</p>
                     </div>
                     <div>
-                      <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Faturamento rastreado</p>
+                      <p className="text-[9px] uppercase tracking-wider" style={{ color: C.muted }}>Faturamento (ticket real)</p>
                       <p className="text-sm font-bold" style={{ color: c.faturamento > 0 ? C.green : C.ink }}>{c.faturamento > 0 ? fmt(c.faturamento) : "sem venda"}</p>
                     </div>
                     <div>
@@ -591,10 +591,10 @@ export default function RelatorioImersaoNatal() {
               <Kpi light label="Vendas Rastreadas"
                 value={<AnimatedNumber value={TOTAL.vendasMeta} />}
                 sub="pelo pixel do Meta" color={C.gold} />
-              <Kpi light label="Faturamento Rastreado"
+              <Kpi light label="Faturamento"
                 value={<AnimatedNumber value={TOTAL.faturamentoMeta} prefix="R$ " />}
-                sub="valor atribuído pelo pixel" color={C.green} />
-              <Kpi light label="ROAS Rastreado"
+                sub="vendas rastreadas x ticket real" color={C.green} />
+              <Kpi light label="ROAS"
                 value={<AnimatedNumber value={TOTAL.roasMeta} suffix="x" decimals={2} />}
                 sub="faturamento / investimento" color={C.green} />
             </div>
@@ -602,7 +602,7 @@ export default function RelatorioImersaoNatal() {
             <div className="mt-4 flex items-start gap-3 px-4 py-3.5 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-                Vendas e faturamento aqui são só o que o Meta consegue rastrear pelo pixel. O número real do Hotmart ainda não entrou nessa conta, e costuma ser maior, principalmente na Mentoria.
+                O faturamento usa o preço real de cada produto: R$ 29,90 na Imersão e R$ 2.300 na Mentoria. Não é o valor que o pixel do Meta reporta, porque esse valor vinha com inconsistência. O ROAS ainda é parcial: falta o total real de vendas da Mentoria, que também vende fora do Meta.
               </p>
             </div>
           </Reveal>
@@ -789,16 +789,16 @@ export default function RelatorioImersaoNatal() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 <Kpi label="Investimento" value={<AnimatedNumber value={VENDAS_IMERSAO.investimento} prefix="R$ " />} sub="8 campanhas" />
                 <Kpi label="Vendas Rastreadas" value={<AnimatedNumber value={VENDAS_IMERSAO.vendasMeta} />} sub={`${fmt(VENDAS_IMERSAO.cpaMeta)} por venda`} color={GROUP_COLOR.imersao} />
-                <Kpi label="ROAS Rastreado" value={<AnimatedNumber value={VENDAS_IMERSAO.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
+                <Kpi label="ROAS" value={<AnimatedNumber value={VENDAS_IMERSAO.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
                 <Kpi label="Taxa de Conversão" value={fmtPct(VENDAS_IMERSAO.taxaConversao)} sub="cliques que viraram venda" color={GROUP_COLOR.imersao} />
                 <Kpi label="CTR" value={fmtPct(VENDAS_IMERSAO.ctr)} sub={`CPC médio ${fmt(VENDAS_IMERSAO.cpc)}`} />
-                <Kpi label="Faturamento Rastreado" value={<AnimatedNumber value={VENDAS_IMERSAO.faturamentoMeta} prefix="R$ " />} sub="valor atribuído pelo pixel" color={C.green} />
+                <Kpi label="Faturamento" value={<AnimatedNumber value={VENDAS_IMERSAO.faturamentoMeta} prefix="R$ " />} sub="vendas rastreadas x R$ 29,90" color={C.green} />
               </div>
 
               <div className="rounded-xl px-5 py-4 flex items-start gap-3 mb-10" style={{ background: C.goldBg, border: `1px solid ${C.goldRim}` }}>
                 <TrendingUp className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
                 <p className="text-sm leading-relaxed" style={{ color: C.inkSoft }}>
-                  Depois do dia 07/08, mais {VENDAS_IMERSAO.vendasMetaPeriodoTotal - VENDAS_IMERSAO.vendasMeta} vendas foram atribuídas a essas mesmas campanhas. No total até hoje: {fmtN(VENDAS_IMERSAO.vendasMetaPeriodoTotal)} vendas e {fmt(VENDAS_IMERSAO.faturamentoMetaPeriodoTotal)} rastreados.
+                  Depois do dia 07/08, mais {VENDAS_IMERSAO.vendasMetaPeriodoTotal - VENDAS_IMERSAO.vendasMeta} vendas foram atribuídas a essas mesmas campanhas. No total até hoje: {fmtN(VENDAS_IMERSAO.vendasMetaPeriodoTotal)} vendas, {fmt(VENDAS_IMERSAO.faturamentoMetaPeriodoTotal)} no ticket real.
                 </p>
               </div>
 
@@ -842,10 +842,10 @@ export default function RelatorioImersaoNatal() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                 <Kpi label="Investimento" value={<AnimatedNumber value={VENDAS_MENTORIA.investimento} prefix="R$ " />} sub="3 campanhas" />
                 <Kpi label="Vendas Rastreadas" value={<AnimatedNumber value={VENDAS_MENTORIA.vendasMeta} />} sub="via pixel do checkout" color={GROUP_COLOR.mentoria} />
-                <Kpi label="ROAS Rastreado" value={<AnimatedNumber value={VENDAS_MENTORIA.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
+                <Kpi label="ROAS" value={<AnimatedNumber value={VENDAS_MENTORIA.roasMeta} suffix="x" decimals={2} />} sub="faturamento / investimento" color={C.green} />
                 <Kpi label="Taxa de Conversão" value={fmtPct(VENDAS_MENTORIA.taxaConversao)} sub="cliques que viraram venda" color={GROUP_COLOR.mentoria} />
                 <Kpi label="CTR" value={fmtPct(VENDAS_MENTORIA.ctr)} sub={`CPC médio ${fmt(VENDAS_MENTORIA.cpc)}`} />
-                <Kpi label="Faturamento Rastreado" value={<AnimatedNumber value={VENDAS_MENTORIA.faturamentoMeta} prefix="R$ " />} sub="1 venda capturada pelo pixel" color={C.green} />
+                <Kpi label="Faturamento" value={<AnimatedNumber value={VENDAS_MENTORIA.faturamentoMeta} prefix="R$ " />} sub="1 venda x ticket real de R$ 2.300" color={C.green} />
               </div>
 
               <div className="rounded-xl px-5 py-4 flex items-start gap-3 mb-10" style={{ background: C.slateBg, border: `1px solid ${C.slateRim}` }}>
@@ -946,7 +946,7 @@ export default function RelatorioImersaoNatal() {
           <div className="mt-10 pt-8" style={{ borderTop: `1px solid ${C.border}` }}>
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: C.muted }}>Fonte dos dados</p>
             <p className="text-xs leading-relaxed" style={{ color: C.muted }}>
-              Investimento, cliques e vendas rastreadas: Meta Ads (conta InovandoObra CA), via Windsor.ai. Faturamento comercial real: Hotmart, em consolidação.
+              Investimento, cliques e vendas rastreadas: Meta Ads (conta InovandoObra CA), via Windsor.ai. Faturamento calculado com o ticket real de cada produto. O total comercial completo (Hotmart) ainda está em consolidação.
             </p>
           </div>
         </Reveal>
