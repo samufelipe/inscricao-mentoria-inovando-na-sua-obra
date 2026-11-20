@@ -370,7 +370,7 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false, target = DEA
   const { days, hours, minutes, seconds, expired } = useCountdown(target);
   if (expired) return null;
   const textMain = dark ? C.white : C.ink;
-  const textSub  = dark ? "rgba(255,255,255,0.45)" : C.muted;
+  const textSub  = dark ? (C === C_BLACK ? "rgba(252,238,225,0.68)" : "rgba(255,255,255,0.45)") : C.muted;
   const bg       = dark ? "rgba(255,255,255,0.06)" : C.cream;
   const border   = dark ? "rgba(255,255,255,0.1)"  : C.border;
   const pad = (n: number) => String(n).padStart(2, "0");
@@ -430,9 +430,9 @@ function BlackChip({ onClick }: { onClick: () => void }) {
   const pad = (n: number) => String(n).padStart(2, "0");
   return (
     <button onClick={onClick}
-      className="flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] cursor-pointer transition-colors"
+      className="relative flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] cursor-pointer transition-colors after:absolute after:-inset-2 after:content-['']"
       style={{ border: `1px solid rgba(${C_BLACK.goldRgb},0.55)`, backgroundColor: "rgba(10,9,8,0.72)", color: C_BLACK.white }}
-      aria-label={`Última turma da mentoria. As inscrições fecham em ${days} dias e ${hours} horas. Ver a condição.`}
+      aria-label="Última turma da mentoria. As inscrições fecham em 30 de novembro, às 23h59. Ver a condição."
     >
       <span className="hidden sm:inline" style={{ color: C_BLACK.gold }}>Última turma</span>
       <span className="hidden sm:inline" style={{ color: "rgba(252,238,225,0.6)" }}>fecha em</span>
@@ -633,8 +633,8 @@ export default function Home() {
                     <Lock className="w-3.5 h-3.5" /> Pagamento 100% Seguro pela Hotmart
                   </p>
                   {black
-                    ? <CountdownTimer label="As inscrições fecham em:" target={BLACK_FIM} />
-                    : <CountdownTimer label="Vagas fecham em:" />}
+                    ? <CountdownTimer key="black" label="As inscrições fecham em:" target={BLACK_FIM} />
+                    : <CountdownTimer key="normal" label="Vagas fecham em:" />}
                 </div>
               </div>
               {black && provaSocial("rgba(252,238,225,0.72)")}
@@ -666,13 +666,14 @@ export default function Home() {
                   />
                 )}
                 <img src={imgNovaImgMentoras}
-                  alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
+                  alt="Ingrid Zarza e Fernanda Bradaschia, da Mentoria Inovando na Sua Obra"
                   className={black ? "relative z-10 w-full h-auto" : "relative z-10 w-full h-auto mix-blend-multiply"}
                   loading="eager"
                   fetchPriority="high"
                 />
                 {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
-                {black && <BlackSelo className="absolute left-1/2 -translate-x-1/2 -bottom-4 z-20" />}
+                {/* No celular o selo fica no centro da base; no computador vai para o canto direito, porque o cartão +250 ocupa o esquerdo */}
+                {black && <BlackSelo className="absolute left-1/2 -translate-x-1/2 -bottom-4 z-20 lg:left-auto lg:right-4 lg:translate-x-0" />}
                 <div className="absolute top-2 right-2 lg:top-auto lg:right-auto lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-1.5 lg:px-5 lg:py-4 shadow-xl"
                   style={black ? { backgroundColor: C.dark, border: "1px solid rgba(252,238,225,0.2)" } : { backgroundColor: C.dark }}
                 >
@@ -1269,10 +1270,10 @@ export default function Home() {
                     <div className="absolute -top-5 -right-5 z-20 px-4 py-3 shadow-lg"
                       style={{ backgroundColor: C.gold }}
                     >
-                      <p className="font-display font-black text-xl text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
+                      <p className="font-display font-black text-xl text-white" style={black ? { fontFamily: "Montserrat, sans-serif", color: C.dark } : { fontFamily: "Montserrat, sans-serif" }}>
                         +250
                       </p>
-                      <p className="text-[9px] uppercase tracking-widest text-white/80">obras</p>
+                      <p className="text-[9px] uppercase tracking-widest text-white/80" style={black ? { color: "rgba(10,9,8,0.82)" } : undefined}>obras</p>
                     </div>
                   </div>
                 </div>
@@ -1294,7 +1295,7 @@ export default function Home() {
                       Fundamos a <strong style={{ color: C.ink }}>INOVANDO ARQUITETURA</strong>, escritório especializado em desenvolvimento e gerenciamento de projetos residenciais e comerciais. Ao longo da nossa trajetória, já concluímos mais de 250 obras. Depois de anos vivendo obras reais, erros, retrabalhos, problemas com fornecedores, clientes difíceis e decisões caras, organizamos a experiência prática que realmente acelera a trajetória de uma arquiteta.
                     </p>
                     <p>
-                      Em 2024 criamos a <strong style={{ color: C.ink }}>Mentoria Inovando na Sua Obra</strong> para compartilhar toda essa vivência de forma organizada, prática e acessível. Já são dezenas de alunas impactadas pela nossa metodologia.
+                      Em 2024 criamos a <strong style={{ color: C.ink }}>Mentoria Inovando na Sua Obra</strong> para compartilhar toda essa vivência de forma organizada, prática e acessível. {black ? "Já são mais de 1000 arquitetas impactadas pela nossa metodologia." : "Já são dezenas de alunas impactadas pela nossa metodologia."}
                     </p>
                     <p>
                       Tenha acesso ao repertório que normalmente só vem com o tempo. Pare de improvisar na prática.
@@ -1351,7 +1352,7 @@ export default function Home() {
                 </h2>
                 <p className="text-base leading-relaxed" style={{ color: black ? "rgba(252,238,225,0.8)" : "rgba(255,255,255,0.55)", maxWidth: black ? "40ch" : "34ch" }}>
                   {black
-                    ? `Depois de ${BLACK.prazoLongo}, as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra com acesso vitalício ao conteúdo e parcela em 10x sem juros.`
+                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra com acesso vitalício ao conteúdo e parcela em 10x sem juros.`
                     : "Pagamento 100% Seguro pela Hotmart."}
                 </p>
                 <div className="px-4 py-3 text-base font-semibold"
@@ -1360,14 +1361,14 @@ export default function Home() {
                   Uma obra com gerenciamento cobrado paga a mentoria inteira.
                 </div>
                 {black
-                  ? <CountdownTimer label="A última turma fecha em:" dark target={BLACK_FIM} />
-                  : <CountdownTimer label="Vagas fecham em:" dark />}
+                  ? <CountdownTimer key="black" label="A última turma fecha em:" dark target={BLACK_FIM} />
+                  : <CountdownTimer key="normal" label="Vagas fecham em:" dark />}
                 <div className="space-y-2 pt-2">
-                  <div className="flex items-center justify-center gap-2 text-xs text-center" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  <div className="flex items-center justify-center gap-2 text-xs text-center" style={{ color: black ? "rgba(252,238,225,0.74)" : "rgba(255,255,255,0.45)" }}>
                     <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
                     {black ? "+1000 arquitetas já foram impactadas pela Inovando na Sua Obra" : "Milhares de arquitetas ja transformaram seus resultados com a Mentoria Inovando na Sua Obra"}
                   </div>
-                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+                  <div className="flex items-center justify-center gap-2 text-xs" style={{ color: black ? "rgba(252,238,225,0.68)" : "rgba(255,255,255,0.35)" }}>
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: C.green }} />
                     Pagamento 100% Seguro pela Hotmart · Garantia de 15 dias
                   </div>
@@ -1454,15 +1455,21 @@ export default function Home() {
                     {black ? "Garantir minha vaga na última turma" : "Quero meu acesso agora"}
                     <ArrowRight className="w-4 h-4" />
                   </a>
-                  <a href="https://pay.hotmart.com/Y93975016X?off=azkbpgud&bid=1786136104312"
-                    target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full py-3 text-xs font-bold uppercase tracking-wider transition-colors"
-                    style={{ backgroundColor: "rgba(0,0,0,0.05)", color: C.muted, border: `1px solid ${C.border}` }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.09)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.05)")}
-                  >
-                    Parcelar no PIX
-                  </a>
+                  {black ? (
+                    <p className="text-xs text-center leading-relaxed" style={{ color: C.inkLight }}>
+                      Cartão em até 10x sem juros, Pix, PayPal ou Google Pay.
+                    </p>
+                  ) : (
+                    <a href="https://pay.hotmart.com/Y93975016X?off=azkbpgud&bid=1786136104312"
+                      target="_blank" rel="noopener noreferrer"
+                      className="flex items-center justify-center w-full py-3 text-xs font-bold uppercase tracking-wider transition-colors"
+                      style={{ backgroundColor: "rgba(0,0,0,0.05)", color: C.muted, border: `1px solid ${C.border}` }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.09)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.05)")}
+                    >
+                      Parcelar no PIX
+                    </a>
+                  )}
                   <div className="flex items-center justify-center gap-2 text-xs" style={{ color: C.muted }}>
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: C.green }} />
                     Pagamento 100% Seguro pela Hotmart · Garantia de 15 dias
