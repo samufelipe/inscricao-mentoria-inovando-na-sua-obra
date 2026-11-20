@@ -195,3 +195,13 @@
     }
   }
 }
+
+/* Campanha Black Arquiteta na Obra (até 30/11/2026). A classe .tema-black só existe enquanto a campanha está no ar.
+   Regra da casa na versão Black: botão só com texto, sem seta. */
+.tema-black .lucide-arrow-right {
+  display: none;
+}
+.tema-black ::selection {
+  background: #e8818e;
+  color: #0a0908;
+}

@@ -5,9 +5,11 @@ interface VideoTestimonialCardProps {
   name: string;
   thumbnailSrc: string;
   videoSrc: string;
+  /** cor do anel do botão de play; acompanha a paleta da página */
+  accent?: string;
 }
 
-export function VideoTestimonialCard({ name, thumbnailSrc, videoSrc }: VideoTestimonialCardProps) {
+export function VideoTestimonialCard({ name, thumbnailSrc, videoSrc, accent = "#C9A257" }: VideoTestimonialCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -74,7 +76,7 @@ export function VideoTestimonialCard({ name, thumbnailSrc, videoSrc }: VideoTest
         <div
           className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200"
           style={{
-            border: "2px solid #C9A257",
+            border: `2px solid ${accent}`,
             backgroundColor: "rgba(0,0,0,0.35)",
             backdropFilter: "blur(4px)",
             opacity: playing && !showControl ? 0 : 1,

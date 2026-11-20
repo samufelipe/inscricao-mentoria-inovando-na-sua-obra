@@ -21,7 +21,7 @@ import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
 /* ═══════════════════════════════════════
    DESIGN TOKENS
    ═══════════════════════════════════════ */
-const C = {
+const C_NORMAL = {
   cream:     "#FAF8F4",
   white:     "#FFFFFF",
   ink:       "#1C1C1A",
@@ -36,7 +36,70 @@ const C = {
   dark:      "#1A1510",
   darkMid:   "#252018",
   sage:      "#B2BEB5",
+  /* Derivados. Na página normal valem o mesmo que os valores acima; só mudam na paleta da Black. */
+  goldText:  "#C9A257",
+  goldRgb:   "201,162,87",
+  deep:      "#111110",
 };
+type Paleta = typeof C_NORMAL;
+
+/* Paleta da campanha Black Arquiteta na Obra: preto, marfim e rosa, as cores da arte da cliente
+   e da LP da aula gratuita. goldText é o rosa escuro, usado quando o rosa vira texto sobre fundo claro. */
+const C_BLACK: Paleta = {
+  cream:     "#FDF4EC",
+  white:     "#FCEEE1",
+  ink:       "#0A0908",
+  inkLight:  "#4B4042",
+  muted:     "#6B5E60",
+  border:    "#F1D3CB",
+  gold:      "#E8818E",
+  goldLight: "#F9DDD7",
+  goldDim:   "rgba(232,129,142,0.12)",
+  green:     "#15803D",
+  greenDark: "#166534",
+  dark:      "#0A0908",
+  darkMid:   "#1C1313",
+  sage:      "#B2BEB5",
+  goldText:  "#A3434F",
+  goldRgb:   "232,129,142",
+  deep:      "#0A0908",
+};
+
+const PaletaCtx = React.createContext<Paleta>(C_NORMAL);
+const usePaleta = () => React.useContext(PaletaCtx);
+
+/* ═══════════════════════════════════════
+   CAMPANHA BLACK ARQUITETA NA OBRA (novembro de 2026)
+   Enquanto o relógio do visitante estiver antes de BLACK_FIM, a página mostra a oferta,
+   a copy e a paleta da Black. Passou do prazo, ela volta sozinha a ser a página normal:
+   nada da Black é renderizado e a paleta volta a ser a C_NORMAL.
+   ?black=0 na URL mostra a página normal antes do prazo, para conferência.
+   Tudo que é da Black passa pela variável `black`.
+   ═══════════════════════════════════════ */
+const BLACK_FIM = new Date("2026-11-30T23:59:59-03:00");
+const BLACK = {
+  parcelas:   "10x de R$ 240,00",
+  avista:     "R$ 2.400,00",
+  de:         "R$ 2.700,00",
+  economia:   "R$ 300,00",
+  prazoCurto: "30/11",
+  prazoLongo: "30/11, às 23h59",
+};
+
+function blackNoAr() {
+  if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("black") === "0") return false;
+  return Date.now() < BLACK_FIM.getTime();
+}
+
+function useBlackAtiva() {
+  const [ativa, setAtiva] = useState(blackNoAr);
+  useEffect(() => {
+    if (!ativa) return;
+    const id = setInterval(() => { if (!blackNoAr()) setAtiva(false); }, 1000);
+    return () => clearInterval(id);
+  }, [ativa]);
+  return ativa;
+}
 
 /* ─── Grid background helper ─── */
 const gridBg = (color = "rgba(201,162,87,0.07)", size = "60px 60px") => ({
@@ -71,7 +134,10 @@ function Reveal({
    SECTION LABEL
    ═══════════════════════════════════════ */
 function Label({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  const col = light ? "rgba(201,162,87,0.8)" : C.gold;
+  const C = usePaleta();
+  /* regra da casa na versão Black: sem rótulo acima de título */
+  if (C === C_BLACK) return null;
+  const col = light ? `rgba(${C.goldRgb},0.8)` : C.goldText;
   return (
     <div className="flex items-center gap-3 justify-center mb-4">
       <div className="w-8 h-px" style={{ backgroundColor: col }} />
@@ -87,6 +153,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
    GOLD HIGHLIGHT WORD
    ═══════════════════════════════════════ */
 function Highlight({ children }: { children: React.ReactNode }) {
+  const C = usePaleta();
   return (
     <span className="relative inline-block">
       <span className="absolute inset-0 -skew-x-3"
@@ -296,8 +363,9 @@ function useCountdown(target: Date) {
   return t;
 }
 
-function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: string; dark?: boolean }) {
-  const { days, hours, minutes, seconds, expired } = useCountdown(DEADLINE);
+function CountdownTimer({ label = "Vagas fecham em:", dark = false, target = DEADLINE }: { label?: string; dark?: boolean; target?: Date }) {
+  const C = usePaleta();
+  const { days, hours, minutes, seconds, expired } = useCountdown(target);
   if (expired) return null;
   const textMain = dark ? C.white : C.ink;
   const textSub  = dark ? "rgba(255,255,255,0.45)" : C.muted;
@@ -312,7 +380,7 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: 
   ];
   return (
     <div className="flex flex-col items-center gap-2">
-      <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: dark ? C.gold : C.gold }}>
+      <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: dark ? C.gold : C.goldText }}>
         {label}
       </p>
       <div className="flex items-center gap-2">
@@ -326,7 +394,7 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: 
               </div>
               <span className="text-[9px] uppercase tracking-wider" style={{ color: textSub }}>{l}</span>
             </div>
-            {i < 3 && <span className="font-black text-lg mb-3" style={{ color: dark ? C.gold : C.gold }}>:</span>}
+            {i < 3 && <span className="font-black text-lg mb-3" style={{ color: dark ? C.gold : C.goldText }}>:</span>}
           </React.Fragment>
         ))}
       </div>
@@ -337,7 +405,45 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false }: { label?: 
 /* ═══════════════════════════════════════
    HOME PAGE
    ═══════════════════════════════════════ */
+/* Selo da campanha, igual ao da LP da aula: BLACK em marfim, ARQUITETA em rosa */
+function BlackSelo({ className = "" }: { className?: string }) {
+  return (
+    <p className={`inline-flex items-baseline gap-2 whitespace-nowrap rounded-full px-4 py-2 font-bold uppercase ${className}`}
+      style={{
+        backgroundColor: C_BLACK.dark, border: `2px solid ${C_BLACK.gold}`, color: C_BLACK.white,
+        fontSize: "0.75rem", letterSpacing: "0.04em", lineHeight: 1.1, boxShadow: "0 12px 26px -12px rgba(0,0,0,0.6)",
+      }}
+    >
+      <span style={{ fontSize: "1rem", letterSpacing: "0.03em" }}>Black</span>
+      <span style={{ color: C_BLACK.gold }}>Arquiteta</span>
+      <span>na Obra</span>
+    </p>
+  );
+}
+
+/* Relógio do cabeçalho: leva para a seção de investimento */
+function BlackChip({ onClick }: { onClick: () => void }) {
+  const { days, hours, minutes, seconds, expired } = useCountdown(BLACK_FIM);
+  if (expired) return null;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return (
+    <button onClick={onClick}
+      className="flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] cursor-pointer transition-colors"
+      style={{ border: `1px solid rgba(${C_BLACK.goldRgb},0.55)`, backgroundColor: "rgba(10,9,8,0.72)", color: C_BLACK.white }}
+      aria-label={`Última turma da mentoria. As inscrições fecham em ${days} dias e ${hours} horas. Ver a condição.`}
+    >
+      <span style={{ color: C_BLACK.gold }}>Última turma</span>
+      <span className="hidden sm:inline" style={{ color: "rgba(252,238,225,0.6)" }}>fecha em</span>
+      <span style={{ fontVariantNumeric: "tabular-nums" }} aria-hidden="true">
+        {pad(days)}d {pad(hours)}h {pad(minutes)}m<span className="hidden sm:inline"> {pad(seconds)}s</span>
+      </span>
+    </button>
+  );
+}
+
 export default function Home() {
+  const black = useBlackAtiva();
+  const C = black ? C_BLACK : C_NORMAL;
   const [stickyNav,    setStickyNav]    = useState(false);
   const [showMobileCTA,setShowMobileCTA] = useState(false);
 
@@ -356,41 +462,66 @@ export default function Home() {
       name: "Mentoria Inovando na Sua Obra",
       description: "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras.",
       brand: { "@type": "Organization", name: "Inovando na Sua Obra" },
-      offers: { "@type": "Offer", price: "2700.00", priceCurrency: "BRL", availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
+      offers: { "@type": "Offer", price: black ? "2400.00" : "2700.00", priceCurrency: "BRL", ...(black ? { priceValidUntil: "2026-11-30" } : {}), availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
       aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "100" },
     };
     const s = document.createElement("script");
     s.type = "application/ld+json"; s.textContent = JSON.stringify(jsonLd);
     document.head.appendChild(s);
     return () => { document.head.removeChild(s); };
-  }, []);
+  }, [black]);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
+  /* Black: acesso vitalício no lugar dos 12 meses e duas perguntas a mais no FAQ */
+  const inclusos = black
+    ? INCLUDES.map((i) => (i.text.startsWith("12 meses") ? { ...i, text: "Acesso vitalício ao conteúdo (em vez de 12 meses)" } : i))
+    : INCLUDES;
+  const faqs = black
+    ? [
+        { q: "Esta é mesmo a última turma?", a: `Sim. Esta é a última turma da Mentoria Inovando na Sua Obra. As inscrições fecham em ${BLACK.prazoLongo} (horário de Brasília), e as vagas são limitadas.` },
+        { q: "O que muda na Black Arquiteta na Obra?", a: `Até ${BLACK.prazoCurto}, a mentoria sai por ${BLACK.parcelas} sem juros ou ${BLACK.avista} à vista, e o acesso ao conteúdo passa a ser vitalício.` },
+        ...FAQS.map((f) => (f.q.startsWith("Por quanto tempo") ? { ...f, a: "Nesta última turma, o acesso ao conteúdo é vitalício. Você assiste e revê as aulas quando quiser." } : f)),
+      ]
+    : FAQS;
+
+  const provaSocial = (cor: string) => (
+    <div className="flex flex-col gap-1">
+      <div className="flex">
+        {[1,2,3,4,5].map(i => (
+          <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: C.gold }} />
+        ))}
+      </div>
+      <span className="text-xs" style={{ color: cor }}>+1000 arquitetas impactadas</span>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: C.cream, fontFamily: "Inter, sans-serif" }}>
+    <PaletaCtx.Provider value={C}>
+    <div className={black ? "min-h-screen overflow-x-hidden tema-black" : "min-h-screen overflow-x-hidden"} style={{ backgroundColor: C.cream, fontFamily: "Inter, sans-serif" }}>
 
       {/* ══════════════════════════════════════════
           NAV
       ══════════════════════════════════════════ */}
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: stickyNav ? "rgba(250,248,244,0.96)" : "transparent",
+          backgroundColor: stickyNav ? (black ? "rgba(10,9,8,0.96)" : "rgba(250,248,244,0.96)") : "transparent",
           backdropFilter: stickyNav ? "blur(14px)" : "none",
-          borderBottom: stickyNav ? `1px solid ${C.border}` : "none",
+          borderBottom: stickyNav ? `1px solid ${black ? `rgba(${C.goldRgb},0.3)` : C.border}` : "none",
         }}
       >
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="focus:outline-none">
-            <img src={imgLogo} alt="Inovando na Sua Obra" className="h-14 object-contain mix-blend-multiply" />
+            <img src={imgLogo} alt="Inovando na Sua Obra" className={black ? "h-9 sm:h-11 object-contain rounded-lg" : "h-14 object-contain mix-blend-multiply"} />
           </button>
+          {black && <BlackChip onClick={() => scrollTo("pricing")} />}
           <button onClick={() => scrollTo("pricing")}
             className="hidden md:flex items-center gap-2 px-6 py-2.5 text-xs font-bold tracking-[0.15em] uppercase transition-colors"
             style={{ backgroundColor: C.green, color: C.white }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
           >
-            Quero me inscrever
+            {black ? "Garantir minha vaga" : "Quero me inscrever"}
           </button>
         </div>
       </header>
@@ -399,11 +530,13 @@ export default function Home() {
           HERO
       ══════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden"
-        style={{ backgroundColor: C.cream, ...gridBg() }}
+        style={{ backgroundColor: black ? C.dark : C.cream, ...gridBg(`rgba(${C.goldRgb},${black ? "0.05" : "0.07"})`) }}
       >
         {/* Vignette corners */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(250,248,244,0.7) 100%)" }}
+          style={{ background: black
+            ? "radial-gradient(ellipse at center, transparent 40%, rgba(10,9,8,0.85) 100%)"
+            : "radial-gradient(ellipse at center, transparent 40%, rgba(250,248,244,0.7) 100%)" }}
         />
 
         <div className="container mx-auto px-4 md:px-8 pt-20 pb-8 md:pt-24 md:pb-12 relative z-10">
@@ -417,46 +550,71 @@ export default function Home() {
               {/* Headline */}
               <div className="space-y-3">
                 <h1 className="font-display font-black uppercase"
-                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.875rem, 3.5vw, 3rem)", color: C.ink, lineHeight: "1.15" }}
+                  style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.875rem, 3.5vw, 3rem)", color: black ? C.white : C.ink, lineHeight: "1.15" }}
                 >
-                  Domine a obra de interiores com mais <Highlight>lucro</Highlight>,{" "}
-                  organização e segurança.
+                  {black ? (
+                    <><Highlight>Última turma</Highlight>: domine a obra de interiores com mais lucro, organização e segurança.</>
+                  ) : (
+                    <>Domine a obra de interiores com mais <Highlight>lucro</Highlight>,{" "}
+                    organização e segurança.</>
+                  )}
                 </h1>
-                <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
-                  Tenha acesso à experiência prática, técnica e comportamental
-                  {" "}que leva anos para ser construída, e aprenda a cobrar
-                  {" "}melhor, evitar erros e crescer sem transformar
-                  {" "}seu escritório em um caos. Do primeiro atendimento à entrega final.
-                </p>
+                {black ? (
+                  <p className="text-base md:text-lg leading-relaxed" style={{ color: "rgba(252,238,225,0.82)", maxWidth: "44ch" }}>
+                    A experiência prática, técnica e comportamental que leva anos para ser construída, agora com acesso vitalício ao conteúdo. As inscrições da última turma fecham em {BLACK.prazoCurto}.
+                  </p>
+                ) : (
+                  <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
+                    Tenha acesso à experiência prática, técnica e comportamental
+                    {" "}que leva anos para ser construída, e aprenda a cobrar
+                    {" "}melhor, evitar erros e crescer sem transformar
+                    {" "}seu escritório em um caos. Do primeiro atendimento à entrega final.
+                  </p>
+                )}
               </div>
 
-              {/* Social proof mini */}
-              <div className="flex flex-col gap-1">
-                <div className="flex">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: C.gold }} />
-                  ))}
-                </div>
-                <span className="text-xs" style={{ color: C.muted }}>+1000 arquitetas impactadas</span>
-              </div>
+              {/* Social proof mini. Na Black ela desce para depois do cartão, para o botão caber na primeira dobra do celular. */}
+              {!black && provaSocial(C.muted)}
 
               {/* Hero CTAs */}
               <div className="shadow-xl overflow-hidden"
                 style={{ border: `1px solid ${C.border}` }}
               >
                 <div className="px-5 py-3 flex items-center"
-                  style={{ backgroundColor: C.dark }}
+                  style={{ backgroundColor: black ? C.gold : C.dark }}
                 >
                   <div>
-                    <p className="text-xs font-black uppercase tracking-wider text-white">
-                      Garanta sua vaga agora
+                    <p className={black ? "text-xs font-black uppercase tracking-wider" : "text-xs font-black uppercase tracking-wider text-white"}
+                      style={black ? { color: C.dark } : undefined}
+                    >
+                      {black ? "Black Arquiteta na Obra" : "Garanta sua vaga agora"}
                     </p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>
-                      Valor exclusivo nova turma Junho 2026
+                    <p className="text-[10px] mt-0.5" style={{ color: black ? "rgba(10,9,8,0.82)" : "rgba(255,255,255,0.45)" }}>
+                      {black ? `Última turma. Vagas limitadas. Encerra em ${BLACK.prazoLongo}.` : "Valor exclusivo nova turma Junho 2026"}
                     </p>
                   </div>
                 </div>
                 <div className="p-4 md:p-5 space-y-3" style={{ backgroundColor: C.white }}>
+                  {black && (
+                    <div className="flex items-end justify-between gap-3">
+                      <div>
+                        <p className="text-xs" style={{ color: C.muted }}>
+                          <span className="line-through">De {BLACK.de}</span> por
+                        </p>
+                        <p className="font-black leading-none mt-1"
+                          style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.5rem, 2.6vw, 1.875rem)", color: C.ink }}
+                        >
+                          {BLACK.parcelas}
+                        </p>
+                        <p className="text-xs mt-1.5" style={{ color: C.inkLight }}>
+                          sem juros, ou {BLACK.avista} à vista
+                        </p>
+                      </div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-right leading-snug" style={{ color: C.goldText }}>
+                        Acesso<br />vitalício
+                      </p>
+                    </div>
+                  )}
                   <div className="flex flex-col gap-2.5">
                     <button
                       onClick={() => scrollTo("pricing")}
@@ -465,15 +623,18 @@ export default function Home() {
                       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
                     >
-                      Quero meu acesso agora <ArrowRight className="w-4 h-4" />
+                      {black ? "Garantir minha vaga na última turma" : "Quero meu acesso agora"} <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
                   <p className="flex items-center justify-center gap-1.5 text-xs" style={{ color: C.muted }}>
                     <Lock className="w-3.5 h-3.5" /> Pagamento 100% Seguro pela Hotmart
                   </p>
-                  <CountdownTimer label="Vagas fecham em:" />
+                  {black
+                    ? <CountdownTimer label="As inscrições fecham em:" target={BLACK_FIM} />
+                    : <CountdownTimer label="Vagas fecham em:" />}
                 </div>
               </div>
+              {black && provaSocial("rgba(252,238,225,0.72)")}
             </motion.div>
 
             {/* Right — photo editorial */}
@@ -490,15 +651,22 @@ export default function Home() {
                 <div className="absolute -bottom-2 -left-2 w-14 h-14 lg:-bottom-4 lg:-left-4 lg:w-24 lg:h-24"
                   style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
                 />
+                {/* Black: a foto vai sobre um cartão escuro com brilho rosa, como no hero da LP da aula */}
+                {black && (
+                  <div className="absolute inset-0"
+                    style={{ zIndex: 1, background: `radial-gradient(115% 85% at 50% 100%, rgba(${C.goldRgb},0.30), rgba(${C.goldRgb},0) 64%), ${C.darkMid}` }}
+                  />
+                )}
                 <img src={imgNovaImgMentoras}
                   alt="Ingrid Zarza e Fernanda Bradaschia — Mentoria Inovando na Sua Obra"
-                  className="relative z-10 w-full h-auto mix-blend-multiply"
+                  className={black ? "relative z-10 w-full h-auto" : "relative z-10 w-full h-auto mix-blend-multiply"}
                   loading="eager"
                   fetchPriority="high"
                 />
                 {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
+                {black && <BlackSelo className="absolute left-1/2 -translate-x-1/2 -bottom-4 z-20" />}
                 <div className="absolute top-2 right-2 lg:top-auto lg:right-auto lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-1.5 lg:px-5 lg:py-4 shadow-xl"
-                  style={{ backgroundColor: C.dark }}
+                  style={black ? { backgroundColor: C.dark, border: `1px solid rgba(${C.goldRgb},0.45)` } : { backgroundColor: C.dark }}
                 >
                   <p className="font-display font-black text-sm lg:text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
                     +250
@@ -513,10 +681,10 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        <motion.div className={black ? "absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block" : "absolute bottom-8 left-1/2 -translate-x-1/2"}
           animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}
         >
-          <ChevronDown className="w-5 h-5" style={{ color: C.muted }} />
+          <ChevronDown className="w-5 h-5" style={{ color: black ? "rgba(252,238,225,0.5)" : C.muted }} />
         </motion.div>
       </section>
 
@@ -537,16 +705,17 @@ export default function Home() {
           {/* Video testimonials — carrossel mobile, grid desktop */}
           <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none px-4 sm:px-0 pb-2 sm:pb-0 -mx-4 sm:mx-auto scrollbar-hide">
             {[
-              { name: "Beatriz Francini", thumbnail: "/thumbnails/capa-beatriz.png",  video: "/videos/video-beatriz.mp4" },
-              { name: "Laura Almeida",    thumbnail: "/thumbnails/capa-laura.png",     video: "/videos/video-laura.mp4"  },
-              { name: "Ligia",            thumbnail: "/thumbnails/capa-ligia.png",     video: "/videos/video-ligia.mp4"  },
-              { name: "Luísa",            thumbnail: "/thumbnails/capa-luisa.png",     video: "/videos/video-luisa.mp4"  },
+              { name: "Beatriz Francini", thumbnail: "/thumbnails/depoimento-beatriz.webp", video: "/videos/depoimento-beatriz.mp4" },
+              { name: "Laura Almeida",    thumbnail: "/thumbnails/depoimento-laura.webp",   video: "/videos/depoimento-laura.mp4"   },
+              { name: "Ligia",            thumbnail: "/thumbnails/depoimento-ligia.webp",   video: "/videos/depoimento-ligia.mp4"   },
+              { name: "Luísa",            thumbnail: "/thumbnails/depoimento-luisa.webp",   video: "/videos/depoimento-luisa.mp4"   },
             ].map((t) => (
               <div key={t.name} className="snap-center flex-shrink-0 w-[72vw] sm:w-auto">
                 <VideoTestimonialCard
                   name={t.name}
                   thumbnailSrc={t.thumbnail}
                   videoSrc={t.video}
+                  accent={C.gold}
                 />
               </div>
             ))}
@@ -602,7 +771,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 flex flex-col gap-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>01</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.goldText }}>01</span>
                   <div className="w-7 h-px mt-2 mb-3" style={{ backgroundColor: C.gold }} />
                   <h3 className="font-display font-black text-lg md:text-xl uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
@@ -636,7 +805,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 flex flex-col gap-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>02</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.goldText }}>02</span>
                   <div className="w-7 h-px mt-2 mb-3" style={{ backgroundColor: C.gold }} />
                   <h3 className="font-display font-black text-lg md:text-xl uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
@@ -670,7 +839,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 flex flex-col gap-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>03</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.goldText }}>03</span>
                   <div className="w-7 h-px mt-2 mb-3" style={{ backgroundColor: C.gold }} />
                   <h3 className="font-display font-black text-lg md:text-xl uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
@@ -704,7 +873,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 flex flex-col gap-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.gold }}>04</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: C.goldText }}>04</span>
                   <div className="w-7 h-px mt-2 mb-3" style={{ backgroundColor: C.gold }} />
                   <h3 className="font-display font-black text-lg md:text-xl uppercase leading-tight"
                     style={{ fontFamily: "Montserrat, sans-serif", color: C.ink }}
@@ -720,7 +889,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm italic leading-relaxed border-t pt-3" style={{ color: C.inkLight, borderColor: "rgba(201,162,87,0.3)" }}>
+                <p className="text-sm italic leading-relaxed border-t pt-3" style={{ color: C.inkLight, borderColor: `rgba(${C.goldRgb},0.3)` }}>
                   "A insegurança faz arquitetas cobrarem barato."
                 </p>
               </div>
@@ -734,7 +903,7 @@ export default function Home() {
           PROBLEMA / SOLUÇÃO
       ══════════════════════════════════════════ */}
       <section className="overflow-hidden" style={{ backgroundColor: C.ink }}>
-        <Reveal className="text-center py-12 md:py-16 px-4" style={{ backgroundColor: "#111110" }}>
+        <Reveal className="text-center py-12 md:py-16 px-4" style={{ backgroundColor: C.deep }}>
           <h2 className="font-display font-black text-3xl md:text-5xl uppercase leading-tight"
             style={{ fontFamily: "Montserrat, sans-serif", color: C.white }}
           >
@@ -745,7 +914,7 @@ export default function Home() {
 
           {/* Left — O problema */}
           <div className="px-8 md:px-16 py-20 md:py-28 relative overflow-hidden"
-            style={{ backgroundColor: "#111110" }}
+            style={{ backgroundColor: C.deep }}
           >
             <Reveal>
               <p className="text-xs font-bold uppercase tracking-[0.25em] mb-8" style={{ color: "#FF6B6B" }}>
@@ -798,7 +967,7 @@ export default function Home() {
                     style={{ color: "rgba(255,255,255,0.8)" }}
                   >
                     <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-0.5"
-                      style={{ backgroundColor: "rgba(201,162,87,0.2)" }}
+                      style={{ backgroundColor: `rgba(${C.goldRgb},0.2)` }}
                     >
                       <Check className="w-3 h-3" style={{ color: C.gold }} />
                     </div>
@@ -853,7 +1022,7 @@ export default function Home() {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
             >
-              Essa sou eu — quero garantir minha vaga
+              {black ? "Essa sou eu. Quero entrar na última turma" : "Essa sou eu — quero garantir minha vaga"}
               <ArrowRight className="w-4 h-4" />
             </button>
           </Reveal>
@@ -881,7 +1050,7 @@ export default function Home() {
             {/* Coluna 1 — Metodologia Gravada */}
             <Reveal>
               <h3 className="text-base font-black uppercase tracking-[0.2em] mb-3"
-                style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.goldText }}
               >
                 Metodologia Gravada
               </h3>
@@ -892,7 +1061,7 @@ export default function Home() {
               <div className="space-y-2">
                 {[
                   { icon: BookOpen, text: "16h de conteúdo gravado em 4 módulos" },
-                  { icon: Lock,     text: "12 meses de acesso à plataforma" },
+                  { icon: Lock,     text: black ? "Acesso vitalício ao conteúdo" : "12 meses de acesso à plataforma" },
                   { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-3 px-4 py-3"
@@ -912,7 +1081,7 @@ export default function Home() {
             {/* Coluna 2 — Aulas ao Vivo */}
             <Reveal delay={0.1}>
               <h3 className="text-base font-black uppercase tracking-[0.2em] mb-3"
-                style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.goldText }}
               >
                 Aulas ao Vivo
               </h3>
@@ -950,7 +1119,7 @@ export default function Home() {
             {/* Coluna 3 — Comunidade */}
             <Reveal delay={0.15}>
               <h3 className="text-base font-black uppercase tracking-[0.2em] mb-3"
-                style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}
+                style={{ fontFamily: "Montserrat, sans-serif", color: C.goldText }}
               >
                 Comunidade
               </h3>
@@ -991,7 +1160,7 @@ export default function Home() {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
             >
-              Quero meu acesso
+              {black ? "Quero meu acesso vitalício" : "Quero meu acesso"}
               <ArrowRight className="w-4 h-4" />
             </button>
           </Reveal>
@@ -1020,7 +1189,7 @@ export default function Home() {
                     style={{ color: C.ink }}
                   >
                     <div className="flex-shrink-0 w-16 md:w-20 self-stretch flex items-center justify-center font-display font-black text-3xl md:text-4xl"
-                      style={{ fontFamily: "Montserrat, sans-serif", color: C.white, backgroundColor: i % 2 === 0 ? C.dark : C.gold }}
+                      style={{ fontFamily: "Montserrat, sans-serif", color: black && i % 2 !== 0 ? C.dark : C.white, backgroundColor: i % 2 === 0 ? C.dark : C.gold }}
                     >
                       {mod.number}
                     </div>
@@ -1128,7 +1297,7 @@ export default function Home() {
                     <a href="https://www.instagram.com/inovandonasuaobra/"
                       target="_blank" rel="noopener noreferrer"
                       className="text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-2 transition-opacity hover:opacity-70"
-                      style={{ color: C.gold }}
+                      style={{ color: C.goldText }}
                     >
                       <Instagram className="w-3.5 h-3.5" />
                       @inovandonasuaobra
@@ -1157,34 +1326,38 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           INVESTIMENTO
       ══════════════════════════════════════════ */}
-      <section id="pricing" className="py-16 md:py-24" style={{ backgroundColor: C.ink, ...gridBg("rgba(201,162,87,0.05)", "50px 50px") }}>
+      <section id="pricing" className="py-16 md:py-24" style={{ backgroundColor: C.ink, ...gridBg(`rgba(${C.goldRgb},0.05)`, "50px 50px") }}>
         <div className="container mx-auto px-4 md:px-8">
           <Reveal>
             <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl" style={{ borderRadius: "24px" }}>
 
               {/* LEFT — headline + urgência */}
               <div className="flex-1 flex flex-col p-8 md:p-12 lg:p-14 gap-6"
-                style={{ backgroundColor: C.dark, backgroundImage: gridBg("rgba(201,162,87,0.06)", "40px 40px").backgroundImage }}
+                style={{ backgroundColor: C.dark, backgroundImage: gridBg(`rgba(${C.goldRgb},0.06)`, "40px 40px").backgroundImage }}
               >
                 <Label light>Investimento</Label>
                 <h2 className="font-display font-black uppercase leading-[1.05] text-white"
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
                 >
-                  Condição exclusiva
+                  {black ? <>Esta é a <span style={{ color: C.gold }}>última turma</span> da mentoria</> : "Condição exclusiva"}
                 </h2>
-                <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "34ch" }}>
-                  Pagamento 100% Seguro pela Hotmart.
+                <p className="text-base leading-relaxed" style={{ color: black ? "rgba(252,238,225,0.8)" : "rgba(255,255,255,0.55)", maxWidth: black ? "40ch" : "34ch" }}>
+                  {black
+                    ? `Depois de ${BLACK.prazoLongo}, as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra com acesso vitalício ao conteúdo e parcela em 10x sem juros.`
+                    : "Pagamento 100% Seguro pela Hotmart."}
                 </p>
                 <div className="px-4 py-3 text-base font-semibold"
-                  style={{ backgroundColor: "rgba(201,162,87,0.12)", color: C.gold, border: `1px solid rgba(201,162,87,0.25)` }}
+                  style={{ backgroundColor: `rgba(${C.goldRgb},0.12)`, color: C.gold, border: `1px solid rgba(${C.goldRgb},0.25)` }}
                 >
                   Uma obra com gerenciamento cobrado paga a mentoria inteira.
                 </div>
-                <CountdownTimer label="Vagas fecham em:" dark />
+                {black
+                  ? <CountdownTimer label="A última turma fecha em:" dark target={BLACK_FIM} />
+                  : <CountdownTimer label="Vagas fecham em:" dark />}
                 <div className="space-y-2 pt-2">
                   <div className="flex items-center justify-center gap-2 text-xs text-center" style={{ color: "rgba(255,255,255,0.45)" }}>
                     <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
-                    Milhares de arquitetas ja transformaram seus resultados com a Mentoria Inovando na Sua Obra
+                    {black ? "+1000 arquitetas já foram impactadas pela Inovando na Sua Obra" : "Milhares de arquitetas ja transformaram seus resultados com a Mentoria Inovando na Sua Obra"}
                   </div>
                   <div className="flex items-center justify-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: C.green }} />
@@ -1200,30 +1373,43 @@ export default function Home() {
                 {/* Badge + Preço */}
                 <div className="space-y-3">
                   <div className="inline-flex items-center gap-2 px-3 py-1 self-start"
-                    style={{ backgroundColor: "rgba(255,68,68,0.08)", border: "1px solid rgba(255,68,68,0.22)" }}
+                    style={black
+                      ? { backgroundColor: `rgba(${C.goldRgb},0.2)`, border: `1px solid rgba(${C.goldRgb},0.7)` }
+                      : { backgroundColor: "rgba(255,68,68,0.08)", border: "1px solid rgba(255,68,68,0.22)" }}
                   >
-                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF4444" }} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#FF6B6B" }}>
-                      Valor de lançamento
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: black ? C.goldText : "#FF4444" }} />
+                    <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: black ? C.goldText : "#FF6B6B" }}>
+                      {black ? "Última turma · Black Arquiteta na Obra" : "Valor de lançamento"}
                     </span>
                   </div>
                   <div className="space-y-1">
                     <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.muted }}>
                       Seu investimento
                     </p>
-                    <p className="text-sm line-through" style={{ color: C.muted }}>
-                      De R$ 3.000,00
-                    </p>
+                    {black ? (
+                      <p className="text-sm" style={{ color: C.muted }}>
+                        <span className="line-through">De {BLACK.de}</span> por
+                      </p>
+                    ) : (
+                      <p className="text-sm line-through" style={{ color: C.muted }}>
+                        De R$ 3.000,00
+                      </p>
+                    )}
                     <p className="font-black leading-none"
                       style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
-                      10x de R$ 270,00
+                      {black ? BLACK.parcelas : "10x de R$ 270,00"}
                     </p>
-                    <p className="text-sm" style={{ color: C.muted }}>
-                      ou R$ 2.700,00 à vista
+                    <p className="text-sm" style={{ color: black ? C.inkLight : C.muted }}>
+                      {black ? `sem juros, ou ${BLACK.avista} à vista` : "ou R$ 2.700,00 à vista"}
                     </p>
-                    <p className="text-xs font-bold uppercase tracking-wide" style={{ color: "#FF6B6B" }}>
-                      Vagas se esgotando
+                    {black && (
+                      <p className="text-sm font-semibold" style={{ color: C.ink }}>
+                        {BLACK.economia} a menos que o valor normal, com acesso vitalício ao conteúdo.
+                      </p>
+                    )}
+                    <p className="text-xs font-bold uppercase tracking-wide" style={{ color: black ? C.goldText : "#FF6B6B" }}>
+                      {black ? `Vagas limitadas · até ${BLACK.prazoLongo}` : "Vagas se esgotando"}
                     </p>
                   </div>
                 </div>
@@ -1237,7 +1423,7 @@ export default function Home() {
                     Tudo que você recebe
                   </p>
                   <ul className="space-y-3.5">
-                    {INCLUDES.map((item) => (
+                    {inclusos.map((item) => (
                       <li key={item.text} className="flex items-start gap-3 text-base leading-snug" style={{ color: C.inkLight }}>
                         <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.green }} />
                         {item.text}
@@ -1255,7 +1441,7 @@ export default function Home() {
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
                   >
-                    Quero meu acesso agora
+                    {black ? "Garantir minha vaga na última turma" : "Quero meu acesso agora"}
                     <ArrowRight className="w-4 h-4" />
                   </a>
                   <a href="https://pay.hotmart.com/Y93975016X?off=azkbpgud&bid=1786136104312"
@@ -1368,7 +1554,7 @@ export default function Home() {
           </Reveal>
 
           <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-2">
-            {FAQS.map((faq, i) => (
+            {faqs.map((faq, i) => (
               <Reveal key={i} delay={i * 0.06}>
                 <AccordionItem value={`faq-${i}`} className="overflow-hidden"
                   style={{ backgroundColor: C.white, border: `1px solid ${C.border}` }}
@@ -1390,7 +1576,7 @@ export default function Home() {
 
           <Reveal className="flex flex-col items-center gap-4 mt-14 text-center">
             <p className="text-sm" style={{ color: C.muted }}>
-              Ainda tem dúvidas? Fale com a gente antes de decidir.
+              {black ? `Ainda tem dúvidas? Fale com a gente antes de ${BLACK.prazoCurto}, quando a última turma fecha.` : "Ainda tem dúvidas? Fale com a gente antes de decidir."}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center">
               <button
@@ -1474,11 +1660,14 @@ export default function Home() {
               >
                 <Phone className="w-3.5 h-3.5" /> (11) 5571-7229
               </a>
-              <a href="mailto:contato@inovandonasuaobra.com.br"
+              {/* O endereço só é montado no clique: escrito na página, a correspondência avançada automática
+                  do pixel da Meta o enviava como e-mail de toda visitante. */}
+              <a href="#"
+                onClick={(e) => { e.preventDefault(); window.location.href = "mailto:" + ["contato", "inovandonasuaobra.com.br"].join("@"); }}
                 className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-70"
                 style={{ color: "rgba(255,255,255,0.4)" }}
               >
-                <Mail className="w-3.5 h-3.5" /> contato@inovandonasuaobra.com.br
+                <Mail className="w-3.5 h-3.5" /> Enviar e-mail
               </a>
               <a href="https://www.instagram.com/inovandonasuaobra/" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2.5 text-xs transition-opacity hover:opacity-70"
@@ -1501,15 +1690,15 @@ export default function Home() {
           MOBILE STICKY CTA
       ══════════════════════════════════════════ */}
       <div className={`fixed bottom-0 left-0 right-0 z-50 md:hidden transition-transform duration-300 ${showMobileCTA ? "translate-y-0" : "translate-y-full"}`}
-        style={{ backgroundColor: C.dark, borderTop: `1px solid rgba(201,162,87,0.25)`, boxShadow: "0 -8px 32px rgba(0,0,0,0.3)" }}
+        style={{ backgroundColor: C.dark, borderTop: `1px solid rgba(${C.goldRgb},${black ? "0.45" : "0.25"})`, boxShadow: "0 -8px 32px rgba(0,0,0,0.3)" }}
       >
         <div className="flex items-center justify-between px-5 py-3.5">
           <div>
-            <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Seu investimento</p>
+            <p className="text-[10px] uppercase tracking-wider" style={{ color: black ? C.gold : "rgba(255,255,255,0.4)" }}>{black ? `Última turma · até ${BLACK.prazoCurto}` : "Seu investimento"}</p>
             <p className="font-display font-black text-base text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              10x de R$ 270,00
+              {black ? BLACK.parcelas : "10x de R$ 270,00"}
             </p>
-            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>ou R$ 2.700,00 à vista</p>
+            <p className="text-[10px] mt-0.5" style={{ color: black ? "rgba(252,238,225,0.72)" : "rgba(255,255,255,0.35)" }}>{black ? `ou ${BLACK.avista} à vista` : "ou R$ 2.700,00 à vista"}</p>
           </div>
           <button
             onClick={() => scrollTo("pricing")}
@@ -1523,5 +1712,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </PaletaCtx.Provider>
   );
 }
