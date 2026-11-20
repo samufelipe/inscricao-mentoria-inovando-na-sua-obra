@@ -55,7 +55,7 @@ const C_BLACK: Paleta = {
   gold:      "#E8818E",
   goldLight: "#F9DDD7",
   goldDim:   "rgba(232,129,142,0.12)",
-  green:     "#15803D",
+  green:     "#147838",   // um tom abaixo do verde da LP: o texto marfim do botão passa de 4,5:1
   greenDark: "#166534",
   dark:      "#0A0908",
   darkMid:   "#1C1313",
