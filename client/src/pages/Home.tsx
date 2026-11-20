@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/accordion";
 
 /* ─── Asset imports ─── */
-import imgLogo            from "@/assets/mentoria/logo.png";
+/* Logotipo com fundo transparente (pedido do Samuel em 2026-11-20): tinta escura para fundo claro, tinta clara para fundo escuro */
+import imgLogo            from "@/assets/mentoria/logo-transparente.png";
+import imgLogoClaro       from "@/assets/mentoria/logo-claro.png";
 import imgHeroPhoto       from "@/assets/mentoria/hero-photo.png";
 import imgAbout           from "@/assets/mentoria/about.png";
 import imgNovaImgMentoras from "@/assets/mentoria/foto-hero-sem-fundo.png";
@@ -513,7 +515,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="focus:outline-none">
-            <img src={imgLogo} alt="Inovando na Sua Obra" className={black ? "h-9 min-[360px]:h-10 sm:h-14 object-contain rounded-lg" : "h-14 object-contain mix-blend-multiply"} />
+            <img src={black ? imgLogoClaro : imgLogo} alt="Inovando na Sua Obra" className={black ? "h-9 min-[360px]:h-10 sm:h-12 object-contain" : "h-[46px] object-contain"} />
           </button>
           {black && <BlackChip onClick={() => scrollTo("pricing")} />}
           <button onClick={() => scrollTo("pricing")}
@@ -644,14 +646,19 @@ export default function Home() {
               className="relative flex justify-center lg:justify-end"
             >
               <div className="relative">
-                {/* Gold accent frame — desktop: estende para fora; mobile: fica dentro */}
-                <div className="absolute top-0 -right-2 w-full h-full lg:-top-4 lg:-right-4"
-                  style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
-                />
-                {/* Secondary corner accent */}
-                <div className="absolute -bottom-2 -left-2 w-14 h-14 lg:-bottom-4 lg:-left-4 lg:w-24 lg:h-24"
-                  style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
-                />
+                {/* Moldura da foto: só na versão normal. Na Black a foto fica sem o traço (pedido do Samuel em 20/11). */}
+                {!black && (
+                  <>
+                    {/* Gold accent frame — desktop: estende para fora; mobile: fica dentro */}
+                    <div className="absolute top-0 -right-2 w-full h-full lg:-top-4 lg:-right-4"
+                      style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
+                    />
+                    {/* Secondary corner accent */}
+                    <div className="absolute -bottom-2 -left-2 w-14 h-14 lg:-bottom-4 lg:-left-4 lg:w-24 lg:h-24"
+                      style={{ border: `2px solid ${C.gold}`, opacity: 0.3, zIndex: 0 }}
+                    />
+                  </>
+                )}
                 {/* Black: a foto vai sobre um cartão escuro com brilho rosa, como no hero da LP da aula */}
                 {black && (
                   <div className="absolute inset-0"
@@ -667,7 +674,7 @@ export default function Home() {
                 {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
                 {black && <BlackSelo className="absolute left-1/2 -translate-x-1/2 -bottom-4 z-20" />}
                 <div className="absolute top-2 right-2 lg:top-auto lg:right-auto lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-1.5 lg:px-5 lg:py-4 shadow-xl"
-                  style={black ? { backgroundColor: C.dark, border: `1px solid rgba(${C.goldRgb},0.45)` } : { backgroundColor: C.dark }}
+                  style={black ? { backgroundColor: C.dark, border: "1px solid rgba(252,238,225,0.2)" } : { backgroundColor: C.dark }}
                 >
                   <p className="font-display font-black text-sm lg:text-2xl" style={{ fontFamily: "Montserrat, sans-serif", color: C.gold }}>
                     +250
@@ -1613,8 +1620,8 @@ export default function Home() {
             style={{ borderBottom: `1px solid rgba(255,255,255,0.06)` }}
           >
             <div className="space-y-4">
-              <img src={imgLogo} alt="Inovando na Sua Obra"
-                className="h-12 object-contain" loading="lazy" />
+              <img src={imgLogoClaro} alt="Inovando na Sua Obra"
+                className="h-10 object-contain" loading="lazy" />
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.3)" }}>
                 Transformando a gestão de obras de interiores com método, segurança e resultados reais.
               </p>
