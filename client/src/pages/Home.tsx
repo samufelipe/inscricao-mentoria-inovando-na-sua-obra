@@ -78,10 +78,10 @@ const usePaleta = () => React.useContext(PaletaCtx);
    ═══════════════════════════════════════ */
 const BLACK_FIM = new Date("2026-11-30T23:59:59-03:00");
 const BLACK = {
-  parcelas:   "10x de R$ 240,00",
-  avista:     "R$ 2.400,00",
-  de:         "R$ 2.700,00",
-  economia:   "R$ 300,00",
+  parcelas:   "10x de R$ 240,00",
+  avista:     "R$ 2.400,00",
+  de:         "R$ 2.700,00",
+  economia:   "R$ 300,00",
   prazoCurto: "30/11",
   prazoLongo: "30/11, às 23h59",
 };
@@ -432,8 +432,9 @@ function BlackChip({ onClick }: { onClick: () => void }) {
       style={{ border: `1px solid rgba(${C_BLACK.goldRgb},0.55)`, backgroundColor: "rgba(10,9,8,0.72)", color: C_BLACK.white }}
       aria-label={`Última turma da mentoria. As inscrições fecham em ${days} dias e ${hours} horas. Ver a condição.`}
     >
-      <span style={{ color: C_BLACK.gold }}>Última turma</span>
+      <span className="hidden sm:inline" style={{ color: C_BLACK.gold }}>Última turma</span>
       <span className="hidden sm:inline" style={{ color: "rgba(252,238,225,0.6)" }}>fecha em</span>
+      <span className="sm:hidden" style={{ color: C_BLACK.gold }}>Fecha em</span>
       <span style={{ fontVariantNumeric: "tabular-nums" }} aria-hidden="true">
         {pad(days)}d {pad(hours)}h {pad(minutes)}m<span className="hidden sm:inline"> {pad(seconds)}s</span>
       </span>
@@ -512,7 +513,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="focus:outline-none">
-            <img src={imgLogo} alt="Inovando na Sua Obra" className={black ? "h-9 sm:h-11 object-contain rounded-lg" : "h-14 object-contain mix-blend-multiply"} />
+            <img src={imgLogo} alt="Inovando na Sua Obra" className={black ? "h-9 min-[360px]:h-10 sm:h-14 object-contain rounded-lg" : "h-14 object-contain mix-blend-multiply"} />
           </button>
           {black && <BlackChip onClick={() => scrollTo("pricing")} />}
           <button onClick={() => scrollTo("pricing")}
@@ -549,7 +550,7 @@ export default function Home() {
             >
               {/* Headline */}
               <div className="space-y-3">
-                <h1 className="font-display font-black uppercase"
+                <h1 className={black ? "font-display font-black uppercase max-[400px]:text-[1.625rem]!" : "font-display font-black uppercase"}
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.875rem, 3.5vw, 3rem)", color: black ? C.white : C.ink, lineHeight: "1.15" }}
                 >
                   {black ? (
@@ -561,7 +562,7 @@ export default function Home() {
                 </h1>
                 {black ? (
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: "rgba(252,238,225,0.82)", maxWidth: "44ch" }}>
-                    A experiência prática, técnica e comportamental que leva anos para ser construída, agora com acesso vitalício ao conteúdo. As inscrições da última turma fecham em {BLACK.prazoCurto}.
+                    A experiência prática, técnica e comportamental que leva anos para ser construída, agora com acesso vitalício ao conteúdo.<span className="hidden sm:inline"> As inscrições da última turma fecham em {BLACK.prazoCurto}.</span>
                   </p>
                 ) : (
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
@@ -610,7 +611,7 @@ export default function Home() {
                           sem juros, ou {BLACK.avista} à vista
                         </p>
                       </div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-right leading-snug" style={{ color: C.goldText }}>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-right leading-snug max-[359px]:hidden" style={{ color: C.goldText }}>
                         Acesso<br />vitalício
                       </p>
                     </div>
@@ -1436,7 +1437,9 @@ export default function Home() {
                 <div className="mt-7 pt-6 space-y-3" style={{ borderTop: `1px solid ${C.border}` }}>
                   <a href="https://pay.hotmart.com/Y93975016X?off=m6qyf6ov&checkoutMode=10"
                     target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                    className={black
+                      ? "flex items-center justify-center gap-2.5 w-full py-4 px-4 text-center font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"
+                      : "flex items-center justify-center gap-2.5 w-full py-4 font-bold text-sm tracking-widest uppercase transition-all hover:gap-4"}
                     style={{ backgroundColor: C.green, color: C.white }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
