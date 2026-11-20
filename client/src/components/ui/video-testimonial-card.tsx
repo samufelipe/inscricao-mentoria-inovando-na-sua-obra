@@ -9,6 +9,9 @@ interface VideoTestimonialCardProps {
   accent?: string;
 }
 
+/* Só um depoimento toca por vez: ao dar play em um, o que estava tocando pausa. */
+let videoTocando: HTMLVideoElement | null = null;
+
 export function VideoTestimonialCard({ name, thumbnailSrc, videoSrc, accent = "#C9A257" }: VideoTestimonialCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
@@ -19,22 +22,32 @@ export function VideoTestimonialCard({ name, thumbnailSrc, videoSrc, accent = "#
     const video = videoRef.current;
     if (!video) return;
 
-    if (!started) {
+    if (video.paused) {
+      /* O vídeo começa por um toque da pessoa, então pode e deve tocar com som. */
+      video.muted = false;
+      video.volume = 1;
+      if (videoTocando && videoTocando !== video) videoTocando.pause();
+      videoTocando = video;
       setStarted(true);
-      video.play();
-      setPlaying(true);
-    } else if (playing) {
-      video.pause();
-      setPlaying(false);
+      const tentativa = video.play();
+      if (tentativa && typeof tentativa.catch === "function") tentativa.catch(() => setPlaying(false));
     } else {
-      video.play();
-      setPlaying(true);
+      video.pause();
     }
   };
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label={playing ? `Pausar o depoimento de ${name}` : `Assistir ao depoimento de ${name}, com som`}
       onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
       onMouseEnter={() => setShowControl(true)}
       onMouseLeave={() => setShowControl(false)}
       className="relative overflow-hidden rounded-2xl cursor-pointer flex-shrink-0 w-[72vw] sm:w-auto"
@@ -43,14 +56,20 @@ export function VideoTestimonialCard({ name, thumbnailSrc, videoSrc, accent = "#
         boxShadow: "0 8px 40px rgba(0,0,0,0.22)",
       }}
     >
-      {/* Vídeo inline */}
+      {/* Vídeo inline. O botão segue o que o vídeo está fazendo de verdade (onPlay e onPause). */}
       <video
         ref={videoRef}
         src={videoSrc}
         className="absolute inset-0 w-full h-full object-cover"
         playsInline
         preload="none"
-        onEnded={() => { setPlaying(false); setStarted(false); }}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => {
+          setPlaying(false);
+          setStarted(false);
+          if (videoTocando === videoRef.current) videoTocando = null;
+        }}
       />
 
       {/* Thumbnail some suavemente quando o vídeo inicia */}

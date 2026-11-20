@@ -713,10 +713,10 @@ export default function Home() {
           {/* Video testimonials — carrossel mobile, grid desktop */}
           <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none px-4 sm:px-0 pb-2 sm:pb-0 -mx-4 sm:mx-auto scrollbar-hide">
             {[
-              { name: "Beatriz Francini", thumbnail: "/thumbnails/depoimento-beatriz.webp", video: "/videos/depoimento-beatriz.mp4" },
-              { name: "Laura Almeida",    thumbnail: "/thumbnails/depoimento-laura.webp",   video: "/videos/depoimento-laura.mp4"   },
-              { name: "Ligia",            thumbnail: "/thumbnails/depoimento-ligia.webp",   video: "/videos/depoimento-ligia.mp4"   },
-              { name: "Luísa",            thumbnail: "/thumbnails/depoimento-luisa.webp",   video: "/videos/depoimento-luisa.mp4"   },
+              { name: "Beatriz Francini", thumbnail: "/thumbnails/depoimento-beatriz.webp", video: "/videos/depoimento-beatriz-v2.mp4" },
+              { name: "Laura Almeida",    thumbnail: "/thumbnails/depoimento-laura.webp",   video: "/videos/depoimento-laura-v2.mp4"   },
+              { name: "Ligia",            thumbnail: "/thumbnails/depoimento-ligia.webp",   video: "/videos/depoimento-ligia-v2.mp4"   },
+              { name: "Luísa",            thumbnail: "/thumbnails/depoimento-luisa.webp",   video: "/videos/depoimento-luisa-v2.mp4"   },
             ].map((t) => (
               <div key={t.name} className="snap-center flex-shrink-0 w-[72vw] sm:w-auto">
                 <VideoTestimonialCard
