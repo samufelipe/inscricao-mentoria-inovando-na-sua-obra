@@ -17,6 +17,8 @@ import imgLogoClaro       from "@/assets/mentoria/logo-claro.png";
 import imgHeroPhoto       from "@/assets/mentoria/hero-photo.png";
 import imgAbout           from "@/assets/mentoria/about.png";
 import imgNovaImgMentoras from "@/assets/mentoria/foto-hero-sem-fundo.png";
+import imgHeroBlack       from "@/assets/mentoria/hero-black-friday.webp";
+import imgHeroBlack720    from "@/assets/mentoria/hero-black-friday-720.webp";
 import imgLogoGarantia    from "@/assets/mentoria/logo-garantia.png";
 import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
 
@@ -80,10 +82,10 @@ const usePaleta = () => React.useContext(PaletaCtx);
    ═══════════════════════════════════════ */
 const BLACK_FIM = new Date("2026-11-30T23:59:59-03:00");
 const BLACK = {
-  parcelas:   "10x de R$ 240,00",
-  avista:     "R$ 2.400,00",
-  de:         "R$ 2.700,00",
-  economia:   "R$ 300,00",
+  parcelas:   "12x de R$ 186,16",
+  avista:     "R$ 1.800,00",
+  de:         "R$ 3.000,00",
+  economia:   "R$ 1.200,00",
   prazoCurto: "30/11",
   prazoLongo: "30/11, às 23h59",
 };
@@ -407,22 +409,6 @@ function CountdownTimer({ label = "Vagas fecham em:", dark = false, target = DEA
 /* ═══════════════════════════════════════
    HOME PAGE
    ═══════════════════════════════════════ */
-/* Selo da campanha, igual ao da LP da aula: BLACK em marfim, ARQUITETA em rosa */
-function BlackSelo({ className = "" }: { className?: string }) {
-  return (
-    <p className={`inline-flex items-baseline gap-2 whitespace-nowrap rounded-full px-4 py-2 font-bold uppercase ${className}`}
-      style={{
-        backgroundColor: C_BLACK.dark, border: `2px solid ${C_BLACK.gold}`, color: C_BLACK.white,
-        fontSize: "0.75rem", letterSpacing: "0.04em", lineHeight: 1.1, boxShadow: "0 12px 26px -12px rgba(0,0,0,0.6)",
-      }}
-    >
-      <span style={{ fontSize: "1rem", letterSpacing: "0.03em" }}>Black</span>
-      <span style={{ color: C_BLACK.gold }}>Arquiteta</span>
-      <span>na Obra</span>
-    </p>
-  );
-}
-
 /* Relógio do cabeçalho: leva para a seção de investimento */
 function BlackChip({ onClick }: { onClick: () => void }) {
   const { days, hours, minutes, seconds, expired } = useCountdown(BLACK_FIM);
@@ -465,7 +451,7 @@ export default function Home() {
       name: "Mentoria Inovando na Sua Obra",
       description: "Mentoria completa de gerenciamento de obras de interiores para arquitetas, designers e engenheiras.",
       brand: { "@type": "Organization", name: "Inovando na Sua Obra" },
-      offers: { "@type": "Offer", price: black ? "2400.00" : "2700.00", priceCurrency: "BRL", ...(black ? { priceValidUntil: "2026-11-30" } : {}), availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
+      offers: { "@type": "Offer", price: black ? "1800.00" : "2700.00", priceCurrency: "BRL", ...(black ? { priceValidUntil: "2026-11-30" } : {}), availability: "https://schema.org/InStock", url: "https://www.inovandonasuaobra.com.br/" },
       aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "100" },
     };
     const s = document.createElement("script");
@@ -476,15 +462,13 @@ export default function Home() {
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  /* Black: acesso vitalício no lugar dos 12 meses e duas perguntas a mais no FAQ */
-  const inclusos = black
-    ? INCLUDES.map((i) => (i.text.startsWith("12 meses") ? { ...i, text: "Acesso vitalício ao conteúdo (em vez de 12 meses)" } : i))
-    : INCLUDES;
+  /* Black (oferta de 24/11): o acesso é o mesmo da versão normal, 12 meses. A Black muda preço, prazo e duas perguntas do FAQ. */
+  const inclusos = INCLUDES;
   const faqs = black
     ? [
         { q: "Esta é mesmo a última turma?", a: `Sim. Esta é a última turma da Mentoria Inovando na Sua Obra. As inscrições fecham em ${BLACK.prazoLongo} (horário de Brasília), e as vagas são limitadas.` },
-        { q: "O que muda na Black Arquiteta na Obra?", a: `Até ${BLACK.prazoCurto}, a mentoria sai por ${BLACK.parcelas} sem juros ou ${BLACK.avista} à vista, e o acesso ao conteúdo passa a ser vitalício.` },
-        ...FAQS.map((f) => (f.q.startsWith("Por quanto tempo") ? { ...f, a: "Nesta última turma, o acesso ao conteúdo é vitalício. Você assiste e revê as aulas quando quiser." } : f)),
+        { q: "O que muda na Black Arquiteta na Obra?", a: `Até ${BLACK.prazoCurto}, a mentoria sai por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista. Depois dessa data, as inscrições fecham.` },
+        ...FAQS,
       ]
     : FAQS;
 
@@ -556,7 +540,10 @@ export default function Home() {
                   style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.875rem, 3.5vw, 3rem)", color: black ? C.white : C.ink, lineHeight: "1.15" }}
                 >
                   {black ? (
-                    <><Highlight>Última turma</Highlight>: domine a obra de interiores com mais lucro, organização e segurança.</>
+                    <>
+                      <span className="block" style={{ textWrap: "balance" }}><Highlight>Última turma</Highlight> da mentoria</span>
+                      <span className="block" style={{ fontSize: "0.66em", lineHeight: 1.22, marginTop: "0.5em" }}>Domine a obra de interiores com mais lucro, organização e segurança.</span>
+                    </>
                   ) : (
                     <>Domine a obra de interiores com mais <Highlight>lucro</Highlight>,{" "}
                     organização e segurança.</>
@@ -564,7 +551,7 @@ export default function Home() {
                 </h1>
                 {black ? (
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: "rgba(252,238,225,0.82)", maxWidth: "44ch" }}>
-                    A experiência prática, técnica e comportamental que leva anos para ser construída, agora com acesso vitalício ao conteúdo.<span className="hidden sm:inline"> As inscrições da última turma fecham em {BLACK.prazoCurto}.</span>
+                    A experiência prática, técnica e comportamental que leva anos para ser construída.<span className="hidden sm:inline"> As inscrições da última turma fecham em {BLACK.prazoCurto}.</span>
                   </p>
                 ) : (
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
@@ -610,12 +597,9 @@ export default function Home() {
                           {BLACK.parcelas}
                         </p>
                         <p className="text-xs mt-1.5" style={{ color: C.inkLight }}>
-                          sem juros, ou {BLACK.avista} à vista
+                          ou {BLACK.avista} à vista
                         </p>
                       </div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-right leading-snug max-[359px]:hidden" style={{ color: C.goldText }}>
-                        Acesso<br />vitalício
-                      </p>
                     </div>
                   )}
                   <div className="flex flex-col gap-2.5">
@@ -659,21 +643,27 @@ export default function Home() {
                     />
                   </>
                 )}
-                {/* Black: a foto vai sobre um cartão escuro com brilho rosa, como no hero da LP da aula */}
-                {black && (
-                  <div className="absolute inset-0"
-                    style={{ zIndex: 1, background: `radial-gradient(115% 85% at 50% 100%, rgba(${C.goldRgb},0.30), rgba(${C.goldRgb},0) 64%), ${C.darkMid}` }}
+                {/* Black (24/11): a arte "Black Friday" enviada pela cliente entra no lugar da foto recortada.
+                    Ela já traz o fundo escuro e o letreiro, por isso não leva cartão de fundo nem selo por cima. */}
+                {black ? (
+                  <img src={imgHeroBlack}
+                    srcSet={`${imgHeroBlack720} 720w, ${imgHeroBlack} 1086w`}
+                    sizes="(min-width: 1024px) 480px, (min-width: 480px) 420px, 92vw"
+                    width={1086} height={1448}
+                    alt="Ingrid Zarza e Fernanda Bradaschia na Black Friday da Mentoria Inovando na Sua Obra"
+                    className="relative z-10 block h-auto w-full max-w-[420px] lg:max-w-none lg:w-[min(54vh,480px,42vw)]"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                ) : (
+                  <img src={imgNovaImgMentoras}
+                    alt="Ingrid Zarza e Fernanda Bradaschia, da Mentoria Inovando na Sua Obra"
+                    className="relative z-10 w-full h-auto mix-blend-multiply"
+                    loading="eager"
+                    fetchPriority="high"
                   />
                 )}
-                <img src={imgNovaImgMentoras}
-                  alt="Ingrid Zarza e Fernanda Bradaschia, da Mentoria Inovando na Sua Obra"
-                  className={black ? "relative z-10 w-full h-auto" : "relative z-10 w-full h-auto mix-blend-multiply"}
-                  loading="eager"
-                  fetchPriority="high"
-                />
                 {/* Floating stat card — topo-direito no mobile, inferior-esquerdo no desktop */}
-                {/* No celular o selo fica no centro da base; no computador vai para o canto direito, porque o cartão +250 ocupa o esquerdo */}
-                {black && <BlackSelo className="absolute left-1/2 -translate-x-1/2 -bottom-4 z-20 lg:left-auto lg:right-4 lg:translate-x-0" />}
                 <div className="absolute top-2 right-2 lg:top-auto lg:right-auto lg:-bottom-6 lg:-left-6 z-20 px-2.5 py-1.5 lg:px-5 lg:py-4 shadow-xl"
                   style={black ? { backgroundColor: C.dark, border: "1px solid rgba(252,238,225,0.2)" } : { backgroundColor: C.dark }}
                 >
@@ -1070,7 +1060,7 @@ export default function Home() {
               <div className="space-y-2">
                 {[
                   { icon: BookOpen, text: "16h de conteúdo gravado em 4 módulos" },
-                  { icon: Lock,     text: black ? "Acesso vitalício ao conteúdo" : "12 meses de acesso à plataforma" },
+                  { icon: Lock,     text: "12 meses de acesso à plataforma" },
                   { icon: FileText, text: "Materiais, checklists e ferramentas prontas" },
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-3 px-4 py-3"
@@ -1169,7 +1159,7 @@ export default function Home() {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = C.greenDark)}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = C.green)}
             >
-              {black ? "Quero meu acesso vitalício" : "Quero meu acesso"}
+              {black ? "Quero garantir minha vaga" : "Quero meu acesso"}
               <ArrowRight className="w-4 h-4" />
             </button>
           </Reveal>
@@ -1352,7 +1342,7 @@ export default function Home() {
                 </h2>
                 <p className="text-base leading-relaxed" style={{ color: black ? "rgba(252,238,225,0.8)" : "rgba(255,255,255,0.55)", maxWidth: black ? "40ch" : "34ch" }}>
                   {black
-                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra com acesso vitalício ao conteúdo e parcela em 10x sem juros.`
+                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista.`
                     : "Pagamento 100% Seguro pela Hotmart."}
                 </p>
                 <div className="px-4 py-3 text-base font-semibold"
@@ -1407,14 +1397,14 @@ export default function Home() {
                     <p className="font-black leading-none"
                       style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
-                      {black ? BLACK.parcelas : "10x de R$ 270,00"}
+                      {black ? `${BLACK.parcelas}*` : "10x de R$ 270,00"}
                     </p>
                     <p className="text-sm" style={{ color: black ? C.inkLight : C.muted }}>
-                      {black ? `sem juros, ou ${BLACK.avista} à vista` : "ou R$ 2.700,00 à vista"}
+                      {black ? `ou ${BLACK.avista} à vista` : "ou R$ 2.700,00 à vista"}
                     </p>
                     {black && (
                       <p className="text-sm font-semibold" style={{ color: C.ink }}>
-                        {BLACK.economia} a menos que o valor normal, com acesso vitalício ao conteúdo.
+                        {BLACK.economia} a menos no valor à vista.
                       </p>
                     )}
                     <p className="text-xs font-bold uppercase tracking-wide" style={{ color: black ? C.goldText : "#FF6B6B" }}>
@@ -1457,7 +1447,7 @@ export default function Home() {
                   </a>
                   {black ? (
                     <p className="text-xs text-center leading-relaxed" style={{ color: C.inkLight }}>
-                      Cartão em até 10x sem juros, Pix, PayPal ou Google Pay.
+                      Cartão em até 12x, Pix ou PayPal. *Parcelamento no cartão com acréscimo.
                     </p>
                   ) : (
                     <a href="https://pay.hotmart.com/Y93975016X?off=azkbpgud&bid=1786136104312"
