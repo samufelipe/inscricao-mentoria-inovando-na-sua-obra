@@ -1372,7 +1372,7 @@ export default function Home() {
                 </h2>
                 <p className="text-base leading-relaxed" style={{ color: black ? "rgba(252,238,225,0.8)" : "rgba(255,255,255,0.55)", maxWidth: black ? "40ch" : "34ch" }}>
                   {black
-                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista, com 4 bônus que só existem nesta Black.`
+                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista, com 4 bônus que só quem entra nesta Black recebe.`
                     : "Pagamento 100% Seguro pela Hotmart."}
                 </p>
                 <div className="px-4 py-3 text-base font-semibold"
