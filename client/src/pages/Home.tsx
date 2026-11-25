@@ -1260,12 +1260,15 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Photo */}
                 <div className="relative flex justify-center md:justify-start order-2 md:order-1">
-                  <div className="relative">
+                  {/* Largura fixa no bloco da foto: sem ela o bloco mede zero até a imagem carregar,
+                      a seção cresce 447 px no meio da rolagem e o botão do topo para antes do investimento. */}
+                  <div className="relative w-full max-w-sm">
                     <div className="absolute -bottom-4 -left-4 w-full h-full"
                       style={{ border: `2px solid ${C.gold}`, zIndex: 0 }}
                     />
                     <img src={imgHeroPhoto} alt="Ingrid Zarza e Fernanda Bradaschia"
-                      className="relative z-10 w-full max-w-sm mix-blend-multiply" loading="lazy" />
+                      width={1080} height={1350}
+                      className="relative z-10 w-full h-auto max-w-sm mix-blend-multiply" loading="lazy" />
                     {/* Stat badge */}
                     <div className="absolute -top-5 -right-5 z-20 px-4 py-3 shadow-lg"
                       style={{ backgroundColor: C.gold }}
