@@ -4,7 +4,7 @@ import {
   Check, X, ShieldCheck, Lock, ArrowRight, Phone, Mail, Instagram,
   ChevronDown, FileText, Clock, Users, MapPin, BookOpen, TrendingUp,
   Layers, MessageSquare, DollarSign, AlertCircle, Star,
-  GraduationCap, Briefcase, HardHat, RefreshCw,
+  GraduationCap, Briefcase, HardHat, RefreshCw, Gift,
 } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -19,6 +19,9 @@ import imgAbout           from "@/assets/mentoria/about.png";
 import imgNovaImgMentoras from "@/assets/mentoria/foto-hero-sem-fundo.png";
 import imgHeroBlack       from "@/assets/mentoria/hero-black-friday.webp";
 import imgHeroBlack720    from "@/assets/mentoria/hero-black-friday-720.webp";
+import imgBannerBonus      from "@/assets/mentoria/banner-black-bonus.webp";
+import imgBannerBonus1280  from "@/assets/mentoria/banner-black-bonus-1280.webp";
+import imgBannerBonus800   from "@/assets/mentoria/banner-black-bonus-800.webp";
 import imgLogoGarantia    from "@/assets/mentoria/logo-garantia.png";
 import { VideoTestimonialCard } from "@/components/ui/video-testimonial-card";
 
@@ -85,10 +88,17 @@ const BLACK = {
   parcelas:   "12x de R$ 186,16",
   avista:     "R$ 1.800,00",
   de:         "R$ 3.000,00",
-  economia:   "R$ 1.200,00",
   prazoCurto: "30/11",
   prazoLongo: "30/11, às 23h59",
 };
+
+/* Bônus exclusivos da Black, tirados do banner enviado pela cliente em 25/11 */
+const BONUS_BLACK = [
+  "Acesso à lista secreta de fornecedores",
+  "Um dia com a gente, visitando nossas obras em São Paulo",
+  "Grupo de estudos de IA na obra",
+  "Ingresso para a Imersão Rotinas na Obra, nossa nova imersão",
+];
 
 function blackNoAr() {
   if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("black") === "0") return false;
@@ -467,7 +477,7 @@ export default function Home() {
   const faqs = black
     ? [
         { q: "Esta é mesmo a última turma?", a: `Sim. Esta é a última turma da Mentoria Inovando na Sua Obra. As inscrições fecham em ${BLACK.prazoLongo} (horário de Brasília), e as vagas são limitadas.` },
-        { q: "O que muda na Black Arquiteta na Obra?", a: `Até ${BLACK.prazoCurto}, a mentoria sai por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista. Depois dessa data, as inscrições fecham.` },
+        { q: "O que muda na Black Arquiteta na Obra?", a: `Até ${BLACK.prazoCurto}, a mentoria sai por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista, com 4 bônus exclusivos: a lista secreta de fornecedores, um dia com a gente visitando nossas obras em São Paulo, o grupo de estudos de IA na obra e o ingresso para a Imersão Rotinas na Obra. Depois dessa data, as inscrições fecham.` },
         ...FAQS,
       ]
     : FAQS;
@@ -551,7 +561,7 @@ export default function Home() {
                 </h1>
                 {black ? (
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: "rgba(252,238,225,0.82)", maxWidth: "44ch" }}>
-                    A experiência prática, técnica e comportamental que leva anos para ser construída.<span className="hidden sm:inline"> As inscrições da última turma fecham em {BLACK.prazoCurto}.</span>
+                    Preparamos 4 bônus exclusivos para esta Black, por tempo limitado.<span className="hidden sm:inline"> As inscrições da última turma fecham em {BLACK.prazoCurto}.</span>
                   </p>
                 ) : (
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: C.inkLight, maxWidth: "42ch" }}>
@@ -1325,8 +1335,25 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           INVESTIMENTO
       ══════════════════════════════════════════ */}
-      <section id="pricing" className="py-16 md:py-24" style={{ backgroundColor: C.ink, ...gridBg(`rgba(${C.goldRgb},0.05)`, "50px 50px") }}>
+      <section id="pricing" className={black ? "py-16 md:py-24 scroll-mt-3" : "py-16 md:py-24"} style={{ backgroundColor: C.ink, ...gridBg(`rgba(${C.goldRgb},0.05)`, "50px 50px") }}>
         <div className="container mx-auto px-4 md:px-8">
+          {/* Black (25/11): banner da cliente no topo do investimento, onde caem todos os botões da página.
+              A arte vai inteira em todas as telas, sem recorte nem retoque (pedido do Samuel em 25/11).
+              No celular ela ocupa a largura toda da tela para ganhar tamanho. Os bônus também aparecem
+              em texto na lista "Tudo que você recebe", legíveis em qualquer tela. */}
+          {black && (
+            <Reveal className="-mx-4 sm:mx-0 mb-8 md:mb-10">
+              <img src={imgBannerBonus1280}
+                srcSet={`${imgBannerBonus800} 800w, ${imgBannerBonus1280} 1280w, ${imgBannerBonus} 2081w`}
+                sizes="(min-width: 1536px) 1472px, (min-width: 1280px) 1216px, (min-width: 1024px) 960px, (min-width: 768px) 704px, (min-width: 640px) 608px, 100vw"
+                width={2081} height={755}
+                alt="Black Friday da Mentoria Inovando na Sua Obra: desconto de 40% na mentoria, última turma e 4 bônus exclusivos: lista secreta de fornecedores, um dia com Ingrid e Fernanda nas obras em São Paulo, grupo de estudos de IA na obra e ingresso para a Imersão Rotinas na Obra"
+                className="block w-full h-auto sm:rounded-2xl lg:rounded-[24px]"
+                loading="lazy"
+                decoding="async"
+              />
+            </Reveal>
+          )}
           <Reveal>
             <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl" style={{ borderRadius: "24px" }}>
 
@@ -1342,7 +1369,7 @@ export default function Home() {
                 </h2>
                 <p className="text-base leading-relaxed" style={{ color: black ? "rgba(252,238,225,0.8)" : "rgba(255,255,255,0.55)", maxWidth: black ? "40ch" : "34ch" }}>
                   {black
-                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista.`
+                    ? `Depois de ${BLACK.prazoLongo} (horário de Brasília), as inscrições fecham e não haverá outra turma. Na Black Arquiteta na Obra, você entra por ${BLACK.parcelas} no cartão ou ${BLACK.avista} à vista, com 4 bônus que só existem nesta Black.`
                     : "Pagamento 100% Seguro pela Hotmart."}
                 </p>
                 <div className="px-4 py-3 text-base font-semibold"
@@ -1395,7 +1422,7 @@ export default function Home() {
                       </p>
                     )}
                     <p className="font-black leading-none"
-                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
+                      style={{ fontFamily: "Montserrat, sans-serif", fontSize: black ? "clamp(1.5rem, 7.5vw, 2.25rem)" : "clamp(1.8rem, 3.5vw, 2.4rem)", color: C.ink }}
                     >
                       {black ? `${BLACK.parcelas}*` : "10x de R$ 270,00"}
                     </p>
@@ -1404,7 +1431,7 @@ export default function Home() {
                     </p>
                     {black && (
                       <p className="text-sm font-semibold" style={{ color: C.ink }}>
-                        {BLACK.economia} a menos no valor à vista.
+                        40% de desconto no pagamento à vista.
                       </p>
                     )}
                     <p className="text-xs font-bold uppercase tracking-wide" style={{ color: black ? C.goldText : "#FF6B6B" }}>
@@ -1429,6 +1456,21 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
+                  {black && (
+                    <div className="pt-3 space-y-3.5">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: C.goldText }}>
+                        Bônus exclusivos desta Black
+                      </p>
+                      <ul className="space-y-3.5">
+                        {BONUS_BLACK.map((b) => (
+                          <li key={b} className="flex items-start gap-3 text-base leading-snug" style={{ color: C.inkLight }}>
+                            <Gift className="w-4 h-4 shrink-0 mt-0.5" style={{ color: C.goldText }} />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
                 {/* Divider + CTAs */}
